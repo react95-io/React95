@@ -1,0 +1,50 @@
+.TableHeaderCell {
+  position: relative;
+  text-align: center;
+  background: #ced0cf;
+  /* border-top: 2px solid #fff;
+  border-left: 2px solid #fff; */
+  border-bottom: 2px solid #050608;
+  border-right: 2px solid #050608;
+  font-weight: normal;
+  font-size: 16px;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.TableHeaderCell:before {
+  padding: 0;
+  content: "";
+  display: inline-block;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+
+  border-top: 2px solid #dfe0e3;
+  border-left: 2px solid #dfe0e3;
+  border-bottom: 2px solid #888c8f;
+  border-right: 2px solid #888c8f;
+}
+
+.TableHeaderCell:not(.TableHeaderCell--disabled):active,
+.TableHeaderCell--active {
+  border-bottom: 2px solid #fff;
+  /* border-right: 2px solid #fff; */
+  /* border-top: 2px solid #050608;
+  border-left: 2px solid #050608; */
+}
+.TableHeaderCell:not(.TableHeaderCell--disabled):active:before,
+.TableHeaderCell--active:before {
+  border-bottom: 2px solid #dfe0e3;
+  border-right: 2px solid #dfe0e3;
+  border-top: 2px solid #888c8f;
+  border-left: 2px solid #888c8f;
+}
+
+.TableHeaderCell:not(.TableHeaderCell--disabled):active
+  .TableHeaderCell__content,
+.TableHeaderCell--active .TableHeaderCell__content {
+  position: relative;
+  top: 2px;
+}

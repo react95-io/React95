@@ -1,0 +1,15 @@
+.Tabs {
+  position: relative;
+}
+/* to cover ugly left border on the first tab */
+.Tabs:after {
+  position: absolute;
+  content: "";
+  display: inline-block;
+  height: 8px;
+  border-left: 2px solid #fff;
+  border-right: 2px solid #dfe0e3;
+  z-index: 9999;
+  left: 0;
+  top: 32px;
+}

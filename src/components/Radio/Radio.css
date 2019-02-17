@@ -1,0 +1,70 @@
+.Radio {
+  display: block;
+  position: relative;
+  padding-left: 1.5em;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 1em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.Radio__input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.Radio__checkmark {
+  position: absolute;
+  display: inline-block;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.Radio__checkmark:before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: -4px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  border-radius: 50%;
+
+  /* border-left: 2px solid #050608;
+  border-top: 2px solid #050608; */
+  /* box-shadow: inset 3px 3px 10px rgba(0, 0, 0, 0.4); */
+}
+
+.Radio--checked .Radio__checkmark:after {
+  position: absolute;
+  content: "";
+  display: inline-block;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #000;
+}
+.Radio--disabled {
+  color: gray;
+  text-shadow: 1px 1px #fff;
+  filter: grayscale(100%);
+}
+.Radio--disabled.Radio--checked .Radio__checkmark:after {
+  background: #888c8f !important;
+}
+
+.Radio--disabled .Radio__checkmark {
+  background: #ced0cf;
+}

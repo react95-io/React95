@@ -1,0 +1,91 @@
+.Select-wrapper {
+  height: 28px;
+
+  position: relative;
+  /* display: inline-block; */
+  width: 200px;
+  background: #fff;
+}
+.Select {
+  font-size: 1em;
+  position: absolute;
+  bottom: -4px;
+  width: calc(100% + 4px);
+  transform: translateY(100%);
+  left: -2px;
+  background: #fff;
+  border: 2px solid #050608;
+  border-top: none;
+  box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  z-index: 99;
+}
+.Select--noShadow {
+  box-shadow: none;
+}
+.Select--fixedHeight {
+  overflow-y: scroll;
+}
+.Select-header {
+  font-size: 1em;
+  height: 26px;
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding-left: 0.5em;
+  padding-right: 38px;
+  position: relative;
+  background: none;
+  /* overflow: hidden; */
+
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.Select-button {
+  display: inline-block;
+  width: 28px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: center;
+  background: #ced0cf;
+  /* border-top: 2px solid #fff;
+  border-left: 2px solid #fff; */
+  border-bottom: 2px solid #050608;
+  border-right: 2px solid #050608;
+  border-top: 2px solid #dfe0e3;
+  border-left: 2px solid #dfe0e3;
+  font-weight: normal;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.Select-button:before {
+  padding: 0;
+  content: "";
+  display: inline-block;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+
+  border-top: 2px solid #fff;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #888c8f;
+  border-right: 2px solid #888c8f;
+}
+
+.Select-button__icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 0px;
+  height: 0px;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  display: inline-block;
+  border-top: 6px solid #050608;
+}

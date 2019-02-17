@@ -1,0 +1,48 @@
+.Frame {
+  position: relative;
+  width: 100%;
+  border: 2px solid #888c8f;
+  padding: 1em;
+}
+.Frame::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  width: calc(100% + 1px);
+  height: calc(100% + 1px);
+  top: 0;
+  left: 0;
+  border: 1px solid white;
+}
+
+.Frame__title {
+  font-size: 1em;
+  font-weight: normal;
+  background: #ced0cf;
+  position: absolute;
+  top: 0;
+  left: calc(1em - 4px);
+  transform: translateY(-50%);
+  padding: 0 4px;
+}
+.Frame__title-accent {
+  border-bottom: 1px solid black;
+}
+.Frame--disabled .Frame__title {
+  color: #888c8f;
+  text-shadow: 1px 1px #fff;
+}
+
+.Frame--disabled .Frame__title-accent {
+  position: relative;
+  border-bottom: 1px solid #888c8f;
+}
+.Frame--disabled .Frame__title-accent::before {
+  content: "";
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: -2px;
+  border-bottom: 1px solid white;
+}

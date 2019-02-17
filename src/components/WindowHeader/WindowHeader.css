@@ -1,0 +1,15 @@
+.WindowHeader {
+  display: flex;
+  align-items: center;
+  height: 35px;
+  margin-bottom: 2px;
+  font-weight: 700;
+  color: #fff;
+  padding: 0 0.5em;
+  background: linear-gradient(to right, navy, #00f);
+  border-right: 2px solid #ced0cf;
+}
+.WindowHeader.gray {
+  color: #bdbebd;
+  background: #827f82;
+}

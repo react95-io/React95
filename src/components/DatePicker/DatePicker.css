@@ -1,0 +1,45 @@
+.DatePicker-toolbar {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.DatePicker-datePicker {
+  background: #fff;
+  /* width: calc(7 * 30px + 4px); */
+  position: relative;
+  width: 234px;
+}
+.DatePicker-dayNames,
+.DatePicker-dates {
+  display: flex;
+  flex-wrap: wrap;
+}
+.DatePicker-dayNames {
+  background: #888c8f;
+  color: #dfe0e3;
+}
+.DatePicker-datePicker__item {
+  text-align: center;
+  height: 1.5em;
+  line-height: 1.5em;
+  width: 14.28%;
+}
+
+.DatePicker-datePicker__item-content {
+  cursor: pointer;
+  padding: 2px 4px;
+}
+.DatePicker-datePicker__item-content:not(.DatePicker-datePicker__item-content--active):hover {
+  border: 2px dashed #888c8f;
+}
+.DatePicker-datePicker__item-content--active {
+  background: #000080;
+  color: #fff;
+}
+
+.DatePicker-buttons {
+  display: flex;
+  margin-top: 1em;
+}

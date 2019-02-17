@@ -1,0 +1,71 @@
+button {
+  outline: none;
+}
+
+.Fab {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  position: fixed;
+  bottom: 55px;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  border-radius: 50%;
+
+  /* cyan */
+  /* background: #07beb8;
+  border-top: 4px solid #3dccc7;
+  border-left: 4px solid #3dccc7;
+  border-bottom: 4px solid #2cbbb4;
+  border-right: 4px solid #2cbbb4; */
+
+  /* pink */
+  /* background: #f991cc;
+  border-top: 4px solid #e2afde;
+  border-left: 4px solid #e2afde;
+  border-bottom: 4px solid #ee4266;
+  border-right: 4px solid #ee4266; */
+
+  /* lavender */
+  /* background: #a663cc;
+  border-top: 4px solid #b298dc;
+  border-left: 4px solid #b298dc;
+  border-bottom: 4px solid #6f2dbd;
+  border-right: 4px solid #6f2dbd; */
+
+  /* violet */
+  background: #b96ac9;
+  /* background: radial-gradient(#6f2dbd, #b96ac9); */
+  border-top: 4px solid #e980fc;
+  border-left: 4px solid #e980fc;
+  border-bottom: 4px solid #6f2dbd;
+  border-right: 4px solid #6f2dbd;
+
+  box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.45);
+}
+.Fab--square {
+  border-radius: none;
+}
+
+.Fab:not(.Fab--disabled):active {
+  border-bottom: 4px solid #e980fc;
+  border-right: 4px solid #e980fc;
+  border-top: 4px solid #6f2dbd;
+  border-left: 4px solid #6f2dbd;
+  box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.55);
+}
+
+.Fab:not(.Fab--disabled):active .Fab__content {
+  padding-top: 2px;
+}
+
+.Fab__content {
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: bold;
+}

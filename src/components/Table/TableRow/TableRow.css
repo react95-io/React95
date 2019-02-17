@@ -1,0 +1,11 @@
+.TableRow {
+  height: 34px;
+  line-height: 34px;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+.TableBody .TableRow:hover {
+  background: #000080;
+  color: #fff;
+}

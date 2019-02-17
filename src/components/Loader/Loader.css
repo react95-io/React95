@@ -1,0 +1,7 @@
+.Loader {
+  display: inline-block;
+}
+.Loader__img {
+  height: 35px;
+  width: auto;
+}

@@ -1,0 +1,52 @@
+.ListItem {
+    /* padding: 10px; */
+    white-space: nowrap;
+}
+
+.ListItem--m {
+    height: 35px;
+    line-height: 35px;
+    padding: 0 8px;
+}
+.ListItem--m.ListItem--square {
+    width: 35px;
+}
+.ListItem--s {
+    height: 27px;
+    line-height: 27px;
+    padding: 0 4px;
+}
+.ListItem--s.ListItem--square {
+    width: 27px;
+}
+.ListItem--l {
+    height: 43px;
+    line-height: 43px;
+    padding: 0 16px;
+}
+.ListItem--l.ListItem--square {
+    width: 43px;
+}
+.ListItem--xl {
+    height: 51px;
+    line-height: 51px;
+    padding: 0 24px;
+}
+.ListItem--xl.ListItem--square {
+    width: 51px;
+}
+.ListItem.ListItem--square {
+    overflow: hidden;
+    padding: 0;
+}
+.ListItem--disabled {
+    color: gray;
+    text-shadow: 1px 1px #fff;
+    filter: grayscale(100%);
+}
+
+.ListItem:not(.ListItem--disabled):hover {
+    cursor: pointer;
+    background: navy;
+    color: #fff;
+}

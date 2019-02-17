@@ -1,0 +1,29 @@
+.Menu {
+    position: absolute;
+}
+.Menu.Menu--top {
+    top: 0;
+}
+.Menu.Menu--bottom {
+    bottom: 0;
+}
+.Menu.Menu--left {
+    left: 0;
+}
+.Menu.Menu--right {
+    right: 0;
+}
+
+.Menu.Menu--top.Menu--left {
+    transform: translate(0, -100%);
+}
+
+.Menu.Menu--top.Menu--right {
+    transform: translate(100%, -100%);
+}
+.Menu.Menu--bottom.Menu--right {
+    transform: translate(100%, 100%);
+}
+.Menu.Menu--bottom.Menu--left {
+    transform: translate(0, 100%);
+}

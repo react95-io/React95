@@ -1,0 +1,39 @@
+.List {
+    list-style: none;
+    display: inline-block;
+    position: relative;
+    padding: 2px 4px;
+    margin: 0;
+
+    background: #ced0cf;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #050608;
+    border-right: 2px solid #050608;
+    box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.35);
+}
+.List.List--noShadow {
+    box-shadow: none;
+}
+.List.List--fullWidth {
+    width: 100%;
+}
+.List:before {
+    pointer-events: none;
+    padding: 0;
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+
+    border-top: 2px solid #dfe0e3;
+    border-left: 2px solid #dfe0e3;
+    border-bottom: 2px solid #888c8f;
+    border-right: 2px solid #888c8f;
+
+    outline: 2px solid #ced0cf;
+    outline-offset: -4px;
+}
