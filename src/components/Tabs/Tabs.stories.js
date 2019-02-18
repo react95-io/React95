@@ -17,7 +17,7 @@ storiesOf("Tabs", module)
     <div
       style={{
         padding: "5rem",
-        background: "#ced0cf"
+        background: "#008080"
       }}
     >
       {story()}
@@ -58,8 +58,7 @@ class TabsDemo extends React.Component {
                     value="fast"
                     label="Fast shipping"
                     onChange={() => null}
-
-                    // checked
+                    checked
                   />
                 </Frame>
               </TabBody>

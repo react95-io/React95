@@ -108,18 +108,6 @@ class DatePicker extends Component {
       <Window style={{ margin: 20 }} className={className} noShadow={noShadow}>
         <WindowHeader>📆 Date</WindowHeader>
         <WindowContent>
-          <Button flat size="s" accent>
-            File
-          </Button>
-          <Button flat size="s" accent>
-            Edit
-          </Button>
-          <Button flat size="s" accent>
-            View
-          </Button>
-          <Button flat size="s" accent>
-            Help
-          </Button>
           <div className={`${baseClass}-toolbar`}>
             <Select
               items={months}

@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
 import Button from "./Button";
-
+import LogoIcon from "../Icon/LogoIcon";
 const props = {
   type: "button",
   onClick: null,
@@ -58,5 +58,11 @@ storiesOf("Button", module)
   .add("flat", () => (
     <Button {...actions} flat size="s" accent>
       File
+    </Button>
+  ))
+  .add("with icon", () => (
+    <Button {...actions} style={{ fontWeight: "bold", fontSize: "1.2em" }}>
+      <LogoIcon />
+      Start
     </Button>
   ));

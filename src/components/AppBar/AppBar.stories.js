@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
 import AppBar from "./AppBar";
-
+import Menu from "../Menu/Menu";
 const props = {
   type: "button",
   onClick: null,
@@ -17,4 +17,10 @@ const props = {
 
 export const actions = { onClick: action("onClick") };
 
-storiesOf("AppBar", module).add("default", () => <AppBar />);
+storiesOf("AppBar", module)
+  .add("default", () => <AppBar />)
+  .add("with stuff", () => (
+    <AppBar>
+      <Menu />
+    </AppBar>
+  ));

@@ -1,9 +1,12 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
+import { action } from "@storybook/addon-actions";
 
-import Material from "./Material";
+import Menu from "./Menu";
 
-storiesOf("Material", module)
+export const actions = { onClick: action("onClick") };
+
+storiesOf("Menu", module)
   .addDecorator(story => (
     <div
       style={{
@@ -14,5 +17,4 @@ storiesOf("Material", module)
       {story()}
     </div>
   ))
-  .add("default", () => <Material>reuse that artur pls</Material>)
-  .add("hollow", () => <Material hollow>reuse that artur pls</Material>);
+  .add("default", () => <Menu />);

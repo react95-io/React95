@@ -6,9 +6,6 @@ button {
   display: inline-block;
   width: 60px;
   height: 60px;
-  position: fixed;
-  bottom: 55px;
-  left: 50%;
   transform: translate(-50%, 50%);
   border-radius: 50%;
 

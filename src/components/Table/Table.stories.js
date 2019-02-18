@@ -15,46 +15,32 @@ import Button from "../Button/Button";
 class SimpleTable extends React.Component {
   render() {
     return (
-      <Window style={{ width: 400 }}>
-        <WindowHeader>Table.exe</WindowHeader>
+      <Window>
+        <WindowHeader>Component libraries</WindowHeader>
         <WindowContent>
           <Table>
             <TableHead>
               <TableRow>
                 <TableHeaderCell>Name</TableHeaderCell>
-                <TableHeaderCell>Age</TableHeaderCell>
                 <TableHeaderCell>Swag</TableHeaderCell>
-                <TableHeaderCell>Money</TableHeaderCell>
-                <TableHeaderCell />
+                <TableHeaderCell>Ready</TableHeaderCell>
               </TableRow>
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableDataCell>Artur</TableDataCell>
-                <TableDataCell>28</TableDataCell>
-                <TableDataCell>always</TableDataCell>
-                <TableDataCell>1991</TableDataCell>
-                <TableDataCell>
-                  <Button fullWidth>+</Button>
-                </TableDataCell>
+                <TableDataCell>Material design</TableDataCell>
+                <TableDataCell>4%</TableDataCell>
+                <TableDataCell>yes</TableDataCell>
               </TableRow>
               <TableRow>
-                <TableDataCell>Ola</TableDataCell>
-                <TableDataCell>30</TableDataCell>
-                <TableDataCell>always</TableDataCell>
-                <TableDataCell>1988</TableDataCell>
-                <TableDataCell>
-                  <Button fullWidth>+</Button>
-                </TableDataCell>
+                <TableDataCell>Bootstrap</TableDataCell>
+                <TableDataCell>2%</TableDataCell>
+                <TableDataCell>yes</TableDataCell>
               </TableRow>
               <TableRow>
-                <TableDataCell>Adaś</TableDataCell>
-                <TableDataCell>25</TableDataCell>
-                <TableDataCell>always</TableDataCell>
-                <TableDataCell>1994</TableDataCell>
-                <TableDataCell>
-                  <Button fullWidth>+</Button>
-                </TableDataCell>
+                <TableDataCell>React95</TableDataCell>
+                <TableDataCell>95%</TableDataCell>
+                <TableDataCell>no</TableDataCell>
               </TableRow>
             </TableBody>
           </Table>

@@ -10,11 +10,16 @@ const List = ({
   style,
   children,
   fullWidth,
+  verticalAlign,
+  horizontalAlign,
   ...otherProps
 }) => {
   const baseClass = "List";
 
   const rootClass = cx(baseClass, className, {
+    [`${baseClass}--${verticalAlign}`]: verticalAlign || false,
+
+    [`${baseClass}--${horizontalAlign}`]: horizontalAlign || false,
     [`${baseClass}--fullWidth`]: fullWidth,
     [`${baseClass}--noShadow`]: noShadow
   });
@@ -37,7 +42,9 @@ List.propTypes = {
   style: PropTypes.object,
   fullWidth: PropTypes.bool,
   noShadow: PropTypes.bool,
-  children: PropTypes.node
+  children: PropTypes.node,
+  verticalAlign: PropTypes.oneOf(["top", "bottom"]),
+  horizontalAlign: PropTypes.oneOf(["left", "right"])
 };
 
 export default List;

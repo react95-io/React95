@@ -28,7 +28,7 @@
 .Frame__title-accent {
   border-bottom: 1px solid black;
 }
-.Frame--disabled .Frame__title {
+.Frame--disabled {
   color: #888c8f;
   text-shadow: 1px 1px #fff;
 }

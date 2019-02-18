@@ -10,14 +10,18 @@ button {
   border: none;
   font-size: 16px;
 }
-
-.Button:not(.Button--flat) {
+.Button__content {
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+}
+.Button:not(.Button--flat):not(.Button--active) {
   border-top: 2px solid #fff;
   border-left: 2px solid #fff;
   border-bottom: 2px solid #050608;
   border-right: 2px solid #050608;
 }
-.Button:not(.Button--flat):before {
+.Button:before {
   padding: 0;
   content: "";
   display: inline-block;
@@ -26,7 +30,8 @@ button {
   top: 0px;
   width: calc(100% - 4px);
   height: calc(100% - 4px);
-
+}
+.Button:not(.Button--flat):not(.Button--active):before {
   border-top: 2px solid #dfe0e3;
   border-left: 2px solid #dfe0e3;
   border-bottom: 2px solid #888c8f;
@@ -35,7 +40,7 @@ button {
 
 .Button--m {
   height: 35px;
-  padding: 0 16px;
+  padding: 0 10px;
 }
 .Button--m.Button--square {
   width: 35px;
