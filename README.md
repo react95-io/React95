@@ -1,9 +1,10 @@
 ![banner2](https://user-images.githubusercontent.com/28541613/52980735-e5563f80-33db-11e9-9e01-c2c86578f1d4.png)
 
 ![banner](https://user-images.githubusercontent.com/28541613/52980546-ecc91900-33da-11e9-89fc-2a7648d38c4a.png)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=shields)](http://makeapullrequest.com)
 
 
-This project was bootstrapped with [Storybook](https://github.com/storybooks/storybook) and [Create React App](https://github.com/facebook/create-react-app).
+
 
 ## How to
 To see the components in a storybook run:
