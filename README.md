@@ -3,7 +3,6 @@
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
 
 ![banner](https://user-images.githubusercontent.com/28541613/52980546-ecc91900-33da-11e9-89fc-2a7648d38c4a.png)
-![img-3883](https://user-images.githubusercontent.com/28541613/52981305-361b6780-33df-11e9-903b-677ba734ac2c.JPG)
 
 
 
