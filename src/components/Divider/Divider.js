@@ -1,12 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import cx from "classnames";
-import "./Divider.css";
+import styled from "styled-components";
+
+const StyledDivider = styled.hr`
+  width: 100%;
+  border-bottom: 2px solid #fff;
+  border-top: 2px solid #888c8f;
+  margin: 0;
+`;
 
 const Divider = ({ className, style, ...otherProps }) => {
-  const baseClass = "Divider";
-  const rootClass = cx(baseClass, className);
-  return <hr className={rootClass} style={style} {...otherProps} />;
+  return <StyledDivider className={className} style={style} {...otherProps} />;
 };
 
 Divider.defaultProps = {};

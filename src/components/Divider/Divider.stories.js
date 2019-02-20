@@ -20,6 +20,7 @@ storiesOf("Divider", module)
   .add("default", () => (
     <List>
       <ListItem>Item 1</ListItem>
+      <Divider />
       <ListItem>Item 2</ListItem>
       <Divider />
       <ListItem>Item 3</ListItem>

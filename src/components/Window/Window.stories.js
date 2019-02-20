@@ -28,4 +28,17 @@ storiesOf("Window", module)
         </ul>
       </WindowContent>
     </Window>
+  ))
+  .add("no shadow", () => (
+    <Window shadow={false}>
+      <WindowHeader>react95.exe</WindowHeader>
+      <WindowContent>
+        <ul>
+          <li>something here</li>
+          <li>something here</li>
+          <li>something here</li>
+          <li>something here</li>
+        </ul>
+      </WindowContent>
+    </Window>
   ));

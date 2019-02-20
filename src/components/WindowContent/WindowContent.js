@@ -1,23 +1,22 @@
 import React from "react";
-import "./WindowContent.css";
 import PropTypes from "prop-types";
 
-import cx from "classnames";
+import styled from "styled-components";
+import { padding } from "../common/theme.variables";
+
+const StyledWindowContent = styled.div`
+  padding: ${padding.md};
+`;
 
 const WindowContent = ({ className, children, style, ...otherProps }) => {
-  const baseClass = "WindowContent";
-  const rootClass = cx(baseClass, className);
-
   return (
-    <div className={rootClass} style={style}>
+    <StyledWindowContent className={className} style={style} {...otherProps}>
       {children}
-    </div>
+    </StyledWindowContent>
   );
 };
 
-WindowContent.defaultProps = {
-  border: false
-};
+WindowContent.defaultProps = {};
 
 WindowContent.propTypes = {
   className: PropTypes.string,

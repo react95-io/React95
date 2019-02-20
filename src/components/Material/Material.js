@@ -1,19 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import cx from "classnames";
 
-import "./Material.css";
+import { StyledMaterial } from "../common";
 
 const Material = ({ hollow, className, children, style, ...otherProps }) => {
-  const baseClass = "Material";
-  const rootClass = cx(baseClass, className, {
-    [`${baseClass}--hollow`]: hollow
-  });
-  return (
-    <div className={rootClass} style={style} {...otherProps}>
-      {children}
-    </div>
-  );
+  return <StyledMaterial>{children}</StyledMaterial>;
 };
 
 Material.defaultProps = {

@@ -1,14 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
-import cx from "classnames";
 
-import "./WindowHeader.css";
+import styled from "styled-components";
+import { blockSizes, padding, colors } from "../common/theme.variables";
 
-const WindowHeader = ({ className, style, children }) => {
-  const baseClass = "WindowHeader";
+const SlyledWindowHeader = styled.div`
+  height: ${blockSizes.md};
+  padding: 0 ${padding.md};
+  margin-right: 2px;
 
-  const rootClass = cx(baseClass, className);
-  return <header className={rootClass}>{children}</header>;
+  line-height: ${blockSizes.md};
+  font-weight: bold;
+  color: ${colors.light};
+
+  background: linear-gradient(to right, ${colors.navy}, ${colors.blue});
+`;
+
+const WindowHeader = ({ className, style, children, ...otherProps }) => {
+  return (
+    <SlyledWindowHeader className={className} style={style} {...otherProps}>
+      {children}
+    </SlyledWindowHeader>
+  );
 };
 
 WindowHeader.propTypes = {

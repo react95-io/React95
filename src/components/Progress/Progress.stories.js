@@ -14,4 +14,4 @@ storiesOf("Progress", module)
       {story()}
     </div>
   ))
-  .add("default", () => <Progress start={0} end={100} value={51} />);
+  .add("default", () => <Progress percent={52} />);

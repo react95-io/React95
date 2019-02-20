@@ -1,27 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
-import cx from "classnames";
 
-import "./Window.css";
+import styled from "styled-components";
+import { StyledMaterial } from "../common";
 
-const Window = ({ noShadow, className, children, ...otherProps }) => {
-  const baseClass = "Window";
-  const rootClass = cx(baseClass, className, {
-    [`${baseClass}--noShadow`]: noShadow
-  });
+const StyledWindow = styled(StyledMaterial)`
+  position: relative;
+  padding: 2px;
+`;
+
+const Window = ({ shadow, className, children, ...otherProps }) => {
   return (
-    <section className={rootClass} {...otherProps}>
+    <StyledWindow shadow={shadow} className={className} {...otherProps} swag>
       {children}
-    </section>
+    </StyledWindow>
   );
 };
 
 Window.defaultProps = {
-  noShadow: false
+  shadow: true
 };
 
 Window.propTypes = {
-  noShadow: PropTypes.bool,
+  shadow: PropTypes.bool,
+  className: PropTypes.bool,
   children: PropTypes.node
 };
 
