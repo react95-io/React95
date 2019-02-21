@@ -1,30 +1,49 @@
 import React from "react";
 import PropTypes from "prop-types";
-import cx from "classnames";
+import styled from "styled-components";
+import { StyledMaterial } from "../common";
 
-import "./AppBar.css";
+const StyledAppBar = styled(StyledMaterial)`
+  position: ${props => (props.fixed ? "fixed" : "absolute")};
+  top: 0;
+  right: 0;
+  left: auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
 
-const AppBar = ({ children, className, style, noShadow, ...otherProps }) => {
-  const baseClass = "AppBar";
-  const rootClass = cx(baseClass, className, {
-    [`${baseClass}--noShadow`]: noShadow
-  });
+const AppBar = ({
+  fixed,
+  children,
+  className,
+  style,
+  shadow,
+  ...otherProps
+}) => {
   return (
-    <header style={style} className={rootClass} {...otherProps}>
+    <StyledAppBar
+      fixed={fixed}
+      style={style}
+      className={className}
+      {...otherProps}
+    >
       {children}
-    </header>
+    </StyledAppBar>
   );
 };
 
 AppBar.defaultProps = {
-  noShadow: false
+  shadow: true,
+  fixed: true
 };
 
 AppBar.propTypes = {
   style: PropTypes.object,
-  noShadow: PropTypes.bool,
+  shadow: PropTypes.bool,
   className: PropTypes.string,
-  children: PropTypes.node
+  children: PropTypes.node.isRequired,
+  fixed: PropTypes.bool
 };
 
 export default AppBar;
