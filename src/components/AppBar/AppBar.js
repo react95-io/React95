@@ -1,9 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { StyledMaterial } from "../common";
+import { createBorderStyles, createBoxStyles } from "../common";
 
-const StyledAppBar = styled(StyledMaterial)`
+const StyledAppBar = styled.header`
+  ${createBoxStyles()};
+  ${createBorderStyles()};
+
   position: ${props => (props.fixed ? "fixed" : "absolute")};
   top: 0;
   right: 0;

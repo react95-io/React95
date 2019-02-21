@@ -2,33 +2,60 @@ import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
 
-import "./Button.css";
+// import "./Button.css";
+
+import styled, { css } from "styled-components";
+import {
+  createBorderStyles,
+  createBoxStyles,
+  createDisabledTextStyles
+} from "../common";
+import {
+  blockSizes,
+  fontSizes,
+  padding,
+  colors
+} from "../common/theme.variables";
+
+const StyledButton = styled.button`
+  ${createBoxStyles()};
+  ${props =>
+    props.flat
+      ? null
+      : props.active
+      ? createBorderStyles(true)
+      : createBorderStyles(false)}
+  height: ${props => blockSizes[props.size]};
+  width: ${props =>
+    props.fullWidth ? "100%" : props.square ? blockSizes[props.size] : "auto"};
+  padding: ${props => (props.square ? 0 : "0 " + padding.md)};
+  font-size: ${fontSizes.md};
+
+  ${props => props.isDisabled && createDisabledTextStyles()}
+  &:active {
+    ${props => !props.isDisabled && !props.flat && createBorderStyles(true)}
+    outline: 1px dotted ${colors.dark};
+    outline-offset: -10px;
+    outline-width: 2px;
+  }
+`;
 
 const Button = ({
   type,
-  size,
   onClick,
-  className,
   style,
   disabled,
-  active,
-  children,
   fullWidth,
+  size,
   square,
+  active,
   flat,
   accent,
+  className,
+  children,
   ...otherProps
 }) => {
   const baseClass = "Button";
-
-  const rootClass = cx(baseClass, className, {
-    [`${baseClass}--${size}`]: size,
-    [`${baseClass}--disabled`]: disabled,
-    [`${baseClass}--active`]: active,
-    [`${baseClass}--fullWidth`]: fullWidth && !square,
-    [`${baseClass}--square`]: square,
-    [`${baseClass}--flat`]: flat
-  });
 
   let content = children;
   if (typeof content === "string" && accent) {
@@ -40,15 +67,22 @@ const Button = ({
     );
   }
   return (
-    <button
-      className={rootClass}
+    <StyledButton
       type={type}
+      onClick={disabled ? undefined : onClick}
       style={style}
-      onClick={disabled ? null : onClick}
+      isDisabled={disabled}
+      fullWidth={fullWidth}
+      size={size}
+      square={square}
+      active={active}
+      flat={flat}
+      className={className}
+      style={style}
       {...otherProps}
     >
       <span className={`${baseClass}__content`}>{content}</span>
-    </button>
+    </StyledButton>
   );
 };
 
@@ -58,7 +92,7 @@ Button.defaultProps = {
   style: {},
   disabled: false,
   fullWidth: false,
-  size: "m",
+  size: "md",
   square: false,
   active: false,
   flat: false,
@@ -67,17 +101,17 @@ Button.defaultProps = {
 
 Button.propTypes = {
   type: PropTypes.string,
-  size: PropTypes.oneOf(["s", "m", "l", "xl"]),
   onClick: PropTypes.func,
-  className: PropTypes.string,
   style: PropTypes.object,
   disabled: PropTypes.bool,
-  active: PropTypes.bool,
   fullWidth: PropTypes.bool,
+  size: PropTypes.oneOf(["sm", "md", "lg"]),
   square: PropTypes.bool,
+  active: PropTypes.bool,
   flat: PropTypes.bool,
   accent: PropTypes.bool,
-  children: PropTypes.node
+  className: PropTypes.string,
+  children: PropTypes.node.isRequired
 };
 
 export default Button;

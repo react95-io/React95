@@ -40,6 +40,11 @@ storiesOf("Button", module)
       Disabled
     </Button>
   ))
+  .add("active", () => (
+    <Button active {...actions}>
+      Active
+    </Button>
+  ))
   .add("fullWidth", () => (
     <Button fullWidth {...actions}>
       Full width
@@ -50,19 +55,13 @@ storiesOf("Button", module)
       🎂
     </Button>
   ))
-  .add("size XL", () => (
-    <Button {...actions} size={"xl"} square>
+  .add("size large", () => (
+    <Button {...actions} size={"lg"} square>
       💖
     </Button>
   ))
   .add("flat", () => (
-    <Button {...actions} flat size="s" accent>
+    <Button {...actions} flat size="sm" accent>
       File
-    </Button>
-  ))
-  .add("with icon", () => (
-    <Button {...actions} style={{ fontWeight: "bold", fontSize: "1.2em" }}>
-      <LogoIcon />
-      Start
     </Button>
   ));

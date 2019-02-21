@@ -2,11 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import styled from "styled-components";
-import { StyledMaterial } from "../common";
+import { createBorderStyles, createBoxStyles } from "../common";
 
-const StyledWindow = styled(StyledMaterial)`
+const StyledWindow = styled.div`
   position: relative;
   padding: 2px;
+  ${createBorderStyles()}
+  ${createBoxStyles()}
 `;
 
 const Window = ({ shadow, className, children, ...otherProps }) => {
