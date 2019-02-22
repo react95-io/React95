@@ -46,7 +46,7 @@ const TextField = ({
   const onValueChange = e => {
     const newValue = e.target.value;
     setInputValue(newValue);
-    onChange && onChange(newValue);
+    onChange && onChange(e);
   };
   return (
     <StyledInputWrapper
@@ -75,7 +75,8 @@ TextField.defaultProps = {
 };
 TextField.propTypes = {
   className: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
+  name: PropTypes.string,
+  onChange: PropTypes.func,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   disabled: PropTypes.bool,
   rows: PropTypes.number,

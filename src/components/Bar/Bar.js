@@ -1,24 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { blockSizes, colors } from "../common/theme.variables";
 
 const StyledBar = styled.div`
   display: inline-block;
-  height: 100%;
+  height: ${props => blockSizes[props.size]};
   width: 5px;
-  border-top: 2px solid #fff;
-  border-left: 2px solid #fff;
-  border-bottom: 2px solid #888c8f;
-  border-right: 2px solid #888c8f;
-  background: #ced0cf;
+  border-top: 2px solid ${colors.light};
+  border-left: 2px solid ${colors.light};
+  border-bottom: 2px solid ${colors.darkGray};
+  border-right: 2px solid ${colors.darkGray};
+  background: ${colors.bg};
 `;
-const Bar = ({ className, style, ...otherProps }) => {
-  return <StyledBar className={className} style={style} {...otherProps} />;
+const Bar = ({ size, className, style, ...otherProps }) => {
+  return (
+    <StyledBar
+      size={size}
+      className={className}
+      style={style}
+      {...otherProps}
+    />
+  );
 };
 
-Bar.defaultProps = {};
+Bar.defaultProps = {
+  size: "md"
+};
 Bar.propTypes = {
   className: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
+  size: PropTypes.oneOf(["sm", "md", "lg"])
 };
 export default Bar;

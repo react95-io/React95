@@ -32,9 +32,8 @@ function Menu() {
       <Button
         onClick={handleClick}
         active={Boolean(open)}
-        style={{ fontWeight: "bold", fontSize: "1.2em" }}
+        // style={{ fontWeight: "bold", fontSize: "1.2em" }}
       >
-        <LogoIcon />
         Start
       </Button>
     </div>

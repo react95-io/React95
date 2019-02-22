@@ -3,6 +3,7 @@ import { storiesOf } from "@storybook/react";
 
 import Bar from "./Bar";
 import AppBar from "../AppBar/AppBar";
+import Toolbar from "../Toolbar/Toolbar";
 import Button from "../Button/Button";
 
 storiesOf("Bar", module)
@@ -17,13 +18,16 @@ storiesOf("Bar", module)
     </div>
   ))
   .add("default", () => (
-    <AppBar style={{ height: 44 }}>
-      <Bar />
-      <Button flat accent>
-        Edit
-      </Button>
-      <Button flat accent disabled>
-        Save
-      </Button>
+    <AppBar>
+      <Toolbar>
+        <Bar />
+        <Button flat accent>
+          Edit
+        </Button>
+        <Button flat accent disabled>
+          Save
+        </Button>
+        <Bar />
+      </Toolbar>
     </AppBar>
   ));

@@ -16,12 +16,24 @@ storiesOf("TextField", module)
       {story()}
     </div>
   ))
-  .add("default", () => (
-    <TextField value={"If you read this it's already too late"} {...actions} />
-  ))
+  .add("default", () => <Swag />)
   .add("disabled", () => (
     <TextField value="Can't type 😥" disabled {...actions} />
   ))
   .add("custom width", () => (
     <TextField value="Custom width" width={120} {...actions} />
   ));
+
+class Swag extends React.Component {
+  state = {
+    value: "swag"
+  };
+  render() {
+    return (
+      <TextField
+        value={this.state.value}
+        onChange={e => this.setState({ value: e.target.value })}
+      />
+    );
+  }
+}

@@ -14,7 +14,14 @@ storiesOf("Checkbox", module)
       {story()}
     </div>
   ))
-  .add("default", () => <CheckboxGroup />);
+  .add("controlled group", () => <CheckboxGroup />)
+  .add("uncontrolled", () => (
+    <Checkbox
+      checked={true}
+      value="single"
+      label="I'm single 😥 ...and no one's controlling me 😎"
+    />
+  ));
 
 class CheckboxGroup extends React.Component {
   state = {
@@ -32,6 +39,7 @@ class CheckboxGroup extends React.Component {
 
   render() {
     const { steak, tortilla, pizza } = this.state;
+    console.log(steak, tortilla, pizza);
     return (
       <>
         <Checkbox
