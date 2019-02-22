@@ -18,6 +18,7 @@ import {
 } from "../common/theme.variables";
 
 const StyledButton = styled.button`
+  position: relative;
   ${createBoxStyles()};
   ${props =>
     props.flat
@@ -34,10 +35,21 @@ const StyledButton = styled.button`
   ${props => props.isDisabled && createDisabledTextStyles()}
   &:active {
     ${props => !props.isDisabled && !props.flat && createBorderStyles(true)}
-    outline: 1px dotted ${colors.dark};
+    ${props =>
+      !props.isDisabled &&
+      !props.flat &&
+      !props.active &&
+      `outline: 1px dotted` +
+        colors.dark +
+        `;
     outline-offset: -10px;
     outline-width: 2px;
+    `}
+    padding-top: ${props => !props.isDisabled && "2px"};
+    
   }
+  padding-top: ${props => props.active && !props.isDisabled && "2px"};
+  ${props => props.flat && "border: none;"}
 `;
 
 const Button = ({
@@ -50,22 +62,12 @@ const Button = ({
   square,
   active,
   flat,
-  accent,
   className,
   children,
   ...otherProps
 }) => {
   const baseClass = "Button";
 
-  let content = children;
-  if (typeof content === "string" && accent) {
-    content = (
-      <span>
-        <span className={`${baseClass}__accent`}>{content.charAt(0)}</span>
-        {content.slice(1)}
-      </span>
-    );
-  }
   return (
     <StyledButton
       type={type}
@@ -81,7 +83,7 @@ const Button = ({
       style={style}
       {...otherProps}
     >
-      <span className={`${baseClass}__content`}>{content}</span>
+      {children}
     </StyledButton>
   );
 };
@@ -95,8 +97,7 @@ Button.defaultProps = {
   size: "md",
   square: false,
   active: false,
-  flat: false,
-  accent: false
+  flat: false
 };
 
 Button.propTypes = {
@@ -109,7 +110,6 @@ Button.propTypes = {
   square: PropTypes.bool,
   active: PropTypes.bool,
   flat: PropTypes.bool,
-  accent: PropTypes.bool,
   className: PropTypes.string,
   children: PropTypes.node.isRequired
 };
