@@ -18,7 +18,7 @@ storiesOf("Radio", module)
 
 class RadioGroup extends React.Component {
   state = {
-    checkedValue: null
+    checkedValue: "Pear"
   };
 
   handleChange = e => this.setState({ checkedValue: e.target.value });
@@ -31,22 +31,29 @@ class RadioGroup extends React.Component {
           checked={checkedValue === "Pear"}
           onChange={this.handleChange}
           value="Pear"
-          label="Pear"
-          name="cars"
+          label="🍐 Pear"
+          name="fruits"
         />
         <Radio
           checked={checkedValue === "Orange"}
           onChange={this.handleChange}
           value="Orange"
-          label="Orange"
-          name="cars"
+          label="🍊 Orange"
+          name="fruits"
+        />
+        <Radio
+          checked={checkedValue === "Kiwi"}
+          onChange={this.handleChange}
+          value="Kiwi"
+          label="🥝 Kiwi"
+          name="fruits"
         />
         <Radio
           checked={checkedValue === "Grape"}
           onChange={this.handleChange}
           value="Grape"
-          label="Grape"
-          name="cars"
+          label="🍇 Grape"
+          name="fruits"
           disabled
         />
       </>
