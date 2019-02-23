@@ -1,86 +1,148 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import cx from "classnames";
 
-import "./Select.css";
+import Button from "../Button/Button";
 
-import SelectItem from "./SelectItem/SelectItem";
+import styled from "styled-components";
+import { shadow } from "../common";
+import {
+  blockSizes,
+  fontSizes,
+  padding,
+  colors
+} from "../common/theme.variables";
+import { StyledCutout } from "../common";
 
-import Cutout from "../Cutout/Cutout";
+const StyledSelectWrapper = styled(StyledCutout)`
+  height: ${blockSizes.md};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: ${colors.light};
+  font-size: ${fontSizes.md};
+`;
+const StyledSelectContent = styled.div`
+  width: 100%;
+  padding-left: ${padding.sm};
+  overflow: hidden;
+`;
+const StyledDropdownButton = styled(Button)`
+  height: 100%;
+  width: 30px;
+  padding: 0;
+  z-index: 1;
+  flex-shrink: 0;
+  border-left-color: ${colors.lightGray};
+  border-top-color: ${colors.lightGray};
+  box-shadow: inset 1px 1px 0px 1px ${colors.light},
+    inset -1px -1px 0 1px ${colors.darkGray};
+`;
+const StyledDropdownIcon = styled.span`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 0px;
+  height: 0px;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  display: inline-block;
+  border-top: 6px solid #050608;
+`;
 
-export class Select extends React.Component {
-  static propTypes = {
-    items: PropTypes.arrayOf(PropTypes.object).isRequired,
-    className: PropTypes.string,
-    width: PropTypes.number,
-    height: PropTypes.number,
-    selectedIndex: PropTypes.number,
-    noShadow: PropTypes.bool,
-    onSelect: PropTypes.func.isRequired
-  };
-  static defaultProps = {
-    style: {},
-    noShadow: false,
-    selectedIndex: 0
-  };
+const StyledDropdownList = styled.ul`
+  font-size: ${fontSizes.md};
+  position: absolute;
+  bottom: -2px;
+  width: calc(100% - 2px);
+  transform: translateY(100%);
+  left: 0px;
+  background: ${colors.light};
+  border: 2px solid ${colors.dark};
+  border-top: none;
+  box-shadow: ${props => (props.shadow ? shadow : "none")};
+  cursor: default;
+  z-index: 99;
+`;
+const StyledDropdownListItem = styled.li`
+  height: calc(${blockSizes.md} - 8px);
+  width: 100%;
+  padding-left: ${padding.sm};
 
-  state = {
-    items: this.props.items || [],
-    open: false,
-    selectedItem: this.props.selectedIndex || 0
-  };
-
-  toggle = () => this.setState(prevState => ({ open: !prevState.open }));
-
-  handleSelect = index => {
-    this.props.onSelect(this.state.items[index].value);
-    this.setState({ selectedItem: index, open: false });
-  };
-
-  render() {
-    const {
-      noShadow,
-      width,
-      height,
-      otherProps,
-      className,
-      style
-    } = this.props;
-    const { items, selectedItem, open } = this.state;
-    const baseClass = "Select";
-
-    const rootClass = cx(baseClass, {
-      [`${baseClass}--noShadow`]: noShadow,
-      [`${baseClass}--fixedHeight`]: height
-    });
-    return (
-      <div
-        className={cx(`${baseClass}-wrapper`, className)}
-        style={{ ...style, width: width ? width : "auto" }}
-      >
-        <Cutout>
-          <button onClick={this.toggle} className={`${baseClass}-header`}>
-            {items.length ? items[selectedItem].title : ""}
-            <span className={`${baseClass}-button`}>
-              <span className={`${baseClass}-button__icon`} />
-            </span>
-          </button>
-        </Cutout>
-        {open && (
-          <ul
-            className={rootClass}
-            {...otherProps}
-            style={{ height: height ? height : "auto" }}
-          >
-            {items.map((item, i) => (
-              <SelectItem key={i} onClick={() => this.handleSelect(i)}>
-                {item.title}
-              </SelectItem>
-            ))}
-          </ul>
-        )}
-      </div>
-    );
+  line-height: calc(${blockSizes.md} - 8px);
+  font-size: ${fontSizes.md};
+  white-space: nowrap;
+  &:hover {
+    background: ${colors.navy};
+    color: ${colors.light};
   }
-}
+`;
+const Select = ({
+  items,
+  selectedIndex,
+  shadow,
+  width,
+  height,
+  otherProps,
+  className,
+  onSelect,
+  style
+}) => {
+  const [index, setIndex] = useState(selectedIndex);
+  const [open, setOpen] = useState(false);
+
+  const handleSelect = i => {
+    onSelect(items[i].value);
+    setIndex(i);
+  };
+  return (
+    <StyledSelectWrapper
+      className={className}
+      onClick={() => setOpen(!open)}
+      style={{ ...style, width }}
+      shadow={shadow}
+      {...otherProps}
+    >
+      <StyledSelectContent>
+        {items.length ? items[index].title : ""}
+      </StyledSelectContent>
+      <StyledDropdownButton>
+        <StyledDropdownIcon />
+      </StyledDropdownButton>
+      {open && (
+        <StyledDropdownList
+          shadow={shadow}
+          style={height && { overflowY: "scroll", height }}
+        >
+          {items.map((item, i) => (
+            <StyledDropdownListItem
+              key={i}
+              onClick={e => {
+                handleSelect(i);
+              }}
+            >
+              {item.title}
+            </StyledDropdownListItem>
+          ))}
+        </StyledDropdownList>
+      )}
+    </StyledSelectWrapper>
+  );
+};
+
+Select.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  className: PropTypes.string,
+  width: PropTypes.number,
+  height: PropTypes.number,
+  selectedIndex: PropTypes.number,
+  shadow: PropTypes.bool,
+  style: PropTypes.object,
+  onSelect: PropTypes.func.isRequired
+};
+Select.defaultProps = {
+  style: {},
+  shadow: true,
+  selectedIndex: 0
+};
 export default Select;

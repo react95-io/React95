@@ -20,8 +20,13 @@ const StyledList = styled.ul`
   padding: 2px 4px 4px 2px;
   ${createBorderStyles()}
   ${createBoxStyles()}
-  display: ${props => (props.inline ? "inline-flex" : "inline-block")};
-  
+  /* display: ${props => (props.inline ? "inline-flex" : "inline-block")}; */
+  ${props =>
+    props.inline &&
+    `
+    align-items: center;
+    display: inline-flex;
+  `}
   list-style: none;
   position: relative;
 

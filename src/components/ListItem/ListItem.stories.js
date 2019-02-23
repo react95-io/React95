@@ -55,7 +55,7 @@ storiesOf("ListItem", module)
     <List>
       <ListItem {...actions}>Normal item</ListItem>
       <ListItem {...actions} as="a" href="https://expensive.toys">
-        Link!
+        🔗 Link!
       </ListItem>
     </List>
   ));

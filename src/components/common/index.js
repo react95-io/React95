@@ -3,7 +3,7 @@ import { colors, fontSizes } from "./theme.variables";
 
 const { bg, light, dark, lightGray, darkGray } = colors;
 
-const shadow = `4px 4px 10px 0 rgba(0, 0, 0, 0.35)`;
+export const shadow = `4px 4px 10px 0 rgba(0, 0, 0, 0.35)`;
 
 export const StyledMaterial = styled.div`
   box-sizing: border-box;

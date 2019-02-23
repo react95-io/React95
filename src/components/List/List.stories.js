@@ -4,6 +4,7 @@ import { action } from "@storybook/addon-actions";
 
 import List from "./List";
 import ListItem from "../ListItem/ListItem";
+import Bar from "../Bar/Bar";
 
 export const actions = { onClick: action("onClick") };
 
@@ -27,7 +28,8 @@ storiesOf("List", module)
   ))
   .add("inline", () => (
     <List inline={true}>
-      <ListItem>Item 1</ListItem>
+      <ListItem square>🌿</ListItem>
+      <Bar />
       <ListItem>Item 2</ListItem>
       <ListItem>Item 3</ListItem>
     </List>

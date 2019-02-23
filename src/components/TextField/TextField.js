@@ -39,6 +39,7 @@ const TextField = ({
   width,
   className,
   type,
+  style,
   shadow,
   ...otherProps
 }) => {
@@ -53,7 +54,7 @@ const TextField = ({
     <StyledInputWrapper
       shadow={shadow}
       isDisabled={disabled}
-      style={{ width: width ? width : "auto" }}
+      style={{ ...style, width: width ? width : "auto" }}
     >
       <StyledInput
         onChange={disabled ? undefined : onValueChange}
