@@ -8,7 +8,7 @@ import TabBody from "./TabBody/TabBody";
 import Window from "../Window/Window";
 import WindowHeader from "../WindowHeader/WindowHeader";
 import WindowContent from "../WindowContent/WindowContent";
-import Frame from "../Frame/Frame";
+import Fieldset from "../Fieldset/Fieldset";
 import NumberField from "../NumberField/NumberField";
 import Checkbox from "../Checkbox/Checkbox";
 
@@ -44,7 +44,7 @@ class TabsDemo extends React.Component {
           <div style={{ height: 300 }}>
             {activeTab === 0 && (
               <TabBody>
-                <Frame title="Order">
+                <Fieldset title="Order">
                   <div style={{ padding: "0.5em 0 0.5em 0" }}>Ammount:</div>
                   <NumberField
                     width={"100%"}
@@ -60,7 +60,7 @@ class TabsDemo extends React.Component {
                     onChange={() => null}
                     checked
                   />
-                </Frame>
+                </Fieldset>
               </TabBody>
             )}
             {activeTab === 1 && <TabBody>Accesories stuff here</TabBody>}

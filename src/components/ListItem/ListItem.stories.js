@@ -51,10 +51,15 @@ storiesOf("ListItem", module)
       </ListItem>
     </List>
   ))
-  .add("renderas link", () => (
+  .add("render as link", () => (
     <List>
       <ListItem {...actions}>Normal item</ListItem>
-      <ListItem {...actions} as="a" href="https://expensive.toys">
+      <ListItem
+        {...actions}
+        as="a"
+        href="https://expensive.toys"
+        target="_blank"
+      >
         🔗 Link!
       </ListItem>
     </List>

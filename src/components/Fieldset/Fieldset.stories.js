@@ -2,7 +2,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
-import Frame from "./Frame";
+import Fieldset from "./Fieldset";
 import Window from "../Window/Window";
 import WindowContent from "../WindowContent/WindowContent";
 
@@ -11,7 +11,7 @@ const props = {
   disabled: false
 };
 
-storiesOf("Frame", module)
+storiesOf("Fieldset", module)
   .addDecorator(story => (
     <div
       style={{
@@ -25,23 +25,23 @@ storiesOf("Frame", module)
   .add("default", () => (
     <Window>
       <WindowContent>
-        <Frame>Some content here 😍</Frame>
+        <Fieldset>Some content here 😍</Fieldset>
       </WindowContent>
     </Window>
   ))
   .add("withTitle", () => (
     <Window>
       <WindowContent>
-        <Frame title="Title here">Some content here 😍</Frame>
+        <Fieldset title="Title here">Some content here 😍</Fieldset>
       </WindowContent>
     </Window>
   ))
   .add("disabled", () => (
     <Window>
       <WindowContent>
-        <Frame title="Disabled" disabled>
+        <Fieldset title="Disabled" disabled>
           Some content here 😍
-        </Frame>
+        </Fieldset>
       </WindowContent>
     </Window>
   ));

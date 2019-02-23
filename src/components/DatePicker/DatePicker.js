@@ -7,12 +7,10 @@ import "./DatePicker.css";
 import Window from "../Window/Window";
 import WindowHeader from "../WindowHeader/WindowHeader";
 import WindowContent from "../WindowContent/WindowContent";
-import Frame from "../Frame/Frame";
 import Select from "../Select/Select";
 import NumberField from "../NumberField/NumberField";
 import Cutout from "../Cutout/Cutout";
 import Button from "../Button/Button";
-import Divider from "../Divider/Divider";
 
 function daysInMonth(year, month) {
   return new Date(year, month, 0).getDate();
