@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 
 import styled from "styled-components";
 import { createBorderStyles, createBoxStyles } from "../common";
@@ -24,9 +24,9 @@ Window.defaultProps = {
 };
 
 Window.propTypes = {
-  shadow: PropTypes.bool,
-  className: PropTypes.bool,
-  children: PropTypes.node
+  shadow: propTypes.bool,
+  className: propTypes.bool,
+  children: propTypes.node
 };
 
 export default Window;

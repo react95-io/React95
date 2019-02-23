@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import styled from "styled-components";
 
 const StyledDivider = styled.hr`
@@ -15,8 +15,8 @@ const Divider = ({ className, style, ...otherProps }) => {
 
 Divider.defaultProps = {};
 Divider.propTypes = {
-  className: PropTypes.string,
-  style: PropTypes.object
+  className: propTypes.string,
+  style: propTypes.object
 };
 
 export default Divider;

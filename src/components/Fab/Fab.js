@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import cx from "classnames";
 
 import "./Fab.css";
@@ -49,15 +49,15 @@ Fab.defaultProps = {
 };
 
 Fab.propTypes = {
-  type: PropTypes.string,
-  size: PropTypes.oneOf(["s", "m", "l", "xl"]),
-  onClick: PropTypes.func,
-  className: PropTypes.string,
-  style: PropTypes.object,
-  disabled: PropTypes.bool,
-  active: PropTypes.bool,
-  square: PropTypes.bool,
-  children: PropTypes.node
+  type: propTypes.string,
+  size: propTypes.oneOf(["s", "m", "l", "xl"]),
+  onClick: propTypes.func,
+  className: propTypes.string,
+  style: propTypes.object,
+  disabled: propTypes.bool,
+  active: propTypes.bool,
+  square: propTypes.bool,
+  children: propTypes.node
 };
 
 export default Fab;

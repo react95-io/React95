@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import cx from "classnames";
 
 import "./NumberField.css";
@@ -13,13 +13,13 @@ class NumberField extends Component {
     width: null
   };
   static propTypes = {
-    onChange: PropTypes.func.isRequired,
-    value: PropTypes.number.isRequired,
-    min: PropTypes.number,
-    max: PropTypes.number,
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    disabled: PropTypes.bool,
-    className: PropTypes.string
+    onChange: propTypes.func.isRequired,
+    value: propTypes.number.isRequired,
+    min: propTypes.number,
+    max: propTypes.number,
+    width: propTypes.oneOfType([propTypes.string, propTypes.number]),
+    disabled: propTypes.bool,
+    className: propTypes.string
   };
   state = {
     value: parseInt(this.props.value) || 0

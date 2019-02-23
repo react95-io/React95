@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import styled from "styled-components";
 import { blockSizes, colors } from "../common/theme.variables";
 
@@ -28,8 +28,8 @@ Bar.defaultProps = {
   size: "md"
 };
 Bar.propTypes = {
-  className: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["sm", "md", "lg"])
+  className: propTypes.string,
+  style: propTypes.object,
+  size: propTypes.oneOf(["sm", "md", "lg"])
 };
 export default Bar;

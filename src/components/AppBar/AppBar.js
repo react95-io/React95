@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import styled from "styled-components";
 import { createBorderStyles, createBoxStyles } from "../common";
 
@@ -42,11 +42,11 @@ AppBar.defaultProps = {
 };
 
 AppBar.propTypes = {
-  style: PropTypes.object,
-  shadow: PropTypes.bool,
-  className: PropTypes.string,
-  children: PropTypes.node.isRequired,
-  fixed: PropTypes.bool
+  style: propTypes.object,
+  shadow: propTypes.bool,
+  className: propTypes.string,
+  children: propTypes.node.isRequired,
+  fixed: propTypes.bool
 };
 
 export default AppBar;

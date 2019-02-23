@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import cx from "classnames";
 
 import "./TableHeaderCell.css";
@@ -25,10 +25,10 @@ TableHeaderCell.defaultProps = {
 };
 
 TableHeaderCell.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  style: PropTypes.object,
-  onClick: PropTypes.func
+  children: propTypes.node,
+  className: propTypes.string,
+  style: propTypes.object,
+  onClick: propTypes.func
 };
 
 export default TableHeaderCell;

@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 
 import styled from "styled-components";
 import {
@@ -102,17 +102,17 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
-  type: PropTypes.string,
-  onClick: PropTypes.func,
-  style: PropTypes.object,
-  disabled: PropTypes.bool,
-  fullWidth: PropTypes.bool,
-  size: PropTypes.oneOf(["sm", "md", "lg"]),
-  square: PropTypes.bool,
-  active: PropTypes.bool,
-  flat: PropTypes.bool,
-  className: PropTypes.string,
-  children: PropTypes.node.isRequired
+  type: propTypes.string,
+  onClick: propTypes.func,
+  style: propTypes.object,
+  disabled: propTypes.bool,
+  fullWidth: propTypes.bool,
+  size: propTypes.oneOf(["sm", "md", "lg"]),
+  square: propTypes.bool,
+  active: propTypes.bool,
+  flat: propTypes.bool,
+  className: propTypes.string,
+  children: propTypes.node.isRequired
 };
 
 export default Button;

@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 
 import { StyledCutout } from "../common";
 
@@ -18,10 +18,10 @@ Cutout.defaultProps = {
 };
 
 Cutout.propTypes = {
-  className: PropTypes.string,
-  shadow: PropTypes.bool,
-  children: PropTypes.node,
-  style: PropTypes.object
+  className: propTypes.string,
+  shadow: propTypes.bool,
+  children: propTypes.node,
+  style: propTypes.object
 };
 
 export default Cutout;

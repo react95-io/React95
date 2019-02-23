@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import cx from "classnames";
 
 import "./Tabs.css";
@@ -37,8 +37,8 @@ Tabs.defaultProps = {
 };
 
 Tabs.propTypes = {
-  value: PropTypes.number,
-  onChange: PropTypes.func,
-  children: PropTypes.node
+  value: propTypes.number,
+  onChange: propTypes.func,
+  children: propTypes.node
 };
 export default Tabs;

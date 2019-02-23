@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 
 import styled from "styled-components";
 import { padding } from "../common/theme.variables";
@@ -19,9 +19,9 @@ const WindowContent = ({ className, children, style, ...otherProps }) => {
 WindowContent.defaultProps = {};
 
 WindowContent.propTypes = {
-  className: PropTypes.string,
-  style: PropTypes.object,
-  children: PropTypes.node
+  className: propTypes.string,
+  style: propTypes.object,
+  children: propTypes.node
 };
 
 export default WindowContent;

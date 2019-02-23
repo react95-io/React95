@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import cx from "classnames";
 
 import "./Table.css";
@@ -20,9 +20,9 @@ const Table = ({ className, children, style, ...otherProps }) => {
 Table.defaultProps = {};
 
 Table.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  style: PropTypes.object
+  children: propTypes.node,
+  className: propTypes.string,
+  style: propTypes.object
 };
 
 export default Table;

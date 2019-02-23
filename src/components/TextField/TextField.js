@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 
 import styled from "styled-components";
 import { StyledCutout } from "../common";
@@ -77,14 +77,14 @@ TextField.defaultProps = {
   onChange: undefined
 };
 TextField.propTypes = {
-  className: PropTypes.string,
-  name: PropTypes.string,
-  onChange: PropTypes.func,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  disabled: PropTypes.bool,
-  shadow: PropTypes.bool,
-  rows: PropTypes.number,
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  type: PropTypes.oneOf(["text", "number"])
+  className: propTypes.string,
+  name: propTypes.string,
+  onChange: propTypes.func,
+  value: propTypes.oneOfType([propTypes.string, propTypes.number]).isRequired,
+  disabled: propTypes.bool,
+  shadow: propTypes.bool,
+  rows: propTypes.number,
+  width: propTypes.oneOfType([propTypes.string, propTypes.number]),
+  type: propTypes.oneOf(["text", "number"])
 };
 export default TextField;

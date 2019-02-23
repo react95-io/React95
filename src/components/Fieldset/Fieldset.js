@@ -13,8 +13,6 @@ const StyledFieldset = styled.fieldset`
   padding: ${padding.md};
 
   font-size: ${fontSizes.md};
-
-  ${props => props.isDisabled && createDisabledTextStyles()}
 `;
 const StyledLegend = styled.legend`
   position: absolute;
@@ -27,8 +25,12 @@ const StyledLegend = styled.legend`
   background: ${colors.bg};
 `;
 
+const StyledFieldsetContent = styled.div`
+  ${props => props.isDisabled && createDisabledTextStyles()}
+`;
+
 const Fieldset = ({
-  title,
+  label,
   disabled,
   children,
   className,
@@ -42,8 +44,10 @@ const Fieldset = ({
       className={className}
       {...otherProps}
     >
-      {title && <StyledLegend>{title}</StyledLegend>}
-      {children}
+      {label && <StyledLegend>{label}</StyledLegend>}
+      <StyledFieldsetContent isDisabled={disabled}>
+        {children}
+      </StyledFieldsetContent>
     </StyledFieldset>
   );
 };
@@ -53,7 +57,11 @@ Fieldset.defaultProps = {
 };
 
 Fieldset.propTypes = {
-  title: propTypes.string,
+  label: propTypes.oneOfType([
+    propTypes.string,
+    propTypes.number,
+    propTypes.node
+  ]),
   className: propTypes.string,
   style: propTypes.object,
   children: propTypes.node,

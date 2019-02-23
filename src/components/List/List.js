@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 
 import styled from "styled-components";
 import { createBorderStyles, createBoxStyles } from "../common";
@@ -69,14 +69,14 @@ List.defaultProps = {
 };
 
 List.propTypes = {
-  className: PropTypes.string,
-  style: PropTypes.object,
-  fullWidth: PropTypes.bool,
-  inline: PropTypes.bool,
-  shadow: PropTypes.bool,
-  children: PropTypes.node,
-  verticalAlign: PropTypes.oneOf(["top", "bottom"]),
-  horizontalAlign: PropTypes.oneOf(["left", "right"])
+  className: propTypes.string,
+  style: propTypes.object,
+  fullWidth: propTypes.bool,
+  inline: propTypes.bool,
+  shadow: propTypes.bool,
+  children: propTypes.node,
+  verticalAlign: propTypes.oneOf(["top", "bottom"]),
+  horizontalAlign: propTypes.oneOf(["left", "right"])
 };
 
 export default List;

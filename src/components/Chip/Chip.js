@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import cx from "classnames";
 
 import "./Chip.css";
@@ -20,6 +20,6 @@ const Chip = ({ className, disabled, children }) => {
 Chip.defaultProps = {};
 
 Chip.propTypes = {
-  className: PropTypes.string
+  className: propTypes.string
 };
 export default Chip;

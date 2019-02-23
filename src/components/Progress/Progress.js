@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 
 import styled from "styled-components";
 
@@ -56,8 +56,8 @@ const ProgressBar = ({ width, percent }) => (
 );
 
 ProgressBar.propTypes = {
-  width: PropTypes.number,
-  percent: PropTypes.number
+  width: propTypes.number,
+  percent: propTypes.number
 };
 
 ProgressBar.defaultProps = {

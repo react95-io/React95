@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 
 import { StyledMaterial } from "../common";
 
@@ -12,10 +12,10 @@ Material.defaultProps = {
 };
 
 Material.propTypes = {
-  hollow: PropTypes.bool,
-  children: PropTypes.node,
-  className: PropTypes.string,
-  style: PropTypes.object
+  hollow: propTypes.bool,
+  children: propTypes.node,
+  className: propTypes.string,
+  style: propTypes.object
 };
 
 export default Material;

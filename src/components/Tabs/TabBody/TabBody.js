@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import cx from "classnames";
 import "./TabBody.css";
 
@@ -18,6 +18,6 @@ const TabBody = ({ children, className, style, ...otherProps }) => {
 TabBody.defaultProps = {};
 
 TabBody.propTypes = {
-  children: PropTypes.node
+  children: propTypes.node
 };
 export default TabBody;

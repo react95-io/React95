@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 
 import styled from "styled-components";
 import { createDisabledTextStyles } from "../common";
@@ -59,15 +59,15 @@ ListItem.defaultProps = {
 };
 
 ListItem.propTypes = {
-  className: PropTypes.string,
-  href: PropTypes.string,
-  style: PropTypes.object,
-  size: PropTypes.oneOf(["sm", "md", "lg"]),
-  disabled: PropTypes.bool,
-  fullWidth: PropTypes.bool,
-  square: PropTypes.bool,
-  children: PropTypes.node,
-  onClick: PropTypes.func
+  className: propTypes.string,
+  href: propTypes.string,
+  style: propTypes.object,
+  size: propTypes.oneOf(["sm", "md", "lg"]),
+  disabled: propTypes.bool,
+  fullWidth: propTypes.bool,
+  square: propTypes.bool,
+  children: propTypes.node,
+  onClick: propTypes.func
 };
 
 export default ListItem;

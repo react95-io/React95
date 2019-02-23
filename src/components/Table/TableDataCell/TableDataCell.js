@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import cx from "classnames";
 
 import "./TableDataCell.css";
@@ -17,9 +17,9 @@ const TableDataCell = ({ className, children, style, ...otherProps }) => {
 TableDataCell.defaultProps = {};
 
 TableDataCell.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  style: PropTypes.object
+  children: propTypes.node,
+  className: propTypes.string,
+  style: propTypes.object
 };
 
 export default TableDataCell;

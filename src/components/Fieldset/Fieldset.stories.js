@@ -1,15 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
 import Fieldset from "./Fieldset";
 import Window from "../Window/Window";
 import WindowContent from "../WindowContent/WindowContent";
-
-const props = {
-  title: "Title here",
-  disabled: false
-};
+import Checkbox from "../Checkbox/Checkbox";
 
 storiesOf("Fieldset", module)
   .addDecorator(story => (
@@ -29,19 +25,35 @@ storiesOf("Fieldset", module)
       </WindowContent>
     </Window>
   ))
-  .add("withTitle", () => (
+  .add("with label", () => (
     <Window>
       <WindowContent>
-        <Fieldset title="Title here">Some content here 😍</Fieldset>
+        <Fieldset label="Label here">Some content here 😍</Fieldset>
       </WindowContent>
     </Window>
   ))
-  .add("disabled", () => (
+  .add("disabled", () => <DisabledFieldset />);
+
+const DisabledFieldset = () => {
+  const [state, setState] = useState(true);
+  return (
     <Window>
       <WindowContent>
-        <Fieldset title="Disabled" disabled>
+        <Fieldset
+          label={
+            <Checkbox
+              style={{ margin: 0 }}
+              label="Enable"
+              checked={!state}
+              value={!state}
+              onChange={() => setState(!state)}
+            />
+          }
+          disabled={state}
+        >
           Some content here 😍
         </Fieldset>
       </WindowContent>
     </Window>
-  ));
+  );
+};

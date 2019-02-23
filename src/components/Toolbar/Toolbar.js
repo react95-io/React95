@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import styled from "styled-components";
 
 const StyledToolbar = styled.div`
@@ -27,10 +27,10 @@ Toolbar.defaultProps = {
 };
 
 Toolbar.propTypes = {
-  style: PropTypes.object,
-  className: PropTypes.string,
-  children: PropTypes.node.isRequired,
-  disablePadding: PropTypes.bool
+  style: propTypes.object,
+  className: propTypes.string,
+  children: propTypes.node.isRequired,
+  disablePadding: propTypes.bool
 };
 
 export default Toolbar;

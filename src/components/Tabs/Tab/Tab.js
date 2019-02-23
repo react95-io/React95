@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import cx from "classnames";
 
 import "./Tab.css";
@@ -37,11 +37,11 @@ const Tab = ({
 Tab.defaultProps = {};
 
 Tab.propTypes = {
-  value: PropTypes.number,
-  active: PropTypes.bool,
-  first: PropTypes.bool,
-  last: PropTypes.bool,
-  onClick: PropTypes.func,
-  children: PropTypes.node
+  value: propTypes.number,
+  active: propTypes.bool,
+  first: propTypes.bool,
+  last: propTypes.bool,
+  onClick: propTypes.func,
+  children: propTypes.node
 };
 export default Tab;

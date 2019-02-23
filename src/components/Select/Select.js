@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 
 import Button from "../Button/Button";
 
@@ -131,14 +131,14 @@ const Select = ({
 };
 
 Select.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object).isRequired,
-  className: PropTypes.string,
-  width: PropTypes.number,
-  height: PropTypes.number,
-  selectedIndex: PropTypes.number,
-  shadow: PropTypes.bool,
-  style: PropTypes.object,
-  onSelect: PropTypes.func.isRequired
+  items: propTypes.arrayOf(propTypes.object).isRequired,
+  className: propTypes.string,
+  width: propTypes.number,
+  height: propTypes.number,
+  selectedIndex: propTypes.number,
+  shadow: propTypes.bool,
+  style: propTypes.object,
+  onSelect: propTypes.func.isRequired
 };
 Select.defaultProps = {
   style: {},

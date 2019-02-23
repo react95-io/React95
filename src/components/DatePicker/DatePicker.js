@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import cx from "classnames";
 
 import "./DatePicker.css";
@@ -20,10 +20,10 @@ function dayIndex(year, month, day) {
 }
 class DatePicker extends Component {
   static propTypes = {
-    className: PropTypes.string,
-    noShadow: PropTypes.bool,
-    onChange: PropTypes.func.isRequired,
-    onCancel: PropTypes.func.isRequired
+    className: propTypes.string,
+    noShadow: propTypes.bool,
+    onChange: propTypes.func.isRequired,
+    onCancel: propTypes.func.isRequired
   };
   static defaultProps = {
     style: {}

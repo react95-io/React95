@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 
 import styled from "styled-components";
 import { StyledCutout, createDisabledTextStyles } from "../common";
@@ -98,17 +98,17 @@ Checkbox.defaultProps = {
 };
 
 Checkbox.propTypes = {
-  onChange: PropTypes.func,
-  name: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.bool
+  onChange: propTypes.func,
+  name: propTypes.string.isRequired,
+  value: propTypes.oneOfType([
+    propTypes.string,
+    propTypes.number,
+    propTypes.bool
   ]).isRequired,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  checked: PropTypes.bool,
-  disabled: PropTypes.bool,
-  style: PropTypes.object
+  label: propTypes.oneOfType([propTypes.string, propTypes.number]),
+  checked: propTypes.bool,
+  disabled: propTypes.bool,
+  style: propTypes.object
 };
 
 export default Checkbox;
