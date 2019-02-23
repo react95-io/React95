@@ -39,6 +39,7 @@ const TextField = ({
   width,
   className,
   type,
+  shadow,
   ...otherProps
 }) => {
   const [inputValue, setInputValue] = useState(value);
@@ -50,7 +51,7 @@ const TextField = ({
   };
   return (
     <StyledInputWrapper
-      shadow
+      shadow={shadow}
       isDisabled={disabled}
       style={{ width: width ? width : "auto" }}
     >
@@ -71,6 +72,7 @@ const TextField = ({
 TextField.defaultProps = {
   value: "",
   disabled: false,
+  shadow: true,
   onChange: undefined
 };
 TextField.propTypes = {
@@ -79,6 +81,7 @@ TextField.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   disabled: PropTypes.bool,
+  shadow: PropTypes.bool,
   rows: PropTypes.number,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   type: PropTypes.oneOf(["text", "number"])

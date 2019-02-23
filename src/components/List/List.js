@@ -1,24 +1,36 @@
 import React from "react";
 import PropTypes from "prop-types";
-import cx from "classnames";
-
-import "./List.css";
 
 import styled from "styled-components";
 import { createBorderStyles, createBoxStyles } from "../common";
 
+const createListPositionStyles = ({
+  verticalAlign = "bottom",
+  horizontalAlign = "left"
+}) =>
+  `
+    position: absolute;
+    ${verticalAlign === "bottom" ? "bottom: 0;" : "top: 0;"}
+    ${horizontalAlign === "left" ? "left: 0;" : "right: 0;"}
+
+    transform: translate(0, ${verticalAlign === "top" ? "-100%" : "100%"})
+  `;
 const StyledList = styled.ul`
+  width: ${props => (props.fullWidth ? "100%" : "auto")};
   padding: 2px 4px 4px 2px;
   ${createBorderStyles()}
   ${createBoxStyles()}
+  display: ${props => (props.inline ? "inline-flex" : "inline-block")};
   
-  display: inline-block;
   list-style: none;
-  position: ${props =>
-    props.verticalAlign && props.horizontalAlign ? "absolute" : "relative"};
+  position: relative;
+
+  ${props =>
+    (props.horizontalAlign || props.verticalAlign) && createListPositionStyles}
 `;
 
 const List = ({
+  inline,
   shadow,
   className,
   style,
@@ -28,18 +40,9 @@ const List = ({
   horizontalAlign,
   ...otherProps
 }) => {
-  const baseClass = "List";
-
-  const rootClass = cx(baseClass, className, {
-    [`${baseClass}--${verticalAlign}`]: verticalAlign || false,
-
-    [`${baseClass}--${horizontalAlign}`]: horizontalAlign || false,
-    [`${baseClass}--fullWidth`]: fullWidth,
-    [`${baseClass}--noShadow`]: shadow
-  });
-
   return (
     <StyledList
+      inline={inline}
       verticalAlign={verticalAlign}
       horizontalAlign={horizontalAlign}
       shadow={shadow}
@@ -56,13 +59,15 @@ const List = ({
 List.defaultProps = {
   style: {},
   fullWidth: false,
-  shadow: true
+  shadow: true,
+  inline: false
 };
 
 List.propTypes = {
   className: PropTypes.string,
   style: PropTypes.object,
   fullWidth: PropTypes.bool,
+  inline: PropTypes.bool,
   shadow: PropTypes.bool,
   children: PropTypes.node,
   verticalAlign: PropTypes.oneOf(["top", "bottom"]),

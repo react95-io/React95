@@ -20,7 +20,6 @@ export const createBoxStyles = () =>
   `
     box-sizing: border-box;
     display: inline-block;
-
     background-color: ${colors.bg};
   `;
 export const createBorderStyles = (invert = false) =>
@@ -77,6 +76,7 @@ export const StyledCutout = styled.div`
     border-bottom-color: ${lightGray};
 
     pointer-events: none;
-    box-shadow: inset 3px 3px 10px rgba(0, 0, 0, 0.3);
+    ${props =>
+      props.shadow && "box-shadow: inset 3px 3px 10px rgba(0, 0, 0, 0.3);"}
   }
 `;

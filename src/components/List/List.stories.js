@@ -25,7 +25,14 @@ storiesOf("List", module)
       <ListItem>Item 3</ListItem>
     </List>
   ))
-  .add("noShadow", () => (
+  .add("inline", () => (
+    <List inline={true}>
+      <ListItem>Item 1</ListItem>
+      <ListItem>Item 2</ListItem>
+      <ListItem>Item 3</ListItem>
+    </List>
+  ))
+  .add("no shadow", () => (
     <List shadow={false}>
       <ListItem>Item 1</ListItem>
       <ListItem>Item 2</ListItem>

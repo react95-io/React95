@@ -1,28 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
-import cx from "classnames";
 
-import "./Cutout.css";
+import { StyledCutout } from "../common";
 
-const Cutout = ({ className, style, children, noShadow, ...otherProps }) => {
-  const baseClass = "Cutout";
-  const rootClass = cx(baseClass, className, {
-    [`${baseClass}--noShadow`]: noShadow
-  });
+// add padding prop ?
+
+const Cutout = ({ className, style, children, shadow, ...otherProps }) => {
   return (
-    <div className={rootClass} style={style} {...otherProps}>
+    <StyledCutout className={className} style={style} {...otherProps}>
       {children}
-    </div>
+    </StyledCutout>
   );
 };
 
 Cutout.defaultProps = {
-  noShadow: false
+  shadow: true
 };
 
 Cutout.propTypes = {
   className: PropTypes.string,
-  noShadow: PropTypes.bool,
+  shadow: PropTypes.bool,
   children: PropTypes.node,
   style: PropTypes.object
 };

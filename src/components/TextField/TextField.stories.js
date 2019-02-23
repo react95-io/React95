@@ -17,6 +17,9 @@ storiesOf("TextField", module)
     </div>
   ))
   .add("default", () => <Swag />)
+  .add("no shadow", () => (
+    <TextField value="No shadow" shadow={false} {...actions} />
+  ))
   .add("disabled", () => (
     <TextField value="Can't type 😥" disabled {...actions} />
   ))

@@ -5,17 +5,6 @@ import { action } from "@storybook/addon-actions";
 import ListItem from "./ListItem";
 import List from "../List/List";
 
-const props = {
-  type: "button",
-  onClick: null,
-  style: {},
-  disabled: false,
-  fullWidth: false,
-  size: "m",
-  square: false,
-  active: false
-};
-
 export const actions = { onClick: action("onClick") };
 
 storiesOf("ListItem", module)
@@ -59,6 +48,14 @@ storiesOf("ListItem", module)
       </ListItem>
       <ListItem {...actions} square>
         🎁
+      </ListItem>
+    </List>
+  ))
+  .add("renderas link", () => (
+    <List>
+      <ListItem {...actions}>Normal item</ListItem>
+      <ListItem {...actions} as="a" href="https://expensive.toys">
+        Link!
       </ListItem>
     </List>
   ));
