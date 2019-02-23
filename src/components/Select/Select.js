@@ -47,7 +47,7 @@ const StyledDropdownIcon = styled.span`
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
   display: inline-block;
-  border-top: 6px solid #050608;
+  border-top: 6px solid ${colors.dark};
 `;
 
 const StyledDropdownList = styled.ul`

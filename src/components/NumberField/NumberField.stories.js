@@ -15,7 +15,34 @@ storiesOf("NumberField", module)
     </div>
   ))
   .add("default", () => (
+    <NumberField value={1991} onChange={value => console.log(value)} />
+  ))
+  .add("fixed width", () => (
     <NumberField
+      width={200}
+      value={1991}
+      onChange={value => console.log(value)}
+    />
+  ))
+  .add("disabled", () => (
+    <NumberField
+      disabled
+      width={200}
+      value={1991}
+      onChange={value => console.log(value)}
+    />
+  ))
+  .add("disabled keyboard input", () => (
+    <NumberField
+      disableKeyboardInput
+      width={200}
+      value={1991}
+      onChange={value => console.log(value)}
+    />
+  ))
+  .add("no shadow", () => (
+    <NumberField
+      shadow={false}
       width={200}
       value={1991}
       onChange={value => console.log(value)}

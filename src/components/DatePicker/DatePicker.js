@@ -117,8 +117,9 @@ class DatePicker extends Component {
             />
             <NumberField
               value={year}
+              disableKeyboardInput
               onChange={this.handleYearSelect}
-              width={90}
+              width={100}
               className={`${baseClass}-toolbar__input`}
             />
           </div>

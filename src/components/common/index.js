@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { colors, fontSizes } from "./theme.variables";
+import { colors, fontSizes, padding } from "./theme.variables";
 
 const { bg, light, dark, lightGray, darkGray } = colors;
 
@@ -79,4 +79,20 @@ export const StyledCutout = styled.div`
     ${props =>
       props.shadow && "box-shadow: inset 3px 3px 10px rgba(0, 0, 0, 0.3);"}
   }
+`;
+
+export const StyledTextInput = styled.input`
+  width: 100%;
+  height: 100%;
+  padding: 0 ${padding.sm};
+  outline: none;
+  border: none;
+  background: none;
+  font-size: ${fontSizes.md};
+
+  color: ${props => (props.disabled ? colors.darkGray : colors.dark)};
+  text-shadow: ${props =>
+    props.disabled ? "1px 1px " + colors.light : "none"};
+  filter: ${props => (props.disabled ? "grayscale(100%)" : "none")};
+  /* negative margin to compensate for wrapper borders */
 `;
