@@ -28,7 +28,11 @@ const StyledButton = styled.button`
     props.fullWidth ? "100%" : props.square ? blockSizes[props.size] : "auto"};
   padding: ${props => (props.square ? 0 : "0 " + padding.md)};
   font-size: ${fontSizes.md};
-
+    
+  ${props =>
+    props.isDisabled &&
+    !props.flat &&
+    "background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAIAAABLbSncAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4gYKCAsDA0vcJAAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAAbSURBVAjXYzhw4MD///8xSQasogcOHGAYlDoAfxenobm/8JkAAAAASUVORK5CYII=);"}
   ${props => props.isDisabled && createDisabledTextStyles()}
   &:active {
     ${props => !props.isDisabled && !props.flat && createBorderStyles(true)}

@@ -4,8 +4,22 @@ import cx from "classnames";
 
 import "./List.css";
 
+import styled from "styled-components";
+import { createBorderStyles, createBoxStyles } from "../common";
+
+const StyledList = styled.ul`
+  padding: 2px 4px 4px 2px;
+  ${createBorderStyles()}
+  ${createBoxStyles()}
+  
+  display: inline-block;
+  list-style: none;
+  position: ${props =>
+    props.verticalAlign && props.horizontalAlign ? "absolute" : "relative"};
+`;
+
 const List = ({
-  noShadow,
+  shadow,
   className,
   style,
   children,
@@ -21,27 +35,35 @@ const List = ({
 
     [`${baseClass}--${horizontalAlign}`]: horizontalAlign || false,
     [`${baseClass}--fullWidth`]: fullWidth,
-    [`${baseClass}--noShadow`]: noShadow
+    [`${baseClass}--noShadow`]: shadow
   });
 
   return (
-    <ul className={rootClass} style={style} {...otherProps}>
+    <StyledList
+      verticalAlign={verticalAlign}
+      horizontalAlign={horizontalAlign}
+      shadow={shadow}
+      fullWidth={fullWidth}
+      className={className}
+      style={style}
+      {...otherProps}
+    >
       {children}
-    </ul>
+    </StyledList>
   );
 };
 
 List.defaultProps = {
   style: {},
   fullWidth: false,
-  noShadow: false
+  shadow: true
 };
 
 List.propTypes = {
   className: PropTypes.string,
   style: PropTypes.object,
   fullWidth: PropTypes.bool,
-  noShadow: PropTypes.bool,
+  shadow: PropTypes.bool,
   children: PropTypes.node,
   verticalAlign: PropTypes.oneOf(["top", "bottom"]),
   horizontalAlign: PropTypes.oneOf(["left", "right"])

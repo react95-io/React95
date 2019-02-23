@@ -10,25 +10,14 @@ export const StyledMaterial = styled.div`
   display: inline-block;
 
   background-color: ${colors.bg};
-  /* border-style: solid;
-  border-width: 2px;
-  border-left-color: ${props => (props.hollow ? dark : light)};
-  border-top-color: ${props => (props.hollow ? dark : light)};
-  border-right-color: ${props => (props.hollow ? light : dark)};
-  border-bottom-color: ${props => (props.hollow ? light : dark)}; */
-
-  /* box-shadow: inset 1px 1px 0px 1px
-      ${props => (props.hollow ? darkGray : lightGray)},
-    inset -1px -1px 0 1px ${props => (props.hollow ? lightGray : darkGray)}
-      ${props => (props.shadow && !props.hollow ? ", " + shadow : "")}; */
 `;
-export const createDisabledTextStyles = () => css`
+export const createDisabledTextStyles = () => `
   color: ${colors.darkGray};
   text-shadow: 1px 1px ${colors.light};
   filter: grayscale(100%);
 `;
 export const createBoxStyles = () =>
-  css`
+  `
     box-sizing: border-box;
     display: inline-block;
 

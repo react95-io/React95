@@ -26,7 +26,7 @@ storiesOf("List", module)
     </List>
   ))
   .add("noShadow", () => (
-    <List noShadow>
+    <List shadow={false}>
       <ListItem>Item 1</ListItem>
       <ListItem>Item 2</ListItem>
       <ListItem>Item 3</ListItem>
