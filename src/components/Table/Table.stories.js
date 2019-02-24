@@ -20,7 +20,7 @@ class SimpleTable extends React.Component {
         <WindowContent>
           <Table>
             <TableHead>
-              <TableRow>
+              <TableRow head>
                 <TableHeaderCell>Name</TableHeaderCell>
                 <TableHeaderCell>Swag</TableHeaderCell>
                 <TableHeaderCell>Ready</TableHeaderCell>

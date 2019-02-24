@@ -1,16 +1,17 @@
 import React from "react";
 import propTypes from "prop-types";
-import cx from "classnames";
 
-import "./TableDataCell.css";
+import styled from "styled-components";
+import { padding } from "../../common/theme.variables";
 
+const StyledTd = styled.td`
+  padding: 0 ${padding.sm};
+`;
 const TableDataCell = ({ className, children, style, ...otherProps }) => {
-  const baseClass = "TableDataCell";
-  const rootClass = cx(baseClass, className);
   return (
-    <td className={rootClass} style={style} {...otherProps}>
+    <StyledTd className={className} style={style} {...otherProps}>
       {children}
-    </td>
+    </StyledTd>
   );
 };
 

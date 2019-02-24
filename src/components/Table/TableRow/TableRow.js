@@ -1,25 +1,42 @@
 import React from "react";
 import propTypes from "prop-types";
-import cx from "classnames";
 
-import "./TableRow.css";
+import styled from "styled-components";
+import { blockSizes, colors } from "../../common/theme.variables";
 
-const TableRow = ({ className, children, style, ...otherProps }) => {
-  const baseClass = "TableRow";
-  const rootClass = cx(baseClass, className);
+const StyledTr = styled.tr`
+  color: inherit;
+  display: table-row;
+  height: calc(${blockSizes.md} - 2px);
+  line-height: calc(${blockSizes.md} - 2px);
+  vertical-align: middle;
+  outline: none;
+
+  ${props =>
+    !props.head &&
+    `&:hover {
+      background: ${colors.navy};
+      color: ${colors.light}
+    }`}
+`;
+
+const TableRow = ({ className, children, style, head, ...otherProps }) => {
   return (
-    <tr className={rootClass} style={style} {...otherProps}>
+    <StyledTr head={head} className={className} style={style} {...otherProps}>
       {children}
-    </tr>
+    </StyledTr>
   );
 };
 
-TableRow.defaultProps = {};
+TableRow.defaultProps = {
+  head: false
+};
 
 TableRow.propTypes = {
   children: propTypes.node,
   className: propTypes.string,
-  style: propTypes.object
+  style: propTypes.object,
+  head: propTypes.bool
 };
 
 export default TableRow;

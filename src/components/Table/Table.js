@@ -1,19 +1,22 @@
 import React from "react";
 import propTypes from "prop-types";
-import cx from "classnames";
 
-import "./Table.css";
-import Cutout from "../Cutout/Cutout";
+import styled from "styled-components";
+import { StyledCutout } from "../common";
 
+const StyledTable = styled.table`
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+`;
 const Table = ({ className, children, style, ...otherProps }) => {
-  const baseClass = "Table";
-  const rootClass = cx(baseClass, className);
   return (
-    <Cutout className={`${baseClass}-wrapper`}>
-      <table className={rootClass} style={style} {...otherProps}>
+    <StyledCutout>
+      <StyledTable className={className} style={style} {...otherProps}>
         {children}
-      </table>
-    </Cutout>
+      </StyledTable>
+    </StyledCutout>
   );
 };
 

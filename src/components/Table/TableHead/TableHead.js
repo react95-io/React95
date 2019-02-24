@@ -1,16 +1,15 @@
 import React from "react";
 import propTypes from "prop-types";
-import cx from "classnames";
+import styled from "styled-components";
 
-import "./TableHead.css";
-
+const StyledTableHead = styled.thead`
+  display: table-header-group;
+`;
 const TableHead = ({ className, children, style, ...otherProps }) => {
-  const baseClass = "TableHead";
-  const rootClass = cx(baseClass, className);
   return (
-    <thead className={rootClass} style={style} {...otherProps}>
+    <StyledTableHead className={className} style={style} {...otherProps}>
       {children}
-    </thead>
+    </StyledTableHead>
   );
 };
 

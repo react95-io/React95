@@ -1,16 +1,21 @@
 import React from "react";
 import propTypes from "prop-types";
-import cx from "classnames";
 
-import "./TableBody.css";
+import styled from "styled-components";
+import { colors } from "../../common/theme.variables";
+import { insetShadow } from "../../common";
+
+const StyledTableBody = styled.tbody`
+  background: ${colors.light};
+  display: table-row-group;
+  box-shadow: ${insetShadow};
+`;
 
 const TableBody = ({ className, children, style, ...otherProps }) => {
-  const baseClass = "TableBody";
-  const rootClass = cx(baseClass, className);
   return (
-    <tbody className={rootClass} style={style} {...otherProps}>
+    <StyledTableBody className={className} style={style} {...otherProps}>
       {children}
-    </tbody>
+    </StyledTableBody>
   );
 };
 

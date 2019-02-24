@@ -1,22 +1,32 @@
 import React from "react";
 import propTypes from "prop-types";
-import cx from "classnames";
 
-import "./TableHeaderCell.css";
+import styled from "styled-components";
+import { createBorderStyles } from "../../common";
+import { padding } from "../../common/theme.variables";
 
-const TableHeaderCell = ({
-  className,
-  children,
-  style,
-  onClick,
-  ...otherProps
-}) => {
-  const baseClass = "TableHeaderCell";
-  const rootClass = cx(baseClass, className);
+// ⭕⭕⭕⭕ move text down on Click
+
+const StyledHeadCell = styled.th`
+  ${createBorderStyles()}
+  padding: 0 ${padding.sm};
+  display: table-cell;
+  vertical-align: inherit;
+  &:active {
+    ${createBorderStyles(true)}
+    border-left: none;
+    border-top: none;
+  }
+  border-left: none;
+  border-top: none;
+  cursor: default;
+`;
+
+const TableHeaderCell = ({ className, children, style, ...otherProps }) => {
   return (
-    <th className={rootClass} style={style} {...otherProps} onClick={onClick}>
-      <span className={`${rootClass}__content`}>{children}</span>
-    </th>
+    <StyledHeadCell className={className} style={style} {...otherProps}>
+      {children}
+    </StyledHeadCell>
   );
 };
 
@@ -27,8 +37,7 @@ TableHeaderCell.defaultProps = {
 TableHeaderCell.propTypes = {
   children: propTypes.node,
   className: propTypes.string,
-  style: propTypes.object,
-  onClick: propTypes.func
+  style: propTypes.object
 };
 
 export default TableHeaderCell;

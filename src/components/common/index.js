@@ -4,6 +4,7 @@ import { colors, fontSizes, padding } from "./theme.variables";
 const { bg, light, dark, lightGray, darkGray } = colors;
 
 export const shadow = `4px 4px 10px 0 rgba(0, 0, 0, 0.35)`;
+export const insetShadow = `inset 3px 3px 10px rgba(0, 0, 0, 0.3);`;
 
 export const StyledMaterial = styled.div`
   box-sizing: border-box;
@@ -76,8 +77,7 @@ export const StyledCutout = styled.div`
     border-bottom-color: ${lightGray};
 
     pointer-events: none;
-    ${props =>
-      props.shadow && "box-shadow: inset 3px 3px 10px rgba(0, 0, 0, 0.3);"}
+    ${props => props.shadow && insetShadow}
   }
 `;
 
