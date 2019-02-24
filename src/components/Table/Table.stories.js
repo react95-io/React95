@@ -11,7 +11,7 @@ import TableDataCell from "./TableDataCell/TableDataCell";
 import Window from "../Window/Window";
 import WindowHeader from "../WindowHeader/WindowHeader";
 import WindowContent from "../WindowContent/WindowContent";
-import Button from "../Button/Button";
+
 class SimpleTable extends React.Component {
   render() {
     return (

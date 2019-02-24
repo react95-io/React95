@@ -8,17 +8,6 @@ import styled from "styled-components";
 import Button from "./Button";
 export const actions = { onClick: action("onClick") };
 
-const Badge = styled.span`
-  content: "";
-  position: absolute;
-  top: 8px;
-  right: 0;
-  width: 12px;
-  height: 4px;
-  display: inline-block;
-  background: fuchsia;
-  box-shadow: 0 0 4px fuchsia;
-`;
 storiesOf("Button", module)
   // .addDecorator(story => (
   //   <div
@@ -30,12 +19,7 @@ storiesOf("Button", module)
   //     {story()}
   //   </div>
   // ))
-  .add("default", () => (
-    <Button {...actions}>
-      Button
-      <Badge />
-    </Button>
-  ))
+  .add("default", () => <Button {...actions}>default</Button>)
   .add("disabled", () => (
     <Button disabled {...actions}>
       Disabled

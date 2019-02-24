@@ -4,24 +4,24 @@ import { colors, fontSizes, padding } from "./theme.variables";
 const { bg, light, dark, lightGray, darkGray } = colors;
 
 export const shadow = `4px 4px 10px 0 rgba(0, 0, 0, 0.35)`;
-export const insetShadow = `inset 3px 3px 10px rgba(0, 0, 0, 0.3);`;
+export const insetShadow = `inset 3px 3px 10px rgba(0, 0, 0, 0.3)`;
 
 export const StyledMaterial = styled.div`
   box-sizing: border-box;
   display: inline-block;
 
-  background-color: ${colors.bg};
+  background-color: ${bg};
 `;
 export const createDisabledTextStyles = () => `
-  color: ${colors.darkGray};
-  text-shadow: 1px 1px ${colors.light};
+  color: ${darkGray};
+  text-shadow: 1px 1px ${light};
   filter: grayscale(100%);
 `;
 export const createBoxStyles = () =>
   `
     box-sizing: border-box;
     display: inline-block;
-    background-color: ${colors.bg};
+    background-color: ${bg};
   `;
 export const createBorderStyles = (invert = false) =>
   invert
@@ -32,9 +32,9 @@ export const createBorderStyles = (invert = false) =>
         border-top-color: ${dark};
         border-right-color: ${light};
         border-bottom-color: ${light};
-        box-shadow: inset 1px 1px 0px 1px ${darkGray},
-          inset -1px -1px 0 1px ${lightGray}
-            ${props => props.shadow && ", " + shadow};
+        box-shadow: ${props => props.shadow && shadow + ", "} inset 1px 1px 0px
+            1px ${darkGray},
+          inset -1px -1px 0 1px ${lightGray};
       `
     : css`
         border-style: solid;
@@ -43,9 +43,9 @@ export const createBorderStyles = (invert = false) =>
         border-top-color: ${light};
         border-right-color: ${dark};
         border-bottom-color: ${dark};
-        box-shadow: inset 1px 1px 0px 1px ${lightGray},
-          inset -1px -1px 0 1px ${darkGray}
-            ${props => props.shadow && ", " + shadow};
+        box-shadow: ${props => props.shadow && shadow + ", "} inset 1px 1px 0px
+            1px ${lightGray},
+          inset -1px -1px 0 1px ${darkGray};
       `;
 
 export const StyledCutout = styled.div`
@@ -77,7 +77,7 @@ export const StyledCutout = styled.div`
     border-bottom-color: ${lightGray};
 
     pointer-events: none;
-    ${props => props.shadow && insetShadow}
+    ${props => props.shadow && "box-shadow:" + insetShadow + ";"}
   }
 `;
 
@@ -90,9 +90,8 @@ export const StyledTextInput = styled.input`
   background: none;
   font-size: ${fontSizes.md};
 
-  color: ${props => (props.disabled ? colors.darkGray : colors.dark)};
-  text-shadow: ${props =>
-    props.disabled ? "1px 1px " + colors.light : "none"};
+  color: ${props => (props.disabled ? darkGray : dark)};
+  text-shadow: ${props => (props.disabled ? "1px 1px " + light : "none")};
   filter: ${props => (props.disabled ? "grayscale(100%)" : "none")};
   /* negative margin to compensate for wrapper borders */
 `;
