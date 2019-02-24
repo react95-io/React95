@@ -36,16 +36,7 @@ const StyledButton = styled.button`
   ${props => props.isDisabled && createDisabledTextStyles()}
   &:active {
     ${props => !props.isDisabled && !props.flat && createBorderStyles(true)}
-    ${props =>
-      !props.isDisabled &&
-      !props.flat &&
-      !props.active &&
-      `outline: 1px dotted` +
-        colors.dark +
-        `;
-    outline-offset: -10px;
-    outline-width: 2px;
-    `}
+   
     padding-top: ${props => !props.isDisabled && "2px"};
     
   }

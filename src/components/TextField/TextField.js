@@ -13,11 +13,11 @@ const TextField = ({
   type,
   style,
   shadow,
+  placeholder,
   ...otherProps
 }) => {
   const [inputValue, setInputValue] = useState(value);
 
-  console.log(value, inputValue);
   const onValueChange = e => {
     const newValue = e.target.value;
     setInputValue(newValue);
@@ -31,8 +31,10 @@ const TextField = ({
       onChange={disabled ? undefined : onValueChange}
       disabled={disabled}
       value={inputValue}
+      placeholder={placeholder}
       name={name}
       className={className}
+      {...otherProps}
       type="text"
     />
   );
@@ -40,12 +42,14 @@ const TextField = ({
 
 TextField.defaultProps = {
   value: "",
+  placeholder: "",
   disabled: false,
   shadow: true,
   onChange: undefined
 };
 TextField.propTypes = {
   className: propTypes.string,
+  placeholder: propTypes.string,
   name: propTypes.string,
   onChange: propTypes.func,
   value: propTypes.oneOfType([propTypes.string, propTypes.number]).isRequired,

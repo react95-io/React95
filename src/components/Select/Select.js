@@ -48,6 +48,9 @@ const StyledDropdownIcon = styled.span`
   border-right: 6px solid transparent;
   display: inline-block;
   border-top: 6px solid ${colors.dark};
+  ${StyledDropdownButton}:active & {
+    margin-top: 2px;
+  }
 `;
 
 const StyledDropdownList = styled.ul`

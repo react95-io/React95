@@ -21,11 +21,11 @@ function Menu() {
     <div style={{ position: "relative", display: "inline-block" }}>
       {Boolean(open) && (
         <List horizontalAlign="left" verticalAlign="bottom" open={open}>
-          <ListItem onClick={handleClose}>Profile</ListItem>
-          <ListItem onClick={handleClose}>My account</ListItem>
+          <ListItem onClick={handleClose}>👨‍💻 Profile</ListItem>
+          <ListItem onClick={handleClose}>📁 My account</ListItem>
           <Divider />
           <ListItem onClick={handleClose} disabled>
-            Logout
+            🔙 Logout
           </ListItem>
         </List>
       )}

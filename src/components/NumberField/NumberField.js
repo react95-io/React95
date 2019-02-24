@@ -43,6 +43,9 @@ const StyledButtonIcon = styled.span`
   border-right: 4px solid transparent;
   display: inline-block;
   border-top: 4px solid ${colors.dark};
+  ${StyledButton}:active & {
+    margin-top: 2px;
+  }
 `;
 
 class NumberField extends React.Component {
@@ -75,7 +78,6 @@ class NumberField extends React.Component {
   handleChange = e => {
     let newValue =
       e.target.value === "-" ? "-" : this.normalize(e.target.value);
-    console.log(newValue);
     newValue = newValue ? newValue : newValue === 0 ? 0 : "";
     if (e.target.validity.valid) {
       this.setState({ value: newValue });
