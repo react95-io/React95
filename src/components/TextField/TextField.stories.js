@@ -24,7 +24,7 @@ storiesOf("TextField", module)
     <TextField value="Can't type 😥" disabled {...actions} />
   ))
   .add("custom width", () => (
-    <TextField value="Custom width" width={120} {...actions} />
+    <TextField value="Custom width" width={150} {...actions} />
   ));
 
 class Swag extends React.Component {

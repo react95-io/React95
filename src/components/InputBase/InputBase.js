@@ -19,9 +19,15 @@ const InputBase = ({
   type,
   style,
   shadow,
+  width,
   ...otherProps
 }) => (
-  <StyledInputWrapper shadow={shadow} isDisabled={disabled} style={style}>
+  <StyledInputWrapper
+    width={width}
+    shadow={shadow}
+    isDisabled={disabled}
+    style={{ ...style, width: width ? width : "auto" }}
+  >
     <StyledTextInput
       onChange={disabled ? undefined : onChange}
       readOnly={disabled}
@@ -42,6 +48,7 @@ InputBase.defaultProps = {
 };
 InputBase.propTypes = {
   name: propTypes.string,
+  width: propTypes.oneOfType([propTypes.string, propTypes.number]),
   onChange: propTypes.func,
   value: propTypes.oneOfType([propTypes.string, propTypes.number]).isRequired,
   disabled: propTypes.bool,

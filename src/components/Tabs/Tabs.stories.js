@@ -44,7 +44,7 @@ class TabsDemo extends React.Component {
           <div style={{ height: 300 }}>
             {activeTab === 0 && (
               <TabBody>
-                <Fieldset title="Order">
+                <Fieldset label="Order:">
                   <div style={{ padding: "0.5em 0 0.5em 0" }}>Ammount:</div>
                   <NumberField
                     width={"100%"}

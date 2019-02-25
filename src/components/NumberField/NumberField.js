@@ -115,6 +115,7 @@ class NumberField extends React.Component {
           shadow={shadow}
           type="tel"
           pattern="^-?[0-9]\d*\.?\d*$"
+          width="100%"
         />
         <StyledButtonWrapper>
           <StyledButton disabled={disabled} onClick={() => this.add(1)}>

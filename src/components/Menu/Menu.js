@@ -7,7 +7,7 @@ import Divider from "../Divider/Divider";
 import LogoIcon from "../Icon/LogoIcon";
 
 function Menu() {
-  const [open, setOpen] = React.useState(null);
+  const [open, setOpen] = React.useState(false);
 
   function handleClick() {
     setOpen(!open);
@@ -19,19 +19,22 @@ function Menu() {
 
   return (
     <div style={{ position: "relative", display: "inline-block" }}>
-      {Boolean(open) && (
-        <List horizontalAlign="left" verticalAlign="bottom" open={open}>
-          <ListItem onClick={handleClose}>👨‍💻 Profile</ListItem>
-          <ListItem onClick={handleClose}>📁 My account</ListItem>
+      {open && (
+        <List
+          horizontalAlign="left"
+          verticalAlign="bottom"
+          open={open}
+          onClick={handleClose}
+        >
+          <ListItem>👨‍💻 Profile</ListItem>
+          <ListItem>📁 My account</ListItem>
           <Divider />
-          <ListItem onClick={handleClose} disabled>
-            🔙 Logout
-          </ListItem>
+          <ListItem disabled>🔙 Logout</ListItem>
         </List>
       )}
       <Button
         onClick={handleClick}
-        active={Boolean(open)}
+        active={open}
         // style={{ fontWeight: "bold", fontSize: "1.2em" }}
       >
         Start

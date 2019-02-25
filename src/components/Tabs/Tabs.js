@@ -1,8 +1,12 @@
 import React from "react";
 import propTypes from "prop-types";
-import cx from "classnames";
 
-import "./Tabs.css";
+import styled from "styled-components";
+
+const StyledTabs = styled.nav`
+  position: relative;
+  left: 8px;
+`;
 
 const Tabs = ({
   value,
@@ -12,23 +16,17 @@ const Tabs = ({
   style,
   ...otherProps
 }) => {
-  const baseClass = "Tabs";
-  const rootClass = cx(baseClass, className);
-
-  const tabsNumber = React.Children.count(children);
-  const childrenWithProps = React.Children.map(children, (child, i) => {
+  const childrenWithProps = React.Children.map(children, child => {
     const tabProps = {
-      first: i === 0,
-      last: i === tabsNumber - 1,
       active: child.props.value === value,
       onClick: onChange
     };
     return React.cloneElement(child, tabProps);
   });
   return (
-    <nav className={rootClass} style={style} {...otherProps}>
+    <StyledTabs className={className} style={style} {...otherProps}>
       {childrenWithProps}
-    </nav>
+    </StyledTabs>
   );
 };
 
@@ -39,6 +37,8 @@ Tabs.defaultProps = {
 Tabs.propTypes = {
   value: propTypes.number,
   onChange: propTypes.func,
-  children: propTypes.node
+  children: propTypes.node,
+  className: propTypes.string,
+  style: propTypes.object
 };
 export default Tabs;

@@ -19,23 +19,17 @@ storiesOf("NumberField", module)
   ))
   .add("fixed width", () => (
     <NumberField
-      width={200}
       value={1991}
+      width={94}
       onChange={value => console.log(value)}
     />
   ))
   .add("disabled", () => (
-    <NumberField
-      disabled
-      width={200}
-      value={1991}
-      onChange={value => console.log(value)}
-    />
+    <NumberField disabled value={1991} onChange={value => console.log(value)} />
   ))
   .add("disabled keyboard input", () => (
     <NumberField
       disableKeyboardInput
-      width={200}
       value={1991}
       onChange={value => console.log(value)}
     />
@@ -43,7 +37,6 @@ storiesOf("NumberField", module)
   .add("no shadow", () => (
     <NumberField
       shadow={false}
-      width={200}
       value={1991}
       onChange={value => console.log(value)}
     />

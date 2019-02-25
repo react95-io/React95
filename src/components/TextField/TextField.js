@@ -27,7 +27,7 @@ const TextField = ({
     <InputBase
       shadow={shadow}
       isDisabled={disabled}
-      style={{ ...style, width: width ? width : "auto" }}
+      width={width}
       onChange={disabled ? undefined : onValueChange}
       disabled={disabled}
       value={inputValue}
