@@ -2,8 +2,8 @@ import React from "react";
 import propTypes from "prop-types";
 
 import styled from "styled-components";
-import { createBorderStyles, createBoxStyles } from "../../common";
-import { blockSizes, padding, colors } from "../../common/theme.variables";
+import { createBorderStyles, createBoxStyles } from "../common";
+import { blockSizes, padding, colors } from "../common/theme.variables";
 
 const StyledTab = styled.div`
   ${createBoxStyles()}

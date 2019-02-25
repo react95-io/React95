@@ -2,8 +2,8 @@ import React from "react";
 import propTypes from "prop-types";
 
 import styled from "styled-components";
-import { colors } from "../../common/theme.variables";
-import { insetShadow } from "../../common";
+import { colors } from "../common/theme.variables";
+import { insetShadow } from "../common";
 
 const StyledTableBody = styled.tbody`
   background: ${colors.light};

@@ -2,11 +2,11 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 
 import Table from "./Table";
-import TableBody from "./TableBody/TableBody";
-import TableHead from "./TableHead/TableHead";
-import TableRow from "./TableRow/TableRow";
-import TableHeaderCell from "./TableHeaderCell/TableHeaderCell";
-import TableDataCell from "./TableDataCell/TableDataCell";
+import TableBody from "../TableBody/TableBody";
+import TableHead from "../TableHead/TableHead";
+import TableRow from "../TableRow/TableRow";
+import TableHeadCell from "../TableHeadCell/TableHeadCell";
+import TableDataCell from "../TableDataCell/TableDataCell";
 
 import Window from "../Window/Window";
 import WindowHeader from "../WindowHeader/WindowHeader";
@@ -21,9 +21,9 @@ class SimpleTable extends React.Component {
           <Table>
             <TableHead>
               <TableRow head>
-                <TableHeaderCell>Name</TableHeaderCell>
-                <TableHeaderCell>Swag</TableHeaderCell>
-                <TableHeaderCell>Ready</TableHeaderCell>
+                <TableHeadCell>Name</TableHeadCell>
+                <TableHeadCell>Swag</TableHeadCell>
+                <TableHeadCell>Ready</TableHeadCell>
               </TableRow>
             </TableHead>
             <TableBody>

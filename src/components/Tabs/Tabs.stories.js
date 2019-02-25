@@ -2,8 +2,8 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 
 import Tabs from "./Tabs";
-import Tab from "./Tab/Tab";
-import TabBody from "./TabBody/TabBody";
+import Tab from "../Tab/Tab";
+import TabBody from "../TabBody/TabBody";
 
 import Window from "../Window/Window";
 import WindowHeader from "../WindowHeader/WindowHeader";

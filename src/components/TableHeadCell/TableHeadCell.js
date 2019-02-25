@@ -2,8 +2,8 @@ import React from "react";
 import propTypes from "prop-types";
 
 import styled from "styled-components";
-import { createBorderStyles } from "../../common";
-import { padding } from "../../common/theme.variables";
+import { createBorderStyles } from "../common";
+import { padding } from "../common/theme.variables";
 
 // ⭕⭕⭕⭕ move text down on Click
 
@@ -22,7 +22,7 @@ const StyledHeadCell = styled.th`
   cursor: default;
 `;
 
-const TableHeaderCell = ({ className, children, style, ...otherProps }) => {
+const TableHeadCell = ({ className, children, style, ...otherProps }) => {
   return (
     <StyledHeadCell className={className} style={style} {...otherProps}>
       {children}
@@ -30,14 +30,14 @@ const TableHeaderCell = ({ className, children, style, ...otherProps }) => {
   );
 };
 
-TableHeaderCell.defaultProps = {
+TableHeadCell.defaultProps = {
   onClick: null
 };
 
-TableHeaderCell.propTypes = {
+TableHeadCell.propTypes = {
   children: propTypes.node,
   className: propTypes.string,
   style: propTypes.object
 };
 
-export default TableHeaderCell;
+export default TableHeadCell;
