@@ -14,4 +14,5 @@ storiesOf("Progress", module)
       {story()}
     </div>
   ))
-  .add("default", () => <Progress percent={52} />);
+  .add("default", () => <Progress percent={52} />)
+  .add("no shadow", () => <Progress percent={52} shadow={false} />);

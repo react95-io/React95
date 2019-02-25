@@ -1,17 +1,17 @@
 import React from "react";
 import logoIMG from "../../images/logo.png";
 
-export default function LogoIcon({}) {
+export default function LogoIcon({ style }) {
   const baseClass = "LogoIcon";
   return (
     <span
       className={baseClass}
-      style={{ display: "inline-block", height: "24px", marginLeft: -5 }}
+      style={{ ...style, display: "inline-block", height: "22px" }}
     >
       <img
         src={logoIMG}
         alt="react95 logo"
-        style={{ marginRight: 5, height: "100%", width: "auto" }}
+        style={{ height: "100%", width: "auto" }}
       />
     </span>
   );

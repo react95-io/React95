@@ -7,16 +7,14 @@ import {
   createBoxStyles,
   createDisabledTextStyles
 } from "../common";
-import {
-  blockSizes,
-  fontSizes,
-  padding,
-  colors
-} from "../common/theme.variables";
+import { blockSizes, fontSizes, padding } from "../common/theme.variables";
 
 const StyledButton = styled.button`
-  position: relative;
   ${createBoxStyles()};
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   ${props =>
     props.flat
       ? null
@@ -26,7 +24,7 @@ const StyledButton = styled.button`
   height: ${props => blockSizes[props.size]};
   width: ${props =>
     props.fullWidth ? "100%" : props.square ? blockSizes[props.size] : "auto"};
-  padding: ${props => (props.square ? 0 : "0 " + padding.md)};
+  padding: ${props => (props.square ? 0 : "0 " + padding.sm)};
   font-size: ${fontSizes.md};
     
   ${props =>
