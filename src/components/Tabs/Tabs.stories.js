@@ -49,7 +49,6 @@ class TabsDemo extends React.Component {
                   <NumberField
                     width={"100%"}
                     min={0}
-                    max={100}
                     value={0}
                     onChange={() => null}
                   />

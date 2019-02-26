@@ -52,7 +52,6 @@ TextField.propTypes = {
   placeholder: propTypes.string,
   name: propTypes.string,
   onChange: propTypes.func,
-  value: propTypes.oneOfType([propTypes.string, propTypes.number]).isRequired,
   disabled: propTypes.bool,
   shadow: propTypes.bool,
   width: propTypes.oneOfType([propTypes.string, propTypes.number])
