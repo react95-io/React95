@@ -26,7 +26,6 @@ const TextField = ({
   return (
     <InputBase
       shadow={shadow}
-      isDisabled={disabled}
       width={width}
       onChange={disabled ? undefined : onValueChange}
       disabled={disabled}
@@ -34,6 +33,7 @@ const TextField = ({
       placeholder={placeholder}
       name={name}
       className={className}
+      style={style}
       {...otherProps}
       type="text"
     />

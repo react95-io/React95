@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { colors, fontSizes, padding } from "./theme.variables";
+import { colors, fontSizes, padding, fontFamily } from "./theme.variables";
 
 const { bg, light, dark, lightGray, darkGray } = colors;
 
@@ -89,9 +89,8 @@ export const StyledTextInput = styled.input`
   border: none;
   background: none;
   font-size: ${fontSizes.md};
-
+  font-family: ${fontFamily};
   color: ${props => (props.disabled ? darkGray : dark)};
   text-shadow: ${props => (props.disabled ? "1px 1px " + light : "none")};
   filter: ${props => (props.disabled ? "grayscale(100%)" : "none")};
-  /* negative margin to compensate for wrapper borders */
 `;
