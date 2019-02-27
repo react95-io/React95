@@ -2,14 +2,14 @@ import React from "react";
 import propTypes from "prop-types";
 
 import styled from "styled-components";
-import { colors, fontSizes } from "../common/theme.variables";
+import { fontSizes } from "../common/theme.variables";
 
 const StyledAnchor = styled.a`
-  color: ${colors.blue};
-  font-size: ${props => (props.size ? fontSizes[props.size] : "inherit")};
+  color: ${({ theme }) => theme.anchor};
+  font-size: ${({ size }) => (size ? fontSizes[size] : "inherit")};
   text-decoration: underline;
   &:visited {
-    color: ${colors.purple};
+    color: ${({ theme }) => theme.anchorVisited};
   }
 `;
 

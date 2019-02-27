@@ -1,17 +1,17 @@
 import React from "react";
 import propTypes from "prop-types";
 import styled from "styled-components";
-import { blockSizes, colors } from "../common/theme.variables";
+import { blockSizes } from "../common/theme.variables";
 
 const StyledBar = styled.div`
   display: inline-block;
   height: ${props => blockSizes[props.size]};
   width: 5px;
-  border-top: 2px solid ${colors.light};
-  border-left: 2px solid ${colors.light};
-  border-bottom: 2px solid ${colors.darkGray};
-  border-right: 2px solid ${colors.darkGray};
-  background: ${colors.bg};
+  border-top: 2px solid ${({ theme }) => theme.borderLightest};
+  border-left: 2px solid ${({ theme }) => theme.borderLightest};
+  border-bottom: 2px solid ${({ theme }) => theme.borderDark};
+  border-right: 2px solid ${({ theme }) => theme.borderDark};
+  background: ${({ theme }) => theme.material};
 `;
 const Bar = ({ size, className, style, ...otherProps }) => {
   return (

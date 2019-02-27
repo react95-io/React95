@@ -3,12 +3,13 @@ import propTypes from "prop-types";
 
 import styled from "styled-components";
 import { StyledTextInput, StyledCutout } from "../common";
-import { colors, blockSizes } from "../common/theme.variables";
+import { blockSizes } from "../common/theme.variables";
 
 const StyledInputWrapper = styled(StyledCutout)`
   height: ${blockSizes.md};
   padding: 2px;
-  background: ${props => (props.isDisabled ? colors.bg : colors.light)};
+  background: ${({ theme, isDisabled }) =>
+    isDisabled ? theme.material : theme.canvas};
 `;
 
 const InputBase = ({

@@ -4,7 +4,7 @@ import propTypes from "prop-types";
 import Button from "../Button/Button";
 
 import styled from "styled-components";
-import { colors, blockSizes } from "../common/theme.variables";
+import { blockSizes } from "../common/theme.variables";
 import InputBase from "../InputBase/InputBase";
 
 // ⭕⭕⭕⭕⭕ fix functionality and use hooks
@@ -27,10 +27,10 @@ const StyledButton = styled(Button)`
   width: 30px;
   padding: 0;
   flex-shrink: 0;
-  border-left-color: ${colors.lightGray};
-  border-top-color: ${colors.lightGray};
-  box-shadow: inset 1px 1px 0px 1px ${colors.light},
-    inset -1px -1px 0 1px ${colors.darkGray};
+  border-left-color: ${({ theme }) => theme.borderLight};
+  border-top-color: ${({ theme }) => theme.borderLight};
+  box-shadow: inset 1px 1px 0px 1px ${({ theme }) => theme.borderLightest},
+    inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
 `;
 const StyledButtonIcon = styled.span`
   position: absolute;
@@ -42,7 +42,7 @@ const StyledButtonIcon = styled.span`
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
   display: inline-block;
-  border-top: 4px solid ${colors.dark};
+  border-top: 4px solid ${({ theme }) => theme.text};
   ${StyledButton}:active & {
     margin-top: 2px;
   }

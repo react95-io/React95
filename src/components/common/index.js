@@ -1,51 +1,49 @@
 import styled, { css } from "styled-components";
 import { colors, fontSizes, padding, fontFamily } from "./theme.variables";
 
-const { bg, light, dark, lightGray, darkGray } = colors;
-
 export const shadow = `4px 4px 10px 0 rgba(0, 0, 0, 0.35)`;
 export const insetShadow = `inset 3px 3px 10px rgba(0, 0, 0, 0.3)`;
 
 export const StyledMaterial = styled.div`
   box-sizing: border-box;
   display: inline-block;
-
-  background-color: ${bg};
+  color: ${({ theme }) => theme.text};
+  background-color: ${({ theme }) => theme.material};
 `;
-export const createDisabledTextStyles = () => `
-  color: ${darkGray};
-  text-shadow: 1px 1px ${light};
+export const createDisabledTextStyles = () => css`
+  color: ${({ theme }) => theme.textDisabled};
+  text-shadow: 1px 1px ${({ theme }) => theme.textDisabledShadow};
   filter: grayscale(100%);
 `;
 export const createBoxStyles = () =>
-  `
+  css`
     box-sizing: border-box;
     display: inline-block;
-    background-color: ${bg};
+    background-color: ${({ theme }) => theme.material};
   `;
 export const createBorderStyles = (invert = false) =>
   invert
     ? css`
         border-style: solid;
         border-width: 2px;
-        border-left-color: ${dark};
-        border-top-color: ${dark};
-        border-right-color: ${light};
-        border-bottom-color: ${light};
+        border-left-color: ${({ theme }) => theme.borderDarkest};
+        border-top-color: ${({ theme }) => theme.borderDarkest};
+        border-right-color: ${({ theme }) => theme.borderLightest};
+        border-bottom-color: ${({ theme }) => theme.borderLightest};
         box-shadow: ${props => props.shadow && shadow + ", "} inset 1px 1px 0px
-            1px ${darkGray},
-          inset -1px -1px 0 1px ${lightGray};
+            1px ${({ theme }) => theme.borderDark},
+          inset -1px -1px 0 1px ${({ theme }) => theme.borderLight};
       `
     : css`
         border-style: solid;
         border-width: 2px;
-        border-left-color: ${light};
-        border-top-color: ${light};
-        border-right-color: ${dark};
-        border-bottom-color: ${dark};
+        border-left-color: ${({ theme }) => theme.borderLightest};
+        border-top-color: ${({ theme }) => theme.borderLightest};
+        border-right-color: ${({ theme }) => theme.borderDarkest};
+        border-bottom-color: ${({ theme }) => theme.borderDarkest};
         box-shadow: ${props => props.shadow && shadow + ", "} inset 1px 1px 0px
-            1px ${lightGray},
-          inset -1px -1px 0 1px ${darkGray};
+            1px ${({ theme }) => theme.borderLight},
+          inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
       `;
 
 export const StyledCutout = styled.div`
@@ -55,10 +53,10 @@ export const StyledCutout = styled.div`
 
   border-style: solid;
   border-width: 2px;
-  border-left-color: ${darkGray};
-  border-top-color: ${darkGray};
-  border-right-color: ${light};
-  border-bottom-color: ${light};
+  border-left-color: ${({ theme }) => theme.borderDark};
+  border-top-color: ${({ theme }) => theme.borderDark};
+  border-right-color: ${({ theme }) => theme.borderLightest};
+  border-bottom-color: ${({ theme }) => theme.borderLightest};
 
   &:before {
     position: absolute;
@@ -71,10 +69,10 @@ export const StyledCutout = styled.div`
 
     border-style: solid;
     border-width: 2px;
-    border-left-color: ${dark};
-    border-top-color: ${dark};
-    border-right-color: ${lightGray};
-    border-bottom-color: ${lightGray};
+    border-left-color: ${({ theme }) => theme.borderDarkest};
+    border-top-color: ${({ theme }) => theme.borderDarkest};
+    border-right-color: ${({ theme }) => theme.borderLight};
+    border-bottom-color: ${({ theme }) => theme.borderLight};
 
     pointer-events: none;
     ${props => props.shadow && "box-shadow:" + insetShadow + ";"}
@@ -90,7 +88,9 @@ export const StyledTextInput = styled.input`
   background: none;
   font-size: ${fontSizes.md};
   font-family: ${fontFamily};
-  color: ${props => (props.disabled ? darkGray : dark)};
-  text-shadow: ${props => (props.disabled ? "1px 1px " + light : "none")};
+  color: ${({ theme, disabled }) =>
+    disabled ? theme.textDisabled : theme.text};
+  text-shadow: ${({ theme, disabled }) =>
+    disabled ? "1px 1px " + theme.textDisabledShadow : "none"};
   filter: ${props => (props.disabled ? "grayscale(100%)" : "none")};
 `;

@@ -4,7 +4,7 @@ import propTypes from "prop-types";
 import styled from "styled-components";
 
 import { StyledCutout } from "../common";
-import { blockSizes, colors } from "../common/theme.variables";
+import { blockSizes } from "../common/theme.variables";
 
 const Wrapper = styled(StyledCutout)`
   display: inline-block;
@@ -19,11 +19,11 @@ const Wrapper = styled(StyledCutout)`
 const WhiteBar = styled.div`
   width: calc(100% - 4px);
   line-height: ${blockSizes.md};
-  background: ${colors.light};
+  background: ${({ theme }) => theme.canvas};
   color: #000;
   margin-left: 2px;
   margin-top: -2px;
-  color: ${colors.dark};
+  color: ${({ theme }) => theme.text};
 `;
 
 const BlueBarContainer = styled.div`
@@ -35,15 +35,14 @@ const BlueBarContainer = styled.div`
   margin-left: 2px;
   margin-top: -2px;
   overflow: hidden;
-  box-shadow: inset 0 0 20px ${colors.blue};
-  background: ${colors.navy};
+  background: ${({ theme }) => theme.progress};
 `;
 
 const BlueBar = styled.div`
   width: ${props => props.width - 8}px;
   height: 100%;
   line-height: ${blockSizes.md};
-  color: ${colors.light};
+  color: ${({ theme }) => theme.textInvert};
 `;
 
 const ProgressBar = ({ width, percent, shadow }) => (

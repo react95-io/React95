@@ -3,7 +3,7 @@ import propTypes from "prop-types";
 
 import styled from "styled-components";
 import { createBorderStyles, createBoxStyles } from "../common";
-import { blockSizes, padding, colors } from "../common/theme.variables";
+import { blockSizes, padding } from "../common/theme.variables";
 
 const StyledTab = styled.div`
   ${createBoxStyles()}
@@ -17,6 +17,7 @@ const StyledTab = styled.div`
   border-top-right-radius: 5px;
   margin-bottom: -2px;
   cursor: default;
+  color: ${({ theme }) => theme.text};
   ${props =>
     props.active &&
     `
@@ -34,7 +35,7 @@ const StyledTab = styled.div`
     width: calc(100% - 4px);
     height: 4px;
 
-    background: ${colors.bg};
+    background: ${({ theme }) => theme.material};
     bottom: -2px;
     left: 2px;
   }

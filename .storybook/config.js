@@ -1,7 +1,19 @@
 import { configure, addDecorator } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
+import { withThemesProvider } from "storybook-addon-styled-component-theme";
 
 import "../src/components/index.css";
+import themes from "../src/components/common/themes";
+
+const demoThemes = [
+  themes.default,
+  themes.water,
+  themes.coldGray,
+  themes.lilacRoseDark,
+  themes.violetDark
+];
+addDecorator(withThemesProvider(demoThemes));
+
 addDecorator(
   withInfo({
     inline: true,

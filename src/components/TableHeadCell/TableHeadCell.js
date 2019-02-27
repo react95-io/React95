@@ -12,6 +12,7 @@ const StyledHeadCell = styled.th`
   padding: 0 ${padding.sm};
   display: table-cell;
   vertical-align: inherit;
+  background: ${({ theme }) => theme.material};
   &:active {
     ${createBorderStyles(true)}
     border-left: none;

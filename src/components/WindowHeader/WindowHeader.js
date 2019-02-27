@@ -2,7 +2,7 @@ import React from "react";
 import propTypes from "prop-types";
 
 import styled from "styled-components";
-import { blockSizes, padding, colors } from "../common/theme.variables";
+import { blockSizes, padding } from "../common/theme.variables";
 
 const SlyledWindowHeader = styled.div`
   height: ${blockSizes.md};
@@ -11,9 +11,13 @@ const SlyledWindowHeader = styled.div`
 
   line-height: ${blockSizes.md};
   font-weight: bold;
-  color: ${colors.light};
+  color: ${({ theme }) => theme.textInvert};
 
-  background: linear-gradient(to right, ${colors.navy}, ${colors.blue});
+  background: linear-gradient(
+    to right,
+    ${({ theme }) => theme.headerMaterialDark},
+    ${({ theme }) => theme.headerMaterialLight}
+  );
 `;
 
 const WindowHeader = ({ className, style, children, ...otherProps }) => {

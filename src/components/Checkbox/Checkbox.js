@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import propTypes from "prop-types";
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { StyledCutout, createDisabledTextStyles } from "../common";
-import { colors, padding, fontSizes } from "../common/theme.variables";
+import { padding, fontSizes } from "../common/theme.variables";
 
 const StyledLabel = styled.label`
   display: block;
@@ -28,21 +28,21 @@ const StyledInput = styled.input`
 
 const createCheckmarkSymbol = ({ checked }) =>
   checked &&
-  `
-  &:after {
-    content: "";
-    display: block;
-    position: absolute;
-    left: 50%;
-    top: calc(50% - 1px);
-    width: 3px;
-    height: 7px;
+  css`
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: calc(50% - 1px);
+      width: 3px;
+      height: 7px;
 
-    border: solid ${colors.dark};
-    border-width: 0 3px 3px 0;
-    transform: translate(-50%, -50%) rotate(45deg);
-  }
-`;
+      border: solid ${({ theme }) => theme.checkmark};
+      border-width: 0 3px 3px 0;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+  `;
 const StyledCheckmark = styled(StyledCutout)`
   position: absolute;
   top: 50%;
@@ -50,7 +50,8 @@ const StyledCheckmark = styled(StyledCutout)`
   transform: translateY(-50%);
   width: 20px;
   height: 20px;
-  background: ${props => (props.isDisabled ? colors.bg : colors.light)};
+  background: ${({ theme, isDisabled }) =>
+    isDisabled ? theme.material : theme.canvas};
   ${props => createCheckmarkSymbol(props)}
 `;
 

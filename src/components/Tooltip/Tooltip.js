@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import propTypes from "prop-types";
 
 import styled from "styled-components";
-import { colors } from "../common/theme.variables";
 import { shadow } from "../common";
 
 const Tip = styled.div`
@@ -13,8 +12,8 @@ const Tip = styled.div`
   transform: translate(-50%, 100%);
   display: ${props => (props.show ? "block" : "none")};
   padding: 4px;
-  border: 1px solid ${colors.dark};
-  background: ${colors.lightYellow};
+  border: 1px solid ${({ theme }) => theme.borderDarkest};
+  background: ${({ theme }) => theme.tooltip};
   box-shadow: ${shadow};
   text-align: center;
 `;

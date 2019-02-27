@@ -4,8 +4,8 @@ import styled from "styled-components";
 
 const StyledDivider = styled.hr`
   width: 100%;
-  border-bottom: 2px solid #fff;
-  border-top: 2px solid #888c8f;
+  border-bottom: 2px solid ${({ theme }) => theme.borderLightest};
+  border-top: 2px solid ${({ theme }) => theme.borderDark};
   margin: 0;
 `;
 

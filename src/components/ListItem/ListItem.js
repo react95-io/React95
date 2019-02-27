@@ -3,7 +3,7 @@ import propTypes from "prop-types";
 
 import styled from "styled-components";
 import { createDisabledTextStyles } from "../common";
-import { padding, blockSizes, colors } from "../common/theme.variables";
+import { padding, blockSizes } from "../common/theme.variables";
 
 const StyledListItem = styled.li`
   display: block;
@@ -15,11 +15,16 @@ const StyledListItem = styled.li`
   white-space: nowrap;
   text-align: ${props => (props.square ? "center" : "left")};
   line-height: ${props => blockSizes[props.size]};
-  color: ${colors.dark};
+  color: ${({ theme }) => theme.text};
 
   &:hover {
-    ${props => !props.isDisabled && "color:" + colors.light + ";"}
-    background: ${props => (props.isDisabled ? "none" : colors.navy)};
+    ${({ theme, isDisabled }) =>
+      !isDisabled &&
+      `
+        color: ${theme.textInvert};
+        background: ${theme.hoverBackground};
+      `}
+
     cursor: default;
   }
   ${props => props.isDisabled && createDisabledTextStyles()}

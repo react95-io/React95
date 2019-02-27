@@ -1,9 +1,9 @@
 import React from "react";
 import propTypes from "prop-types";
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { StyledCutout, createDisabledTextStyles } from "../common";
-import { colors, padding, fontSizes } from "../common/theme.variables";
+import { padding, fontSizes } from "../common/theme.variables";
 
 const StyledLabel = styled.label`
   display: block;
@@ -28,20 +28,20 @@ const StyledInput = styled.input`
 
 const createCheckmarkSymbol = ({ checked }) =>
   checked &&
-  `
-  &:after {
-    position: absolute;
-    content: "";
-    display: inline-block;
-    top: 50%;
-    left: 50%;
-    width: 6px;
-    height: 6px;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    background: ${colors.dark};
-  }
-`;
+  css`
+    &:after {
+      position: absolute;
+      content: "";
+      display: inline-block;
+      top: 50%;
+      left: 50%;
+      width: 6px;
+      height: 6px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: ${({ theme }) => theme.checkmark};
+    }
+  `;
 const StyledCheckmark = styled(StyledCutout)`
   position: absolute;
   top: 50%;
@@ -51,7 +51,8 @@ const StyledCheckmark = styled(StyledCutout)`
   height: 20px;
   border-radius: 50%;
 
-  background: ${props => (props.isDisabled ? colors.bg : colors.light)};
+  background: ${({ theme, isDisabled }) =>
+    isDisabled ? theme.material : theme.canvas};
 
   &:before {
     content: "";

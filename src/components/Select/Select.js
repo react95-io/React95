@@ -5,12 +5,7 @@ import Button from "../Button/Button";
 
 import styled from "styled-components";
 import { shadow } from "../common";
-import {
-  blockSizes,
-  fontSizes,
-  padding,
-  colors
-} from "../common/theme.variables";
+import { blockSizes, fontSizes, padding } from "../common/theme.variables";
 import { StyledCutout } from "../common";
 
 const StyledSelectWrapper = styled(StyledCutout)`
@@ -18,7 +13,7 @@ const StyledSelectWrapper = styled(StyledCutout)`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: ${colors.light};
+  background: ${({ theme }) => theme.canvas};
   font-size: ${fontSizes.md};
 `;
 const StyledSelectContent = styled.div`
@@ -32,10 +27,10 @@ const StyledDropdownButton = styled(Button)`
   padding: 0;
   z-index: 1;
   flex-shrink: 0;
-  border-left-color: ${colors.lightGray};
-  border-top-color: ${colors.lightGray};
-  box-shadow: inset 1px 1px 0px 1px ${colors.light},
-    inset -1px -1px 0 1px ${colors.darkGray};
+  border-left-color: ${({ theme }) => theme.borderLight};
+  border-top-color: ${({ theme }) => theme.borderLight};
+  box-shadow: inset 1px 1px 0px 1px ${({ theme }) => theme.borderLightest},
+    inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
 `;
 const StyledDropdownIcon = styled.span`
   position: absolute;
@@ -47,7 +42,7 @@ const StyledDropdownIcon = styled.span`
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
   display: inline-block;
-  border-top: 6px solid ${colors.dark};
+  border-top: 6px solid ${({ theme }) => theme.text};
   ${StyledDropdownButton}:active & {
     margin-top: 2px;
   }
@@ -60,8 +55,8 @@ const StyledDropdownList = styled.ul`
   width: calc(100% - 2px);
   transform: translateY(100%);
   left: 0px;
-  background: ${colors.light};
-  border: 2px solid ${colors.dark};
+  background: ${({ theme }) => theme.canvas};
+  border: 2px solid ${({ theme }) => theme.borderDarkest};
   border-top: none;
   box-shadow: ${props => (props.shadow ? shadow : "none")};
   cursor: default;
@@ -75,9 +70,10 @@ const StyledDropdownListItem = styled.li`
   line-height: calc(${blockSizes.md} - 8px);
   font-size: ${fontSizes.md};
   white-space: nowrap;
+  color: ${({ theme }) => theme.text};
   &:hover {
-    background: ${colors.navy};
-    color: ${colors.light};
+    background: ${({ theme }) => theme.hoverBackground};
+    color: ${({ theme }) => theme.textInvert};
   }
 `;
 const Select = ({

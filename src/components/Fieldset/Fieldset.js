@@ -3,13 +3,13 @@ import propTypes from "prop-types";
 
 import styled from "styled-components";
 import { createDisabledTextStyles } from "../common";
-import { fontSizes, padding, colors } from "../common/theme.variables";
+import { fontSizes, padding } from "../common/theme.variables";
 
 const StyledFieldset = styled.fieldset`
   position: relative;
-  border: 2px solid ${colors.light};
-  box-shadow: -1px -1px 0 1px ${colors.darkGray},
-    inset -1px -1px 0 1px ${colors.darkGray};
+  border: 2px solid ${({ theme }) => theme.borderLightest};
+  box-shadow: -1px -1px 0 1px ${({ theme }) => theme.borderDark},
+    inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
   padding: ${padding.md};
 
   font-size: ${fontSizes.md};
@@ -22,7 +22,7 @@ const StyledLegend = styled.legend`
   padding: 0 ${padding.sm};
 
   font-size: ${fontSizes.md};
-  background: ${colors.bg};
+  background: ${({ theme }) => theme.material};
 `;
 
 const StyledFieldsetContent = styled.div`
