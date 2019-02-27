@@ -6,7 +6,8 @@ export const colors = {
   lightGray: "#dfe0e3",
   navy: "#000080",
   blue: "#1034a6",
-  lightYellow: "#fefbcc"
+  lightYellow: "#fefbcc",
+  purple: "#440381"
 };
 
 export const styles = {
