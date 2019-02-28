@@ -1,3 +1,5 @@
+import { darken, lighten } from "polished";
+
 const themes = {};
 
 themes.default = {
@@ -11,11 +13,17 @@ themes.default = {
 
   headerMaterialDark: "#000080",
   headerMaterialLight: "#1034a6",
+  headerText: "#ffffff",
 
   text: "#050608",
   textInvert: "#ffffff",
   textDisabled: "#888c8f",
   textDisabledShadow: "#ffffff",
+
+  inputText: "#050608",
+  inputTextInvert: "#ffffff",
+  inputTextDisabled: "#888c8f",
+  inputTextDisabledShadow: "#ffffff",
 
   tooltip: "#fefbcc",
 
@@ -38,11 +46,17 @@ themes.water = {
 
   headerMaterialDark: "#72b3b4",
   headerMaterialLight: "#72b3b4",
+  headerText: "#ffffff",
 
   text: "#050608",
   textInvert: "#ffffff",
   textDisabled: "#888c8f",
   textDisabledShadow: "#ffffff",
+
+  inputText: "#050608",
+  inputTextInvert: "#ffffff",
+  inputTextDisabled: "#888c8f",
+  inputTextDisabledShadow: "#ffffff",
 
   tooltip: "#fefbcc",
 
@@ -65,11 +79,17 @@ themes.coldGray = {
 
   headerMaterialDark: "#8d88c2",
   headerMaterialLight: "#8d88c2",
+  headerText: "#010601",
 
   text: "#010601",
-  textInvert: "#010601",
+  textInvert: "#c7c7df",
   textDisabled: "#888c8f",
   textDisabledShadow: "#c7c7df",
+
+  inputText: "#050608",
+  inputTextInvert: "#ffffff",
+  inputTextDisabled: "#888c8f",
+  inputTextDisabledShadow: "#ffffff",
 
   tooltip: "#fefbcc",
 
@@ -85,18 +105,24 @@ themes.lilacRoseDark = {
   canvas: "#dab1c7",
   material: "#b26496",
 
-  borderDarkest: "#100619",
-  borderLightest: "#ecbfe3",
-  borderDark: "#542440",
-  borderLight: "#ab7098",
+  borderDarkest: darken(0.7, "#b26496"),
+  borderLightest: lighten(0.2, "#b26496"),
+  borderDark: darken(0.15, "#b26496"),
+  borderLight: lighten(0.05, "#b26496"),
 
   headerMaterialDark: "#a65387",
   headerMaterialLight: "#8d88c2",
+  headerText: "#010601",
 
   text: "#ecbfe3",
   textInvert: "#ecbfe3",
   textDisabled: "#82416d",
   textDisabledShadow: "#ecbfe3",
+
+  inputText: "#000000",
+  inputTextInvert: "#000000",
+  inputTextDisabled: "#000000",
+  inputTextDisabledShadow: "#000000",
 
   tooltip: "#fefbcc",
 

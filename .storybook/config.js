@@ -6,10 +6,10 @@ import "../src/components/index.css";
 import themes from "../src/components/common/themes";
 
 const demoThemes = [
+  themes.lilacRoseDark,
   themes.default,
   themes.water,
   themes.coldGray,
-  themes.lilacRoseDark,
   themes.violetDark
 ];
 addDecorator(withThemesProvider(demoThemes));

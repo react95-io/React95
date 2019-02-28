@@ -89,8 +89,8 @@ export const StyledTextInput = styled.input`
   font-size: ${fontSizes.md};
   font-family: ${fontFamily};
   color: ${({ theme, disabled }) =>
-    disabled ? theme.textDisabled : theme.text};
+    disabled ? theme.inputTextDisabled : theme.inputText};
   text-shadow: ${({ theme, disabled }) =>
-    disabled ? "1px 1px " + theme.textDisabledShadow : "none"};
+    disabled ? "1px 1px " + theme.inputTextDisabledShadow : "none"};
   filter: ${props => (props.disabled ? "grayscale(100%)" : "none")};
 `;

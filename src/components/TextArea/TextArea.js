@@ -28,9 +28,9 @@ const StyledTextArea = styled.textarea`
   font-size: ${fontSizes.md};
   font-family: ${fontFamily};
   color: ${({ theme, disabled }) =>
-    disabled ? theme.textDisabled : theme.text};
-  ${props => props.disabled && createDisabledTextStyles()}
-  filter: ${props => (props.disabled ? "grayscale(100%)" : "none")};
+    disabled ? theme.inputTextDisabled : theme.inputText};
+    ${props => props.disabled && createDisabledTextStyles()}
+  /* filter: ${props => (props.disabled ? "grayscale(100%)" : "none")}; */
   ${props => props.shadow && "box-shadow: " + insetShadow + ";"}
 `;
 
