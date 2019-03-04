@@ -13,13 +13,14 @@ export const StyledMaterial = styled.div`
 export const createDisabledTextStyles = () => css`
   color: ${({ theme }) => theme.textDisabled};
   text-shadow: 1px 1px ${({ theme }) => theme.textDisabledShadow};
-  filter: grayscale(100%);
+  /* filter: grayscale(100%); */
 `;
 export const createBoxStyles = () =>
   css`
     box-sizing: border-box;
     display: inline-block;
     background-color: ${({ theme }) => theme.material};
+    color: ${({ theme }) => theme.text};
   `;
 export const createBorderStyles = (invert = false) =>
   invert
@@ -92,5 +93,5 @@ export const StyledTextInput = styled.input`
     disabled ? theme.inputTextDisabled : theme.inputText};
   text-shadow: ${({ theme, disabled }) =>
     disabled ? "1px 1px " + theme.inputTextDisabledShadow : "none"};
-  filter: ${props => (props.disabled ? "grayscale(100%)" : "none")};
+  /* filter: ${props => (props.disabled ? "grayscale(100%)" : "none")}; */
 `;

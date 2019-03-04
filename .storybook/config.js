@@ -6,8 +6,8 @@ import "../src/components/index.css";
 import themes from "../src/components/common/themes";
 
 const demoThemes = [
-  themes.lilacRoseDark,
   themes.default,
+  themes.lilacRoseDark,
   themes.water,
   themes.coldGray,
   themes.violetDark

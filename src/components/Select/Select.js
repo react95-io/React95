@@ -14,6 +14,7 @@ const StyledSelectWrapper = styled(StyledCutout)`
   align-items: center;
   justify-content: space-between;
   background: ${({ theme }) => theme.canvas};
+  color: ${({ theme }) => theme.inputText};
   font-size: ${fontSizes.md};
 `;
 const StyledSelectContent = styled.div`
@@ -70,10 +71,10 @@ const StyledDropdownListItem = styled.li`
   line-height: calc(${blockSizes.md} - 8px);
   font-size: ${fontSizes.md};
   white-space: nowrap;
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.inputText};
   &:hover {
     background: ${({ theme }) => theme.hoverBackground};
-    color: ${({ theme }) => theme.textInvert};
+    color: ${({ theme }) => theme.inputTextInvert};
   }
 `;
 const Select = ({

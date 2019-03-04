@@ -13,6 +13,7 @@ const StyledFieldset = styled.fieldset`
   padding: ${padding.md};
 
   font-size: ${fontSizes.md};
+  color: ${({ theme }) => theme.text};
 `;
 const StyledLegend = styled.legend`
   position: absolute;

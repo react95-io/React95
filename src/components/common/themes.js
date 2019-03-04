@@ -83,7 +83,7 @@ themes.coldGray = {
 
   text: "#010601",
   textInvert: "#c7c7df",
-  textDisabled: "#888c8f",
+  textDisabled: "#5b57a1",
   textDisabledShadow: "#c7c7df",
 
   inputText: "#050608",
@@ -120,7 +120,7 @@ themes.lilacRoseDark = {
   textDisabledShadow: "#ecbfe3",
 
   inputText: "#000000",
-  inputTextInvert: "#000000",
+  inputTextInvert: "#ecbfe3",
   inputTextDisabled: "#000000",
   inputTextDisabledShadow: "#000000",
 
@@ -143,13 +143,18 @@ themes.violetDark = {
   borderDark: "#3c1f3e",
   borderLight: "#945b9b",
 
-  headerMaterialDark: "#512155",
-  headerMaterialLight: "#1034a6",
+  headerMaterialDark: "#1034a6",
+  headerMaterialLight: "#512155",
 
   text: "#c57ece",
   textInvert: "#c47bcc",
-  textDisabled: "#888c8f",
+  textDisabled: "#3c1f3e",
   textDisabledShadow: "#c47bcc",
+
+  inputText: "#18051a",
+  inputTextInvert: "#c57ece",
+  inputTextDisabled: "#000000",
+  inputTextDisabledShadow: "#000000",
 
   tooltip: "#fefbcc",
 

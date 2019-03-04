@@ -136,7 +136,7 @@ class DatePicker extends Component {
             <div className={`${baseClass}-dates`}>{dayPickerItems}</div>
           </Cutout>
           <div className={`${baseClass}-buttons`}>
-            <Button fullWidth onClick={onCancel}>
+            <Button fullWidth onClick={onCancel} disabled>
               Cancel
             </Button>
             <Button fullWidth onClick={this.handleChange}>
