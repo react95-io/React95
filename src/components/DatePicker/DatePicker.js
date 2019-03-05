@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
+
+import styled from "styled-components";
+import { darken, lighten } from "polished";
+
 import cx from "classnames";
 
 import "./DatePicker.css";
@@ -11,7 +15,18 @@ import Select from "../Select/Select";
 import NumberField from "../NumberField/NumberField";
 import Cutout from "../Cutout/Cutout";
 import Button from "../Button/Button";
+import Toolbar from "../Toolbar/Toolbar";
 
+const Calendar = styled(Cutout)`
+  width: 234px;
+  margin: 1rem 0;
+  background: ${({ theme }) => theme.canvas};
+`;
+const WeekDays = styled.div`
+  display: flex;
+  background: ${({ theme }) => darken(0.2, theme.material)};
+  color: #dfe0e3;
+`;
 function daysInMonth(year, month) {
   return new Date(year, month, 0).getDate();
 }
@@ -106,7 +121,7 @@ class DatePicker extends Component {
       <Window style={{ margin: 20 }} className={className} noShadow={noShadow}>
         <WindowHeader>📆 Date</WindowHeader>
         <WindowContent>
-          <div className={`${baseClass}-toolbar`}>
+          <Toolbar noPadding style={{ justifyContent: "space-between" }}>
             <Select
               items={months}
               selectedIndex={month - 1}
@@ -122,9 +137,9 @@ class DatePicker extends Component {
               width={100}
               className={`${baseClass}-toolbar__input`}
             />
-          </div>
-          <Cutout className={`${baseClass}-datePicker`}>
-            <div className={`${baseClass}-dayNames`}>
+          </Toolbar>
+          <Calendar>
+            <WeekDays>
               <div className={`${baseClass}-datePicker__item`}>S</div>
               <div className={`${baseClass}-datePicker__item`}>M</div>
               <div className={`${baseClass}-datePicker__item`}>T</div>
@@ -132,17 +147,17 @@ class DatePicker extends Component {
               <div className={`${baseClass}-datePicker__item`}>T</div>
               <div className={`${baseClass}-datePicker__item`}>F</div>
               <div className={`${baseClass}-datePicker__item`}>S</div>
-            </div>
+            </WeekDays>
             <div className={`${baseClass}-dates`}>{dayPickerItems}</div>
-          </Cutout>
-          <div className={`${baseClass}-buttons`}>
+          </Calendar>
+          <Toolbar noPadding style={{ justifyContent: "space-between" }}>
             <Button fullWidth onClick={onCancel} disabled>
               Cancel
             </Button>
             <Button fullWidth onClick={this.handleChange}>
               OK
             </Button>
-          </div>
+          </Toolbar>
         </WindowContent>
       </Window>
     );

@@ -77,7 +77,7 @@ themes.coldGray = {
   borderDark: "#5b57a1",
   borderLight: "#a4a7c8",
 
-  headerMaterialDark: "#8d88c2",
+  headerMaterialDark: darken(0.2, "#a1a3ca"),
   headerMaterialLight: "#8d88c2",
   headerText: "#010601",
 
@@ -114,7 +114,7 @@ themes.lilacRoseDark = {
   headerMaterialLight: "#8d88c2",
   headerText: "#010601",
 
-  text: "#ecbfe3",
+  text: "#000000",
   textInvert: "#ecbfe3",
   textDisabled: "#82416d",
   textDisabledShadow: "#ecbfe3",

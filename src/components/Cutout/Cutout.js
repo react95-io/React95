@@ -7,7 +7,12 @@ import { StyledCutout } from "../common";
 
 const Cutout = ({ className, style, children, shadow, ...otherProps }) => {
   return (
-    <StyledCutout className={className} style={style} {...otherProps}>
+    <StyledCutout
+      shadow={shadow}
+      className={className}
+      style={style}
+      {...otherProps}
+    >
       {children}
     </StyledCutout>
   );
