@@ -23,4 +23,9 @@ storiesOf("Fab", module)
       {story()}
     </div>
   ))
-  .add("default", () => <Fab {...actions}>+</Fab>);
+  .add("default", () => <Fab {...actions}>+</Fab>)
+  .add("square", () => (
+    <Fab square {...actions}>
+      +
+    </Fab>
+  ));

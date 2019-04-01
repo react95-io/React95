@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import propTypes from "prop-types";
 
 import styled from "styled-components";
-import { darken, lighten } from "polished";
-
-import cx from "classnames";
-
-import "./DatePicker.css";
+import { darken } from "polished";
 
 import Window from "../Window/Window";
 import WindowHeader from "../WindowHeader/WindowHeader";
@@ -27,6 +23,29 @@ const WeekDays = styled.div`
   background: ${({ theme }) => darken(0.2, theme.material)};
   color: #dfe0e3;
 `;
+const Dates = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+const DateItem = styled.div`
+  text-align: center;
+  height: 1.5em;
+  line-height: 1.5em;
+  width: 14.28%;
+`;
+const DateItemContent = styled.span`
+  cursor: pointer;
+
+  background: ${({ active, theme }) =>
+    active ? theme.hoverBackground : "transparent"};
+  color: ${({ active, theme }) => (active ? theme.textInvert : "initial")};
+
+  &:hover {
+    border: 2px dashed
+      ${({ theme, active }) => (active ? "none" : darken(0.2, theme.material))};
+  }
+`;
+
 function daysInMonth(year, month) {
   return new Date(year, month, 0).getDate();
 }
@@ -91,28 +110,20 @@ class DatePicker extends Component {
         console.log(dayNumber);
 
         dayPickerItems[i] = (
-          <div
+          <DateItem
             key={i}
             onClick={() => {
               console.log("🥩", dayNumber);
               this.handleDaySelect(dayNumber);
             }}
-            className={`${baseClass}-datePicker__item`}
           >
-            <span
-              className={cx(`${baseClass}-datePicker__item-content`, {
-                [`${baseClass}-datePicker__item-content--active`]:
-                  dayNumber === day
-              })}
-            >
+            <DateItemContent active={dayNumber === day}>
               {dayNumber}
-            </span>
-          </div>
+            </DateItemContent>
+          </DateItem>
         );
       } else {
-        dayPickerItems[i] = (
-          <div key={i} className={`${baseClass}-datePicker__item`} />
-        );
+        dayPickerItems[i] = <DateItem key={i} />;
       }
     });
     console.log(dayPickerItems);
@@ -140,15 +151,15 @@ class DatePicker extends Component {
           </Toolbar>
           <Calendar>
             <WeekDays>
-              <div className={`${baseClass}-datePicker__item`}>S</div>
-              <div className={`${baseClass}-datePicker__item`}>M</div>
-              <div className={`${baseClass}-datePicker__item`}>T</div>
-              <div className={`${baseClass}-datePicker__item`}>W</div>
-              <div className={`${baseClass}-datePicker__item`}>T</div>
-              <div className={`${baseClass}-datePicker__item`}>F</div>
-              <div className={`${baseClass}-datePicker__item`}>S</div>
+              <DateItem>S</DateItem>
+              <DateItem>M</DateItem>
+              <DateItem>T</DateItem>
+              <DateItem>W</DateItem>
+              <DateItem>T</DateItem>
+              <DateItem>F</DateItem>
+              <DateItem>S</DateItem>
             </WeekDays>
-            <div className={`${baseClass}-dates`}>{dayPickerItems}</div>
+            <Dates>{dayPickerItems}</Dates>
           </Calendar>
           <Toolbar noPadding style={{ justifyContent: "space-between" }}>
             <Button fullWidth onClick={onCancel} disabled>

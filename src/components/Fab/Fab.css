@@ -9,27 +9,6 @@ button {
   transform: translate(-50%, 50%);
   border-radius: 50%;
 
-  /* cyan */
-  /* background: #07beb8;
-  border-top: 4px solid #3dccc7;
-  border-left: 4px solid #3dccc7;
-  border-bottom: 4px solid #2cbbb4;
-  border-right: 4px solid #2cbbb4; */
-
-  /* pink */
-  /* background: #f991cc;
-  border-top: 4px solid #e2afde;
-  border-left: 4px solid #e2afde;
-  border-bottom: 4px solid #ee4266;
-  border-right: 4px solid #ee4266; */
-
-  /* lavender */
-  /* background: #a663cc;
-  border-top: 4px solid #b298dc;
-  border-left: 4px solid #b298dc;
-  border-bottom: 4px solid #6f2dbd;
-  border-right: 4px solid #6f2dbd; */
-
   /* violet */
   background: #b96ac9;
   /* background: radial-gradient(#6f2dbd, #b96ac9); */
