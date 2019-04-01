@@ -4,6 +4,8 @@ import { storiesOf } from "@storybook/react";
 import Window from "./Window";
 import WindowContent from "../WindowContent/WindowContent";
 import WindowHeader from "../WindowHeader/WindowHeader";
+import Button from "../Button/Button";
+import Toolbar from "../Toolbar/Toolbar";
 
 storiesOf("Window", module)
   .addDecorator(story => (
@@ -17,8 +19,19 @@ storiesOf("Window", module)
     </div>
   ))
   .add("default", () => (
-    <Window>
+    <Window style={{ width: 400 }}>
       <WindowHeader>react95.exe</WindowHeader>
+      <Toolbar>
+        <Button flat size="sm">
+          File
+        </Button>
+        <Button flat size="sm">
+          Edit
+        </Button>
+        <Button flat size="sm">
+          Save
+        </Button>
+      </Toolbar>
       <WindowContent>
         <ul>
           <li>something here</li>

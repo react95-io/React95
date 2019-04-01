@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import propTypes from "prop-types";
 
 import styled, { css } from "styled-components";
-import { StyledCutout, createDisabledTextStyles } from "../common";
+import { StyledCutout, createDisabledTextStyles, insetShadow } from "../common";
 import { padding, fontSizes } from "../common/theme.variables";
 
 const StyledLabel = styled.label`
@@ -52,7 +52,11 @@ const StyledCheckmark = styled(StyledCutout)`
   height: 20px;
   background: ${({ theme, isDisabled }) =>
     isDisabled ? theme.material : theme.canvas};
-  ${props => createCheckmarkSymbol(props)}
+  ${props => createCheckmarkSymbol(props)};
+  box-shadow: ${({ shadow }) => (shadow ? insetShadow : "none")};
+  &:before {
+    box-shadow: none;
+  }
 `;
 
 const Checkbox = ({
@@ -64,6 +68,7 @@ const Checkbox = ({
   name,
   className,
   style,
+  shadow,
   ...otherProps
 }) => {
   const [state, setState] = useState(checked);
@@ -85,7 +90,7 @@ const Checkbox = ({
         name={name}
         {...otherProps}
       />
-      <StyledCheckmark checked={state} isDisabled={disabled} />
+      <StyledCheckmark checked={state} isDisabled={disabled} shadow={shadow} />
     </StyledLabel>
   );
 };
@@ -95,7 +100,8 @@ Checkbox.defaultProps = {
   name: "",
   value: null,
   label: "",
-  disabled: false
+  disabled: false,
+  shadow: true
 };
 
 Checkbox.propTypes = {
@@ -109,6 +115,7 @@ Checkbox.propTypes = {
   label: propTypes.oneOfType([propTypes.string, propTypes.number]),
   checked: propTypes.bool,
   disabled: propTypes.bool,
+  shadow: propTypes.bool,
   style: propTypes.object
 };
 

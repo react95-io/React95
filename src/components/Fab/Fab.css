@@ -20,7 +20,7 @@ button {
   box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.45);
 }
 .Fab--square {
-  border-radius: none;
+  border-radius: 0;
 }
 
 .Fab:not(.Fab--disabled):active {

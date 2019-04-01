@@ -2,7 +2,7 @@ import React from "react";
 import propTypes from "prop-types";
 
 import styled, { css } from "styled-components";
-import { StyledCutout, createDisabledTextStyles } from "../common";
+import { StyledCutout, createDisabledTextStyles, insetShadow } from "../common";
 import { padding, fontSizes } from "../common/theme.variables";
 
 const StyledLabel = styled.label`
@@ -42,6 +42,7 @@ const createCheckmarkSymbol = ({ checked }) =>
       background: ${({ theme }) => theme.checkmark};
     }
   `;
+// had to overwrite box-shadow for StyledCheckmark since the default made checkbox too dark
 const StyledCheckmark = styled(StyledCutout)`
   position: absolute;
   top: 50%;
@@ -54,6 +55,9 @@ const StyledCheckmark = styled(StyledCutout)`
   background: ${({ theme, isDisabled }) =>
     isDisabled ? theme.material : theme.canvas};
 
+  box-shadow: ${({ shadow }) =>
+    shadow ? "inset 3px 3px 10px rgba(0,0,0,0.2)" : "none"};
+
   &:before {
     content: "";
     position: absolute;
@@ -62,6 +66,7 @@ const StyledCheckmark = styled(StyledCutout)`
     width: calc(100% - 4px);
     height: calc(100% - 4px);
     border-radius: 50%;
+    box-shadow: none;
   }
 
   ${props => createCheckmarkSymbol(props)}
@@ -76,6 +81,7 @@ const Radio = ({
   name,
   className,
   style,
+  shadow,
   ...otherProps
 }) => {
   return (
@@ -90,7 +96,11 @@ const Radio = ({
         name={name}
         {...otherProps}
       />
-      <StyledCheckmark checked={checked} isDisabled={disabled} />
+      <StyledCheckmark
+        checked={checked}
+        isDisabled={disabled}
+        shadow={shadow}
+      />
     </StyledLabel>
   );
 };
@@ -100,7 +110,8 @@ Radio.defaultProps = {
   name: "",
   value: null,
   label: "",
-  disabled: false
+  disabled: false,
+  shadow: true
 };
 
 Radio.propTypes = {
@@ -114,6 +125,7 @@ Radio.propTypes = {
   label: propTypes.oneOfType([propTypes.string, propTypes.number]),
   checked: propTypes.bool,
   disabled: propTypes.bool,
+  shadow: propTypes.bool,
   style: propTypes.object
 };
 

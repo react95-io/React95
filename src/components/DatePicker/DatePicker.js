@@ -4,14 +4,14 @@ import propTypes from "prop-types";
 import styled from "styled-components";
 import { darken } from "polished";
 
-import Window from "../Window/Window";
-import WindowHeader from "../WindowHeader/WindowHeader";
-import WindowContent from "../WindowContent/WindowContent";
-import Select from "../Select/Select";
-import NumberField from "../NumberField/NumberField";
-import Cutout from "../Cutout/Cutout";
-import Button from "../Button/Button";
-import Toolbar from "../Toolbar/Toolbar";
+import { Window } from "../";
+import { WindowHeader } from "../";
+import { WindowContent } from "../";
+import { Select } from "../";
+import { NumberField } from "../";
+import { Cutout } from "../";
+import { Button } from "../";
+import { Toolbar } from "../";
 
 const Calendar = styled(Cutout)`
   width: 234px;
@@ -55,11 +55,12 @@ function dayIndex(year, month, day) {
 class DatePicker extends Component {
   static propTypes = {
     className: propTypes.string,
-    noShadow: propTypes.bool,
+    shadow: propTypes.bool,
     onChange: propTypes.func.isRequired,
     onCancel: propTypes.func.isRequired
   };
   static defaultProps = {
+    shadow: true,
     style: {}
   };
 
@@ -78,7 +79,7 @@ class DatePicker extends Component {
   };
   render() {
     let { day, month, year } = this.state;
-    const { noShadow, className, onCancel } = this.props;
+    const { shadow, className, onCancel } = this.props;
     const baseClass = "DatePicker";
 
     const months = [
@@ -129,7 +130,7 @@ class DatePicker extends Component {
     console.log(dayPickerItems);
 
     return (
-      <Window style={{ margin: 20 }} className={className} noShadow={noShadow}>
+      <Window style={{ margin: 20 }} className={className} shadow={shadow}>
         <WindowHeader>📆 Date</WindowHeader>
         <WindowContent>
           <Toolbar noPadding style={{ justifyContent: "space-between" }}>
