@@ -4,8 +4,8 @@ import styled from "styled-components";
 import { createBorderStyles, createBoxStyles } from "../common";
 
 const StyledAppBar = styled.header`
-  ${createBoxStyles()};
   ${createBorderStyles()};
+  ${createBoxStyles()};
 
   position: ${props => (props.fixed ? "fixed" : "absolute")};
   top: 0;
@@ -29,6 +29,7 @@ const AppBar = ({
       fixed={fixed}
       style={style}
       className={className}
+      shadow={shadow}
       {...otherProps}
     >
       {children}

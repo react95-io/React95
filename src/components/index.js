@@ -1,3 +1,5 @@
+import themes from "./common/themes";
+
 import Anchor from "./Anchor/Anchor";
 import AppBar from "./AppBar/AppBar";
 import Bar from "./Bar/Bar";
@@ -6,10 +8,10 @@ import Checkbox from "./Checkbox/Checkbox";
 import Cutout from "./Cutout/Cutout";
 // DatPicker
 import Divider from "./Divider/Divider";
-import Fab from "./Fab/Fab";
+// import Fab from "./Fab/Fab";
 import Fieldset from "./Fieldset/Fieldset";
 // File Icon
-import Hourglass from "./Hourglass/Hourglass";
+// import Hourglass from "./Hourglass/Hourglass";
 // Icon
 // Input Base ⭕
 import List from "./List/List";
@@ -37,6 +39,7 @@ import WindowContent from "./WindowContent/WindowContent";
 import WindowHeader from "./WindowHeader/WindowHeader";
 
 export {
+  themes,
   Anchor,
   AppBar,
   Bar,
@@ -44,9 +47,9 @@ export {
   Checkbox,
   Cutout,
   Divider,
-  Fab,
+  // Fab,
   Fieldset,
-  Hourglass,
+  // Hourglass,
   List,
   ListItem,
   NumberField,

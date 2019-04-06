@@ -85,14 +85,14 @@ const Select = ({
   height,
   otherProps,
   className,
-  onSelect,
+  onChange,
   style
 }) => {
   const [index, setIndex] = useState(selectedIndex);
   const [open, setOpen] = useState(false);
 
   const handleSelect = i => {
-    onSelect(items[i].value);
+    if (onChange) onChange(items[i].value);
     setIndex(i);
   };
   return (
@@ -138,7 +138,7 @@ Select.propTypes = {
   selectedIndex: propTypes.number,
   shadow: propTypes.bool,
   style: propTypes.object,
-  onSelect: propTypes.func.isRequired
+  onChange: propTypes.func.isRequired
 };
 Select.defaultProps = {
   style: {},

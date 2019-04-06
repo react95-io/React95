@@ -10,7 +10,6 @@ const StyledToolbar = styled.div`
 `;
 
 const Toolbar = ({ children, className, style, noPadding, ...otherProps }) => {
-  console.log("⭕", noPadding);
   return (
     <StyledToolbar
       noPadding={noPadding}

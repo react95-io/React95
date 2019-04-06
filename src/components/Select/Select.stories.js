@@ -15,7 +15,7 @@ const items = [
   { value: 6, title: 6 },
   { value: 7, title: 7 }
 ];
-const onSelect = value => console.log(value);
+const onChange = value => console.log(value);
 storiesOf("Select", module)
   .addDecorator(story => (
     <div
@@ -28,11 +28,11 @@ storiesOf("Select", module)
     </div>
   ))
   .add("fixed width", () => (
-    <Select items={items} onSelect={onSelect} width={140} />
+    <Select items={items} onChange={onChange} width={140} />
   ))
   .add("fixed height", () => (
-    <Select items={items} onSelect={onSelect} height={100} width={140} />
+    <Select items={items} onChange={onChange} height={100} width={140} />
   ))
   .add("no shadow", () => (
-    <Select shadow={false} items={items} onSelect={onSelect} />
+    <Select shadow={false} items={items} onChange={onChange} />
   ));
