@@ -5,7 +5,7 @@ import replace from "rollup-plugin-replace";
 
 const NODE_ENV = process.env.NODE_ENV || "development";
 const outputFile =
-  NODE_ENV === "production" ? "./dist/lib/prod.js" : "./dist/lib/dev.js";
+  NODE_ENV === "production" ? "./dist/prod.js" : "./dist/dev.js";
 
 export default {
   input: "./src/components/index.js",
