@@ -25,7 +25,7 @@ Window.defaultProps = {
 
 Window.propTypes = {
   shadow: propTypes.bool,
-  className: propTypes.bool,
+  className: propTypes.string,
   children: propTypes.node
 };
 

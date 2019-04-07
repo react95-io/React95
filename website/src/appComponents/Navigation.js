@@ -1,13 +1,25 @@
 import React from "react";
 import styled from "styled-components";
-import { AppBar, Toolbar, Button } from "../components";
-import { withRouter, Link } from "react-router-dom";
 
+import { AppBar, Toolbar } from "../components";
+import LinkButton from "./LinkButton";
+
+import InstallIcon from "../assets/images/icons/install.ico";
+import SettingsIcon from "../assets/images/icons/settings.ico";
+import AboutIcon from "../assets/images/icons/help_book.ico";
+import LogoIcon from "../assets/images/icons/react95.png";
+
+const StyledIcon = styled.img`
+  height: 25px;
+`;
+const StyledLogoIcon = styled.img`
+  height: 20px;
+`;
 const paths = [
-  { path: "/", label: "💾" },
-  { path: "/settings", label: "💻" },
-  { path: "/about", label: "😎" },
-  { path: "/pizza", label: "🍕" }
+  { to: "/", label: <StyledLogoIcon src={LogoIcon} /> },
+  { to: "/install", label: <StyledIcon src={InstallIcon} /> },
+  { to: "/settings", label: <StyledIcon src={SettingsIcon} /> },
+  { to: "/about", label: <StyledIcon src={AboutIcon} /> }
 ];
 
 const Nav = styled(AppBar)`
@@ -16,19 +28,17 @@ const Nav = styled(AppBar)`
   top: auto;
 `;
 function Navigation(props) {
-  const currentPath = props.location.pathname;
-  console.log(currentPath);
   return (
     <Nav>
       <Toolbar>
         {paths.map((path, i) => (
-          <Button key={i} fullWidth active={currentPath === path.path}>
-            <Link to={path.path}>{path.label}</Link>
-          </Button>
+          <LinkButton key={i} fullWidth to={path.to}>
+            {path.label}
+          </LinkButton>
         ))}
       </Toolbar>
     </Nav>
   );
 }
 
-export default withRouter(Navigation);
+export default Navigation;

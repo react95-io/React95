@@ -65,6 +65,7 @@ const Button = ({
       flat={flat}
       className={className}
       style={style}
+      onTouchStart=""
       {...otherProps}
     >
       {children}
