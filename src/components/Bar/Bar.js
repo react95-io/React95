@@ -5,6 +5,7 @@ import { blockSizes } from "../common/theme.variables";
 
 const StyledBar = styled.div`
   display: inline-block;
+  box-sizing: border-box;
   height: ${props => blockSizes[props.size]};
   width: 5px;
   border-top: 2px solid ${({ theme }) => theme.borderLightest};

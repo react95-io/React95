@@ -6,6 +6,8 @@ import { createDisabledTextStyles } from "../common";
 import { padding, blockSizes } from "../common/theme.variables";
 
 const StyledListItem = styled.li`
+  box-sizing: border-box;
+
   display: block;
   position: relative;
   height: ${props => blockSizes[props.size]};

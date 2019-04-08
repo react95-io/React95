@@ -3,9 +3,10 @@ import propTypes from "prop-types";
 
 import styled from "styled-components";
 import { StyledTextInput, StyledCutout } from "../common";
+import { Cutout } from "../";
 import { blockSizes } from "../common/theme.variables";
 
-const StyledInputWrapper = styled(StyledCutout)`
+const StyledInputWrapper = styled(Cutout)`
   height: ${blockSizes.md};
   padding: 2px;
   background: ${({ theme, isDisabled }) =>

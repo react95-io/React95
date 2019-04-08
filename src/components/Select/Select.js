@@ -50,6 +50,8 @@ const StyledDropdownIcon = styled.span`
 `;
 
 const StyledDropdownList = styled.ul`
+  box-sizing: border-box;
+
   font-size: ${fontSizes.md};
   position: absolute;
   bottom: -2px;
@@ -64,11 +66,13 @@ const StyledDropdownList = styled.ul`
   z-index: 99;
 `;
 const StyledDropdownListItem = styled.li`
-  height: calc(${blockSizes.md} - 8px);
+  box-sizing: border-box;
+
   width: 100%;
   padding-left: ${padding.sm};
 
-  line-height: calc(${blockSizes.md} - 8px);
+  height: calc(${blockSizes.md} - 4px);
+  line-height: calc(${blockSizes.md} - 4px);
   font-size: ${fontSizes.md};
   white-space: nowrap;
   color: ${({ theme }) => theme.inputText};

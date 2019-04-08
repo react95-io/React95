@@ -1,4 +1,5 @@
 import themes from "./common/themes";
+import reset from "./common/reset";
 
 import Anchor from "./Anchor/Anchor";
 import AppBar from "./AppBar/AppBar";
@@ -40,6 +41,7 @@ import WindowHeader from "./WindowHeader/WindowHeader";
 
 export {
   themes,
+  reset,
   Anchor,
   AppBar,
   Bar,

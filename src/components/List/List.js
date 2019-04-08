@@ -16,6 +16,8 @@ const createListPositionStyles = ({
     transform: translate(0, ${verticalAlign === "top" ? "-100%" : "100%"})
   `;
 const StyledList = styled.ul`
+  box-sizing: border-box;
+
   width: ${props => (props.fullWidth ? "100%" : "auto")};
   padding: 2px 4px 4px 2px;
   ${createBorderStyles()}

@@ -20,6 +20,7 @@ const StyledTextAreaWrapper = styled(StyledCutout)`
 const StyledTextArea = styled.textarea`
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
   padding: ${padding.sm};
   outline: none;
   border: none;

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styled, { ThemeProvider } from "styled-components";
-import "./components/index.css";
 
 import { themes, Button } from "./components";
 import { BrowserRouter as Router, Route } from "react-router-dom";

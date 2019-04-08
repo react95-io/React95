@@ -2,8 +2,9 @@ import { configure, addDecorator } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
 import { withThemesProvider } from "storybook-addon-styled-component-theme";
 
-import "../src/components/index.css";
 import themes from "../src/components/common/themes";
+
+import GlobalStyle from "./decorators/globalStyle";
 
 const demoThemes = [
   themes.default,
@@ -29,7 +30,7 @@ addDecorator(
     })
   })
 );
-
+addDecorator(GlobalStyle);
 const req = require.context("../src", true, /\.stories\.js$/);
 function loadStories() {
   req.keys().forEach(filename => req(filename));
