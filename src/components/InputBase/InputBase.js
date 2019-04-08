@@ -4,7 +4,7 @@ import propTypes from "prop-types";
 import styled from "styled-components";
 import { StyledTextInput, StyledCutout } from "../common";
 import { Cutout } from "../";
-import { blockSizes } from "../common/theme.variables";
+import { blockSizes } from "../common/system";
 
 const StyledInputWrapper = styled(Cutout)`
   height: ${blockSizes.md};

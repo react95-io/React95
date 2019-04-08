@@ -3,7 +3,7 @@ import propTypes from "prop-types";
 
 import styled, { css } from "styled-components";
 import { StyledCutout, createDisabledTextStyles, insetShadow } from "../common";
-import { padding, fontSizes } from "../common/theme.variables";
+import { padding, fontSizes } from "../common/system";
 
 const StyledLabel = styled.label`
   display: block;

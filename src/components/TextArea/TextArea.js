@@ -3,12 +3,7 @@ import propTypes from "prop-types";
 
 import styled from "styled-components";
 import { StyledCutout, insetShadow, createDisabledTextStyles } from "../common";
-import {
-  blockSizes,
-  fontSizes,
-  padding,
-  fontFamily
-} from "../common/theme.variables";
+import { blockSizes, fontSizes, padding, fontFamily } from "../common/system";
 
 const StyledTextAreaWrapper = styled(StyledCutout)`
   display: inline-block;

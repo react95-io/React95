@@ -4,7 +4,7 @@ import propTypes from "prop-types";
 import styled from "styled-components";
 
 import { StyledCutout } from "../common";
-import { blockSizes } from "../common/theme.variables";
+import { blockSizes } from "../common/system";
 
 const Wrapper = styled(StyledCutout)`
   display: inline-block;

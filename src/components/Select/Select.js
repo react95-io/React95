@@ -5,7 +5,7 @@ import Button from "../Button/Button";
 
 import styled from "styled-components";
 import { shadow } from "../common";
-import { blockSizes, fontSizes, padding } from "../common/theme.variables";
+import { blockSizes, fontSizes, padding } from "../common/system";
 import { StyledCutout } from "../common";
 
 const StyledSelectWrapper = styled(StyledCutout)`

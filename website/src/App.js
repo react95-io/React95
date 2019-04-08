@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   /* background: #050608; */
 `;
 
-const ratio = 0.8;
+const ratio = 1;
 
 const Main = styled.main`
   display: inline-block;

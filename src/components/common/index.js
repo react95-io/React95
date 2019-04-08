@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { colors, fontSizes, padding, fontFamily } from "./theme.variables";
+import { fontSizes, padding, fontFamily } from "./system";
 
 export const shadow = `4px 4px 10px 0 rgba(0, 0, 0, 0.35)`;
 export const insetShadow = `inset 3px 3px 10px rgba(0, 0, 0, 0.2)`;

@@ -3,7 +3,7 @@ import propTypes from "prop-types";
 
 import styled from "styled-components";
 import { createBorderStyles, createBoxStyles } from "../common";
-import { padding } from "../common/theme.variables";
+import { padding } from "../common/system";
 
 const StyledTabBody = styled.div`
   ${createBoxStyles()}

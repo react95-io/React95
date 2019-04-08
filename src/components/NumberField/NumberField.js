@@ -4,7 +4,7 @@ import propTypes from "prop-types";
 import Button from "../Button/Button";
 
 import styled from "styled-components";
-import { blockSizes } from "../common/theme.variables";
+import { blockSizes } from "../common/system";
 import InputBase from "../InputBase/InputBase";
 
 // ⭕⭕⭕⭕⭕ fix functionality and use hooks

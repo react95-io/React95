@@ -1,7 +1,7 @@
 import React from "react";
 import propTypes from "prop-types";
 import styled from "styled-components";
-import { blockSizes } from "../common/theme.variables";
+import { blockSizes } from "../common/system";
 
 const StyledBar = styled.div`
   display: inline-block;

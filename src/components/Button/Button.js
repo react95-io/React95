@@ -7,7 +7,7 @@ import {
   createBoxStyles,
   createDisabledTextStyles
 } from "../common";
-import { blockSizes, fontSizes, padding } from "../common/theme.variables";
+import { blockSizes, fontSizes, padding } from "../common/system";
 
 const StyledButton = styled.button`
   ${createBoxStyles()};

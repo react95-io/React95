@@ -2,7 +2,7 @@ import React from "react";
 import propTypes from "prop-types";
 
 import styled from "styled-components";
-import { fontSizes } from "../common/theme.variables";
+import { fontSizes } from "../common/system";
 
 const StyledAnchor = styled.a`
   color: ${({ theme }) => theme.anchor};

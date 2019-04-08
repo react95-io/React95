@@ -2,7 +2,7 @@ import React from "react";
 import propTypes from "prop-types";
 
 import styled from "styled-components";
-import { padding } from "../common/theme.variables";
+import { padding } from "../common/system";
 
 const StyledWindowContent = styled.div`
   padding: ${padding.md};

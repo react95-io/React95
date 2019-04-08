@@ -3,7 +3,7 @@ import propTypes from "prop-types";
 
 import styled from "styled-components";
 import { createDisabledTextStyles } from "../common";
-import { fontSizes, padding } from "../common/theme.variables";
+import { fontSizes, padding } from "../common/system";
 
 const StyledFieldset = styled.fieldset`
   position: relative;
