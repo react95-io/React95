@@ -142,7 +142,7 @@ Select.propTypes = {
   selectedIndex: propTypes.number,
   shadow: propTypes.bool,
   style: propTypes.object,
-  onChange: propTypes.func.isRequired
+  onChange: propTypes.func
 };
 Select.defaultProps = {
   style: {},

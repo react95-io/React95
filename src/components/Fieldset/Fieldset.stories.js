@@ -11,8 +11,8 @@ storiesOf("Fieldset", module)
   .addDecorator(story => (
     <div
       style={{
-        padding: "5rem"
-        // background: "teal"
+        padding: "5rem",
+        background: "teal"
       }}
     >
       {story()}

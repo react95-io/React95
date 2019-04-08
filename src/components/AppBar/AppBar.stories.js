@@ -9,15 +9,26 @@ import TextField from "../TextField/TextField";
 
 export const actions = { onClick: action("onClick") };
 
-storiesOf("AppBar", module).add("default", () => (
-  <AppBar>
-    <Toolbar style={{ justifyContent: "space-between" }}>
-      <Menu />
-      <TextField
-        placeholder="Search..."
-        width={150}
-        style={{ marginLeft: 4 }}
-      />
-    </Toolbar>
-  </AppBar>
-));
+storiesOf("AppBar", module)
+  .addDecorator(story => (
+    <div
+      style={{
+        padding: "5rem",
+        background: "teal"
+      }}
+    >
+      {story()}
+    </div>
+  ))
+  .add("default", () => (
+    <AppBar>
+      <Toolbar style={{ justifyContent: "space-between" }}>
+        <Menu />
+        <TextField
+          placeholder="Search..."
+          width={150}
+          style={{ marginLeft: 4 }}
+        />
+      </Toolbar>
+    </AppBar>
+  ));

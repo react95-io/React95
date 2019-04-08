@@ -13,7 +13,6 @@ const demoThemes = [
   themes.coldGray,
   themes.violetDark
 ];
-addDecorator(withThemesProvider(demoThemes));
 
 addDecorator(
   withInfo({
@@ -31,6 +30,8 @@ addDecorator(
   })
 );
 addDecorator(GlobalStyle);
+addDecorator(withThemesProvider(demoThemes));
+
 const req = require.context("../src", true, /\.stories\.js$/);
 function loadStories() {
   req.keys().forEach(filename => req(filename));

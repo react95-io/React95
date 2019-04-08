@@ -10,7 +10,7 @@ storiesOf("Radio", module)
     <div
       style={{
         padding: "5rem",
-        background: "#ced0cf"
+        background: "teal"
       }}
     >
       {story()}

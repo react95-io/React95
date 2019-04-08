@@ -96,25 +96,22 @@ class DatePicker extends Component {
       { value: 11, title: "November" },
       { value: 12, title: "December" }
     ];
-    console.log("days in month: ", daysInMonth(year, month));
-    console.log("day index", dayIndex(year, month, day));
-    console.log("first day index", dayIndex(year, month, 1));
+    // console.log("days in month: ", daysInMonth(year, month));
+    // console.log("day index", dayIndex(year, month, day));
+    // console.log("first day index", dayIndex(year, month, 1));
 
     const dayPickerItems = Array.apply(null, { length: 35 });
     const firstDayIndex = dayIndex(year, month, 1);
     const daysNumber = daysInMonth(year, month);
     day = day < daysNumber ? day : daysNumber;
     dayPickerItems.forEach((item, i) => {
-      console.log("swag");
       if (i >= firstDayIndex && i < daysNumber + firstDayIndex) {
         let dayNumber = i - firstDayIndex + 1;
-        console.log(dayNumber);
 
         dayPickerItems[i] = (
           <DateItem
             key={i}
             onClick={() => {
-              console.log("🥩", dayNumber);
               this.handleDaySelect(dayNumber);
             }}
           >
@@ -127,7 +124,6 @@ class DatePicker extends Component {
         dayPickerItems[i] = <DateItem key={i} />;
       }
     });
-    console.log(dayPickerItems);
 
     return (
       <Window style={{ margin: 20 }} className={className} shadow={shadow}>
@@ -137,7 +133,7 @@ class DatePicker extends Component {
             <Select
               items={months}
               selectedIndex={month - 1}
-              onSelect={this.handleMonthSelect}
+              onChange={this.handleMonthSelect}
               width={128}
               height={200}
               className={`${baseClass}-toolbar__input`}

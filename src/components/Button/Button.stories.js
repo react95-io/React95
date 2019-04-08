@@ -9,16 +9,16 @@ import Button from "./Button";
 export const actions = { onClick: action("onClick") };
 
 storiesOf("Button", module)
-  // .addDecorator(story => (
-  //   <div
-  //     style={{
-  //       padding: "5rem",
-  //       background: "teal"
-  //     }}
-  //   >
-  //     {story()}
-  //   </div>
-  // ))
+  .addDecorator(story => (
+    <div
+      style={{
+        padding: "5rem",
+        background: "teal"
+      }}
+    >
+      {story()}
+    </div>
+  ))
   .add("default", () => <Button {...actions}>default</Button>)
   .add("disabled", () => (
     <Button disabled {...actions}>

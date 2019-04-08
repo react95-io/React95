@@ -65,7 +65,8 @@ const Button = ({
       flat={flat}
       className={className}
       style={style}
-      onTouchStart=""
+      // onTouchStart below to enable button :active style on iOS
+      onTouchStart={() => ""}
       {...otherProps}
     >
       {children}
