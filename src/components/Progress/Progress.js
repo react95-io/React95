@@ -3,10 +3,10 @@ import propTypes from "prop-types";
 
 import styled from "styled-components";
 
-import { StyledCutout } from "../common";
+import Cutout from "../Cutout/Cutout";
 import { blockSizes } from "../common/system";
 
-const Wrapper = styled(StyledCutout)`
+const Wrapper = styled(Cutout)`
   display: inline-block;
   width: ${props => props.width}px;
   height: ${blockSizes.md};

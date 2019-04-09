@@ -2,7 +2,7 @@ import React from "react";
 import propTypes from "prop-types";
 
 import styled from "styled-components";
-import { blockSizes, colors } from "../common/system";
+import { blockSizes } from "../common/system";
 
 const StyledTr = styled.tr`
   color: inherit;

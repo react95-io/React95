@@ -23,19 +23,30 @@ const StyledHeadCell = styled.th`
   cursor: default;
 `;
 
-const TableHeadCell = ({ className, children, style, ...otherProps }) => {
+const TableHeadCell = ({
+  className,
+  children,
+  style,
+  onClick,
+  ...otherProps
+}) => {
   return (
-    <StyledHeadCell className={className} style={style} {...otherProps}>
+    <StyledHeadCell
+      className={className}
+      style={style}
+      {...otherProps}
+      onClick={onClick}
+      onTouchStart={() => ""}
+    >
       {children}
     </StyledHeadCell>
   );
 };
 
-TableHeadCell.defaultProps = {
-  onClick: null
-};
+TableHeadCell.defaultProps = {};
 
 TableHeadCell.propTypes = {
+  onClick: propTypes.func,
   children: propTypes.node,
   className: propTypes.string,
   style: propTypes.object

@@ -2,17 +2,30 @@ import React from "react";
 import propTypes from "prop-types";
 
 import styled from "styled-components";
-import { StyledTextInput, StyledCutout } from "../common";
-import { Cutout } from "../";
-import { blockSizes } from "../common/system";
+import Cutout from "../Cutout/Cutout";
+import { blockSizes, fontSizes, padding, fontFamily } from "../common/system";
 
 const StyledInputWrapper = styled(Cutout)`
   height: ${blockSizes.md};
-  padding: 2px;
   background: ${({ theme, isDisabled }) =>
     isDisabled ? theme.material : theme.canvas};
 `;
 
+export const StyledTextInput = styled.input`
+  width: 100%;
+  height: 100%;
+  padding: 0 ${padding.sm};
+  outline: none;
+  border: none;
+  background: none;
+  font-size: ${fontSizes.md};
+  font-family: ${fontFamily};
+  color: ${({ theme, disabled }) =>
+    disabled ? theme.inputTextDisabled : theme.inputText};
+  text-shadow: ${({ theme, disabled }) =>
+    disabled ? "1px 1px " + theme.inputTextDisabledShadow : "none"};
+  /* filter: ${props => (props.disabled ? "grayscale(100%)" : "none")}; */
+`;
 const InputBase = ({
   onChange,
   value,

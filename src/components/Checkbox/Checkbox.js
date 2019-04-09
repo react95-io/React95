@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import propTypes from "prop-types";
 
 import styled, { css } from "styled-components";
-import { StyledCutout, createDisabledTextStyles, insetShadow } from "../common";
+import { createDisabledTextStyles, insetShadow } from "../common";
 import { padding, fontSizes } from "../common/system";
+import Cutout from "../Cutout/Cutout";
 
 const StyledLabel = styled.label`
   display: block;
@@ -43,7 +44,7 @@ const createCheckmarkSymbol = ({ checked }) =>
       transform: translate(-50%, -50%) rotate(45deg);
     }
   `;
-const StyledCheckmark = styled(StyledCutout)`
+const StyledCheckmark = styled(Cutout)`
   position: absolute;
   top: 50%;
   left: 0;

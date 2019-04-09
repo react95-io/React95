@@ -2,8 +2,9 @@ import React from "react";
 import propTypes from "prop-types";
 
 import styled, { css } from "styled-components";
-import { StyledCutout, createDisabledTextStyles, insetShadow } from "../common";
+import { createDisabledTextStyles, insetShadow } from "../common";
 import { padding, fontSizes } from "../common/system";
+import Cutout from "../Cutout/Cutout";
 
 const StyledLabel = styled.label`
   display: block;
@@ -43,7 +44,7 @@ const createCheckmarkSymbol = ({ checked }) =>
     }
   `;
 // had to overwrite box-shadow for StyledCheckmark since the default made checkbox too dark
-const StyledCheckmark = styled(StyledCutout)`
+const StyledCheckmark = styled(Cutout)`
   position: absolute;
   top: 50%;
   left: 0;
@@ -55,8 +56,7 @@ const StyledCheckmark = styled(StyledCutout)`
   background: ${({ theme, isDisabled }) =>
     isDisabled ? theme.material : theme.canvas};
 
-  box-shadow: ${({ shadow }) =>
-    shadow ? "inset 3px 3px 10px rgba(0,0,0,0.2)" : "none"};
+  box-shadow: ${({ shadow }) => (shadow ? insetShadow : "none")};
 
   &:before {
     content: "";

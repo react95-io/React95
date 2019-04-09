@@ -2,16 +2,15 @@ import React, { Component } from "react";
 import propTypes from "prop-types";
 
 import styled from "styled-components";
-import { darken } from "polished";
 
-import { Window } from "../";
-import { WindowHeader } from "../";
-import { WindowContent } from "../";
-import { Select } from "../";
-import { NumberField } from "../";
-import { Cutout } from "../";
-import { Button } from "../";
-import { Toolbar } from "../";
+import Window from "../Window/Window";
+import WindowHeader from "../WindowHeader/WindowHeader";
+import WindowContent from "../WindowContent/WindowContent";
+import Select from "../Select/Select";
+import NumberField from "../NumberField/NumberField";
+import Cutout from "../Cutout/Cutout";
+import Button from "../Button/Button";
+import Toolbar from "../Toolbar/Toolbar";
 
 const Calendar = styled(Cutout)`
   width: 234px;
@@ -20,7 +19,7 @@ const Calendar = styled(Cutout)`
 `;
 const WeekDays = styled.div`
   display: flex;
-  background: ${({ theme }) => darken(0.2, theme.material)};
+  background: ${({ theme }) => theme.materialDark};
   color: #dfe0e3;
 `;
 const Dates = styled.div`
@@ -42,7 +41,7 @@ const DateItemContent = styled.span`
 
   &:hover {
     border: 2px dashed
-      ${({ theme, active }) => (active ? "none" : darken(0.2, theme.material))};
+      ${({ theme, active }) => (active ? "none" : theme.materialDark)};
   }
 `;
 
@@ -83,18 +82,18 @@ class DatePicker extends Component {
     const baseClass = "DatePicker";
 
     const months = [
-      { value: 1, title: "January" },
-      { value: 2, title: "February" },
-      { value: 3, title: "March" },
-      { value: 4, title: "April" },
-      { value: 5, title: "May" },
-      { value: 6, title: "June" },
-      { value: 7, title: "July" },
-      { value: 8, title: "August" },
-      { value: 9, title: "September" },
-      { value: 10, title: "October" },
-      { value: 11, title: "November" },
-      { value: 12, title: "December" }
+      { value: 1, label: "January" },
+      { value: 2, label: "February" },
+      { value: 3, label: "March" },
+      { value: 4, label: "April" },
+      { value: 5, label: "May" },
+      { value: 6, label: "June" },
+      { value: 7, label: "July" },
+      { value: 8, label: "August" },
+      { value: 9, label: "September" },
+      { value: 10, label: "October" },
+      { value: 11, label: "November" },
+      { value: 12, label: "December" }
     ];
     // console.log("days in month: ", daysInMonth(year, month));
     // console.log("day index", dayIndex(year, month, day));

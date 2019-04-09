@@ -3,13 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "polished": "^3.0.0",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
     "styled-components": "^4.1.3"
   },
   "peerDependencies": {
-    "polished": "^3.0.0",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
     "styled-components": "^4.1.3"

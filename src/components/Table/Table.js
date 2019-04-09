@@ -2,7 +2,7 @@ import React from "react";
 import propTypes from "prop-types";
 
 import styled from "styled-components";
-import { StyledCutout } from "../common";
+import Cutout from "../Cutout/Cutout";
 
 const StyledTable = styled.table`
   display: table;
@@ -12,11 +12,11 @@ const StyledTable = styled.table`
 `;
 const Table = ({ className, children, style, ...otherProps }) => {
   return (
-    <StyledCutout>
+    <Cutout>
       <StyledTable className={className} style={style} {...otherProps}>
         {children}
       </StyledTable>
-    </StyledCutout>
+    </Cutout>
   );
 };
 

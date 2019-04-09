@@ -2,10 +2,11 @@ import React from "react";
 import propTypes from "prop-types";
 
 import styled from "styled-components";
-import { StyledCutout, insetShadow, createDisabledTextStyles } from "../common";
+import { createDisabledTextStyles } from "../common";
 import { blockSizes, fontSizes, padding, fontFamily } from "../common/system";
+import Cutout from "../Cutout/Cutout";
 
-const StyledTextAreaWrapper = styled(StyledCutout)`
+const StyledTextAreaWrapper = styled(Cutout)`
   display: inline-block;
   min-height: ${blockSizes.md};
   padding: 0;
@@ -27,7 +28,6 @@ const StyledTextArea = styled.textarea`
     disabled ? theme.inputTextDisabled : theme.inputText};
     ${props => props.disabled && createDisabledTextStyles()}
   /* filter: ${props => (props.disabled ? "grayscale(100%)" : "none")}; */
-  ${props => props.shadow && "box-shadow: " + insetShadow + ";"}
 `;
 
 const TextArea = ({
@@ -53,6 +53,7 @@ const TextArea = ({
       height: height ? height : "auto"
     }}
     isDisabled={disabled}
+    shadow={shadow}
   >
     <StyledTextArea
       className={className}
@@ -61,7 +62,6 @@ const TextArea = ({
       height={height}
       readOnly={disabled}
       onChange={disabled && onChange ? onChange : undefined}
-      shadow={shadow}
       disabled={disabled}
       placeholder={placeholder}
       {...otherProps}

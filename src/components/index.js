@@ -7,17 +7,15 @@ import Bar from "./Bar/Bar";
 import Button from "./Button/Button";
 import Checkbox from "./Checkbox/Checkbox";
 import Cutout from "./Cutout/Cutout";
-// DatPicker
+import DatePicker from "./DatePicker/DatePicker";
 import Divider from "./Divider/Divider";
 // import Fab from "./Fab/Fab";
 import Fieldset from "./Fieldset/Fieldset";
 // File Icon
 // import Hourglass from "./Hourglass/Hourglass";
 // Icon
-// Input Base ⭕
 import List from "./List/List";
 import ListItem from "./ListItem/ListItem";
-// Menu ⭕
 import NumberField from "./NumberField/NumberField";
 import Progress from "./Progress/Progress";
 import Radio from "./Radio/Radio";
@@ -48,6 +46,7 @@ export {
   Button,
   Checkbox,
   Cutout,
+  DatePicker,
   Divider,
   // Fab,
   Fieldset,

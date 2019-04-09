@@ -6,9 +6,9 @@ import Button from "../Button/Button";
 import styled from "styled-components";
 import { shadow } from "../common";
 import { blockSizes, fontSizes, padding } from "../common/system";
-import { StyledCutout } from "../common";
+import Cutout from "../Cutout/Cutout";
 
-const StyledSelectWrapper = styled(StyledCutout)`
+const StyledSelectWrapper = styled(Cutout)`
   height: ${blockSizes.md};
   display: flex;
   align-items: center;
@@ -108,7 +108,7 @@ const Select = ({
       {...otherProps}
     >
       <StyledSelectContent>
-        {items.length ? items[index].title : ""}
+        {items.length ? items[index].label : ""}
       </StyledSelectContent>
       <StyledDropdownButton>
         <StyledDropdownIcon />
@@ -125,7 +125,7 @@ const Select = ({
                 handleSelect(i);
               }}
             >
-              {item.title}
+              {item.label}
             </StyledDropdownListItem>
           ))}
         </StyledDropdownList>

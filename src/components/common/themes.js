@@ -1,10 +1,9 @@
-import { darken, lighten } from "polished";
-
 const themes = {};
 
 themes.default = {
   canvas: "#ffffff",
   material: "#ced0cf",
+  materialDark: "#9a9e9c",
 
   borderDarkest: "#050608",
   borderLightest: "#ffffff",
@@ -38,6 +37,7 @@ themes.default = {
 themes.water = {
   canvas: "#ffffff",
   material: "#ced0cf",
+  materialDark: "#9a9e9c",
 
   borderDarkest: "#050608",
   borderLightest: "#ffffff",
@@ -71,13 +71,14 @@ themes.water = {
 themes.coldGray = {
   canvas: "#c7c7df",
   material: "#a1a3ca",
+  materialDark: "#6063a5",
 
   borderDarkest: "#010601",
   borderLightest: "#c7c7df",
   borderDark: "#5b57a1",
   borderLight: "#a4a7c8",
 
-  headerMaterialDark: darken(0.2, "#a1a3ca"),
+  headerMaterialDark: "#3B3D64",
   headerMaterialLight: "#8d88c2",
   headerText: "#010601",
 
@@ -104,13 +105,14 @@ themes.coldGray = {
 themes.lilacRoseDark = {
   canvas: "#dab1c7",
   material: "#b26496",
+  materialDark: "#763a60",
 
-  borderDarkest: darken(0.7, "#b26496"),
-  borderLightest: lighten(0.2, "#b26496"),
-  borderDark: darken(0.15, "#b26496"),
-  borderLight: lighten(0.05, "#b26496"),
+  borderDarkest: "#190000",
+  borderLightest: "#FFCAFC",
+  borderDark: "#7F3163",
+  borderLight: "#E597C9",
 
-  headerMaterialDark: "#a65387",
+  headerMaterialDark: "#4C0030",
   headerMaterialLight: "#8d88c2",
   headerText: "#010601",
 
@@ -137,7 +139,7 @@ themes.lilacRoseDark = {
 themes.violetDark = {
   canvas: "#c47bcc",
   material: "#652a6d",
-
+  materialDark: "#210e23",
   borderDarkest: "#18051a",
   borderLightest: "#c47bcc",
   borderDark: "#3c1f3e",

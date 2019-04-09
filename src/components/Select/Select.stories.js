@@ -7,13 +7,13 @@ import Select from "./Select";
 export const actions = { onClick: action("onClick") };
 
 const items = [
-  { value: 1, title: 1 },
-  { value: 2, title: 2 },
-  { value: 3, title: 3 },
-  { value: 4, title: 4 },
-  { value: 5, title: 5 },
-  { value: 6, title: 6 },
-  { value: 7, title: 7 }
+  { value: 1, label: 1 },
+  { value: 2, label: 2 },
+  { value: 3, label: 3 },
+  { value: 4, label: 4 },
+  { value: 5, label: 5 },
+  { value: 6, label: 6 },
+  { value: 7, label: 7 }
 ];
 const onChange = value => console.log(value);
 storiesOf("Select", module)
