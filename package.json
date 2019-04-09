@@ -21,22 +21,13 @@
     "access": "public"
   },
   "scripts": {
-    "storybook": "start-storybook -p 9009 -s docs",
-    "build:storybook": "build-storybook -s docs",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build:storybook": "build-storybook -s public -o ./docs",
     "prepublishOnly": "npm run release",
     "release": "npm run build:dev && npm run build:prod",
     "build:dev": "cross-env NODE_ENV=development rollup -c",
     "build:prod": "cross-env NODE_ENV=production rollup -c"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
   "peerDependencies": {
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
