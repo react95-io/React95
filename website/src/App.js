@@ -4,10 +4,6 @@ import styled, { ThemeProvider } from "styled-components";
 import { themes, Button } from "./components";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import Navigation from "./appComponents/Navigation";
-import Desktop from "./views/Desktop/Desktop";
-import Install from "./views/Install/Install";
-import Settings from "./views/Settings/Settings";
 
 import PlasticIMG from "./assets/images/plastic.png";
 
@@ -38,16 +34,10 @@ class App extends Component {
   render() {
     return (
       <ThemeProvider theme={themes.default}>
-        <Wrapper>
-          <Main>
+          <main>
             <Router>
-              <Route exact path="/" component={Desktop} />
-              <Route exact path="/install" component={Install} />
-              <Route exact path="/settings" component={Settings} />
-              <Navigation />
-            </Router>
-          </Main>
-        </Wrapper>
+              <Route exact path="/" component={<h1>asdasdasd</h1>} />
+          </main>
       </ThemeProvider>
     );
   }
