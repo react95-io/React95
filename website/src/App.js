@@ -1,43 +1,30 @@
 import React, { Component } from "react";
-import styled, { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 
-import { themes, Button } from "./components";
+import { reset, themes, Button } from "./lib";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-
-import PlasticIMG from "./assets/images/plastic.png";
-
-const Wrapper = styled.div`
-  position: relative;
-  height: 100%;
-  width: 100%;
-  background-image: url(https://ak4.picdn.net/shutterstock/videos/24223834/thumb/1.jpg);
-  background-size: cover;
-  /* background: #050608; */
+const GlobalStyle = createGlobalStyle`
+  ${reset}
 `;
 
-const ratio = 1;
-
-const Main = styled.main`
-  display: inline-block;
-  position: relative;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: ${375 * ratio}px;
-  height: ${667 * ratio}px;
-  width: 100%;
-  height: 100%;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
-`;
 class App extends Component {
   render() {
     return (
       <ThemeProvider theme={themes.default}>
+        <>
+          <GlobalStyle />
+
           <main>
             <Router>
-              <Route exact path="/" component={<h1>asdasdasd</h1>} />
+              <Route
+                exact
+                path="/"
+                component={() => <Button>asdasdasd</Button>}
+              />
+            </Router>
           </main>
+        </>
       </ThemeProvider>
     );
   }
