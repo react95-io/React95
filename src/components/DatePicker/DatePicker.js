@@ -46,7 +46,7 @@ const DateItemContent = styled.span`
 `;
 
 function daysInMonth(year, month) {
-  return new Date(year, month, 0).getDate();
+  return new Date(year, month + 1, 0).getDate();
 }
 function dayIndex(year, month, day) {
   return new Date(year, month, day).getDay();
@@ -55,52 +55,59 @@ class DatePicker extends Component {
   static propTypes = {
     className: propTypes.string,
     shadow: propTypes.bool,
-    onChange: propTypes.func.isRequired,
-    onCancel: propTypes.func.isRequired
+    onAccept: propTypes.func.isRequired,
+    onCancel: propTypes.func.isRequired,
+    date: propTypes.instanceOf(Date)
   };
   static defaultProps = {
     shadow: true,
     style: {}
   };
-
-  state = {
-    day: 10,
-    month: 2,
-    year: 2019
+  constructor(props) {
+    super(props);
+    const initialDate = this.convertDateToState(props.date || new Date());
+    this.state = initialDate;
+  }
+  convertDateToState = date => {
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    return { day, month, year };
   };
   handleMonthSelect = month => this.setState({ month });
   handleYearSelect = year => this.setState({ year });
   handleDaySelect = day => this.setState({ day });
-  handleChange = () => {
+  handleAccept = () => {
     const { year, month, day } = this.state;
     const date = new Date(year, month, day);
-    this.props.onChange(date);
+
+    this.props.onAccept(date);
   };
   render() {
     let { day, month, year } = this.state;
-    const { shadow, className, onCancel } = this.props;
+    const { shadow, className, onAccept, onCancel } = this.props;
     const baseClass = "DatePicker";
 
     const months = [
-      { value: 1, label: "January" },
-      { value: 2, label: "February" },
-      { value: 3, label: "March" },
-      { value: 4, label: "April" },
-      { value: 5, label: "May" },
-      { value: 6, label: "June" },
-      { value: 7, label: "July" },
-      { value: 8, label: "August" },
-      { value: 9, label: "September" },
-      { value: 10, label: "October" },
-      { value: 11, label: "November" },
-      { value: 12, label: "December" }
+      { value: 0, label: "January" },
+      { value: 1, label: "February" },
+      { value: 2, label: "March" },
+      { value: 3, label: "April" },
+      { value: 4, label: "May" },
+      { value: 5, label: "June" },
+      { value: 6, label: "July" },
+      { value: 7, label: "August" },
+      { value: 8, label: "September" },
+      { value: 9, label: "October" },
+      { value: 10, label: "November" },
+      { value: 11, label: "December" }
     ];
     // console.log("days in month: ", daysInMonth(year, month));
-    // console.log("day index", dayIndex(year, month, day));
-    // console.log("first day index", dayIndex(year, month, 1));
+    console.log("first day index", dayIndex(year, month - 1, 1));
 
     const dayPickerItems = Array.apply(null, { length: 35 });
     const firstDayIndex = dayIndex(year, month, 1);
+
     const daysNumber = daysInMonth(year, month);
     day = day < daysNumber ? day : daysNumber;
     dayPickerItems.forEach((item, i) => {
@@ -131,18 +138,16 @@ class DatePicker extends Component {
           <Toolbar noPadding style={{ justifyContent: "space-between" }}>
             <Select
               items={months}
-              selectedIndex={month - 1}
+              selectedIndex={month}
               onChange={this.handleMonthSelect}
               width={128}
               height={200}
-              className={`${baseClass}-toolbar__input`}
             />
             <NumberField
               value={year}
               disableKeyboardInput
               onChange={this.handleYearSelect}
               width={100}
-              className={`${baseClass}-toolbar__input`}
             />
           </Toolbar>
           <Calendar>
@@ -161,7 +166,10 @@ class DatePicker extends Component {
             <Button fullWidth onClick={onCancel} disabled>
               Cancel
             </Button>
-            <Button fullWidth onClick={this.handleChange}>
+            <Button
+              fullWidth
+              onClick={onAccept ? this.handleAccept : undefined}
+            >
               OK
             </Button>
           </Toolbar>
