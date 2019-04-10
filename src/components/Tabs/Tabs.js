@@ -6,6 +6,7 @@ import styled from "styled-components";
 const StyledTabs = styled.nav`
   position: relative;
   left: 8px;
+  text-align: left;
 `;
 
 const Tabs = ({

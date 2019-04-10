@@ -10,7 +10,7 @@ var styled = require('styled-components');
 var styled__default = _interopDefault(styled);
 
 var themes = {};
-themes.default = {
+themes["default"] = {
   canvas: "#ffffff",
   material: "#ced0cf",
   materialDark: "#9a9e9c",
@@ -1350,7 +1350,7 @@ var DateItemContent = styled__default.span.withConfig({
 });
 
 function daysInMonth(year, month) {
-  return new Date(year, month, 0).getDate();
+  return new Date(year, month + 1, 0).getDate();
 }
 
 function dayIndex(year, month, day) {
@@ -1362,23 +1362,22 @@ var DatePicker =
 function (_Component) {
   _inherits(DatePicker, _Component);
 
-  function DatePicker() {
-    var _getPrototypeOf2;
-
+  function DatePicker(props) {
     var _this;
 
     _classCallCheck(this, DatePicker);
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(DatePicker).call(this, props));
 
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(DatePicker)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    _defineProperty(_assertThisInitialized(_this), "state", {
-      day: 10,
-      month: 2,
-      year: 2019
+    _defineProperty(_assertThisInitialized(_this), "convertDateToState", function (date) {
+      var day = date.getDate();
+      var month = date.getMonth();
+      var year = date.getFullYear();
+      return {
+        day: day,
+        month: month,
+        year: year
+      };
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleMonthSelect", function (month) {
@@ -1399,16 +1398,19 @@ function (_Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleChange", function () {
+    _defineProperty(_assertThisInitialized(_this), "handleAccept", function () {
       var _this$state = _this.state,
           year = _this$state.year,
           month = _this$state.month,
           day = _this$state.day;
       var date = new Date(year, month, day);
 
-      _this.props.onChange(date);
+      _this.props.onAccept(date);
     });
 
+    var initialDate = _this.convertDateToState(props.date || new Date());
+
+    _this.state = initialDate;
     return _this;
   }
 
@@ -1424,48 +1426,47 @@ function (_Component) {
       var _this$props = this.props,
           shadow = _this$props.shadow,
           className = _this$props.className,
+          onAccept = _this$props.onAccept,
           onCancel = _this$props.onCancel;
-      var baseClass = "DatePicker";
       var months = [{
-        value: 1,
+        value: 0,
         label: "January"
       }, {
-        value: 2,
+        value: 1,
         label: "February"
       }, {
-        value: 3,
+        value: 2,
         label: "March"
       }, {
-        value: 4,
+        value: 3,
         label: "April"
       }, {
-        value: 5,
+        value: 4,
         label: "May"
       }, {
-        value: 6,
+        value: 5,
         label: "June"
       }, {
-        value: 7,
+        value: 6,
         label: "July"
       }, {
-        value: 8,
+        value: 7,
         label: "August"
       }, {
-        value: 9,
+        value: 8,
         label: "September"
       }, {
-        value: 10,
+        value: 9,
         label: "October"
       }, {
-        value: 11,
+        value: 10,
         label: "November"
       }, {
-        value: 12,
+        value: 11,
         label: "December"
       }]; // console.log("days in month: ", daysInMonth(year, month));
-      // console.log("day index", dayIndex(year, month, day));
-      // console.log("first day index", dayIndex(year, month, 1));
 
+      console.log("first day index", dayIndex(year, month - 1, 1));
       var dayPickerItems = Array.apply(null, {
         length: 35
       });
@@ -1502,17 +1503,15 @@ function (_Component) {
         }
       }, React__default.createElement(Select, {
         items: months,
-        selectedIndex: month - 1,
+        selectedIndex: month,
         onChange: this.handleMonthSelect,
         width: 128,
-        height: 200,
-        className: "".concat(baseClass, "-toolbar__input")
+        height: 200
       }), React__default.createElement(NumberField, {
         value: year,
         disableKeyboardInput: true,
         onChange: this.handleYearSelect,
-        width: 100,
-        className: "".concat(baseClass, "-toolbar__input")
+        width: 100
       })), React__default.createElement(Calendar, null, React__default.createElement(WeekDays, null, React__default.createElement(DateItem, null, "S"), React__default.createElement(DateItem, null, "M"), React__default.createElement(DateItem, null, "T"), React__default.createElement(DateItem, null, "W"), React__default.createElement(DateItem, null, "T"), React__default.createElement(DateItem, null, "F"), React__default.createElement(DateItem, null, "S")), React__default.createElement(Dates, null, dayPickerItems)), React__default.createElement(Toolbar, {
         noPadding: true,
         style: {
@@ -1524,7 +1523,7 @@ function (_Component) {
         disabled: true
       }, "Cancel"), React__default.createElement(Button, {
         fullWidth: true,
-        onClick: this.handleChange
+        onClick: onAccept ? this.handleAccept : undefined
       }, "OK"))));
     }
   }]);
@@ -1535,8 +1534,9 @@ function (_Component) {
 _defineProperty(DatePicker, "propTypes", {
   className: propTypes.string,
   shadow: propTypes.bool,
-  onChange: propTypes.func.isRequired,
-  onCancel: propTypes.func.isRequired
+  onAccept: propTypes.func.isRequired,
+  onCancel: propTypes.func.isRequired,
+  date: propTypes.instanceOf(Date)
 });
 
 _defineProperty(DatePicker, "defaultProps", {
@@ -1940,7 +1940,7 @@ Tab.propTypes = {
 var StyledTabs = styled__default.nav.withConfig({
   displayName: "Tabs__StyledTabs",
   componentId: "sc-11btqu5-0"
-})(["position:relative;left:8px;"]);
+})(["position:relative;left:8px;text-align:left;"]);
 
 var Tabs = function Tabs(_ref) {
   var value = _ref.value,
