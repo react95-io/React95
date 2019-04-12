@@ -7,6 +7,7 @@ import NPM from "../assets/images/npm.png";
 import Logo from "../assets/images/logo.png";
 import LogoName from "../assets/images/logoName.png";
 import Plastic from "../assets/images/plastic.jpg";
+import Tape from "../assets/images/tape.png";
 import Clouds from "../assets/images/clouds.jpg";
 import LogoIcon from "../assets/images/icons/logo.png";
 
@@ -33,6 +34,8 @@ const BoxWrapper = styled.div`
   display: inline-block;
   max-width: 480px;
   width: calc(100% - 2em);
+  overflow: hidden;
+  box-shadow: -5px 10px 20px rgba(0, 0, 0, 0.5);
 
   &:before {
     content: "";
@@ -67,18 +70,17 @@ const Box = styled.img`
   right: -2%;
   z-index: 999;
   top: 0%;
-  box-shadow: -5px -10px 20px rgba(0, 0, 0, 0.5);
   pointer-events: none;
+
   transform: rotateX(180deg);
 `;
 const CD = styled.img`
   display: inline-block
   border-radius: 50%;
-  
   height: 95%;
   width: auto;
   right: 4%;
-  top: 2%;
+  top: 1%;
   position: absolute;
   box-shadow: -3px  3px 10px rgba(0, 0, 0, 0.9);
   transform: rotateZ(300deg);
@@ -86,12 +88,15 @@ const CD = styled.img`
 `;
 const HeroImage = styled.img`
   position: absolute;
-  width: 68%;
+  /* width: 68%; */
+  width: 45%;
   height: auto;
-  bottom: 10%;
+  /* bottom: 10%; */
+  bottom: 16%;
   right: 48%;
   transform: translateX(50%);
   z-index: 999;
+  opacity: 0.9;
 `;
 
 const Centered = styled.div`
@@ -108,7 +113,7 @@ const TopBar = styled.div`
   background: #050608;
   height: 15%;
   width: 87%;
-  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.6);
 `;
 const NPMLink = styled.a`
   display: inline-block;
@@ -151,6 +156,16 @@ const LibImage = styled.img`
     transform: translateY(-50%) scale(1.05);
   }
 `;
+const TapeImage = styled.img`
+  position: absolute;
+  height: 45%;
+  width: auto;
+  top: 55%;
+  right: 0;
+  transform: translate(70%, -50%);
+  filter: drop-shadow(5px -15px 20px rgba(0, 0, 0, 0.5)) grayscale(0.4);
+  /* box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5); */
+`;
 export default function Hero() {
   return (
     <Wrapper>
@@ -167,6 +182,7 @@ export default function Hero() {
             </LibLink>
           </TopBar>
           <HeroImage src={LogoName} alt="React95 logo" />
+          <TapeImage src={Tape} />
         </BoxWrapper>
       </Centered>
     </Wrapper>
