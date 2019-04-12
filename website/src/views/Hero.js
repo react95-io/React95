@@ -8,6 +8,7 @@ import Logo from "../assets/images/logo.png";
 import LogoName from "../assets/images/logoName.png";
 import Plastic from "../assets/images/plastic.jpg";
 import Clouds from "../assets/images/clouds.jpg";
+import LogoIcon from "../assets/images/icons/logo.png";
 
 const Wrapper = styled.div`
   background-image: url(${Clouds});
@@ -24,13 +25,15 @@ const Wrapper = styled.div`
     background-size: cover;
     opacity: 0.4;
     mix-blend-mode: screen;
+    pointer-events: none;
   }
 `;
 const BoxWrapper = styled.div`
   position: relative;
   display: inline-block;
-  width: 400px;
-  height: 400px;
+  max-width: 480px;
+  width: calc(100% - 2em);
+
   &:before {
     content: "";
     position: absolute;
@@ -58,33 +61,35 @@ const BoxWrapper = styled.div`
 `;
 const Box = styled.img`
   /* width: 100%; */
-  height: 100%;
-  width: auto;
-  position: absolute;
+  height: auto;
+  width: 100%;
+  /* position: absolute; */
   right: -2%;
   z-index: 999;
   top: 0%;
-  box-shadow: -5px 5px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: -5px -10px 20px rgba(0, 0, 0, 0.5);
   pointer-events: none;
+  transform: rotateX(180deg);
 `;
 const CD = styled.img`
   display: inline-block
   border-radius: 50%;
-  max-height: 470px;
-  width: 100%;
-  height: auto;
+  
+  height: 95%;
+  width: auto;
+  right: 4%;
+  top: 2%;
   position: absolute;
-  right: 0;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-  transform: rotateZ(306deg);
-
+  box-shadow: -3px  3px 10px rgba(0, 0, 0, 0.9);
+  transform: rotateZ(300deg);
+  filter: grayscale(0.2);
 `;
 const HeroImage = styled.img`
   position: absolute;
-  width: 75%;
+  width: 68%;
   height: auto;
   bottom: 10%;
-  right: 50%;
+  right: 48%;
   transform: translateX(50%);
   z-index: 999;
 `;
@@ -98,16 +103,17 @@ const Centered = styled.div`
 `;
 const TopBar = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 2%;
+  left: 11%;
   background: #050608;
   height: 15%;
-  width: 100%;
+  width: 87%;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.5);
 `;
 const NPMLink = styled.a`
   display: inline-block;
   height: 100%;
+  width: 15%;
   position: absolute;
   top: 100%;
   left: 0;
@@ -115,11 +121,35 @@ const NPMLink = styled.a`
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.5);
 `;
 const NPMImage = styled.img`
-  height: 40%;
-  width: auto;
+  width: 100%;
+  height: auto;
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+  transition: 0s ease-in-out all;
+  &:hover {
+    transform: translateY(-50%) scale(1.05);
+  }
+`;
+const LibLink = styled.a`
+  display: inline-block;
+  height: 100%;
+  width: 15%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: white;
+`;
+const LibImage = styled.img`
+  width: 60%;
+  height: auto;
+  position: relative;
+  top: 54%;
+  transform: translateY(-50%);
+  transition: 0s ease-in-out all;
+  &:hover {
+    transform: translateY(-50%) scale(1.05);
+  }
 `;
 export default function Hero() {
   return (
@@ -132,6 +162,9 @@ export default function Hero() {
             <NPMLink href="$">
               <NPMImage src={NPM} />
             </NPMLink>
+            <LibLink href="$">
+              <LibImage src={LogoIcon} />
+            </LibLink>
           </TopBar>
           <HeroImage src={LogoName} alt="React95 logo" />
         </BoxWrapper>
