@@ -69,6 +69,10 @@ themes.water = {
 };
 
 themes.coldGray = {
+  // background: "#CCF5AC",
+  // background: "#416165",
+  background: "#4C6663",
+
   canvas: "#c7c7df",
   material: "#a1a3ca",
   materialDark: "#6063a5",
@@ -103,6 +107,8 @@ themes.coldGray = {
 };
 
 themes.lilacRoseDark = {
+  background: "#3B3B58",
+
   canvas: "#dab1c7",
   material: "#b26496",
   materialDark: "#763a60",

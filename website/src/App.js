@@ -8,8 +8,7 @@ import { reset, themes } from "./lib";
 
 import Hero from "./views/Hero";
 import Finally from "./views/Finally";
-import Install from "./views/Install";
-import Settings from "./views/Settings";
+import Info from "./views/Info";
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -51,17 +50,8 @@ class App extends Component {
                     <Section className="section">
                       <Finally onStart={() => fullpageApi.moveSectionDown()} />
                     </Section>
-                    {/* <Section className="section">
-                      <Install onStart={() => fullpageApi.moveSectionDown()} />
-                    </Section> */}
                     <Section className="section">
-                      <Settings />
-                    </Section>
-                    <Section
-                      className="section"
-                      style={{ background: "white" }}
-                    >
-                      blabla
+                      <Info />
                     </Section>
                   </ReactFullpage.Wrapper>
                 );

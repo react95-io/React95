@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+import HeroCD from "../assets/images/heroCD2.png";
 import CDImage from "../assets/images/cd.png";
 import BoxImage from "../assets/images/box.png";
 import NPM from "../assets/images/npm.png";
@@ -9,13 +10,24 @@ import LogoName from "../assets/images/logoName.png";
 import Plastic from "../assets/images/plastic.jpg";
 import Tape from "../assets/images/tape.png";
 import Clouds from "../assets/images/clouds.jpg";
+import Grow from "../assets/images/growEmoji.png";
 import LogoIcon from "../assets/images/icons/logo.png";
+
+import Code from "../components/Code";
+
+import { Anchor } from "../lib";
+
+const HeroImage = styled.img`
+  width: 100%;
+  height: auto;
+  display: block;
+`;
 
 const Wrapper = styled.div`
   background-image: url(${Clouds});
   background-size: cover;
   height: 100%;
-  &:after {
+  &:before {
     content: "";
     position: absolute;
     top: 0;
@@ -35,32 +47,7 @@ const BoxWrapper = styled.div`
   max-width: 480px;
   width: calc(100% - 2em);
   overflow: hidden;
-  box-shadow: -5px 10px 20px rgba(0, 0, 0, 0.5);
-
-  &:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgb(40, 40, 40);
-    z-index: -2;
-  }
-
-  &:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* opacity: 0.5; */
-    background-image: url(${Plastic});
-    background-size: cover;
-    z-index: -1;
-    pointer-events: none;
-  }
+  box-shadow: -0px 10px 28px rgba(0, 0, 0, 0.7);
 `;
 const Box = styled.img`
   /* width: 100%; */
@@ -86,18 +73,18 @@ const CD = styled.img`
   transform: rotateZ(300deg);
   filter: grayscale(0.2);
 `;
-const HeroImage = styled.img`
-  position: absolute;
-  /* width: 68%; */
-  width: 45%;
-  height: auto;
-  /* bottom: 10%; */
-  bottom: 16%;
-  right: 48%;
-  transform: translateX(50%);
-  z-index: 999;
-  opacity: 0.9;
-`;
+// const HeroImage = styled.img`
+//   position: absolute;
+//   /* width: 68%; */
+//   width: 45%;
+//   height: auto;
+//   /* bottom: 10%; */
+//   bottom: 16%;
+//   right: 48%;
+//   transform: translateX(50%);
+//   z-index: 999;
+//   opacity: 0.9;
+// `;
 
 const Centered = styled.div`
   position: absolute;
@@ -166,12 +153,47 @@ const TapeImage = styled.img`
   filter: drop-shadow(5px -15px 20px rgba(0, 0, 0, 0.5)) grayscale(0.4);
   /* box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5); */
 `;
+const Links = styled.div`
+  display: inline-block;
+  position: absolute;
+  bottom: -2em;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  line-height: 1.5;
+  font-size: 1.4em;
+  text-align: left;
+
+  img {
+    display: inline-block;
+    height: 38px;
+    position: relative;
+    top: 7px;
+  }
+  @media (max-width: 700px) {
+    font-size: 1.2em;
+    text-align: center;
+
+    img {
+      height: 33px;
+      top: 7px;
+    }
+  }
+  @media (max-width: 475px) {
+    font-size: 1em;
+
+    img {
+      height: 26px;
+      top: 5px;
+    }
+  }
+`;
+const GrowImage = styled.img``;
 export default function Hero() {
   return (
     <Wrapper>
       <Centered>
         <BoxWrapper>
-          <Box src={BoxImage} />
+          {/* <Box src={BoxImage} />
           <CD src={CDImage} />
           <TopBar>
             <NPMLink href="$">
@@ -182,8 +204,18 @@ export default function Hero() {
             </LibLink>
           </TopBar>
           <HeroImage src={LogoName} alt="React95 logo" />
-          <TapeImage src={Tape} />
+          <TapeImage src={Tape} /> */}
+          <HeroImage src={HeroCD} />
         </BoxWrapper>
+        <Links>
+          <Code>
+            Star on <Anchor href="#">Github</Anchor>, let it <img src={Grow} />.
+          </Code>
+          <br />
+          <Code>
+            Then, see <Anchor href="#">storybook</Anchor>.
+          </Code>
+        </Links>
       </Centered>
     </Wrapper>
   );

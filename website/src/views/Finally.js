@@ -8,7 +8,11 @@ import LogoIcon from "../assets/images/icons/logo.png";
 import { Button } from "../lib";
 
 import Center from "../components/Center";
+import Code from "../components/Code";
 
+const StyledCenter = styled(Center)`
+  width: 100%;
+`;
 const Wrapper = styled.div`
   position: relative;
   height: 100%;
@@ -18,7 +22,7 @@ const Wrapper = styled.div`
 
 const CelebrationImage = styled.img`
   width: calc(100% - 3rem);
-  max-width: 380px;
+  max-width: 480px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
   margin: 3rem 0;
 
@@ -28,13 +32,9 @@ const CelebrationImage = styled.img`
   }
 `;
 
-const Code = styled.code`
+const StyledCode = styled(Code)`
   position: absolute;
   top: -1em;
-  font-size: 1.4em;
-  /* left: 50%; */
-  /* transform: translateX(-50%); */
-  white-space: nowrap;
 `;
 const HourglassIcon = styled.img`
   height: 40px;
@@ -73,16 +73,17 @@ const StyledButton = styled(Button)`
 export default function Finally(props) {
   return (
     <Wrapper>
-      <Center>
-        <Code>
+      <StyledCenter>
+        <StyledCode>
           The <HourglassIcon src={Hourglass} /> is over.
-        </Code>
+          <br />
+        </StyledCode>
         <CelebrationImage src={Celebration} />
         <StyledButton size="lg" onClick={props.onStart}>
           <img src={LogoIcon} />
           Start
         </StyledButton>
-      </Center>
+      </StyledCenter>
     </Wrapper>
   );
 }
