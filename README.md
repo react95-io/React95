@@ -12,21 +12,32 @@ Built with styled-components 💅
 ![banner](https://user-images.githubusercontent.com/28541613/52980546-ecc91900-33da-11e9-89fc-2a7648d38c4a.png)
 
 ## Getting Started
+First, install component library in your project directory: 
 ```sh
 $ npm i react95
 ```
-
+Then wrap your app in ThemeProvider and apply style reset like shown below, and your're ready to go!
 ```jsx
 import React from 'react';
-import { List, ListItem, Divider } from 'react95';
+import { ThemeProvider, createGlobalStyle } from "styled-components";
+import { themes, reset, List, ListItem, Divider } from 'react95';
+
+const ResetStyles = createGlobalStyle`
+  ${reset}
+`;
 
 export default props =>
-  <List>
-      <ListItem>🎤 Sing</ListItem>
-      <ListItem>💃🏻 Dance</ListItem>
-      <Divider />
-      <ListItem disabled>😴 Sleep</ListItem>
-  </List>
+  <ThemeProvider theme={themes.default}>
+    <>
+      <ResetStyles />
+      <List>
+          <ListItem>🎤 Sing</ListItem>
+          <ListItem>💃🏻 Dance</ListItem>
+          <Divider />
+          <ListItem disabled>😴 Sleep</ListItem>
+      </List>
+    </>
+  </ThemeProvider>
 ```
 
 ### Explore
@@ -36,7 +47,7 @@ $ npm i
 $ npm run storybook
 ```
 ### Submit your project
-Apps buiilt with React95 will be submitted on official React95 [website](https://react95.io) 🤟🏻
+Apps built with React95 will be submitted on official React95 [website](https://react95.io) 🤟🏻
 
 ### Support / Contributing
 There's a lot to do. If you want to help me with the project, feel free to open pull requests and submit issues. Let't make UI great again 🔥 
