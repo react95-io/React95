@@ -14,6 +14,4 @@ storiesOf("DatePicker", module)
       {story()}
     </div>
   ))
-  .add("default", () => (
-    <DatePicker onCancel={() => null} onAccept={date => console.log(date)} />
-  ));
+  .add("default", () => <DatePicker onAccept={date => console.log(date)} />);

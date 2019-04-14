@@ -15,7 +15,7 @@ import LogoIcon from "../assets/images/icons/logo.png";
 
 import Code from "../components/Code";
 
-import { Anchor } from "../lib";
+import { Anchor, Tooltip } from "../lib";
 
 const HeroImage = styled.img`
   width: 100%;
@@ -209,7 +209,11 @@ export default function Hero() {
         </BoxWrapper>
         <Links>
           <Code>
-            Star on <Anchor href="#">Github</Anchor>, let it <img src={Grow} />.
+            Star on <Anchor href="#">Github</Anchor>, let it{" "}
+            <Tooltip text="grow">
+              <img src={Grow} />
+            </Tooltip>
+            .
           </Code>
           <br />
           <Code>

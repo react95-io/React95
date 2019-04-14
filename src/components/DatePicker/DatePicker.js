@@ -55,8 +55,8 @@ class DatePicker extends Component {
   static propTypes = {
     className: propTypes.string,
     shadow: propTypes.bool,
-    onAccept: propTypes.func.isRequired,
-    onCancel: propTypes.func.isRequired,
+    onAccept: propTypes.func,
+    onCancel: propTypes.func,
     date: propTypes.instanceOf(Date)
   };
   static defaultProps = {
@@ -77,6 +77,7 @@ class DatePicker extends Component {
   handleMonthSelect = month => this.setState({ month });
   handleYearSelect = year => this.setState({ year });
   handleDaySelect = day => this.setState({ day });
+
   handleAccept = () => {
     const { year, month, day } = this.state;
     const date = new Date(year, month, day);
@@ -163,12 +164,17 @@ class DatePicker extends Component {
             <Dates>{dayPickerItems}</Dates>
           </Calendar>
           <Toolbar noPadding style={{ justifyContent: "space-between" }}>
-            <Button fullWidth onClick={onCancel} disabled>
+            <Button
+              fullWidth
+              onClick={onCancel ? onCancel : undefined}
+              disabled={!onCancel}
+            >
               Cancel
             </Button>
             <Button
               fullWidth
               onClick={onAccept ? this.handleAccept : undefined}
+              disabled={!onAccept}
             >
               OK
             </Button>
