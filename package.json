@@ -1,8 +1,10 @@
 {
   "name": "react95",
-  "version": "0.1.0",
-  "author": "artur bien",
-  "description": "Refreshed Windows 95 style UI components for your React app",
+  "version": "1.0.0",
+  "authors": [
+    "Artur Bień"
+  ],
+  "description": "Refreshed Windows95 UI components for modern web apps - React95",
   "keywords": [
     "react",
     "styled-components",
@@ -16,7 +18,10 @@
     "url": "https://github.com/arturbien/react95.git"
   },
   "homepage": "https://react95.io",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
+  "files": [
+    "/dist"
+  ],
   "publishConfig": {
     "access": "public"
   },
