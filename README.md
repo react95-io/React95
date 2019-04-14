@@ -51,7 +51,7 @@ $ npm run storybook
 Apps built with React95 will be submitted on official React95 [website](https://react95.io) 🤟🏻
 
 ### Support / Contributing
-There's a lot to do. If you want to help me with the project, feel free to open pull requests and submit issues. Let't make UI great again 🔥 
+There's a lot to do. If you want to help with the project, feel free to open pull requests and submit issues. Let't make UI great again 🔥 
 
 ### Roadmap
 There's quite a few things to be done:
