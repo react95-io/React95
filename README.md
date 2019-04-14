@@ -9,7 +9,7 @@ Built with styled-components 💅
 ![version-badge](https://flat.badgen.net/npm/v/react95)
 ![license-badge](https://flat.badgen.net/npm/license/react95)
 
-![banner](https://user-images.githubusercontent.com/28541613/52980546-ecc91900-33da-11e9-89fc-2a7648d38c4a.png)
+![demo](https://user-images.githubusercontent.com/28541613/56099388-7513f800-5f0c-11e9-893b-532eded39f92.png)
 
 ## Getting Started
 First, install component library in your project directory: 
