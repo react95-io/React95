@@ -21,6 +21,7 @@ const StyledSelectContent = styled.div`
   width: 100%;
   padding-left: ${padding.sm};
   overflow: hidden;
+  white-space: nowrap;
 `;
 const StyledDropdownButton = styled(Button)`
   height: 100%;

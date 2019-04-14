@@ -16,31 +16,37 @@ class SimpleTable extends React.Component {
   render() {
     return (
       <Window>
-        <WindowHeader>Component libraries</WindowHeader>
+        <WindowHeader>Pokedex.exe</WindowHeader>
         <WindowContent>
           <Table>
             <TableHead>
               <TableRow head>
+                <TableHeadCell>Type</TableHeadCell>
                 <TableHeadCell>Name</TableHeadCell>
-                <TableHeadCell>Swag</TableHeadCell>
-                <TableHeadCell>Ready</TableHeadCell>
+                <TableHeadCell>Lvl.</TableHeadCell>
               </TableRow>
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableDataCell>Material design</TableDataCell>
-                <TableDataCell>4%</TableDataCell>
-                <TableDataCell>yes</TableDataCell>
+                <TableDataCell style={{ textAlign: "center" }}>
+                  🌿
+                </TableDataCell>
+                <TableDataCell>Bulbasaur</TableDataCell>
+                <TableDataCell>64</TableDataCell>
               </TableRow>
               <TableRow>
-                <TableDataCell>Bootstrap</TableDataCell>
-                <TableDataCell>2%</TableDataCell>
-                <TableDataCell>yes</TableDataCell>
+                <TableDataCell style={{ textAlign: "center" }}>
+                  🔥
+                </TableDataCell>
+                <TableDataCell>Charizard</TableDataCell>
+                <TableDataCell>209</TableDataCell>
               </TableRow>
               <TableRow>
-                <TableDataCell>React95</TableDataCell>
-                <TableDataCell>95%</TableDataCell>
-                <TableDataCell>no</TableDataCell>
+                <TableDataCell style={{ textAlign: "center" }}>
+                  ⚡
+                </TableDataCell>
+                <TableDataCell>Pikachu</TableDataCell>
+                <TableDataCell>82</TableDataCell>
               </TableRow>
             </TableBody>
           </Table>

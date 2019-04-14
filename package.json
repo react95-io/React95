@@ -42,6 +42,7 @@
     "@storybook/addon-actions": "^4.1.11",
     "@storybook/addon-info": "^4.1.11",
     "@storybook/addon-links": "^4.1.11",
+    "@storybook/addon-options": "^4.1.11",
     "@storybook/react": "^4.1.11",
     "babel-loader": "^8.0.5",
     "babel-plugin-styled-components": "^1.10.0",

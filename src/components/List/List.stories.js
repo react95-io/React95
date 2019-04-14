@@ -21,30 +21,33 @@ storiesOf("List", module)
   ))
   .add("default", () => (
     <List>
-      <ListItem>Item 1</ListItem>
-      <ListItem>Item 2</ListItem>
-      <ListItem>Item 3</ListItem>
+      <ListItem>Photos</ListItem>
+      <ListItem>Videos</ListItem>
+      <ListItem>Other</ListItem>
     </List>
   ))
   .add("inline", () => (
     <List inline={true}>
-      <ListItem square>🌿</ListItem>
+      <ListItem square disabled>
+        🌿
+      </ListItem>
       <Bar />
-      <ListItem>Item 2</ListItem>
-      <ListItem>Item 3</ListItem>
+      <ListItem>Tackle</ListItem>
+      <ListItem>Growl</ListItem>
+      <ListItem disabled>Razor Leaf</ListItem>
     </List>
   ))
   .add("no shadow", () => (
     <List shadow={false}>
-      <ListItem>Item 1</ListItem>
-      <ListItem>Item 2</ListItem>
-      <ListItem>Item 3</ListItem>
+      <ListItem>Photos</ListItem>
+      <ListItem>Videos</ListItem>
+      <ListItem>Other</ListItem>
     </List>
   ))
   .add("fullWidth", () => (
     <List fullWidth>
-      <ListItem>Item 1</ListItem>
-      <ListItem>Item 2</ListItem>
-      <ListItem>Item 3</ListItem>
+      <ListItem>Photos</ListItem>
+      <ListItem>Videos</ListItem>
+      <ListItem>Other</ListItem>
     </List>
   ));
