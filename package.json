@@ -12,10 +12,10 @@
     "component",
     "vaporwave"
   ],
-  "license": "MIT",
+  "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/arturbien/react95.git"
+    "url": "https://github.com/arturbien/heythere.git"
   },
   "homepage": "https://react95.io",
   "main": "./dist/index.js",
