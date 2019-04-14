@@ -16,28 +16,29 @@ First, install component library in your project directory:
 ```sh
 $ npm i react95
 ```
-Then wrap your app in ThemeProvider and apply style reset like shown below, and your're ready to go!
+Then apply style reset, and include ThemeProvider with selected theme, just like shown below. Now and your're ready to go! 🚀
 ```jsx
 import React from 'react';
-import { ThemeProvider, createGlobalStyle } from "styled-components";
-import { themes, reset, List, ListItem, Divider } from 'react95';
+import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { reset, themes, List, ListItem, Divider } from 'react95';
 
 const ResetStyles = createGlobalStyle`
   ${reset}
 `;
 
 export default props =>
-  <ThemeProvider theme={themes.default}>
-    <>
-      <ResetStyles />
+  <div className="App">
+    <ResetStyles />
+    <ThemeProvider theme={themes.default}>
       <List>
           <ListItem>🎤 Sing</ListItem>
           <ListItem>💃🏻 Dance</ListItem>
           <Divider />
           <ListItem disabled>😴 Sleep</ListItem>
       </List>
-    </>
-  </ThemeProvider>
+    </ThemeProvider>
+  </div>
+  
 ```
 
 ### Explore
