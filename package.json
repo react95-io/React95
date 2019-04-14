@@ -15,7 +15,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/arturbien/heythere"
+    "url": "https://github.com/arturbien/React95"
   },
   "homepage": "https://react95.io",
   "main": "./dist/index.js",
