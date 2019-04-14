@@ -12,7 +12,7 @@
     "component",
     "vaporwave"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/arturbien/react95.git"
