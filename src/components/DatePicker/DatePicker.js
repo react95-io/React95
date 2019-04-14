@@ -103,8 +103,6 @@ class DatePicker extends Component {
       { value: 10, label: "November" },
       { value: 11, label: "December" }
     ];
-    // console.log("days in month: ", daysInMonth(year, month));
-    console.log("first day index", dayIndex(year, month - 1, 1));
 
     const dayPickerItems = Array.apply(null, { length: 35 });
     const firstDayIndex = dayIndex(year, month, 1);

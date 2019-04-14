@@ -63,6 +63,9 @@ themes.water = {
   progress: "#72b3b4"
 };
 themes.coldGray = {
+  // background: "#CCF5AC",
+  // background: "#416165",
+  background: "#4C6663",
   canvas: "#c7c7df",
   material: "#a1a3ca",
   materialDark: "#6063a5",
@@ -89,6 +92,7 @@ themes.coldGray = {
   progress: "#8d88c2"
 };
 themes.lilacRoseDark = {
+  background: "#3B3B58",
   canvas: "#dab1c7",
   material: "#b26496",
   materialDark: "#763a60",
@@ -942,7 +946,7 @@ var StyledSelectWrapper = styled__default(Cutout).withConfig({
 var StyledSelectContent = styled__default.div.withConfig({
   displayName: "Select__StyledSelectContent",
   componentId: "x1tonx-1"
-})(["width:100%;padding-left:", ";overflow:hidden;"], padding.sm);
+})(["width:100%;padding-left:", ";overflow:hidden;white-space:nowrap;"], padding.sm);
 var StyledDropdownButton = styled__default(Button).withConfig({
   displayName: "Select__StyledDropdownButton",
   componentId: "x1tonx-2"
@@ -1070,7 +1074,7 @@ var StyledInputWrapper = styled__default(Cutout).withConfig({
 var StyledTextInput = styled__default.input.withConfig({
   displayName: "InputBase__StyledTextInput",
   componentId: "sc-1komot1-1"
-})(["width:100%;height:100%;padding:0 ", ";outline:none;border:none;background:none;font-size:", ";font-family:", ";color:", ";text-shadow:", ";"], padding.sm, fontSizes.md, fontFamily, function (_ref2) {
+})(["box-sizing:border-box;width:100%;height:100%;padding:0 ", ";outline:none;border:none;background:none;font-size:", ";font-family:", ";color:", ";text-shadow:", ";"], padding.sm, fontSizes.md, fontFamily, function (_ref2) {
   var theme = _ref2.theme,
       disabled = _ref2.disabled;
   return disabled ? theme.inputTextDisabled : theme.inputText;
@@ -1464,9 +1468,7 @@ function (_Component) {
       }, {
         value: 11,
         label: "December"
-      }]; // console.log("days in month: ", daysInMonth(year, month));
-
-      console.log("first day index", dayIndex(year, month - 1, 1));
+      }];
       var dayPickerItems = Array.apply(null, {
         length: 35
       });
@@ -1505,8 +1507,8 @@ function (_Component) {
         items: months,
         selectedIndex: month,
         onChange: this.handleMonthSelect,
-        width: 128,
-        height: 200
+        width: 128 // height={200}
+
       }), React__default.createElement(NumberField, {
         value: year,
         disableKeyboardInput: true,
@@ -1519,11 +1521,12 @@ function (_Component) {
         }
       }, React__default.createElement(Button, {
         fullWidth: true,
-        onClick: onCancel,
-        disabled: true
+        onClick: onCancel ? onCancel : undefined,
+        disabled: !onCancel
       }, "Cancel"), React__default.createElement(Button, {
         fullWidth: true,
-        onClick: onAccept ? this.handleAccept : undefined
+        onClick: onAccept ? this.handleAccept : undefined,
+        disabled: !onAccept
       }, "OK"))));
     }
   }]);
@@ -1534,8 +1537,8 @@ function (_Component) {
 _defineProperty(DatePicker, "propTypes", {
   className: propTypes.string,
   shadow: propTypes.bool,
-  onAccept: propTypes.func.isRequired,
-  onCancel: propTypes.func.isRequired,
+  onAccept: propTypes.func,
+  onCancel: propTypes.func,
   date: propTypes.instanceOf(Date)
 });
 

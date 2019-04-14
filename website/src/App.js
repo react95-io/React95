@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import ReactFullpage from "@fullpage/react-fullpage";
 
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
@@ -39,6 +38,7 @@ class App extends Component {
 
           <Main>
             <ReactFullpage
+              licenseKey="C6FC49F4-8D154646-97D49C8C-8B9E9DD8"
               anchors={["", "wait", "secondPage", "thirdPage"]}
               verticalCentered={false}
               render={({ state, fullpageApi }) => {

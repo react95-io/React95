@@ -90,7 +90,6 @@ const Links = styled.div`
     }
   }
 `;
-const GrowImage = styled.img``;
 export default function Hero() {
   return (
     <Wrapper>
@@ -102,7 +101,7 @@ export default function Hero() {
           <Code>
             Star on <Anchor href="#">Github</Anchor>, let it{" "}
             <Tooltip text="grow">
-              <img src={Grow} />
+              <img src={Grow} alt="Growing seed" />
             </Tooltip>
             .
           </Code>

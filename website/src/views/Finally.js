@@ -78,9 +78,12 @@ export default function Finally(props) {
           The <HourglassIcon src={Hourglass} /> is over.
           <br />
         </StyledCode>
-        <CelebrationImage src={Celebration} />
+        <CelebrationImage
+          src={Celebration}
+          alt="Bill Gates and Steve Ballmer dancing during Windows 95 launch"
+        />
         <StyledButton size="lg" onClick={props.onStart}>
-          <img src={LogoIcon} />
+          <img src={LogoIcon} alt="React95 logo" />
           Start
         </StyledButton>
       </StyledCenter>
