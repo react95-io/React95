@@ -11,7 +11,12 @@ const StyledCenter = styled(Center)`
 export default function Info() {
   return (
     <StyledCenter>
-      <DatePicker date={new Date(1995, 7, 24)} />
+      <DatePicker
+        date={new Date(1995, 7, 24)}
+        onAccept={() => {
+          console.log("📆");
+        }}
+      />
     </StyledCenter>
   );
 }

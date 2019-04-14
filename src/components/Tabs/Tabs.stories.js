@@ -33,7 +33,7 @@ class TabsDemo extends React.Component {
   render() {
     const { activeTab } = this.state;
     return (
-      <Window style={{ width: 400 }}>
+      <Window style={{ width: 350 }}>
         <WindowHeader>👗 store.exe</WindowHeader>
         <WindowContent>
           <Tabs value={activeTab} onChange={this.handleChange}>
@@ -45,7 +45,7 @@ class TabsDemo extends React.Component {
             {activeTab === 0 && (
               <TabBody>
                 <Fieldset label="Order:">
-                  <div style={{ padding: "0.5em 0 0.5em 0" }}>Ammount:</div>
+                  <div style={{ padding: "0.5em 0 0.5em 0" }}>Amount:</div>
                   <NumberField
                     width={"100%"}
                     min={0}

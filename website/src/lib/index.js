@@ -1507,8 +1507,8 @@ function (_Component) {
         items: months,
         selectedIndex: month,
         onChange: this.handleMonthSelect,
-        width: 128 // height={200}
-
+        width: 128,
+        height: 200
       }), React__default.createElement(NumberField, {
         value: year,
         disableKeyboardInput: true,

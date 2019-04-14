@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import propTypes from "prop-types";
 
 import styled, { css } from "styled-components";
-import { createDisabledTextStyles, insetShadow } from "../common";
+import { createDisabledTextStyles } from "../common";
 import { padding, fontSizes } from "../common/system";
 import Cutout from "../Cutout/Cutout";
 
@@ -54,7 +54,8 @@ const StyledCheckmark = styled(Cutout)`
   background: ${({ theme, isDisabled }) =>
     isDisabled ? theme.material : theme.canvas};
   ${props => createCheckmarkSymbol(props)};
-  box-shadow: ${({ shadow }) => (shadow ? insetShadow : "none")};
+  box-shadow: ${({ shadow }) =>
+    shadow ? `inset 3px 3px 10px rgba(0, 0, 0, 0.1)` : "none"};
   &:before {
     box-shadow: none;
   }

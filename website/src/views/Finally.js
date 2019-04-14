@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import Celebration from "../assets/images/celebration.gif";
-import Hourglass from "../assets/images/hourglass.gif";
-import LogoIcon from "../assets/images/icons/logo.png";
+import Celebration from "../assets/images/optimized/celebration2.gif";
+import Hourglass from "../assets/images/optimized/hourglass.gif";
+import LogoIcon from "../assets/images/optimized/logo.png";
 
 import { Button } from "../lib";
 
@@ -29,6 +29,9 @@ const CelebrationImage = styled.img`
   transition: 0.2s all ease-in-out;
   &:hover {
     transform: scale(1.01);
+  }
+  @media (max-height: 700px) {
+    max-width: 420px;
   }
 `;
 

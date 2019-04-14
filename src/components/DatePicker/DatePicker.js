@@ -140,7 +140,7 @@ class DatePicker extends Component {
               selectedIndex={month}
               onChange={this.handleMonthSelect}
               width={128}
-              // height={200}
+              height={200}
             />
             <NumberField
               value={year}

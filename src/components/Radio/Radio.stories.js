@@ -30,7 +30,7 @@ class RadioGroup extends React.Component {
     return (
       <Window>
         <WindowContent>
-          <Fieldset label="Friuts">
+          <Fieldset label="Fruits">
             <Radio
               checked={checkedValue === "Pear"}
               onChange={this.handleChange}
