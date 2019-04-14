@@ -1,7 +1,7 @@
 ![ogImage](https://user-images.githubusercontent.com/28541613/56097057-f741f380-5eef-11e9-8296-92c4dc6e853d.png)
 
 # React95
-Refreshed Windows95 UI components for your modern React apps. 
+**Refreshed** Windows95 UI components for your modern React apps. 
 
 Built with styled-components 💅
 
@@ -55,14 +55,14 @@ There's a lot to do. If you want to help me with the project, feel free to open 
 
 ### Roadmap
 There's quite a few things to be done:
-- **Lots of tacky color schemes 🌈**
-- **Custom icons maybe? (Emojis from Windows 10 seem to go very well with the lib)**
-- **Typography**
-- **Range slider component**
-- **Avatar component**
-- **Components common in all modern UIs (FAB, Badge, Avatar, Snackbar, Steppers)**
+- Lots of tacky color schemes 🌈
+- Custom icons maybe? (Emojis from Windows 10 seem to go very well with the lib)
+- Typography
+- Range slider component
+- Avatar component
+- Components common in all modern UIs (FAB, Badge, Avatar, Snackbar, Steppers)
 
 And the boring stuff too:
-- **Testing**
-- **Semantic release**
-- **eslint**
+- Testing
+- Semantic release
+- eslint
