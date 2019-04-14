@@ -13,10 +13,7 @@
     "vaporwave"
   ],
   "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/arturbien/React95"
-  },
+  "repository": "git@github.com:arturbien/React95.git",
   "homepage": "https://react95.io",
   "main": "./dist/index.js",
   "files": [
