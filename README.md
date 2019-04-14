@@ -5,10 +5,9 @@ Refreshed Windows95 UI components for your modern React apps.
 
 Built with styled-components 💅
 
-[version-badge]: https://flat.badgen.net/npm/v/react95
-[license-badge]: https://flat.badgen.net/badge/license/MIT/blue
-[npm]: https://npmjs.com/package/react95
-
+[![downloads-badge](https://flat.badgen.net/npm/dw/rebass)
+[![version-badge](https://flat.badgen.net/npm/v/react95)
+[![license-badge](https://flat.badgen.net/npm/license/react95)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=shields)](http://makeapullrequest.com)
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
 
@@ -45,14 +44,13 @@ Apps buiilt with React95 will be submitted on official React95 [website](https:/
 There's a lot to do. If you want to help me with the project, feel free to open pull requests and submit issues. Let't make UI great again 🔥 
 
 ### Roadmap
-
 There's quite a few things to be done:
 - **Lots of tacky color schemes 🌈**
 - **Custom icons maybe? (Emojis from Windows 10 seem to go very well with the lib)**
 - **Typography**
 - **Range slider component**
 - **Avatar component**
-- **Components common in all modern UIs (FAB, Badge, Avatar, Snackbar, Steppers)
+- **Components common in all modern UIs (FAB, Badge, Avatar, Snackbar, Steppers)**
 
 And the boring stuff too:
 - **Testing**
