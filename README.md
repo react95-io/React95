@@ -16,7 +16,7 @@ First, install component library in your project directory:
 ```sh
 $ npm i react95
 ```
-Then apply style reset, and include ThemeProvider with selected theme, just like shown below. Now and your're ready to go! 🚀
+Apply style reset, wrap your app content with ThemeProvider with theme of your choice... and you are ready to go! 🚀
 ```jsx
 import React from 'react';
 import { createGlobalStyle, ThemeProvider } from "styled-components";
