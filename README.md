@@ -55,6 +55,7 @@ There's a lot to do. If you want to help me with the project, feel free to open 
 
 ### Roadmap
 There's quite a few things to be done:
+- Styled system
 - Lots of tacky color schemes 🌈
 - Custom icons maybe? (Emojis from Windows 10 seem to go very well with the lib)
 - Typography
