@@ -5,7 +5,7 @@ Refreshed Windows95 UI components for your modern React apps.
 
 Built with styled-components 💅
 
-![downloads-badge](https://flat.badgen.net/npm/dw/rebass)
+![downloads-badge](https://flat.badgen.net/npm/dw/react95)
 ![version-badge](https://flat.badgen.net/npm/v/react95)
 ![license-badge](https://flat.badgen.net/npm/license/react95)
 
