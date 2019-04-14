@@ -5,11 +5,11 @@ Refreshed Windows95 UI components for your modern React apps.
 
 Built with styled-components 💅
 
-[![downloads-badge](https://flat.badgen.net/npm/dw/rebass)
-[![version-badge](https://flat.badgen.net/npm/v/react95)
-[![license-badge](https://flat.badgen.net/npm/license/react95)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=shields)](http://makeapullrequest.com)
-[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
+![downloads-badge](https://flat.badgen.net/npm/dw/rebass)
+![version-badge](https://flat.badgen.net/npm/v/react95)
+![license-badge](https://flat.badgen.net/npm/license/react95)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=shields)](http://makeapullrequest.com)
+![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
 
 ![banner](https://user-images.githubusercontent.com/28541613/52980546-ecc91900-33da-11e9-89fc-2a7648d38c4a.png)
 
