@@ -5,7 +5,7 @@
 
 Built with styled-components 💅
 
-![downloads-badge](https://flat.badgen.net/npm/dw/react95)
+![downloads-badge](https://flat.badgen.net/npm/dt/react95)
 ![version-badge](https://flat.badgen.net/npm/v/react95)
 ![license-badge](https://flat.badgen.net/npm/license/react95)
 
