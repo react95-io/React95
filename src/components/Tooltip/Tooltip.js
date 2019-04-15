@@ -4,7 +4,7 @@ import propTypes from "prop-types";
 import styled from "styled-components";
 import { shadow } from "../common";
 
-const Tip = styled.div`
+const Tip = styled.span`
   position: absolute;
   bottom: -4px;
   left: 50%;

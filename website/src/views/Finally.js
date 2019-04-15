@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import Celebration from "../assets/images/optimized/celebration2.gif";
-import Hourglass from "../assets/images/optimized/hourglass.gif";
+import Celebration from "../assets/images/optimized/celebration.webp";
+import Hourglass from "../assets/images/optimized/hourglass.webp";
 import LogoIcon from "../assets/images/optimized/logo.png";
 
 import { Button } from "../lib";
@@ -78,7 +78,7 @@ export default function Finally(props) {
     <Wrapper>
       <StyledCenter>
         <StyledCode>
-          The <HourglassIcon src={Hourglass} /> is over.
+          The <HourglassIcon src={Hourglass} alt="Hourglass" /> is over.
           <br />
         </StyledCode>
         <CelebrationImage

@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-import HeroCD from "../assets/images/heroCD2.png";
-import Plastic from "../assets/images/plastic.jpg";
-import Clouds from "../assets/images/clouds.jpg";
-import Grow from "../assets/images/growEmoji.png";
+import HeroCD from "../assets/images/optimized/heroCD2.webp";
+import Plastic from "../assets/images/optimized/plastic.webp";
+import Clouds from "../assets/images/optimized/clouds.webp";
+import Grow from "../assets/images/optimized/growEmoji.png";
 
 import Code from "../components/Code";
 
@@ -102,7 +102,7 @@ export default function Hero() {
     <Wrapper>
       <Centered>
         <BoxWrapper>
-          <HeroImage src={HeroCD} />
+          <HeroImage src={HeroCD} alt="Scratched CD with React95 logo" />
         </BoxWrapper>
         <Links>
           <Code>
@@ -115,7 +115,7 @@ export default function Hero() {
             .
           </Code>
           <br />
-          <Code>
+          <Code as="p">
             Then, see{" "}
             <Anchor href="https://arturbien.github.io/React95/">
               storybook

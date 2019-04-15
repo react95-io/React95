@@ -39,7 +39,7 @@ class App extends Component {
           <Main>
             <ReactFullpage
               licenseKey="C6FC49F4-8D154646-97D49C8C-8B9E9DD8"
-              anchors={["", "wait", "secondPage", "thirdPage"]}
+              anchors={["", "finally", "launched"]}
               verticalCentered={false}
               render={({ state, fullpageApi }) => {
                 return (
