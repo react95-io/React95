@@ -51,6 +51,9 @@ $ npm run storybook
 Apps built with React95 will be submitted on official React95 [website](https://react95.io) 🤟🏻
 
 ### Support / Contributing
+**We are not attempting to exactly RECREATE Windows95 components. We are going to make them usable in the modern mobile / web apps. 
+Thus, any help from UI / UX designers would be EXTREMELY appreciated. The challenge is to come up with new component designs / layouts that are broadly used in modern UIs, that weren't present back in 95.**
+
 There's a lot to do. If you want to help with the project, feel free to open pull requests and submit issues. Let's make UI great again 🔥 
 
 ### Roadmap
