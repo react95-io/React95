@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import Celebration from "../assets/images/optimized/celebration.webp";
-import Hourglass from "../assets/images/optimized/hourglass.webp";
+import Celebration from "../assets/images/optimized/celebration.gif";
+import Hourglass from "../assets/images/optimized/hourglass.gif";
 import LogoIcon from "../assets/images/optimized/logo.png";
 
 import { Button } from "../lib";

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import HeroCD from "../assets/images/optimized/heroCD2.webp";
-import Plastic from "../assets/images/optimized/plastic.webp";
-import Clouds from "../assets/images/optimized/clouds.webp";
+import HeroCD from "../assets/images/optimized/heroCD2.png";
+import Plastic from "../assets/images/optimized/plastic.jpg";
+import Clouds from "../assets/images/optimized/clouds.jpg";
 import Grow from "../assets/images/optimized/growEmoji.png";
 
 import Code from "../components/Code";

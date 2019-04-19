@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
 
 import TextField from "./TextField";
-const actions = { onChange: action("onChange") };
+const onChange = e => console.log(e.target.value);
 
 storiesOf("TextField", module)
   .addDecorator(story => (
@@ -16,27 +15,13 @@ storiesOf("TextField", module)
       {story()}
     </div>
   ))
-  .add("default", () => <Swag />)
+  .add("default", () => <TextField value="" onChange={onChange} />)
   .add("no shadow", () => (
-    <TextField value="No shadow" shadow={false} {...actions} />
+    <TextField value="No shadow" shadow={false} onChange={onChange} />
   ))
   .add("disabled", () => (
-    <TextField value="Can't type 😥" disabled {...actions} />
+    <TextField value="Can't type 😥" disabled onChange={onChange} />
   ))
   .add("custom width", () => (
-    <TextField value="Custom width" width={150} {...actions} />
+    <TextField value="Custom width" width={150} onChange={onChange} />
   ));
-
-class Swag extends React.Component {
-  state = {
-    value: "swag"
-  };
-  render() {
-    return (
-      <TextField
-        value={this.state.value}
-        onChange={e => this.setState({ value: e.target.value })}
-      />
-    );
-  }
-}

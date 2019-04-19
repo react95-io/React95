@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import propTypes from "prop-types";
 
 import styled from "styled-components";
@@ -26,8 +26,7 @@ const StyledTextArea = styled.textarea`
   font-family: ${fontFamily};
   color: ${({ theme, disabled }) =>
     disabled ? theme.inputTextDisabled : theme.inputText};
-    ${props => props.disabled && createDisabledTextStyles()}
-  /* filter: ${props => (props.disabled ? "grayscale(100%)" : "none")}; */
+  ${props => props.disabled && createDisabledTextStyles()}
 `;
 
 const TextArea = ({
@@ -45,31 +44,39 @@ const TextArea = ({
   shadow,
   placeholder,
   ...otherProps
-}) => (
-  <StyledTextAreaWrapper
-    style={{
-      ...style,
-      width: width ? width : "100%",
-      height: height ? height : "auto"
-    }}
-    isDisabled={disabled}
-    shadow={shadow}
-  >
-    <StyledTextArea
-      className={className}
-      name={name}
-      width={width}
-      height={height}
-      readOnly={disabled}
-      onChange={disabled && onChange ? onChange : undefined}
-      disabled={disabled}
-      placeholder={placeholder}
-      {...otherProps}
+}) => {
+  const [inputValue, setInputValue] = useState(value);
+
+  const onValueChange = e => {
+    const newValue = e.target.value;
+    setInputValue(newValue);
+    onChange && onChange(e);
+  };
+  return (
+    <StyledTextAreaWrapper
+      style={{
+        ...style,
+        width: width ? width : "100%",
+        height: height ? height : "auto"
+      }}
+      isDisabled={disabled}
+      shadow={shadow}
     >
-      {children}
-    </StyledTextArea>
-  </StyledTextAreaWrapper>
-);
+      <StyledTextArea
+        className={className}
+        name={name}
+        value={inputValue}
+        width={width}
+        height={height}
+        readOnly={disabled}
+        onChange={disabled ? undefined : onValueChange}
+        disabled={disabled}
+        placeholder={placeholder}
+        {...otherProps}
+      />
+    </StyledTextAreaWrapper>
+  );
+};
 TextArea.defaultProps = {
   children: null,
   shadow: true,
