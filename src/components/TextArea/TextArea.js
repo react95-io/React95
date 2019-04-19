@@ -30,9 +30,6 @@ const StyledTextArea = styled.textarea`
 `;
 
 const TextArea = ({
-  children,
-  rows,
-  cols,
   onChange,
   value,
   disabled,
@@ -78,18 +75,10 @@ const TextArea = ({
   );
 };
 TextArea.defaultProps = {
-  children: null,
   shadow: true,
   placeholder: ""
 };
 TextArea.propTypes = {
-  rows: propTypes.number,
-  cols: propTypes.number,
-  children: propTypes.oneOfType([
-    propTypes.arrayOf(propTypes.node),
-    propTypes.node
-  ]),
-
   name: propTypes.string,
   width: propTypes.oneOfType([propTypes.string, propTypes.number]),
   height: propTypes.oneOfType([propTypes.string, propTypes.number]),
