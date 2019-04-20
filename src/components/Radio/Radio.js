@@ -7,11 +7,11 @@ import { padding, fontSizes } from "../common/system";
 import Cutout from "../Cutout/Cutout";
 
 const StyledLabel = styled.label`
-  display: block;
+  display: inline-block;
 
   position: relative;
   padding-left: calc(20px + ${padding.sm});
-  margin: ${padding.md} 0;
+  margin: ${padding.sm} 0;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;

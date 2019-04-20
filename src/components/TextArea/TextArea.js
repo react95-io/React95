@@ -35,6 +35,7 @@ const TextArea = ({
   width,
   height,
   style,
+  className,
   shadow,
   ...otherProps
 }) => (
@@ -44,6 +45,7 @@ const TextArea = ({
       width: width ? width : "100%",
       height: height ? height : "auto"
     }}
+    className={className}
     isDisabled={disabled}
     shadow={shadow}
   >
@@ -66,6 +68,7 @@ TextArea.propTypes = {
   height: propTypes.oneOfType([propTypes.string, propTypes.number]),
   onChange: propTypes.func,
   disabled: propTypes.bool,
+  className: propTypes.string,
   shadow: propTypes.bool
 };
 

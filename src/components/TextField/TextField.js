@@ -32,6 +32,7 @@ const TextField = ({
   type,
   style,
   shadow,
+  className,
   width,
   ...otherProps
 }) => (
@@ -40,6 +41,7 @@ const TextField = ({
     shadow={shadow}
     isDisabled={disabled}
     style={{ ...style, width: width ? width : "auto" }}
+    className={className}
   >
     <StyledTextInput
       onChange={disabled ? undefined : onChange}
@@ -60,6 +62,7 @@ TextField.propTypes = {
   onChange: propTypes.func,
   disabled: propTypes.bool,
   shadow: propTypes.bool,
-  type: propTypes.string
+  type: propTypes.string,
+  className: propTypes.string
 };
 export default TextField;
