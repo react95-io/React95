@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { storiesOf } from "@storybook/react";
 
 import TextField from "./TextField";
+
+import { Button, Toolbar } from "../";
+
 const onChange = e => console.log(e.target.value);
 
 storiesOf("TextField", module)
@@ -15,13 +18,30 @@ storiesOf("TextField", module)
       {story()}
     </div>
   ))
-  .add("default", () => <TextField value="" onChange={onChange} />)
+  .add("default", () => <TextField defaultValue="" onChange={onChange} />)
+  .add("controlled", () => <ControlledTextFieldExample />)
   .add("no shadow", () => (
-    <TextField value="No shadow" shadow={false} onChange={onChange} />
+    <TextField defaultValue="No shadow" shadow={false} onChange={onChange} />
   ))
   .add("disabled", () => (
-    <TextField value="Can't type 😥" disabled onChange={onChange} />
+    <TextField defaultValue="Can't type 😥" disabled onChange={onChange} />
   ))
   .add("custom width", () => (
-    <TextField value="Custom width" width={150} onChange={onChange} />
+    <TextField defaultValue="Custom width" width={150} onChange={onChange} />
   ));
+
+class ControlledTextFieldExample extends React.Component {
+  state = {
+    value: "default value"
+  };
+  handleChange = e => this.setState({ value: e.target.value });
+  reset = () => this.setState({ value: "" });
+  render() {
+    return (
+      <Toolbar>
+        <TextField value={this.state.value} onChange={this.handleChange} />
+        <Button onClick={this.reset}>Reset</Button>
+      </Toolbar>
+    );
+  }
+}

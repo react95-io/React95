@@ -31,61 +31,42 @@ const StyledTextArea = styled.textarea`
 
 const TextArea = ({
   onChange,
-  value,
   disabled,
-  name,
   width,
   height,
-  className,
   style,
   shadow,
-  placeholder,
   ...otherProps
-}) => {
-  const [inputValue, setInputValue] = useState(value);
+}) => (
+  <StyledTextAreaWrapper
+    style={{
+      ...style,
+      width: width ? width : "100%",
+      height: height ? height : "auto"
+    }}
+    isDisabled={disabled}
+    shadow={shadow}
+  >
+    <StyledTextArea
+      width={width}
+      height={height}
+      readOnly={disabled}
+      onChange={disabled ? undefined : onChange}
+      disabled={disabled}
+      {...otherProps}
+    />
+  </StyledTextAreaWrapper>
+);
 
-  const onValueChange = e => {
-    const newValue = e.target.value;
-    setInputValue(newValue);
-    onChange && onChange(e);
-  };
-  return (
-    <StyledTextAreaWrapper
-      style={{
-        ...style,
-        width: width ? width : "100%",
-        height: height ? height : "auto"
-      }}
-      isDisabled={disabled}
-      shadow={shadow}
-    >
-      <StyledTextArea
-        className={className}
-        name={name}
-        value={inputValue}
-        width={width}
-        height={height}
-        readOnly={disabled}
-        onChange={disabled ? undefined : onValueChange}
-        disabled={disabled}
-        placeholder={placeholder}
-        {...otherProps}
-      />
-    </StyledTextAreaWrapper>
-  );
-};
 TextArea.defaultProps = {
-  shadow: true,
-  placeholder: ""
+  shadow: true
 };
 TextArea.propTypes = {
-  name: propTypes.string,
   width: propTypes.oneOfType([propTypes.string, propTypes.number]),
   height: propTypes.oneOfType([propTypes.string, propTypes.number]),
   onChange: propTypes.func,
   disabled: propTypes.bool,
-  shadow: propTypes.bool,
-  placeholder: propTypes.string
+  shadow: propTypes.bool
 };
 
 export default TextArea;

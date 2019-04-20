@@ -5,7 +5,7 @@ import Button from "../Button/Button";
 
 import styled from "styled-components";
 import { blockSizes } from "../common/system";
-import InputBase from "../InputBase/InputBase";
+import TextField from "../TextField/TextField";
 
 // ⭕⭕⭕⭕⭕ fix functionality and use hooks
 
@@ -105,7 +105,7 @@ class NumberField extends React.Component {
         className={className}
         style={{ ...style, width: width ? width : "auto" }}
       >
-        <InputBase
+        <TextField
           value={value}
           onChange={
             disabled || disableKeyboardInput ? undefined : this.handleChange
