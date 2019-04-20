@@ -1,59 +1,68 @@
-import React, { useState } from "react";
+import React from "react";
 import propTypes from "prop-types";
 
-import InputBase from "../InputBase/InputBase";
+import styled from "styled-components";
+import Cutout from "../Cutout/Cutout";
+import { blockSizes, fontSizes, padding, fontFamily } from "../common/system";
 
+const StyledWrapper = styled(Cutout)`
+  height: ${blockSizes.md};
+  background: ${({ theme, isDisabled }) =>
+    isDisabled ? theme.material : theme.canvas};
+`;
+
+export const StyledTextInput = styled.input`
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 0 ${padding.sm};
+  outline: none;
+  border: none;
+  background: none;
+  font-size: ${fontSizes.md};
+  font-family: ${fontFamily};
+  color: ${({ theme, disabled }) =>
+    disabled ? theme.inputTextDisabled : theme.inputText};
+  text-shadow: ${({ theme, disabled }) =>
+    disabled ? "1px 1px " + theme.inputTextDisabledShadow : "none"};
+`;
 const TextField = ({
   onChange,
-  value,
   disabled,
-  name,
-  width,
-  className,
   type,
   style,
   shadow,
-  placeholder,
+  className,
+  width,
   ...otherProps
-}) => {
-  const [inputValue, setInputValue] = useState(value);
-
-  const onValueChange = e => {
-    const newValue = e.target.value;
-    setInputValue(newValue);
-    onChange && onChange(e);
-  };
-  return (
-    <InputBase
-      shadow={shadow}
-      width={width}
-      onChange={disabled ? undefined : onValueChange}
+}) => (
+  <StyledWrapper
+    width={width}
+    shadow={shadow}
+    isDisabled={disabled}
+    style={{ ...style, width: width ? width : "auto" }}
+    className={className}
+  >
+    <StyledTextInput
+      onChange={disabled ? undefined : onChange}
+      readOnly={disabled}
       disabled={disabled}
-      value={inputValue}
-      placeholder={placeholder}
-      name={name}
-      className={className}
-      style={style}
+      type={type}
       {...otherProps}
-      type="text"
     />
-  );
-};
-
+  </StyledWrapper>
+);
 TextField.defaultProps = {
-  value: "",
-  placeholder: "",
   disabled: false,
   shadow: true,
-  onChange: undefined
+  type: "text"
 };
 TextField.propTypes = {
-  className: propTypes.string,
-  placeholder: propTypes.string,
-  name: propTypes.string,
+  width: propTypes.oneOfType([propTypes.string, propTypes.number]),
   onChange: propTypes.func,
   disabled: propTypes.bool,
   shadow: propTypes.bool,
-  width: propTypes.oneOfType([propTypes.string, propTypes.number])
+  type: propTypes.string,
+  className: propTypes.string
 };
 export default TextField;

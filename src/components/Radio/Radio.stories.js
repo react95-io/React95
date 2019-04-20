@@ -38,6 +38,7 @@ class RadioGroup extends React.Component {
               label="🍐 Pear"
               name="fruits"
             />
+            <br />
             <Radio
               checked={checkedValue === "Orange"}
               onChange={this.handleChange}
@@ -45,6 +46,7 @@ class RadioGroup extends React.Component {
               label="🍊 Orange"
               name="fruits"
             />
+            <br />
             <Radio
               checked={checkedValue === "Kiwi"}
               onChange={this.handleChange}
@@ -52,6 +54,7 @@ class RadioGroup extends React.Component {
               label="🥝 Kiwi"
               name="fruits"
             />
+            <br />
             <Radio
               checked={checkedValue === "Grape"}
               onChange={this.handleChange}

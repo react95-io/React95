@@ -7,11 +7,10 @@ import { padding, fontSizes } from "../common/system";
 import Cutout from "../Cutout/Cutout";
 
 const StyledLabel = styled.label`
-  display: block;
-
+  display: inline-block;
   position: relative;
   padding-left: calc(20px + ${padding.sm});
-  margin: ${padding.md} 0;
+  margin: ${padding.sm} 0;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -25,6 +24,7 @@ const StyledLabel = styled.label`
 const StyledInput = styled.input`
   position: absolute;
   opacity: 0;
+  z-index: -99;
 `;
 
 const createCheckmarkSymbol = ({ checked }) =>
@@ -67,38 +67,70 @@ const Checkbox = ({
   disabled,
   value,
   checked,
+  defaultChecked,
   name,
   className,
   style,
   shadow,
   ...otherProps
 }) => {
-  const [state, setState] = useState(checked);
+  let Input, isChecked;
 
-  const handleChange = e => {
-    const newState = e.target.checked;
-    setState(newState);
-    onChange && onChange(e);
-  };
+  if (defaultChecked || checked === undefined) {
+    const [state, setState] = useState(defaultChecked || false);
+
+    const handleChange = e => {
+      const newState = e.target.checked;
+      setState(newState);
+      onChange && onChange(e);
+    };
+    Input = (
+      <>
+        <StyledInput
+          onChange={disabled ? undefined : handleChange}
+          readOnly={disabled}
+          type="checkbox"
+          value={value}
+          checked={state}
+          name={name}
+          {...otherProps}
+        />
+        <StyledCheckmark
+          checked={state}
+          isDisabled={disabled}
+          shadow={shadow}
+        />
+      </>
+    );
+  } else {
+    Input = (
+      <>
+        <StyledInput
+          onChange={disabled ? undefined : onChange}
+          readOnly={disabled}
+          type="checkbox"
+          value={value}
+          checked={checked}
+          name={name}
+          {...otherProps}
+        />
+        <StyledCheckmark
+          checked={checked}
+          isDisabled={disabled}
+          shadow={shadow}
+        />
+      </>
+    );
+  }
   return (
     <StyledLabel isDisabled={disabled} className={className} style={style}>
       {label}
-      <StyledInput
-        onChange={disabled ? undefined : handleChange}
-        readOnly={disabled}
-        type="checkbox"
-        value={value}
-        checked={state}
-        name={name}
-        {...otherProps}
-      />
-      <StyledCheckmark checked={state} isDisabled={disabled} shadow={shadow} />
+      {Input}
     </StyledLabel>
   );
 };
 
 Checkbox.defaultProps = {
-  checked: false,
   name: "",
   value: null,
   label: "",

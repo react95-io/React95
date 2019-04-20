@@ -3,6 +3,7 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
 import TextArea from "./TextArea";
+import { Button } from "../";
 
 const onChange = e => console.log(e.target.value);
 
@@ -19,11 +20,12 @@ storiesOf("TextArea", module)
   ))
   .add("default", () => (
     <TextArea
-      value="User ReactGirl was the first one to find 🐛 here."
+      defaultValue="User ReactGirl was the first one to find 🐛 here."
       placeholder="Type in here.."
       onChange={onChange}
     />
   ))
+  .add("controlled", () => <ControlledTextAreaExample />)
   .add("disabled", () => (
     <TextArea disabled placeholder="Typing disabled " onChange={onChange} />
   ))
@@ -39,3 +41,21 @@ storiesOf("TextArea", module)
   .add("no shadow", () => (
     <TextArea shadow={false} placeholder="Type in here.." onChange={onChange} />
   ));
+class ControlledTextAreaExample extends React.Component {
+  state = {
+    value: "default value"
+  };
+  handleChange = e => this.setState({ value: e.target.value });
+  reset = () => this.setState({ value: "" });
+  render() {
+    return (
+      <>
+        <TextArea value={this.state.value} onChange={this.handleChange} />
+        <br />
+        <Button style={{ marginTop: "0.5em" }} onClick={this.reset}>
+          Reset
+        </Button>
+      </>
+    );
+  }
+}
