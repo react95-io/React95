@@ -6,6 +6,7 @@ import { padding } from "../common/system";
 
 const StyledWindowContent = styled.div`
   padding: ${padding.md};
+  margin-right: 2px;
 `;
 
 const WindowContent = ({ className, children, style, ...otherProps }) => {
