@@ -1,6 +1,6 @@
 const path = require('path');
 
-module.exports = (baseConfig, env, config) => {
+module.exports = ({config}) => {
     config.module.rules.push({
         test: /\.stories\.js?$/,
         loaders: [require.resolve('@storybook/addon-storysource/loader')],
