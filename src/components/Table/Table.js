@@ -10,13 +10,18 @@ const StyledTable = styled.table`
   border-collapse: collapse;
   border-spacing: 0;
 `;
+const StyledCutout = styled(Cutout)`
+  &:before {
+    box-shadow: none;
+  }
+`;
 const Table = ({ className, children, style, ...otherProps }) => {
   return (
-    <Cutout>
+    <StyledCutout>
       <StyledTable className={className} style={style} {...otherProps}>
         {children}
       </StyledTable>
-    </Cutout>
+    </StyledCutout>
   );
 };
 
