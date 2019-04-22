@@ -18,7 +18,7 @@ addDecorator(
   withInfo({
     inline: true,
     header: false,
-    source: true,
+    source: false,
     maxPropsIntoLine: 1,
     styles: stylesheet => ({
       // Setting the style with a function
