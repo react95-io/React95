@@ -12,9 +12,9 @@ Built with styled-components 💅
 ![demo](https://user-images.githubusercontent.com/28541613/56099388-7513f800-5f0c-11e9-893b-532eded39f92.png)
 
 ## Getting Started
-First, install component library in your project directory: 
+First, install component library and styled-components in your project directory: 
 ```sh
-$ npm i react95
+$ npm i react95 styled-components
 ```
 Apply style reset, wrap your app content with ThemeProvider with theme of your choice... and you are ready to go! 🚀
 ```jsx
