@@ -25,4 +25,13 @@ storiesOf("Divider", module)
       <Divider />
       <ListItem>Item 3</ListItem>
     </List>
+  ))
+  .add("vertical", () => (
+    <List inline>
+      <ListItem>Item 1</ListItem>
+      <Divider vertical size="lg" />
+      <ListItem>Item 2</ListItem>
+      <Divider vertical size="lg" />
+      <ListItem>Item 3</ListItem>
+    </List>
   ));
