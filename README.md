@@ -48,7 +48,7 @@ $ npm i
 $ npm run storybook
 ```
 ### Submit your project
-Apps built with React95 will be submitted on official React95 [website](https://react95.io) 🤟🏻
+Apps built with React95 will be submitted on the official React95 [website](https://react95.io) 🤟🏻
 
 ### Support / Contributing
 **We are not attempting to exactly RECREATE Windows95 components. We are going to make them usable in the modern mobile / web apps. 
