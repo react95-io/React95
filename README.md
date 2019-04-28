@@ -1,15 +1,20 @@
-![ogImage](https://user-images.githubusercontent.com/28541613/56097057-f741f380-5eef-11e9-8296-92c4dc6e853d.png)
+<h1 align="center">React95</h1>
 
-# React95
-**Refreshed** Windows95 UI components for your modern React apps. 
-
-Built with styled-components 💅
-
-![downloads-badge](https://flat.badgen.net/npm/dt/react95)
-![version-badge](https://flat.badgen.net/npm/v/react95)
-![license-badge](https://flat.badgen.net/npm/license/react95)
-
+<p align="center">
+  <a href="https://www.npmjs.com/package/react95"><img src="https://flat.badgen.net/npm/dt/react95" alt="NPM"></a>
+  <a href="https://www.npmjs.com/package/react95"><img src="https://flat.badgen.net/npm/v/react95" alt="React95 version"></a>
+  <a href="https://www.npmjs.com/package/react95"><img src="https://flat.badgen.net/npm/license/react95" alt="React95 license"></a>
+  
+</p>
+<p align="center">
+  <b>Refreshed</b> Windows95 UI components for your modern React apps. <br> Built with styled-components 💅</p>
+  
 ![demo](https://user-images.githubusercontent.com/28541613/56099388-7513f800-5f0c-11e9-893b-532eded39f92.png)
+
+### Support
+- [Become a backer or sponsor on Patreon](https://www.patreon.com/arturbien).
+- [One-time donation via PayPal](https://www.paypal.me/react95)
+
 
 ## Getting Started
 First, install component library and styled-components in your project directory: 
@@ -50,7 +55,7 @@ $ npm run storybook
 ### Submit your project
 Apps built with React95 will be submitted on the official React95 [website](https://react95.io) 🤟🏻
 
-### Support / Contributing
+### Contributing
 **We are not attempting to exactly RECREATE Windows95 components. We are going to make them usable in the modern mobile / web apps. 
 Thus, any help from UI / UX designers would be EXTREMELY appreciated. The challenge is to come up with new component designs / layouts that are broadly used in modern UIs, that weren't present back in 95.**
 
