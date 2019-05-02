@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 
-export const shadow = `4px 4px 10px 0 rgba(0, 0, 0, 0.35)`;
+export const shadow = `4px 4px 10px 0 rgba(0,0,0,0.35)`;
 export const insetShadow = `inset 3px 3px 10px rgba(0, 0, 0, 0.2)`;
 
 export const createDisabledTextStyles = () => css`
