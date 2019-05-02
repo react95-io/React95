@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Anchor renders matching snapshot 1`] = `
+.c0 {
+  color: #1034a6;
+  font-size: inherit;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.c0:visited {
+  color: #440381;
+}
+
+<a
+  className="c0"
+  href="#"
+>
+  text
+</a>
+`;

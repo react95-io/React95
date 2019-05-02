@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: AppBar render matching snapshot 1`] = `
+.c0 {
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: 4px 4px 10px 0 rgba(0,0,0,0.35),inset 1px 1px 0px 1px ,inset -1px -1px 0 1px;
+  box-sizing: border-box;
+  display: inline-block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+<header
+  className="c0"
+>
+  test
+</header>
+`;
