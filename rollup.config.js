@@ -7,31 +7,21 @@ const NODE_ENV = process.env.NODE_ENV || "development";
 const outputFile =
   NODE_ENV === "production" ? "./dist/prod.js" : "./dist/dev.js";
 
-export default [
-  {
-    input: "./src/components/index.js",
-    output: {
-      file: outputFile,
-      format: "cjs"
-    },
-    plugins: [
-      replace({
-        "process.env.NODE_ENV": JSON.stringify(NODE_ENV)
-      }),
-      babel({
-        exclude: "node_modules/**"
-      }),
-      resolve(),
-      commonjs()
-    ],
-    external: id => /^react|react-dom|styled-components/.test(id)
+export default {
+  input: "./src/components/index.js",
+  output: {
+    file: outputFile,
+    format: "cjs"
   },
-  {
-    input: "./src/components/index.js",
-    external: [],
-    output: [
-      { file:  "dist/rollup-jest.cjs.js", format: "cjs" },
-      { file:  "dist/rollup-jest.esm.js", format: "es" }
-    ]
-  }
-];
+  plugins: [
+    replace({
+      "process.env.NODE_ENV": JSON.stringify(NODE_ENV)
+    }),
+    babel({
+      exclude: "node_modules/**"
+    }),
+    resolve(),
+    commonjs()
+  ],
+  external: id => /^react|react-dom|styled-components/.test(id)
+};
