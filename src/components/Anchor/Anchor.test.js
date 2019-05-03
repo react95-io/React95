@@ -27,7 +27,7 @@ describe("Component: Anchor", () => {
 
   it("renders", () => {
     const wrapper = shallow(<Anchor />);
-    expect(wrapper.find("Anchor__StyledAnchor").length).toBe(1);
+    expect(wrapper.length).toBe(1);
   });
 
   it("renders children", () => {
