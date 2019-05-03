@@ -24,7 +24,7 @@ $ npm i react95 styled-components
 Apply style reset, wrap your app content with ThemeProvider with theme of your choice... and you are ready to go! 🚀
 ```jsx
 import React from 'react';
-import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { reset, themes, List, ListItem, Divider } from 'react95';
 
 const ResetStyles = createGlobalStyle`
