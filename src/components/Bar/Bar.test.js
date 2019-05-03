@@ -24,7 +24,7 @@ describe("Component: Bar", () => {
 
   it("renders", () => {
     const wrapper = shallow(<Bar />);
-    expect(wrapper.find("Bar__StyledBar").length).toBe(1);
+    expect(wrapper.length).toBe(1);
   });
 
   it("renders className", () => {
