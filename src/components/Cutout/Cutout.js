@@ -12,28 +12,30 @@ const StyledCutout = styled.div`
   border-width: 2px;
   border-left-color: ${({ theme }) => theme.borderDark};
   border-top-color: ${({ theme }) => theme.borderDark};
-  border-right-color: ${({ theme }) => theme.borderLightest};
-  border-bottom-color: ${({ theme }) => theme.borderLightest};
+  border-right-color: ${({ theme, flat }) => flat ? theme.borderDark : theme.borderLightest};
+  border-bottom-color: ${({ theme, flat }) => flat ? theme.borderDark : theme.borderLightest};
 
-  &:before {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 1;
-    content: "";
-    width: calc(100% - 4px);
-    height: calc(100% - 4px);
+  ${({ flat }) => !flat && `
+    &:before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 1;
+      content: "";
+      width: calc(100% - 4px);
+      height: calc(100% - 4px);
 
-    border-style: solid;
-    border-width: 2px;
-    border-left-color: ${({ theme }) => theme.borderDarkest};
-    border-top-color: ${({ theme }) => theme.borderDarkest};
-    border-right-color: ${({ theme }) => theme.borderLight};
-    border-bottom-color: ${({ theme }) => theme.borderLight};
+      border-style: solid;
+      border-width: 2px;
+      border-left-color: ${({ theme }) => theme.borderDarkest};
+      border-top-color: ${({ theme }) => theme.borderDarkest};
+      border-right-color: ${({ theme }) => theme.borderLight};
+      border-bottom-color: ${({ theme }) => theme.borderLight};
 
-    pointer-events: none;
-    ${props => props.shadow && "box-shadow:" + insetShadow + ";"}
-  }
+      pointer-events: none;
+      ${props => props.shadow && "box-shadow:" + insetShadow + ";"}
+    }
+  `}
 `;
 // add padding prop ?
 
