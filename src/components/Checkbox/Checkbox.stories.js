@@ -21,6 +21,14 @@ storiesOf("Checkbox", module)
       value="single"
       label="I'm single 😥 ...and no one's controlling me 😎"
     />
+  ))
+  .add("flat", () => (
+    <Checkbox
+      defaultChecked={true}
+      value="single"
+      label="I'm a flat checkbox"
+      flat
+    />
   ));
 
 class ControlledCheckboxGroupExample extends React.Component {

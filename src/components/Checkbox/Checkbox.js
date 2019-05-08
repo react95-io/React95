@@ -72,6 +72,7 @@ const Checkbox = ({
   className,
   style,
   shadow,
+  flat,
   ...otherProps
 }) => {
   let Input, isChecked;
@@ -96,6 +97,7 @@ const Checkbox = ({
           {...otherProps}
         />
         <StyledCheckmark
+          flat={flat}
           checked={state}
           isDisabled={disabled}
           shadow={shadow}
@@ -115,6 +117,7 @@ const Checkbox = ({
           {...otherProps}
         />
         <StyledCheckmark
+          flat={flat}
           checked={checked}
           isDisabled={disabled}
           shadow={shadow}
@@ -135,7 +138,8 @@ Checkbox.defaultProps = {
   value: null,
   label: "",
   disabled: false,
-  shadow: true
+  shadow: true,
+  flat: false,
 };
 
 Checkbox.propTypes = {
@@ -150,7 +154,8 @@ Checkbox.propTypes = {
   checked: propTypes.bool,
   disabled: propTypes.bool,
   shadow: propTypes.bool,
-  style: propTypes.object
+  style: propTypes.object,
+  flat: propTypes.bool
 };
 
 export default Checkbox;
