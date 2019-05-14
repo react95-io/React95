@@ -44,7 +44,7 @@ const createCheckmarkSymbol = ({ checked }) =>
       transform: translate(-50%, -50%) rotate(45deg);
     }
   `;
-const StyledCheckmark = styled(Cutout)`
+export const StyledCheckmark = styled(Cutout)`
   position: absolute;
   top: 50%;
   left: 0;

@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Checkbox renders a matching snapshot 1`] = `
+.c3 {
+  position: relative;
+  box-sizing: border-box;
+  padding: 2px;
+  border-style: solid;
+  border-width: 2px;
+}
+
+.c3:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  content: "";
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  border-style: solid;
+  border-width: 2px;
+  pointer-events: none;
+  box-shadow: inset 3px 3px 10px rgba(0,0,0,0.2);
+}
+
+.c0 {
+  display: inline-block;
+  position: relative;
+  padding-left: calc(20px + 0.5rem);
+  margin: 0.5rem 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-size: 16px;
+}
+
+.c1 {
+  position: absolute;
+  opacity: 0;
+  z-index: -99;
+}
+
+.c2 {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  box-shadow: inset 3px 3px 10px rgba(0,0,0,0.1);
+}
+
+.c2:before {
+  box-shadow: none;
+}
+
+<label
+  className="c0"
+>
+  bar
+  <input
+    checked={false}
+    className="c1"
+    name=""
+    onChange={[Function]}
+    readOnly={false}
+    type="checkbox"
+    value="foo"
+  />
+  <div
+    checked={false}
+    className="c2 c3"
+  />
+</label>
+`;
