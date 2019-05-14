@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Cutout renders a matching snapshot 1`] = `
+.c0 {
+  position: relative;
+  box-sizing: border-box;
+  padding: 2px;
+  border-style: solid;
+  border-width: 2px;
+}
+
+.c0:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  content: "";
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  border-style: solid;
+  border-width: 2px;
+  pointer-events: none;
+  box-shadow: inset 3px 3px 10px rgba(0,0,0,0.2);
+}
+
+<div
+  className="c0"
+>
+  text
+</div>
+`;
