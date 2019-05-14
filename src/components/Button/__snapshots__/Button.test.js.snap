@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Button renders matching snapshot 1`] = `
+.c0 {
+  box-sizing: border-box;
+  display: inline-block;
+  background-color: #ced0cf;
+  color: #050608;
+  position: relative;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  height: 35px;
+  width: auto;
+  padding: 0 0.5rem;
+  font-size: 16px;
+}
+
+.c0:active {
+  padding-top: 2px;
+}
+
+<button
+  className="c0"
+  onClick={null}
+  onTouchStart={[Function]}
+  size="md"
+  style={Object {}}
+  type="button"
+>
+  text
+</button>
+`;
