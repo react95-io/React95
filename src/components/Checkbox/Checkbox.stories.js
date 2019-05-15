@@ -27,7 +27,7 @@ storiesOf("Checkbox", module)
       defaultChecked={true}
       value="single"
       label="I'm a flat checkbox"
-      flat
+      flat={true}
     />
   ));
 

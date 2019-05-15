@@ -1,6 +1,6 @@
 import React from "react";
 import propTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { insetShadow } from "../common";
 
 const StyledCutout = styled.div`
@@ -15,7 +15,7 @@ const StyledCutout = styled.div`
   border-right-color: ${({ theme, flat }) => flat ? theme.borderDark : theme.borderLightest};
   border-bottom-color: ${({ theme, flat }) => flat ? theme.borderDark : theme.borderLightest};
 
-  ${({ flat }) => !flat && `
+  ${({ flat }) => !flat && css`
     &:before {
       position: absolute;
       left: 0;
@@ -39,12 +39,13 @@ const StyledCutout = styled.div`
 `;
 // add padding prop ?
 
-const Cutout = ({ className, style, children, shadow, ...otherProps }) => {
+const Cutout = ({ className, style, children, shadow, flat, ...otherProps }) => {
   return (
     <StyledCutout
       shadow={shadow}
       className={className}
       style={style}
+      flat={flat}
       {...otherProps}
     >
       {children}
@@ -60,7 +61,8 @@ Cutout.propTypes = {
   className: propTypes.string,
   shadow: propTypes.bool,
   children: propTypes.node,
-  style: propTypes.object
+  style: propTypes.object,
+  flat: propTypes.bool
 };
 
 export default Cutout;

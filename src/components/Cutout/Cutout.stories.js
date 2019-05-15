@@ -19,8 +19,3 @@ storiesOf("Cutout", module)
       <h1>swag </h1>
     </Cutout>
   ))
-  .add("flat", () => (
-    <Cutout flat>
-      <h1>swag </h1>
-    </Cutout>
-  ));

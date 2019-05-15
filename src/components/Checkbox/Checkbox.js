@@ -100,7 +100,7 @@ const Checkbox = ({
           flat={flat}
           checked={state}
           isDisabled={disabled}
-          shadow={shadow}
+          shadow={!flat && shadow}
         />
       </>
     );
@@ -120,7 +120,7 @@ const Checkbox = ({
           flat={flat}
           checked={checked}
           isDisabled={disabled}
-          shadow={shadow}
+          shadow={!flat && shadow}
         />
       </>
     );
