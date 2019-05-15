@@ -3,10 +3,12 @@ import propTypes from "prop-types";
 
 import Button from "../Button/Button";
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { shadow } from "../common";
 import { blockSizes, fontSizes, padding } from "../common/system";
 import Cutout from "../Cutout/Cutout";
+
+import bgImgHash from "./hatch.jpg";
 
 const StyledSelectWrapper = styled(Cutout)`
   height: ${blockSizes.md};
@@ -16,6 +18,12 @@ const StyledSelectWrapper = styled(Cutout)`
   background: ${({ theme }) => theme.canvas};
   color: ${({ theme }) => theme.inputText};
   font-size: ${fontSizes.md};
+
+  ${({ hatched }) => hatched && css`
+    background-image: url(${bgImgHash});
+    background-size: contain;
+    box-shadow: inset 1px 1px 1px 1px #fff, inset -1px -1px 1px 1px #fff
+  `}
 `;
 const StyledSelectContent = styled.div`
   width: 100%;
@@ -29,10 +37,19 @@ const StyledDropdownButton = styled(Button)`
   padding: 0;
   z-index: 1;
   flex-shrink: 0;
-  border-left-color: ${({ theme }) => theme.borderLight};
-  border-top-color: ${({ theme }) => theme.borderLight};
-  box-shadow: inset 1px 1px 0px 1px ${({ theme }) => theme.borderLightest},
-    inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
+  background-color: ${({ flat }) => flat && "inherit"};
+  border: ${({ theme, flat }) => flat && `2px solid ${theme.borderDark}`};
+
+  ${({ flat }) => flat
+    ? css`
+      box-shadow: ${({ hatched }) => hatched && '-1px -1px 1px 1px #fff'};
+    `
+    : css`
+    border-left-color: ${({ theme }) => theme.borderLight};
+    border-top-color: ${({ theme }) => theme.borderLight};
+    box-shadow: inset 1px 1px 0px 1px ${({ theme }) => theme.borderLightest},
+      inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
+  `}
 `;
 const StyledDropdownIcon = styled.span`
   position: absolute;
@@ -88,6 +105,8 @@ const Select = ({
   shadow,
   width,
   height,
+  flat,
+  hatched,
   otherProps,
   className,
   onChange,
@@ -106,12 +125,14 @@ const Select = ({
       onClick={() => setOpen(!open)}
       style={{ ...style, width }}
       shadow={shadow}
+      flat={flat}
+      hatched={hatched}
       {...otherProps}
     >
       <StyledSelectContent>
         {items.length ? items[index].label : ""}
       </StyledSelectContent>
-      <StyledDropdownButton>
+      <StyledDropdownButton flat={flat} hatched={hatched}>
         <StyledDropdownIcon />
       </StyledDropdownButton>
       {open && (
@@ -142,12 +163,16 @@ Select.propTypes = {
   height: propTypes.number,
   selectedIndex: propTypes.number,
   shadow: propTypes.bool,
+  flat: propTypes.bool,
+  hatched: propTypes.bool,
   style: propTypes.object,
   onChange: propTypes.func
 };
 Select.defaultProps = {
   style: {},
   shadow: true,
-  selectedIndex: 0
+  selectedIndex: 0,
+  flat: false,
+  hatched: false,
 };
 export default Select;

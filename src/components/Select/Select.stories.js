@@ -35,4 +35,10 @@ storiesOf("Select", module)
   ))
   .add("no shadow", () => (
     <Select shadow={false} items={items} onChange={onChange} />
+  ))
+  .add("flat", () => (
+    <Select flat={true} shadow={false} items={items} width={150} onChange={onChange} />
+  ))
+  .add("flat II", () => (
+    <Select flat={true} shadow={false} hatched={true} items={items} width={150} onChange={onChange} />
   ));
