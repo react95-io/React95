@@ -2,7 +2,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 
 import Checkbox from "./Checkbox";
-import { Fieldset, Toolbar, Button } from "../";
+import { Fieldset, Toolbar, Button, Cutout } from "../";
 storiesOf("Checkbox", module)
   .addDecorator(story => (
     <div
@@ -21,6 +21,39 @@ storiesOf("Checkbox", module)
       value="single"
       label="I'm single 😥 ...and no one's controlling me 😎"
     />
+  ))
+  .add("flat", () => (
+    <Cutout style={{ padding: "2rem", background: "white", width: "300px" }}>
+      <p style={{ lineHeight: 1.3 }}>
+        When you want to add input field on a light background (like scrollable
+        content), just use the flat variant:
+      </p>
+      <div style={{ display: "flex", alignItems: "center", marginTop: "1rem" }}>
+        <Checkbox
+          flat
+          defaultChecked={true}
+          value="single"
+          label="Earth is flat 🌍"
+        />
+      </div>
+    </Cutout>
+  ))
+  .add("flat disabled", () => (
+    <Cutout style={{ padding: "2rem", background: "white", width: "300px" }}>
+      <p style={{ lineHeight: 1.3 }}>
+        When you want to add input field on a light background (like scrollable
+        content), just use the flat variant:
+      </p>
+      <div style={{ display: "flex", alignItems: "center", marginTop: "1rem" }}>
+        <Checkbox
+          flat
+          disabled
+          defaultChecked={true}
+          value="single"
+          label="Earth is flat 🌍"
+        />
+      </div>
+    </Cutout>
   ));
 
 class ControlledCheckboxGroupExample extends React.Component {
