@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
 import TextArea from "./TextArea";
-import { Button } from "../";
+import { Button, Cutout } from "../";
 
 const onChange = e => console.log(e.target.value);
 
@@ -40,6 +40,41 @@ storiesOf("TextArea", module)
   ))
   .add("no shadow", () => (
     <TextArea shadow={false} placeholder="Type in here.." onChange={onChange} />
+  ))
+  .add("flat", () => (
+    <Cutout style={{ padding: "2rem", background: "white", width: "300px" }}>
+      <p style={{ lineHeight: 1.3 }}>
+        When you want to add text area on a light background (like scrollable
+        content), just use the flat variant:
+      </p>
+      <div style={{ display: "flex", alignItems: "center", marginTop: "1rem" }}>
+        <TextArea
+          flat
+          width={"100%"}
+          height={200}
+          placeholder="Type in here.."
+          onChange={onChange}
+        />
+      </div>
+    </Cutout>
+  ))
+  .add("flat disabled", () => (
+    <Cutout style={{ padding: "2rem", background: "white", width: "300px" }}>
+      <p style={{ lineHeight: 1.3 }}>
+        When you want to add text area on a light background (like scrollable
+        content), just use the flat variant:
+      </p>
+      <div style={{ display: "flex", alignItems: "center", marginTop: "1rem" }}>
+        <TextArea
+          flat
+          disabled
+          width={"100%"}
+          height={200}
+          placeholder="Type in here.."
+          onChange={onChange}
+        />
+      </div>
+    </Cutout>
   ));
 class ControlledTextAreaExample extends React.Component {
   state = {

@@ -31,7 +31,10 @@ themes.default = {
 
   hoverBackground: "#000080",
   checkmark: "#050608",
-  progress: "#000080"
+  progress: "#000080",
+
+  flatLight: "#d8d8d8",
+  flatDark: "#9e9e9e"
 };
 
 themes.water = {
@@ -65,7 +68,10 @@ themes.water = {
 
   hoverBackground: "#72b3b4",
   checkmark: "#050608",
-  progress: "#72b3b4"
+  progress: "#72b3b4",
+
+  flatLight: "#d8d8d8",
+  flatDark: "#9e9e9e"
 };
 
 themes.coldGray = {
@@ -103,7 +109,10 @@ themes.coldGray = {
 
   hoverBackground: "#8d88c2",
   checkmark: "#010601",
-  progress: "#8d88c2"
+  progress: "#8d88c2",
+
+  flatLight: "#a4a7c8",
+  flatDark: "#5b57a1"
 };
 
 themes.lilacRoseDark = {
@@ -139,7 +148,10 @@ themes.lilacRoseDark = {
 
   hoverBackground: "#713259",
   checkmark: "#010601",
-  progress: "#713259"
+  progress: "#713259",
+
+  flatLight: "#E597C9",
+  flatDark: "#7F3163"
 };
 
 themes.violetDark = {
@@ -171,6 +183,9 @@ themes.violetDark = {
 
   hoverBackground: "#512155",
   checkmark: "#000000",
-  progress: "#000080"
+  progress: "#000080",
+
+  flatLight: "#945b9b",
+  flatDark: "#3c1f3e"
 };
 export default themes;

@@ -15,6 +15,17 @@ export const createBoxStyles = () =>
     background-color: ${({ theme }) => theme.material};
     color: ${({ theme }) => theme.text};
   `;
+export const createFlatBoxStyles = () =>
+  css`
+    box-sizing: border-box;
+    display: inline-block;
+    color: ${({ theme }) => theme.text};
+    background: ${({ theme, isDisabled }) =>
+      isDisabled ? theme.flatLight : theme.canvas};
+    border: 2px solid ${({ theme }) => theme.canvas};
+    outline: 2px solid ${({ theme }) => theme.flatDark};
+    outline-offset: -4px;
+  `;
 export const createBorderStyles = (invert = false) =>
   invert
     ? css`
