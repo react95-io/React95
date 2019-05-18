@@ -1,19 +1,23 @@
 import React from "react";
 import propTypes from "prop-types";
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { createDisabledTextStyles } from "../common";
 import { fontSizes, padding } from "../common/system";
 
 const StyledFieldset = styled.fieldset`
   position: relative;
-  border: 2px solid ${({ theme }) => theme.borderLightest};
-  box-shadow: -1px -1px 0 1px ${({ theme }) => theme.borderDark},
-    inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
+  border: 2px solid
+    ${({ theme, flat }) => (flat ? theme.flatDark : theme.borderLightest)};
   padding: ${padding.md};
-
   font-size: ${fontSizes.md};
   color: ${({ theme }) => theme.text};
+  ${({ flat }) =>
+    !flat &&
+    css`
+      box-shadow: -1px -1px 0 1px ${({ theme }) => theme.borderDark},
+        inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
+    `}
 `;
 const StyledLegend = styled.legend`
   position: absolute;
@@ -23,7 +27,7 @@ const StyledLegend = styled.legend`
   padding: 0 ${padding.sm};
 
   font-size: ${fontSizes.md};
-  background: ${({ theme }) => theme.material};
+  background: ${({ theme, flat }) => (flat ? theme.canvas : theme.material)};
 `;
 
 const StyledFieldsetContent = styled.div`
@@ -33,6 +37,7 @@ const StyledFieldsetContent = styled.div`
 const Fieldset = ({
   label,
   disabled,
+  flat,
   children,
   className,
   style,
@@ -41,11 +46,12 @@ const Fieldset = ({
   return (
     <StyledFieldset
       isDisabled={disabled}
+      flat={flat}
       style={style}
       className={className}
       {...otherProps}
     >
-      {label && <StyledLegend>{label}</StyledLegend>}
+      {label && <StyledLegend flat={flat}>{label}</StyledLegend>}
       <StyledFieldsetContent isDisabled={disabled}>
         {children}
       </StyledFieldsetContent>
@@ -54,7 +60,8 @@ const Fieldset = ({
 };
 
 Fieldset.defaultProps = {
-  disabled: false
+  disabled: false,
+  flat: false
 };
 
 Fieldset.propTypes = {
@@ -66,7 +73,8 @@ Fieldset.propTypes = {
   className: propTypes.string,
   style: propTypes.object,
   children: propTypes.node,
-  disabled: propTypes.bool
+  disabled: propTypes.bool,
+  flat: propTypes.bool
 };
 
 export default Fieldset;
