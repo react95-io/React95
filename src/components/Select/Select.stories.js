@@ -2,7 +2,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
-import Select from "./Select";
+import { Select, Window, WindowContent, Cutout } from "../";
 
 export const actions = { onClick: action("onClick") };
 
@@ -35,4 +35,36 @@ storiesOf("Select", module)
   ))
   .add("no shadow", () => (
     <Select shadow={false} items={items} onChange={onChange} />
+  ))
+  .add("flat", () => (
+    <Window>
+      <WindowContent>
+        <Cutout
+          style={{
+            padding: "1rem",
+            paddingBottom: "3rem",
+            background: "white",
+            width: "300px"
+          }}
+        >
+          <p style={{ lineHeight: 1.3 }}>
+            When you want to use Buttons on a light background (like scrollable
+            content), just use the flat variant:
+          </p>
+          <div
+            style={{
+              marginTop: "1.5rem"
+            }}
+          >
+            <Select
+              flat
+              items={items}
+              onChange={onChange}
+              height={100}
+              width={150}
+            />
+          </div>
+        </Cutout>
+      </WindowContent>
+    </Window>
   ));

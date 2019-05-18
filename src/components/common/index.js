@@ -15,8 +15,10 @@ export const createBoxStyles = () =>
     background-color: ${({ theme }) => theme.material};
     color: ${({ theme }) => theme.text};
   `;
+// TODO for flat box styles add checkered background when disabled (not solid color)
 export const createFlatBoxStyles = () =>
   css`
+    position: relative;
     box-sizing: border-box;
     display: inline-block;
     color: ${({ theme }) => theme.text};

@@ -3,12 +3,12 @@ import propTypes from "prop-types";
 
 import Button from "../Button/Button";
 
-import styled from "styled-components";
-import { shadow } from "../common";
+import styled, { css } from "styled-components";
+import { shadow, createFlatBoxStyles } from "../common";
 import { blockSizes, fontSizes, padding } from "../common/system";
 import Cutout from "../Cutout/Cutout";
 
-const StyledSelectWrapper = styled(Cutout)`
+const sharedWrapperStyles = css`
   height: ${blockSizes.md};
   display: flex;
   align-items: center;
@@ -17,6 +17,13 @@ const StyledSelectWrapper = styled(Cutout)`
   color: ${({ theme }) => theme.inputText};
   font-size: ${fontSizes.md};
 `;
+const StyledSelectWrapper = styled(Cutout)`
+  ${sharedWrapperStyles}
+`;
+const StyledFlatSelectWrapper = styled.div`
+  ${createFlatBoxStyles()}
+  ${sharedWrapperStyles}
+`;
 const StyledSelectContent = styled.div`
   width: 100%;
   padding-left: ${padding.sm};
@@ -24,15 +31,24 @@ const StyledSelectContent = styled.div`
   white-space: nowrap;
 `;
 const StyledDropdownButton = styled(Button)`
-  height: 100%;
   width: 30px;
   padding: 0;
   z-index: 1;
   flex-shrink: 0;
-  border-left-color: ${({ theme }) => theme.borderLight};
-  border-top-color: ${({ theme }) => theme.borderLight};
-  box-shadow: inset 1px 1px 0px 1px ${({ theme }) => theme.borderLightest},
-    inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
+  ${({ flat }) =>
+    flat
+      ? css`
+          height: calc(100% - 4px);
+          margin-right: 2px;
+        `
+      : css`
+          height: 100%;
+          border-left-color: ${({ theme }) => theme.borderLight};
+          border-top-color: ${({ theme }) => theme.borderLight};
+          box-shadow: inset 1px 1px 0px 1px
+              ${({ theme }) => theme.borderLightest},
+            inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
+        `}
 `;
 const StyledDropdownIcon = styled.span`
   position: absolute;
@@ -55,16 +71,27 @@ const StyledDropdownList = styled.ul`
 
   font-size: ${fontSizes.md};
   position: absolute;
-  bottom: -2px;
-  width: calc(100% - 2px);
   transform: translateY(100%);
   left: 0px;
   background: ${({ theme }) => theme.canvas};
-  border: 2px solid ${({ theme }) => theme.borderDarkest};
+  padding: 2px;
   border-top: none;
-  box-shadow: ${props => (props.shadow ? shadow : "none")};
   cursor: default;
   z-index: 99;
+
+  ${({ flat }) =>
+    flat
+      ? css`
+          bottom: 2px;
+          width: 100%;
+          border: 2px solid ${({ theme }) => theme.flatDark};
+        `
+      : css`
+          box-shadow: ${props => (props.shadow ? shadow : "none")};
+          bottom: -2px;
+          width: calc(100% - 2px);
+          border: 2px solid ${({ theme }) => theme.borderDarkest};
+        `}
 `;
 const StyledDropdownListItem = styled.li`
   box-sizing: border-box;
@@ -86,6 +113,7 @@ const Select = ({
   items,
   selectedIndex,
   shadow,
+  flat,
   width,
   height,
   otherProps,
@@ -100,8 +128,10 @@ const Select = ({
     if (onChange) onChange(items[i].value);
     setIndex(i);
   };
+
+  const Wrapper = flat ? StyledFlatSelectWrapper : StyledSelectWrapper;
   return (
-    <StyledSelectWrapper
+    <Wrapper
       className={className}
       onClick={() => setOpen(!open)}
       style={{ ...style, width }}
@@ -111,12 +141,13 @@ const Select = ({
       <StyledSelectContent>
         {items.length ? items[index].label : ""}
       </StyledSelectContent>
-      <StyledDropdownButton>
+      <StyledDropdownButton flat={flat}>
         <StyledDropdownIcon />
       </StyledDropdownButton>
       {open && (
         <StyledDropdownList
           shadow={shadow}
+          flat={flat}
           style={height && { overflowY: "scroll", height }}
         >
           {items.map((item, i) => (
@@ -131,7 +162,7 @@ const Select = ({
           ))}
         </StyledDropdownList>
       )}
-    </StyledSelectWrapper>
+    </Wrapper>
   );
 };
 
@@ -142,12 +173,14 @@ Select.propTypes = {
   height: propTypes.number,
   selectedIndex: propTypes.number,
   shadow: propTypes.bool,
+  flat: propTypes.bool,
   style: propTypes.object,
   onChange: propTypes.func
 };
 Select.defaultProps = {
   style: {},
   shadow: true,
+  flat: false,
   selectedIndex: 0
 };
 export default Select;
