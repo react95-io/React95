@@ -1,6 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-
+import styled from "styled-components";
 import { Radio, Cutout, Fieldset, Window, WindowContent } from "../";
 storiesOf("Radio", module)
   .addDecorator(story => (
@@ -80,9 +80,7 @@ class FlatRadioGroup extends React.Component {
     return (
       <Window>
         <WindowContent>
-          <Cutout
-            style={{ padding: "2rem", background: "white", width: "300px" }}
-          >
+          <StyledCutout>
             <p style={{ lineHeight: 1.3 }}>
               When you want to use radio buttons on a light background (like
               scrollable content), just use the flat variant:
@@ -129,9 +127,15 @@ class FlatRadioGroup extends React.Component {
                 disabled
               />
             </div>
-          </Cutout>
+          </StyledCutout>
         </WindowContent>
       </Window>
     );
   }
 }
+let StyledCutout = styled(Cutout)`
+  background: ${({ theme }) => theme.canvas};
+  color: ${({ theme }) => theme.text};
+  padding: 2rem;
+  width: 300px;
+`;

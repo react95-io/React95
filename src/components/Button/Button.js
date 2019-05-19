@@ -27,8 +27,6 @@ const commonButtonStyles = css`
 `;
 
 const StyledButton = styled.button`
-  ${commonButtonStyles}
-
   ${({ flat }) =>
     flat
       ? css`
@@ -50,6 +48,7 @@ const StyledButton = styled.button`
           }
           ${({ srat }) => srat && "border: none;"}
         `}
+  ${commonButtonStyles}
 `;
 
 const Button = ({
