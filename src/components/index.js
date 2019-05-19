@@ -3,6 +3,7 @@ import reset from "./common/reset";
 
 import Anchor from "./Anchor/Anchor";
 import AppBar from "./AppBar/AppBar";
+import Avatar from "./Avatar/Avatar";
 import Bar from "./Bar/Bar";
 import Button from "./Button/Button";
 import Checkbox from "./Checkbox/Checkbox";
@@ -42,6 +43,7 @@ export {
   reset,
   Anchor,
   AppBar,
+  Avatar,
   Bar,
   Button,
   Checkbox,

@@ -1,0 +1,70 @@
+import React from "react";
+import { storiesOf } from "@storybook/react";
+
+import Avatar from "./Avatar";
+import AppBar from "../AppBar/AppBar";
+import Toolbar from "../Toolbar/Toolbar";
+import Button from "../Button/Button";
+
+storiesOf("Avatar", module)
+  .addDecorator(story => (
+    <div
+      style={{
+        padding: "5rem",
+        background: "teal"
+      }}
+    >
+      {story()}
+    </div>
+  ))
+  .add("default", () => (
+    <AppBar>
+      <Toolbar
+        style={{ justifyContent: "space-between", paddingRight: "1rem" }}
+      >
+        <Button flat accent>
+          Menu
+        </Button>
+        <Avatar src="https://sphoto.nasza-klasa.pl/33278012/1/square/2658174fbd.jpeg?v=1" />
+      </Toolbar>
+    </AppBar>
+  ))
+  .add("noBorder", () => (
+    <AppBar>
+      <Toolbar
+        style={{ justifyContent: "space-between", paddingRight: "1rem" }}
+      >
+        <Button flat accent>
+          Menu
+        </Button>
+        <Avatar
+          src="https://sphoto.nasza-klasa.pl/33278012/1/square/2658174fbd.jpeg?v=1"
+          noBorder
+        />
+      </Toolbar>
+    </AppBar>
+  ))
+  .add("letter", () => (
+    <AppBar>
+      <Toolbar
+        style={{ justifyContent: "space-between", paddingRight: "1rem" }}
+      >
+        <Button flat accent>
+          Menu
+        </Button>
+        <Avatar style={{ background: "palevioletred" }}>AK</Avatar>
+      </Toolbar>
+    </AppBar>
+  ))
+  .add("square", () => (
+    <AppBar>
+      <Toolbar
+        style={{ justifyContent: "space-between", paddingRight: "1rem" }}
+      >
+        <Button flat accent>
+          Menu
+        </Button>
+        <Avatar square>🚀</Avatar>
+      </Toolbar>
+    </AppBar>
+  ));
