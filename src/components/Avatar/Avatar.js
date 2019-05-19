@@ -7,10 +7,10 @@ const StyledAvatar = styled.div`
   display: inline-block;
   box-sizing: border-box;
   object-fit: contain;
-  height: ${props => blockSizes.md};
-  width: ${props => blockSizes.md};
+  height: calc(${props => blockSizes.md} - 2px);
+  width: calc(${props => blockSizes.md} - 2px);
   border-radius: ${({ square }) => (square ? 0 : "50%")};
-
+  overflow: hidden;
   ${({ noBorder, theme }) =>
     !noBorder &&
     `
@@ -30,18 +30,18 @@ const StyledAvatar = styled.div`
     font-size: 1rem;
   `}
 `;
+const SlyledAvatarIMG = styled.img`
+  display: block;
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+`;
 // src takes priority over children
 
-const Avatar = ({ children, noBorder, square, src, ...otherProps }) => {
+const Avatar = ({ children, noBorder, square, src, alt, ...otherProps }) => {
   return (
-    <StyledAvatar
-      noBorder={noBorder}
-      src={src}
-      as={src ? "img" : "div"}
-      square={square}
-      {...otherProps}
-    >
-      {!src && children ? children : null}
+    <StyledAvatar noBorder={noBorder} square={square} {...otherProps}>
+      {src ? <SlyledAvatarIMG src={src} alt={alt} /> : children}
     </StyledAvatar>
   );
 };
@@ -49,11 +49,15 @@ const Avatar = ({ children, noBorder, square, src, ...otherProps }) => {
 Avatar.defaultProps = {
   square: false,
   noBorder: false,
-  src: undefined
+  src: undefined,
+  children: null,
+  alt: ""
 };
 Avatar.propTypes = {
   square: propTypes.bool,
   noBorder: propTypes.bool,
-  src: propTypes.string
+  children: propTypes.node,
+  src: propTypes.string,
+  alt: propTypes.string
 };
 export default Avatar;
