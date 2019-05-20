@@ -4,6 +4,7 @@ import propTypes from "prop-types";
 import styled, { css } from "styled-components";
 import {
   createBorderStyles,
+  createWellBorderStyles,
   createBoxStyles,
   createFlatBoxStyles,
   createDisabledTextStyles
@@ -32,21 +33,27 @@ const StyledButton = styled.button`
       ? css`
           ${createFlatBoxStyles()} /* background: none; */
         `
+      : variant === "menu"
+      ? css`
+          ${createBoxStyles()};
+          border: 2px solid transparent;
+          &:hover {
+            ${createWellBorderStyles(false)}
+          }
+          &:active {
+            ${createWellBorderStyles(true)}
+          }
+          ${({ active }) => active && createBorderStyles(true)}
+        `
       : css`
           ${createBoxStyles()};
-          ${({ variant, active }) =>
-            variant === "menu"
-              ? null
-              : active
-              ? createBorderStyles(true)
-              : createBorderStyles(false)}
+          ${({ active }) =>
+            active ? createBorderStyles(true) : createBorderStyles(false)}
           ${({ isDisabled }) =>
             isDisabled && createDisabledTextStyles()}
-      &:active {
-            ${({ isDisabled, variant }) =>
-              !isDisabled && variant !== "menu" && createBorderStyles(true)}
+        &:active {
+            ${({ isDisabled }) => !isDisabled && createBorderStyles(true)}
           }
-          ${({ variant }) => variant === "menu" && "border: none;"}
         `}
   ${commonButtonStyles}
 `;

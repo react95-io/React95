@@ -52,3 +52,21 @@ export const createBorderStyles = (invert = false) =>
             1px ${({ theme }) => theme.borderLight},
           inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
       `;
+export const createWellBorderStyles = (invert = false) =>
+  invert
+    ? css`
+        border-style: solid;
+        border-width: 2px;
+        border-left-color: ${({ theme }) => theme.borderDark};
+        border-top-color: ${({ theme }) => theme.borderDark};
+        border-right-color: ${({ theme }) => theme.borderLightest};
+        border-bottom-color: ${({ theme }) => theme.borderLightest};
+      `
+    : css`
+        border-style: solid;
+        border-width: 2px;
+        border-left-color: ${({ theme }) => theme.borderLightest};
+        border-top-color: ${({ theme }) => theme.borderLightest};
+        border-right-color: ${({ theme }) => theme.borderDark};
+        border-bottom-color: ${({ theme }) => theme.borderDark};
+      `;
