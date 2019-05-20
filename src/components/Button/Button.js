@@ -27,15 +27,15 @@ const commonButtonStyles = css`
 `;
 
 const StyledButton = styled.button`
-  ${({ flat }) =>
-    flat
+  ${({ variant }) =>
+    variant === "flat"
       ? css`
           ${createFlatBoxStyles()} /* background: none; */
         `
       : css`
           ${createBoxStyles()};
-          ${({ srat, active }) =>
-            srat
+          ${({ variant, active }) =>
+            variant === "menu"
               ? null
               : active
               ? createBorderStyles(true)
@@ -43,10 +43,10 @@ const StyledButton = styled.button`
           ${({ isDisabled }) =>
             isDisabled && createDisabledTextStyles()}
       &:active {
-            ${({ isDisabled, srat }) =>
-              !isDisabled && !srat && createBorderStyles(true)}
+            ${({ isDisabled, variant }) =>
+              !isDisabled && variant !== "menu" && createBorderStyles(true)}
           }
-          ${({ srat }) => srat && "border: none;"}
+          ${({ variant }) => variant === "menu" && "border: none;"}
         `}
   ${commonButtonStyles}
 `;
@@ -60,8 +60,7 @@ const Button = ({
   size,
   square,
   active,
-  flat,
-  srat,
+  variant,
   className,
   children,
   ...otherProps
@@ -69,6 +68,7 @@ const Button = ({
   return (
     <StyledButton
       type={type}
+      variant={variant}
       onClick={disabled ? undefined : onClick}
       style={style}
       isDisabled={disabled}
@@ -76,8 +76,6 @@ const Button = ({
       size={size}
       square={square}
       active={active}
-      flat={flat}
-      srat={srat}
       className={className}
       style={style}
       // onTouchStart below to enable button :active style on iOS
@@ -98,8 +96,7 @@ Button.defaultProps = {
   size: "md",
   square: false,
   active: false,
-  flat: false,
-  srat: false
+  variant: "default"
 };
 
 Button.propTypes = {
@@ -111,8 +108,7 @@ Button.propTypes = {
   size: propTypes.oneOf(["sm", "md", "lg"]),
   square: propTypes.bool,
   active: propTypes.bool,
-  flat: propTypes.bool,
-  srat: propTypes.bool,
+  variant: propTypes.oneOf(["default", "menu", "flat"]),
   className: propTypes.string,
   children: propTypes.node.isRequired
 };

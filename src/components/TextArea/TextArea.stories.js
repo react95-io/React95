@@ -49,7 +49,7 @@ storiesOf("TextArea", module)
       </p>
       <div style={{ display: "flex", alignItems: "center", marginTop: "1rem" }}>
         <TextArea
-          flat
+          variant="flat"
           width={"100%"}
           height={200}
           placeholder="Type in here.."
@@ -66,7 +66,7 @@ storiesOf("TextArea", module)
       </p>
       <div style={{ display: "flex", alignItems: "center", marginTop: "1rem" }}>
         <TextArea
-          flat
+          variant="flat"
           disabled
           width={"100%"}
           height={200}

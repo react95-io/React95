@@ -29,13 +29,13 @@ storiesOf("Checkbox", module)
       </p>
       <div style={{ marginTop: "1rem" }}>
         <Checkbox
-          flat
+          variant="flat"
           defaultChecked={true}
           value="single"
           label="Earth is flat 🌍"
         />
         <Checkbox
-          flat
+          variant="flat"
           defaultChecked={false}
           value="single"
           label="Reptilians rule the world 🦎"

@@ -8,12 +8,13 @@ import { fontSizes, padding } from "../common/system";
 const StyledFieldset = styled.fieldset`
   position: relative;
   border: 2px solid
-    ${({ theme, flat }) => (flat ? theme.flatDark : theme.borderLightest)};
+    ${({ theme, variant }) =>
+      variant === "flat" ? theme.flatDark : theme.borderLightest};
   padding: ${padding.md};
   font-size: ${fontSizes.md};
   color: ${({ theme }) => theme.text};
-  ${({ flat }) =>
-    !flat &&
+  ${({ variant }) =>
+    variant !== "flat" &&
     css`
       box-shadow: -1px -1px 0 1px ${({ theme }) => theme.borderDark},
         inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
@@ -27,7 +28,8 @@ const StyledLegend = styled.legend`
   padding: 0 ${padding.sm};
 
   font-size: ${fontSizes.md};
-  background: ${({ theme, flat }) => (flat ? theme.canvas : theme.material)};
+  background: ${({ theme, variant }) =>
+    variant === "flat" ? theme.canvas : theme.material};
 `;
 
 const StyledFieldsetContent = styled.div`
@@ -37,7 +39,7 @@ const StyledFieldsetContent = styled.div`
 const Fieldset = ({
   label,
   disabled,
-  flat,
+  variant,
   children,
   className,
   style,
@@ -46,12 +48,12 @@ const Fieldset = ({
   return (
     <StyledFieldset
       isDisabled={disabled}
-      flat={flat}
+      variant={variant}
       style={style}
       className={className}
       {...otherProps}
     >
-      {label && <StyledLegend flat={flat}>{label}</StyledLegend>}
+      {label && <StyledLegend variant={variant}>{label}</StyledLegend>}
       <StyledFieldsetContent isDisabled={disabled}>
         {children}
       </StyledFieldsetContent>
@@ -61,7 +63,7 @@ const Fieldset = ({
 
 Fieldset.defaultProps = {
   disabled: false,
-  flat: false
+  variant: "default"
 };
 
 Fieldset.propTypes = {
@@ -74,7 +76,7 @@ Fieldset.propTypes = {
   style: propTypes.object,
   children: propTypes.node,
   disabled: propTypes.bool,
-  flat: propTypes.bool
+  variant: propTypes.oneOf(["default", "flat"])
 };
 
 export default Fieldset;

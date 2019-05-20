@@ -26,12 +26,13 @@ export const StyledTextInput = styled.input`
   background: none;
   font-size: ${fontSizes.md};
   font-family: ${fontFamily};
-  ${({ disabled, flat }) => !flat && disabled && createDisabledTextStyles()}
+  ${({ disabled, variant }) =>
+    variant !== "flat" && disabled && createDisabledTextStyles()}
 `;
 const TextField = ({
   onChange,
   disabled,
-  flat,
+  variant,
   type,
   style,
   shadow,
@@ -39,7 +40,7 @@ const TextField = ({
   width,
   ...otherProps
 }) => {
-  const Wrapper = flat ? StyledFlatWrapper : StyledWrapper;
+  const Wrapper = variant === "flat" ? StyledFlatWrapper : StyledWrapper;
   return (
     <Wrapper
       width={width}
@@ -52,7 +53,7 @@ const TextField = ({
         onChange={disabled ? undefined : onChange}
         readOnly={disabled}
         disabled={disabled}
-        flat={flat}
+        variant={variant}
         type={type}
         {...otherProps}
       />
@@ -63,13 +64,13 @@ TextField.defaultProps = {
   disabled: false,
   type: "text",
   shadow: true,
-  flat: false
+  variant: "default"
 };
 TextField.propTypes = {
   width: propTypes.oneOfType([propTypes.string, propTypes.number]),
   onChange: propTypes.func,
   disabled: propTypes.bool,
-  flat: propTypes.bool,
+  variant: propTypes.oneOf(["default", "flat"]),
   shadow: propTypes.bool,
   type: propTypes.string,
   className: propTypes.string

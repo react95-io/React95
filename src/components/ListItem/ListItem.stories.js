@@ -2,10 +2,9 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
-import ListItem from "./ListItem";
-import List from "../List/List";
+import { ListItem, List, Divider } from "../";
 
-export const actions = { onClick: action("onClick") };
+const actions = { onClick: action("onClick") };
 
 storiesOf("ListItem", module)
   .addDecorator(story => (
@@ -49,6 +48,17 @@ storiesOf("ListItem", module)
       <ListItem {...actions} square>
         🎁
       </ListItem>
+    </List>
+  ))
+  .add("size small", () => (
+    <List>
+      <ListItem size="sm">View</ListItem>
+      <Divider />
+      <ListItem size="sm">Paste</ListItem>
+      <ListItem size="sm">Paste Shortcut</ListItem>
+      <ListItem size="sm">Undo Copy</ListItem>
+      <Divider />
+      <ListItem size="sm">Properties</ListItem>
     </List>
   ))
   .add("render as link", () => (

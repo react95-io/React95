@@ -57,7 +57,7 @@ storiesOf("Select", module)
             }}
           >
             <Select
-              flat
+              variant="flat"
               items={items}
               onChange={onChange}
               height={100}

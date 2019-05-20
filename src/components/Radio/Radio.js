@@ -98,7 +98,7 @@ const Radio = ({
   onChange,
   label,
   disabled,
-  flat,
+  variant,
   value,
   checked,
   name,
@@ -107,7 +107,7 @@ const Radio = ({
   shadow,
   ...otherProps
 }) => {
-  const Checkmark = flat ? StyledFlatCheckmark : StyledCheckmark;
+  const Checkmark = variant === "flat" ? StyledFlatCheckmark : StyledCheckmark;
 
   return (
     <StyledLabel isDisabled={disabled} className={className} style={style}>
@@ -132,7 +132,7 @@ Radio.defaultProps = {
   value: null,
   label: "",
   disabled: false,
-  flat: false,
+  variant: "default",
   shadow: true
 };
 
@@ -147,8 +147,8 @@ Radio.propTypes = {
   label: propTypes.oneOfType([propTypes.string, propTypes.number]),
   checked: propTypes.bool,
   disabled: propTypes.bool,
-  flat: propTypes.bool,
   shadow: propTypes.bool,
+  variant: propTypes.oneOf(["default", "flat"]),
   style: propTypes.object
 };
 

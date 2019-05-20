@@ -45,12 +45,12 @@ storiesOf("Button", module)
       💖
     </Button>
   ))
-  .add("srat", () => (
-    <Button {...actions} srat size="sm" accent>
+  .add("menu button", () => (
+    <Button {...actions} variant="menu" size="sm" accent>
       File
     </Button>
   ))
-  .add("flat", () => (
+  .add("flat button", () => (
     <Window>
       <WindowContent>
         <Cutout
@@ -66,10 +66,10 @@ storiesOf("Button", module)
             }}
           >
             <Toolbar>
-              <Button {...actions} flat fullWidth accent>
+              <Button {...actions} variant="flat" fullWidth accent>
                 OK
               </Button>
-              <Button {...actions} flat disabled fullWidth accent>
+              <Button {...actions} variant="flat" disabled fullWidth accent>
                 Cancel
               </Button>
             </Toolbar>

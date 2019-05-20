@@ -35,8 +35,8 @@ const StyledDropdownButton = styled(Button)`
   padding: 0;
   z-index: 1;
   flex-shrink: 0;
-  ${({ flat }) =>
-    flat
+  ${({ variant }) =>
+    variant === "flat"
       ? css`
           height: calc(100% - 4px);
           margin-right: 2px;
@@ -79,8 +79,8 @@ const StyledDropdownList = styled.ul`
   cursor: default;
   z-index: 99;
 
-  ${({ flat }) =>
-    flat
+  ${({ variant }) =>
+    variant === "flat"
       ? css`
           bottom: 2px;
           width: 100%;
@@ -113,7 +113,7 @@ const Select = ({
   items,
   selectedIndex,
   shadow,
-  flat,
+  variant,
   width,
   height,
   otherProps,
@@ -129,7 +129,8 @@ const Select = ({
     setIndex(i);
   };
 
-  const Wrapper = flat ? StyledFlatSelectWrapper : StyledSelectWrapper;
+  const Wrapper =
+    variant === "flat" ? StyledFlatSelectWrapper : StyledSelectWrapper;
   return (
     <Wrapper
       className={className}
@@ -141,13 +142,13 @@ const Select = ({
       <StyledSelectContent>
         {items.length ? items[index].label : ""}
       </StyledSelectContent>
-      <StyledDropdownButton flat={flat}>
+      <StyledDropdownButton variant={variant}>
         <StyledDropdownIcon />
       </StyledDropdownButton>
       {open && (
         <StyledDropdownList
           shadow={shadow}
-          flat={flat}
+          variant={variant}
           style={height && { overflowY: "scroll", height }}
         >
           {items.map((item, i) => (
@@ -173,14 +174,14 @@ Select.propTypes = {
   height: propTypes.number,
   selectedIndex: propTypes.number,
   shadow: propTypes.bool,
-  flat: propTypes.bool,
+  variant: propTypes.oneOf(["default", "flat"]),
   style: propTypes.object,
   onChange: propTypes.func
 };
 Select.defaultProps = {
   style: {},
   shadow: true,
-  flat: false,
+  variant: "default",
   selectedIndex: 0
 };
 export default Select;

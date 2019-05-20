@@ -49,10 +49,10 @@ const FlatFieldset = () => {
             }}
           >
             <Fieldset
-              flat
+              variant="flat"
               label={
                 <Checkbox
-                  flat
+                  variant="flat"
                   style={{ margin: 0 }}
                   label="Enable"
                   checked={!state}
@@ -70,7 +70,7 @@ const FlatFieldset = () => {
     </Window>
   );
 };
-const DisabledFieldset = ({ flat }) => {
+const DisabledFieldset = () => {
   const [state, setState] = useState(true);
   return (
     <Window>

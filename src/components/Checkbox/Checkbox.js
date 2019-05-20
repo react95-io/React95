@@ -75,7 +75,7 @@ const Checkbox = ({
   onChange,
   label,
   disabled,
-  flat,
+  variant,
   value,
   checked,
   defaultChecked,
@@ -87,7 +87,7 @@ const Checkbox = ({
 }) => {
   let Input, isChecked;
 
-  const Checkmark = flat ? StyledFlatCheckmark : StyledCheckmark;
+  const Checkmark = variant === "flat" ? StyledFlatCheckmark : StyledCheckmark;
   if (defaultChecked || checked === undefined) {
     const [state, setState] = useState(defaultChecked || false);
 
@@ -139,7 +139,7 @@ Checkbox.defaultProps = {
   value: null,
   label: "",
   disabled: false,
-  flat: false,
+  variant: "default",
   shadow: true
 };
 
@@ -154,7 +154,7 @@ Checkbox.propTypes = {
   label: propTypes.oneOfType([propTypes.string, propTypes.number]),
   checked: propTypes.bool,
   disabled: propTypes.bool,
-  flat: propTypes.bool,
+  variant: propTypes.oneOf(["default", "flat"]),
   shadow: propTypes.bool,
   style: propTypes.object
 };

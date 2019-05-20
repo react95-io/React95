@@ -91,7 +91,7 @@ class FlatRadioGroup extends React.Component {
               }}
             >
               <Radio
-                flat
+                variant="flat"
                 checked={checkedValue === "Pear"}
                 onChange={this.handleChange}
                 value="Pear"
@@ -100,7 +100,7 @@ class FlatRadioGroup extends React.Component {
               />
               <br />
               <Radio
-                flat
+                variant="flat"
                 checked={checkedValue === "Orange"}
                 onChange={this.handleChange}
                 value="Orange"
@@ -109,7 +109,7 @@ class FlatRadioGroup extends React.Component {
               />
               <br />
               <Radio
-                flat
+                variant="flat"
                 checked={checkedValue === "Kiwi"}
                 onChange={this.handleChange}
                 value="Kiwi"
@@ -118,7 +118,7 @@ class FlatRadioGroup extends React.Component {
               />
               <br />
               <Radio
-                flat
+                variant="flat"
                 checked={checkedValue === "Grape"}
                 onChange={this.handleChange}
                 value="Grape"

@@ -40,7 +40,7 @@ storiesOf("TextField", module)
           Name:
         </label>
         <TextField
-          flat
+          variant="flat"
           placeholder="type here..."
           width={150}
           onChange={onChange}
@@ -59,7 +59,7 @@ storiesOf("TextField", module)
           Name:
         </label>
         <TextField
-          flat
+          variant="flat"
           disabled
           defaultValue="Can't type 😥"
           width={150}
@@ -79,7 +79,9 @@ class ControlledTextFieldExample extends React.Component {
     return (
       <Toolbar>
         <TextField value={this.state.value} onChange={this.handleChange} />
-        <Button onClick={this.reset}>Reset</Button>
+        <Button onClick={this.reset} style={{ marginLeft: "2px" }}>
+          Reset
+        </Button>
       </Toolbar>
     );
   }

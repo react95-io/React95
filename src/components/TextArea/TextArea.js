@@ -30,13 +30,14 @@ const StyledTextArea = styled.textarea`
   font-size: ${fontSizes.md};
   font-family: ${fontFamily};
 
-  ${({ disabled, flat }) => !flat && disabled && createDisabledTextStyles()}
+  ${({ disabled, variant }) =>
+    variant !== "flat" && disabled && createDisabledTextStyles()}
 `;
 
 const TextArea = ({
   onChange,
   disabled,
-  flat,
+  variant,
   width,
   height,
   style,
@@ -44,7 +45,8 @@ const TextArea = ({
   shadow,
   ...otherProps
 }) => {
-  const Wrapper = flat ? StyledFlatTextAreaWrapper : StyledTextAreaWrapper;
+  const Wrapper =
+    variant === "flat" ? StyledFlatTextAreaWrapper : StyledTextAreaWrapper;
   return (
     <Wrapper
       style={{
@@ -62,7 +64,7 @@ const TextArea = ({
         readOnly={disabled}
         onChange={disabled ? undefined : onChange}
         disabled={disabled}
-        flat={flat}
+        variant={variant}
         {...otherProps}
       />
     </Wrapper>
@@ -71,14 +73,14 @@ const TextArea = ({
 
 TextArea.defaultProps = {
   shadow: true,
-  flat: false
+  variant: "default"
 };
 TextArea.propTypes = {
   width: propTypes.oneOfType([propTypes.string, propTypes.number]),
   height: propTypes.oneOfType([propTypes.string, propTypes.number]),
   onChange: propTypes.func,
   disabled: propTypes.bool,
-  flat: propTypes.bool,
+  variant: propTypes.oneOf(["default", "flat"]),
   className: propTypes.string,
   shadow: propTypes.bool
 };

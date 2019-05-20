@@ -21,10 +21,8 @@ storiesOf("Bar", module)
     <AppBar>
       <Toolbar>
         <Bar />
-        <Button flat accent>
-          Edit
-        </Button>
-        <Button flat accent disabled>
+        <Button variant="menu">Edit</Button>
+        <Button variant="menu" disabled>
           Save
         </Button>
         <Bar />
