@@ -28,7 +28,7 @@ storiesOf("Window", module)
         <Button variant="menu" size="sm">
           Edit
         </Button>
-        <Button variant="menu" size="sm">
+        <Button variant="menu" size="sm" disabled>
           Save
         </Button>
       </Toolbar>

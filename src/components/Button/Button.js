@@ -38,22 +38,22 @@ const StyledButton = styled.button`
           ${createBoxStyles()};
           border: 2px solid transparent;
           &:hover {
-            ${createWellBorderStyles(false)}
+            ${({ isDisabled }) => !isDisabled && createWellBorderStyles(false)}
           }
           &:active {
-            ${createWellBorderStyles(true)}
+            ${({ isDisabled }) => !isDisabled && createWellBorderStyles(true)}
           }
           ${({ active }) => active && createBorderStyles(true)}
+          ${({ isDisabled }) => isDisabled && createDisabledTextStyles()}
         `
       : css`
           ${createBoxStyles()};
           ${({ active }) =>
             active ? createBorderStyles(true) : createBorderStyles(false)}
-          ${({ isDisabled }) =>
-            isDisabled && createDisabledTextStyles()}
-        &:active {
+          &:active {
             ${({ isDisabled }) => !isDisabled && createBorderStyles(true)}
           }
+          ${({ isDisabled }) => isDisabled && createDisabledTextStyles()}
         `}
   ${commonButtonStyles}
 `;
