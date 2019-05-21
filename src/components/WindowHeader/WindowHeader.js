@@ -5,11 +5,11 @@ import styled from "styled-components";
 import { blockSizes, padding } from "../common/system";
 
 const SlyledWindowHeader = styled.div`
-  height: ${blockSizes.md};
-  padding: 0 ${padding.md};
+  height: 33px;
+  line-height: 33px;
+  padding: 0 ${padding.sm};
   margin-right: 2px;
 
-  line-height: ${blockSizes.md};
   font-weight: bold;
   color: ${({ theme }) => theme.textInvert};
 
