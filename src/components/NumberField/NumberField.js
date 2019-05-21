@@ -3,7 +3,7 @@ import propTypes from "prop-types";
 
 import Button from "../Button/Button";
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { blockSizes } from "../common/system";
 import TextField from "../TextField/TextField";
 
@@ -20,18 +20,30 @@ const StyledButtonWrapper = styled.div`
   flex-direction: column;
   flex-wrap: nowrap;
   margin-left: 2px;
-  margin-top: -2px;
+  margin-top: ${({ variant }) => (variant === "default" ? "-2px" : "0")};
 `;
 const StyledButton = styled(Button)`
   height: 50%;
   width: 30px;
   padding: 0;
   flex-shrink: 0;
-  border-left-color: ${({ theme }) => theme.borderLight};
-  border-top-color: ${({ theme }) => theme.borderLight};
-  box-shadow: inset 1px 1px 0px 1px ${({ theme }) => theme.borderLightest},
-    inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
+
+  ${({ theme, isFlat }) =>
+    !isFlat &&
+    css`
+      border-left-color: ${({ theme }) => theme.borderLight};
+      border-top-color: ${({ theme }) => theme.borderLight};
+      box-shadow: inset 1px 1px 0px 1px ${({ theme }) => theme.borderLightest},
+        inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
+    `}
 `;
+const StyledFlatButton = styled(Button)`
+  height: 50%;
+  width: 30px;
+  padding: 0;
+  flex-shrink: 0;
+`;
+
 const StyledButtonIcon = styled.span`
   position: absolute;
   left: 50%;
@@ -50,10 +62,12 @@ const StyledButtonIcon = styled.span`
 
 class NumberField extends React.Component {
   static defaultProps = {
+    variant: "default",
     value: 0,
     disabled: false
   };
   static propTypes = {
+    variant: propTypes.oneOf(["default", "flat"]),
     onChange: propTypes.func.isRequired,
     value: propTypes.number.isRequired,
     min: propTypes.number,
@@ -95,6 +109,7 @@ class NumberField extends React.Component {
       disabled,
       disableKeyboardInput,
       className,
+      variant,
       width,
       style,
       shadow
@@ -107,6 +122,7 @@ class NumberField extends React.Component {
       >
         <TextField
           value={value}
+          variant={variant}
           onChange={
             disabled || disableKeyboardInput ? undefined : this.handleChange
           }
@@ -118,10 +134,20 @@ class NumberField extends React.Component {
           width="100%"
         />
         <StyledButtonWrapper>
-          <StyledButton disabled={disabled} onClick={() => this.add(1)}>
+          <StyledButton
+            isFlat={variant === "flat"}
+            variant={variant}
+            disabled={disabled}
+            onClick={() => this.add(1)}
+          >
             <StyledButtonIcon invert />
           </StyledButton>
-          <StyledButton disabled={disabled} onClick={() => this.add(-1)}>
+          <StyledButton
+            isFlat={variant === "flat"}
+            variant={variant}
+            disabled={disabled}
+            onClick={() => this.add(-1)}
+          >
             <StyledButtonIcon />
           </StyledButton>
         </StyledButtonWrapper>

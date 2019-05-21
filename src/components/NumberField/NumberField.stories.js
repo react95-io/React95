@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 
-import NumberField from "./NumberField";
+import { NumberField, Cutout } from "../";
 
 storiesOf("NumberField", module)
   .addDecorator(story => (
@@ -40,4 +40,18 @@ storiesOf("NumberField", module)
       value={1991}
       onChange={value => console.log(value)}
     />
+  ))
+  .add("flat", () => (
+    <Cutout style={{ padding: "2rem", background: "white", width: "300px" }}>
+      <p style={{ lineHeight: 1.3, marginBottom: "1rem" }}>
+        When you want to use NumberField on a light background (like scrollable
+        content), just use the flat variant:
+      </p>
+      <NumberField
+        variant="flat"
+        shadow={false}
+        value={1991}
+        onChange={value => console.log(value)}
+      />
+    </Cutout>
   ));
