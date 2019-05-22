@@ -2,7 +2,7 @@ import React from "react";
 import propTypes from "prop-types";
 
 import styled, { css } from "styled-components";
-import { createDisabledTextStyles } from "../common";
+import { createDisabledTextStyles, createFlatBoxStyles } from "../common";
 import { padding, fontSizes } from "../common/system";
 import Cutout from "../Cutout/Cutout";
 
@@ -43,8 +43,8 @@ const createCheckmarkSymbol = ({ checked }) =>
       background: ${({ theme }) => theme.checkmark};
     }
   `;
-// had to overwrite box-shadow for StyledCheckmark since the default made checkbox too dark
-const StyledCheckmark = styled(Cutout)`
+
+const sharedCheckmarkStyles = css`
   position: absolute;
   top: 50%;
   left: 0;
@@ -52,7 +52,12 @@ const StyledCheckmark = styled(Cutout)`
   width: 20px;
   height: 20px;
   border-radius: 50%;
-
+  ${props => createCheckmarkSymbol(props)}
+`;
+// had to overwrite box-shadow for StyledCheckmark since the default made checkbox too dark
+const StyledCheckmark = styled(Cutout)`
+ 
+  ${sharedCheckmarkStyles}
   background: ${({ theme, isDisabled }) =>
     isDisabled ? theme.material : theme.canvas};
 
@@ -70,13 +75,30 @@ const StyledCheckmark = styled(Cutout)`
     box-shadow: none;
   }
 
-  ${props => createCheckmarkSymbol(props)}
 `;
-
+const StyledFlatCheckmark = styled.div`
+  ${createFlatBoxStyles()}
+  ${sharedCheckmarkStyles}
+  outline: none;
+  background: ${({ theme, isDisabled }) =>
+    isDisabled ? theme.flatLight : theme.canvas};
+  &:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    border: 2px solid ${({ theme }) => theme.flatDark};
+    border-radius: 50%;
+  }
+`;
 const Radio = ({
   onChange,
   label,
   disabled,
+  variant,
   value,
   checked,
   name,
@@ -85,6 +107,8 @@ const Radio = ({
   shadow,
   ...otherProps
 }) => {
+  const Checkmark = variant === "flat" ? StyledFlatCheckmark : StyledCheckmark;
+
   return (
     <StyledLabel isDisabled={disabled} className={className} style={style}>
       {label}
@@ -97,11 +121,7 @@ const Radio = ({
         name={name}
         {...otherProps}
       />
-      <StyledCheckmark
-        checked={checked}
-        isDisabled={disabled}
-        shadow={shadow}
-      />
+      <Checkmark checked={checked} isDisabled={disabled} shadow={shadow} />
     </StyledLabel>
   );
 };
@@ -112,6 +132,7 @@ Radio.defaultProps = {
   value: null,
   label: "",
   disabled: false,
+  variant: "default",
   shadow: true
 };
 
@@ -127,6 +148,7 @@ Radio.propTypes = {
   checked: propTypes.bool,
   disabled: propTypes.bool,
   shadow: propTypes.bool,
+  variant: propTypes.oneOf(["default", "flat"]),
   style: propTypes.object
 };
 

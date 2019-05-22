@@ -1,41 +1,61 @@
 import React from "react";
 import propTypes from "prop-types";
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import {
   createBorderStyles,
+  createWellBorderStyles,
   createBoxStyles,
+  createFlatBoxStyles,
   createDisabledTextStyles
 } from "../common";
 import { blockSizes, fontSizes, padding } from "../common/system";
 
-const StyledButton = styled.button`
-  ${createBoxStyles()};
+const commonButtonStyles = css`
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  ${props =>
-    props.flat
-      ? null
-      : props.active
-      ? createBorderStyles(true)
-      : createBorderStyles(false)}
-  height: ${props => blockSizes[props.size]};
-  width: ${props =>
-    props.fullWidth ? "100%" : props.square ? blockSizes[props.size] : "auto"};
-  padding: ${props => (props.square ? 0 : "0 " + padding.sm)};
+  height: ${({ size }) => blockSizes[size]};
+  width: ${({ fullWidth, square, size }) =>
+    fullWidth ? "100%" : square ? blockSizes[size] : "auto"};
+  padding: ${({ square }) => (square ? 0 : "0 " + padding.sm)};
   font-size: ${fontSizes.md};
-    
-  ${props => props.isDisabled && createDisabledTextStyles()}
   &:active {
-    ${props => !props.isDisabled && !props.flat && createBorderStyles(true)}
-   
-    padding-top: ${props => !props.isDisabled && "2px"};
-    
+    padding-top: ${({ isDisabled }) => !isDisabled && "2px"};
   }
-  padding-top: ${props => props.active && !props.isDisabled && "2px"};
-  ${props => props.flat && "border: none;"}
+  padding-top: ${({ active, isDisabled }) => active && !isDisabled && "2px"};
+`;
+
+const StyledButton = styled.button`
+  ${({ variant }) =>
+    variant === "flat"
+      ? css`
+          ${createFlatBoxStyles()} /* background: none; */
+        `
+      : variant === "menu"
+      ? css`
+          ${createBoxStyles()};
+          border: 2px solid transparent;
+          &:hover {
+            ${({ isDisabled }) => !isDisabled && createWellBorderStyles(false)}
+          }
+          &:active {
+            ${({ isDisabled }) => !isDisabled && createWellBorderStyles(true)}
+          }
+          ${({ active }) => active && createBorderStyles(true)}
+          ${({ isDisabled }) => isDisabled && createDisabledTextStyles()}
+        `
+      : css`
+          ${createBoxStyles()};
+          ${({ active }) =>
+            active ? createBorderStyles(true) : createBorderStyles(false)}
+          &:active {
+            ${({ isDisabled }) => !isDisabled && createBorderStyles(true)}
+          }
+          ${({ isDisabled }) => isDisabled && createDisabledTextStyles()}
+        `}
+  ${commonButtonStyles}
 `;
 
 const Button = ({
@@ -47,7 +67,7 @@ const Button = ({
   size,
   square,
   active,
-  flat,
+  variant,
   className,
   children,
   ...otherProps
@@ -55,6 +75,7 @@ const Button = ({
   return (
     <StyledButton
       type={type}
+      variant={variant}
       onClick={disabled ? undefined : onClick}
       style={style}
       isDisabled={disabled}
@@ -62,7 +83,6 @@ const Button = ({
       size={size}
       square={square}
       active={active}
-      flat={flat}
       className={className}
       style={style}
       // onTouchStart below to enable button :active style on iOS
@@ -83,7 +103,7 @@ Button.defaultProps = {
   size: "md",
   square: false,
   active: false,
-  flat: false
+  variant: "default"
 };
 
 Button.propTypes = {
@@ -95,7 +115,7 @@ Button.propTypes = {
   size: propTypes.oneOf(["sm", "md", "lg"]),
   square: propTypes.bool,
   active: propTypes.bool,
-  flat: propTypes.bool,
+  variant: propTypes.oneOf(["default", "menu", "flat"]),
   className: propTypes.string,
   children: propTypes.node.isRequired
 };

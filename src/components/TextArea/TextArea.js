@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import propTypes from "prop-types";
 
 import styled from "styled-components";
-import { createDisabledTextStyles } from "../common";
+import { createDisabledTextStyles, createFlatBoxStyles } from "../common";
 import { blockSizes, fontSizes, padding, fontFamily } from "../common/system";
 import Cutout from "../Cutout/Cutout";
 
@@ -12,6 +12,11 @@ const StyledTextAreaWrapper = styled(Cutout)`
   padding: 0;
   background: ${({ theme, isDisabled }) =>
     isDisabled ? theme.material : theme.canvas};
+`;
+const StyledFlatTextAreaWrapper = styled.div`
+  position: relative;
+  min-height: ${blockSizes.md};
+  ${createFlatBoxStyles()}
 `;
 const StyledTextArea = styled.textarea`
   width: 100%;
@@ -24,50 +29,58 @@ const StyledTextArea = styled.textarea`
   resize: none;
   font-size: ${fontSizes.md};
   font-family: ${fontFamily};
-  color: ${({ theme, disabled }) =>
-    disabled ? theme.inputTextDisabled : theme.inputText};
-  ${props => props.disabled && createDisabledTextStyles()}
+
+  ${({ disabled, variant }) =>
+    variant !== "flat" && disabled && createDisabledTextStyles()}
 `;
 
 const TextArea = ({
   onChange,
   disabled,
+  variant,
   width,
   height,
   style,
   className,
   shadow,
   ...otherProps
-}) => (
-  <StyledTextAreaWrapper
-    style={{
-      ...style,
-      width: width ? width : "100%",
-      height: height ? height : "auto"
-    }}
-    className={className}
-    isDisabled={disabled}
-    shadow={shadow}
-  >
-    <StyledTextArea
-      width={width}
-      height={height}
-      readOnly={disabled}
-      onChange={disabled ? undefined : onChange}
-      disabled={disabled}
-      {...otherProps}
-    />
-  </StyledTextAreaWrapper>
-);
+}) => {
+  const Wrapper =
+    variant === "flat" ? StyledFlatTextAreaWrapper : StyledTextAreaWrapper;
+  return (
+    <Wrapper
+      style={{
+        ...style,
+        width: width ? width : "100%",
+        height: height ? height : "auto"
+      }}
+      className={className}
+      isDisabled={disabled}
+      shadow={shadow}
+    >
+      <StyledTextArea
+        width={width}
+        height={height}
+        readOnly={disabled}
+        onChange={disabled ? undefined : onChange}
+        disabled={disabled}
+        variant={variant}
+        {...otherProps}
+      />
+    </Wrapper>
+  );
+};
 
 TextArea.defaultProps = {
-  shadow: true
+  shadow: true,
+  variant: "default"
 };
 TextArea.propTypes = {
   width: propTypes.oneOfType([propTypes.string, propTypes.number]),
   height: propTypes.oneOfType([propTypes.string, propTypes.number]),
   onChange: propTypes.func,
   disabled: propTypes.bool,
+  variant: propTypes.oneOf(["default", "flat"]),
   className: propTypes.string,
   shadow: propTypes.bool
 };

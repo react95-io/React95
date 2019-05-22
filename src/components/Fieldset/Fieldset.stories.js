@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
-import Fieldset from "./Fieldset";
-import Window from "../Window/Window";
-import WindowContent from "../WindowContent/WindowContent";
-import Checkbox from "../Checkbox/Checkbox";
-
+import { Checkbox, Cutout, Fieldset, Window, WindowContent } from "../";
 storiesOf("Fieldset", module)
   .addDecorator(story => (
     <div
@@ -32,8 +28,48 @@ storiesOf("Fieldset", module)
       </WindowContent>
     </Window>
   ))
-  .add("disabled", () => <DisabledFieldset />);
+  .add("disabled", () => <DisabledFieldset />)
+  .add("flat", () => <FlatFieldset />);
 
+const FlatFieldset = () => {
+  const [state, setState] = useState(true);
+  return (
+    <Window>
+      <WindowContent>
+        <Cutout
+          style={{ padding: "1rem", background: "white", width: "300px" }}
+        >
+          <p style={{ lineHeight: 1.3 }}>
+            When you want to use Fieldset on a light background (like scrollable
+            content), just use the flat variant:
+          </p>
+          <div
+            style={{
+              marginTop: "1.5rem"
+            }}
+          >
+            <Fieldset
+              variant="flat"
+              label={
+                <Checkbox
+                  variant="flat"
+                  style={{ margin: 0 }}
+                  label="Enable"
+                  checked={!state}
+                  value={!state}
+                  onChange={() => setState(!state)}
+                />
+              }
+              disabled={state}
+            >
+              Some content here 😍
+            </Fieldset>
+          </div>
+        </Cutout>
+      </WindowContent>
+    </Window>
+  );
+};
 const DisabledFieldset = () => {
   const [state, setState] = useState(true);
   return (

@@ -1,19 +1,19 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
+import styled from "styled-components";
 
-import NumberField from "./NumberField";
+import { NumberField, Cutout } from "../";
+
+const StyledCutout = styled(Cutout)`
+  background: ${({ theme }) => theme.canvas};
+`;
+const Wrapper = styled.div`
+  background: ${({ theme }) => theme.material};
+  padding: 5rem;
+`;
 
 storiesOf("NumberField", module)
-  .addDecorator(story => (
-    <div
-      style={{
-        padding: "5rem",
-        background: "#ced0cf"
-      }}
-    >
-      {story()}
-    </div>
-  ))
+  .addDecorator(story => <Wrapper>{story()}</Wrapper>)
   .add("default", () => (
     <NumberField value={1991} onChange={value => console.log(value)} />
   ))
@@ -40,4 +40,18 @@ storiesOf("NumberField", module)
       value={1991}
       onChange={value => console.log(value)}
     />
+  ))
+  .add("flat", () => (
+    <StyledCutout style={{ padding: "2rem", width: "300px" }}>
+      <p style={{ lineHeight: 1.3, marginBottom: "1rem" }}>
+        When you want to use NumberField on a light background (like scrollable
+        content), just use the flat variant:
+      </p>
+      <NumberField
+        variant="flat"
+        shadow={false}
+        value={1991}
+        onChange={value => console.log(value)}
+      />
+    </StyledCutout>
   ));

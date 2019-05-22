@@ -22,13 +22,13 @@ storiesOf("Window", module)
     <Window style={{ width: 400 }}>
       <WindowHeader>react95.exe</WindowHeader>
       <Toolbar>
-        <Button flat size="sm">
+        <Button variant="menu" size="sm">
           File
         </Button>
-        <Button flat size="sm">
+        <Button variant="menu" size="sm">
           Edit
         </Button>
-        <Button flat size="sm">
+        <Button variant="menu" size="sm" disabled>
           Save
         </Button>
       </Toolbar>

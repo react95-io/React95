@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import propTypes from "prop-types";
 
 import styled, { css } from "styled-components";
-import { createDisabledTextStyles } from "../common";
+import { createDisabledTextStyles, createFlatBoxStyles } from "../common";
+
 import { padding, fontSizes } from "../common/system";
 import Cutout from "../Cutout/Cutout";
 
@@ -44,27 +45,37 @@ const createCheckmarkSymbol = ({ checked }) =>
       transform: translate(-50%, -50%) rotate(45deg);
     }
   `;
-const StyledCheckmark = styled(Cutout)`
+const sharedCheckmarkStyles = css`
   position: absolute;
   top: 50%;
   left: 0;
   transform: translateY(-50%);
   width: 20px;
   height: 20px;
+  ${props => createCheckmarkSymbol(props)}
+`;
+const StyledCheckmark = styled(Cutout)`
+  ${sharedCheckmarkStyles}
   background: ${({ theme, isDisabled }) =>
     isDisabled ? theme.material : theme.canvas};
-  ${props => createCheckmarkSymbol(props)};
   box-shadow: ${({ shadow }) =>
     shadow ? `inset 3px 3px 10px rgba(0, 0, 0, 0.1)` : "none"};
   &:before {
     box-shadow: none;
   }
 `;
-
+const StyledFlatCheckmark = styled.div`
+  ${createFlatBoxStyles()}
+  ${sharedCheckmarkStyles}
+  background: ${({ theme, isDisabled }) =>
+    isDisabled ? theme.flatLight : theme.canvas};
+  
+`;
 const Checkbox = ({
   onChange,
   label,
   disabled,
+  variant,
   value,
   checked,
   defaultChecked,
@@ -74,8 +85,9 @@ const Checkbox = ({
   shadow,
   ...otherProps
 }) => {
-  let Input, isChecked;
+  let Input;
 
+  const Checkmark = variant === "flat" ? StyledFlatCheckmark : StyledCheckmark;
   if (defaultChecked || checked === undefined) {
     const [state, setState] = useState(defaultChecked || false);
 
@@ -95,11 +107,7 @@ const Checkbox = ({
           name={name}
           {...otherProps}
         />
-        <StyledCheckmark
-          checked={state}
-          isDisabled={disabled}
-          shadow={shadow}
-        />
+        <Checkmark checked={state} isDisabled={disabled} shadow={shadow} />
       </>
     );
   } else {
@@ -114,11 +122,7 @@ const Checkbox = ({
           name={name}
           {...otherProps}
         />
-        <StyledCheckmark
-          checked={checked}
-          isDisabled={disabled}
-          shadow={shadow}
-        />
+        <Checkmark checked={checked} isDisabled={disabled} shadow={shadow} />
       </>
     );
   }
@@ -135,6 +139,7 @@ Checkbox.defaultProps = {
   value: null,
   label: "",
   disabled: false,
+  variant: "default",
   shadow: true
 };
 
@@ -149,6 +154,7 @@ Checkbox.propTypes = {
   label: propTypes.oneOfType([propTypes.string, propTypes.number]),
   checked: propTypes.bool,
   disabled: propTypes.bool,
+  variant: propTypes.oneOf(["default", "flat"]),
   shadow: propTypes.bool,
   style: propTypes.object
 };
