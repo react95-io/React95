@@ -1,6 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
+import styled from "styled-components";
 
 import { Select, Window, WindowContent, Cutout } from "../";
 
@@ -15,18 +16,13 @@ const items = [
   { value: 6, label: "🛌🏻 Snorlax" },
   { value: 7, label: "⛰ Geodude" }
 ];
+const Wrapper = styled.div`
+  background: ${({ theme }) => theme.material};
+  padding: 5rem;
+`;
 const onChange = value => console.log(value);
 storiesOf("Select", module)
-  .addDecorator(story => (
-    <div
-      style={{
-        padding: "5rem",
-        background: "#ced0cf"
-      }}
-    >
-      {story()}
-    </div>
-  ))
+  .addDecorator(story => <Wrapper>{story()}</Wrapper>)
   .add("fixed width", () => (
     <Select items={items} onChange={onChange} width={150} />
   ))

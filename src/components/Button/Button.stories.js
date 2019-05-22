@@ -3,10 +3,14 @@ import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
-import styled from "styled-components";
+import styled, {ThemeProvider} from "styled-components";
 
 import { Button, Window, WindowContent, Cutout, Toolbar } from "../";
 export const actions = { onClick: action("onClick") };
+
+const StyledCutout = styled(Cutout)`
+  background: ${({theme})=>theme.canvas};
+`;
 
 storiesOf("Button", module)
   .addDecorator(story => (
@@ -53,8 +57,8 @@ storiesOf("Button", module)
   .add("flat button", () => (
     <Window>
       <WindowContent>
-        <Cutout
-          style={{ padding: "1rem", background: "white", width: "300px" }}
+        <StyledCutout
+          style={{ padding: "1rem", width: "300px" }}
         >
           <p style={{ lineHeight: 1.3 }}>
             When you want to use Buttons on a light background (like scrollable
@@ -74,7 +78,7 @@ storiesOf("Button", module)
               </Button>
             </Toolbar>
           </div>
-        </Cutout>
+        </StyledCutout>
       </WindowContent>
     </Window>
   ));

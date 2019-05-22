@@ -1,23 +1,21 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 
-import TextField from "./TextField";
+import styled from "styled-components";
 
-import { Button, Toolbar, Cutout } from "../";
+import { TextField, Button, Toolbar, Cutout } from "../";
 
 const onChange = e => console.log(e.target.value);
 
+const StyledCutout = styled(Cutout)`
+  background: ${({ theme }) => theme.canvas};
+`;
+const Wrapper = styled.div`
+  background: ${({ theme }) => theme.material};
+  padding: 5rem;
+`;
 storiesOf("TextField", module)
-  .addDecorator(story => (
-    <div
-      style={{
-        padding: "5rem",
-        background: "#ced0cf"
-      }}
-    >
-      {story()}
-    </div>
-  ))
+  .addDecorator(story => <Wrapper>{story()}</Wrapper>)
   .add("default", () => <TextField defaultValue="" onChange={onChange} />)
   .add("controlled", () => <ControlledTextFieldExample />)
   .add("no shadow", () => (
@@ -30,7 +28,7 @@ storiesOf("TextField", module)
     <TextField defaultValue="Custom width" width={150} onChange={onChange} />
   ))
   .add("flat", () => (
-    <Cutout style={{ padding: "2rem", background: "white", width: "300px" }}>
+    <StyledCutout style={{ padding: "2rem", width: "300px" }}>
       <p style={{ lineHeight: 1.3 }}>
         When you want to add input field on a light background (like scrollable
         content), just use the flat variant:
@@ -46,10 +44,10 @@ storiesOf("TextField", module)
           onChange={onChange}
         />
       </div>
-    </Cutout>
+    </StyledCutout>
   ))
   .add("flat disabled", () => (
-    <Cutout style={{ padding: "2rem", background: "white", width: "300px" }}>
+    <StyledCutout style={{ padding: "2rem", width: "300px" }}>
       <p style={{ lineHeight: 1.3 }}>
         When you want to add input field on a light background (like scrollable
         content), just use the flat variant:
@@ -66,7 +64,7 @@ storiesOf("TextField", module)
           onChange={onChange}
         />
       </div>
-    </Cutout>
+    </StyledCutout>
   ));
 
 class ControlledTextFieldExample extends React.Component {

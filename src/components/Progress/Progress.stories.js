@@ -1,18 +1,15 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 
-import Progress from "./Progress";
+import styled from "styled-components";
 
+import { Progress } from "../";
+
+const Wrapper = styled.div`
+  background: ${({ theme }) => theme.material};
+  padding: 5rem;
+`;
 storiesOf("Progress", module)
-  .addDecorator(story => (
-    <div
-      style={{
-        padding: "5rem",
-        background: "#ced0cf"
-      }}
-    >
-      {story()}
-    </div>
-  ))
+  .addDecorator(story => <Wrapper>{story()}</Wrapper>)
   .add("default", () => <Progress percent={52} />)
   .add("no shadow", () => <Progress percent={52} shadow={false} />);
