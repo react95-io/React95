@@ -85,7 +85,7 @@ const Checkbox = ({
   shadow,
   ...otherProps
 }) => {
-  let Input, isChecked;
+  let Input;
 
   const Checkmark = variant === "flat" ? StyledFlatCheckmark : StyledCheckmark;
   if (defaultChecked || checked === undefined) {
