@@ -50,6 +50,12 @@ const StyledButton = styled.button`
           ${createBoxStyles()};
           ${({ active }) =>
             active ? createBorderStyles(true) : createBorderStyles(false)}
+          ${({ active, theme }) =>
+            active &&
+            `background-image: ${
+              theme.hatchedBackground
+            };`}
+          
           &:active {
             ${({ isDisabled }) => !isDisabled && createBorderStyles(true)}
           }
