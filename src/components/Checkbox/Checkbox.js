@@ -7,10 +7,11 @@ import { createDisabledTextStyles, createFlatBoxStyles } from "../common";
 import { padding, fontSizes } from "../common/system";
 import Cutout from "../Cutout/Cutout";
 
+const checkboxSize = "22px";
 const StyledLabel = styled.label`
   display: inline-block;
   position: relative;
-  padding-left: calc(20px + ${padding.sm});
+  padding-left: calc(${checkboxSize} + ${padding.sm});
   margin: ${padding.sm} 0;
   cursor: pointer;
   -webkit-user-select: none;
@@ -37,8 +38,8 @@ const createCheckmarkSymbol = ({ checked }) =>
       position: absolute;
       left: 50%;
       top: calc(50% - 1px);
-      width: 3px;
-      height: 7px;
+      width: 4px;
+      height: 8px;
 
       border: solid ${({ theme }) => theme.checkmark};
       border-width: 0 3px 3px 0;
@@ -50,8 +51,8 @@ const sharedCheckmarkStyles = css`
   top: 50%;
   left: 0;
   transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
+  width: ${checkboxSize};
+  height: ${checkboxSize};
   ${props => createCheckmarkSymbol(props)}
 `;
 const StyledCheckmark = styled(Cutout)`
