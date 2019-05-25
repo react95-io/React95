@@ -11,6 +11,7 @@ const StyledFieldset = styled.fieldset`
     ${({ theme, variant }) =>
       variant === "flat" ? theme.flatDark : theme.borderLightest};
   padding: ${padding.md};
+  margin-top: ${padding.sm};
   font-size: ${fontSizes.md};
   color: ${({ theme }) => theme.text};
   ${({ variant }) =>
