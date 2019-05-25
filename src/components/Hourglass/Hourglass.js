@@ -1,16 +1,20 @@
 import React from "react";
 import propTypes from "prop-types";
-import hourglass from "./hourglass.gif";
 
 import styled from "styled-components";
+
+import base64hourglass from "./base64hourglass";
 
 const StyledContainer = styled.span`
   display: inline-block;
 `;
-const StyledImg = styled.img`
-  object-fit: cover;
+
+const StyledHourglass = styled.span`
+  display: block;
+  background: ${base64hourglass};
+  background-size: cover;
+  width: 100%;
   height: 100%;
-  width: auto;
 `;
 const Hourglass = ({ size, className, style, ...otherProps }) => {
   return (
@@ -23,7 +27,7 @@ const Hourglass = ({ size, className, style, ...otherProps }) => {
       }}
       {...otherProps}
     >
-      <StyledImg src={hourglass} alt="hourglass" />
+      <StyledHourglass />
     </StyledContainer>
   );
 };

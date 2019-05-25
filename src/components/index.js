@@ -10,11 +10,9 @@ import Checkbox from "./Checkbox/Checkbox";
 import Cutout from "./Cutout/Cutout";
 import DatePicker from "./DatePicker/DatePicker";
 import Divider from "./Divider/Divider";
-// import Fab from "./Fab/Fab";
 import Fieldset from "./Fieldset/Fieldset";
-// File Icon
-// import Hourglass from "./Hourglass/Hourglass";
-// Icon
+// import FileIcon from "./FileIcon/FileIcon";
+import Hourglass from "./Hourglass/Hourglass";
 import List from "./List/List";
 import ListItem from "./ListItem/ListItem";
 import NumberField from "./NumberField/NumberField";
@@ -50,9 +48,9 @@ export {
   Cutout,
   DatePicker,
   Divider,
-  // Fab,
   Fieldset,
-  // Hourglass,
+  // FileIcon,
+  Hourglass,
   List,
   ListItem,
   NumberField,

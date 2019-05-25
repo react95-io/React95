@@ -44,7 +44,7 @@ storiesOf("Select", module)
           }}
         >
           <p style={{ lineHeight: 1.3 }}>
-            When you want to use Buttons on a light background (like scrollable
+            When you want to use Select on a light background (like scrollable
             content), just use the flat variant:
           </p>
           <div
