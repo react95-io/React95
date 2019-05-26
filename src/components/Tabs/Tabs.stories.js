@@ -53,11 +53,12 @@ class TabsDemo extends React.Component {
                     onChange={() => null}
                   />
                   <Checkbox
+                    style={{ marginTop: "1rem" }}
                     name="shipping"
                     value="fast"
                     label="Fast shipping"
                     onChange={() => null}
-                    checked
+                    defaultChecked={true}
                   />
                 </Fieldset>
               </TabBody>

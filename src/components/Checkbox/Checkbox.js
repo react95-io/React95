@@ -7,7 +7,7 @@ import { createDisabledTextStyles, createFlatBoxStyles } from "../common";
 import { padding, fontSizes } from "../common/system";
 import Cutout from "../Cutout/Cutout";
 
-const checkboxSize = "22px";
+const checkboxSize = "20px";
 const StyledLabel = styled.label`
   display: inline-block;
   position: relative;
@@ -38,8 +38,8 @@ const createCheckmarkSymbol = ({ checked }) =>
       position: absolute;
       left: 50%;
       top: calc(50% - 1px);
-      width: 4px;
-      height: 8px;
+      width: 3px;
+      height: 7px;
 
       border: solid ${({ theme }) => theme.checkmark};
       border-width: 0 3px 3px 0;

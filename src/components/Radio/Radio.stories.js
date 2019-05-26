@@ -136,6 +136,6 @@ class FlatRadioGroup extends React.Component {
 let StyledCutout = styled(Cutout)`
   background: ${({ theme }) => theme.canvas};
   color: ${({ theme }) => theme.text};
-  padding: 2rem;
+  padding: 1rem;
   width: 300px;
 `;

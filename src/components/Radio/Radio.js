@@ -6,7 +6,7 @@ import { createDisabledTextStyles, createFlatBoxStyles } from "../common";
 import { padding, fontSizes } from "../common/system";
 import Cutout from "../Cutout/Cutout";
 
-const radioSize = "22px";
+const radioSize = "20px";
 const StyledLabel = styled.label`
   display: inline-block;
 
@@ -37,8 +37,8 @@ const createCheckmarkSymbol = ({ checked }) =>
       display: inline-block;
       top: 50%;
       left: 50%;
-      width: 7px;
-      height: 7px;
+      width: 6px;
+      height: 6px;
       transform: translate(-50%, -50%);
       border-radius: 50%;
       background: ${({ theme }) => theme.checkmark};
