@@ -9,6 +9,7 @@ const SlyledWindowHeader = styled.div`
   line-height: 33px;
   padding: 0 ${padding.sm};
   margin-right: 2px;
+  margin-bottom: 4px;
 
   font-weight: bold;
   color: ${({ theme }) => theme.textInvert};

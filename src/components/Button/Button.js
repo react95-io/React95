@@ -38,12 +38,13 @@ const StyledButton = styled.button`
           ${createBoxStyles()};
           border: 2px solid transparent;
           &:hover {
-            ${({ isDisabled }) => !isDisabled && createWellBorderStyles(false)}
+            ${({ isDisabled, active }) =>
+              !isDisabled && !active && createWellBorderStyles(false)}
           }
           &:active {
             ${({ isDisabled }) => !isDisabled && createWellBorderStyles(true)}
           }
-          ${({ active }) => active && createBorderStyles(true)}
+          ${({ active }) => active && createWellBorderStyles(true)}
           ${({ isDisabled }) => isDisabled && createDisabledTextStyles()}
         `
       : css`
