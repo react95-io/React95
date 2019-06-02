@@ -20,7 +20,24 @@ storiesOf("Window", module)
   ))
   .add("default", () => (
     <Window style={{ width: 400 }}>
-      <WindowHeader>react95.exe</WindowHeader>
+      <WindowHeader
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between"
+        }}
+      >
+        <span>react95.exe</span>
+        <Button
+          style={{ marginRight: "-6px", marginTop: "1px" }}
+          size={"sm"}
+          square
+        >
+          <span style={{ fontWeight: "bold", transform: "translateY(-1px)" }}>
+            x
+          </span>
+        </Button>
+      </WindowHeader>
       <Toolbar>
         <Button variant="menu" size="sm">
           File
@@ -45,44 +62,6 @@ storiesOf("Window", module)
   .add("no shadow", () => (
     <Window shadow={false}>
       <WindowHeader>react95.exe</WindowHeader>
-      <WindowContent>
-        <ul>
-          <li>something here</li>
-          <li>something here</li>
-          <li>something here</li>
-          <li>something here</li>
-        </ul>
-      </WindowContent>
-    </Window>
-  ))
-  .add("with close button", () => (
-    <Window style={{ width: 400 }}>
-      <WindowHeader
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between"
-        }}
-      >
-        <span>Welcome to:</span>
-        <span>react95.exe</span>
-        <Button size={"sm"} square>
-          <span style={{ fontWeight: "bold", transform: "translateY(-1px)" }}>
-            x
-          </span>
-        </Button>
-      </WindowHeader>
-      <Toolbar>
-        <Button variant="menu" size="sm">
-          File
-        </Button>
-        <Button variant="menu" size="sm">
-          Edit
-        </Button>
-        <Button variant="menu" size="sm" disabled>
-          Save
-        </Button>
-      </Toolbar>
       <WindowContent>
         <ul>
           <li>something here</li>
