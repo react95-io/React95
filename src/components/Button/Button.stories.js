@@ -4,6 +4,7 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
 import styled, { ThemeProvider } from "styled-components";
+import { blockSizes } from "../common/system";
 
 import {
   Button,
@@ -54,10 +55,21 @@ storiesOf("Button", module)
       🎂
     </Button>
   ))
-  .add("size large", () => (
-    <Button {...actions} size={"lg"} square>
-      💖
-    </Button>
+  .add("sizes", () => (
+    <div
+      style={{
+        alignItems: "center",
+        display: "flex",
+        width: 200,
+        justifyContent: "space-between"
+      }}
+    >
+      {Object.keys(blockSizes).map(size => (
+        <Button {...actions} size={size} square>
+          {size[0].toUpperCase()}
+        </Button>
+      ))}
+    </div>
   ))
   .add("menu button", () => <MenuButtonExample />)
   .add("flat button", () => (
