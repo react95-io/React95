@@ -54,10 +54,25 @@ storiesOf("Button", module)
       🎂
     </Button>
   ))
-  .add("size large", () => (
-    <Button {...actions} size={"lg"} square>
-      💖
-    </Button>
+  .add("sizes", () => (
+    <div
+      style={{
+        alignItems: "center",
+        display: "flex",
+        width: 200,
+        justifyContent: "space-between"
+      }}
+    >
+      <Button {...actions} size="sm">
+        small
+      </Button>
+      <Button {...actions} size="md">
+        medium
+      </Button>
+      <Button {...actions} size="lg">
+        large
+      </Button>
+    </div>
   ))
   .add("menu button", () => <MenuButtonExample />)
   .add("flat button", () => (
