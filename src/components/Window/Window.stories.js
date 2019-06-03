@@ -20,7 +20,24 @@ storiesOf("Window", module)
   ))
   .add("default", () => (
     <Window style={{ width: 400 }}>
-      <WindowHeader>react95.exe</WindowHeader>
+      <WindowHeader
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between"
+        }}
+      >
+        <span>react95.exe</span>
+        <Button
+          style={{ marginRight: "-6px", marginTop: "1px" }}
+          size={"sm"}
+          square
+        >
+          <span style={{ fontWeight: "bold", transform: "translateY(-1px)" }}>
+            x
+          </span>
+        </Button>
+      </WindowHeader>
       <Toolbar>
         <Button variant="menu" size="sm">
           File
