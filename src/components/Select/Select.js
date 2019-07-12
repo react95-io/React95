@@ -103,6 +103,8 @@ const StyledDropdownListItem = styled.li`
   line-height: calc(${blockSizes.md} - 4px);
   font-size: ${fontSizes.md};
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: ${({ theme }) => theme.inputText};
   &:hover {
     background: ${({ theme }) => theme.hoverBackground};
