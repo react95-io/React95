@@ -6,6 +6,12 @@
   <a href="https://www.npmjs.com/package/react95"><img src="https://flat.badgen.net/npm/license/react95" alt="React95 license"></a>
   
 </p>
+<h3 align="center">
+  <a href="https://arturbien.github.io/React95/?path=/story/select--fixed-width">Components</a> -
+  <a href="https://react95.io/">Website</a> -
+  <a href="https://discord.gg/VfMmpPq">Discord Chat</a> -
+  <a href="https://www.paypal.me/react95">PayPal donation 💰</a>
+</h3>
 <p align="center">
   <b>Refreshed</b> Windows95 UI components for your modern React apps. <br> Built with styled-components 💅</p>
   
