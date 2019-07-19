@@ -103,6 +103,8 @@ const StyledDropdownListItem = styled.li`
   line-height: calc(${blockSizes.md} - 4px);
   font-size: ${fontSizes.md};
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: ${({ theme }) => theme.inputText};
   &:hover {
     background: ${({ theme }) => theme.hoverBackground};
@@ -135,7 +137,7 @@ const Select = ({
     <Wrapper
       className={className}
       onClick={() => setOpen(!open)}
-      style={{ ...style, width }}
+      style={{ ...style, width: width ? width : "auto" }}
       shadow={shadow}
       {...otherProps}
     >
@@ -170,7 +172,7 @@ const Select = ({
 Select.propTypes = {
   items: propTypes.arrayOf(propTypes.object).isRequired,
   className: propTypes.string,
-  width: propTypes.number,
+  width: propTypes.oneOfType([propTypes.string, propTypes.number]),
   height: propTypes.number,
   selectedIndex: propTypes.number,
   shadow: propTypes.bool,
