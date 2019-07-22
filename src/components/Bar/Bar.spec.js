@@ -1,5 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
+import { blockSizes } from '../common/system'
 
 import Bar from './Bar'
 
@@ -15,11 +16,11 @@ describe('<Bar />', () => {
     const { container, rerender } = render(<Bar size='sm' />)
     const barEl = container.firstChild
 
-    expect(barEl).toHaveStyleRule('height', '27px')
+    expect(barEl).toHaveStyleRule('height', blockSizes.sm)
 
     rerender(<Bar size='lg' />)
 
-    expect(barEl).toHaveStyleRule('height', '43px')
+    expect(barEl).toHaveStyleRule('height', blockSizes.lg)
   })
 
   it('should handle custom style', () => {
