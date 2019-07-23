@@ -3,6 +3,7 @@ import { render, fireEvent } from '@testing-library/react'
 
 import { renderWithTheme, theme } from '../../../test/utils'
 import { blockSizes } from '../common/system'
+import { createDisabledTextStyles } from '../common'
 
 import Button from './Button'
 
@@ -36,11 +37,21 @@ describe('<Button />', () => {
     expect(onButtonClick).toHaveBeenCalled()
   })
 
-  it('should render disabled', () => {
-    const { getByRole } = renderWithTheme(<Button {...defaultProps} disabled />)
+  it('should handle disabled for all variants', () => {
+    const { getByRole, rerender } = renderWithTheme(<Button {...defaultProps} disabled />)
     const button = getByRole('button')
+    const disabledTextShadow = `1px 1px ${theme.textDisabledShadow}`
 
     expect(button).toHaveStyleRule('color', theme.textDisabled)
+    expect(button).toHaveStyleRule('text-shadow', disabledTextShadow)
+
+    rerender(<Button {...defaultProps} variant='menu' />)
+    expect(button).toHaveStyleRule('color', theme.textDisabled)
+    expect(button).toHaveStyleRule('text-shadow', disabledTextShadow)
+
+    rerender(<Button {...defaultProps} variant='flat' />)
+    expect(button).toHaveStyleRule('color', theme.textDisabled)
+    expect(button).toHaveStyleRule('text-shadow', disabledTextShadow)
   })
 
   it('should handle fullWidth prop', () => {
