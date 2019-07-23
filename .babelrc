@@ -10,6 +10,12 @@
   ],
   "plugins": [
     "babel-plugin-styled-components",
-    "@babel/plugin-proposal-class-properties"
-  ]
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-transform-runtime"
+  ],
+  "env": {
+    "test": {
+      "presets": ["@babel/preset-env"]
+    }
+  }
 }

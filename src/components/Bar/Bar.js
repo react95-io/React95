@@ -14,6 +14,7 @@ const StyledBar = styled.div`
   border-right: 2px solid ${({ theme }) => theme.borderDark};
   background: ${({ theme }) => theme.material};
 `;
+
 const Bar = ({ size, className, style, ...otherProps }) => {
   return (
     <StyledBar
