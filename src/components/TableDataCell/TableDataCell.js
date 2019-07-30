@@ -1,26 +1,33 @@
-import React from "react";
-import propTypes from "prop-types";
+import React from 'react';
+import propTypes from 'prop-types';
 
-import styled from "styled-components";
-import { padding } from "../common/system";
+import styled from 'styled-components';
+import { padding } from '../common/system';
 
 const StyledTd = styled.td`
   padding: 0 ${padding.sm};
 `;
-const TableDataCell = ({ className, children, style, ...otherProps }) => {
-  return (
-    <StyledTd className={className} style={style} {...otherProps}>
-      {children}
-    </StyledTd>
-  );
-};
+const TableDataCell = ({
+  className, children, style, ...otherProps
+}) => (
+  <StyledTd className={className} style={style} {...otherProps}>
+    {children}
+  </StyledTd>
+);
 
-TableDataCell.defaultProps = {};
+TableDataCell.defaultProps = {
+  children: null,
+  className: '',
+  style: {},
+};
 
 TableDataCell.propTypes = {
   children: propTypes.node,
   className: propTypes.string,
-  style: propTypes.object
+  style: propTypes.shape([
+    propTypes.string,
+    propTypes.number,
+  ]),
 };
 
 export default TableDataCell;

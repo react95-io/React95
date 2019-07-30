@@ -1,18 +1,18 @@
-import React from "react";
-import { storiesOf } from "@storybook/react";
+import React from 'react';
+import { storiesOf } from '@storybook/react';
 
-import { Cutout, Window, WindowContent } from "../";
+import { Cutout, Window, WindowContent } from '..';
 
-storiesOf("Cutout", module).add("default", () => (
+storiesOf('Cutout', module).add('default', () => (
   <Window>
     <WindowContent>
-      <Cutout style={{ width: "300px", height: "200px" }}>
+      <Cutout style={{ width: '300px', height: '200px' }}>
         <h1
           style={{
-            fontFamily: "times new roman",
-            textAlign: "center",
-            fontSize: "3rem",
-            marginTop: "0.5rem"
+            fontFamily: 'times new roman',
+            textAlign: 'center',
+            fontSize: '3rem',
+            marginTop: '0.5rem',
           }}
         >
           React95

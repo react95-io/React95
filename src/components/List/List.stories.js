@@ -1,35 +1,32 @@
-import React from "react";
-import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
+import React from 'react';
+import { storiesOf } from '@storybook/react';
 
-import List from "./List";
-import ListItem from "../ListItem/ListItem";
-import Bar from "../Bar/Bar";
+import List from './List';
+import ListItem from '../ListItem/ListItem';
+import Bar from '../Bar/Bar';
 
-export const actions = { onClick: action("onClick") };
-
-storiesOf("List", module)
+storiesOf('List', module)
   .addDecorator(story => (
     <div
       style={{
-        padding: "5rem",
-        background: "teal"
+        padding: '5rem',
+        background: 'teal',
       }}
     >
       {story()}
     </div>
   ))
-  .add("default", () => (
+  .add('default', () => (
     <List>
       <ListItem>Photos</ListItem>
       <ListItem>Videos</ListItem>
       <ListItem>Other</ListItem>
     </List>
   ))
-  .add("inline", () => (
-    <List inline={true}>
+  .add('inline', () => (
+    <List inline>
       <ListItem square disabled>
-        🌿
+        <span role="img" aria-label="🌿">🌿</span>
       </ListItem>
       <Bar />
       <ListItem>Tackle</ListItem>
@@ -37,14 +34,14 @@ storiesOf("List", module)
       <ListItem disabled>Razor Leaf</ListItem>
     </List>
   ))
-  .add("no shadow", () => (
+  .add('no shadow', () => (
     <List shadow={false}>
       <ListItem>Photos</ListItem>
       <ListItem>Videos</ListItem>
       <ListItem>Other</ListItem>
     </List>
   ))
-  .add("fullWidth", () => (
+  .add('fullWidth', () => (
     <List fullWidth>
       <ListItem>Photos</ListItem>
       <ListItem>Videos</ListItem>

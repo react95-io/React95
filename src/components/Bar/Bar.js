@@ -1,7 +1,7 @@
-import React from "react";
-import propTypes from "prop-types";
-import styled from "styled-components";
-import { blockSizes } from "../common/system";
+import React from 'react';
+import propTypes from 'prop-types';
+import styled from 'styled-components';
+import { blockSizes } from '../common/system';
 
 const StyledBar = styled.div`
   display: inline-block;
@@ -15,23 +15,28 @@ const StyledBar = styled.div`
   background: ${({ theme }) => theme.material};
 `;
 
-const Bar = ({ size, className, style, ...otherProps }) => {
-  return (
-    <StyledBar
-      size={size}
-      className={className}
-      style={style}
-      {...otherProps}
-    />
-  );
-};
+const Bar = ({
+  size, className, style, ...otherProps
+}) => (
+  <StyledBar
+    size={size}
+    className={className}
+    style={style}
+    {...otherProps}
+  />
+);
 
 Bar.defaultProps = {
-  size: "md"
+  size: 'md',
+  className: '',
+  style: {},
 };
 Bar.propTypes = {
   className: propTypes.string,
-  style: propTypes.object,
-  size: propTypes.oneOf(["sm", "md", "lg"])
+  style: propTypes.shape([
+    propTypes.string,
+    propTypes.number,
+  ]),
+  size: propTypes.oneOf(['sm', 'md', 'lg']),
 };
 export default Bar;

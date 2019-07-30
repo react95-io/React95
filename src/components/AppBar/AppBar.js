@@ -1,13 +1,13 @@
-import React from "react";
-import propTypes from "prop-types";
-import styled from "styled-components";
-import { createBorderStyles, createBoxStyles } from "../common";
+import React from 'react';
+import propTypes from 'prop-types';
+import styled from 'styled-components';
+import { createBorderStyles, createBoxStyles } from '../common';
 
 const StyledAppBar = styled.header`
   ${createBorderStyles()};
   ${createBoxStyles()};
 
-  position: ${props => (props.fixed ? "fixed" : "absolute")};
+  position: ${props => (props.fixed ? 'fixed' : 'absolute')};
   top: 0;
   right: 0;
   left: auto;
@@ -23,31 +23,34 @@ const AppBar = ({
   style,
   shadow,
   ...otherProps
-}) => {
-  return (
-    <StyledAppBar
-      fixed={fixed}
-      style={style}
-      className={className}
-      shadow={shadow}
-      {...otherProps}
-    >
-      {children}
-    </StyledAppBar>
-  );
-};
+}) => (
+  <StyledAppBar
+    fixed={fixed}
+    style={style}
+    className={className}
+    shadow={shadow}
+    {...otherProps}
+  >
+    {children}
+  </StyledAppBar>
+);
 
 AppBar.defaultProps = {
   shadow: true,
-  fixed: true
+  fixed: true,
+  style: {},
+  className: '',
 };
 
 AppBar.propTypes = {
-  style: propTypes.object,
+  style: propTypes.shape([
+    propTypes.string,
+    propTypes.number,
+  ]),
   shadow: propTypes.bool,
   className: propTypes.string,
   children: propTypes.node.isRequired,
-  fixed: propTypes.bool
+  fixed: propTypes.bool,
 };
 
 export default AppBar;

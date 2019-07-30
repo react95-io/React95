@@ -1,23 +1,23 @@
-import React from "react";
-import { storiesOf } from "@storybook/react";
+import React from 'react';
+import { storiesOf } from '@storybook/react';
 
-import Bar from "./Bar";
-import AppBar from "../AppBar/AppBar";
-import Toolbar from "../Toolbar/Toolbar";
-import Button from "../Button/Button";
+import Bar from './Bar';
+import AppBar from '../AppBar/AppBar';
+import Toolbar from '../Toolbar/Toolbar';
+import Button from '../Button/Button';
 
-storiesOf("Bar", module)
+storiesOf('Bar', module)
   .addDecorator(story => (
     <div
       style={{
-        padding: "5rem",
-        background: "teal"
+        padding: '5rem',
+        background: 'teal',
       }}
     >
       {story()}
     </div>
   ))
-  .add("default", () => (
+  .add('default', () => (
     <AppBar>
       <Toolbar>
         <Bar />

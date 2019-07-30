@@ -1,20 +1,20 @@
 // TODO - implement styled-system
 
 export const fontSizes = {
-  sm: "15px",
-  md: "16px",
-  lg: "17px"
+  sm: '15px',
+  md: '16px',
+  lg: '17px',
 };
 
 export const blockSizes = {
-  sm: "27px",
-  md: "35px",
-  lg: "43px"
+  sm: '27px',
+  md: '35px',
+  lg: '43px',
 };
 export const padding = {
-  sm: "0.5rem",
-  md: "1rem",
-  lg: "1.25rem"
+  sm: '0.5rem',
+  md: '1rem',
+  lg: '1.25rem',
 };
 
-export const fontFamily = "sans-serif";
+export const fontFamily = 'sans-serif';

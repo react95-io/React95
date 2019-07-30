@@ -1,17 +1,17 @@
-import React from "react";
-import { storiesOf } from "@storybook/react";
+import React from 'react';
+import { storiesOf } from '@storybook/react';
 
-import Hourglass from "./Hourglass";
+import Hourglass from './Hourglass';
 
-storiesOf("Hourglass", module)
+storiesOf('Hourglass', module)
   .addDecorator(story => (
     <div
       style={{
-        padding: "5rem",
-        background: "#008080"
+        padding: '5rem',
+        background: '#008080',
       }}
     >
       {story()}
     </div>
   ))
-  .add("default", () => <Hourglass size={32} />);
+  .add('default', () => <Hourglass size={32} />);

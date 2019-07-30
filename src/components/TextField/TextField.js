@@ -1,15 +1,16 @@
-import React from "react";
-import propTypes from "prop-types";
+import React from 'react';
+import propTypes from 'prop-types';
 
-import styled, { css } from "styled-components";
-import { createDisabledTextStyles, createFlatBoxStyles } from "../common";
-import { blockSizes, fontSizes, padding, fontFamily } from "../common/system";
-import Cutout from "../Cutout/Cutout";
+import styled from 'styled-components';
+import { createDisabledTextStyles, createFlatBoxStyles } from '../common';
+import {
+  blockSizes, fontSizes, padding, fontFamily,
+} from '../common/system';
+import Cutout from '../Cutout/Cutout';
 
 const StyledWrapper = styled(Cutout)`
   height: ${blockSizes.md};
-  background: ${({ theme, isDisabled }) =>
-    isDisabled ? theme.material : theme.canvas};
+  background: ${({ theme, isDisabled }) => (isDisabled ? theme.material : theme.canvas)};
 `;
 const StyledFlatWrapper = styled.div`
   position: relative;
@@ -26,8 +27,7 @@ export const StyledTextInput = styled.input`
   background: none;
   font-size: ${fontSizes.md};
   font-family: ${fontFamily};
-  ${({ disabled, variant }) =>
-    variant !== "flat" && disabled && createDisabledTextStyles()}
+  ${({ disabled, variant }) => variant !== 'flat' && disabled && createDisabledTextStyles()}
 `;
 const TextField = ({
   onChange,
@@ -40,13 +40,13 @@ const TextField = ({
   width,
   ...otherProps
 }) => {
-  const Wrapper = variant === "flat" ? StyledFlatWrapper : StyledWrapper;
+  const Wrapper = variant === 'flat' ? StyledFlatWrapper : StyledWrapper;
   return (
     <Wrapper
       width={width}
       shadow={shadow}
       isDisabled={disabled}
-      style={{ ...style, width: width ? width : "auto" }}
+      style={{ ...style, width: width || 'auto' }}
       className={className}
     >
       <StyledTextInput
@@ -62,17 +62,26 @@ const TextField = ({
 };
 TextField.defaultProps = {
   disabled: false,
-  type: "text",
+  type: 'text',
   shadow: true,
-  variant: "default"
+  variant: 'default',
+  style: {},
+  width: null,
+  onChange: () => {},
+  className: '',
 };
+
 TextField.propTypes = {
   width: propTypes.oneOfType([propTypes.string, propTypes.number]),
   onChange: propTypes.func,
   disabled: propTypes.bool,
-  variant: propTypes.oneOf(["default", "flat"]),
+  variant: propTypes.oneOf(['default', 'flat']),
   shadow: propTypes.bool,
   type: propTypes.string,
-  className: propTypes.string
+  className: propTypes.string,
+  style: propTypes.shape([
+    propTypes.string,
+    propTypes.number,
+  ]),
 };
 export default TextField;

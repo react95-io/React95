@@ -1,30 +1,30 @@
-import React from "react";
-import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 
-import { ListItem, List, Divider } from "../";
+import { ListItem, List, Divider } from '..';
 
-const actions = { onClick: action("onClick") };
+const actions = { onClick: action('onClick') };
 
-storiesOf("ListItem", module)
+storiesOf('ListItem', module)
   .addDecorator(story => (
     <div
       style={{
-        padding: "5rem",
-        background: "teal"
+        padding: '5rem',
+        background: 'teal',
       }}
     >
       {story()}
     </div>
   ))
-  .add("default", () => (
+  .add('default', () => (
     <List>
       <ListItem {...actions}>Item 1</ListItem>
       <ListItem {...actions}>Item 2</ListItem>
       <ListItem {...actions}>Item 3</ListItem>
     </List>
   ))
-  .add("disabled", () => (
+  .add('disabled', () => (
     <List>
       <ListItem {...actions} disabled>
         disabled
@@ -37,20 +37,20 @@ storiesOf("ListItem", module)
       </ListItem>
     </List>
   ))
-  .add("square", () => (
+  .add('square', () => (
     <List>
       <ListItem {...actions} square>
-        😎
+        <span role="img" aria-label="😎">😎</span>
       </ListItem>
       <ListItem {...actions} square>
-        🤖
+        <span role="img" aria-label="🤖">🤖</span>
       </ListItem>
       <ListItem {...actions} square>
-        🎁
+        <span role="img" aria-label="🎁">🎁</span>
       </ListItem>
     </List>
   ))
-  .add("size small", () => (
+  .add('size small', () => (
     <List>
       <ListItem size="sm">View</ListItem>
       <Divider />
@@ -61,7 +61,7 @@ storiesOf("ListItem", module)
       <ListItem size="sm">Properties</ListItem>
     </List>
   ))
-  .add("render as link", () => (
+  .add('render as link', () => (
     <List>
       <ListItem {...actions}>Normal item</ListItem>
       <ListItem
@@ -70,7 +70,8 @@ storiesOf("ListItem", module)
         href="https://expensive.toys"
         target="_blank"
       >
-        🔗 Link!
+        <span role="img" aria-label="🔗">🔗</span>
+        Link!
       </ListItem>
     </List>
   ));

@@ -1,35 +1,43 @@
-import React, { useState } from "react";
-import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
+import React, { useState } from 'react';
+import { storiesOf } from '@storybook/react';
 
-import { Checkbox, Cutout, Fieldset, Window, WindowContent } from "../";
-storiesOf("Fieldset", module)
+import {
+  Checkbox, Cutout, Fieldset, Window, WindowContent,
+} from '..';
+
+storiesOf('Fieldset', module)
   .addDecorator(story => (
     <div
       style={{
-        padding: "5rem",
-        background: "teal"
+        padding: '5rem',
+        background: 'teal',
       }}
     >
       {story()}
     </div>
   ))
-  .add("default", () => (
+  .add('default', () => (
     <Window>
       <WindowContent>
-        <Fieldset>Some content here 😍</Fieldset>
+        <Fieldset>
+          Some content here
+          <span role="img" aria-label="😍">😍</span>
+        </Fieldset>
       </WindowContent>
     </Window>
   ))
-  .add("with label", () => (
+  .add('with label', () => (
     <Window>
       <WindowContent>
-        <Fieldset label="Label here">Some content here 😍</Fieldset>
+        <Fieldset label="Label here">
+          Some content here
+          <span role="img" aria-label="😍">😍</span>
+        </Fieldset>
       </WindowContent>
     </Window>
   ))
-  .add("disabled", () => <DisabledFieldset />)
-  .add("flat", () => <FlatFieldset />);
+  .add('disabled', () => <DisabledFieldset />)
+  .add('flat', () => <FlatFieldset />);
 
 const FlatFieldset = () => {
   const [state, setState] = useState(true);
@@ -37,7 +45,7 @@ const FlatFieldset = () => {
     <Window>
       <WindowContent>
         <Cutout
-          style={{ padding: "1rem", background: "white", width: "300px" }}
+          style={{ padding: '1rem', background: 'white', width: '300px' }}
         >
           <p style={{ lineHeight: 1.3 }}>
             When you want to use Fieldset on a light background (like scrollable
@@ -45,12 +53,12 @@ const FlatFieldset = () => {
           </p>
           <div
             style={{
-              marginTop: "1.5rem"
+              marginTop: '1.5rem',
             }}
           >
             <Fieldset
               variant="flat"
-              label={
+              label={(
                 <Checkbox
                   variant="flat"
                   style={{ margin: 0 }}
@@ -59,10 +67,11 @@ const FlatFieldset = () => {
                   value={!state}
                   onChange={() => setState(!state)}
                 />
-              }
+)}
               disabled={state}
             >
-              Some content here 😍
+              Some content here
+              <span role="img" aria-label="😍">😍</span>
             </Fieldset>
           </div>
         </Cutout>
@@ -76,7 +85,7 @@ const DisabledFieldset = () => {
     <Window>
       <WindowContent>
         <Fieldset
-          label={
+          label={(
             <Checkbox
               style={{ margin: 0 }}
               label="Enable"
@@ -84,10 +93,11 @@ const DisabledFieldset = () => {
               value={!state}
               onChange={() => setState(!state)}
             />
-          }
+          )}
           disabled={state}
         >
-          Some content here 😍
+          Some content here
+          <span role="img" aria-label="😍">😍</span>
         </Fieldset>
       </WindowContent>
     </Window>

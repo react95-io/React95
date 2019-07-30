@@ -1,23 +1,22 @@
-import React from "react";
-import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
+import React from 'react';
+import { storiesOf } from '@storybook/react';
 
-import Divider from "./Divider";
-import List from "../List/List";
-import ListItem from "../ListItem/ListItem";
+import Divider from './Divider';
+import List from '../List/List';
+import ListItem from '../ListItem/ListItem';
 
-storiesOf("Divider", module)
+storiesOf('Divider', module)
   .addDecorator(story => (
     <div
       style={{
-        padding: "5rem",
-        background: "teal"
+        padding: '5rem',
+        background: 'teal',
       }}
     >
       {story()}
     </div>
   ))
-  .add("default", () => (
+  .add('default', () => (
     <List>
       <ListItem>Item 1</ListItem>
       <Divider />
@@ -26,7 +25,7 @@ storiesOf("Divider", module)
       <ListItem>Item 3</ListItem>
     </List>
   ))
-  .add("vertical", () => (
+  .add('vertical', () => (
     <List inline>
       <ListItem>Item 1</ListItem>
       <Divider vertical size="lg" />

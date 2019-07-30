@@ -1,11 +1,11 @@
-import React from "react";
-import propTypes from "prop-types";
+import React from 'react';
+import propTypes from 'prop-types';
 
-import Button from "../Button/Button";
+import styled, { css } from 'styled-components';
 
-import styled, { css } from "styled-components";
-import { blockSizes } from "../common/system";
-import TextField from "../TextField/TextField";
+import Button from '../Button/Button';
+import { blockSizes } from '../common/system';
+import TextField from '../TextField/TextField';
 
 // ⭕⭕⭕⭕⭕ fix functionality and use hooks
 
@@ -20,35 +20,28 @@ const StyledButtonWrapper = styled.div`
   flex-direction: column;
   flex-wrap: nowrap;
   margin-left: 2px;
-  margin-top: ${({ variant }) => (variant === "default" ? "-2px" : "0")};
+  margin-top: ${({ variant }) => (variant === 'default' ? '-2px' : '0')};
 `;
+
 const StyledButton = styled(Button)`
   height: 50%;
   width: 30px;
   padding: 0;
   flex-shrink: 0;
 
-  ${({ theme, isFlat }) =>
-    !isFlat &&
-    css`
-      border-left-color: ${({ theme }) => theme.borderLight};
-      border-top-color: ${({ theme }) => theme.borderLight};
-      box-shadow: inset 1px 1px 0px 1px ${({ theme }) => theme.borderLightest},
-        inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
-    `}
-`;
-const StyledFlatButton = styled(Button)`
-  height: 50%;
-  width: 30px;
-  padding: 0;
-  flex-shrink: 0;
+  ${({ isFlat }) => !isFlat && css`
+    border-left-color: ${({ theme }) => theme.borderLight};
+    border-top-color: ${({ theme }) => theme.borderLight};
+    box-shadow: inset 1px 1px 0px 1px ${({ theme }) => theme.borderLightest},
+      inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
+  `}
 `;
 
 const StyledButtonIcon = styled.span`
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%) ${props => props.invert && "rotateZ(180deg)"};
+  transform: translate(-50%, -50%) ${props => props.invert && 'rotateZ(180deg)'};
   width: 0px;
   height: 0px;
   border-left: 4px solid transparent;
@@ -62,12 +55,18 @@ const StyledButtonIcon = styled.span`
 
 class NumberField extends React.Component {
   static defaultProps = {
-    variant: "default",
-    value: 0,
-    disabled: false
+    variant: 'default',
+    disabled: false,
+    min: null,
+    max: null,
+    width: null,
+    disableKeyboardInput: false,
+    className: '',
+    style: {},
   };
+
   static propTypes = {
-    variant: propTypes.oneOf(["default", "flat"]),
+    variant: propTypes.oneOf(['default', 'flat']),
     onChange: propTypes.func.isRequired,
     value: propTypes.number.isRequired,
     min: propTypes.number,
@@ -75,35 +74,48 @@ class NumberField extends React.Component {
     width: propTypes.oneOfType([propTypes.string, propTypes.number]),
     disabled: propTypes.bool,
     disableKeyboardInput: propTypes.bool,
-    fullWidth: propTypes.bool,
-    shadow: propTypes.bool,
-    className: propTypes.string
-  };
-  state = {
-    value: parseInt(this.props.value) || 0
+    className: propTypes.string,
+    style: propTypes.shape([
+      propTypes.string,
+      propTypes.number,
+    ]),
   };
 
-  add = value => {
-    const newValue = this.normalize(this.state.value + value);
-    this.props.onChange(newValue);
+  state = {
+    // eslint-disable-next-line
+    value: parseInt(this.props.value, 10) || 0
+  };
+
+  add = (addValue) => {
+    const { value } = this.state;
+    const { onChange } = this.props;
+
+    const newValue = this.normalize(value + addValue);
+    onChange(newValue);
     this.setState({ value: newValue });
   };
 
-  handleChange = e => {
-    let newValue =
-      e.target.value === "-" ? "-" : this.normalize(e.target.value);
+  handleChange = (e) => {
+    let newValue = e.target.value === '-' ? '-' : this.normalize(e.target.value);
+    // eslint-disable-next-line
     newValue = newValue ? newValue : newValue === 0 ? 0 : "";
+
     if (e.target.validity.valid) {
+      const { onChange } = this.props;
       this.setState({ value: newValue });
-      this.props.onChange(newValue);
+      onChange(newValue);
     }
   };
-  normalize = value => {
+
+  normalize = (value) => {
     const { min, max } = this.props;
-    if (min !== undefined && value < min) return min;
-    if (max !== undefined && value > max) return max;
-    return parseInt(value);
+
+    if (min && value < min) return min;
+    if (max && value > max) return max;
+
+    return parseInt(value, 10);
   };
+
   render() {
     const {
       disabled,
@@ -112,13 +124,12 @@ class NumberField extends React.Component {
       variant,
       width,
       style,
-      shadow
     } = this.props;
     const { value } = this.state;
     return (
       <StyledNumberFieldWrapper
         className={className}
-        style={{ ...style, width: width ? width : "auto" }}
+        style={{ ...style, width: width || 'auto' }}
       >
         <TextField
           value={value}
@@ -128,14 +139,13 @@ class NumberField extends React.Component {
           }
           readOnly={disabled || disableKeyboardInput}
           disabled={disabled}
-          shadow={shadow}
           type="tel"
           pattern="^-?[0-9]\d*\.?\d*$"
           width="100%"
         />
         <StyledButtonWrapper>
           <StyledButton
-            isFlat={variant === "flat"}
+            isFlat={variant === 'flat'}
             variant={variant}
             disabled={disabled}
             onClick={() => this.add(1)}
@@ -143,7 +153,7 @@ class NumberField extends React.Component {
             <StyledButtonIcon invert />
           </StyledButton>
           <StyledButton
-            isFlat={variant === "flat"}
+            isFlat={variant === 'flat'}
             variant={variant}
             disabled={disabled}
             onClick={() => this.add(-1)}

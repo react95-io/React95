@@ -1,28 +1,28 @@
-import React from "react";
-import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
+import React from 'react';
+import { storiesOf } from '@storybook/react';
 
-import Anchor from "./Anchor";
+import Anchor from './Anchor';
 
-storiesOf("Anchor", module)
+storiesOf('Anchor', module)
   .addDecorator(story => (
     <div
       style={{
-        padding: "5rem",
-        background: "#ced0cf"
+        padding: '5rem',
+        background: '#ced0cf',
       }}
     >
       {story()}
     </div>
   ))
-  .add("default", () => (
+  .add('default', () => (
     <Anchor href="https://expensive.toys" target="_blank">
-      Expensive Toys{" "}
+      Expensive Toys
+      {' '}
     </Anchor>
   ))
-  .add("within text", () => (
+  .add('within text', () => (
     <h1>
-      {"Everybody needs "}
+      {'Everybody needs '}
       <Anchor href="https://expensive.toys" target="_blank">
         Expensive Toys
       </Anchor>

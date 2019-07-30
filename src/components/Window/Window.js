@@ -1,8 +1,8 @@
-import React from "react";
-import propTypes from "prop-types";
+import React from 'react';
+import propTypes from 'prop-types';
 
-import styled from "styled-components";
-import { createBorderStyles, createBoxStyles } from "../common";
+import styled from 'styled-components';
+import { createBorderStyles, createBoxStyles } from '../common';
 
 const StyledWindow = styled.div`
   position: relative;
@@ -11,22 +11,24 @@ const StyledWindow = styled.div`
   ${createBoxStyles()}
 `;
 
-const Window = ({ shadow, className, children, ...otherProps }) => {
-  return (
-    <StyledWindow shadow={shadow} className={className} {...otherProps} swag>
-      {children}
-    </StyledWindow>
-  );
-};
+const Window = ({
+  shadow, className, children, ...otherProps
+}) => (
+  <StyledWindow shadow={shadow} className={className} {...otherProps} swag>
+    {children}
+  </StyledWindow>
+);
 
 Window.defaultProps = {
-  shadow: true
+  shadow: true,
+  className: '',
+  children: null,
 };
 
 Window.propTypes = {
   shadow: propTypes.bool,
   className: propTypes.string,
-  children: propTypes.node
+  children: propTypes.node,
 };
 
 export default Window;

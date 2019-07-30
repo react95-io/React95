@@ -1,37 +1,44 @@
-import React from "react";
-import propTypes from "prop-types";
+import React from 'react';
+import propTypes from 'prop-types';
 
-import styled from "styled-components";
-import { fontSizes } from "../common/system";
+import styled from 'styled-components';
+import { fontSizes } from '../common/system';
 
 const StyledAnchor = styled.a`
   color: ${({ theme }) => theme.anchor};
-  font-size: ${({ size }) => (size ? fontSizes[size] : "inherit")};
+  font-size: ${({ size }) => (size ? fontSizes[size] : 'inherit')};
   text-decoration: underline;
   &:visited {
     color: ${({ theme }) => theme.anchorVisited};
   }
 `;
 
-const Anchor = ({ className, style, href, children, ...otherProps }) => {
-  return (
-    <StyledAnchor
-      href={href}
-      className={className}
-      style={style}
-      {...otherProps}
-    >
-      {children}
-    </StyledAnchor>
-  );
+const Anchor = ({
+  className, style, href, children, ...otherProps
+}) => (
+  <StyledAnchor
+    href={href}
+    className={className}
+    style={style}
+    {...otherProps}
+  >
+    {children}
+  </StyledAnchor>
+);
+
+Anchor.defaultProps = {
+  className: '',
+  style: {},
 };
 
-Anchor.defaultProps = {};
 Anchor.propTypes = {
   className: propTypes.string,
   href: propTypes.string.isRequired,
-  style: propTypes.object,
-  children: propTypes.node.isRequired
+  style: propTypes.shape([
+    propTypes.string,
+    propTypes.number,
+  ]),
+  children: propTypes.node.isRequired,
 };
 
 export default Anchor;

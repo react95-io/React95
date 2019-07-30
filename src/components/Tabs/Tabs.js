@@ -1,7 +1,7 @@
-import React from "react";
-import propTypes from "prop-types";
+import React from 'react';
+import propTypes from 'prop-types';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const StyledTabs = styled.nav`
   position: relative;
@@ -17,10 +17,10 @@ const Tabs = ({
   style,
   ...otherProps
 }) => {
-  const childrenWithProps = React.Children.map(children, child => {
+  const childrenWithProps = React.Children.map(children, (child) => {
     const tabProps = {
       active: child.props.value === value,
-      onClick: onChange
+      onClick: onChange,
     };
     return React.cloneElement(child, tabProps);
   });
@@ -32,7 +32,11 @@ const Tabs = ({
 };
 
 Tabs.defaultProps = {
-  value: 0
+  value: 0,
+  onChange: () => {},
+  children: null,
+  className: '',
+  style: {},
 };
 
 Tabs.propTypes = {
@@ -40,6 +44,9 @@ Tabs.propTypes = {
   onChange: propTypes.func,
   children: propTypes.node,
   className: propTypes.string,
-  style: propTypes.object
+  style: propTypes.shape([
+    propTypes.string,
+    propTypes.number,
+  ]),
 };
 export default Tabs;

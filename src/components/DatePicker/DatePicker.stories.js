@@ -1,17 +1,17 @@
-import React from "react";
-import { storiesOf } from "@storybook/react";
+import React from 'react';
+import { storiesOf } from '@storybook/react';
 
-import DatePicker from "./DatePicker";
+import DatePicker from './DatePicker';
 
-storiesOf("DatePicker", module)
+storiesOf('DatePicker', module)
   .addDecorator(story => (
     <div
       style={{
-        padding: "5rem",
-        background: "teal"
+        padding: '5rem',
+        background: 'teal',
       }}
     >
       {story()}
     </div>
   ))
-  .add("default", () => <DatePicker onAccept={date => console.log(date)} />);
+  .add('default', () => <DatePicker onAccept={date => console.log(date)} />);
