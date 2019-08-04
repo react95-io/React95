@@ -1,3 +1,6 @@
+/* FileIcon will be rewritten soon */
+/* eslint-disable */
+
 import React from 'react';
 import propTypes from 'prop-types';
 import cx from 'classnames';

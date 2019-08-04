@@ -4,7 +4,10 @@ import propTypes from 'prop-types';
 import styled from 'styled-components';
 import { createBorderStyles, createBoxStyles } from '../common';
 
-const createListPositionStyles = ({ verticalAlign, horizontalAlign }) => `
+const createListPositionStyles = ({
+  verticalAlign = 'bottom',
+  horizontalAlign = 'left',
+}) => `
     position: absolute;
     ${verticalAlign === 'bottom' ? 'bottom: 0;' : 'top: 0;'}
     ${horizontalAlign === 'left' ? 'left: 0;' : 'right: 0;'}
@@ -63,16 +66,13 @@ List.defaultProps = {
   inline: false,
   className: '',
   children: null,
-  verticalAlign: 'bottom',
-  horizontalAlign: 'left',
+  verticalAlign: undefined,
+  horizontalAlign: undefined,
 };
 
 List.propTypes = {
   className: propTypes.string,
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
+  style: propTypes.shape([propTypes.string, propTypes.number]),
   fullWidth: propTypes.bool,
   inline: propTypes.bool,
   shadow: propTypes.bool,
