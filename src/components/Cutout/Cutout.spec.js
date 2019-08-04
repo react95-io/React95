@@ -1,41 +1,39 @@
-import React from 'react'
-import { render } from '@testing-library/react'
+import React from 'react';
+import { render } from '@testing-library/react';
 
-import { insetShadow } from '../common'
-
-import Cutout from './Cutout'
+import Cutout from './Cutout';
 
 describe('<Cutout />', () => {
   it('should render cutout', () => {
-    const { container, debug } = render(<Cutout />)
-    const cutout = container.firstChild
+    const { container } = render(<Cutout />);
+    const cutout = container.firstChild;
 
-    expect(cutout).toBeInTheDocument()
-  })
+    expect(cutout).toBeInTheDocument();
+  });
 
   it('should render custom styles', () => {
-    const { container } = render(<Cutout style={{ backgroundColor: 'papayawhip' }} />)
-    const cutout = container.firstChild
+    const { container } = render(<Cutout style={{ backgroundColor: 'papayawhip' }} />);
+    const cutout = container.firstChild;
 
-    expect(cutout).toHaveAttribute('style', 'background-color: papayawhip;')
-  })
+    expect(cutout).toHaveAttribute('style', 'background-color: papayawhip;');
+  });
 
   it('should render children', async () => {
-    const { container, findByText } = render((
+    const { findByText } = render((
       <Cutout>
         <span>Cool cutout</span>
       </Cutout>
-    ))
-    const content = await findByText(/cool cutout/i)
+    ));
+    const content = await findByText(/cool cutout/i);
 
-    expect(content).toBeInTheDocument()
-  })
+    expect(content).toBeInTheDocument();
+  });
 
   it('should render custom props', () => {
-    const customProps = { title: 'cutout' }
-    const { container } = render(<Cutout {...customProps} />)
-    const cutout = container.firstChild
+    const customProps = { title: 'cutout' };
+    const { container } = render(<Cutout {...customProps} />);
+    const cutout = container.firstChild;
 
-    expect(cutout).toHaveAttribute('title', 'cutout')
-  })
-})
+    expect(cutout).toHaveAttribute('title', 'cutout');
+  });
+});

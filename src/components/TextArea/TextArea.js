@@ -1,17 +1,18 @@
-import React, { useState } from "react";
-import propTypes from "prop-types";
+import React from 'react';
+import propTypes from 'prop-types';
 
-import styled from "styled-components";
-import { createDisabledTextStyles, createFlatBoxStyles } from "../common";
-import { blockSizes, fontSizes, padding, fontFamily } from "../common/system";
-import Cutout from "../Cutout/Cutout";
+import styled from 'styled-components';
+import { createDisabledTextStyles, createFlatBoxStyles } from '../common';
+import {
+  blockSizes, fontSizes, padding, fontFamily,
+} from '../common/system';
+import Cutout from '../Cutout/Cutout';
 
 const StyledTextAreaWrapper = styled(Cutout)`
   display: inline-block;
   min-height: ${blockSizes.md};
   padding: 0;
-  background: ${({ theme, isDisabled }) =>
-    isDisabled ? theme.material : theme.canvas};
+  background: ${({ theme, isDisabled }) => (isDisabled ? theme.material : theme.canvas)};
 `;
 const StyledFlatTextAreaWrapper = styled.div`
   position: relative;
@@ -30,8 +31,7 @@ const StyledTextArea = styled.textarea`
   font-size: ${fontSizes.md};
   font-family: ${fontFamily};
 
-  ${({ disabled, variant }) =>
-    variant !== "flat" && disabled && createDisabledTextStyles()}
+  ${({ disabled, variant }) => variant !== 'flat' && disabled && createDisabledTextStyles()}
 `;
 
 const TextArea = ({
@@ -45,14 +45,13 @@ const TextArea = ({
   shadow,
   ...otherProps
 }) => {
-  const Wrapper =
-    variant === "flat" ? StyledFlatTextAreaWrapper : StyledTextAreaWrapper;
+  const Wrapper = variant === 'flat' ? StyledFlatTextAreaWrapper : StyledTextAreaWrapper;
   return (
     <Wrapper
       style={{
         ...style,
-        width: width ? width : "100%",
-        height: height ? height : "auto"
+        width: width || '100%',
+        height: height || 'auto',
       }}
       className={className}
       isDisabled={disabled}
@@ -73,16 +72,27 @@ const TextArea = ({
 
 TextArea.defaultProps = {
   shadow: true,
-  variant: "default"
+  variant: 'default',
+  style: {},
+  width: null,
+  height: null,
+  onChange: () => {},
+  disabled: false,
+  className: '',
 };
+
 TextArea.propTypes = {
   width: propTypes.oneOfType([propTypes.string, propTypes.number]),
   height: propTypes.oneOfType([propTypes.string, propTypes.number]),
   onChange: propTypes.func,
   disabled: propTypes.bool,
-  variant: propTypes.oneOf(["default", "flat"]),
+  variant: propTypes.oneOf(['default', 'flat']),
   className: propTypes.string,
-  shadow: propTypes.bool
+  shadow: propTypes.bool,
+  style: propTypes.shape([
+    propTypes.string,
+    propTypes.number,
+  ]),
 };
 
 export default TextArea;

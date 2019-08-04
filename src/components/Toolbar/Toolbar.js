@@ -1,35 +1,41 @@
-import React from "react";
-import propTypes from "prop-types";
-import styled from "styled-components";
+import React from 'react';
+import propTypes from 'prop-types';
+import styled from 'styled-components';
 
 const StyledToolbar = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  padding: ${props => (props.noPadding ? "0px" : "4px")};
+  padding: ${props => (props.noPadding ? '0px' : '4px')};
 `;
 
-const Toolbar = ({ children, className, style, noPadding, ...otherProps }) => {
-  return (
-    <StyledToolbar
-      noPadding={noPadding}
-      className={className}
-      style={style}
-      {...otherProps}
-    >
-      {children}
-    </StyledToolbar>
-  );
-};
+const Toolbar = ({
+  children, className, style, noPadding, ...otherProps
+}) => (
+  <StyledToolbar
+    noPadding={noPadding}
+    className={className}
+    style={style}
+    {...otherProps}
+  >
+    {children}
+  </StyledToolbar>
+);
+
 Toolbar.defaultProps = {
-  noPadding: false
+  noPadding: false,
+  style: {},
+  className: '',
 };
 
 Toolbar.propTypes = {
-  style: propTypes.object,
+  style: propTypes.shape([
+    propTypes.string,
+    propTypes.number,
+  ]),
   className: propTypes.string,
   children: propTypes.node.isRequired,
-  noPadding: propTypes.bool
+  noPadding: propTypes.bool,
 };
 
 export default Toolbar;

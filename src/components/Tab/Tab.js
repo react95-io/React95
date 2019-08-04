@@ -1,9 +1,9 @@
-import React from "react";
-import propTypes from "prop-types";
+import React from 'react';
+import propTypes from 'prop-types';
 
-import styled from "styled-components";
-import { createBorderStyles, createBoxStyles } from "../common";
-import { blockSizes, padding } from "../common/system";
+import styled from 'styled-components';
+import { createBorderStyles, createBoxStyles } from '../common';
+import { blockSizes, padding } from '../common/system';
 
 const StyledTab = styled.div`
   ${createBoxStyles()}
@@ -18,9 +18,8 @@ const StyledTab = styled.div`
   margin-bottom: -2px;
   cursor: default;
   color: ${({ theme }) => theme.text};
-  ${props =>
-    props.active &&
-    `
+  ${props => props.active
+    && `
     z-index: 1;
     height: calc(${blockSizes.md} + 4px);
     top: -4px;
@@ -48,28 +47,35 @@ const Tab = ({
   className,
   style,
   ...otherProps
-}) => {
-  return (
-    <StyledTab
-      className={className}
-      active={active}
-      style={style}
-      {...otherProps}
-      onClick={() => onClick(value)}
-    >
-      {children}
-    </StyledTab>
-  );
+}) => (
+  <StyledTab
+    className={className}
+    active={active}
+    style={style}
+    {...otherProps}
+    onClick={() => onClick(value)}
+  >
+    {children}
+  </StyledTab>
+);
+
+Tab.defaultProps = {
+  onClick: () => {},
+  active: false,
+  children: null,
+  className: '',
+  style: {},
 };
 
-Tab.defaultProps = {};
-
 Tab.propTypes = {
-  value: propTypes.number,
+  value: propTypes.number.isRequired,
   onClick: propTypes.func,
   active: propTypes.bool,
   children: propTypes.node,
   className: propTypes.string,
-  style: propTypes.object
+  style: propTypes.shape([
+    propTypes.string,
+    propTypes.number,
+  ]),
 };
 export default Tab;

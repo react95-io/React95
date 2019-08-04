@@ -1,76 +1,38 @@
-import themes from "./common/themes";
-import reset from "./common/reset";
+/* common */
+export { default as themes } from './common/themes';
+export { default as reset } from './common/reset';
 
-import Anchor from "./Anchor/Anchor";
-import AppBar from "./AppBar/AppBar";
-import Avatar from "./Avatar/Avatar";
-import Bar from "./Bar/Bar";
-import Button from "./Button/Button";
-import Checkbox from "./Checkbox/Checkbox";
-import Cutout from "./Cutout/Cutout";
-import DatePicker from "./DatePicker/DatePicker";
-import Divider from "./Divider/Divider";
-import Fieldset from "./Fieldset/Fieldset";
-// import FileIcon from "./FileIcon/FileIcon";
-import Hourglass from "./Hourglass/Hourglass";
-import List from "./List/List";
-import ListItem from "./ListItem/ListItem";
-import NumberField from "./NumberField/NumberField";
-import Progress from "./Progress/Progress";
-import Radio from "./Radio/Radio";
-import Select from "./Select/Select";
-import Tab from "./Tab/Tab";
-import Tabs from "./Tabs/Tabs";
-import TabBody from "./TabBody/TabBody";
-import Table from "./Table/Table";
-import TableBody from "./TableBody/TableBody";
-import TableDataCell from "./TableDataCell/TableDataCell";
-import TableHead from "./TableHead/TableHead";
-import TableHeadCell from "./TableHeadCell/TableHeadCell";
-import TableRow from "./TableRow/TableRow";
-import TextArea from "./TextArea/TextArea";
-import TextField from "./TextField/TextField";
-import Toolbar from "./Toolbar/Toolbar";
-import Tooltip from "./Tooltip/Tooltip";
-import Window from "./Window/Window";
-import WindowContent from "./WindowContent/WindowContent";
-import WindowHeader from "./WindowHeader/WindowHeader";
-
-export {
-  themes,
-  reset,
-  Anchor,
-  AppBar,
-  Avatar,
-  Bar,
-  Button,
-  Checkbox,
-  Cutout,
-  DatePicker,
-  Divider,
-  Fieldset,
-  // FileIcon,
-  Hourglass,
-  List,
-  ListItem,
-  NumberField,
-  Progress,
-  Radio,
-  Select,
-  Tab,
-  Tabs,
-  TabBody,
-  Table,
-  TableBody,
-  TableDataCell,
-  TableHead,
-  TableHeadCell,
-  TableRow,
-  TextArea,
-  TextField,
-  Toolbar,
-  Tooltip,
-  Window,
-  WindowContent,
-  WindowHeader
-};
+/* components */
+export { default as Anchor } from './Anchor/Anchor';
+export { default as AppBar } from './AppBar/AppBar';
+export { default as Avatar } from './Avatar/Avatar';
+export { default as Bar } from './Bar/Bar';
+export { default as Button } from './Button/Button';
+export { default as Checkbox } from './Checkbox/Checkbox';
+export { default as Cutout } from './Cutout/Cutout';
+export { default as DatePicker } from './DatePicker/DatePicker';
+export { default as Divider } from './Divider/Divider';
+export { default as Fieldset } from './Fieldset/Fieldset';
+export { default as Hourglass } from './Hourglass/Hourglass';
+export { default as List } from './List/List';
+export { default as ListItem } from './ListItem/ListItem';
+export { default as NumberField } from './NumberField/NumberField';
+export { default as Progress } from './Progress/Progress';
+export { default as Radio } from './Radio/Radio';
+export { default as Select } from './Select/Select';
+export { default as Tab } from './Tab/Tab';
+export { default as Tabs } from './Tabs/Tabs';
+export { default as TabBody } from './TabBody/TabBody';
+export { default as Table } from './Table/Table';
+export { default as TableBody } from './TableBody/TableBody';
+export { default as TableDataCell } from './TableDataCell/TableDataCell';
+export { default as TableHead } from './TableHead/TableHead';
+export { default as TableHeadCell } from './TableHeadCell/TableHeadCell';
+export { default as TableRow } from './TableRow/TableRow';
+export { default as TextArea } from './TextArea/TextArea';
+export { default as TextField } from './TextField/TextField';
+export { default as Toolbar } from './Toolbar/Toolbar';
+export { default as Tooltip } from './Tooltip/Tooltip';
+export { default as Window } from './Window/Window';
+export { default as WindowContent } from './WindowContent/WindowContent';
+export { default as WindowHeader } from './WindowHeader/WindowHeader';

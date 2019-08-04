@@ -1,26 +1,26 @@
-import React from "react";
-import { storiesOf } from "@storybook/react";
+import React from 'react';
+import { storiesOf } from '@storybook/react';
 
-import Avatar from "./Avatar";
-import AppBar from "../AppBar/AppBar";
-import Toolbar from "../Toolbar/Toolbar";
-import Button from "../Button/Button";
+import Avatar from './Avatar';
+import AppBar from '../AppBar/AppBar';
+import Toolbar from '../Toolbar/Toolbar';
+import Button from '../Button/Button';
 
-storiesOf("Avatar", module)
+storiesOf('Avatar', module)
   .addDecorator(story => (
     <div
       style={{
-        padding: "5rem",
-        background: "teal"
+        padding: '5rem',
+        background: 'teal',
       }}
     >
       {story()}
     </div>
   ))
-  .add("default", () => (
+  .add('default', () => (
     <AppBar>
       <Toolbar
-        style={{ justifyContent: "space-between", paddingRight: "1rem" }}
+        style={{ justifyContent: 'space-between', paddingRight: '1rem' }}
       >
         <Button flat accent>
           Menu
@@ -29,10 +29,10 @@ storiesOf("Avatar", module)
       </Toolbar>
     </AppBar>
   ))
-  .add("noBorder", () => (
+  .add('noBorder', () => (
     <AppBar>
       <Toolbar
-        style={{ justifyContent: "space-between", paddingRight: "1rem" }}
+        style={{ justifyContent: 'space-between', paddingRight: '1rem' }}
       >
         <Button flat accent>
           Menu
@@ -44,27 +44,29 @@ storiesOf("Avatar", module)
       </Toolbar>
     </AppBar>
   ))
-  .add("letter", () => (
+  .add('letter', () => (
     <AppBar>
       <Toolbar
-        style={{ justifyContent: "space-between", paddingRight: "1rem" }}
+        style={{ justifyContent: 'space-between', paddingRight: '1rem' }}
       >
         <Button flat accent>
           Menu
         </Button>
-        <Avatar style={{ background: "palevioletred" }}>AK</Avatar>
+        <Avatar style={{ background: 'palevioletred' }}>AK</Avatar>
       </Toolbar>
     </AppBar>
   ))
-  .add("square", () => (
+  .add('square', () => (
     <AppBar>
       <Toolbar
-        style={{ justifyContent: "space-between", paddingRight: "1rem" }}
+        style={{ justifyContent: 'space-between', paddingRight: '1rem' }}
       >
         <Button flat accent>
           Menu
         </Button>
-        <Avatar square>🚀</Avatar>
+        <Avatar square>
+          <span role="img" aria-label="🚀">🚀</span>
+        </Avatar>
       </Toolbar>
     </AppBar>
   ));

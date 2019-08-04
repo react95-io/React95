@@ -1,8 +1,8 @@
-import React from "react";
-import { storiesOf } from "@storybook/react";
-import styled from "styled-components";
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+import styled from 'styled-components';
 
-import { NumberField, Cutout } from "../";
+import { NumberField, Cutout } from '..';
 
 const StyledCutout = styled(Cutout)`
   background: ${({ theme }) => theme.canvas};
@@ -12,38 +12,38 @@ const Wrapper = styled.div`
   padding: 5rem;
 `;
 
-storiesOf("NumberField", module)
+storiesOf('NumberField', module)
   .addDecorator(story => <Wrapper>{story()}</Wrapper>)
-  .add("default", () => (
+  .add('default', () => (
     <NumberField value={1991} onChange={value => console.log(value)} />
   ))
-  .add("fixed width", () => (
+  .add('fixed width', () => (
     <NumberField
       value={1991}
       width={94}
       onChange={value => console.log(value)}
     />
   ))
-  .add("disabled", () => (
+  .add('disabled', () => (
     <NumberField disabled value={1991} onChange={value => console.log(value)} />
   ))
-  .add("disabled keyboard input", () => (
+  .add('disabled keyboard input', () => (
     <NumberField
       disableKeyboardInput
       value={1991}
       onChange={value => console.log(value)}
     />
   ))
-  .add("no shadow", () => (
+  .add('no shadow', () => (
     <NumberField
       shadow={false}
       value={1991}
       onChange={value => console.log(value)}
     />
   ))
-  .add("flat", () => (
-    <StyledCutout style={{ padding: "2rem", width: "300px" }}>
-      <p style={{ lineHeight: 1.3, marginBottom: "1rem" }}>
+  .add('flat', () => (
+    <StyledCutout style={{ padding: '2rem', width: '300px' }}>
+      <p style={{ lineHeight: 1.3, marginBottom: '1rem' }}>
         When you want to use NumberField on a light background (like scrollable
         content), just use the flat variant:
       </p>

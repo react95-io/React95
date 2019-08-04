@@ -1,9 +1,9 @@
-import React from "react";
-import propTypes from "prop-types";
+import React from 'react';
+import propTypes from 'prop-types';
 
-import styled from "styled-components";
-import { createBorderStyles } from "../common";
-import { padding } from "../common/system";
+import styled from 'styled-components';
+import { createBorderStyles } from '../common';
+import { padding } from '../common/system';
 
 // ⭕⭕⭕⭕ move text down on Click
 
@@ -29,27 +29,33 @@ const TableHeadCell = ({
   style,
   onClick,
   ...otherProps
-}) => {
-  return (
-    <StyledHeadCell
-      className={className}
-      style={style}
-      {...otherProps}
-      onClick={onClick}
-      onTouchStart={() => ""}
-    >
-      {children}
-    </StyledHeadCell>
-  );
-};
+}) => (
+  <StyledHeadCell
+    className={className}
+    style={style}
+    onClick={onClick}
+    onTouchStart={() => ''}
+    {...otherProps}
+  >
+    {children}
+  </StyledHeadCell>
+);
 
-TableHeadCell.defaultProps = {};
+TableHeadCell.defaultProps = {
+  onClick: () => {},
+  children: null,
+  className: '',
+  style: {},
+};
 
 TableHeadCell.propTypes = {
   onClick: propTypes.func,
   children: propTypes.node,
   className: propTypes.string,
-  style: propTypes.object
+  style: propTypes.shape([
+    propTypes.string,
+    propTypes.number,
+  ]),
 };
 
 export default TableHeadCell;

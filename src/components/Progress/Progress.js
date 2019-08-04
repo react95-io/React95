@@ -1,10 +1,10 @@
-import React from "react";
-import propTypes from "prop-types";
+import React from 'react';
+import propTypes from 'prop-types';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import Cutout from "../Cutout/Cutout";
-import { blockSizes } from "../common/system";
+import Cutout from '../Cutout/Cutout';
+import { blockSizes } from '../common/system';
 
 const Wrapper = styled(Cutout)`
   display: inline-block;
@@ -43,23 +43,36 @@ const BlueBar = styled.div`
   );
 `;
 
-const ProgressBar = ({ width, percent, shadow, style }) => (
+const ProgressBar = ({
+  width, percent, shadow, style,
+}) => (
   <Wrapper style={{ ...style, width }} shadow={shadow}>
-    <WhiteBar>{percent}%</WhiteBar>
-    <BlueBar percent={percent}>{percent}%</BlueBar>
+    <WhiteBar>
+      {percent}
+      %
+    </WhiteBar>
+    <BlueBar percent={percent}>
+      {percent}
+      %
+    </BlueBar>
   </Wrapper>
 );
 
 ProgressBar.defaultProps = {
-  width: "100%",
+  width: '100%',
   percent: 0,
-  shadow: true
+  shadow: true,
+  style: {},
 };
+
 ProgressBar.propTypes = {
   width: propTypes.oneOfType([propTypes.string, propTypes.number]),
   percent: propTypes.number,
-  style: propTypes.object,
-  shadow: propTypes.bool
+  style: propTypes.shape([
+    propTypes.string,
+    propTypes.number,
+  ]),
+  shadow: propTypes.bool,
 };
 
 export default ProgressBar;

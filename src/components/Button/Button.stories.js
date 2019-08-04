@@ -1,9 +1,8 @@
-import React from "react";
-import { withInfo } from "@storybook/addon-info";
-import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 
-import styled, { ThemeProvider } from "styled-components";
+import styled from 'styled-components';
 
 import {
   Button,
@@ -14,53 +13,54 @@ import {
   ListItem,
   Divider,
   Cutout,
-  Toolbar
-} from "../";
-export const actions = { onClick: action("onClick") };
+  Toolbar,
+} from '..';
+
+const actions = { onClick: action('onClick') };
 
 const StyledCutout = styled(Cutout)`
   background: ${({ theme }) => theme.canvas};
 `;
 
-storiesOf("Button", module)
+storiesOf('Button', module)
   .addDecorator(story => (
     <div
       style={{
-        padding: "5rem",
-        background: "teal"
+        padding: '5rem',
+        background: 'teal',
       }}
     >
       {story()}
     </div>
   ))
-  .add("default", () => <Button {...actions}>default</Button>)
-  .add("disabled", () => (
+  .add('default', () => <Button {...actions}>default</Button>)
+  .add('disabled', () => (
     <Button disabled {...actions}>
       Disabled
     </Button>
   ))
-  .add("active", () => (
+  .add('active', () => (
     <Button active {...actions}>
       Active
     </Button>
   ))
-  .add("fullWidth", () => (
+  .add('fullWidth', () => (
     <Button fullWidth {...actions}>
       Full width
     </Button>
   ))
-  .add("square", () => (
+  .add('square', () => (
     <Button {...actions} square>
-      🎂
+      <span role="img" aria-label="🎂">🎂</span>
     </Button>
   ))
-  .add("sizes", () => (
+  .add('sizes', () => (
     <div
       style={{
-        alignItems: "center",
-        display: "flex",
+        alignItems: 'center',
+        display: 'flex',
         width: 200,
-        justifyContent: "space-between"
+        justifyContent: 'space-between',
       }}
     >
       <Button {...actions} size="sm">
@@ -74,18 +74,18 @@ storiesOf("Button", module)
       </Button>
     </div>
   ))
-  .add("menu button", () => <MenuButtonExample />)
-  .add("flat button", () => (
+  .add('menu button', () => <MenuButtonExample />)
+  .add('flat button', () => (
     <Window>
       <WindowContent>
-        <StyledCutout style={{ padding: "1rem", width: "300px" }}>
+        <StyledCutout style={{ padding: '1rem', width: '300px' }}>
           <p style={{ lineHeight: 1.3 }}>
             When you want to use Buttons on a light background (like scrollable
             content), just use the flat variant:
           </p>
           <div
             style={{
-              marginTop: "1.5rem"
+              marginTop: '1.5rem',
             }}
           >
             <Toolbar>
@@ -114,8 +114,11 @@ function MenuButtonExample() {
   }
 
   return (
-    <Window style={{ maxWidth: "250px" }}>
-      <WindowHeader>🥝 Kiwi.app</WindowHeader>
+    <Window style={{ maxWidth: '250px' }}>
+      <WindowHeader>
+        <span role="img" aria-label="🥝">🥝</span>
+        Kiwi.app
+      </WindowHeader>
       <Toolbar noPadding>
         <Button variant="menu" disabled>
           Upload
@@ -125,14 +128,14 @@ function MenuButtonExample() {
         </Button>
         <div
           style={{
-            position: "relative",
-            display: "inline-block",
-            alignSelf: "left"
+            position: 'relative',
+            display: 'inline-block',
+            alignSelf: 'left',
           }}
         >
           {open && (
             <List
-              style={{ zIndex: "9999" }}
+              style={{ zIndex: '9999' }}
               horizontalAlign="right"
               verticalAlign="bottom"
               open={open}
@@ -154,10 +157,10 @@ function MenuButtonExample() {
           </Button>
         </div>
       </Toolbar>
-      <WindowContent style={{ padding: "0.25rem" }}>
+      <WindowContent style={{ padding: '0.25rem' }}>
         <Cutout>
           <img
-            style={{ width: "100%", height: "1uto", display: "block" }}
+            style={{ width: '100%', height: '1uto', display: 'block' }}
             src="https://image.freepik.com/foto-gratuito/la-frutta-fresca-del-kiwi-tagliata-a-meta-con-la-decorazione-completa-del-pezzo-e-bella-sulla-tavola-di-legno_47436-1.jpg"
             alt="kiwi"
           />

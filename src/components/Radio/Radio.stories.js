@@ -1,24 +1,31 @@
-import React from "react";
-import { storiesOf } from "@storybook/react";
-import styled from "styled-components";
-import { Radio, Cutout, Fieldset, Window, WindowContent } from "../";
-storiesOf("Radio", module)
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+import styled from 'styled-components';
+import {
+  Radio,
+  Cutout,
+  Fieldset,
+  Window,
+  WindowContent,
+} from '..';
+
+storiesOf('Radio', module)
   .addDecorator(story => (
     <div
       style={{
-        padding: "5rem",
-        background: "teal"
+        padding: '5rem',
+        background: 'teal',
       }}
     >
       {story()}
     </div>
   ))
-  .add("default", () => <RadioGroup />)
-  .add("flat", () => <FlatRadioGroup />);
+  .add('default', () => <RadioGroup />)
+  .add('flat', () => <FlatRadioGroup />);
 
 class RadioGroup extends React.Component {
   state = {
-    checkedValue: "Pear"
+    checkedValue: 'Pear',
   };
 
   handleChange = e => this.setState({ checkedValue: e.target.value });
@@ -30,7 +37,7 @@ class RadioGroup extends React.Component {
         <WindowContent>
           <Fieldset label="Fruits">
             <Radio
-              checked={checkedValue === "Pear"}
+              checked={checkedValue === 'Pear'}
               onChange={this.handleChange}
               value="Pear"
               label="🍐 Pear"
@@ -38,7 +45,7 @@ class RadioGroup extends React.Component {
             />
             <br />
             <Radio
-              checked={checkedValue === "Orange"}
+              checked={checkedValue === 'Orange'}
               onChange={this.handleChange}
               value="Orange"
               label="🍊 Orange"
@@ -46,7 +53,7 @@ class RadioGroup extends React.Component {
             />
             <br />
             <Radio
-              checked={checkedValue === "Kiwi"}
+              checked={checkedValue === 'Kiwi'}
               onChange={this.handleChange}
               value="Kiwi"
               label="🥝 Kiwi"
@@ -54,7 +61,7 @@ class RadioGroup extends React.Component {
             />
             <br />
             <Radio
-              checked={checkedValue === "Grape"}
+              checked={checkedValue === 'Grape'}
               onChange={this.handleChange}
               value="Grape"
               label="🍇 Grape"
@@ -70,13 +77,14 @@ class RadioGroup extends React.Component {
 
 class FlatRadioGroup extends React.Component {
   state = {
-    checkedValue: "Pear"
+    checkedValue: 'Pear',
   };
 
   handleChange = e => this.setState({ checkedValue: e.target.value });
 
   render() {
     const { checkedValue } = this.state;
+
     return (
       <Window>
         <WindowContent>
@@ -87,12 +95,12 @@ class FlatRadioGroup extends React.Component {
             </p>
             <div
               style={{
-                marginTop: "1rem"
+                marginTop: '1rem',
               }}
             >
               <Radio
                 variant="flat"
-                checked={checkedValue === "Pear"}
+                checked={checkedValue === 'Pear'}
                 onChange={this.handleChange}
                 value="Pear"
                 label="🍐 Pear"
@@ -101,7 +109,7 @@ class FlatRadioGroup extends React.Component {
               <br />
               <Radio
                 variant="flat"
-                checked={checkedValue === "Orange"}
+                checked={checkedValue === 'Orange'}
                 onChange={this.handleChange}
                 value="Orange"
                 label="🍊 Orange"
@@ -110,7 +118,7 @@ class FlatRadioGroup extends React.Component {
               <br />
               <Radio
                 variant="flat"
-                checked={checkedValue === "Kiwi"}
+                checked={checkedValue === 'Kiwi'}
                 onChange={this.handleChange}
                 value="Kiwi"
                 label="🥝 Kiwi"
@@ -119,7 +127,7 @@ class FlatRadioGroup extends React.Component {
               <br />
               <Radio
                 variant="flat"
-                checked={checkedValue === "Grape"}
+                checked={checkedValue === 'Grape'}
                 onChange={this.handleChange}
                 value="Grape"
                 label="🍇 Grape"
@@ -133,7 +141,8 @@ class FlatRadioGroup extends React.Component {
     );
   }
 }
-let StyledCutout = styled(Cutout)`
+
+const StyledCutout = styled(Cutout)`
   background: ${({ theme }) => theme.canvas};
   color: ${({ theme }) => theme.text};
   padding: 1rem;

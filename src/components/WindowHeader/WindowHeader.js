@@ -1,8 +1,8 @@
-import React from "react";
-import propTypes from "prop-types";
+import React from 'react';
+import propTypes from 'prop-types';
 
-import styled from "styled-components";
-import { blockSizes, padding } from "../common/system";
+import styled from 'styled-components';
+import { padding } from '../common/system';
 
 const SlyledWindowHeader = styled.div`
   height: 33px;
@@ -21,18 +21,27 @@ const SlyledWindowHeader = styled.div`
   );
 `;
 
-const WindowHeader = ({ className, style, children, ...otherProps }) => {
-  return (
-    <SlyledWindowHeader className={className} style={style} {...otherProps}>
-      {children}
-    </SlyledWindowHeader>
-  );
+const WindowHeader = ({
+  className, style, children, ...otherProps
+}) => (
+  <SlyledWindowHeader className={className} style={style} {...otherProps}>
+    {children}
+  </SlyledWindowHeader>
+);
+
+WindowHeader.defaultProps = {
+  className: '',
+  style: {},
+  children: null,
 };
 
 WindowHeader.propTypes = {
   className: propTypes.string,
-  style: propTypes.object,
-  children: propTypes.node
+  style: propTypes.shape([
+    propTypes.string,
+    propTypes.number,
+  ]),
+  children: propTypes.node,
 };
 
 export default WindowHeader;

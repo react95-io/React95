@@ -1,40 +1,45 @@
-import React from "react";
-import { storiesOf } from "@storybook/react";
+import React from 'react';
+import { storiesOf } from '@storybook/react';
 
-import Tabs from "./Tabs";
-import Tab from "../Tab/Tab";
-import TabBody from "../TabBody/TabBody";
+import Tabs from './Tabs';
+import Tab from '../Tab/Tab';
+import TabBody from '../TabBody/TabBody';
 
-import Window from "../Window/Window";
-import WindowHeader from "../WindowHeader/WindowHeader";
-import WindowContent from "../WindowContent/WindowContent";
-import Fieldset from "../Fieldset/Fieldset";
-import NumberField from "../NumberField/NumberField";
-import Checkbox from "../Checkbox/Checkbox";
+import Window from '../Window/Window';
+import WindowHeader from '../WindowHeader/WindowHeader';
+import WindowContent from '../WindowContent/WindowContent';
+import Fieldset from '../Fieldset/Fieldset';
+import NumberField from '../NumberField/NumberField';
+import Checkbox from '../Checkbox/Checkbox';
 
-storiesOf("Tabs", module)
+storiesOf('Tabs', module)
   .addDecorator(story => (
     <div
       style={{
-        padding: "5rem",
-        background: "#008080"
+        padding: '5rem',
+        background: '#008080',
       }}
     >
       {story()}
     </div>
   ))
-  .add("default", () => <TabsDemo />);
+  .add('default', () => <TabsDemo />);
 
 class TabsDemo extends React.Component {
   state = {
-    activeTab: 0
+    activeTab: 0,
   };
+
   handleChange = value => this.setState({ activeTab: value });
+
   render() {
     const { activeTab } = this.state;
     return (
       <Window style={{ width: 350 }}>
-        <WindowHeader>👗 store.exe</WindowHeader>
+        <WindowHeader>
+          <span role="img" aria-label="👗">👗</span>
+          store.exe
+        </WindowHeader>
         <WindowContent>
           <Tabs value={activeTab} onChange={this.handleChange}>
             <Tab value={0}>Shoes</Tab>
@@ -45,20 +50,20 @@ class TabsDemo extends React.Component {
             {activeTab === 0 && (
               <TabBody>
                 <Fieldset label="Order:">
-                  <div style={{ padding: "0.5em 0 0.5em 0" }}>Amount:</div>
+                  <div style={{ padding: '0.5em 0 0.5em 0' }}>Amount:</div>
                   <NumberField
-                    width={"100%"}
+                    width="100%"
                     min={0}
                     value={0}
                     onChange={() => null}
                   />
                   <Checkbox
-                    style={{ marginTop: "1rem" }}
+                    style={{ marginTop: '1rem' }}
                     name="shipping"
                     value="fast"
                     label="Fast shipping"
                     onChange={() => null}
-                    defaultChecked={true}
+                    defaultChecked
                   />
                 </Fieldset>
               </TabBody>

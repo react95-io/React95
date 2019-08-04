@@ -1,24 +1,31 @@
-import React from "react";
-import propTypes from "prop-types";
-import styled from "styled-components";
+import React from 'react';
+import propTypes from 'prop-types';
+import styled from 'styled-components';
 
 const StyledTableHead = styled.thead`
   display: table-header-group;
 `;
-const TableHead = ({ className, children, style, ...otherProps }) => {
-  return (
-    <StyledTableHead className={className} style={style} {...otherProps}>
-      {children}
-    </StyledTableHead>
-  );
-};
+const TableHead = ({
+  className, children, style, ...otherProps
+}) => (
+  <StyledTableHead className={className} style={style} {...otherProps}>
+    {children}
+  </StyledTableHead>
+);
 
-TableHead.defaultProps = {};
+TableHead.defaultProps = {
+  children: null,
+  className: '',
+  style: {},
+};
 
 TableHead.propTypes = {
   children: propTypes.node,
   className: propTypes.string,
-  style: propTypes.object
+  style: propTypes.shape([
+    propTypes.string,
+    propTypes.number,
+  ]),
 };
 
 export default TableHead;

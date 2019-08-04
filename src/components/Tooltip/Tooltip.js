@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import propTypes from "prop-types";
+import React, { useState } from 'react';
+import propTypes from 'prop-types';
 
-import styled from "styled-components";
-import { shadow } from "../common";
+import styled from 'styled-components';
+import { shadow } from '../common';
 
 const Tip = styled.span`
   position: absolute;
@@ -10,7 +10,7 @@ const Tip = styled.span`
   left: 50%;
   z-index: 10;
   transform: translate(-50%, 100%);
-  display: ${props => (props.show ? "block" : "none")};
+  display: ${props => (props.show ? 'block' : 'none')};
   padding: 4px;
   border: 1px solid ${({ theme }) => theme.borderDarkest};
   background: ${({ theme }) => theme.tooltip};
@@ -58,16 +58,21 @@ const Tooltip = ({
   );
 };
 
+Tooltip.defaultProps = {
+  delay: 1000,
+  className: '',
+  style: {},
+};
+
 Tooltip.propTypes = {
   children: propTypes.node.isRequired,
   text: propTypes.string.isRequired,
   className: propTypes.string,
-  style: propTypes.object,
-  delay: propTypes.number
-};
-
-Tooltip.defaultProps = {
-  delay: 1000
+  style: propTypes.shape([
+    propTypes.string,
+    propTypes.number,
+  ]),
+  delay: propTypes.number,
 };
 
 export default Tooltip;

@@ -1,7 +1,7 @@
-import React from "react";
-import propTypes from "prop-types";
-import styled from "styled-components";
-import { insetShadow } from "../common";
+import React from 'react';
+import propTypes from 'prop-types';
+import styled from 'styled-components';
+import { insetShadow } from '../common';
 
 const StyledCutout = styled.div`
   position: relative;
@@ -32,33 +32,39 @@ const StyledCutout = styled.div`
     border-bottom-color: ${({ theme }) => theme.borderLight};
 
     pointer-events: none;
-    ${props => props.shadow && "box-shadow:" + insetShadow + ";"}
+    ${props => props.shadow && `box-shadow:${insetShadow};`}
   }
 `;
 // add padding prop ?
 
-const Cutout = ({ className, style, children, shadow, ...otherProps }) => {
-  return (
-    <StyledCutout
-      shadow={shadow}
-      className={className}
-      style={style}
-      {...otherProps}
-    >
-      {children}
-    </StyledCutout>
-  );
-};
+const Cutout = ({
+  className, style, children, shadow, ...otherProps
+}) => (
+  <StyledCutout
+    shadow={shadow}
+    className={className}
+    style={style}
+    {...otherProps}
+  >
+    {children}
+  </StyledCutout>
+);
 
 Cutout.defaultProps = {
-  shadow: true
+  shadow: true,
+  className: '',
+  children: null,
+  style: {},
 };
 
 Cutout.propTypes = {
   className: propTypes.string,
   shadow: propTypes.bool,
   children: propTypes.node,
-  style: propTypes.object
+  style: propTypes.shape([
+    propTypes.string,
+    propTypes.number,
+  ]),
 };
 
 export default Cutout;

@@ -1,34 +1,31 @@
-import React from "react";
-import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
+import React from 'react';
+import { storiesOf } from '@storybook/react';
 
-import AppBar from "./AppBar";
-import Toolbar from "../Toolbar/Toolbar";
-import TextField from "../TextField/TextField";
+import AppBar from './AppBar';
+import Toolbar from '../Toolbar/Toolbar';
+import TextField from '../TextField/TextField';
 
-import Button from "../Button/Button";
-import List from "../List/List";
-import ListItem from "../ListItem/ListItem";
-import Divider from "../Divider/Divider";
+import Button from '../Button/Button';
+import List from '../List/List';
+import ListItem from '../ListItem/ListItem';
+import Divider from '../Divider/Divider';
 
-import LogoIcon from "../Icon/LogoIcon";
+import LogoIcon from '../Icon/LogoIcon';
 
-export const actions = { onClick: action("onClick") };
-
-storiesOf("AppBar", module)
+storiesOf('AppBar', module)
   .addDecorator(story => (
     <div
       style={{
-        padding: "5rem",
-        background: "teal"
+        padding: '5rem',
+        background: 'teal',
       }}
     >
       {story()}
     </div>
   ))
-  .add("default", () => (
+  .add('default', () => (
     <AppBar>
-      <Toolbar style={{ justifyContent: "space-between" }}>
+      <Toolbar style={{ justifyContent: 'space-between' }}>
         <Menu />
         <TextField
           placeholder="Search..."
@@ -51,7 +48,7 @@ function Menu() {
   }
 
   return (
-    <div style={{ position: "relative", display: "inline-block" }}>
+    <div style={{ position: 'relative', display: 'inline-block' }}>
       {open && (
         <List
           horizontalAlign="left"
@@ -59,16 +56,25 @@ function Menu() {
           open={open}
           onClick={handleClose}
         >
-          <ListItem>👨‍💻 Profile</ListItem>
-          <ListItem>📁 My account</ListItem>
+          <ListItem>
+            <span role="img" aria-label="👨‍💻">👨‍💻</span>
+            Profile
+          </ListItem>
+          <ListItem>
+            <span role="img" aria-label="📁">📁</span>
+            My account
+          </ListItem>
           <Divider />
-          <ListItem disabled>🔙 Logout</ListItem>
+          <ListItem disabled>
+            <span role="img" aria-label="🔙">🔙</span>
+            Logout
+          </ListItem>
         </List>
       )}
       <Button
         onClick={handleClick}
         active={open}
-        style={{ fontWeight: "bold" }}
+        style={{ fontWeight: 'bold' }}
       >
         <LogoIcon style={{ marginLeft: -2, marginRight: 4 }} />
         Start

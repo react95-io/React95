@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import propTypes from "prop-types";
+import React, { useState } from 'react';
+import propTypes from 'prop-types';
 
-import Button from "../Button/Button";
+import styled, { css } from 'styled-components';
+import Button from '../Button/Button';
 
-import styled, { css } from "styled-components";
-import { shadow, createFlatBoxStyles } from "../common";
-import { blockSizes, fontSizes, padding } from "../common/system";
-import Cutout from "../Cutout/Cutout";
+import { shadow as commonShadow, createFlatBoxStyles } from '../common';
+import { blockSizes, fontSizes, padding } from '../common/system';
+import Cutout from '../Cutout/Cutout';
 
 const sharedWrapperStyles = css`
   height: ${blockSizes.md};
@@ -35,20 +35,19 @@ const StyledDropdownButton = styled(Button)`
   padding: 0;
   z-index: 1;
   flex-shrink: 0;
-  ${({ variant }) =>
-    variant === "flat"
-      ? css`
+  ${({ variant }) => (variant === 'flat'
+    ? css`
           height: calc(100% - 4px);
           margin-right: 2px;
         `
-      : css`
+    : css`
           height: 100%;
           border-left-color: ${({ theme }) => theme.borderLight};
           border-top-color: ${({ theme }) => theme.borderLight};
           box-shadow: inset 1px 1px 0px 1px
               ${({ theme }) => theme.borderLightest},
             inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
-        `}
+        `)}
 `;
 const StyledDropdownIcon = styled.span`
   position: absolute;
@@ -79,19 +78,18 @@ const StyledDropdownList = styled.ul`
   cursor: default;
   z-index: 99;
 
-  ${({ variant }) =>
-    variant === "flat"
-      ? css`
-          bottom: 2px;
-          width: 100%;
-          border: 2px solid ${({ theme }) => theme.flatDark};
-        `
-      : css`
-          box-shadow: ${props => (props.shadow ? shadow : "none")};
-          bottom: -2px;
-          width: calc(100% - 2px);
-          border: 2px solid ${({ theme }) => theme.borderDarkest};
-        `}
+  ${({ variant }) => (variant === 'flat'
+    ? css`
+      bottom: 2px;
+      width: 100%;
+      border: 2px solid ${({ theme }) => theme.flatDark};
+    `
+    : css`
+      box-shadow: ${props => (props.shadow ? commonShadow : 'none')};
+      bottom: -2px;
+      width: calc(100% - 2px);
+      border: 2px solid ${({ theme }) => theme.borderDarkest};
+    `)}
 `;
 const StyledDropdownListItem = styled.li`
   box-sizing: border-box;
@@ -118,31 +116,30 @@ const Select = ({
   variant,
   width,
   height,
-  otherProps,
   className,
   onChange,
-  style
+  style,
+  ...otherProps
 }) => {
   const [index, setIndex] = useState(selectedIndex);
   const [open, setOpen] = useState(false);
 
-  const handleSelect = i => {
+  const handleSelect = (i) => {
     if (onChange) onChange(items[i].value);
     setIndex(i);
   };
 
-  const Wrapper =
-    variant === "flat" ? StyledFlatSelectWrapper : StyledSelectWrapper;
+  const Wrapper = variant === 'flat' ? StyledFlatSelectWrapper : StyledSelectWrapper;
   return (
     <Wrapper
       className={className}
       onClick={() => setOpen(!open)}
-      style={{ ...style, width: width ? width : "auto" }}
+      style={{ ...style, width: width || 'auto' }}
       shadow={shadow}
       {...otherProps}
     >
       <StyledSelectContent>
-        {items.length ? items[index].label : ""}
+        {items.length ? items[index].label : ''}
       </StyledSelectContent>
       <StyledDropdownButton variant={variant}>
         <StyledDropdownIcon />
@@ -151,14 +148,13 @@ const Select = ({
         <StyledDropdownList
           shadow={shadow}
           variant={variant}
-          style={height && { overflowY: "scroll", height }}
+          style={height && { overflowY: 'scroll', height }}
         >
           {items.map((item, i) => (
             <StyledDropdownListItem
+              // eslint-disable-next-line
               key={i}
-              onClick={e => {
-                handleSelect(i);
-              }}
+              onClick={() => handleSelect(i)}
             >
               {item.label}
             </StyledDropdownListItem>
@@ -169,6 +165,17 @@ const Select = ({
   );
 };
 
+Select.defaultProps = {
+  style: {},
+  shadow: true,
+  variant: 'default',
+  selectedIndex: 0,
+  className: '',
+  width: null,
+  height: null,
+  onChange: null,
+};
+
 Select.propTypes = {
   items: propTypes.arrayOf(propTypes.object).isRequired,
   className: propTypes.string,
@@ -176,14 +183,12 @@ Select.propTypes = {
   height: propTypes.number,
   selectedIndex: propTypes.number,
   shadow: propTypes.bool,
-  variant: propTypes.oneOf(["default", "flat"]),
-  style: propTypes.object,
-  onChange: propTypes.func
+  variant: propTypes.oneOf(['default', 'flat']),
+  style: propTypes.shape([
+    propTypes.string,
+    propTypes.number,
+  ]),
+  onChange: propTypes.func,
 };
-Select.defaultProps = {
-  style: {},
-  shadow: true,
-  variant: "default",
-  selectedIndex: 0
-};
+
 export default Select;
