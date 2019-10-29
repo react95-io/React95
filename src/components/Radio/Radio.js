@@ -28,11 +28,12 @@ const StyledInput = styled.input`
   opacity: 0;
 `;
 
-const createCheckmarkSymbol = ({ checked }) => checked
-  && css`
+const createCheckmarkSymbol = ({ checked }) =>
+  checked &&
+  css`
     &:after {
       position: absolute;
-      content: "";
+      content: '';
       display: inline-block;
       top: 50%;
       left: 50%;
@@ -58,9 +59,11 @@ const sharedCheckmarkStyles = css`
 const StyledCheckmark = styled(Cutout)`
 
   ${sharedCheckmarkStyles}
-  background: ${({ theme, isDisabled }) => (isDisabled ? theme.material : theme.canvas)};
+  background: ${({ theme, isDisabled }) =>
+    isDisabled ? theme.material : theme.canvas};
 
-  box-shadow: ${({ shadow }) => (shadow ? 'inset 3px 3px 10px rgba(0, 0, 0, 0.1)' : 'none')};
+  box-shadow: ${({ shadow }) =>
+    shadow ? 'inset 3px 3px 10px rgba(0, 0, 0, 0.1)' : 'none'};
 
   &:before {
     content: "";
@@ -78,9 +81,10 @@ const StyledFlatCheckmark = styled.div`
   ${createFlatBoxStyles()}
   ${sharedCheckmarkStyles}
   outline: none;
-  background: ${({ theme, isDisabled }) => (isDisabled ? theme.flatLight : theme.canvas)};
+  background: ${({ theme, isDisabled }) =>
+    isDisabled ? theme.flatLight : theme.canvas};
   &:before {
-    content: "";
+    content: '';
     display: inline-block;
     position: absolute;
     top: 0;
@@ -112,7 +116,7 @@ const Radio = ({
       <StyledInput
         onChange={disabled ? undefined : onChange}
         readOnly={disabled}
-        type="radio"
+        type='radio'
         value={value}
         checked={checked}
         name={name}
@@ -130,7 +134,7 @@ Radio.defaultProps = {
   variant: 'default',
   shadow: true,
   className: '',
-  style: {},
+  style: {}
 };
 
 Radio.propTypes = {
@@ -139,18 +143,15 @@ Radio.propTypes = {
   value: propTypes.oneOfType([
     propTypes.string,
     propTypes.number,
-    propTypes.bool,
+    propTypes.bool
   ]).isRequired,
   label: propTypes.oneOfType([propTypes.string, propTypes.number]),
   checked: propTypes.bool,
   disabled: propTypes.bool,
   shadow: propTypes.bool,
   variant: propTypes.oneOf(['default', 'flat']),
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
-  className: propTypes.string,
+  style: propTypes.shape([propTypes.string, propTypes.number]),
+  className: propTypes.string
 };
 
 export default Radio;

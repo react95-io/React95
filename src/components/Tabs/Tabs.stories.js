@@ -17,7 +17,7 @@ storiesOf('Tabs', module)
     <div
       style={{
         padding: '5rem',
-        background: '#008080',
+        background: '#008080'
       }}
     >
       {story()}
@@ -27,7 +27,7 @@ storiesOf('Tabs', module)
 
 class TabsDemo extends React.Component {
   state = {
-    activeTab: 0,
+    activeTab: 0
   };
 
   handleChange = value => this.setState({ activeTab: value });
@@ -37,7 +37,9 @@ class TabsDemo extends React.Component {
     return (
       <Window style={{ width: 350 }}>
         <WindowHeader>
-          <span role="img" aria-label="👗">👗</span>
+          <span role='img' aria-label='👗'>
+            👗
+          </span>
           store.exe
         </WindowHeader>
         <WindowContent>
@@ -49,19 +51,19 @@ class TabsDemo extends React.Component {
           <div style={{ height: 300 }}>
             {activeTab === 0 && (
               <TabBody>
-                <Fieldset label="Order:">
+                <Fieldset label='Order:'>
                   <div style={{ padding: '0.5em 0 0.5em 0' }}>Amount:</div>
                   <NumberField
-                    width="100%"
+                    width='100%'
                     min={0}
                     value={0}
                     onChange={() => null}
                   />
                   <Checkbox
                     style={{ marginTop: '1rem' }}
-                    name="shipping"
-                    value="fast"
-                    label="Fast shipping"
+                    name='shipping'
+                    value='fast'
+                    label='Fast shipping'
                     onChange={() => null}
                     defaultChecked
                   />

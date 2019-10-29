@@ -9,9 +9,7 @@ const StyledToolbar = styled.div`
   padding: ${props => (props.noPadding ? '0px' : '4px')};
 `;
 
-const Toolbar = ({
-  children, className, style, noPadding, ...otherProps
-}) => (
+const Toolbar = ({ children, className, style, noPadding, ...otherProps }) => (
   <StyledToolbar
     noPadding={noPadding}
     className={className}
@@ -25,17 +23,14 @@ const Toolbar = ({
 Toolbar.defaultProps = {
   noPadding: false,
   style: {},
-  className: '',
+  className: ''
 };
 
 Toolbar.propTypes = {
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
+  style: propTypes.shape([propTypes.string, propTypes.number]),
   className: propTypes.string,
   children: propTypes.node.isRequired,
-  noPadding: propTypes.bool,
+  noPadding: propTypes.bool
 };
 
 export default Toolbar;

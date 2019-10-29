@@ -61,18 +61,15 @@ const Tooltip = ({
 Tooltip.defaultProps = {
   delay: 1000,
   className: '',
-  style: {},
+  style: {}
 };
 
 Tooltip.propTypes = {
   children: propTypes.node.isRequired,
   text: propTypes.string.isRequired,
   className: propTypes.string,
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
-  delay: propTypes.number,
+  style: propTypes.shape([propTypes.string, propTypes.number]),
+  delay: propTypes.number
 };
 
 export default Tooltip;

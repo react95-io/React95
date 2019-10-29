@@ -3,14 +3,13 @@ import propTypes from 'prop-types';
 
 import styled from 'styled-components';
 import { createDisabledTextStyles, createFlatBoxStyles } from '../common';
-import {
-  blockSizes, fontSizes, padding, fontFamily,
-} from '../common/system';
+import { blockSizes, fontSizes, padding, fontFamily } from '../common/system';
 import Cutout from '../Cutout/Cutout';
 
 const StyledWrapper = styled(Cutout)`
   height: ${blockSizes.md};
-  background: ${({ theme, isDisabled }) => (isDisabled ? theme.material : theme.canvas)};
+  background: ${({ theme, isDisabled }) =>
+    isDisabled ? theme.material : theme.canvas};
 `;
 const StyledFlatWrapper = styled.div`
   position: relative;
@@ -27,7 +26,8 @@ export const StyledTextInput = styled.input`
   background: none;
   font-size: ${fontSizes.md};
   font-family: ${fontFamily};
-  ${({ disabled, variant }) => variant !== 'flat' && disabled && createDisabledTextStyles()}
+  ${({ disabled, variant }) =>
+    variant !== 'flat' && disabled && createDisabledTextStyles()}
 `;
 const TextField = ({
   onChange,
@@ -68,7 +68,7 @@ TextField.defaultProps = {
   style: {},
   width: null,
   onChange: () => {},
-  className: '',
+  className: ''
 };
 
 TextField.propTypes = {
@@ -79,9 +79,6 @@ TextField.propTypes = {
   shadow: propTypes.bool,
   type: propTypes.string,
   className: propTypes.string,
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
+  style: propTypes.shape([propTypes.string, propTypes.number])
 };
 export default TextField;

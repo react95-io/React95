@@ -10,7 +10,7 @@ storiesOf('List', module)
     <div
       style={{
         padding: '5rem',
-        background: 'teal',
+        background: 'teal'
       }}
     >
       {story()}
@@ -26,7 +26,9 @@ storiesOf('List', module)
   .add('inline', () => (
     <List inline>
       <ListItem square disabled>
-        <span role="img" aria-label="🌿">🌿</span>
+        <span role='img' aria-label='🌿'>
+          🌿
+        </span>
       </ListItem>
       <Bar />
       <ListItem>Tackle</ListItem>

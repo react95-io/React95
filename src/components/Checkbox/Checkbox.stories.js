@@ -2,12 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
 
-import {
-  Checkbox,
-  Fieldset,
-  Button,
-  Cutout,
-} from '..';
+import { Checkbox, Fieldset, Button, Cutout } from '..';
 
 const StyledCutout = styled(Cutout)`
   background: ${({ theme }) => theme.canvas};
@@ -21,8 +16,8 @@ storiesOf('Checkbox', module)
   .add('controlled group', () => <ControlledCheckboxGroupExample />)
   .add('uncontrolled', () => (
     <Checkbox
-      name="single"
-      value="single"
+      name='single'
+      value='single'
       label="I'm single 😥 ...and no one's controlling me 😎"
       defaultChecked
     />
@@ -35,18 +30,18 @@ storiesOf('Checkbox', module)
       </p>
       <div style={{ marginTop: '1rem' }}>
         <Checkbox
-          name="conspirancy"
-          variant="flat"
-          value="single"
-          label="Earth is flat 🌍"
+          name='conspirancy'
+          variant='flat'
+          value='single'
+          label='Earth is flat 🌍'
           defaultChecked
         />
         <Checkbox
-          name="conspirancy"
-          variant="flat"
+          name='conspirancy'
+          variant='flat'
           defaultChecked={false}
-          value="single"
-          label="Reptilians rule the world 🦎"
+          value='single'
+          label='Reptilians rule the world 🦎'
           disabled
         />
       </div>
@@ -57,13 +52,15 @@ class ControlledCheckboxGroupExample extends React.Component {
   state = {
     steak: true,
     tortilla: false,
-    pizza: false,
+    pizza: false
   };
 
-  handleChange = (e) => {
-    const { target: { value } } = e;
+  handleChange = e => {
+    const {
+      target: { value }
+    } = e;
     this.setState(prevState => ({
-      [value]: !prevState[value],
+      [value]: !prevState[value]
     }));
   };
 
@@ -71,38 +68,38 @@ class ControlledCheckboxGroupExample extends React.Component {
     this.setState({
       steak: false,
       tortilla: false,
-      pizza: false,
+      pizza: false
     });
-  }
+  };
 
   render() {
     const { steak, tortilla, pizza } = this.state;
 
     return (
       <div style={{ maxWidth: '250px' }}>
-        <Fieldset label="Party food">
+        <Fieldset label='Party food'>
           <Checkbox
             checked={steak}
             onChange={this.handleChange}
-            value="steak"
-            label="Steak 🥩"
-            name="food"
+            value='steak'
+            label='Steak 🥩'
+            name='food'
           />
           <br />
           <Checkbox
             checked={tortilla}
             onChange={this.handleChange}
-            value="tortilla"
-            label="Tortilla 🌯"
-            name="food"
+            value='tortilla'
+            label='Tortilla 🌯'
+            name='food'
           />
           <br />
           <Checkbox
             checked={pizza}
             onChange={this.handleChange}
-            value="pizza"
-            label="Pizza 🍕"
-            name="food"
+            value='pizza'
+            label='Pizza 🍕'
+            name='food'
             disabled
           />
         </Fieldset>

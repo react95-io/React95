@@ -48,7 +48,7 @@ storiesOf('NumberField', module)
         content), just use the flat variant:
       </p>
       <NumberField
-        variant="flat"
+        variant='flat'
         shadow={false}
         value={1991}
         onChange={value => console.log(value)}

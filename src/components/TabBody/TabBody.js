@@ -14,9 +14,7 @@ const StyledTabBody = styled.div`
   padding: ${padding.md};
   padding-top: calc(1.5 * ${padding.md});
 `;
-const TabBody = ({
-  children, className, style, ...otherProps
-}) => (
+const TabBody = ({ children, className, style, ...otherProps }) => (
   <StyledTabBody className={className} style={style} {...otherProps}>
     {children}
   </StyledTabBody>
@@ -25,15 +23,12 @@ const TabBody = ({
 TabBody.defaultProps = {
   children: null,
   className: '',
-  style: {},
+  style: {}
 };
 
 TabBody.propTypes = {
   children: propTypes.node,
   className: propTypes.string,
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
+  style: propTypes.shape([propTypes.string, propTypes.number])
 };
 export default TabBody;

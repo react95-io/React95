@@ -12,7 +12,7 @@ storiesOf('Window', module)
     <div
       style={{
         padding: '5rem',
-        background: 'teal',
+        background: 'teal'
       }}
     >
       {story()}
@@ -24,13 +24,13 @@ storiesOf('Window', module)
         style={{
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between',
+          justifyContent: 'space-between'
         }}
       >
         <span>react95.exe</span>
         <Button
           style={{ marginRight: '-6px', marginTop: '1px' }}
-          size="sm"
+          size='sm'
           square
         >
           <span style={{ fontWeight: 'bold', transform: 'translateY(-1px)' }}>
@@ -39,13 +39,13 @@ storiesOf('Window', module)
         </Button>
       </WindowHeader>
       <Toolbar>
-        <Button variant="menu" size="sm">
+        <Button variant='menu' size='sm'>
           File
         </Button>
-        <Button variant="menu" size="sm">
+        <Button variant='menu' size='sm'>
           Edit
         </Button>
-        <Button variant="menu" size="sm" disabled>
+        <Button variant='menu' size='sm' disabled>
           Save
         </Button>
       </Toolbar>

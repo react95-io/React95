@@ -20,8 +20,9 @@ const StyledListItem = styled.li`
   color: ${({ theme }) => theme.text};
 
   &:hover {
-    ${({ theme, isDisabled }) => !isDisabled
-      && `
+    ${({ theme, isDisabled }) =>
+      !isDisabled &&
+      `
         color: ${theme.textInvert};
         background: ${theme.hoverBackground};
       `}
@@ -61,20 +62,17 @@ ListItem.defaultProps = {
   square: false,
   onClick: null,
   className: '',
-  children: null,
+  children: null
 };
 
 ListItem.propTypes = {
   className: propTypes.string,
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
+  style: propTypes.shape([propTypes.string, propTypes.number]),
   size: propTypes.oneOf(['sm', 'md', 'lg']),
   disabled: propTypes.bool,
   square: propTypes.bool,
   children: propTypes.node,
-  onClick: propTypes.func,
+  onClick: propTypes.func
 };
 
 export default ListItem;

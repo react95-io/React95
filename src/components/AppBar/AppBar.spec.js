@@ -32,12 +32,9 @@ describe('<AppBar />', () => {
   });
 
   it('should custom style', () => {
-    const { container } = render((
-      <AppBar
-        {...defaultProps}
-        style={{ backgroundColor: 'papayawhip' }}
-      />
-    ));
+    const { container } = render(
+      <AppBar {...defaultProps} style={{ backgroundColor: 'papayawhip' }} />
+    );
     const headerEl = container.firstChild;
 
     expect(headerEl).toHaveAttribute('style', 'background-color: papayawhip;');

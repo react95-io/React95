@@ -37,7 +37,7 @@ themes.default = {
   progress: '#000080',
 
   flatLight: '#d8d8d8',
-  flatDark: '#9e9e9e',
+  flatDark: '#9e9e9e'
 };
 
 themes.water = {
@@ -77,7 +77,7 @@ themes.water = {
   progress: '#72b3b4',
 
   flatLight: '#d8d8d8',
-  flatDark: '#9e9e9e',
+  flatDark: '#9e9e9e'
 };
 
 themes.coldGray = {
@@ -121,7 +121,7 @@ themes.coldGray = {
   progress: '#8d88c2',
 
   flatLight: '#a4a7c8',
-  flatDark: '#5b57a1',
+  flatDark: '#5b57a1'
 };
 
 themes.lilacRoseDark = {
@@ -163,7 +163,7 @@ themes.lilacRoseDark = {
   progress: '#713259',
 
   flatLight: '#E597C9',
-  flatDark: '#7F3163',
+  flatDark: '#7F3163'
 };
 
 themes.violetDark = {
@@ -201,6 +201,6 @@ themes.violetDark = {
   progress: '#000080',
 
   flatLight: '#945b9b',
-  flatDark: '#3c1f3e',
+  flatDark: '#3c1f3e'
 };
 export default themes;

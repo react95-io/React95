@@ -29,10 +29,11 @@ const StyledInput = styled.input`
   z-index: -99;
 `;
 
-const createCheckmarkSymbol = ({ checked }) => checked
-  && css`
+const createCheckmarkSymbol = ({ checked }) =>
+  checked &&
+  css`
     &:after {
-      content: "";
+      content: '';
       display: block;
       position: absolute;
       left: 50%;
@@ -56,8 +57,10 @@ const sharedCheckmarkStyles = css`
 `;
 const StyledCheckmark = styled(Cutout)`
   ${sharedCheckmarkStyles}
-  background: ${({ theme, isDisabled }) => (isDisabled ? theme.material : theme.canvas)};
-  box-shadow: ${({ shadow }) => (shadow ? 'inset 3px 3px 10px rgba(0, 0, 0, 0.1)' : 'none')};
+  background: ${({ theme, isDisabled }) =>
+    isDisabled ? theme.material : theme.canvas};
+  box-shadow: ${({ shadow }) =>
+    shadow ? 'inset 3px 3px 10px rgba(0, 0, 0, 0.1)' : 'none'};
   &:before {
     box-shadow: none;
   }
@@ -65,7 +68,8 @@ const StyledCheckmark = styled(Cutout)`
 const StyledFlatCheckmark = styled.div`
   ${createFlatBoxStyles()}
   ${sharedCheckmarkStyles}
-  background: ${({ theme, isDisabled }) => (isDisabled ? theme.flatLight : theme.canvas)};
+  background: ${({ theme, isDisabled }) =>
+    isDisabled ? theme.flatLight : theme.canvas};
 
 `;
 const Checkbox = ({
@@ -89,7 +93,7 @@ const Checkbox = ({
   if (defaultChecked || checked === undefined) {
     const [state, setState] = useState(defaultChecked || false);
 
-    const handleChange = (e) => {
+    const handleChange = e => {
       const newState = e.target.checked;
       setState(newState);
       if (onChange) onChange(e);
@@ -100,7 +104,7 @@ const Checkbox = ({
         <StyledInput
           onChange={disabled ? undefined : handleChange}
           readOnly={disabled}
-          type="checkbox"
+          type='checkbox'
           value={value}
           checked={state}
           name={name}
@@ -115,7 +119,7 @@ const Checkbox = ({
         <StyledInput
           onChange={disabled ? undefined : onChange}
           readOnly={disabled}
-          type="checkbox"
+          type='checkbox'
           value={value}
           checked={checked}
           name={name}
@@ -142,7 +146,7 @@ Checkbox.defaultProps = {
   checked: false,
   style: {},
   defaultChecked: false,
-  className: '',
+  className: ''
 };
 
 Checkbox.propTypes = {
@@ -151,19 +155,16 @@ Checkbox.propTypes = {
   value: propTypes.oneOfType([
     propTypes.string,
     propTypes.number,
-    propTypes.bool,
+    propTypes.bool
   ]).isRequired,
   label: propTypes.oneOfType([propTypes.string, propTypes.number]),
   checked: propTypes.bool,
   disabled: propTypes.bool,
   variant: propTypes.oneOf(['default', 'flat']),
   shadow: propTypes.bool,
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
+  style: propTypes.shape([propTypes.string, propTypes.number]),
   defaultChecked: propTypes.bool,
-  className: propTypes.string,
+  className: propTypes.string
 };
 
 export default Checkbox;

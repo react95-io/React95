@@ -20,7 +20,7 @@ const StyledCutout = styled.div`
     left: 0;
     top: 0;
     z-index: 1;
-    content: "";
+    content: '';
     width: calc(100% - 4px);
     height: calc(100% - 4px);
 
@@ -37,9 +37,7 @@ const StyledCutout = styled.div`
 `;
 // add padding prop ?
 
-const Cutout = ({
-  className, style, children, shadow, ...otherProps
-}) => (
+const Cutout = ({ className, style, children, shadow, ...otherProps }) => (
   <StyledCutout
     shadow={shadow}
     className={className}
@@ -54,17 +52,14 @@ Cutout.defaultProps = {
   shadow: true,
   className: '',
   children: null,
-  style: {},
+  style: {}
 };
 
 Cutout.propTypes = {
   className: propTypes.string,
   shadow: propTypes.bool,
   children: propTypes.node,
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
+  style: propTypes.shape([propTypes.string, propTypes.number])
 };
 
 export default Cutout;
