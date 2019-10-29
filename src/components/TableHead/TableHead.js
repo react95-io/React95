@@ -5,9 +5,7 @@ import styled from 'styled-components';
 const StyledTableHead = styled.thead`
   display: table-header-group;
 `;
-const TableHead = ({
-  className, children, style, ...otherProps
-}) => (
+const TableHead = ({ className, children, style, ...otherProps }) => (
   <StyledTableHead className={className} style={style} {...otherProps}>
     {children}
   </StyledTableHead>
@@ -16,16 +14,13 @@ const TableHead = ({
 TableHead.defaultProps = {
   children: null,
   className: '',
-  style: {},
+  style: {}
 };
 
 TableHead.propTypes = {
   children: propTypes.node,
   className: propTypes.string,
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
+  style: propTypes.shape([propTypes.string, propTypes.number])
 };
 
 export default TableHead;

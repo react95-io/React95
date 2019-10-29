@@ -10,7 +10,7 @@ storiesOf('Divider', module)
     <div
       style={{
         padding: '5rem',
-        background: 'teal',
+        background: 'teal'
       }}
     >
       {story()}
@@ -28,9 +28,9 @@ storiesOf('Divider', module)
   .add('vertical', () => (
     <List inline>
       <ListItem>Item 1</ListItem>
-      <Divider vertical size="lg" />
+      <Divider vertical size='lg' />
       <ListItem>Item 2</ListItem>
-      <Divider vertical size="lg" />
+      <Divider vertical size='lg' />
       <ListItem>Item 3</ListItem>
     </List>
   ));

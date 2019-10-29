@@ -17,10 +17,10 @@ const Tabs = ({
   style,
   ...otherProps
 }) => {
-  const childrenWithProps = React.Children.map(children, (child) => {
+  const childrenWithProps = React.Children.map(children, child => {
     const tabProps = {
       active: child.props.value === value,
-      onClick: onChange,
+      onClick: onChange
     };
     return React.cloneElement(child, tabProps);
   });
@@ -36,7 +36,7 @@ Tabs.defaultProps = {
   onChange: () => {},
   children: null,
   className: '',
-  style: {},
+  style: {}
 };
 
 Tabs.propTypes = {
@@ -44,9 +44,6 @@ Tabs.propTypes = {
   onChange: propTypes.func,
   children: propTypes.node,
   className: propTypes.string,
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
+  style: propTypes.shape([propTypes.string, propTypes.number])
 };
 export default Tabs;

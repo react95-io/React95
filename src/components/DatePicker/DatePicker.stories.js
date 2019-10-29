@@ -8,7 +8,7 @@ storiesOf('DatePicker', module)
     <div
       style={{
         padding: '5rem',
-        background: 'teal',
+        background: 'teal'
       }}
     >
       {story()}

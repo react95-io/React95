@@ -32,7 +32,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "lint": "eslint src",
+    "lint": "eslint src --ext .js",
     "lint:fix": "npm run lint -- --fix"
   },
   "peerDependencies": {

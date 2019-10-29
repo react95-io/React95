@@ -3,12 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import styled from 'styled-components';
 
-import {
-  TextField,
-  Button,
-  Toolbar,
-  Cutout,
-} from '..';
+import { TextField, Button, Toolbar, Cutout } from '..';
 
 const onChange = e => console.log(e.target.value);
 
@@ -23,16 +18,16 @@ const Wrapper = styled.div`
 
 storiesOf('TextField', module)
   .addDecorator(story => <Wrapper>{story()}</Wrapper>)
-  .add('default', () => <TextField defaultValue="" onChange={onChange} />)
+  .add('default', () => <TextField defaultValue='' onChange={onChange} />)
   .add('controlled', () => <ControlledTextFieldExample />)
   .add('no shadow', () => (
-    <TextField defaultValue="No shadow" shadow={false} onChange={onChange} />
+    <TextField defaultValue='No shadow' shadow={false} onChange={onChange} />
   ))
   .add('disabled', () => (
     <TextField defaultValue="Can't type 😥" disabled onChange={onChange} />
   ))
   .add('custom width', () => (
-    <TextField defaultValue="Custom width" width={150} onChange={onChange} />
+    <TextField defaultValue='Custom width' width={150} onChange={onChange} />
   ))
   .add('flat', () => (
     <StyledCutout style={{ padding: '2rem', width: '300px' }}>
@@ -43,14 +38,14 @@ storiesOf('TextField', module)
       <div style={{ display: 'flex', alignItems: 'center', marginTop: '1rem' }}>
         <label
           style={{ paddingRight: '0.5rem', fontSize: '1rem' }}
-          htmlFor="name"
+          htmlFor='name'
         >
           Name:
         </label>
         <TextField
-          id="name"
-          variant="flat"
-          placeholder="type here..."
+          id='name'
+          variant='flat'
+          placeholder='type here...'
           width={150}
           onChange={onChange}
         />
@@ -66,13 +61,13 @@ storiesOf('TextField', module)
       <div style={{ display: 'flex', alignItems: 'center', marginTop: '1rem' }}>
         <label
           style={{ paddingRight: '0.5rem', fontSize: '1rem' }}
-          htmlFor="name"
+          htmlFor='name'
         >
           Name:
         </label>
         <TextField
-          id="name"
-          variant="flat"
+          id='name'
+          variant='flat'
           defaultValue="Can't type 😥"
           width={150}
           onChange={onChange}
@@ -84,7 +79,7 @@ storiesOf('TextField', module)
 
 class ControlledTextFieldExample extends React.Component {
   state = {
-    value: 'default value',
+    value: 'default value'
   };
 
   handleChange = e => this.setState({ value: e.target.value });

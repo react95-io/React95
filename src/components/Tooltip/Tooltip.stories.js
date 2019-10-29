@@ -9,14 +9,14 @@ storiesOf('Tooltip', module)
     <div
       style={{
         padding: '5rem',
-        background: '#008080',
+        background: '#008080'
       }}
     >
       {story()}
     </div>
   ))
   .add('default', () => (
-    <Tooltip text="Nothing really 🤷‍">
+    <Tooltip text='Nothing really 🤷‍'>
       <Button>Whad do I do?</Button>
     </Tooltip>
   ));

@@ -21,9 +21,7 @@ const SlyledWindowHeader = styled.div`
   );
 `;
 
-const WindowHeader = ({
-  className, style, children, ...otherProps
-}) => (
+const WindowHeader = ({ className, style, children, ...otherProps }) => (
   <SlyledWindowHeader className={className} style={style} {...otherProps}>
     {children}
   </SlyledWindowHeader>
@@ -32,16 +30,13 @@ const WindowHeader = ({
 WindowHeader.defaultProps = {
   className: '',
   style: {},
-  children: null,
+  children: null
 };
 
 WindowHeader.propTypes = {
   className: propTypes.string,
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
-  children: propTypes.node,
+  style: propTypes.shape([propTypes.string, propTypes.number]),
+  children: propTypes.node
 };
 
 export default WindowHeader;

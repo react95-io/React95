@@ -11,7 +11,7 @@ storiesOf('Bar', module)
     <div
       style={{
         padding: '5rem',
-        background: 'teal',
+        background: 'teal'
       }}
     >
       {story()}
@@ -21,8 +21,8 @@ storiesOf('Bar', module)
     <AppBar>
       <Toolbar>
         <Bar />
-        <Button variant="menu">Edit</Button>
-        <Button variant="menu" disabled>
+        <Button variant='menu'>Edit</Button>
+        <Button variant='menu' disabled>
           Save
         </Button>
         <Bar />

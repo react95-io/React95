@@ -39,18 +39,15 @@ AppBar.defaultProps = {
   shadow: true,
   fixed: true,
   style: {},
-  className: '',
+  className: ''
 };
 
 AppBar.propTypes = {
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
+  style: propTypes.shape([propTypes.string, propTypes.number]),
   shadow: propTypes.bool,
   className: propTypes.string,
   children: propTypes.node.isRequired,
-  fixed: propTypes.bool,
+  fixed: propTypes.bool
 };
 
 export default AppBar;

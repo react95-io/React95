@@ -8,13 +8,15 @@ import { fontSizes, padding } from '../common/system';
 const StyledFieldset = styled.fieldset`
   position: relative;
   border: 2px solid
-    ${({ theme, variant }) => (variant === 'flat' ? theme.flatDark : theme.borderLightest)};
+    ${({ theme, variant }) =>
+      variant === 'flat' ? theme.flatDark : theme.borderLightest};
   padding: ${padding.md};
   margin-top: ${padding.sm};
   font-size: ${fontSizes.md};
   color: ${({ theme }) => theme.text};
-  ${({ variant }) => variant !== 'flat'
-    && css`
+  ${({ variant }) =>
+    variant !== 'flat' &&
+    css`
       box-shadow: -1px -1px 0 1px ${({ theme }) => theme.borderDark},
         inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
     `}
@@ -27,7 +29,8 @@ const StyledLegend = styled.legend`
   padding: 0 ${padding.sm};
 
   font-size: ${fontSizes.md};
-  background: ${({ theme, variant }) => (variant === 'flat' ? theme.canvas : theme.material)};
+  background: ${({ theme, variant }) =>
+    variant === 'flat' ? theme.canvas : theme.material};
 `;
 
 const StyledFieldsetContent = styled.div`
@@ -63,23 +66,20 @@ Fieldset.defaultProps = {
   label: null,
   className: '',
   style: {},
-  children: null,
+  children: null
 };
 
 Fieldset.propTypes = {
   label: propTypes.oneOfType([
     propTypes.string,
     propTypes.number,
-    propTypes.node,
+    propTypes.node
   ]),
   className: propTypes.string,
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
+  style: propTypes.shape([propTypes.string, propTypes.number]),
   children: propTypes.node,
   disabled: propTypes.bool,
-  variant: propTypes.oneOf(['default', 'flat']),
+  variant: propTypes.oneOf(['default', 'flat'])
 };
 
 export default Fieldset;

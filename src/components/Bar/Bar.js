@@ -15,28 +15,18 @@ const StyledBar = styled.div`
   background: ${({ theme }) => theme.material};
 `;
 
-const Bar = ({
-  size, className, style, ...otherProps
-}) => (
-  <StyledBar
-    size={size}
-    className={className}
-    style={style}
-    {...otherProps}
-  />
+const Bar = ({ size, className, style, ...otherProps }) => (
+  <StyledBar size={size} className={className} style={style} {...otherProps} />
 );
 
 Bar.defaultProps = {
   size: 'md',
   className: '',
-  style: {},
+  style: {}
 };
 Bar.propTypes = {
   className: propTypes.string,
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
-  size: propTypes.oneOf(['sm', 'md', 'lg']),
+  style: propTypes.shape([propTypes.string, propTypes.number]),
+  size: propTypes.oneOf(['sm', 'md', 'lg'])
 };
 export default Bar;

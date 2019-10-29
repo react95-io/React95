@@ -9,7 +9,7 @@ import {
   createWellBorderStyles,
   createBoxStyles,
   createFlatBoxStyles,
-  createDisabledTextStyles,
+  createDisabledTextStyles
 } from '../common';
 import { blockSizes, fontSizes, padding } from '../common/system';
 
@@ -19,7 +19,8 @@ const commonButtonStyles = css`
   align-items: center;
   justify-content: center;
   height: ${({ size }) => blockSizes[size]};
-  width: ${({ fullWidth, square, size }) => (fullWidth ? '100%' : square ? blockSizes[size] : 'auto')};
+  width: ${({ fullWidth, square, size }) =>
+    fullWidth ? '100%' : square ? blockSizes[size] : 'auto'};
   padding: ${({ square }) => (square ? 0 : `0 ${padding.sm}`)};
   font-size: ${fontSizes.md};
   &:active {
@@ -29,16 +30,18 @@ const commonButtonStyles = css`
 `;
 
 const StyledButton = styled.button`
-  ${({ variant }) => (variant === 'flat'
-    ? css`
-      ${createFlatBoxStyles()} /* background: none; */
-    `
-    : variant === 'menu'
+  ${({ variant }) =>
+    variant === 'flat'
+      ? css`
+          ${createFlatBoxStyles()} /* background: none; */
+        `
+      : variant === 'menu'
       ? css`
           ${createBoxStyles()};
           border: 2px solid transparent;
           &:hover {
-            ${({ isDisabled, active }) => !isDisabled && !active && createWellBorderStyles(false)}
+            ${({ isDisabled, active }) =>
+              !isDisabled && !active && createWellBorderStyles(false)}
           }
           &:active {
             ${({ isDisabled }) => !isDisabled && createWellBorderStyles(true)}
@@ -48,17 +51,17 @@ const StyledButton = styled.button`
         `
       : css`
           ${createBoxStyles()};
-          ${({ active }) => (active ? createBorderStyles(true) : createBorderStyles(false))}
-          ${({ active, theme }) => active
-            && `background-image: ${
-              theme.hatchedBackground
-            };`}
+          ${({ active }) =>
+            active ? createBorderStyles(true) : createBorderStyles(false)}
+          ${({ active, theme }) =>
+            active &&
+            `background-image: ${theme.hatchedBackground};`}
 
           &:active {
             ${({ isDisabled }) => !isDisabled && createBorderStyles(true)}
           }
           ${({ isDisabled }) => isDisabled && createDisabledTextStyles()}
-        `)}
+        `}
   ${commonButtonStyles}
 `;
 
@@ -87,7 +90,7 @@ const Button = ({
     square={square}
     active={active}
     className={className}
-      // onTouchStart below to enable button :active style on iOS
+    // onTouchStart below to enable button :active style on iOS
     onTouchStart={() => ''}
     {...otherProps}
   >
@@ -105,16 +108,13 @@ Button.defaultProps = {
   square: false,
   active: false,
   variant: 'default',
-  className: '',
+  className: ''
 };
 
 Button.propTypes = {
   type: propTypes.string,
   onClick: propTypes.func,
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
+  style: propTypes.shape([propTypes.string, propTypes.number]),
   disabled: propTypes.bool,
   fullWidth: propTypes.bool,
   size: propTypes.oneOf(['sm', 'md', 'lg']),
@@ -122,7 +122,7 @@ Button.propTypes = {
   active: propTypes.bool,
   variant: propTypes.oneOf(['default', 'menu', 'flat']),
   className: propTypes.string,
-  children: propTypes.node.isRequired,
+  children: propTypes.node.isRequired
 };
 
 export default Button;

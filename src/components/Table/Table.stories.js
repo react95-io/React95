@@ -27,21 +27,27 @@ const SimpleTable = () => (
         <TableBody>
           <TableRow>
             <TableDataCell style={{ textAlign: 'center' }}>
-              <span role="img" aria-label="🌿">🌿</span>
+              <span role='img' aria-label='🌿'>
+                🌿
+              </span>
             </TableDataCell>
             <TableDataCell>Bulbasaur</TableDataCell>
             <TableDataCell>64</TableDataCell>
           </TableRow>
           <TableRow>
             <TableDataCell style={{ textAlign: 'center' }}>
-              <span role="img" aria-label="🔥">🔥</span>
+              <span role='img' aria-label='🔥'>
+                🔥
+              </span>
             </TableDataCell>
             <TableDataCell>Charizard</TableDataCell>
             <TableDataCell>209</TableDataCell>
           </TableRow>
           <TableRow>
             <TableDataCell style={{ textAlign: 'center' }}>
-              <span role="img" aria-label="⚡">⚡</span>
+              <span role='img' aria-label='⚡'>
+                ⚡
+              </span>
             </TableDataCell>
             <TableDataCell>Pikachu</TableDataCell>
             <TableDataCell>82</TableDataCell>
@@ -57,7 +63,7 @@ storiesOf('Table', module)
     <div
       style={{
         padding: '5rem',
-        background: 'teal',
+        background: 'teal'
       }}
     >
       {story()}

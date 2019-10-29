@@ -13,18 +13,20 @@ describe('<Bar />', () => {
   });
 
   it('should handle bar with correct size', () => {
-    const { container, rerender } = render(<Bar size="sm" />);
+    const { container, rerender } = render(<Bar size='sm' />);
     const barEl = container.firstChild;
 
     expect(barEl).toHaveStyleRule('height', blockSizes.sm);
 
-    rerender(<Bar size="lg" />);
+    rerender(<Bar size='lg' />);
 
     expect(barEl).toHaveStyleRule('height', blockSizes.lg);
   });
 
   it('should handle custom style', () => {
-    const { container } = render(<Bar style={{ backgroundColor: 'papayawhip' }} />);
+    const { container } = render(
+      <Bar style={{ backgroundColor: 'papayawhip' }} />
+    );
     const barEl = container.firstChild;
 
     expect(barEl).toHaveAttribute('style', 'background-color: papayawhip;');

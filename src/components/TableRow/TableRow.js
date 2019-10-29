@@ -13,16 +13,15 @@ const StyledTr = styled.tr`
   outline: none;
 
   color: ${({ theme }) => theme.text};
-  ${({ theme, head }) => !head
-    && `&:hover {
+  ${({ theme, head }) =>
+    !head &&
+    `&:hover {
       background: ${theme.hoverBackground};
       color: ${theme.textInvert}
     }`}
 `;
 
-const TableRow = ({
-  className, children, style, head, ...otherProps
-}) => (
+const TableRow = ({ className, children, style, head, ...otherProps }) => (
   <StyledTr head={head} className={className} style={style} {...otherProps}>
     {children}
   </StyledTr>
@@ -32,17 +31,14 @@ TableRow.defaultProps = {
   head: false,
   children: null,
   className: '',
-  style: {},
+  style: {}
 };
 
 TableRow.propTypes = {
   children: propTypes.node,
   className: propTypes.string,
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
-  head: propTypes.bool,
+  style: propTypes.shape([propTypes.string, propTypes.number]),
+  head: propTypes.bool
 };
 
 export default TableRow;

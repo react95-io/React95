@@ -39,7 +39,8 @@ const DateItem = styled.div`
 const DateItemContent = styled.span`
   cursor: pointer;
 
-  background: ${({ active, theme }) => (active ? theme.hoverBackground : 'transparent')};
+  background: ${({ active, theme }) =>
+    active ? theme.hoverBackground : 'transparent'};
   color: ${({ active, theme }) => (active ? theme.textInvert : 'initial')};
 
   &:hover {
@@ -62,7 +63,7 @@ class DatePicker extends Component {
     shadow: propTypes.bool,
     onAccept: propTypes.func,
     onCancel: propTypes.func,
-    date: propTypes.instanceOf(Date),
+    date: propTypes.instanceOf(Date)
   };
 
   static defaultProps = {
@@ -70,7 +71,7 @@ class DatePicker extends Component {
     className: '',
     onAccept: null,
     onCancel: null,
-    date: null,
+    date: null
   };
 
   constructor(props) {
@@ -80,7 +81,7 @@ class DatePicker extends Component {
     this.state = initialDate;
   }
 
-  convertDateToState = (date) => {
+  convertDateToState = date => {
     const day = date.getDate();
     const month = date.getMonth();
     const year = date.getFullYear();
@@ -105,12 +106,7 @@ class DatePicker extends Component {
   render() {
     let { day } = this.state;
     const { month, year } = this.state;
-    const {
-      shadow,
-      className,
-      onAccept,
-      onCancel,
-    } = this.props;
+    const { shadow, className, onAccept, onCancel } = this.props;
 
     const months = [
       { value: 0, label: 'January' },
@@ -124,7 +120,7 @@ class DatePicker extends Component {
       { value: 8, label: 'September' },
       { value: 9, label: 'October' },
       { value: 10, label: 'November' },
-      { value: 11, label: 'December' },
+      { value: 11, label: 'December' }
     ];
 
     // eslint-disable-next-line
@@ -163,7 +159,9 @@ class DatePicker extends Component {
     return (
       <Window style={{ margin: 20 }} className={className} shadow={shadow}>
         <WindowHeader>
-          <span role="img" aria-label="📆">📆</span>
+          <span role='img' aria-label='📆'>
+            📆
+          </span>
           Date
         </WindowHeader>
         <WindowContent>

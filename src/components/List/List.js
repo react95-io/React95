@@ -6,7 +6,7 @@ import { createBorderStyles, createBoxStyles } from '../common';
 
 const createListPositionStyles = ({
   verticalAlign = 'bottom',
-  horizontalAlign = 'left',
+  horizontalAlign = 'left'
 }) => `
     position: absolute;
     ${verticalAlign === 'bottom' ? 'bottom: 0;' : 'top: 0;'}
@@ -23,15 +23,17 @@ const StyledList = styled.ul`
   ${createBorderStyles()}
   ${createBoxStyles()}
   /* display: ${props => (props.inline ? 'inline-flex' : 'inline-block')}; */
-  ${props => props.inline
-    && `
+  ${props =>
+    props.inline &&
+    `
     align-items: center;
     display: inline-flex;
   `}
   list-style: none;
   position: relative;
 
-  ${props => (props.horizontalAlign || props.verticalAlign) && createListPositionStyles}
+  ${props =>
+    (props.horizontalAlign || props.verticalAlign) && createListPositionStyles}
 `;
 
 const List = ({
@@ -67,7 +69,7 @@ List.defaultProps = {
   className: '',
   children: null,
   verticalAlign: undefined,
-  horizontalAlign: undefined,
+  horizontalAlign: undefined
 };
 
 List.propTypes = {
@@ -78,7 +80,7 @@ List.propTypes = {
   shadow: propTypes.bool,
   children: propTypes.node,
   verticalAlign: propTypes.oneOf(['top', 'bottom']),
-  horizontalAlign: propTypes.oneOf(['left', 'right']),
+  horizontalAlign: propTypes.oneOf(['left', 'right'])
 };
 
 export default List;

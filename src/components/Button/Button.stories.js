@@ -13,7 +13,7 @@ import {
   ListItem,
   Divider,
   Cutout,
-  Toolbar,
+  Toolbar
 } from '..';
 
 const actions = { onClick: action('onClick') };
@@ -27,7 +27,7 @@ storiesOf('Button', module)
     <div
       style={{
         padding: '5rem',
-        background: 'teal',
+        background: 'teal'
       }}
     >
       {story()}
@@ -51,7 +51,9 @@ storiesOf('Button', module)
   ))
   .add('square', () => (
     <Button {...actions} square>
-      <span role="img" aria-label="🎂">🎂</span>
+      <span role='img' aria-label='🎂'>
+        🎂
+      </span>
     </Button>
   ))
   .add('sizes', () => (
@@ -60,16 +62,16 @@ storiesOf('Button', module)
         alignItems: 'center',
         display: 'flex',
         width: 200,
-        justifyContent: 'space-between',
+        justifyContent: 'space-between'
       }}
     >
-      <Button {...actions} size="sm">
+      <Button {...actions} size='sm'>
         small
       </Button>
-      <Button {...actions} size="md">
+      <Button {...actions} size='md'>
         medium
       </Button>
-      <Button {...actions} size="lg">
+      <Button {...actions} size='lg'>
         large
       </Button>
     </div>
@@ -85,14 +87,14 @@ storiesOf('Button', module)
           </p>
           <div
             style={{
-              marginTop: '1.5rem',
+              marginTop: '1.5rem'
             }}
           >
             <Toolbar>
-              <Button {...actions} variant="flat" fullWidth accent>
+              <Button {...actions} variant='flat' fullWidth accent>
                 OK
               </Button>
-              <Button {...actions} variant="flat" disabled fullWidth accent>
+              <Button {...actions} variant='flat' disabled fullWidth accent>
                 Cancel
               </Button>
             </Toolbar>
@@ -116,43 +118,45 @@ function MenuButtonExample() {
   return (
     <Window style={{ maxWidth: '250px' }}>
       <WindowHeader>
-        <span role="img" aria-label="🥝">🥝</span>
+        <span role='img' aria-label='🥝'>
+          🥝
+        </span>
         Kiwi.app
       </WindowHeader>
       <Toolbar noPadding>
-        <Button variant="menu" disabled>
+        <Button variant='menu' disabled>
           Upload
         </Button>
-        <Button variant="menu" disabled>
+        <Button variant='menu' disabled>
           Save
         </Button>
         <div
           style={{
             position: 'relative',
             display: 'inline-block',
-            alignSelf: 'left',
+            alignSelf: 'left'
           }}
         >
           {open && (
             <List
               style={{ zIndex: '9999' }}
-              horizontalAlign="right"
-              verticalAlign="bottom"
+              horizontalAlign='right'
+              verticalAlign='bottom'
               open={open}
               onClick={handleClose}
             >
-              <ListItem size="sm">Copy link</ListItem>
+              <ListItem size='sm'>Copy link</ListItem>
               <Divider />
-              <ListItem size="sm">Facebook</ListItem>
-              <ListItem size="sm">Twitter</ListItem>
-              <ListItem size="sm">Instagram</ListItem>
+              <ListItem size='sm'>Facebook</ListItem>
+              <ListItem size='sm'>Twitter</ListItem>
+              <ListItem size='sm'>Instagram</ListItem>
               <Divider />
-              <ListItem size="sm" disabled>
+              <ListItem size='sm' disabled>
                 MySpace
               </ListItem>
             </List>
           )}
-          <Button variant="menu" onClick={handleClick} size="sm" active={open}>
+          <Button variant='menu' onClick={handleClick} size='sm' active={open}>
             Share
           </Button>
         </div>
@@ -161,8 +165,8 @@ function MenuButtonExample() {
         <Cutout>
           <img
             style={{ width: '100%', height: '1uto', display: 'block' }}
-            src="https://image.freepik.com/foto-gratuito/la-frutta-fresca-del-kiwi-tagliata-a-meta-con-la-decorazione-completa-del-pezzo-e-bella-sulla-tavola-di-legno_47436-1.jpg"
-            alt="kiwi"
+            src='https://image.freepik.com/foto-gratuito/la-frutta-fresca-del-kiwi-tagliata-a-meta-con-la-decorazione-completa-del-pezzo-e-bella-sulla-tavola-di-legno_47436-1.jpg'
+            alt='kiwi'
           />
         </Cutout>
       </WindowContent>
