@@ -43,18 +43,10 @@ const BlueBar = styled.div`
   );
 `;
 
-const ProgressBar = ({
-  width, percent, shadow, style,
-}) => (
+const ProgressBar = ({ width, percent, shadow, style }) => (
   <Wrapper style={{ ...style, width }} shadow={shadow}>
-    <WhiteBar>
-      {percent}
-      %
-    </WhiteBar>
-    <BlueBar percent={percent}>
-      {percent}
-      %
-    </BlueBar>
+    <WhiteBar>{percent}%</WhiteBar>
+    <BlueBar percent={percent}>{percent}%</BlueBar>
   </Wrapper>
 );
 
@@ -62,17 +54,14 @@ ProgressBar.defaultProps = {
   width: '100%',
   percent: 0,
   shadow: true,
-  style: {},
+  style: {}
 };
 
 ProgressBar.propTypes = {
   width: propTypes.oneOfType([propTypes.string, propTypes.number]),
   percent: propTypes.number,
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
-  shadow: propTypes.bool,
+  style: propTypes.shape([propTypes.string, propTypes.number]),
+  shadow: propTypes.bool
 };
 
 export default ProgressBar;

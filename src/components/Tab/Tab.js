@@ -18,8 +18,9 @@ const StyledTab = styled.div`
   margin-bottom: -2px;
   cursor: default;
   color: ${({ theme }) => theme.text};
-  ${props => props.active
-    && `
+  ${props =>
+    props.active &&
+    `
     z-index: 1;
     height: calc(${blockSizes.md} + 4px);
     top: -4px;
@@ -29,7 +30,7 @@ const StyledTab = styled.div`
     margin-right: -8px;
   `}
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     width: calc(100% - 4px);
     height: 4px;
@@ -64,7 +65,7 @@ Tab.defaultProps = {
   active: false,
   children: null,
   className: '',
-  style: {},
+  style: {}
 };
 
 Tab.propTypes = {
@@ -73,9 +74,6 @@ Tab.propTypes = {
   active: propTypes.bool,
   children: propTypes.node,
   className: propTypes.string,
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
+  style: propTypes.shape([propTypes.string, propTypes.number])
 };
 export default Tab;

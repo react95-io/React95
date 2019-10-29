@@ -2,9 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
 
-import {
-  Select, Window, WindowContent, Cutout,
-} from '..';
+import { Select, Window, WindowContent, Cutout } from '..';
 
 const items = [
   { value: 1, label: '⚡ Pikachu' },
@@ -13,7 +11,7 @@ const items = [
   { value: 4, label: '🔥 Charizard' },
   { value: 5, label: '🎤 Jigglypuff' },
   { value: 6, label: '🛌🏻 Snorlax' },
-  { value: 7, label: '⛰ Geodude' },
+  { value: 7, label: '⛰ Geodude' }
 ];
 
 const Wrapper = styled.div`
@@ -42,7 +40,7 @@ storiesOf('Select', module)
             padding: '1rem',
             paddingBottom: '3rem',
             background: 'white',
-            width: '300px',
+            width: '300px'
           }}
         >
           <p style={{ lineHeight: 1.3 }}>
@@ -51,11 +49,11 @@ storiesOf('Select', module)
           </p>
           <div
             style={{
-              marginTop: '1.5rem',
+              marginTop: '1.5rem'
             }}
           >
             <Select
-              variant="flat"
+              variant='flat'
               items={items}
               onChange={onChange}
               height={100}

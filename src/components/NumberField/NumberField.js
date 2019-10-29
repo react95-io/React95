@@ -29,12 +29,14 @@ const StyledButton = styled(Button)`
   padding: 0;
   flex-shrink: 0;
 
-  ${({ isFlat }) => !isFlat && css`
-    border-left-color: ${({ theme }) => theme.borderLight};
-    border-top-color: ${({ theme }) => theme.borderLight};
-    box-shadow: inset 1px 1px 0px 1px ${({ theme }) => theme.borderLightest},
-      inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
-  `}
+  ${({ isFlat }) =>
+    !isFlat &&
+    css`
+      border-left-color: ${({ theme }) => theme.borderLight};
+      border-top-color: ${({ theme }) => theme.borderLight};
+      box-shadow: inset 1px 1px 0px 1px ${({ theme }) => theme.borderLightest},
+        inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
+    `}
 `;
 
 const StyledButtonIcon = styled.span`
@@ -54,17 +56,6 @@ const StyledButtonIcon = styled.span`
 `;
 
 class NumberField extends React.Component {
-  static defaultProps = {
-    variant: 'default',
-    disabled: false,
-    min: null,
-    max: null,
-    width: null,
-    disableKeyboardInput: false,
-    className: '',
-    style: {},
-  };
-
   static propTypes = {
     variant: propTypes.oneOf(['default', 'flat']),
     onChange: propTypes.func.isRequired,
@@ -75,10 +66,18 @@ class NumberField extends React.Component {
     disabled: propTypes.bool,
     disableKeyboardInput: propTypes.bool,
     className: propTypes.string,
-    style: propTypes.shape([
-      propTypes.string,
-      propTypes.number,
-    ]),
+    style: propTypes.shape([propTypes.string, propTypes.number])
+  };
+
+  static defaultProps = {
+    variant: 'default',
+    disabled: false,
+    min: null,
+    max: null,
+    width: null,
+    disableKeyboardInput: false,
+    className: '',
+    style: {}
   };
 
   state = {
@@ -86,7 +85,7 @@ class NumberField extends React.Component {
     value: parseInt(this.props.value, 10) || 0
   };
 
-  add = (addValue) => {
+  add = addValue => {
     const { value } = this.state;
     const { onChange } = this.props;
 
@@ -95,10 +94,11 @@ class NumberField extends React.Component {
     this.setState({ value: newValue });
   };
 
-  handleChange = (e) => {
-    let newValue = e.target.value === '-' ? '-' : this.normalize(e.target.value);
+  handleChange = e => {
+    let newValue =
+      e.target.value === '-' ? '-' : this.normalize(e.target.value);
     // eslint-disable-next-line
-    newValue = newValue ? newValue : newValue === 0 ? 0 : "";
+    newValue = newValue ? newValue : newValue === 0 ? 0 : '';
 
     if (e.target.validity.valid) {
       const { onChange } = this.props;
@@ -107,7 +107,7 @@ class NumberField extends React.Component {
     }
   };
 
-  normalize = (value) => {
+  normalize = value => {
     const { min, max } = this.props;
 
     if (min && value < min) return min;
@@ -123,7 +123,7 @@ class NumberField extends React.Component {
       className,
       variant,
       width,
-      style,
+      style
     } = this.props;
     const { value } = this.state;
     return (
@@ -139,9 +139,9 @@ class NumberField extends React.Component {
           }
           readOnly={disabled || disableKeyboardInput}
           disabled={disabled}
-          type="tel"
-          pattern="^-?[0-9]\d*\.?\d*$"
-          width="100%"
+          type='tel'
+          pattern='^-?[0-9]\d*\.?\d*$'
+          width='100%'
         />
         <StyledButtonWrapper>
           <StyledButton

@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 
-import {
-  Checkbox, Cutout, Fieldset, Window, WindowContent,
-} from '..';
+import { Checkbox, Cutout, Fieldset, Window, WindowContent } from '..';
 
 storiesOf('Fieldset', module)
   .addDecorator(story => (
     <div
       style={{
         padding: '5rem',
-        background: 'teal',
+        background: 'teal'
       }}
     >
       {story()}
@@ -21,7 +19,9 @@ storiesOf('Fieldset', module)
       <WindowContent>
         <Fieldset>
           Some content here
-          <span role="img" aria-label="😍">😍</span>
+          <span role='img' aria-label='😍'>
+            😍
+          </span>
         </Fieldset>
       </WindowContent>
     </Window>
@@ -29,9 +29,11 @@ storiesOf('Fieldset', module)
   .add('with label', () => (
     <Window>
       <WindowContent>
-        <Fieldset label="Label here">
+        <Fieldset label='Label here'>
           Some content here
-          <span role="img" aria-label="😍">😍</span>
+          <span role='img' aria-label='😍'>
+            😍
+          </span>
         </Fieldset>
       </WindowContent>
     </Window>
@@ -53,25 +55,27 @@ const FlatFieldset = () => {
           </p>
           <div
             style={{
-              marginTop: '1.5rem',
+              marginTop: '1.5rem'
             }}
           >
             <Fieldset
-              variant="flat"
-              label={(
+              variant='flat'
+              label={
                 <Checkbox
-                  variant="flat"
+                  variant='flat'
                   style={{ margin: 0 }}
-                  label="Enable"
+                  label='Enable'
                   checked={!state}
                   value={!state}
                   onChange={() => setState(!state)}
                 />
-)}
+              }
               disabled={state}
             >
               Some content here
-              <span role="img" aria-label="😍">😍</span>
+              <span role='img' aria-label='😍'>
+                😍
+              </span>
             </Fieldset>
           </div>
         </Cutout>
@@ -85,19 +89,21 @@ const DisabledFieldset = () => {
     <Window>
       <WindowContent>
         <Fieldset
-          label={(
+          label={
             <Checkbox
               style={{ margin: 0 }}
-              label="Enable"
+              label='Enable'
               checked={!state}
               value={!state}
               onChange={() => setState(!state)}
             />
-          )}
+          }
           disabled={state}
         >
           Some content here
-          <span role="img" aria-label="😍">😍</span>
+          <span role='img' aria-label='😍'>
+            😍
+          </span>
         </Fieldset>
       </WindowContent>
     </Window>

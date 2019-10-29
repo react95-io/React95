@@ -35,19 +35,20 @@ const StyledDropdownButton = styled(Button)`
   padding: 0;
   z-index: 1;
   flex-shrink: 0;
-  ${({ variant }) => (variant === 'flat'
-    ? css`
+  ${({ variant }) =>
+    variant === 'flat'
+      ? css`
           height: calc(100% - 4px);
           margin-right: 2px;
         `
-    : css`
+      : css`
           height: 100%;
           border-left-color: ${({ theme }) => theme.borderLight};
           border-top-color: ${({ theme }) => theme.borderLight};
           box-shadow: inset 1px 1px 0px 1px
               ${({ theme }) => theme.borderLightest},
             inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
-        `)}
+        `}
 `;
 const StyledDropdownIcon = styled.span`
   position: absolute;
@@ -78,18 +79,19 @@ const StyledDropdownList = styled.ul`
   cursor: default;
   z-index: 99;
 
-  ${({ variant }) => (variant === 'flat'
-    ? css`
-      bottom: 2px;
-      width: 100%;
-      border: 2px solid ${({ theme }) => theme.flatDark};
-    `
-    : css`
-      box-shadow: ${props => (props.shadow ? commonShadow : 'none')};
-      bottom: -2px;
-      width: calc(100% - 2px);
-      border: 2px solid ${({ theme }) => theme.borderDarkest};
-    `)}
+  ${({ variant }) =>
+    variant === 'flat'
+      ? css`
+          bottom: 2px;
+          width: 100%;
+          border: 2px solid ${({ theme }) => theme.flatDark};
+        `
+      : css`
+          box-shadow: ${props => (props.shadow ? commonShadow : 'none')};
+          bottom: -2px;
+          width: calc(100% - 2px);
+          border: 2px solid ${({ theme }) => theme.borderDarkest};
+        `}
 `;
 const StyledDropdownListItem = styled.li`
   box-sizing: border-box;
@@ -124,12 +126,13 @@ const Select = ({
   const [index, setIndex] = useState(selectedIndex);
   const [open, setOpen] = useState(false);
 
-  const handleSelect = (i) => {
+  const handleSelect = i => {
     if (onChange) onChange(items[i].value);
     setIndex(i);
   };
 
-  const Wrapper = variant === 'flat' ? StyledFlatSelectWrapper : StyledSelectWrapper;
+  const Wrapper =
+    variant === 'flat' ? StyledFlatSelectWrapper : StyledSelectWrapper;
   return (
     <Wrapper
       className={className}
@@ -173,7 +176,7 @@ Select.defaultProps = {
   className: '',
   width: null,
   height: null,
-  onChange: null,
+  onChange: null
 };
 
 Select.propTypes = {
@@ -184,11 +187,8 @@ Select.propTypes = {
   selectedIndex: propTypes.number,
   shadow: propTypes.bool,
   variant: propTypes.oneOf(['default', 'flat']),
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
-  onChange: propTypes.func,
+  style: propTypes.shape([propTypes.string, propTypes.number]),
+  onChange: propTypes.func
 };
 
 export default Select;

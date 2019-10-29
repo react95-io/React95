@@ -12,7 +12,7 @@ storiesOf('Cutout', module).add('default', () => (
             fontFamily: 'times new roman',
             textAlign: 'center',
             fontSize: '3rem',
-            marginTop: '0.5rem',
+            marginTop: '0.5rem'
           }}
         >
           React95

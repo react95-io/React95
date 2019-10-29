@@ -10,9 +10,7 @@ const StyledTableBody = styled.tbody`
   box-shadow: ${insetShadow};
 `;
 
-const TableBody = ({
-  className, children, style, ...otherProps
-}) => (
+const TableBody = ({ className, children, style, ...otherProps }) => (
   <StyledTableBody className={className} style={style} {...otherProps}>
     {children}
   </StyledTableBody>
@@ -21,16 +19,13 @@ const TableBody = ({
 TableBody.defaultProps = {
   children: null,
   className: '',
-  style: {},
+  style: {}
 };
 
 TableBody.propTypes = {
   children: propTypes.node,
   className: propTypes.string,
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
+  style: propTypes.shape([propTypes.string, propTypes.number])
 };
 
 export default TableBody;

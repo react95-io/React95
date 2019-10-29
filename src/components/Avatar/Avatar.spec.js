@@ -20,10 +20,15 @@ describe('<Avatar />', () => {
   });
 
   it('should handle border properly', () => {
-    const { container, rerender } = renderWithTheme(<Avatar noBorder={false} />);
+    const { container, rerender } = renderWithTheme(
+      <Avatar noBorder={false} />
+    );
     const avatarEl = container.firstChild;
 
-    expect(avatarEl).toHaveStyleRule('border-top', `2px solid ${theme.borderDark}`);
+    expect(avatarEl).toHaveStyleRule(
+      'border-top',
+      `2px solid ${theme.borderDark}`
+    );
 
     rerender(<Avatar noBorder />);
 
@@ -43,9 +48,7 @@ describe('<Avatar />', () => {
 
   it('should render with source', async () => {
     const catGif = 'https://cdn2.thecatapi.com/images/1ac.gif';
-    const { findByAltText } = render((
-      <Avatar src={catGif} alt="cat avatar" />
-    ));
+    const { findByAltText } = render(<Avatar src={catGif} alt='cat avatar' />);
     const imageEl = await findByAltText('cat avatar');
 
     expect(imageEl.src).toBe(catGif);
@@ -53,11 +56,11 @@ describe('<Avatar />', () => {
 
   it('should render source with priority over children', async () => {
     const catGif = 'https://cdn2.thecatapi.com/images/1ac.gif';
-    const { queryByText } = render((
-      <Avatar src={catGif} alt="cat avatar">
+    const { queryByText } = render(
+      <Avatar src={catGif} alt='cat avatar'>
         Cats are cool
       </Avatar>
-    ));
+    );
     const content = await queryByText(/cats are cool/i);
 
     expect(content).toBeNull();

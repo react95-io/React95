@@ -11,16 +11,18 @@ const StyledAvatar = styled.div`
   width: calc(${() => blockSizes.md} - 2px);
   border-radius: ${({ square }) => (square ? 0 : '50%')};
   overflow: hidden;
-  ${({ noBorder, theme }) => !noBorder
-    && `
+  ${({ noBorder, theme }) =>
+    !noBorder &&
+    `
     border-top: 2px solid ${theme.borderDark};
     border-left: 2px solid ${theme.borderDark};
     border-bottom: 2px solid ${theme.borderLightest};
     border-right: 2px solid ${theme.borderLightest};
     background: ${theme.material};
   `}
-  ${({ src }) => !src
-    && `
+  ${({ src }) =>
+    !src &&
+    `
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -36,9 +38,7 @@ const SlyledAvatarIMG = styled.img`
   height: 100%;
 `;
 
-const Avatar = ({
-  children, noBorder, square, src, alt, ...otherProps
-}) => (
+const Avatar = ({ children, noBorder, square, src, alt, ...otherProps }) => (
   <StyledAvatar noBorder={noBorder} square={square} {...otherProps}>
     {src ? <SlyledAvatarIMG src={src} alt={alt} /> : children}
   </StyledAvatar>
@@ -49,7 +49,7 @@ Avatar.defaultProps = {
   noBorder: false,
   src: undefined,
   children: null,
-  alt: '',
+  alt: ''
 };
 
 Avatar.propTypes = {
@@ -57,7 +57,7 @@ Avatar.propTypes = {
   noBorder: propTypes.bool,
   children: propTypes.node,
   src: propTypes.string,
-  alt: propTypes.string,
+  alt: propTypes.string
 };
 
 export default Avatar;

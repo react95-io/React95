@@ -16,15 +16,13 @@ const StyledHourglass = styled.span`
   width: 100%;
   height: 100%;
 `;
-const Hourglass = ({
-  size, className, style, ...otherProps
-}) => (
+const Hourglass = ({ size, className, style, ...otherProps }) => (
   <StyledContainer
     className={className}
     style={{
       ...style,
       width: size || '30px',
-      height: size || '30px',
+      height: size || '30px'
     }}
     {...otherProps}
   >
@@ -35,15 +33,12 @@ const Hourglass = ({
 Hourglass.defaultProps = {
   size: '30px',
   className: '',
-  style: {},
+  style: {}
 };
 
 Hourglass.propTypes = {
   size: propTypes.oneOfType([propTypes.string, propTypes.number]),
   className: propTypes.string,
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
+  style: propTypes.shape([propTypes.string, propTypes.number])
 };
 export default Hourglass;

@@ -45,17 +45,14 @@ TableHeadCell.defaultProps = {
   onClick: () => {},
   children: null,
   className: '',
-  style: {},
+  style: {}
 };
 
 TableHeadCell.propTypes = {
   onClick: propTypes.func,
   children: propTypes.node,
   className: propTypes.string,
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
+  style: propTypes.shape([propTypes.string, propTypes.number])
 };
 
 export default TableHeadCell;

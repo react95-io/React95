@@ -8,22 +8,21 @@ storiesOf('Anchor', module)
     <div
       style={{
         padding: '5rem',
-        background: '#ced0cf',
+        background: '#ced0cf'
       }}
     >
       {story()}
     </div>
   ))
   .add('default', () => (
-    <Anchor href="https://expensive.toys" target="_blank">
+    <Anchor href='https://expensive.toys' target='_blank'>
       Expensive Toys
-      {' '}
     </Anchor>
   ))
   .add('within text', () => (
     <h1>
-      {'Everybody needs '}
-      <Anchor href="https://expensive.toys" target="_blank">
+      Everybody needs
+      <Anchor href='https://expensive.toys' target='_blank'>
         Expensive Toys
       </Anchor>
     </h1>

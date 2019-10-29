@@ -1,20 +1,14 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
-import {
-  Radio,
-  Cutout,
-  Fieldset,
-  Window,
-  WindowContent,
-} from '..';
+import { Radio, Cutout, Fieldset, Window, WindowContent } from '..';
 
 storiesOf('Radio', module)
   .addDecorator(story => (
     <div
       style={{
         padding: '5rem',
-        background: 'teal',
+        background: 'teal'
       }}
     >
       {story()}
@@ -25,7 +19,7 @@ storiesOf('Radio', module)
 
 class RadioGroup extends React.Component {
   state = {
-    checkedValue: 'Pear',
+    checkedValue: 'Pear'
   };
 
   handleChange = e => this.setState({ checkedValue: e.target.value });
@@ -35,37 +29,37 @@ class RadioGroup extends React.Component {
     return (
       <Window>
         <WindowContent>
-          <Fieldset label="Fruits">
+          <Fieldset label='Fruits'>
             <Radio
               checked={checkedValue === 'Pear'}
               onChange={this.handleChange}
-              value="Pear"
-              label="🍐 Pear"
-              name="fruits"
+              value='Pear'
+              label='🍐 Pear'
+              name='fruits'
             />
             <br />
             <Radio
               checked={checkedValue === 'Orange'}
               onChange={this.handleChange}
-              value="Orange"
-              label="🍊 Orange"
-              name="fruits"
+              value='Orange'
+              label='🍊 Orange'
+              name='fruits'
             />
             <br />
             <Radio
               checked={checkedValue === 'Kiwi'}
               onChange={this.handleChange}
-              value="Kiwi"
-              label="🥝 Kiwi"
-              name="fruits"
+              value='Kiwi'
+              label='🥝 Kiwi'
+              name='fruits'
             />
             <br />
             <Radio
               checked={checkedValue === 'Grape'}
               onChange={this.handleChange}
-              value="Grape"
-              label="🍇 Grape"
-              name="fruits"
+              value='Grape'
+              label='🍇 Grape'
+              name='fruits'
               disabled
             />
           </Fieldset>
@@ -77,7 +71,7 @@ class RadioGroup extends React.Component {
 
 class FlatRadioGroup extends React.Component {
   state = {
-    checkedValue: 'Pear',
+    checkedValue: 'Pear'
   };
 
   handleChange = e => this.setState({ checkedValue: e.target.value });
@@ -95,43 +89,43 @@ class FlatRadioGroup extends React.Component {
             </p>
             <div
               style={{
-                marginTop: '1rem',
+                marginTop: '1rem'
               }}
             >
               <Radio
-                variant="flat"
+                variant='flat'
                 checked={checkedValue === 'Pear'}
                 onChange={this.handleChange}
-                value="Pear"
-                label="🍐 Pear"
-                name="fruits"
+                value='Pear'
+                label='🍐 Pear'
+                name='fruits'
               />
               <br />
               <Radio
-                variant="flat"
+                variant='flat'
                 checked={checkedValue === 'Orange'}
                 onChange={this.handleChange}
-                value="Orange"
-                label="🍊 Orange"
-                name="fruits"
+                value='Orange'
+                label='🍊 Orange'
+                name='fruits'
               />
               <br />
               <Radio
-                variant="flat"
+                variant='flat'
                 checked={checkedValue === 'Kiwi'}
                 onChange={this.handleChange}
-                value="Kiwi"
-                label="🥝 Kiwi"
-                name="fruits"
+                value='Kiwi'
+                label='🥝 Kiwi'
+                name='fruits'
               />
               <br />
               <Radio
-                variant="flat"
+                variant='flat'
                 checked={checkedValue === 'Grape'}
                 onChange={this.handleChange}
-                value="Grape"
-                label="🍇 Grape"
-                name="fruits"
+                value='Grape'
+                label='🍇 Grape'
+                name='fruits'
                 disabled
               />
             </div>

@@ -11,7 +11,7 @@ storiesOf('Avatar', module)
     <div
       style={{
         padding: '5rem',
-        background: 'teal',
+        background: 'teal'
       }}
     >
       {story()}
@@ -25,7 +25,7 @@ storiesOf('Avatar', module)
         <Button flat accent>
           Menu
         </Button>
-        <Avatar src="https://sphoto.nasza-klasa.pl/33278012/1/square/2658174fbd.jpeg?v=1" />
+        <Avatar src='https://sphoto.nasza-klasa.pl/33278012/1/square/2658174fbd.jpeg?v=1' />
       </Toolbar>
     </AppBar>
   ))
@@ -38,7 +38,7 @@ storiesOf('Avatar', module)
           Menu
         </Button>
         <Avatar
-          src="https://sphoto.nasza-klasa.pl/33278012/1/square/2658174fbd.jpeg?v=1"
+          src='https://sphoto.nasza-klasa.pl/33278012/1/square/2658174fbd.jpeg?v=1'
           noBorder
         />
       </Toolbar>
@@ -65,7 +65,9 @@ storiesOf('Avatar', module)
           Menu
         </Button>
         <Avatar square>
-          <span role="img" aria-label="🚀">🚀</span>
+          <span role='img' aria-label='🚀'>
+            🚀
+          </span>
         </Avatar>
       </Toolbar>
     </AppBar>

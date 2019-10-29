@@ -11,7 +11,7 @@ const LogoIcon = ({ style }) => {
     >
       <img
         src={logoIMG}
-        alt="react95 logo"
+        alt='react95 logo'
         style={{ height: '100%', width: 'auto' }}
       />
     </span>
@@ -19,14 +19,11 @@ const LogoIcon = ({ style }) => {
 };
 
 LogoIcon.defaultProps = {
-  style: {},
+  style: {}
 };
 
 LogoIcon.propTypes = {
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
+  style: propTypes.shape([propTypes.string, propTypes.number])
 };
 
 export default LogoIcon;

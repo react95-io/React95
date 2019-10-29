@@ -7,7 +7,7 @@ import { blockSizes } from '../common/system';
 import Button from './Button';
 
 const defaultProps = {
-  children: 'click me',
+  children: 'click me'
 };
 
 describe('<Button />', () => {
@@ -20,7 +20,7 @@ describe('<Button />', () => {
   });
 
   it('should handle different types', () => {
-    const { getByRole } = render(<Button {...defaultProps} type="submit" />);
+    const { getByRole } = render(<Button {...defaultProps} type='submit' />);
     const button = getByRole('button');
 
     expect(button).toHaveAttribute('type', 'submit');
@@ -28,7 +28,9 @@ describe('<Button />', () => {
 
   it('should handle click properly', () => {
     const onButtonClick = jest.fn();
-    const { getByRole } = render(<Button {...defaultProps} onClick={onButtonClick} />);
+    const { getByRole } = render(
+      <Button {...defaultProps} onClick={onButtonClick} />
+    );
     const button = getByRole('button');
 
     fireEvent.click(button);
@@ -37,24 +39,28 @@ describe('<Button />', () => {
   });
 
   it('should handle disabled for all variants', () => {
-    const { getByRole, rerender } = renderWithTheme(<Button {...defaultProps} disabled />);
+    const { getByRole, rerender } = renderWithTheme(
+      <Button {...defaultProps} disabled />
+    );
     const button = getByRole('button');
     const disabledTextShadow = `1px 1px ${theme.textDisabledShadow}`;
 
     expect(button).toHaveStyleRule('color', theme.textDisabled);
     expect(button).toHaveStyleRule('text-shadow', disabledTextShadow);
 
-    rerender(<Button {...defaultProps} variant="menu" />);
+    rerender(<Button {...defaultProps} variant='menu' />);
     expect(button).toHaveStyleRule('color', theme.textDisabled);
     expect(button).toHaveStyleRule('text-shadow', disabledTextShadow);
 
-    rerender(<Button {...defaultProps} variant="flat" />);
+    rerender(<Button {...defaultProps} variant='flat' />);
     expect(button).toHaveStyleRule('color', theme.textDisabled);
     expect(button).toHaveStyleRule('text-shadow', disabledTextShadow);
   });
 
   it('should handle fullWidth prop', () => {
-    const { getByRole, rerender } = render(<Button {...defaultProps} fullWidth />);
+    const { getByRole, rerender } = render(
+      <Button {...defaultProps} fullWidth />
+    );
     const button = getByRole('button');
 
     expect(button).toHaveStyleRule('width', '100%');
@@ -65,18 +71,20 @@ describe('<Button />', () => {
   });
 
   it('should handle button sizes properly', () => {
-    const { getByRole, rerender } = render(<Button {...defaultProps} size="sm" />);
+    const { getByRole, rerender } = render(
+      <Button {...defaultProps} size='sm' />
+    );
     const button = getByRole('button');
 
     expect(button).toHaveStyleRule('height', blockSizes.sm);
 
-    rerender(<Button {...defaultProps} size="lg" />);
+    rerender(<Button {...defaultProps} size='lg' />);
 
     expect(button).toHaveStyleRule('height', blockSizes.lg);
   });
 
   it('should handle square prop', () => {
-    const { getByRole } = render(<Button {...defaultProps} square size="md" />);
+    const { getByRole } = render(<Button {...defaultProps} square size='md' />);
     const button = getByRole('button');
 
     expect(button).toHaveStyleRule('padding', '0');

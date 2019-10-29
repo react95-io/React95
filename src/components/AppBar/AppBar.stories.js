@@ -17,7 +17,7 @@ storiesOf('AppBar', module)
     <div
       style={{
         padding: '5rem',
-        background: 'teal',
+        background: 'teal'
       }}
     >
       {story()}
@@ -28,7 +28,7 @@ storiesOf('AppBar', module)
       <Toolbar style={{ justifyContent: 'space-between' }}>
         <Menu />
         <TextField
-          placeholder="Search..."
+          placeholder='Search...'
           width={150}
           style={{ marginLeft: 4 }}
         />
@@ -51,22 +51,28 @@ function Menu() {
     <div style={{ position: 'relative', display: 'inline-block' }}>
       {open && (
         <List
-          horizontalAlign="left"
-          verticalAlign="bottom"
+          horizontalAlign='left'
+          verticalAlign='bottom'
           open={open}
           onClick={handleClose}
         >
           <ListItem>
-            <span role="img" aria-label="👨‍💻">👨‍💻</span>
+            <span role='img' aria-label='👨‍💻'>
+              👨‍💻
+            </span>
             Profile
           </ListItem>
           <ListItem>
-            <span role="img" aria-label="📁">📁</span>
+            <span role='img' aria-label='📁'>
+              📁
+            </span>
             My account
           </ListItem>
           <Divider />
           <ListItem disabled>
-            <span role="img" aria-label="🔙">🔙</span>
+            <span role='img' aria-label='🔙'>
+              🔙
+            </span>
             Logout
           </ListItem>
         </List>

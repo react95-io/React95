@@ -17,9 +17,7 @@ const StyledCutout = styled(Cutout)`
   }
 `;
 
-const Table = ({
-  className, children, style, ...otherProps
-}) => (
+const Table = ({ className, children, style, ...otherProps }) => (
   <StyledCutout>
     <StyledTable className={className} style={style} {...otherProps}>
       {children}
@@ -30,16 +28,13 @@ const Table = ({
 Table.defaultProps = {
   children: null,
   className: '',
-  style: {},
+  style: {}
 };
 
 Table.propTypes = {
   children: propTypes.node,
   className: propTypes.string,
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
+  style: propTypes.shape([propTypes.string, propTypes.number])
 };
 
 export default Table;

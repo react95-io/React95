@@ -19,26 +19,26 @@ storiesOf('TextArea', module)
   .addDecorator(story => <Wrapper>{story()}</Wrapper>)
   .add('default', () => (
     <TextArea
-      defaultValue="User ReactGirl was the first one to find 🐛 here."
-      placeholder="Type in here.."
+      defaultValue='User ReactGirl was the first one to find 🐛 here.'
+      placeholder='Type in here..'
       onChange={onChange}
     />
   ))
   .add('controlled', () => <ControlledTextAreaExample />)
   .add('disabled', () => (
-    <TextArea disabled placeholder="Typing disabled " onChange={onChange} />
+    <TextArea disabled placeholder='Typing disabled ' onChange={onChange} />
   ))
 
   .add('fixed size', () => (
     <TextArea
       width={200}
       height={200}
-      placeholder="Type in here.."
+      placeholder='Type in here..'
       onChange={onChange}
     />
   ))
   .add('no shadow', () => (
-    <TextArea shadow={false} placeholder="Type in here.." onChange={onChange} />
+    <TextArea shadow={false} placeholder='Type in here..' onChange={onChange} />
   ))
   .add('flat', () => (
     <StyledCutout style={{ padding: '2rem', width: '300px' }}>
@@ -48,10 +48,10 @@ storiesOf('TextArea', module)
       </p>
       <div style={{ display: 'flex', alignItems: 'center', marginTop: '1rem' }}>
         <TextArea
-          variant="flat"
-          width="100%"
+          variant='flat'
+          width='100%'
           height={200}
-          placeholder="Type in here.."
+          placeholder='Type in here..'
           onChange={onChange}
         />
       </div>
@@ -65,11 +65,11 @@ storiesOf('TextArea', module)
       </p>
       <div style={{ display: 'flex', alignItems: 'center', marginTop: '1rem' }}>
         <TextArea
-          variant="flat"
+          variant='flat'
           disabled
-          width="100%"
+          width='100%'
           height={200}
-          placeholder="Type in here.."
+          placeholder='Type in here..'
           onChange={onChange}
         />
       </div>
@@ -77,7 +77,7 @@ storiesOf('TextArea', module)
   ));
 class ControlledTextAreaExample extends React.Component {
   state = {
-    value: 'default value',
+    value: 'default value'
   };
 
   handleChange = e => this.setState({ value: e.target.value });

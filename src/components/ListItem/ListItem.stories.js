@@ -11,7 +11,7 @@ storiesOf('ListItem', module)
     <div
       style={{
         padding: '5rem',
-        background: 'teal',
+        background: 'teal'
       }}
     >
       {story()}
@@ -40,25 +40,31 @@ storiesOf('ListItem', module)
   .add('square', () => (
     <List>
       <ListItem {...actions} square>
-        <span role="img" aria-label="😎">😎</span>
+        <span role='img' aria-label='😎'>
+          😎
+        </span>
       </ListItem>
       <ListItem {...actions} square>
-        <span role="img" aria-label="🤖">🤖</span>
+        <span role='img' aria-label='🤖'>
+          🤖
+        </span>
       </ListItem>
       <ListItem {...actions} square>
-        <span role="img" aria-label="🎁">🎁</span>
+        <span role='img' aria-label='🎁'>
+          🎁
+        </span>
       </ListItem>
     </List>
   ))
   .add('size small', () => (
     <List>
-      <ListItem size="sm">View</ListItem>
+      <ListItem size='sm'>View</ListItem>
       <Divider />
-      <ListItem size="sm">Paste</ListItem>
-      <ListItem size="sm">Paste Shortcut</ListItem>
-      <ListItem size="sm">Undo Copy</ListItem>
+      <ListItem size='sm'>Paste</ListItem>
+      <ListItem size='sm'>Paste Shortcut</ListItem>
+      <ListItem size='sm'>Undo Copy</ListItem>
       <Divider />
-      <ListItem size="sm">Properties</ListItem>
+      <ListItem size='sm'>Properties</ListItem>
     </List>
   ))
   .add('render as link', () => (
@@ -66,11 +72,13 @@ storiesOf('ListItem', module)
       <ListItem {...actions}>Normal item</ListItem>
       <ListItem
         {...actions}
-        as="a"
-        href="https://expensive.toys"
-        target="_blank"
+        as='a'
+        href='https://expensive.toys'
+        target='_blank'
       >
-        <span role="img" aria-label="🔗">🔗</span>
+        <span role='img' aria-label='🔗'>
+          🔗
+        </span>
         Link!
       </ListItem>
     </List>

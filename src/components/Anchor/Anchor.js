@@ -13,32 +13,22 @@ const StyledAnchor = styled.a`
   }
 `;
 
-const Anchor = ({
-  className, style, href, children, ...otherProps
-}) => (
-  <StyledAnchor
-    href={href}
-    className={className}
-    style={style}
-    {...otherProps}
-  >
+const Anchor = ({ className, style, href, children, ...otherProps }) => (
+  <StyledAnchor href={href} className={className} style={style} {...otherProps}>
     {children}
   </StyledAnchor>
 );
 
 Anchor.defaultProps = {
   className: '',
-  style: {},
+  style: {}
 };
 
 Anchor.propTypes = {
   className: propTypes.string,
   href: propTypes.string.isRequired,
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
-  children: propTypes.node.isRequired,
+  style: propTypes.shape([propTypes.string, propTypes.number]),
+  children: propTypes.node.isRequired
 };
 
 export default Anchor;

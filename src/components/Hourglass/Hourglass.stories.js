@@ -8,7 +8,7 @@ storiesOf('Hourglass', module)
     <div
       style={{
         padding: '5rem',
-        background: '#008080',
+        background: '#008080'
       }}
     >
       {story()}

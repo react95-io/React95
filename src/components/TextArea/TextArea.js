@@ -3,16 +3,15 @@ import propTypes from 'prop-types';
 
 import styled from 'styled-components';
 import { createDisabledTextStyles, createFlatBoxStyles } from '../common';
-import {
-  blockSizes, fontSizes, padding, fontFamily,
-} from '../common/system';
+import { blockSizes, fontSizes, padding, fontFamily } from '../common/system';
 import Cutout from '../Cutout/Cutout';
 
 const StyledTextAreaWrapper = styled(Cutout)`
   display: inline-block;
   min-height: ${blockSizes.md};
   padding: 0;
-  background: ${({ theme, isDisabled }) => (isDisabled ? theme.material : theme.canvas)};
+  background: ${({ theme, isDisabled }) =>
+    isDisabled ? theme.material : theme.canvas};
 `;
 const StyledFlatTextAreaWrapper = styled.div`
   position: relative;
@@ -31,7 +30,8 @@ const StyledTextArea = styled.textarea`
   font-size: ${fontSizes.md};
   font-family: ${fontFamily};
 
-  ${({ disabled, variant }) => variant !== 'flat' && disabled && createDisabledTextStyles()}
+  ${({ disabled, variant }) =>
+    variant !== 'flat' && disabled && createDisabledTextStyles()}
 `;
 
 const TextArea = ({
@@ -45,13 +45,14 @@ const TextArea = ({
   shadow,
   ...otherProps
 }) => {
-  const Wrapper = variant === 'flat' ? StyledFlatTextAreaWrapper : StyledTextAreaWrapper;
+  const Wrapper =
+    variant === 'flat' ? StyledFlatTextAreaWrapper : StyledTextAreaWrapper;
   return (
     <Wrapper
       style={{
         ...style,
         width: width || '100%',
-        height: height || 'auto',
+        height: height || 'auto'
       }}
       className={className}
       isDisabled={disabled}
@@ -78,7 +79,7 @@ TextArea.defaultProps = {
   height: null,
   onChange: () => {},
   disabled: false,
-  className: '',
+  className: ''
 };
 
 TextArea.propTypes = {
@@ -89,10 +90,7 @@ TextArea.propTypes = {
   variant: propTypes.oneOf(['default', 'flat']),
   className: propTypes.string,
   shadow: propTypes.bool,
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
+  style: propTypes.shape([propTypes.string, propTypes.number])
 };
 
 export default TextArea;
