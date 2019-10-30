@@ -7,6 +7,7 @@ export const createDisabledTextStyles = () => css`
   color: ${({ theme }) => theme.textDisabled};
   text-shadow: 1px 1px ${({ theme }) => theme.textDisabledShadow};
   /* filter: grayscale(100%); */
+  -webkit-text-fill-color: ${({ theme }) => theme.inputTextDisabled};
 `;
 export const createBoxStyles = () => css`
   box-sizing: border-box;
