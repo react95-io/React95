@@ -18,7 +18,8 @@ export default {
       "process.env.NODE_ENV": JSON.stringify(NODE_ENV)
     }),
     babel({
-      exclude: "node_modules/**"
+      exclude: "node_modules/**",
+      runtimeHelpers: true
     }),
     resolve(),
     commonjs()
