@@ -1,7 +1,4 @@
 {
   "buildCommand": "build:prod",
-  "publishDirectory": {
-    "react95": "./dist"
-  },
   "sandboxes": ["react95-template-xkfj0"]
 }
