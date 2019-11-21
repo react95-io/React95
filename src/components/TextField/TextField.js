@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import propTypes from 'prop-types';
 
 import styled from 'styled-components';
@@ -29,37 +29,43 @@ export const StyledTextInput = styled.input`
   ${({ disabled, variant }) =>
     variant !== 'flat' && disabled && createDisabledTextStyles()}
 `;
-const TextField = ({
-  onChange,
-  disabled,
-  variant,
-  type,
-  style,
-  shadow,
-  className,
-  width,
-  ...otherProps
-}) => {
-  const Wrapper = variant === 'flat' ? StyledFlatWrapper : StyledWrapper;
-  return (
-    <Wrapper
-      width={width}
-      shadow={shadow}
-      isDisabled={disabled}
-      style={{ ...style, width: width || 'auto' }}
-      className={className}
-    >
-      <StyledTextInput
-        onChange={disabled ? undefined : onChange}
-        readOnly={disabled}
-        disabled={disabled}
-        variant={variant}
-        type={type}
-        {...otherProps}
-      />
-    </Wrapper>
-  );
-};
+const TextField = forwardRef(
+  (
+    {
+      onChange,
+      disabled,
+      variant,
+      type,
+      style,
+      shadow,
+      className,
+      width,
+      ...otherProps
+    },
+    ref
+  ) => {
+    const Wrapper = variant === 'flat' ? StyledFlatWrapper : StyledWrapper;
+    return (
+      <Wrapper
+        width={width}
+        shadow={shadow}
+        isDisabled={disabled}
+        style={{ ...style, width: width || 'auto' }}
+        className={className}
+      >
+        <StyledTextInput
+          onChange={disabled ? undefined : onChange}
+          readOnly={disabled}
+          disabled={disabled}
+          variant={variant}
+          type={type}
+          ref={ref}
+          {...otherProps}
+        />
+      </Wrapper>
+    );
+  }
+);
 TextField.defaultProps = {
   disabled: false,
   type: 'text',
