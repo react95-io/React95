@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import propTypes from 'prop-types';
 
 import styled, { css } from 'styled-components';
@@ -23,7 +23,11 @@ const StyledLabel = styled.label`
   ${props => props.isDisabled && createDisabledTextStyles()}
 `;
 
-const StyledInput = styled.input`
+const RadioInput = forwardRef(({ ...props }, ref) => {
+  return <input {...props} ref={ref} />;
+});
+
+const StyledRadioInput = styled(RadioInput)`
   position: absolute;
   opacity: 0;
 `;
@@ -95,37 +99,43 @@ const StyledFlatCheckmark = styled.div`
     border-radius: 50%;
   }
 `;
-const Radio = ({
-  onChange,
-  label,
-  disabled,
-  variant,
-  value,
-  checked,
-  name,
-  className,
-  style,
-  shadow,
-  ...otherProps
-}) => {
-  const Checkmark = variant === 'flat' ? StyledFlatCheckmark : StyledCheckmark;
-
-  return (
-    <StyledLabel isDisabled={disabled} className={className} style={style}>
-      {label}
-      <StyledInput
-        onChange={disabled ? undefined : onChange}
-        readOnly={disabled}
-        type='radio'
-        value={value}
-        checked={checked}
-        name={name}
-        {...otherProps}
-      />
-      <Checkmark checked={checked} isDisabled={disabled} shadow={shadow} />
-    </StyledLabel>
-  );
-};
+const Radio = forwardRef(
+  (
+    {
+      onChange,
+      label,
+      disabled,
+      variant,
+      value,
+      checked,
+      name,
+      className,
+      style,
+      shadow,
+      ...otherProps
+    },
+    ref
+  ) => {
+    const Checkmark =
+      variant === 'flat' ? StyledFlatCheckmark : StyledCheckmark;
+    return (
+      <StyledLabel isDisabled={disabled} className={className} style={style}>
+        {label}
+        <StyledRadioInput
+          onChange={disabled ? undefined : onChange}
+          readOnly={disabled}
+          type='radio'
+          value={value}
+          checked={checked}
+          name={name}
+          ref={ref}
+          {...otherProps}
+        />
+        <Checkmark checked={checked} isDisabled={disabled} shadow={shadow} />
+      </StyledLabel>
+    );
+  }
+);
 
 Radio.defaultProps = {
   checked: false,

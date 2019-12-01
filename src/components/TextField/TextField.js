@@ -16,7 +16,12 @@ const StyledFlatWrapper = styled.div`
   height: ${blockSizes.md};
   ${createFlatBoxStyles()}
 `;
-export const StyledTextInput = styled.input`
+
+const TextInput = forwardRef(({ ...props }, ref) => (
+  <input {...props} ref={ref} />
+));
+
+export const StyledTextInput = styled(TextInput)`
   box-sizing: border-box;
   width: 100%;
   height: 100%;
@@ -29,6 +34,7 @@ export const StyledTextInput = styled.input`
   ${({ disabled, variant }) =>
     variant !== 'flat' && disabled && createDisabledTextStyles()}
 `;
+
 const TextField = forwardRef(
   (
     {

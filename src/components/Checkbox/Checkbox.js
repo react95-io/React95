@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import propTypes from 'prop-types';
 
 import styled, { css } from 'styled-components';
@@ -23,7 +23,11 @@ const StyledLabel = styled.label`
   ${props => props.isDisabled && createDisabledTextStyles()}
 `;
 
-const StyledInput = styled.input`
+const CheckboxInput = forwardRef(({ ...props }, ref) => {
+  return <input {...props} ref={ref} />;
+});
+
+const StyledCheckboxInput = styled(CheckboxInput)`
   position: absolute;
   opacity: 0;
   z-index: -99;
@@ -72,70 +76,79 @@ const StyledFlatCheckmark = styled.div`
     isDisabled ? theme.flatLight : theme.canvas};
 
 `;
-const Checkbox = ({
-  onChange,
-  label,
-  disabled,
-  variant,
-  value,
-  checked,
-  defaultChecked,
-  name,
-  className,
-  style,
-  shadow,
-  ...otherProps
-}) => {
-  const Checkmark = variant === 'flat' ? StyledFlatCheckmark : StyledCheckmark;
 
-  let Input;
+const Checkbox = forwardRef(
+  (
+    {
+      onChange,
+      label,
+      disabled,
+      variant,
+      value,
+      checked,
+      defaultChecked,
+      name,
+      className,
+      style,
+      shadow,
+      ...otherProps
+    },
+    ref
+  ) => {
+    const Checkmark =
+      variant === 'flat' ? StyledFlatCheckmark : StyledCheckmark;
 
-  if (defaultChecked || checked === undefined) {
-    const [state, setState] = useState(defaultChecked || false);
+    let Input;
 
-    const handleChange = e => {
-      const newState = e.target.checked;
-      setState(newState);
-      if (onChange) onChange(e);
-    };
+    if (defaultChecked || checked === undefined) {
+      const [state, setState] = useState(defaultChecked || false);
 
-    Input = (
-      <>
-        <StyledInput
-          onChange={disabled ? undefined : handleChange}
-          readOnly={disabled}
-          type='checkbox'
-          value={value}
-          checked={state}
-          name={name}
-          {...otherProps}
-        />
-        <Checkmark checked={state} isDisabled={disabled} shadow={shadow} />
-      </>
-    );
-  } else {
-    Input = (
-      <>
-        <StyledInput
-          onChange={disabled ? undefined : onChange}
-          readOnly={disabled}
-          type='checkbox'
-          value={value}
-          checked={checked}
-          name={name}
-          {...otherProps}
-        />
-        <Checkmark checked={checked} isDisabled={disabled} shadow={shadow} />
-      </>
+      const handleChange = e => {
+        const newState = e.target.checked;
+        setState(newState);
+        if (onChange) onChange(e);
+      };
+
+      Input = (
+        <>
+          <StyledCheckboxInput
+            onChange={disabled ? undefined : handleChange}
+            readOnly={disabled}
+            type='checkbox'
+            value={value}
+            checked={state}
+            name={name}
+            ref={ref}
+            {...otherProps}
+          />
+          <Checkmark checked={state} isDisabled={disabled} shadow={shadow} />
+        </>
+      );
+    } else {
+      Input = (
+        <>
+          <StyledCheckboxInput
+            onChange={disabled ? undefined : onChange}
+            readOnly={disabled}
+            type='checkbox'
+            value={value}
+            checked={checked}
+            name={name}
+            ref={ref}
+            {...otherProps}
+          />
+          <Checkmark checked={checked} isDisabled={disabled} shadow={shadow} />
+        </>
+      );
+    }
+    return (
+      <StyledLabel isDisabled={disabled} className={className} style={style}>
+        {label}
+        {Input}
+      </StyledLabel>
     );
   }
-  return (
-    <StyledLabel isDisabled={disabled} className={className} style={style}>
-      {label}
-      {Input}
-    </StyledLabel>
-  );
-};
+);
 
 Checkbox.defaultProps = {
   label: '',

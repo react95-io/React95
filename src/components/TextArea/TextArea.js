@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import propTypes from 'prop-types';
 
 import styled from 'styled-components';
@@ -18,7 +18,12 @@ const StyledFlatTextAreaWrapper = styled.div`
   min-height: ${blockSizes.md};
   ${createFlatBoxStyles()}
 `;
-const StyledTextArea = styled.textarea`
+
+const TextAreaInput = forwardRef(({ ...props }, ref) => {
+  return <textarea {...props} ref={ref} />;
+});
+
+const StyledTextArea = styled(TextAreaInput)`
   width: 100%;
   height: 100%;
   box-sizing: border-box;
@@ -34,42 +39,48 @@ const StyledTextArea = styled.textarea`
     variant !== 'flat' && disabled && createDisabledTextStyles()}
 `;
 
-const TextArea = ({
-  onChange,
-  disabled,
-  variant,
-  width,
-  height,
-  style,
-  className,
-  shadow,
-  ...otherProps
-}) => {
-  const Wrapper =
-    variant === 'flat' ? StyledFlatTextAreaWrapper : StyledTextAreaWrapper;
-  return (
-    <Wrapper
-      style={{
-        ...style,
-        width: width || '100%',
-        height: height || 'auto'
-      }}
-      className={className}
-      isDisabled={disabled}
-      shadow={shadow}
-    >
-      <StyledTextArea
-        width={width}
-        height={height}
-        readOnly={disabled}
-        onChange={disabled ? undefined : onChange}
-        disabled={disabled}
-        variant={variant}
-        {...otherProps}
-      />
-    </Wrapper>
-  );
-};
+const TextArea = forwardRef(
+  (
+    {
+      onChange,
+      disabled,
+      variant,
+      width,
+      height,
+      style,
+      className,
+      shadow,
+      ...otherProps
+    },
+    ref
+  ) => {
+    const Wrapper =
+      variant === 'flat' ? StyledFlatTextAreaWrapper : StyledTextAreaWrapper;
+    return (
+      <Wrapper
+        style={{
+          ...style,
+          width: width || '100%',
+          height: height || 'auto'
+        }}
+        className={className}
+        isDisabled={disabled}
+        shadow={shadow}
+      >
+        <StyledTextArea
+          width={width}
+          height={height}
+          readOnly={disabled}
+          onChange={disabled ? undefined : onChange}
+          disabled={disabled}
+          variant={variant}
+          ref={ref}
+          {...otherProps}
+        />
+      </Wrapper>
+    );
+  }
+);
 
 TextArea.defaultProps = {
   shadow: true,
