@@ -26,7 +26,7 @@
     "storybook": "start-storybook -p 9009 -s public",
     "build:storybook": "build-storybook -s public -o ./docs",
     "prepublishOnly": "npm run release",
-    "release": "npm run build:dev && npm run build:prod",
+    "release": "npm run build:prod",
     "build:dev": "cross-env NODE_ENV=development rollup -c",
     "build:prod": "cross-env NODE_ENV=production rollup -c",
     "test": "jest",
