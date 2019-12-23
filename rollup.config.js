@@ -1,24 +1,25 @@
-import babel from "rollup-plugin-babel";
-import commonjs from "rollup-plugin-commonjs";
-import resolve from "rollup-plugin-node-resolve";
-import replace from "rollup-plugin-replace";
+import babel from 'rollup-plugin-babel';
+import commonjs from 'rollup-plugin-commonjs';
+import resolve from 'rollup-plugin-node-resolve';
+import replace from 'rollup-plugin-replace';
 
-const NODE_ENV = process.env.NODE_ENV || "development";
+const NODE_ENV = process.env.NODE_ENV || 'development';
 const outputFile =
-  NODE_ENV === "production" ? "./dist/prod.js" : "./dist/dev.js";
+  NODE_ENV === 'production' ? './dist/index.js' : './dist/dev.js';
 
 export default {
-  input: "./src/components/index.js",
+  input: './src/components/index.js',
   output: {
     file: outputFile,
-    format: "cjs"
+    format: 'cjs'
   },
   plugins: [
     replace({
-      "process.env.NODE_ENV": JSON.stringify(NODE_ENV)
+      'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
     }),
     babel({
-      exclude: "node_modules/**"
+      exclude: 'node_modules/**',
+      runtimeHelpers: true
     }),
     resolve(),
     commonjs()
