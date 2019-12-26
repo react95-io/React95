@@ -20,6 +20,8 @@ export { default as NumberField } from './NumberField/NumberField';
 export { default as Progress } from './Progress/Progress';
 export { default as Radio } from './Radio/Radio';
 export { default as Select } from './Select/Select';
+export { default as Slider } from './Slider/Slider';
+
 export { default as Tab } from './Tab/Tab';
 export { default as Tabs } from './Tabs/Tabs';
 export { default as TabBody } from './TabBody/TabBody';
