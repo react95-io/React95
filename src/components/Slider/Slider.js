@@ -128,7 +128,7 @@ const Slider = ({
   const ticksNumber = Math.floor((max - min) / step);
   const test = step + min + max;
 
-  const getFingerNewValue = React.useCallback(
+  const getNewValue = React.useCallback(
     finger => {
       const { current: slider } = ref;
       const rect = slider.getBoundingClientRect();
@@ -150,7 +150,7 @@ const Slider = ({
     if (!finger) {
       return;
     }
-    const newValue = getFingerNewValue(finger);
+    const newValue = getNewValue(finger);
 
     setVal(newValue);
 
@@ -165,7 +165,7 @@ const Slider = ({
       return;
     }
 
-    // const newValue = getFingerNewValue(finger);
+    // const newValue = getNewValue(finger);
     // if (onChangeCommitted) {
     //   onChangeCommitted(event, newValue);
     // }
@@ -184,7 +184,7 @@ const Slider = ({
     // }
     event.preventDefault();
     const finger = trackFinger(event, touchId);
-    const newValue = getFingerNewValue(finger);
+    const newValue = getNewValue(finger);
 
     setVal(newValue);
     if (onChange) {
@@ -203,7 +203,7 @@ const Slider = ({
       touchId.current = touch.identifier;
     }
     const finger = trackFinger(event, touchId);
-    const newValue = getFingerNewValue(finger);
+    const newValue = getNewValue(finger);
     setVal(newValue);
 
     if (onChange) {
@@ -239,7 +239,7 @@ const Slider = ({
           .map((_, i) => (
             <Tick
               style={{ left: `${(step / (max - min)) * 100 * i}%` }}
-              // key={(step / (max - min)) * 100 * i}
+              key={(step / (max - min)) * 100 * i}
             >
               <Mark>{i * step}</Mark>
             </Tick>
