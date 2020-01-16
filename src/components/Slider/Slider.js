@@ -128,24 +128,29 @@ const Slider = ({
   const ticksNumber = Math.floor((max - min) / step);
   const test = step + min + max;
 
+  const getFingerNewValue = React.useCallback(
+    finger => {
+      const { current: slider } = ref;
+      const rect = slider.getBoundingClientRect();
+      const percent = (finger.x - rect.left) / rect.width;
+      let newValue;
+      newValue = percentToValue(percent, min, max);
+      newValue = roundValueToStep(newValue, step, min);
+
+      newValue = clamp(newValue, min, max);
+
+      return newValue;
+    },
+    [max, min, step]
+  );
+
   const handleTouchMove = useEventCallback(event => {
     const finger = trackFinger(event, touchId);
 
     if (!finger) {
       return;
     }
-
-    const rect = ref.current.getBoundingClientRect();
-    const x = finger.x - rect.left;
-    const percent = x / rect.width;
-
-    // TODO clamp
-    let newVal = percentToValue(percent, min, max);
-    if (step) {
-      newVal = roundValueToStep(newVal, step, min);
-    }
-    const clampedVal = clamp(newVal, min, max);
-    const newValue = clampedVal;
+    const newValue = getFingerNewValue(finger);
 
     setVal(newValue);
 
@@ -160,17 +165,7 @@ const Slider = ({
       return;
     }
 
-    // const rect = ref.current.getBoundingClientRect();
-    // const x = finger.x - rect.left;
-    // const percent = x / rect.width;
-
-    // let newVal = percentToValue(percent, min, max);
-    // if (step) {
-    //   newVal = roundValueToStep(newVal, step, min);
-    // }
-    // const clampedVal = clamp(newVal, min, max);
-    // const newValue = clampedVal;
-
+    // const newValue = getFingerNewValue(finger);
     // if (onChangeCommitted) {
     //   onChangeCommitted(event, newValue);
     // }
@@ -187,24 +182,11 @@ const Slider = ({
     // if (onMouseDown) {
     //   onMouseDown(event);
     // }
-
     event.preventDefault();
     const finger = trackFinger(event, touchId);
-
-    const rect = ref.current.getBoundingClientRect();
-    const x = finger.x - rect.left;
-    const percent = x / rect.width;
-
-    // TODO clamp
-    let newVal = percentToValue(percent, min, max);
-    if (step) {
-      newVal = roundValueToStep(newVal, step, min);
-    }
-    const clampedVal = clamp(newVal, min, max);
-    const newValue = clampedVal;
+    const newValue = getFingerNewValue(finger);
 
     setVal(newValue);
-
     if (onChange) {
       onChange(newValue);
     }
@@ -221,17 +203,7 @@ const Slider = ({
       touchId.current = touch.identifier;
     }
     const finger = trackFinger(event, touchId);
-    const rect = ref.current.getBoundingClientRect();
-    const x = finger.x - rect.left;
-    const percent = x / rect.width;
-
-    // TODO clamp
-    let newVal = percentToValue(percent, min, max);
-    if (step) {
-      newVal = roundValueToStep(newVal, step, min);
-    }
-    const clampedVal = clamp(newVal, min, max);
-    const newValue = clampedVal;
+    const newValue = getFingerNewValue(finger);
     setVal(newValue);
 
     if (onChange) {
