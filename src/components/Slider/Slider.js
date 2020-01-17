@@ -1,9 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import propTypes from 'prop-types';
 
 import styled from 'styled-components';
 import { createBoxStyles, createBorderStyles } from '../common';
-
+import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import Cutout from '../Cutout/Cutout';
 
 const Wrapper = styled.div`
@@ -79,7 +79,21 @@ function useEventCallback(fn) {
 function ownerDocument(node) {
   return (node && node.ownerDocument) || document;
 }
+function findClosest(values, currentValue) {
+  const { index: closestIndex } = values.reduce((acc, value, index) => {
+    const distance = Math.abs(currentValue - value);
 
+    if (acc === null || distance < acc.distance || distance === acc.distance) {
+      return {
+        distance,
+        index
+      };
+    }
+
+    return acc;
+  }, null);
+  return closestIndex;
+}
 function clamp(value, min, max) {
   return Math.min(Math.max(min, value), max);
 }
@@ -110,17 +124,19 @@ function roundValueToStep(value, step, min) {
   return Number(nearest.toFixed(getDecimalPrecision(step)));
 }
 const Slider = ({
-  //   value,
+  value,
   defaultValue,
   step,
   min,
   max,
   width,
   ticks,
+  marks,
   onChange,
+  onChangeCommitted,
   name
 }) => {
-  const [val, setVal] = useState(defaultValue);
+  const [val, setVal] = useControlledOrUncontrolled({ value, defaultValue });
 
   const ref = useRef();
   const touchId = React.useRef();
@@ -134,6 +150,18 @@ const Slider = ({
       const rect = slider.getBoundingClientRect();
       const percent = (finger.x - rect.left) / rect.width;
       let newValue;
+
+      newValue = percentToValue(percent, min, max);
+      if (step) {
+        newValue = roundValueToStep(newValue, step, min);
+      } else {
+        const marksValues = marks.map(mark => mark.value);
+        const closestIndex = findClosest(marksValues, newValue);
+        newValue = marksValues[closestIndex];
+      }
+
+      newValue = clamp(newValue, min, max);
+
       newValue = percentToValue(percent, min, max);
       newValue = roundValueToStep(newValue, step, min);
 
@@ -165,10 +193,10 @@ const Slider = ({
       return;
     }
 
-    // const newValue = getNewValue(finger);
-    // if (onChangeCommitted) {
-    //   onChangeCommitted(event, newValue);
-    // }
+    const newValue = getNewValue(finger);
+    if (onChangeCommitted) {
+      onChangeCommitted(newValue);
+    }
 
     touchId.current = undefined;
 
@@ -232,16 +260,25 @@ const Slider = ({
     <Wrapper style={{ width }} onMouseDown={handleMouseDown} ref={ref}>
       {/* put onChange callback to the input?  */}
       <input type='hidden' value={val || 0} name={name} />
-      {step &&
-        ticks &&
-        Array(ticksNumber + 1)
-          .fill(0)
-          .map((_, i) => (
+      {ticks
+        ? step &&
+          Array(ticksNumber + 1)
+            .fill(0)
+            .map((_, i) => (
+              <Tick
+                style={{ left: `${(step / (max - min)) * 100 * i}%` }}
+                key={(step / (max - min)) * 100 * i}
+              >
+                <Mark>{i * step}</Mark>
+              </Tick>
+            ))
+        : marks &&
+          marks.map(m => (
             <Tick
-              style={{ left: `${(step / (max - min)) * 100 * i}%` }}
-              key={(step / (max - min)) * 100 * i}
+              style={{ left: `${(m.value / (max - min)) * 100}%` }}
+              key={(m.value / (max - min)) * 100}
             >
-              <Mark>{i * step}</Mark>
+              <Mark>{m.label}</Mark>
             </Tick>
           ))}
       <Groove />
@@ -252,30 +289,28 @@ const Slider = ({
 };
 
 // defaultValue
-// useDebugValue
+// value
 // disabled
 // ticks
-// max
-// min
-// onChange
-// onChangeCommited
 // orientation
-// step
 
 Slider.defaultProps = {
-  //   value: 0,
-  defaultValue: null,
+  defaultValue: undefined,
+  value: undefined,
   step: null,
   min: 0,
   max: 1,
   width: '100%',
   ticks: false,
   onChange: null,
-  name: null
+  onChangeCommitted: null,
+
+  name: null,
+  marks: false
 };
 
 Slider.propTypes = {
-  //   value: propTypes.number,
+  value: propTypes.number,
   defaultValue: propTypes.number,
 
   step: propTypes.number,
@@ -285,6 +320,9 @@ Slider.propTypes = {
   ticks: propTypes.bool,
 
   onChange: propTypes.func,
-  name: propTypes.string
+  onChangeCommitted: propTypes.func,
+
+  name: propTypes.string,
+  marks: propTypes.oneOfType([propTypes.bool, propTypes.array])
 };
 export default Slider;
