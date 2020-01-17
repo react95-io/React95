@@ -1,50 +1,101 @@
 import React, { useRef } from 'react';
 import propTypes from 'prop-types';
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { createBoxStyles, createBorderStyles } from '../common';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import Cutout from '../Cutout/Cutout';
 
 const Wrapper = styled.div`
+  display: inline-block;
   position: relative;
   touch-action: none;
+  ${({ vertical, size }) =>
+    vertical
+      ? css`
+          height: ${size};
+        `
+      : css`
+          width: ${size};
+        `}
 `;
 
 const Groove = styled(Cutout)`
   position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 8px;
-  width: 100%;
+
+  ${({ vertical }) =>
+    vertical
+      ? css`
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          height: 100%;
+          width: 8px;
+        `
+      : css`
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          height: 8px;
+          width: 100%;
+        `}
 `;
 
 const Thumb = styled.span`
-  height: 32px;
-  width: 16px;
   position: relative;
-  transform: translateX(-50%);
+  
   z-index: 1;
   ${createBoxStyles()}
   ${createBorderStyles()}
+  ${({ vertical }) =>
+    vertical
+      ? css`
+          width: 32px;
+          height: 16px;
+          transform: translateY(-50%);
+        `
+      : css`
+          height: 32px;
+          width: 16px;
+          transform: translateX(-50%);
+        `}
 `;
 
 const tickHeight = 6;
 const Tick = styled.span`
   display: inline-block;
   position: absolute;
-  bottom: ${-tickHeight}px;
-  height: ${tickHeight}px;
-  border-left: 1px solid ${({ theme }) => theme.text};
-  border-right: 1px solid ${({ theme }) => theme.text};
+
+  ${({ vertical }) =>
+    vertical
+      ? css`
+          right: ${-tickHeight - 2}px;
+          bottom: -1px;
+          width: ${tickHeight}px;
+          border-bottom: 2px solid ${({ theme }) => theme.text};
+        `
+      : css`
+          bottom: ${-tickHeight}px;
+          height: ${tickHeight}px;
+          border-left: 1px solid ${({ theme }) => theme.text};
+          border-right: 1px solid ${({ theme }) => theme.text};
+        `}
 `;
 const Mark = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
-  transform: translate(-0.5ch, calc(100% + 2px));
+
   font-size: 0.875rem;
+
+  ${({ vertical }) =>
+    vertical
+      ? css`
+          transform: translate(${tickHeight + 2}px, ${tickHeight}px);
+        `
+      : css`
+          transform: translate(-0.5ch, calc(100% + 2px));
+        `}
 `;
 function trackFinger(event, touchId) {
   if (touchId.current !== undefined && event.changedTouches) {
@@ -129,12 +180,13 @@ const Slider = ({
   step,
   min,
   max,
-  width,
+  size,
   ticks,
   marks,
   onChange,
   onChangeCommitted,
-  name
+  name,
+  vertical
 }) => {
   const [val, setVal] = useControlledOrUncontrolled({ value, defaultValue });
 
@@ -148,7 +200,13 @@ const Slider = ({
     finger => {
       const { current: slider } = ref;
       const rect = slider.getBoundingClientRect();
-      const percent = (finger.x - rect.left) / rect.width;
+
+      let percent;
+      if (vertical) {
+        percent = (rect.bottom - finger.y) / rect.height;
+      } else {
+        percent = (finger.x - rect.left) / rect.width;
+      }
       let newValue;
 
       newValue = percentToValue(percent, min, max);
@@ -257,8 +315,14 @@ const Slider = ({
   }, [handleTouchEnd, handleTouchMove, handleTouchStart]);
 
   return (
-    <Wrapper style={{ width }} onMouseDown={handleMouseDown} ref={ref}>
+    <Wrapper
+      vertical={vertical}
+      size={size}
+      onMouseDown={handleMouseDown}
+      ref={ref}
+    >
       {/* put onChange callback to the input?  */}
+      {/* should we keep the hidden input ? */}
       <input type='hidden' value={val || 0} name={name} />
       {ticks
         ? step &&
@@ -266,23 +330,38 @@ const Slider = ({
             .fill(0)
             .map((_, i) => (
               <Tick
-                style={{ left: `${(step / (max - min)) * 100 * i}%` }}
+                vertical={vertical}
+                style={{
+                  [vertical ? 'bottom' : 'left']: `${(step / (max - min)) *
+                    100 *
+                    i}%`
+                }}
                 key={(step / (max - min)) * 100 * i}
               >
-                <Mark>{i * step}</Mark>
+                <Mark vertical={vertical}>{i * step}</Mark>
               </Tick>
             ))
         : marks &&
           marks.map(m => (
             <Tick
-              style={{ left: `${(m.value / (max - min)) * 100}%` }}
+              vertical={vertical}
+              style={{
+                [vertical ? 'bottom' : 'left']: `${(m.value / (max - min)) *
+                  100}%`
+              }}
               key={(m.value / (max - min)) * 100}
             >
-              <Mark>{m.label}</Mark>
+              <Mark vertical={vertical}>{m.label}</Mark>
             </Tick>
           ))}
-      <Groove />
-      <Thumb style={{ left: `${(100 * val) / (max - min)}%` }} />
+      <Groove vertical={vertical} />
+      <Thumb
+        style={{
+          [vertical ? 'bottom' : 'left']: `${(vertical ? -100 : 0) +
+            (100 * val) / (max - min)}%`
+        }}
+        vertical={vertical}
+      />
       {0 === 1 && test}
     </Wrapper>
   );
@@ -300,13 +379,14 @@ Slider.defaultProps = {
   step: null,
   min: 0,
   max: 1,
-  width: '100%',
+  size: '100%',
   ticks: false,
   onChange: null,
   onChangeCommitted: null,
 
   name: null,
-  marks: false
+  marks: false,
+  vertical: false
 };
 
 Slider.propTypes = {
@@ -316,13 +396,14 @@ Slider.propTypes = {
   step: propTypes.number,
   min: propTypes.number,
   max: propTypes.number,
-  width: propTypes.oneOfType([propTypes.string, propTypes.number]),
+  size: propTypes.oneOfType([propTypes.string, propTypes.number]),
   ticks: propTypes.bool,
 
   onChange: propTypes.func,
   onChangeCommitted: propTypes.func,
 
   name: propTypes.string,
-  marks: propTypes.oneOfType([propTypes.bool, propTypes.array])
+  marks: propTypes.oneOfType([propTypes.bool, propTypes.array]),
+  vertical: propTypes.bool
 };
 export default Slider;

@@ -12,14 +12,25 @@ const Wrapper = styled.div`
 storiesOf('Slider', module)
   .addDecorator(story => <Wrapper>{story()}</Wrapper>)
   .add('fixed width', () => (
-    <Slider width={300} min={0} max={6} step={1.5} defaultValue={0} />
+    <Slider size='300px' min={0} max={6} step={1.5} defaultValue={0} />
   ))
   .add('with ticks', () => (
-    <Slider width={300} min={0} max={6} step={1.5} defaultValue={0} ticks />
+    <Slider size='300px' min={0} max={6} step={1.5} defaultValue={0} ticks />
   ))
-  .add('with marks', () => (
+  .add('vertical', () => (
     <Slider
-      width={300}
+      size='300px'
+      min={0}
+      max={6}
+      step={1.5}
+      defaultValue={0}
+      ticks
+      vertical
+    />
+  ))
+  .add('with custom marks', () => (
+    <Slider
+      size='300px'
       min={0}
       max={6}
       step={1}
