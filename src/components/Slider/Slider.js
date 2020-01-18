@@ -11,6 +11,76 @@ import {
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import Cutout from '../Cutout/Cutout';
 
+// helper functions and event handling basically copied from Material UI (https://github.com/mui-org/material-ui) Slider component
+function trackFinger(event, touchId) {
+  if (touchId.current !== undefined && event.changedTouches) {
+    for (let i = 0; i < event.changedTouches.length; i += 1) {
+      const touch = event.changedTouches[i];
+      if (touch.identifier === touchId.current) {
+        return {
+          x: touch.clientX,
+          y: touch.clientY
+        };
+      }
+    }
+    return false;
+  }
+  return {
+    x: event.clientX,
+    y: event.clientY
+  };
+}
+const useEnhancedEffect =
+  typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
+
+function useEventCallback(fn) {
+  const ref = React.useRef(fn);
+  useEnhancedEffect(() => {
+    ref.current = fn;
+  });
+  return React.useCallback((...args) => (0, ref.current)(...args), []);
+}
+function ownerDocument(node) {
+  return (node && node.ownerDocument) || document;
+}
+function findClosest(values, currentValue) {
+  const { index: closestIndex } = values.reduce((acc, value, index) => {
+    const distance = Math.abs(currentValue - value);
+
+    if (acc === null || distance < acc.distance || distance === acc.distance) {
+      return {
+        distance,
+        index
+      };
+    }
+
+    return acc;
+  }, null);
+  return closestIndex;
+}
+function clamp(value, min, max) {
+  return Math.min(Math.max(min, value), max);
+}
+function percentToValue(percent, min, max) {
+  return (max - min) * percent + min;
+}
+function getDecimalPrecision(num) {
+  if (Math.abs(num) < 1) {
+    const parts = num.toExponential().split('e-');
+    const matissaDecimalPart = parts[0].split('.')[1];
+    return (
+      (matissaDecimalPart ? matissaDecimalPart.length : 0) +
+      parseInt(parts[1], 10)
+    );
+  }
+
+  const decimalPart = num.toString().split('.')[1];
+  return decimalPart ? decimalPart.length : 0;
+}
+function roundValueToStep(value, step, min) {
+  const nearest = Math.round((value - min) / step) * step + min;
+  return Number(nearest.toFixed(getDecimalPrecision(step)));
+}
 const Wrapper = styled.div`
   display: inline-block;
   position: relative;
@@ -147,83 +217,7 @@ const Mark = styled.div`
           transform: translate(-0.5ch, calc(100% + 2px));
         `}
 `;
-function trackFinger(event, touchId) {
-  if (touchId.current !== undefined && event.changedTouches) {
-    for (let i = 0; i < event.changedTouches.length; i += 1) {
-      const touch = event.changedTouches[i];
-      if (touch.identifier === touchId.current) {
-        return {
-          x: touch.clientX,
-          y: touch.clientY
-        };
-      }
-    }
 
-    return false;
-  }
-
-  return {
-    x: event.clientX,
-    y: event.clientY
-  };
-}
-const useEnhancedEffect =
-  typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
-
-function useEventCallback(fn) {
-  const ref = React.useRef(fn);
-  useEnhancedEffect(() => {
-    ref.current = fn;
-  });
-  return React.useCallback((...args) => (0, ref.current)(...args), []);
-}
-function ownerDocument(node) {
-  return (node && node.ownerDocument) || document;
-}
-function findClosest(values, currentValue) {
-  const { index: closestIndex } = values.reduce((acc, value, index) => {
-    const distance = Math.abs(currentValue - value);
-
-    if (acc === null || distance < acc.distance || distance === acc.distance) {
-      return {
-        distance,
-        index
-      };
-    }
-
-    return acc;
-  }, null);
-  return closestIndex;
-}
-function clamp(value, min, max) {
-  return Math.min(Math.max(min, value), max);
-}
-// function valueToPercent(value, min, max) {
-//   return ((value - min) * 100) / (max - min);
-// }
-
-function percentToValue(percent, min, max) {
-  return (max - min) * percent + min;
-}
-function getDecimalPrecision(num) {
-  // This handles the case when num is very small (0.00000001), js will turn this into 1e-8.
-  // When num is bigger than 1 or less than -1 it won't get converted to this notation so it's fine.
-  if (Math.abs(num) < 1) {
-    const parts = num.toExponential().split('e-');
-    const matissaDecimalPart = parts[0].split('.')[1];
-    return (
-      (matissaDecimalPart ? matissaDecimalPart.length : 0) +
-      parseInt(parts[1], 10)
-    );
-  }
-
-  const decimalPart = num.toString().split('.')[1];
-  return decimalPart ? decimalPart.length : 0;
-}
-function roundValueToStep(value, step, min) {
-  const nearest = Math.round((value - min) / step) * step + min;
-  return Number(nearest.toFixed(getDecimalPrecision(step)));
-}
 const Slider = ({
   value,
   defaultValue,
@@ -287,7 +281,7 @@ const Slider = ({
     setVal(newValue);
 
     if (onChange) {
-      onChange(event, newValue);
+      onChange(newValue);
     }
   });
   const handleTouchEnd = useEventCallback(event => {
@@ -340,7 +334,7 @@ const Slider = ({
     setVal(newValue);
 
     if (onChange) {
-      onChange(event, newValue);
+      onChange(newValue);
     }
 
     const doc = ownerDocument(ref.current);
@@ -369,7 +363,6 @@ const Slider = ({
       onMouseDown={handleMouseDown}
       ref={ref}
     >
-      {/* put onChange callback to the input?  */}
       {/* should we keep the hidden input ? */}
       <input type='hidden' value={val || 0} name={name} disabled={disabled} />
       {ticks

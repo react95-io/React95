@@ -57,6 +57,7 @@ storiesOf('Slider', module)
         { value: 1.35, label: '1.35°C' },
         { value: 6, label: '6°C' }
       ]}
+      onChangeCommitted={val => console.log(val)}
     />
   ))
   .add('disabled', () => (
