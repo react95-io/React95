@@ -2,7 +2,12 @@ import React, { useRef } from 'react';
 import propTypes from 'prop-types';
 
 import styled, { css } from 'styled-components';
-import { createBoxStyles, createBorderStyles } from '../common';
+import {
+  createBoxStyles,
+  createBorderStyles,
+  createFlatBoxStyles,
+  createDisabledTextStyles
+} from '../common';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import Cutout from '../Cutout/Cutout';
 
@@ -14,15 +19,17 @@ const Wrapper = styled.div`
     vertical
       ? css`
           height: ${size};
+          margin-right: 1.5rem;
         `
       : css`
           width: ${size};
+          margin-bottom: 1.5rem;
         `}
+
+  pointer-events: ${({ isDisabled }) => (isDisabled ? 'none' : 'auto')};
 `;
-
-const Groove = styled(Cutout)`
+const sharedGrooveStyles = () => css`
   position: absolute;
-
   ${({ vertical }) =>
     vertical
       ? css`
@@ -40,13 +47,28 @@ const Groove = styled(Cutout)`
           width: 100%;
         `}
 `;
+const StyledGroove = styled(Cutout)`
+  ${sharedGrooveStyles()}
+`;
+const StyledFlatGroove = styled(Cutout)`
+  ${sharedGrooveStyles()}
 
+  border-left-color: ${({ theme }) => theme.flatLight};
+  border-top-color: ${({ theme }) => theme.flatLight};
+  border-right-color: ${({ theme }) => theme.canvas};
+  border-bottom-color: ${({ theme }) => theme.canvas};
+  &:before {
+    border-left-color: ${({ theme }) => theme.flatDark};
+    border-top-color: ${({ theme }) => theme.flatDark};
+    border-right-color: ${({ theme }) => theme.flatLight};
+    border-bottom-color: ${({ theme }) => theme.flatLight};
+  }
+`;
 const Thumb = styled.span`
   position: relative;
-  
+
   z-index: 1;
-  ${createBoxStyles()}
-  ${createBorderStyles()}
+  
   ${({ vertical }) =>
     vertical
       ? css`
@@ -59,6 +81,23 @@ const Thumb = styled.span`
           width: 16px;
           transform: translateX(-50%);
         `}
+  ${({ variant }) =>
+    variant === 'flat'
+      ? css`
+          ${createFlatBoxStyles()}
+          outline: 2px solid ${({ theme }) => theme.flatDark};
+          background: ${({ theme }) => theme.flatLight};
+
+        `
+      : css`
+          ${createBoxStyles()}
+          ${createBorderStyles()}
+        `}
+    ${({ isDisabled, theme }) =>
+      isDisabled &&
+      css`
+        background-image: ${theme.hatchedBackground};
+      `}
 `;
 
 const tickHeight = 6;
@@ -70,16 +109,27 @@ const Tick = styled.span`
     vertical
       ? css`
           right: ${-tickHeight - 2}px;
-          bottom: -1px;
+          bottom: 0px;
+          transform: translateY(1px);
           width: ${tickHeight}px;
           border-bottom: 2px solid ${({ theme }) => theme.text};
         `
       : css`
           bottom: ${-tickHeight}px;
           height: ${tickHeight}px;
+          transform: translateX(-1px);
           border-left: 1px solid ${({ theme }) => theme.text};
           border-right: 1px solid ${({ theme }) => theme.text};
         `}
+
+        color:  ${({ theme }) => theme.text};
+  ${({ isDisabled, theme }) =>
+    isDisabled &&
+    css`
+      ${createDisabledTextStyles()}
+      box-shadow: 1px 1px 1px ${theme.textDisabledShadow};
+      border-color: ${theme.textDisabled};
+    `}
 `;
 const Mark = styled.div`
   position: absolute;
@@ -91,7 +141,7 @@ const Mark = styled.div`
   ${({ vertical }) =>
     vertical
       ? css`
-          transform: translate(${tickHeight + 2}px, ${tickHeight}px);
+          transform: translate(${tickHeight + 2}px, ${tickHeight + 1}px);
         `
       : css`
           transform: translate(-0.5ch, calc(100% + 2px));
@@ -186,8 +236,11 @@ const Slider = ({
   onChange,
   onChangeCommitted,
   name,
-  vertical
+  vertical,
+  variant,
+  disabled
 }) => {
+  const Groove = variant === 'flat' ? StyledFlatGroove : StyledGroove;
   const [val, setVal] = useControlledOrUncontrolled({ value, defaultValue });
 
   const ref = useRef();
@@ -265,6 +318,7 @@ const Slider = ({
     doc.removeEventListener('touchend', handleTouchEnd);
   });
   const handleMouseDown = useEventCallback(event => {
+    // TODO should we also pass event together with new value to callbacks? (same thing with other input components)
     // if (onMouseDown) {
     //   onMouseDown(event);
     // }
@@ -316,6 +370,7 @@ const Slider = ({
 
   return (
     <Wrapper
+      isDisabled={disabled}
       vertical={vertical}
       size={size}
       onMouseDown={handleMouseDown}
@@ -323,13 +378,14 @@ const Slider = ({
     >
       {/* put onChange callback to the input?  */}
       {/* should we keep the hidden input ? */}
-      <input type='hidden' value={val || 0} name={name} />
+      <input type='hidden' value={val || 0} name={name} disabled={disabled} />
       {ticks
         ? step &&
           Array(ticksNumber + 1)
             .fill(0)
             .map((_, i) => (
               <Tick
+                isDisabled={disabled}
                 vertical={vertical}
                 style={{
                   [vertical ? 'bottom' : 'left']: `${(step / (max - min)) *
@@ -344,6 +400,7 @@ const Slider = ({
         : marks &&
           marks.map(m => (
             <Tick
+              isDisabled={disabled}
               vertical={vertical}
               style={{
                 [vertical ? 'bottom' : 'left']: `${(m.value / (max - min)) *
@@ -354,13 +411,15 @@ const Slider = ({
               <Mark vertical={vertical}>{m.label}</Mark>
             </Tick>
           ))}
-      <Groove vertical={vertical} />
+      <Groove vertical={vertical} variant={variant} />
       <Thumb
         style={{
           [vertical ? 'bottom' : 'left']: `${(vertical ? -100 : 0) +
             (100 * val) / (max - min)}%`
         }}
         vertical={vertical}
+        variant={variant}
+        isDisabled={disabled}
       />
       {0 === 1 && test}
     </Wrapper>
@@ -386,7 +445,9 @@ Slider.defaultProps = {
 
   name: null,
   marks: false,
-  vertical: false
+  vertical: false,
+  variant: 'default',
+  disabled: false
 };
 
 Slider.propTypes = {
@@ -404,6 +465,8 @@ Slider.propTypes = {
 
   name: propTypes.string,
   marks: propTypes.oneOfType([propTypes.bool, propTypes.array]),
-  vertical: propTypes.bool
+  vertical: propTypes.bool,
+  variant: propTypes.oneOf(['default', 'flat']),
+  disabled: propTypes.bool
 };
 export default Slider;
