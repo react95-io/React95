@@ -270,14 +270,7 @@ const Slider = ({
         const closestIndex = findClosest(marksValues, newValue);
         newValue = marksValues[closestIndex];
       }
-
       newValue = clamp(newValue, min, max);
-
-      newValue = percentToValue(percent, min, max);
-      newValue = roundValueToStep(newValue, step, min);
-
-      newValue = clamp(newValue, min, max);
-
       return newValue;
     },
     [max, min, step]
