@@ -143,12 +143,12 @@ const Thumb = styled.span`
     vertical
       ? css`
           width: 32px;
-          height: 16px;
+          height: 18px;
           transform: translateY(-50%);
         `
       : css`
           height: 32px;
-          width: 16px;
+          width: 18px;
           transform: translateX(-50%);
         `}
   ${({ variant }) =>
