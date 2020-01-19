@@ -232,12 +232,13 @@ const Slider = ({
   name,
   vertical,
   variant,
-  disabled
+  disabled,
+  ...otherProps
 }) => {
   const Groove = variant === 'flat' ? StyledFlatGroove : StyledGroove;
   const [val, setVal] = useControlledOrUncontrolled({ value, defaultValue });
 
-  const ref = useRef();
+  const sliderRef = useRef();
   const touchId = React.useRef();
 
   const ticksNumber = Math.floor((max - min) / step);
@@ -245,7 +246,7 @@ const Slider = ({
 
   const getNewValue = React.useCallback(
     finger => {
-      const { current: slider } = ref;
+      const { current: slider } = sliderRef;
       const rect = slider.getBoundingClientRect();
 
       let percent;
@@ -298,7 +299,7 @@ const Slider = ({
 
     touchId.current = undefined;
 
-    const doc = ownerDocument(ref.current);
+    const doc = ownerDocument(sliderRef.current);
     doc.removeEventListener('mousemove', handleTouchMove);
     doc.removeEventListener('mouseup', handleTouchEnd);
     doc.removeEventListener('touchmove', handleTouchMove);
@@ -317,7 +318,7 @@ const Slider = ({
     if (onChange) {
       onChange(newValue);
     }
-    const doc = ownerDocument(ref.current);
+    const doc = ownerDocument(sliderRef.current);
     doc.addEventListener('mousemove', handleTouchMove);
     doc.addEventListener('mouseup', handleTouchEnd);
   });
@@ -337,12 +338,12 @@ const Slider = ({
       onChange(newValue);
     }
 
-    const doc = ownerDocument(ref.current);
+    const doc = ownerDocument(sliderRef.current);
     doc.addEventListener('touchmove', handleTouchMove);
     doc.addEventListener('touchend', handleTouchEnd);
   });
   React.useEffect(() => {
-    const { current: slider } = ref;
+    const { current: slider } = sliderRef;
     slider.addEventListener('touchstart', handleTouchStart);
     const doc = ownerDocument(slider);
 
@@ -361,7 +362,8 @@ const Slider = ({
       vertical={vertical}
       size={size}
       onMouseDown={handleMouseDown}
-      ref={ref}
+      ref={sliderRef}
+      {...otherProps}
     >
       {/* should we keep the hidden input ? */}
       <input type='hidden' value={val || 0} name={name} disabled={disabled} />
