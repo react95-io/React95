@@ -33,7 +33,13 @@ storiesOf('Button', module)
       {story()}
     </div>
   ))
-  .add('default', () => <Button {...actions}>default</Button>)
+  .add('default', () => <Button {...actions}>Default</Button>)
+  .add('primary', () => (
+    <Button variant='primary' {...actions}>
+      Primary
+    </Button>
+  ))
+
   .add('disabled', () => (
     <Button disabled {...actions}>
       Disabled
