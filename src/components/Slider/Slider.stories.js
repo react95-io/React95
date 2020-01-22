@@ -13,12 +13,10 @@ const Wrapper = styled.div`
 `;
 storiesOf('Slider', module)
   .addDecorator(story => <Wrapper>{story()}</Wrapper>)
-  .add('default', () => (
-    <Slider size='300px' min={0} max={6} step={1.5} defaultValue={0} />
-  ))
+  .add('default', () => <Slider size='300px' defaultValue={30} />)
 
-  .add('with ticks', () => (
-    <Slider size='300px' min={0} max={6} step={1.5} defaultValue={0} ticks />
+  .add('with marks', () => (
+    <Slider size='300px' min={0} max={6} step={1.5} defaultValue={0} marks />
   ))
   .add('vertical', () => (
     <Slider
@@ -27,7 +25,7 @@ storiesOf('Slider', module)
       max={6}
       step={1.5}
       defaultValue={0}
-      ticks
+      marks
       vertical
     />
   ))
@@ -57,7 +55,6 @@ storiesOf('Slider', module)
         { value: 1.35, label: '1.35°C' },
         { value: 6, label: '6°C' }
       ]}
-      onChangeCommitted={val => console.log(val)}
     />
   ))
   .add('disabled', () => (

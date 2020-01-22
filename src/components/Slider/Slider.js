@@ -225,8 +225,7 @@ const Slider = ({
   min,
   max,
   size,
-  ticks,
-  marks,
+  marks: marksProp,
   onChange,
   onChangeCommitted,
   name,
@@ -241,8 +240,12 @@ const Slider = ({
   const sliderRef = useRef();
   const touchId = React.useRef();
 
-  const ticksNumber = Math.floor((max - min) / step);
-  const test = step + min + max;
+  const marks =
+    marksProp === true
+      ? Array(1 + (max - min) / step)
+          .fill({ label: null })
+          .map((mark, i) => ({ ...mark, value: i * step }))
+      : marksProp;
 
   const getNewValue = React.useCallback(
     finger => {
@@ -367,38 +370,20 @@ const Slider = ({
     >
       {/* should we keep the hidden input ? */}
       <input type='hidden' value={val || 0} name={name} disabled={disabled} />
-      {ticks
-        ? step &&
-          Array(ticksNumber + 1)
-            .fill(0)
-            .map((_, i) => (
-              <Tick
-                isDisabled={disabled}
-                vertical={vertical}
-                style={{
-                  [vertical ? 'bottom' : 'left']: `${(step / (max - min)) *
-                    100 *
-                    i}%`
-                }}
-                key={(step / (max - min)) * 100 * i}
-              >
-                <Mark vertical={vertical}>{i * step}</Mark>
-              </Tick>
-            ))
-        : marks &&
-          marks.map(m => (
-            <Tick
-              isDisabled={disabled}
-              vertical={vertical}
-              style={{
-                [vertical ? 'bottom' : 'left']: `${(m.value / (max - min)) *
-                  100}%`
-              }}
-              key={(m.value / (max - min)) * 100}
-            >
-              <Mark vertical={vertical}>{m.label}</Mark>
-            </Tick>
-          ))}
+      {marks &&
+        marks.map(m => (
+          <Tick
+            isDisabled={disabled}
+            vertical={vertical}
+            style={{
+              [vertical ? 'bottom' : 'left']: `${(m.value / (max - min)) *
+                100}%`
+            }}
+            key={(m.value / (max - min)) * 100}
+          >
+            <Mark vertical={vertical}>{m.label}</Mark>
+          </Tick>
+        ))}
       <Groove vertical={vertical} variant={variant} />
       <Thumb
         style={{
@@ -409,25 +394,17 @@ const Slider = ({
         variant={variant}
         isDisabled={disabled}
       />
-      {0 === 1 && test}
     </Wrapper>
   );
 };
 
-// defaultValue
-// value
-// disabled
-// ticks
-// orientation
-
 Slider.defaultProps = {
   defaultValue: undefined,
   value: undefined,
-  step: null,
+  step: 1,
   min: 0,
-  max: 1,
+  max: 100,
   size: '100%',
-  ticks: false,
   onChange: null,
   onChangeCommitted: null,
 
@@ -445,9 +422,7 @@ Slider.propTypes = {
   step: propTypes.number,
   min: propTypes.number,
   max: propTypes.number,
-  size: propTypes.oneOfType([propTypes.string, propTypes.number]),
-  ticks: propTypes.bool,
-
+  size: propTypes.string,
   onChange: propTypes.func,
   onChangeCommitted: propTypes.func,
 
