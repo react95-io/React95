@@ -43,7 +43,7 @@ const StyledButton = styled.button`
             ${!isDisabled && !active && createWellBorderStyles(false)}
           }
           &:active {
-            ${isDisabled && createWellBorderStyles(true)}
+            ${!isDisabled && createWellBorderStyles(true)}
           }
           ${active && createWellBorderStyles(true)}
           ${isDisabled && createDisabledTextStyles()}
