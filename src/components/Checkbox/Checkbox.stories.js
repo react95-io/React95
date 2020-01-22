@@ -15,12 +15,16 @@ storiesOf('Checkbox', module)
   .addDecorator(story => <Wrapper>{story()}</Wrapper>)
   .add('controlled group', () => <ControlledCheckboxGroupExample />)
   .add('uncontrolled', () => (
-    <Checkbox
-      name='single'
-      value='single'
-      label="I'm single 😥 ...and no one's controlling me 😎"
-      defaultChecked
-    />
+    <>
+      <Checkbox
+        name='cheese'
+        value='cheese'
+        label='Add extra cheese 🧀'
+        defaultChecked
+      />
+      <br />
+      <Checkbox name='pineapple' value='pineapple' label='Add pineapple 🍍' />
+    </>
   ))
   .add('flat', () => (
     <StyledCutout style={{ padding: '1rem', width: '300px' }}>

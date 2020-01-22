@@ -143,7 +143,7 @@ Checkbox.defaultProps = {
   variant: 'default',
   shadow: true,
   onChange: () => {},
-  checked: false,
+  checked: undefined,
   style: {},
   defaultChecked: false,
   className: ''
