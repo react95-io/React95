@@ -16,6 +16,27 @@ export const createBoxStyles = () => css`
   color: ${({ theme }) => theme.text};
 `;
 // TODO for flat box styles add checkered background when disabled (not solid color)
+export const createCheckeredBackground = ({
+  mainColor = 'black',
+  secondaryColor = 'transparent'
+}) => css`
+  background-image: linear-gradient(
+      45deg,
+      ${mainColor} 25%,
+      ${secondaryColor} 25%,
+      ${secondaryColor} 75%,
+      ${mainColor} 75%
+    ),
+    linear-gradient(
+      45deg,
+      ${mainColor} 25%,
+      ${secondaryColor} 25%,
+      ${secondaryColor} 75%,
+      ${mainColor} 75%
+    );
+  background-size: 4px 4px;
+  background-position: 0 0, 2px 2px;
+`;
 export const createFlatBoxStyles = () => css`
   position: relative;
   box-sizing: border-box;

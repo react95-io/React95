@@ -37,19 +37,26 @@ storiesOf('Checkbox', module)
       </p>
       <div style={{ marginTop: '1rem' }}>
         <Checkbox
-          name='conspirancy'
+          name='flatEarth'
           variant='flat'
-          value='single'
+          value='flatEarth'
           label='Earth is flat 🌍'
           defaultChecked
         />
         <Checkbox
-          name='conspirancy'
+          name='reptilians'
           variant='flat'
           defaultChecked={false}
-          value='single'
+          value='reptilians'
           label='Reptilians rule the world 🦎'
           disabled
+        />
+        <Checkbox
+          name='mixed'
+          variant='flat'
+          value='mixed'
+          label='Mixed value'
+          indeterminate
         />
       </div>
     </StyledCutout>

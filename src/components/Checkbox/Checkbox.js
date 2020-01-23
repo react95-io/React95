@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import propTypes from 'prop-types';
 
 import styled, { css } from 'styled-components';
-import { createDisabledTextStyles, createFlatBoxStyles } from '../common';
+import {
+  createDisabledTextStyles,
+  createFlatBoxStyles,
+  createCheckeredBackground
+} from '../common';
 
 import { padding, fontSizes } from '../common/system';
 import Cutout from '../Cutout/Cutout';
@@ -50,28 +54,15 @@ const createIndeterminateSymbol = () => css`
     content: '';
     display: block;
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    left: 2px;
+    top: 2px;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
 
-    background-color: #fff;
-    background-image: linear-gradient(
-        45deg,
-        #000 25%,
-        transparent 25%,
-        transparent 75%,
-        #000 75%
-      ),
-      linear-gradient(
-        45deg,
-        #000 25%,
-        transparent 25%,
-        transparent 75%,
-        #000 75%
-      );
-    background-size: 4px 4px;
-    background-position: 0 0, 2px 2px;
+    ${({ theme }) => createCheckeredBackground({ mainColor: theme.checkmark })}
+    background-position: -1px -1px, 1px 1px;
+    outline: 1px solid ${({ theme }) => theme.canvas};
+    outline-offset: -1px;
   }
 `;
 const sharedCheckmarkStyles = css`
