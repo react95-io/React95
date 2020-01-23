@@ -52,10 +52,10 @@ storiesOf('Checkbox', module)
           disabled
         />
         <Checkbox
-          name='mixed'
+          name='indeterminate'
           variant='flat'
           value='mixed'
-          label='Mixed value'
+          label='Indeterminate'
           indeterminate
         />
       </div>

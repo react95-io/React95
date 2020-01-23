@@ -61,7 +61,8 @@ const createIndeterminateSymbol = () => css`
 
     ${({ theme }) => createCheckeredBackground({ mainColor: theme.checkmark })}
     background-position: -1px -1px, 1px 1px;
-    outline: 1px solid ${({ theme }) => theme.canvas};
+    outline: 1px solid
+      ${({ theme, isDisabled }) => (isDisabled ? theme.material : theme.canvas)};
     outline-offset: -1px;
   }
 `;
