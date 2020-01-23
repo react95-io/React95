@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import propTypes from 'prop-types';
 
 import styled, { css } from 'styled-components';
-import { createDisabledTextStyles, createFlatBoxStyles } from '../common';
+import {
+  createDisabledTextStyles,
+  createFlatBoxStyles,
+  createCheckeredBackground
+} from '../common';
 
 import { padding, fontSizes } from '../common/system';
 import Cutout from '../Cutout/Cutout';
@@ -29,8 +33,7 @@ const StyledInput = styled.input`
   z-index: -99;
 `;
 
-const createCheckmarkSymbol = ({ checked }) =>
-  checked &&
+const createCheckmarkSymbol = () =>
   css`
     &:after {
       content: '';
@@ -46,6 +49,23 @@ const createCheckmarkSymbol = ({ checked }) =>
       transform: translate(-50%, -50%) rotate(45deg);
     }
   `;
+const createIndeterminateSymbol = () => css`
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+
+    ${({ theme }) => createCheckeredBackground({ mainColor: theme.checkmark })}
+    background-position: -1px -1px, 1px 1px;
+    outline: 1px solid
+      ${({ theme, isDisabled }) => (isDisabled ? theme.material : theme.canvas)};
+    outline-offset: -1px;
+  }
+`;
 const sharedCheckmarkStyles = css`
   position: absolute;
   top: 50%;
@@ -53,9 +73,12 @@ const sharedCheckmarkStyles = css`
   transform: translateY(-50%);
   width: ${checkboxSize};
   height: ${checkboxSize};
-  ${props => createCheckmarkSymbol(props)}
+  ${({ checked, indeterminate }) =>
+    indeterminate
+      ? createIndeterminateSymbol()
+      : checked && createCheckmarkSymbol(checked)}
 `;
-const StyledCheckmark = styled(Cutout)`
+const StyledCheckbox = styled(Cutout)`
   ${sharedCheckmarkStyles}
   background: ${({ theme, isDisabled }) =>
     isDisabled ? theme.material : theme.canvas};
@@ -65,7 +88,7 @@ const StyledCheckmark = styled(Cutout)`
     box-shadow: none;
   }
 `;
-const StyledFlatCheckmark = styled.div`
+const StyledFlatCheckbox = styled.div`
   ${createFlatBoxStyles()}
   ${sharedCheckmarkStyles}
   background: ${({ theme, isDisabled }) =>
@@ -80,13 +103,14 @@ const Checkbox = ({
   value,
   checked,
   defaultChecked,
+  indeterminate,
   name,
   className,
   style,
   shadow,
   ...otherProps
 }) => {
-  const Checkmark = variant === 'flat' ? StyledFlatCheckmark : StyledCheckmark;
+  const Checkmark = variant === 'flat' ? StyledFlatCheckbox : StyledCheckbox;
 
   let Input;
 
@@ -108,9 +132,15 @@ const Checkbox = ({
           value={value}
           checked={state}
           name={name}
+          data-indeterminate={indeterminate}
           {...otherProps}
         />
-        <Checkmark checked={state} isDisabled={disabled} shadow={shadow} />
+        <Checkmark
+          checked={state}
+          indeterminate={indeterminate}
+          isDisabled={disabled}
+          shadow={shadow}
+        />
       </>
     );
   } else {
@@ -123,9 +153,15 @@ const Checkbox = ({
           value={value}
           checked={checked}
           name={name}
+          data-indeterminate={indeterminate}
           {...otherProps}
         />
-        <Checkmark checked={checked} isDisabled={disabled} shadow={shadow} />
+        <Checkmark
+          checked={checked}
+          indeterminate={indeterminate}
+          isDisabled={disabled}
+          shadow={shadow}
+        />
       </>
     );
   }
@@ -146,7 +182,8 @@ Checkbox.defaultProps = {
   checked: undefined,
   style: {},
   defaultChecked: false,
-  className: ''
+  className: '',
+  indeterminate: false
 };
 
 Checkbox.propTypes = {
@@ -164,6 +201,7 @@ Checkbox.propTypes = {
   shadow: propTypes.bool,
   style: propTypes.shape([propTypes.string, propTypes.number]),
   defaultChecked: propTypes.bool,
+  indeterminate: propTypes.bool,
   className: propTypes.string
 };
 

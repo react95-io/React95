@@ -14,6 +14,7 @@ const Wrapper = styled.div`
 storiesOf('Checkbox', module)
   .addDecorator(story => <Wrapper>{story()}</Wrapper>)
   .add('controlled group', () => <ControlledCheckboxGroupExample />)
+
   .add('uncontrolled', () => (
     <>
       <Checkbox
@@ -26,6 +27,8 @@ storiesOf('Checkbox', module)
       <Checkbox name='pineapple' value='pineapple' label='Add pineapple 🍍' />
     </>
   ))
+  .add('indeterminate / mixed value', () => <IndeterminateCheckboxExample />)
+
   .add('flat', () => (
     <StyledCutout style={{ padding: '1rem', width: '300px' }}>
       <p style={{ lineHeight: 1.3 }}>
@@ -34,19 +37,26 @@ storiesOf('Checkbox', module)
       </p>
       <div style={{ marginTop: '1rem' }}>
         <Checkbox
-          name='conspirancy'
+          name='flatEarth'
           variant='flat'
-          value='single'
+          value='flatEarth'
           label='Earth is flat 🌍'
           defaultChecked
         />
         <Checkbox
-          name='conspirancy'
+          name='reptilians'
           variant='flat'
           defaultChecked={false}
-          value='single'
+          value='reptilians'
           label='Reptilians rule the world 🦎'
           disabled
+        />
+        <Checkbox
+          name='indeterminate'
+          variant='flat'
+          value='mixed'
+          label='Indeterminate'
+          indeterminate
         />
       </div>
     </StyledCutout>
@@ -110,6 +120,98 @@ class ControlledCheckboxGroupExample extends React.Component {
         <Button fullWidth style={{ marginTop: '1em' }} onClick={this.reset}>
           Diet mode
         </Button>
+      </div>
+    );
+  }
+}
+class IndeterminateCheckboxExample extends React.Component {
+  state = {
+    cheese: true,
+    bacon: false,
+    broccoli: false
+  };
+
+  toggleIngredient = e => {
+    const {
+      target: { value }
+    } = e;
+    this.setState(prevState => ({
+      ...prevState,
+      [value]: !prevState[value]
+    }));
+  };
+
+  render() {
+    const { cheese, bacon, broccoli } = this.state;
+
+    const ingredientsArr = Object.values(this.state).map(val => (val ? 1 : 0));
+    const possibleIngredients = Object.keys(this.state).length;
+    const chosenIngredients = ingredientsArr.reduce((a, b) => a + b, 0);
+
+    const isIndeterminate = ![0, possibleIngredients].includes(
+      chosenIngredients
+    );
+
+    return (
+      <div style={{ maxWidth: '250px' }}>
+        <Fieldset label='Pizza toppings'>
+          <Checkbox
+            name='allToppings'
+            label='All'
+            value='allToppings'
+            indeterminate={isIndeterminate}
+            checked={
+              !isIndeterminate && chosenIngredients === possibleIngredients
+            }
+            onChange={() => {
+              console.log(ingredientsArr);
+              if (isIndeterminate) {
+                this.setState({
+                  cheese: true,
+                  bacon: true,
+                  broccoli: true
+                });
+              } else if (ingredientsArr[0] === 1) {
+                this.setState({
+                  cheese: false,
+                  bacon: false,
+                  broccoli: false
+                });
+              } else {
+                this.setState({
+                  cheese: true,
+                  bacon: true,
+                  broccoli: true
+                });
+              }
+            }}
+          />
+          <div style={{ paddingLeft: '1.5rem' }}>
+            <Checkbox
+              checked={!!cheese}
+              onChange={this.toggleIngredient}
+              value='cheese'
+              label='🧀 Extra cheese'
+              name='ingredients'
+            />
+            <br />
+            <Checkbox
+              checked={!!bacon}
+              onChange={this.toggleIngredient}
+              value='bacon'
+              label='🥓 Bacon'
+              name='ingredients'
+            />
+            <br />
+            <Checkbox
+              checked={!!broccoli}
+              onChange={this.toggleIngredient}
+              value='broccoli'
+              label='🥦 Broccoli'
+              name='ingredients'
+            />
+          </div>
+        </Fieldset>
       </div>
     );
   }
