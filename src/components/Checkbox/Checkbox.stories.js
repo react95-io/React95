@@ -119,9 +119,9 @@ class ControlledCheckboxGroupExample extends React.Component {
 }
 class IndeterminateCheckboxExample extends React.Component {
   state = {
-    cheese: 1,
-    bacon: 0,
-    broccoli: 0
+    cheese: true,
+    bacon: false,
+    broccoli: false
   };
 
   toggleIngredient = e => {
@@ -137,7 +137,7 @@ class IndeterminateCheckboxExample extends React.Component {
   render() {
     const { cheese, bacon, broccoli } = this.state;
 
-    const ingredientsArr = Object.values(this.state);
+    const ingredientsArr = Object.values(this.state).map(val => (val ? 1 : 0));
     const possibleIngredients = Object.keys(this.state).length;
     const chosenIngredients = ingredientsArr.reduce((a, b) => a + b, 0);
 
@@ -151,18 +151,20 @@ class IndeterminateCheckboxExample extends React.Component {
           <Checkbox
             name='allToppings'
             label='All'
+            value='allToppings'
             indeterminate={isIndeterminate}
             checked={
               !isIndeterminate && chosenIngredients === possibleIngredients
             }
             onChange={() => {
+              console.log(ingredientsArr);
               if (isIndeterminate) {
                 this.setState({
                   cheese: true,
                   bacon: true,
                   broccoli: true
                 });
-              } else if (ingredientsArr[0] === true) {
+              } else if (ingredientsArr[0] === 1) {
                 this.setState({
                   cheese: false,
                   bacon: false,

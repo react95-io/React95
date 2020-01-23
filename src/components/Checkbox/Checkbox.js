@@ -191,8 +191,7 @@ Checkbox.defaultProps = {
   style: {},
   defaultChecked: false,
   className: '',
-  indeterminate: false,
-  value: undefined
+  indeterminate: false
 };
 
 Checkbox.propTypes = {
@@ -202,7 +201,7 @@ Checkbox.propTypes = {
     propTypes.string,
     propTypes.number,
     propTypes.bool
-  ]),
+  ]).isRequired,
   label: propTypes.oneOfType([propTypes.string, propTypes.number]),
   checked: propTypes.bool,
   disabled: propTypes.bool,
