@@ -16,12 +16,16 @@ storiesOf('Checkbox', module)
   .add('controlled group', () => <ControlledCheckboxGroupExample />)
 
   .add('uncontrolled', () => (
-    <Checkbox
-      name='single'
-      value='single'
-      label="I'm single 😥 ...and no one's controlling me 😎"
-      defaultChecked
-    />
+    <>
+      <Checkbox
+        name='cheese'
+        value='cheese'
+        label='Add extra cheese 🧀'
+        defaultChecked
+      />
+      <br />
+      <Checkbox name='pineapple' value='pineapple' label='Add pineapple 🍍' />
+    </>
   ))
   .add('indeterminate / mixed value', () => <IndeterminateCheckboxExample />)
 
