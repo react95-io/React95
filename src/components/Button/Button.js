@@ -30,10 +30,21 @@ const commonButtonStyles = css`
 `;
 
 const StyledButton = styled.button`
-  ${({ variant, theme, active, isDisabled }) =>
+  ${({ variant, theme, active, isDisabled, primary }) =>
     variant === 'flat'
       ? css`
-          ${createFlatBoxStyles()} /* background: none; */
+          ${createFlatBoxStyles()}
+          ${primary
+            ? `
+          border: 2px solid ${theme.checkmark};
+            outline: 2px solid ${theme.flatDark};
+            outline-offset: -4px;
+          `
+            : `
+          border: 2px solid ${theme.flatDark};
+            outline: 2px solid transparent;
+            outline-offset: -4px;
+          `}
         `
       : variant === 'menu'
       ? css`
@@ -58,7 +69,7 @@ const StyledButton = styled.button`
             box-sizing: border-box;
             content: '';
             position: absolute;
-            ${variant === 'primary'
+            ${primary
               ? css`
                   left: 2px;
                   top: 2px;
@@ -91,6 +102,7 @@ const Button = ({
   size,
   square,
   active,
+  primary,
   variant,
   className,
   children,
@@ -99,6 +111,7 @@ const Button = ({
   <StyledButton
     type={type}
     variant={variant}
+    primary={primary}
     onClick={disabled ? undefined : onClick}
     style={style}
     isDisabled={disabled}
@@ -124,6 +137,7 @@ Button.defaultProps = {
   size: 'md',
   square: false,
   active: false,
+  primary: false,
   variant: 'default',
   className: ''
 };
@@ -137,7 +151,9 @@ Button.propTypes = {
   size: propTypes.oneOf(['sm', 'md', 'lg']),
   square: propTypes.bool,
   active: propTypes.bool,
-  variant: propTypes.oneOf(['default', 'primary', 'menu', 'flat']),
+  primary: propTypes.bool,
+
+  variant: propTypes.oneOf(['default', 'menu', 'flat']),
   className: propTypes.string,
   children: propTypes.node.isRequired
 };
