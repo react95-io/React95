@@ -35,7 +35,7 @@ storiesOf('Button', module)
   ))
   .add('default', () => <Button {...actions}>Default</Button>)
   .add('primary', () => (
-    <Button variant='primary' {...actions}>
+    <Button primary {...actions}>
       Primary
     </Button>
   ))
@@ -97,11 +97,25 @@ storiesOf('Button', module)
             }}
           >
             <Toolbar>
-              <Button {...actions} variant='flat' fullWidth accent>
-                OK
+              <Button
+                primary
+                {...actions}
+                variant='flat'
+                fullWidth
+                style={{ marginRight: '0.5rem' }}
+              >
+                Primary
               </Button>
-              <Button {...actions} variant='flat' disabled fullWidth accent>
-                Cancel
+              <Button
+                {...actions}
+                variant='flat'
+                fullWidth
+                style={{ marginRight: '0.5rem' }}
+              >
+                Regular
+              </Button>
+              <Button {...actions} variant='flat' disabled fullWidt>
+                Disabled
               </Button>
             </Toolbar>
           </div>
