@@ -228,6 +228,7 @@ const Slider = ({
   marks: marksProp,
   onChange,
   onChangeCommitted,
+  onMouseDown,
   name,
   vertical,
   variant,
@@ -310,9 +311,9 @@ const Slider = ({
   });
   const handleMouseDown = useEventCallback(event => {
     // TODO should we also pass event together with new value to callbacks? (same thing with other input components)
-    // if (onMouseDown) {
-    //   onMouseDown(event);
-    // }
+    if (onMouseDown) {
+      onMouseDown(event);
+    }
     event.preventDefault();
     const finger = trackFinger(event, touchId);
     const newValue = getNewValue(finger);
@@ -407,6 +408,7 @@ Slider.defaultProps = {
   size: '100%',
   onChange: null,
   onChangeCommitted: null,
+  onMouseDown: null,
 
   name: null,
   marks: false,
@@ -425,6 +427,7 @@ Slider.propTypes = {
   size: propTypes.string,
   onChange: propTypes.func,
   onChangeCommitted: propTypes.func,
+  onMouseDown: propTypes.func,
 
   name: propTypes.string,
   marks: propTypes.oneOfType([propTypes.bool, propTypes.array]),
