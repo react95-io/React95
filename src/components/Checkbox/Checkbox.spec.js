@@ -64,7 +64,7 @@ describe('<Checkbox />', () => {
     });
   });
   describe('prop: indeterminate', () => {
-    it('renders', () => {
+    it('renders indeterminate state', () => {
       const { getByRole } = renderWithTheme(<Checkbox indeterminate />);
       const checkbox = getByRole('checkbox');
 
@@ -134,18 +134,14 @@ describe('<Checkbox />', () => {
       const checkbox = getByRole('checkbox');
 
       expect(checkbox.checked).toBe(true);
-      //   expect(getByTestId('checked-icon')).to.be.ok;
 
       checkbox.click();
 
       expect(checkbox.checked).toBe(false);
-      //   expect(getByTestId('unchecked-icon')).to.be.ok;
 
       checkbox.click();
 
       expect(checkbox.checked).toBe(true);
-      //   expect(getByTestId('checked-icon')).to.be.ok;
     });
   });
-  // TODO test indeterminate
 });
