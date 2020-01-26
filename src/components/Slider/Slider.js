@@ -403,10 +403,11 @@ const Slider = ({
         vertical={vertical}
         variant={variant}
         isDisabled={disabled}
+        aria-disabled={disabled.toString()}
         aria-orientation={vertical ? 'vertical' : 'horizontal'}
         aria-valuemax={max}
         aria-valuemin={min}
-        aria-valuenow={value}
+        aria-valuenow={valueDerived}
       />
     </Wrapper>
   );
