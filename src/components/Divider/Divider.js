@@ -1,47 +1,36 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
-import { blockSizes } from '../common/system';
 
 const StyledDivider = styled.hr`
   ${({ vertical, theme, size }) =>
     vertical
       ? `
-    height: ${blockSizes[size]};
+    height: ${size};
     border-left: 2px solid ${theme.borderDark};
     border-right: 2px solid ${theme.borderLightest};
     margin: 0;
     `
       : `
-    width: 100%;
+    width: ${size};
     border-bottom: 2px solid ${theme.borderLightest};
     border-top: 2px solid ${theme.borderDark};
     margin: 0;
     `}
 `;
 
-const Divider = ({ vertical, className, style, ...otherProps }) => (
-  <StyledDivider
-    vertical={vertical}
-    as={vertical ? 'div' : 'hr'}
-    className={className}
-    style={style}
-    {...otherProps}
-  />
+const Divider = ({ vertical, size, ...otherProps }) => (
+  <StyledDivider vertical={vertical} size={size} {...otherProps} />
 );
 
 Divider.defaultProps = {
-  size: 'md',
-  vertical: false,
-  className: '',
-  style: {}
+  size: '100%',
+  vertical: false
 };
 
 Divider.propTypes = {
   vertical: propTypes.bool,
-  size: propTypes.oneOf(['sm', 'md', 'lg']),
-  className: propTypes.string,
-  style: propTypes.shape([propTypes.string, propTypes.number])
+  size: propTypes.string
 };
 
 export default Divider;
