@@ -33,6 +33,26 @@ describe('<Checkbox />', () => {
     });
   });
 
+  describe('disabled', () => {
+    it('should disable checkbox', () => {
+      const handleChange = jest.fn();
+
+      const { getByRole } = renderWithTheme(
+        <Checkbox disabled onChange={handleChange} />
+      );
+      const checkbox = getByRole('checkbox');
+      expect(checkbox).toHaveAttribute('disabled');
+
+      checkbox.click();
+      expect(handleChange).not.toHaveBeenCalled();
+    });
+    it('should be overridden by props', () => {
+      const { getByRole, rerender } = renderWithTheme(<Checkbox disabled />);
+      rerender(<Checkbox disabled={false} />);
+      const checkbox = getByRole('checkbox');
+      expect(checkbox).not.toHaveAttribute('disabled');
+    });
+  });
   describe('controlled', () => {
     it('should check the checkbox', () => {
       const { getByRole, rerender } = renderWithTheme(

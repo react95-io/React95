@@ -125,6 +125,7 @@ const Checkbox = ({
     Input = (
       <>
         <StyledInput
+          disabled={disabled}
           onChange={disabled ? undefined : handleChange}
           readOnly={disabled}
           type='checkbox'
@@ -148,6 +149,7 @@ const Checkbox = ({
     Input = (
       <>
         <StyledInput
+          disabled={disabled}
           onChange={disabled ? undefined : onChange}
           readOnly={disabled}
           type='checkbox'
