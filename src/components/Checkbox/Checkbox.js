@@ -182,17 +182,19 @@ Checkbox.defaultProps = {
   style: {},
   defaultChecked: false,
   className: '',
-  indeterminate: false
+  indeterminate: false,
+  value: undefined,
+  name: null
 };
 
 Checkbox.propTypes = {
   onChange: propTypes.func,
-  name: propTypes.string.isRequired,
+  name: propTypes.string,
   value: propTypes.oneOfType([
     propTypes.string,
     propTypes.number,
     propTypes.bool
-  ]).isRequired,
+  ]),
   label: propTypes.oneOfType([propTypes.string, propTypes.number]),
   checked: propTypes.bool,
   disabled: propTypes.bool,
