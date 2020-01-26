@@ -22,6 +22,7 @@ const StyledFieldset = styled.fieldset`
     `}
 `;
 const StyledLegend = styled.legend`
+  display: flex;
   position: absolute;
   top: 0;
   left: ${padding.sm};
@@ -37,22 +38,8 @@ const StyledFieldsetContent = styled.div`
   ${props => props.isDisabled && createDisabledTextStyles()}
 `;
 
-const Fieldset = ({
-  label,
-  disabled,
-  variant,
-  children,
-  className,
-  style,
-  ...otherProps
-}) => (
-  <StyledFieldset
-    isDisabled={disabled}
-    variant={variant}
-    style={style}
-    className={className}
-    {...otherProps}
-  >
+const Fieldset = ({ label, disabled, variant, children, ...otherProps }) => (
+  <StyledFieldset isDisabled={disabled} variant={variant} {...otherProps}>
     {label && <StyledLegend variant={variant}>{label}</StyledLegend>}
     <StyledFieldsetContent isDisabled={disabled}>
       {children}
@@ -64,19 +51,11 @@ Fieldset.defaultProps = {
   disabled: false,
   variant: 'default',
   label: null,
-  className: '',
-  style: {},
   children: null
 };
 
 Fieldset.propTypes = {
-  label: propTypes.oneOfType([
-    propTypes.string,
-    propTypes.number,
-    propTypes.node
-  ]),
-  className: propTypes.string,
-  style: propTypes.shape([propTypes.string, propTypes.number]),
+  label: propTypes.node,
   children: propTypes.node,
   disabled: propTypes.bool,
   variant: propTypes.oneOf(['default', 'flat'])
