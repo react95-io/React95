@@ -93,7 +93,6 @@ const StyledFlatCheckbox = styled.div`
   ${sharedCheckmarkStyles}
   background: ${({ theme, isDisabled }) =>
     isDisabled ? theme.flatLight : theme.canvas};
-
 `;
 const Checkbox = ({
   onChange,
@@ -140,6 +139,8 @@ const Checkbox = ({
           indeterminate={indeterminate}
           isDisabled={disabled}
           shadow={shadow}
+          aria-hidden
+          role='presentation'
         />
       </>
     );
@@ -161,6 +162,8 @@ const Checkbox = ({
           indeterminate={indeterminate}
           isDisabled={disabled}
           shadow={shadow}
+          aria-hidden
+          role='presentation'
         />
       </>
     );
