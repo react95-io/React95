@@ -389,8 +389,13 @@ const Slider = ({
                 100}%`
             }}
             key={(m.value / (max - min)) * 100}
+            data-testid='tick'
           >
-            <Mark vertical={vertical}>{m.label}</Mark>
+            {m.label && (
+              <Mark vertical={vertical} aria-hidden data-testid='mark'>
+                {m.label}
+              </Mark>
+            )}
           </Tick>
         ))}
       <Groove vertical={vertical} variant={variant} />

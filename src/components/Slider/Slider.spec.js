@@ -164,4 +164,35 @@ describe('<Slider />', () => {
       expect(handleChange.mock.calls[1][0]).toBe(78);
     });
   });
+
+  describe('prop: marks', () => {
+    it('displays only ticks when marks is set to "true"', () => {
+      const { queryAllByTestId } = renderWithTheme(
+        <Slider marks defaultValue={0} min={0} max={6} />
+      );
+      const ticks = queryAllByTestId('tick');
+      const marks = queryAllByTestId('mark');
+
+      expect(ticks.length).toBe(7);
+      expect(marks.length).toBe(0);
+    });
+
+    it('displays marks passed as prop', () => {
+      const { queryAllByTestId } = renderWithTheme(
+        <Slider
+          defaultValue={0}
+          marks={[
+            { value: 0, label: 'zero' },
+            { value: 20, label: 'twenty' },
+            { value: 30, label: 'thirty' }
+          ]}
+        />
+      );
+      const marks = queryAllByTestId('mark');
+
+      expect(marks[0].textContent).toBe('zero');
+      expect(marks[1].textContent).toBe('twenty');
+      expect(marks[2].textContent).toBe('thirty');
+    });
+  });
 });
