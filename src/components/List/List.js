@@ -39,8 +39,6 @@ const StyledList = styled.ul`
 const List = ({
   inline,
   shadow,
-  className,
-  style,
   children,
   fullWidth,
   verticalAlign,
@@ -53,8 +51,6 @@ const List = ({
     horizontalAlign={horizontalAlign}
     shadow={shadow}
     fullWidth={fullWidth}
-    className={className}
-    style={style}
     {...otherProps}
   >
     {children}
@@ -62,19 +58,15 @@ const List = ({
 );
 
 List.defaultProps = {
-  style: {},
   fullWidth: false,
   shadow: true,
   inline: false,
-  className: '',
   children: null,
   verticalAlign: undefined,
   horizontalAlign: undefined
 };
 
 List.propTypes = {
-  className: propTypes.string,
-  style: propTypes.shape([propTypes.string, propTypes.number]),
   fullWidth: propTypes.bool,
   inline: propTypes.bool,
   shadow: propTypes.bool,
