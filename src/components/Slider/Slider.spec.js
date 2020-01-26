@@ -79,7 +79,14 @@ describe('<Slider />', () => {
       'horizontal'
     );
   });
-
+  it('should forward mouseDown', () => {
+    const handleMouseDown = jest.fn();
+    const { container } = renderWithTheme(
+      <Slider onMouseDown={handleMouseDown} value={0} />
+    );
+    fireEvent.mouseDown(container.firstChild);
+    expect(handleMouseDown).toHaveBeenCalledTimes(1);
+  });
   describe('prop: step', () => {
     it('should handle a null step', () => {
       const { getByRole, container } = renderWithTheme(
