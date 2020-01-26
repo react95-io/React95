@@ -236,7 +236,10 @@ const Slider = ({
   ...otherProps
 }) => {
   const Groove = variant === 'flat' ? StyledFlatGroove : StyledGroove;
-  const [val, setVal] = useControlledOrUncontrolled({ value, defaultValue });
+  const [valueDerived, setValueState] = useControlledOrUncontrolled({
+    value,
+    defaultValue
+  });
 
   const sliderRef = useRef();
   const touchId = React.useRef();
@@ -283,7 +286,7 @@ const Slider = ({
     }
     const newValue = getNewValue(finger);
 
-    setVal(newValue);
+    setValueState(newValue);
 
     if (onChange) {
       onChange(newValue);
@@ -318,7 +321,7 @@ const Slider = ({
     const finger = trackFinger(event, touchId);
     const newValue = getNewValue(finger);
 
-    setVal(newValue);
+    setValueState(newValue);
     if (onChange) {
       onChange(newValue);
     }
@@ -336,7 +339,7 @@ const Slider = ({
     }
     const finger = trackFinger(event, touchId);
     const newValue = getNewValue(finger);
-    setVal(newValue);
+    setValueState(newValue);
 
     if (onChange) {
       onChange(newValue);
@@ -370,7 +373,12 @@ const Slider = ({
       {...otherProps}
     >
       {/* should we keep the hidden input ? */}
-      <input type='hidden' value={val || 0} name={name} disabled={disabled} />
+      <input
+        type='hidden'
+        value={valueDerived || 0}
+        name={name}
+        disabled={disabled}
+      />
       {marks &&
         marks.map(m => (
           <Tick
@@ -387,13 +395,18 @@ const Slider = ({
         ))}
       <Groove vertical={vertical} variant={variant} />
       <Thumb
+        role='slider'
         style={{
           [vertical ? 'bottom' : 'left']: `${(vertical ? -100 : 0) +
-            (100 * val) / (max - min)}%`
+            (100 * valueDerived) / (max - min)}%`
         }}
         vertical={vertical}
         variant={variant}
         isDisabled={disabled}
+        aria-orientation={vertical ? 'vertical' : 'horizontal'}
+        aria-valuemax={max}
+        aria-valuemin={min}
+        aria-valuenow={value}
       />
     </Wrapper>
   );
