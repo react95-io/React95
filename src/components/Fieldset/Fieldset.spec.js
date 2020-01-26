@@ -5,7 +5,7 @@ import { renderWithTheme, theme } from '../../../test/utils';
 import Fieldset from './Fieldset';
 
 describe('<Fieldset />', () => {
-  it('renders', () => {
+  it('renders Fieldset', () => {
     const { container } = renderWithTheme(<Fieldset />);
     const fieldset = container.firstChild;
 
@@ -22,7 +22,7 @@ describe('<Fieldset />', () => {
   });
 
   describe('prop: label', () => {
-    it('renders', () => {
+    it('renders Label', () => {
       const labelText = 'Name:';
       const { container } = renderWithTheme(<Fieldset label={labelText} />);
       const fieldset = container.firstChild;
