@@ -152,10 +152,8 @@ const Checkbox = ({
         indeterminate={indeterminate}
         isDisabled={disabled}
         shadow={shadow}
-        aria-hidden
-        role='presentation'
       >
-        {Icon && <Icon isDisabled={disabled} />}
+        {Icon && <Icon isDisabled={disabled} role='presentation' />}
       </CheckboxComponent>
       {label && <span>{label}</span>}
       <StyledInput

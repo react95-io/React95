@@ -13,7 +13,7 @@ describe('<Checkbox />', () => {
     });
   });
 
-  describe('onChange', () => {
+  describe('prop: onChange', () => {
     it('should call onChange when uncontrolled', () => {
       const handleChange = jest.fn(event => event.target.checked);
       const { getByRole } = renderWithTheme(
@@ -43,7 +43,7 @@ describe('<Checkbox />', () => {
     });
   });
 
-  describe('disabled', () => {
+  describe('prop: disabled', () => {
     it('should disable checkbox', () => {
       const handleChange = jest.fn();
 
@@ -61,6 +61,46 @@ describe('<Checkbox />', () => {
       rerender(<Checkbox disabled={false} />);
       const checkbox = getByRole('checkbox');
       expect(checkbox).not.toHaveAttribute('disabled');
+    });
+  });
+  describe('prop: indeterminate', () => {
+    it('renders', () => {
+      const { getByRole } = renderWithTheme(<Checkbox indeterminate />);
+      const checkbox = getByRole('checkbox');
+
+      // don't set native 'indeterminate' attribute because
+      // different browsers treat it differently
+      // instead we're setting 'data-indeterminate' attribute
+      expect(checkbox).toHaveAttribute('data-indeterminate');
+      expect(checkbox).not.toHaveAttribute('indeterminate', 'true');
+
+      expect(getByRole('presentation')).toHaveAttribute(
+        'data-testid',
+        'indeterminateIcon'
+      );
+    });
+    it('replaces checked icon', () => {
+      const { getByRole, rerender } = renderWithTheme(<Checkbox checked />);
+
+      expect(getByRole('checkbox')).toHaveAttribute(
+        'data-indeterminate',
+        'false'
+      );
+      expect(getByRole('presentation')).toHaveAttribute(
+        'data-testid',
+        'checkmarkIcon'
+      );
+
+      rerender(<Checkbox checked indeterminate />);
+
+      expect(getByRole('checkbox')).toHaveAttribute(
+        'data-indeterminate',
+        'true'
+      );
+      expect(getByRole('presentation')).toHaveAttribute(
+        'data-testid',
+        'indeterminateIcon'
+      );
     });
   });
   describe('controlled', () => {
