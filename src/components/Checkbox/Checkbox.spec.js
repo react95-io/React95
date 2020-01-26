@@ -3,6 +3,16 @@ import { renderWithTheme } from '../../../test/utils';
 import Checkbox from './Checkbox';
 
 describe('<Checkbox />', () => {
+  describe('label', () => {
+    it('renders', () => {
+      const labelText = 'Swag';
+      const { getByLabelText } = renderWithTheme(
+        <Checkbox label={labelText} />
+      );
+      expect(getByLabelText(labelText)).toBeInTheDocument();
+    });
+  });
+
   describe('onChange', () => {
     it('should call onChange when uncontrolled', () => {
       const handleChange = jest.fn(event => event.target.checked);

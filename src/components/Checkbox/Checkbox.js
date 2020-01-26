@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 
 import styled, { css } from 'styled-components';
@@ -9,6 +9,7 @@ import {
 } from '../common';
 
 import { padding, fontSizes } from '../common/system';
+import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import Cutout from '../Cutout/Cutout';
 
 const checkboxSize = '20px';
@@ -110,70 +111,38 @@ const Checkbox = ({
   ...otherProps
 }) => {
   const Checkmark = variant === 'flat' ? StyledFlatCheckbox : StyledCheckbox;
+  const [state, setState] = useControlledOrUncontrolled({
+    value: checked,
+    defaultValue: defaultChecked
+  });
+  const handleChange = e => {
+    const newState = e.target.checked;
+    setState(newState);
+    if (onChange) onChange(e);
+  };
 
-  let Input;
-
-  if (defaultChecked || checked === undefined) {
-    const [state, setState] = useState(defaultChecked || false);
-
-    const handleChange = e => {
-      const newState = e.target.checked;
-      setState(newState);
-      if (onChange) onChange(e);
-    };
-
-    Input = (
-      <>
-        <StyledInput
-          disabled={disabled}
-          onChange={disabled ? undefined : handleChange}
-          readOnly={disabled}
-          type='checkbox'
-          value={value}
-          checked={state}
-          name={name}
-          data-indeterminate={indeterminate}
-          {...otherProps}
-        />
-        <Checkmark
-          checked={state}
-          indeterminate={indeterminate}
-          isDisabled={disabled}
-          shadow={shadow}
-          aria-hidden
-          role='presentation'
-        />
-      </>
-    );
-  } else {
-    Input = (
-      <>
-        <StyledInput
-          disabled={disabled}
-          onChange={disabled ? undefined : onChange}
-          readOnly={disabled}
-          type='checkbox'
-          value={value}
-          checked={checked}
-          name={name}
-          data-indeterminate={indeterminate}
-          {...otherProps}
-        />
-        <Checkmark
-          checked={checked}
-          indeterminate={indeterminate}
-          isDisabled={disabled}
-          shadow={shadow}
-          aria-hidden
-          role='presentation'
-        />
-      </>
-    );
-  }
   return (
     <StyledLabel isDisabled={disabled} className={className} style={style}>
-      {label}
-      {Input}
+      {label && <span>{label}</span>}
+      <StyledInput
+        disabled={disabled}
+        onChange={disabled ? undefined : handleChange}
+        readOnly={disabled}
+        type='checkbox'
+        value={value}
+        checked={state}
+        name={name}
+        data-indeterminate={indeterminate}
+        {...otherProps}
+      />
+      <Checkmark
+        checked={state}
+        indeterminate={indeterminate}
+        isDisabled={disabled}
+        shadow={shadow}
+        aria-hidden
+        role='presentation'
+      />
     </StyledLabel>
   );
 };
