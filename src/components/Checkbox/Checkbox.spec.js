@@ -108,4 +108,5 @@ describe('<Checkbox />', () => {
       //   expect(getByTestId('checked-icon')).to.be.ok;
     });
   });
+  // TODO test indeterminate
 });
