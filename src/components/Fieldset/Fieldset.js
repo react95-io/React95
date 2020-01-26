@@ -20,6 +20,7 @@ const StyledFieldset = styled.fieldset`
       box-shadow: -1px -1px 0 1px ${({ theme }) => theme.borderDark},
         inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
     `}
+  ${props => props.isDisabled && createDisabledTextStyles()}
 `;
 const StyledLegend = styled.legend`
   display: flex;
@@ -34,16 +35,10 @@ const StyledLegend = styled.legend`
     variant === 'flat' ? theme.canvas : theme.material};
 `;
 
-const StyledFieldsetContent = styled.div`
-  ${props => props.isDisabled && createDisabledTextStyles()}
-`;
-
 const Fieldset = ({ label, disabled, variant, children, ...otherProps }) => (
   <StyledFieldset isDisabled={disabled} variant={variant} {...otherProps}>
     {label && <StyledLegend variant={variant}>{label}</StyledLegend>}
-    <StyledFieldsetContent isDisabled={disabled}>
-      {children}
-    </StyledFieldsetContent>
+    {children}
   </StyledFieldset>
 );
 
