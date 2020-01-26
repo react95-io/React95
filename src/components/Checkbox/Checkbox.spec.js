@@ -72,9 +72,9 @@ describe('<Checkbox />', () => {
       // different browsers treat it differently
       // instead we're setting 'data-indeterminate' attribute
       expect(checkbox).toHaveAttribute('data-indeterminate');
-      expect(checkbox).not.toHaveAttribute('indeterminate', 'true');
+      expect(checkbox).not.toHaveAttribute('indeterminate');
 
-      expect(getByRole('presentation')).toHaveAttribute(
+      expect(getByRole('presentation').firstChild).toHaveAttribute(
         'data-testid',
         'indeterminateIcon'
       );
@@ -86,10 +86,6 @@ describe('<Checkbox />', () => {
         'data-indeterminate',
         'false'
       );
-      expect(getByRole('presentation')).toHaveAttribute(
-        'data-testid',
-        'checkmarkIcon'
-      );
 
       rerender(<Checkbox checked indeterminate />);
 
@@ -97,7 +93,7 @@ describe('<Checkbox />', () => {
         'data-indeterminate',
         'true'
       );
-      expect(getByRole('presentation')).toHaveAttribute(
+      expect(getByRole('presentation').firstChild).toHaveAttribute(
         'data-testid',
         'indeterminateIcon'
       );
@@ -114,7 +110,10 @@ describe('<Checkbox />', () => {
 
       expect(checkbox.checked).toBe(true);
       expect(getByRole('checkbox')).toHaveAttribute('checked');
-      //   check if proper icon was rendered
+      expect(getByRole('presentation').firstChild).toHaveAttribute(
+        'data-testid',
+        'checkmarkIcon'
+      );
     });
 
     it('should uncheck the checkbox', () => {
@@ -124,7 +123,7 @@ describe('<Checkbox />', () => {
 
       expect(checkbox.checked).toBe(false);
       expect(getByRole('checkbox')).not.toHaveAttribute('checked');
-
+      expect(getByRole('presentation').firstChild).toBeNull();
       //   check if proper icon was rendered
     });
   });

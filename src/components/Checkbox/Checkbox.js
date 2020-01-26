@@ -152,8 +152,9 @@ const Checkbox = ({
         indeterminate={indeterminate}
         isDisabled={disabled}
         shadow={shadow}
+        role='presentation'
       >
-        {Icon && <Icon isDisabled={disabled} role='presentation' />}
+        {Icon && <Icon isDisabled={disabled} />}
       </CheckboxComponent>
       {label && <span>{label}</span>}
       <StyledInput
