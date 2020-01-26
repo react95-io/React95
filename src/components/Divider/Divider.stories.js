@@ -28,9 +28,9 @@ storiesOf('Divider', module)
   .add('vertical', () => (
     <List inline>
       <ListItem>Item 1</ListItem>
-      <Divider vertical size='lg' />
+      <Divider vertical size='43px' />
       <ListItem>Item 2</ListItem>
-      <Divider vertical size='lg' />
+      <Divider vertical size='43px' />
       <ListItem>Item 3</ListItem>
     </List>
   ));
