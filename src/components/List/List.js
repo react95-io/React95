@@ -20,7 +20,7 @@ const StyledList = styled.ul`
 
   width: ${props => (props.fullWidth ? '100%' : 'auto')};
   padding: 2px 4px 4px 2px;
-  ${createBorderStyles()}
+  ${createBorderStyles({ windowBorders: true })}
   ${createBoxStyles()}
   ${props =>
     props.inline &&

@@ -84,10 +84,12 @@ const StyledButton = styled.button`
                   height: 100%;
                 `}
 
-            ${active ? createBorderStyles(true) : createBorderStyles(false)}
+            ${active
+              ? createBorderStyles({ invert: true })
+              : createBorderStyles({ invert: false })}
           }
           &:active:before {
-            ${!isDisabled && createBorderStyles(true)}
+            ${!isDisabled && createBorderStyles({ invert: true })}
           }
         `}
   ${commonButtonStyles}

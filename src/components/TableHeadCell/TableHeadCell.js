@@ -14,7 +14,7 @@ const StyledHeadCell = styled.th`
   vertical-align: inherit;
   background: ${({ theme }) => theme.material};
   &:active {
-    ${createBorderStyles(true)}
+    ${createBorderStyles({ invert: true })}
     border-left: none;
     border-top: none;
   }
