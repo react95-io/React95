@@ -36,8 +36,6 @@ const ListItem = ({
   size,
   disabled,
   square,
-  className,
-  style,
   children,
   onClick,
   ...otherProps
@@ -46,8 +44,6 @@ const ListItem = ({
     size={size}
     isDisabled={disabled}
     square={square}
-    className={className}
-    style={style}
     onClick={disabled ? undefined : onClick}
     role='menuitem'
     aria-disabled={disabled.toString()}
@@ -58,18 +54,15 @@ const ListItem = ({
 );
 
 ListItem.defaultProps = {
-  style: {},
   disabled: false,
   size: 'lg',
   square: false,
   onClick: null,
-  className: '',
+
   children: null
 };
 
 ListItem.propTypes = {
-  className: propTypes.string,
-  style: propTypes.shape([propTypes.string, propTypes.number]),
   size: propTypes.oneOf(['sm', 'md', 'lg']),
   disabled: propTypes.bool,
   square: propTypes.bool,
