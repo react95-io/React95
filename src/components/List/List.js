@@ -21,12 +21,13 @@ const StyledList = styled.ul`
   position: relative;
 
 `;
-
+// TODO keyboard controls
 const List = ({ inline, shadow, children, fullWidth, ...otherProps }) => (
   <StyledList
     inline={inline}
     shadow={shadow}
     fullWidth={fullWidth}
+    role='menu'
     {...otherProps}
   >
     {children}

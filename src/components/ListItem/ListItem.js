@@ -49,6 +49,8 @@ const ListItem = ({
     className={className}
     style={style}
     onClick={disabled ? undefined : onClick}
+    role='menuitem'
+    aria-disabled={disabled.toString()}
     {...otherProps}
   >
     {children}
