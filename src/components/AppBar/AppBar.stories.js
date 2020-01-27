@@ -51,9 +51,11 @@ function Menu() {
     <div style={{ position: 'relative', display: 'inline-block' }}>
       {open && (
         <List
-          horizontalAlign='left'
-          verticalAlign='bottom'
-          open={open}
+          style={{
+            position: 'absolute',
+            left: '0',
+            top: '100%'
+          }}
           onClick={handleClose}
         >
           <ListItem>

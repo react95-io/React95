@@ -18,6 +18,7 @@ const StyledListItem = styled.li`
   text-align: ${props => (props.square ? 'center' : 'left')};
   line-height: ${props => blockSizes[props.size]};
   color: ${({ theme }) => theme.text};
+  pointer-events: ${({ isDisabled }) => (isDisabled ? 'none' : 'auto')};
 
   &:hover {
     ${({ theme, isDisabled }) =>
@@ -32,47 +33,55 @@ const StyledListItem = styled.li`
   ${props => props.isDisabled && createDisabledTextStyles()}
 `;
 
-const ListItem = ({
-  size,
-  disabled,
-  square,
-  className,
-  style,
-  children,
-  onClick,
-  ...otherProps
-}) => (
-  <StyledListItem
-    size={size}
-    isDisabled={disabled}
-    square={square}
-    className={className}
-    style={style}
-    onClick={disabled ? undefined : onClick}
-    {...otherProps}
-  >
-    {children}
-  </StyledListItem>
-);
+const ListItem = React.forwardRef(function ListItem(props, ref) {
+  const {
+    size,
+    disabled,
+    // tabIndex: tabIndexProp,
+    square,
+    children,
+    onClick,
+    ...otherProps
+  } = props;
+  // let tabIndex;
+  // if (!disabled) {
+  //   tabIndex = tabIndexProp !== undefined ? tabIndexProp : -1;
+  // }
+
+  return (
+    <StyledListItem
+      size={size}
+      isDisabled={disabled}
+      square={square}
+      onClick={disabled ? undefined : onClick}
+      // tabIndex={tabIndex}
+      role='menuitem'
+      ref={ref}
+      aria-disabled={disabled.toString()}
+      {...otherProps}
+    >
+      {children}
+    </StyledListItem>
+  );
+});
 
 ListItem.defaultProps = {
-  style: {},
   disabled: false,
   size: 'lg',
   square: false,
   onClick: null,
-  className: '',
+
   children: null
+  // tabIndex: undefined
 };
 
 ListItem.propTypes = {
-  className: propTypes.string,
-  style: propTypes.shape([propTypes.string, propTypes.number]),
   size: propTypes.oneOf(['sm', 'md', 'lg']),
   disabled: propTypes.bool,
   square: propTypes.bool,
   children: propTypes.node,
   onClick: propTypes.func
+  // tabIndex: propTypes.number
 };
 
 export default ListItem;

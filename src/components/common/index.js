@@ -48,7 +48,10 @@ export const createFlatBoxStyles = () => css`
   outline: 2px solid ${({ theme }) => theme.flatDark};
   outline-offset: -4px;
 `;
-export const createBorderStyles = (invert = false) =>
+export const createBorderStyles = ({
+  invert = false,
+  windowBorders = false
+} = {}) =>
   invert
     ? css`
         border-style: solid;
@@ -64,12 +67,16 @@ export const createBorderStyles = (invert = false) =>
     : css`
         border-style: solid;
         border-width: 2px;
-        border-left-color: ${({ theme }) => theme.borderLightest};
-        border-top-color: ${({ theme }) => theme.borderLightest};
+        border-left-color: ${({ theme }) =>
+          windowBorders ? theme.borderLight : theme.borderLightest};
+        border-top-color: ${({ theme }) =>
+          windowBorders ? theme.borderLight : theme.borderLightest};
         border-right-color: ${({ theme }) => theme.borderDarkest};
         border-bottom-color: ${({ theme }) => theme.borderDarkest};
         box-shadow: ${props => props.shadow && `${shadow}, `} inset 1px 1px 0px
-            1px ${({ theme }) => theme.borderLight},
+            1px
+            ${({ theme }) =>
+              windowBorders ? theme.borderLightest : theme.borderLight},
           inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
       `;
 export const createWellBorderStyles = (invert = false) =>
