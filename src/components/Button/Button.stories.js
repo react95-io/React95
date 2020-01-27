@@ -159,7 +159,12 @@ function MenuButtonExample() {
         >
           {open && (
             <List
-              style={{ zIndex: '9999' }}
+              style={{
+                position: 'absolute',
+                right: '0',
+                top: '100%',
+                zIndex: '9999'
+              }}
               horizontalAlign='right'
               verticalAlign='bottom'
               open={open}

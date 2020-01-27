@@ -4,17 +4,6 @@ import propTypes from 'prop-types';
 import styled from 'styled-components';
 import { createBorderStyles, createBoxStyles } from '../common';
 
-const createListPositionStyles = ({
-  verticalAlign = 'bottom',
-  horizontalAlign = 'left'
-}) => `
-    position: absolute;
-    ${verticalAlign === 'bottom' ? 'bottom: 0;' : 'top: 0;'}
-    ${horizontalAlign === 'left' ? 'left: 0;' : 'right: 0;'}
-
-    transform: translate(0, ${verticalAlign === 'top' ? '-100%' : '100%'})
-  `;
-
 const StyledList = styled.ul`
   box-sizing: border-box;
 
@@ -31,23 +20,11 @@ const StyledList = styled.ul`
   list-style: none;
   position: relative;
 
-  ${props =>
-    (props.horizontalAlign || props.verticalAlign) && createListPositionStyles}
 `;
 
-const List = ({
-  inline,
-  shadow,
-  children,
-  fullWidth,
-  verticalAlign,
-  horizontalAlign,
-  ...otherProps
-}) => (
+const List = ({ inline, shadow, children, fullWidth, ...otherProps }) => (
   <StyledList
     inline={inline}
-    verticalAlign={verticalAlign}
-    horizontalAlign={horizontalAlign}
     shadow={shadow}
     fullWidth={fullWidth}
     {...otherProps}
@@ -60,18 +37,14 @@ List.defaultProps = {
   fullWidth: false,
   shadow: true,
   inline: false,
-  children: null,
-  verticalAlign: undefined,
-  horizontalAlign: undefined
+  children: null
 };
 
 List.propTypes = {
   fullWidth: propTypes.bool,
   inline: propTypes.bool,
   shadow: propTypes.bool,
-  children: propTypes.node,
-  verticalAlign: propTypes.oneOf(['top', 'bottom']),
-  horizontalAlign: propTypes.oneOf(['left', 'right'])
+  children: propTypes.node
 };
 
 export default List;
