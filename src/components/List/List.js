@@ -22,17 +22,22 @@ const StyledList = styled.ul`
 
 `;
 // TODO keyboard controls
-const List = ({ inline, shadow, children, fullWidth, ...otherProps }) => (
-  <StyledList
-    inline={inline}
-    shadow={shadow}
-    fullWidth={fullWidth}
-    role='menu'
-    {...otherProps}
-  >
-    {children}
-  </StyledList>
-);
+const List = React.forwardRef(function List(props, ref) {
+  const { inline, shadow, children, fullWidth, ...otherProps } = props;
+
+  return (
+    <StyledList
+      inline={inline}
+      shadow={shadow}
+      fullWidth={fullWidth}
+      role='menu'
+      ref={ref}
+      {...otherProps}
+    >
+      {children}
+    </StyledList>
+  );
+});
 
 List.defaultProps = {
   fullWidth: false,
