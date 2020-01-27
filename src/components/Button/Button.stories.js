@@ -165,8 +165,6 @@ function MenuButtonExample() {
                 top: '100%',
                 zIndex: '9999'
               }}
-              horizontalAlign='right'
-              verticalAlign='bottom'
               open={open}
               onClick={handleClose}
             >
