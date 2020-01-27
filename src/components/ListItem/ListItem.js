@@ -18,6 +18,7 @@ const StyledListItem = styled.li`
   text-align: ${props => (props.square ? 'center' : 'left')};
   line-height: ${props => blockSizes[props.size]};
   color: ${({ theme }) => theme.text};
+  pointer-events: ${({ isDisabled }) => (isDisabled ? 'none' : 'auto')};
 
   &:hover {
     ${({ theme, isDisabled }) =>
