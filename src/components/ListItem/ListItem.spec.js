@@ -1,15 +1,26 @@
 import React from 'react';
 
 import { renderWithTheme, theme } from '../../../test/utils';
-
+import { blockSizes } from '../common/system';
 import ListItem from './ListItem';
 
+const defaultSize = 'lg';
 describe('<ListItem />', () => {
   it('renders ListItem', () => {
     const { container } = renderWithTheme(<ListItem />);
     const listItem = container.firstChild;
     expect(listItem).toBeInTheDocument();
     expect(listItem).toHaveAttribute('aria-disabled', 'false');
+    expect(ListItem.defaultProps.size).toBe(defaultSize);
+  });
+  it('renders children', () => {
+    const textContent = 'Hi there!';
+    const { getByText } = renderWithTheme(
+      <ListItem>
+        <span>{textContent}</span>
+      </ListItem>
+    );
+    expect(getByText(textContent)).toBeInTheDocument();
   });
   it('should have a default role of menuitem', () => {
     const { container } = renderWithTheme(<ListItem />);
@@ -59,6 +70,24 @@ describe('<ListItem />', () => {
       const listItem = container.firstChild;
       listItem.click();
       expect(clickHandler).toHaveBeenCalledTimes(1);
+    });
+  });
+  describe('prop: square', () => {
+    it('should render square ListItem', () => {
+      const { getByRole } = renderWithTheme(<ListItem square />);
+      const listItem = getByRole('menuitem');
+
+      expect(listItem).toHaveStyleRule('width', blockSizes[defaultSize]);
+      expect(listItem).toHaveStyleRule('height', blockSizes[defaultSize]);
+    });
+  });
+  describe('prop: size', () => {
+    it('should define ListItem height', () => {
+      const size = 'sm';
+      const { getByRole } = renderWithTheme(<ListItem size={size} />);
+      const listItem = getByRole('menuitem');
+
+      expect(listItem).toHaveStyleRule('height', blockSizes[size]);
     });
   });
 });
