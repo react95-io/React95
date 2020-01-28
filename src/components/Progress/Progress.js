@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import propTypes from 'prop-types';
 
 import styled, { keyframes, css } from 'styled-components';
@@ -144,38 +144,47 @@ const IndeterminateSecondaryInner = styled.span`
   animation: ${secondaryScale} 2s infinite linear;
 `;
 
-const ProgressBar = ({ value, variant, shadow, ...otherProps }) => (
-  <Wrapper role='progressbar' variant={variant} shadow={shadow} {...otherProps}>
-    {variant === 'default' ? (
-      <>
-        <WhiteBar>{value}%</WhiteBar>
-        <BlueBar value={value}>{value}%</BlueBar>
-      </>
-    ) : (
-      <>
-        <IndeterminatePrimary>
-          <IndeterminatePrimaryInner />
-        </IndeterminatePrimary>
-        <IndeterminateSecondary>
-          <IndeterminateSecondaryInner />
-        </IndeterminateSecondary>
-      </>
-    )}
-  </Wrapper>
-);
+const Progress = forwardRef(function Progress(props, ref) {
+  const { value, variant, shadow, ...otherProps } = props;
+  return (
+    <Wrapper
+      ref={ref}
+      role='progressbar'
+      variant={variant}
+      shadow={shadow}
+      {...otherProps}
+    >
+      {variant === 'default' ? (
+        <>
+          <WhiteBar>{value}%</WhiteBar>
+          <BlueBar value={value}>{value}%</BlueBar>
+        </>
+      ) : (
+        <>
+          <IndeterminatePrimary>
+            <IndeterminatePrimaryInner />
+          </IndeterminatePrimary>
+          <IndeterminateSecondary>
+            <IndeterminateSecondaryInner />
+          </IndeterminateSecondary>
+        </>
+      )}
+    </Wrapper>
+  );
+});
 
-ProgressBar.defaultProps = {
+Progress.defaultProps = {
   value: 0,
   shadow: true,
   style: {},
   variant: 'default'
 };
 
-ProgressBar.propTypes = {
+Progress.propTypes = {
   value: propTypes.number,
   style: propTypes.shape([propTypes.string, propTypes.number]),
   variant: propTypes.oneOf(['default', 'indeterminate']),
   shadow: propTypes.bool
 };
 
-export default ProgressBar;
+export default Progress;
