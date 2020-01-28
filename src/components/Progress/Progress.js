@@ -19,6 +19,7 @@ const Wrapper = styled(Cutout)`
 
 const WhiteBar = styled.div`
   width: calc(100% - 4px);
+  height: ${blockSizes.md};
   line-height: ${blockSizes.md};
   background: ${({ theme }) => theme.canvas};
   color: #000;
@@ -33,6 +34,8 @@ const BlueBar = styled.div`
   top: -2px;
   left: 2px;
   width: calc(100% - 4px);
+  height: ${blockSizes.md};
+
   line-height: ${blockSizes.md};
 
   color: ${({ theme }) => theme.textInvert};
@@ -43,6 +46,7 @@ const BlueBar = styled.div`
     ${({ value }) => value}% 100%,
     0 100%
   );
+  transition: 0.4s linear clip-path;
 `;
 
 // animations taken from https://material.io/develop/web/ Linear Progress
@@ -145,7 +149,9 @@ const IndeterminateSecondaryInner = styled.span`
 `;
 
 const Progress = forwardRef(function Progress(props, ref) {
-  const { value, variant, shadow, ...otherProps } = props;
+  const { value, variant, shadow, hideValue, ...otherProps } = props;
+  const displayValue = hideValue ? null : `${value}%`;
+
   return (
     <Wrapper
       ref={ref}
@@ -156,8 +162,8 @@ const Progress = forwardRef(function Progress(props, ref) {
     >
       {variant === 'default' ? (
         <>
-          <WhiteBar>{value}%</WhiteBar>
-          <BlueBar value={value}>{value}%</BlueBar>
+          <WhiteBar>{displayValue}</WhiteBar>
+          <BlueBar value={value}>{displayValue}</BlueBar>
         </>
       ) : (
         <>
@@ -177,14 +183,16 @@ Progress.defaultProps = {
   value: 0,
   shadow: true,
   style: {},
-  variant: 'default'
+  variant: 'default',
+  hideValue: false
 };
 
 Progress.propTypes = {
   value: propTypes.number,
   style: propTypes.shape([propTypes.string, propTypes.number]),
   variant: propTypes.oneOf(['default', 'indeterminate']),
-  shadow: propTypes.bool
+  shadow: propTypes.bool,
+  hideValue: propTypes.bool
 };
 
 export default Progress;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 
 import styled from 'styled-components';
@@ -11,7 +11,29 @@ const Wrapper = styled.div`
 `;
 storiesOf('Progress', module)
   .addDecorator(story => <Wrapper>{story()}</Wrapper>)
-  .add('default', () => <Progress value={52} />)
+  .add('default', () => <ProgressExample />)
   .add('indeterminate', () => <Progress variant='indeterminate' />)
+  .add('hide value', () => <Progress hideValue value={34} />);
 
-  .add('no shadow', () => <Progress value={52} shadow={false} />);
+const ProgressExample = () => {
+  const [percent, setPercent] = useState(0);
+
+  React.useEffect(() => {
+    function progress() {
+      setPercent(previousPercent => {
+        if (previousPercent === 100) {
+          return 0;
+        }
+        const diff = Math.random() * 10;
+        return Math.min(previousPercent + diff, 100);
+      });
+    }
+
+    const timer = setInterval(progress, 500);
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
+  return <Progress value={Math.floor(percent)} />;
+};
