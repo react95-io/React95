@@ -145,7 +145,7 @@ const IndeterminateSecondaryInner = styled.span`
 `;
 
 const ProgressBar = ({ value, variant, shadow, ...otherProps }) => (
-  <Wrapper variant={variant} shadow={shadow} {...otherProps}>
+  <Wrapper role='progressbar' variant={variant} shadow={shadow} {...otherProps}>
     {variant === 'default' ? (
       <>
         <WhiteBar>{value}%</WhiteBar>
