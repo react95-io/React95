@@ -11,5 +11,7 @@ const Wrapper = styled.div`
 `;
 storiesOf('Progress', module)
   .addDecorator(story => <Wrapper>{story()}</Wrapper>)
-  .add('default', () => <Progress percent={52} />)
-  .add('no shadow', () => <Progress percent={52} shadow={false} />);
+  .add('default', () => <Progress value={52} />)
+  .add('indeterminate', () => <Progress variant='indeterminate' />)
+
+  .add('no shadow', () => <Progress value={52} shadow={false} />);
