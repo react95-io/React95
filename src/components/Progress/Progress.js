@@ -129,6 +129,10 @@ const sharedIndeterminateInnerStyles = css`
   display: inline-block;
   background: ${({ theme }) => theme.progress};
 `;
+const IndeterminateWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 const IndeterminatePrimary = styled.div`
   ${sharedIndeterminateStyles}
   left: -145.166611%;
@@ -152,28 +156,35 @@ const Progress = forwardRef(function Progress(props, ref) {
   const { value, variant, shadow, hideValue, ...otherProps } = props;
   const displayValue = hideValue ? null : `${value}%`;
 
+  const progressProps = {};
+  if (value !== undefined && variant !== 'indeterminate') {
+    progressProps['aria-valuenow'] = Math.round(value);
+  }
   return (
     <Wrapper
       ref={ref}
       role='progressbar'
       variant={variant}
       shadow={shadow}
+      {...progressProps}
       {...otherProps}
     >
       {variant === 'default' ? (
         <>
-          <WhiteBar>{displayValue}</WhiteBar>
-          <BlueBar value={value}>{displayValue}</BlueBar>
+          <WhiteBar data-testid='defaultProgress1'>{displayValue}</WhiteBar>
+          <BlueBar data-testid='defaultProgress2' value={value}>
+            {displayValue}
+          </BlueBar>
         </>
       ) : (
-        <>
+        <IndeterminateWrapper data-testid='indeterminateProgress'>
           <IndeterminatePrimary>
             <IndeterminatePrimaryInner />
           </IndeterminatePrimary>
           <IndeterminateSecondary>
             <IndeterminateSecondaryInner />
           </IndeterminateSecondary>
-        </>
+        </IndeterminateWrapper>
       )}
     </Wrapper>
   );
@@ -182,14 +193,12 @@ const Progress = forwardRef(function Progress(props, ref) {
 Progress.defaultProps = {
   value: 0,
   shadow: true,
-  style: {},
   variant: 'default',
   hideValue: false
 };
 
 Progress.propTypes = {
   value: propTypes.number,
-  style: propTypes.shape([propTypes.string, propTypes.number]),
   variant: propTypes.oneOf(['default', 'indeterminate']),
   shadow: propTypes.bool,
   hideValue: propTypes.bool
