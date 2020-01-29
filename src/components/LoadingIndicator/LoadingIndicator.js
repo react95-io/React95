@@ -118,13 +118,13 @@ const IndeterminateSecondaryInner = styled.span`
   animation: ${secondaryScale} 2s infinite linear;
 `;
 
-const Progress = forwardRef(function Progress(props, ref) {
+const LoadingIndicator = forwardRef(function LoadingIndicator(props, ref) {
   const { isLoading, shadow, ...otherProps } = props;
 
   return (
     <Wrapper ref={ref} role='progressbar' shadow={shadow} {...otherProps}>
       {isLoading && (
-        <IndeterminateWrapper data-testid='indeterminateProgress'>
+        <IndeterminateWrapper>
           <IndeterminatePrimary>
             <IndeterminatePrimaryInner />
           </IndeterminatePrimary>
@@ -137,14 +137,14 @@ const Progress = forwardRef(function Progress(props, ref) {
   );
 });
 
-Progress.defaultProps = {
+LoadingIndicator.defaultProps = {
   shadow: true,
   isLoading: true
 };
 
-Progress.propTypes = {
+LoadingIndicator.propTypes = {
   shadow: propTypes.bool,
   isLoading: propTypes.bool
 };
 
-export default Progress;
+export default LoadingIndicator;
