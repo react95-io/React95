@@ -51,7 +51,7 @@ describe('<Progress />', () => {
         const tileWidth = tile.getBoundingClientRect().width;
 
         const targetTileNumber = Math.floor(
-          ((33 / 100) * tileProgressWidth) / tileWidth
+          ((value / 100) * tileProgressWidth) / tileWidth
         );
         expect(tileProgress.childElementCount).toBe(targetTileNumber);
       });
