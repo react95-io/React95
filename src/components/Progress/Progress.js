@@ -104,13 +104,16 @@ const Progress = forwardRef(function Progress(props, ref) {
     function update() {
       savedCallback.current();
     }
-    // run function immediately to calculate number of tiles
-    update();
-    // then listen on window resize to recalculate that number
+
+    // then listen on window resize to recalculate number of tiles
     window.addEventListener('resize', update);
     return () => window.removeEventListener('resize', update);
   }, []);
 
+  // recalculate number of tiles when value changes
+  useEffect(() => {
+    savedCallback.current();
+  }, [value]);
   return (
     <Wrapper
       // TODO what to do with ref from forwardRef ?

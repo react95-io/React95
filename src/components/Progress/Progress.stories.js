@@ -11,11 +11,11 @@ const Wrapper = styled.div`
 `;
 storiesOf('Progress', module)
   .addDecorator(story => <Wrapper>{story()}</Wrapper>)
-  .add('default', () => <ProgressExample />)
-  .add('hide value', () => <Progress hideValue value={34} />)
-  .add('tile progress', () => <Progress variant='tile' value={34} />);
+  .add('default', () => <ProgressExample variant='default' />)
+  .add('hide value', () => <ProgressExample hideValue />)
+  .add('tile progress', () => <ProgressExample variant='tile' />);
 
-const ProgressExample = () => {
+const ProgressExample = props => {
   const [percent, setPercent] = useState(0);
 
   useEffect(() => {
@@ -33,5 +33,5 @@ const ProgressExample = () => {
     };
   }, []);
 
-  return <Progress value={Math.floor(percent)} />;
+  return <Progress {...props} value={Math.floor(percent)} />;
 };
