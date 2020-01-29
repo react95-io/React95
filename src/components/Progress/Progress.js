@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { forwardRef, useRef, useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 
 import styled from 'styled-components';
@@ -53,12 +53,15 @@ const BlueBar = styled.div`
 `;
 
 const TilesWrapper = styled.div`
-  width: 100%;
+  width: calc(100% - 6px);
+  height: calc(100% - 8px);
+  position: absolute;
+  left: 3px;
+  top: 4px;
   box-sizing: border-box;
-  height: 100%;
   display: inline-flex;
 `;
-const tileWidth = 24;
+const tileWidth = 17;
 const Tile = styled.span`
   display: inline-block;
   width: ${tileWidth}px;
@@ -66,11 +69,12 @@ const Tile = styled.span`
   height: 100%;
   background: ${({ theme }) => theme.progress};
   border-color: ${({ theme }) => theme.material};
-  border-width: 2px 1px 2px 1px;
+  border-width: 0px 1px;
   border-style: solid;
 `;
 
-const Progress = ({ value, variant, shadow, hideValue, ...otherProps }) => {
+const Progress = forwardRef(function Progress(props, ref) {
+  const { value, variant, shadow, hideValue, ...otherProps } = props;
   const displayValue = hideValue ? null : `${value}%`;
 
   const progressProps = {};
@@ -78,17 +82,18 @@ const Progress = ({ value, variant, shadow, hideValue, ...otherProps }) => {
     progressProps['aria-valuenow'] = Math.round(value);
   }
 
-  const progressRef = useRef();
+  const tilesWrapperRef = useRef();
   const savedCallback = useRef();
   const [tilesNumber, setTilesNumber] = useState(0);
 
+  // TODO debounce this function
   function updateTilesNumber() {
-    if (progressRef.current) {
-      const progressWidth = progressRef.current.getBoundingClientRect().width;
+    if (tilesWrapperRef.current) {
+      const progressWidth = tilesWrapperRef.current.getBoundingClientRect()
+        .width;
       const newTilesNumber = Math.round(
         ((value / 100) * progressWidth) / tileWidth
       );
-      // console.log(newTilesNumber, progressWidth, tileWidth);
       setTilesNumber(newTilesNumber);
     }
   }
@@ -109,7 +114,7 @@ const Progress = ({ value, variant, shadow, hideValue, ...otherProps }) => {
   return (
     <Wrapper
       // TODO what to do with ref from forwardRef ?
-      ref={progressRef}
+      ref={ref}
       role='progressbar'
       shadow={shadow}
       {...progressProps}
@@ -124,7 +129,7 @@ const Progress = ({ value, variant, shadow, hideValue, ...otherProps }) => {
             </BlueBar>
           </>
         ) : (
-          <TilesWrapper>
+          <TilesWrapper ref={tilesWrapperRef}>
             {Array(tilesNumber)
               .fill(null)
               .map((_, index) => (
@@ -135,7 +140,7 @@ const Progress = ({ value, variant, shadow, hideValue, ...otherProps }) => {
       </ProgressCutout>
     </Wrapper>
   );
-};
+});
 
 Progress.defaultProps = {
   value: 0,
