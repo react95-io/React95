@@ -119,11 +119,10 @@ const Progress = forwardRef(function Progress(props, ref) {
       // TODO what to do with ref from forwardRef ?
       ref={ref}
       role='progressbar'
-      shadow={shadow}
       {...progressProps}
       {...otherProps}
     >
-      <ProgressCutout>
+      <ProgressCutout shadow={shadow}>
         {variant === 'default' ? (
           <>
             <WhiteBar data-testid='defaultProgress1'>{displayValue}</WhiteBar>

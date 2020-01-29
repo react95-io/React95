@@ -5,12 +5,16 @@ import styled, { keyframes, css } from 'styled-components';
 
 import Cutout from '../Cutout/Cutout';
 
-const Wrapper = styled(Cutout)`
+const Wrapper = styled.div`
   display: inline-block;
   height: 15px;
   width: 100%;
+`;
+const ProgressCutout = styled(Cutout)`
+  width: 100%;
+  height: 100%;
+  width: 100%;
   position: relative;
-  text-align: center;
   padding: 0;
   overflow: hidden;
 `;
@@ -122,23 +126,25 @@ const LoadingIndicator = forwardRef(function LoadingIndicator(props, ref) {
   const { isLoading, shadow, ...otherProps } = props;
 
   return (
-    <Wrapper ref={ref} role='progressbar' shadow={shadow} {...otherProps}>
-      {isLoading && (
-        <IndeterminateWrapper>
-          <IndeterminatePrimary>
-            <IndeterminatePrimaryInner />
-          </IndeterminatePrimary>
-          <IndeterminateSecondary>
-            <IndeterminateSecondaryInner />
-          </IndeterminateSecondary>
-        </IndeterminateWrapper>
-      )}
+    <Wrapper ref={ref} role='progressbar' {...otherProps}>
+      <ProgressCutout shadow={shadow}>
+        {isLoading && (
+          <IndeterminateWrapper>
+            <IndeterminatePrimary>
+              <IndeterminatePrimaryInner />
+            </IndeterminatePrimary>
+            <IndeterminateSecondary>
+              <IndeterminateSecondaryInner />
+            </IndeterminateSecondary>
+          </IndeterminateWrapper>
+        )}
+      </ProgressCutout>
     </Wrapper>
   );
 });
 
 LoadingIndicator.defaultProps = {
-  shadow: true,
+  shadow: false,
   isLoading: true
 };
 
