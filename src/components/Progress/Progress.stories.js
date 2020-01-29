@@ -12,7 +12,6 @@ const Wrapper = styled.div`
 storiesOf('Progress', module)
   .addDecorator(story => <Wrapper>{story()}</Wrapper>)
   .add('default', () => <ProgressExample />)
-  .add('indeterminate', () => <Progress variant='indeterminate' />)
   .add('hide value', () => <Progress hideValue value={34} />);
 
 const ProgressExample = () => {
