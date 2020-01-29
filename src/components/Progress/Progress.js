@@ -129,7 +129,7 @@ const Progress = forwardRef(function Progress(props, ref) {
             </BlueBar>
           </>
         ) : (
-          <TilesWrapper ref={tilesWrapperRef}>
+          <TilesWrapper ref={tilesWrapperRef} data-testid='tileProgress'>
             {Array(tilesNumber)
               .fill(null)
               .map((_, index) => (
