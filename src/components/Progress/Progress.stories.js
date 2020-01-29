@@ -12,7 +12,8 @@ const Wrapper = styled.div`
 storiesOf('Progress', module)
   .addDecorator(story => <Wrapper>{story()}</Wrapper>)
   .add('default', () => <ProgressExample />)
-  .add('hide value', () => <Progress hideValue value={34} />);
+  .add('hide value', () => <Progress hideValue value={34} />)
+  .add('tile progress', () => <Progress variant='tile' value={34} />);
 
 const ProgressExample = () => {
   const [percent, setPercent] = useState(0);
