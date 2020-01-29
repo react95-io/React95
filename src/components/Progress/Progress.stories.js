@@ -19,7 +19,7 @@ const ProgressExample = () => {
   const [percent, setPercent] = useState(0);
 
   React.useEffect(() => {
-    function progress() {
+    const timer = setInterval(() => {
       setPercent(previousPercent => {
         if (previousPercent === 100) {
           return 0;
@@ -27,9 +27,7 @@ const ProgressExample = () => {
         const diff = Math.random() * 10;
         return Math.min(previousPercent + diff, 100);
       });
-    }
-
-    const timer = setInterval(progress, 500);
+    }, 500);
     return () => {
       clearInterval(timer);
     };
