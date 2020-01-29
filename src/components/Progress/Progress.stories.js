@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { storiesOf } from '@storybook/react';
 
 import styled from 'styled-components';
@@ -18,7 +18,7 @@ storiesOf('Progress', module)
 const ProgressExample = () => {
   const [percent, setPercent] = useState(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const timer = setInterval(() => {
       setPercent(previousPercent => {
         if (previousPercent === 100) {
