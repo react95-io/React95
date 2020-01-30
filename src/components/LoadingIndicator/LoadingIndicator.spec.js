@@ -14,13 +14,13 @@ describe('<LoadingIndicator />', () => {
 
   describe('prop: isLoading', () => {
     it('when set to false, does not display progress bars', () => {
-      const { getByRole, rerender } = renderWithTheme(<LoadingIndicator />);
+      const { rerender, queryByTestId } = renderWithTheme(<LoadingIndicator />);
 
-      expect(getByRole('progressbar').firstChild).not.toBeNull();
+      expect(queryByTestId('loading-wrapper')).not.toBeNull();
 
       rerender(<LoadingIndicator isLoading={false} />);
 
-      expect(getByRole('progressbar').firstChild).toBeNull();
+      expect(queryByTestId('loading-wrapper')).toBeNull();
     });
   });
 });

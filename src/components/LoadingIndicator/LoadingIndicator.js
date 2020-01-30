@@ -129,7 +129,7 @@ const LoadingIndicator = forwardRef(function LoadingIndicator(props, ref) {
     <Wrapper ref={ref} role='progressbar' {...otherProps}>
       <ProgressCutout shadow={shadow}>
         {isLoading && (
-          <IndeterminateWrapper>
+          <IndeterminateWrapper data-testid='loading-wrapper'>
             <IndeterminatePrimary>
               <IndeterminatePrimaryInner />
             </IndeterminatePrimary>
