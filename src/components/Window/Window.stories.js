@@ -29,7 +29,7 @@ storiesOf('Window', module)
       >
         <span>react95.exe</span>
         <Button
-          style={{ marginRight: '-6px', marginTop: '1px' }}
+          style={{ marginRight: '1px', marginTop: '1px' }}
           size='sm'
           square
         >

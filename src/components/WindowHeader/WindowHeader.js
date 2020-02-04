@@ -2,14 +2,11 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import styled from 'styled-components';
-import { padding } from '../common/system';
 
 const SlyledWindowHeader = styled.div`
-  height: 33px;
-  line-height: 33px;
-  padding: 0 ${padding.sm};
-  margin-right: 2px;
-  margin-bottom: 4px;
+  height: 30px;
+  line-height: 30px;
+  padding-left: 0.25rem;
 
   font-weight: bold;
   color: ${({ theme }) => theme.textInvert};
@@ -19,6 +16,7 @@ const SlyledWindowHeader = styled.div`
     ${({ theme }) => theme.headerMaterialDark},
     ${({ theme }) => theme.headerMaterialLight}
   );
+  border: 2px solid ${({ theme }) => theme.material};
 `;
 
 const WindowHeader = ({ className, style, children, ...otherProps }) => (
