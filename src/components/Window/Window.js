@@ -11,21 +11,19 @@ const StyledWindow = styled.div`
   ${createBoxStyles()}
 `;
 
-const Window = ({ shadow, className, children, ...otherProps }) => (
-  <StyledWindow shadow={shadow} className={className} {...otherProps} swag>
+const Window = ({ shadow, children, ...otherProps }) => (
+  <StyledWindow shadow={shadow} {...otherProps}>
     {children}
   </StyledWindow>
 );
 
 Window.defaultProps = {
   shadow: true,
-  className: '',
   children: null
 };
 
 Window.propTypes = {
   shadow: propTypes.bool,
-  className: propTypes.string,
   children: propTypes.node
 };
 
