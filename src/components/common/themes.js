@@ -1,9 +1,6 @@
 const themes = {};
 
 themes.default = {
-  hatchedBackground:
-    'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIElEQVQYV2P8////fwYGBgZGRkZGMI0hABIFAbgEugAAQFQP/QfjEPcAAAAASUVORK5CYII=)',
-
   canvas: '#ffffff',
   material: '#ced0cf',
   materialDark: '#9a9e9c',
@@ -43,9 +40,6 @@ themes.default = {
 };
 
 themes.water = {
-  hatchedBackground:
-    'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIElEQVQYV2P8////fwYGBgZGRkZGMI0hABIFAbgEugAAQFQP/QfjEPcAAAAASUVORK5CYII=)',
-
   canvas: '#ffffff',
   material: '#ced0cf',
   materialDark: '#9a9e9c',
@@ -84,9 +78,6 @@ themes.water = {
 };
 
 themes.coldGray = {
-  hatchedBackground:
-    'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIElEQVQYV2P8////fwYGBgZGRkZGMI0hABIFAbgEugAAQFQP/QfjEPcAAAAASUVORK5CYII=)',
-
   // background: "#CCF5AC",
   // background: "#416165",
   background: '#4C6663',
@@ -129,9 +120,6 @@ themes.coldGray = {
 };
 
 themes.lilacRoseDark = {
-  hatchedBackground:
-    'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIElEQVQYV2P8////fwYGBgZGRkZGMI0hABIFAbgEugAAQFQP/QfjEPcAAAAASUVORK5CYII=)',
-
   background: '#3B3B58',
 
   canvas: '#dab1c7',
@@ -172,9 +160,6 @@ themes.lilacRoseDark = {
 };
 
 themes.violetDark = {
-  hatchedBackground:
-    'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIElEQVQYV2P8////fwYGBgZGRkZGMI0hABIFAbgEugAAQFQP/QfjEPcAAAAASUVORK5CYII=)',
-
   canvas: '#c47bcc',
   material: '#652a6d',
   materialDark: '#210e23',

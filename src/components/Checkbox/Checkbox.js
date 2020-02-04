@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import styled, { css } from 'styled-components';
-import { createDisabledTextStyles, createCheckeredBackground } from '../common';
+import { createDisabledTextStyles, createHatchedBackground } from '../common';
 
 import { padding, fontSizes } from '../common/system';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
@@ -103,7 +103,7 @@ const IndeterminateIcon = styled.span.attrs(() => ({
     height: 100%;
 
     ${({ theme, isDisabled }) =>
-      createCheckeredBackground({
+      createHatchedBackground({
         mainColor: isDisabled ? theme.checkmarkDisabled : theme.checkmark
       })}
     background-position: -1px -1px, 1px 1px;

@@ -9,7 +9,8 @@ import {
   createWellBorderStyles,
   createBoxStyles,
   createFlatBoxStyles,
-  createDisabledTextStyles
+  createDisabledTextStyles,
+  createHatchedBackground
 } from '../common';
 import { blockSizes, fontSizes, padding } from '../common/system';
 
@@ -64,7 +65,10 @@ const StyledButton = styled.button`
           border: none;
           ${isDisabled && createDisabledTextStyles()}
           ${active &&
-            `background-image: ${theme.hatchedBackground};`}
+            createHatchedBackground({
+              mainColor: theme.material,
+              secondaryColor: theme.borderLightest
+            })}
           &:before {
             box-sizing: border-box;
             content: '';
