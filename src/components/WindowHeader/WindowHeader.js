@@ -16,7 +16,6 @@ const SlyledWindowHeader = styled.div`
     ${({ theme }) => theme.headerMaterialDark},
     ${({ theme }) => theme.headerMaterialLight}
   );
-  border: 2px solid ${({ theme }) => theme.material};
 `;
 
 const WindowHeader = ({ className, style, children, ...otherProps }) => (

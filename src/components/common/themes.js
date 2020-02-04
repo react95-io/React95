@@ -15,7 +15,7 @@ themes.default = {
   borderLight: '#dfe0e3',
 
   headerMaterialDark: '#000080',
-  headerMaterialLight: '#1034a6',
+  headerMaterialLight: '#000080',
   headerText: '#ffffff',
 
   text: '#050608',

@@ -6,7 +6,7 @@ import { createBorderStyles, createBoxStyles } from '../common';
 
 const StyledWindow = styled.div`
   position: relative;
-  padding: 2px;
+  padding: 4px;
   ${createBorderStyles({ windowBorders: true })}
   ${createBoxStyles()}
 `;
