@@ -59,16 +59,9 @@ storiesOf('Window', module)
       </WindowContent>
     </Window>
   ))
-  .add('no shadow', () => (
-    <Window shadow={false}>
+  .add('resizable', () => (
+    <Window resizable>
       <WindowHeader>react95.exe</WindowHeader>
-      <WindowContent>
-        <ul>
-          <li>something here</li>
-          <li>something here</li>
-          <li>something here</li>
-          <li>something here</li>
-        </ul>
-      </WindowContent>
+      <WindowContent>Resizable Window</WindowContent>
     </Window>
   ));
