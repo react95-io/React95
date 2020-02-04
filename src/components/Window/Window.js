@@ -37,6 +37,7 @@ const DragHandle = styled.span`
     border-width: 2px;
     border-style: solid;
     border-color: ${theme.material};
+    cursor: se-resize;
   `}
 `;
 
