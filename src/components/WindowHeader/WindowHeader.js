@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const SlyledWindowHeader = styled.div`
   height: 30px;
@@ -9,25 +9,38 @@ const SlyledWindowHeader = styled.div`
   padding-left: 0.25rem;
 
   font-weight: bold;
-  color: ${({ theme }) => theme.textInvert};
+  color: ${({ theme, isActive }) =>
+    isActive ? theme.textInvert : theme.material};
 
-  background: linear-gradient(
-    to right,
-    ${({ theme }) => theme.headerMaterialDark},
-    ${({ theme }) => theme.headerMaterialLight}
-  );
+  ${({ theme, isActive }) =>
+    isActive
+      ? css`
+          background: linear-gradient(
+            to right,
+            ${theme.headerMaterialDark},
+            ${theme.headerMaterialLight}
+          );
+        `
+      : css`
+          background: ${theme.headerNotActive};
+        `}
 `;
 
-const WindowHeader = ({ children, ...otherProps }) => (
-  <SlyledWindowHeader {...otherProps}>{children}</SlyledWindowHeader>
+// TODO - should we add some aria label indicating if window is currently active?
+const WindowHeader = ({ isActive, children, ...otherProps }) => (
+  <SlyledWindowHeader isActive={isActive} {...otherProps}>
+    {children}
+  </SlyledWindowHeader>
 );
 
 WindowHeader.defaultProps = {
-  children: null
+  children: null,
+  isActive: true
 };
 
 WindowHeader.propTypes = {
-  children: propTypes.node
+  children: propTypes.node,
+  isActive: propTypes.bool
 };
 
 export default WindowHeader;

@@ -17,6 +17,7 @@ themes.default = {
   headerMaterialDark: '#000080',
   headerMaterialLight: '#000080',
   headerText: '#ffffff',
+  headerNotActive: '#7f7f7f',
 
   text: '#050608',
   textInvert: '#ffffff',
@@ -59,6 +60,7 @@ themes.water = {
   headerMaterialDark: '#72b3b4',
   headerMaterialLight: '#72b3b4',
   headerText: '#ffffff',
+  headerNotActive: '#9a9e9c',
 
   text: '#050608',
   textInvert: '#ffffff',
@@ -104,6 +106,7 @@ themes.coldGray = {
   headerMaterialDark: '#3B3D64',
   headerMaterialLight: '#8d88c2',
   headerText: '#010601',
+  headerNotActive: '#6063a5',
 
   text: '#010601',
   textInvert: '#c7c7df',
@@ -147,6 +150,7 @@ themes.lilacRoseDark = {
   headerMaterialDark: '#4C0030',
   headerMaterialLight: '#8d88c2',
   headerText: '#010601',
+  headerNotActive: '#763a60',
 
   text: '#000000',
   textInvert: '#ecbfe3',
@@ -178,6 +182,7 @@ themes.violetDark = {
   canvas: '#c47bcc',
   material: '#652a6d',
   materialDark: '#210e23',
+
   borderDarkest: '#18051a',
   borderLightest: '#c47bcc',
   borderDark: '#3c1f3e',
@@ -186,6 +191,7 @@ themes.violetDark = {
 
   headerMaterialDark: '#1034a6',
   headerMaterialLight: '#512155',
+  headerNotActive: '#210e23',
 
   text: '#c57ece',
   textInvert: '#c47bcc',

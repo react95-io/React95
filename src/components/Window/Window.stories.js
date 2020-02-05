@@ -62,6 +62,14 @@ storiesOf('Window', module)
   .add('resizable', () => (
     <Window resizable>
       <WindowHeader>react95.exe</WindowHeader>
-      <WindowContent>Resizable Window</WindowContent>
+      <WindowContent>
+        Resizable Window displays drag handle in bottom right corner
+      </WindowContent>
+    </Window>
+  ))
+  .add('not Active', () => (
+    <Window>
+      <WindowHeader isActive={false}>react95.exe</WindowHeader>
+      <WindowContent>I am not active</WindowContent>
     </Window>
   ));
