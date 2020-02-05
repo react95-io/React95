@@ -7,8 +7,8 @@ const SlyledWindowHeader = styled.div`
   height: 30px;
   line-height: 30px;
   padding-left: 0.25rem;
-
   font-weight: bold;
+
   color: ${({ theme, isActive }) =>
     isActive ? theme.textInvert : theme.material};
 
@@ -25,7 +25,6 @@ const SlyledWindowHeader = styled.div`
           background: ${theme.headerNotActive};
         `}
 `;
-
 // TODO - should we add some aria label indicating if window is currently active?
 const WindowHeader = ({ isActive, children, ...otherProps }) => (
   <SlyledWindowHeader isActive={isActive} {...otherProps}>
