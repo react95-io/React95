@@ -63,7 +63,7 @@ storiesOf('Window', module)
     <Window resizable>
       <WindowHeader>react95.exe</WindowHeader>
       <WindowContent>
-        Resizable Window displays drag handle in bottom right corner
+        Resizable Window displays resize handle in bottom right corner
       </WindowContent>
     </Window>
   ))
