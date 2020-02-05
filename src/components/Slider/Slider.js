@@ -6,7 +6,8 @@ import {
   createBoxStyles,
   createBorderStyles,
   createFlatBoxStyles,
-  createDisabledTextStyles
+  createDisabledTextStyles,
+  createHatchedBackground
 } from '../common';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import Cutout from '../Cutout/Cutout';
@@ -165,9 +166,10 @@ const Thumb = styled.span`
         `}
     ${({ isDisabled, theme }) =>
       isDisabled &&
-      css`
-        background-image: ${theme.hatchedBackground};
-      `}
+      createHatchedBackground({
+        mainColor: theme.material,
+        secondaryColor: theme.borderLightest
+      })}
 `;
 
 const tickHeight = 6;
