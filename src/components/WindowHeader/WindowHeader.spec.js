@@ -22,19 +22,19 @@ describe('<WindowHeader />', () => {
     expect(getByText(textContent)).toBeInTheDocument();
   });
 
-  //   describe('prop: isActive', () => {
-  //     it('displays active header by default', () => {
-  //       const { container } = renderWithTheme(<WindowHeader />);
-  //       const windowHeader = container.firstChild;
+  describe('prop: isActive', () => {
+    it('displays active header by default', () => {
+      const { container } = renderWithTheme(<WindowHeader />);
+      const windowHeader = container.firstChild;
 
-  //       expect(windowHeader).toHaveAttribute('data-testid', 'activeHeader');
-  //     });
+      expect(windowHeader).toHaveAttribute('data-active', 'true');
+    });
 
-  //     it('renders non-active header when set to false', () => {
-  //       const { container } = renderWithTheme(<WindowHeader isActive={false} />);
-  //       const windowHeader = container.firstChild;
+    it('renders non-active header when set to false', () => {
+      const { container } = renderWithTheme(<WindowHeader isActive={false} />);
+      const windowHeader = container.firstChild;
 
-  //       expect(windowHeader).toHaveAttribute('data-testid', 'notActiveHeader');
-  //     });
-  //   });
+      expect(windowHeader).toHaveAttribute('data-active', 'false');
+    });
+  });
 });
