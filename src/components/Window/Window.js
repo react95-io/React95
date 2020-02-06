@@ -10,7 +10,7 @@ const StyledWindow = styled.div`
   ${createBorderStyles({ windowBorders: true })}
   ${createBoxStyles()}
 `;
-const DragHandle = styled.span`
+const ResizeHandle = styled.span`
   ${({ theme }) => css`
     display: inline-block;
     position: absolute;
@@ -41,11 +41,13 @@ const DragHandle = styled.span`
   `}
 `;
 
-// TODO pass resize handler
+// TODO how to pass event handlers to resize handler?
+// TODO how to pass refs to both Window component and DragHandle?
+
 const Window = ({ resizable, shadow, children, ...otherProps }) => (
   <StyledWindow shadow={shadow} {...otherProps}>
     {children}
-    {resizable && <DragHandle />}
+    {resizable && <ResizeHandle data-testid='resizeHandle' />}
   </StyledWindow>
 );
 
