@@ -110,20 +110,21 @@ const IndeterminateIcon = styled.span.attrs(() => ({
     outline-offset: -1px;
   }
 `;
-const Checkbox = ({
-  onChange,
-  label,
-  disabled,
-  variant,
-  value,
-  checked,
-  defaultChecked,
-  indeterminate,
-  name,
-  className,
-  style,
-  ...otherProps
-}) => {
+const Checkbox = React.forwardRef(function Checkbox(props, ref) {
+  const {
+    onChange,
+    label,
+    disabled,
+    variant,
+    value,
+    checked,
+    defaultChecked,
+    indeterminate,
+    name,
+    className,
+    style,
+    ...otherProps
+  } = props;
   const [state, setState] = useControlledOrUncontrolled({
     value: checked,
     defaultValue: defaultChecked
@@ -162,11 +163,12 @@ const Checkbox = ({
         checked={state}
         name={name}
         data-indeterminate={indeterminate}
+        ref={ref}
         {...otherProps}
       />
     </StyledLabel>
   );
-};
+});
 
 Checkbox.defaultProps = {
   label: '',
