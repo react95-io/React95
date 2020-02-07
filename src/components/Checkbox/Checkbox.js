@@ -45,8 +45,6 @@ const StyledCheckbox = styled(Cutout)`
   height: ${checkboxSize}px;
   background: ${({ theme, isDisabled }) =>
     isDisabled ? theme.material : theme.canvas};
-  box-shadow: ${({ shadow }) =>
-    shadow ? 'inset 3px 3px 10px rgba(0, 0, 0, 0.1)' : 'none'};
   &:before {
     box-shadow: none;
   }
@@ -112,21 +110,21 @@ const IndeterminateIcon = styled.span.attrs(() => ({
     outline-offset: -1px;
   }
 `;
-const Checkbox = ({
-  onChange,
-  label,
-  disabled,
-  variant,
-  value,
-  checked,
-  defaultChecked,
-  indeterminate,
-  name,
-  className,
-  style,
-  shadow,
-  ...otherProps
-}) => {
+const Checkbox = React.forwardRef(function Checkbox(props, ref) {
+  const {
+    onChange,
+    label,
+    disabled,
+    variant,
+    value,
+    checked,
+    defaultChecked,
+    indeterminate,
+    name,
+    className,
+    style,
+    ...otherProps
+  } = props;
   const [state, setState] = useControlledOrUncontrolled({
     value: checked,
     defaultValue: defaultChecked
@@ -151,7 +149,6 @@ const Checkbox = ({
         checked={state}
         indeterminate={indeterminate}
         isDisabled={disabled}
-        shadow={shadow}
         role='presentation'
       >
         {Icon && <Icon isDisabled={disabled} />}
@@ -166,17 +163,17 @@ const Checkbox = ({
         checked={state}
         name={name}
         data-indeterminate={indeterminate}
+        ref={ref}
         {...otherProps}
       />
     </StyledLabel>
   );
-};
+});
 
 Checkbox.defaultProps = {
   label: '',
   disabled: false,
   variant: 'default',
-  shadow: true,
   onChange: () => {},
   checked: undefined,
   style: {},
@@ -199,7 +196,6 @@ Checkbox.propTypes = {
   checked: propTypes.bool,
   disabled: propTypes.bool,
   variant: propTypes.oneOf(['default', 'flat']),
-  shadow: propTypes.bool,
   style: propTypes.shape([propTypes.string, propTypes.number]),
   defaultChecked: propTypes.bool,
   indeterminate: propTypes.bool,

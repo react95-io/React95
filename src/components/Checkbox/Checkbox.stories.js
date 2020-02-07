@@ -14,53 +14,57 @@ const Wrapper = styled.div`
 storiesOf('Checkbox', module)
   .addDecorator(story => <Wrapper>{story()}</Wrapper>)
   .add('controlled group', () => <ControlledCheckboxGroupExample />)
-
-  .add('uncontrolled', () => (
-    <>
-      <Checkbox
-        name='cheese'
-        value='cheese'
-        label='Add extra cheese 🧀'
-        defaultChecked
-      />
-      <br />
-      <Checkbox name='pineapple' value='pineapple' label='Add pineapple 🍍' />
-    </>
-  ))
-  .add('indeterminate / mixed value', () => <IndeterminateCheckboxExample />)
-
-  .add('flat', () => (
-    <StyledCutout style={{ padding: '1rem', width: '300px' }}>
-      <p style={{ lineHeight: 1.3 }}>
-        When you want to add input field on a light background (like scrollable
-        content), just use the flat variant:
-      </p>
-      <div style={{ marginTop: '1rem' }}>
+  // Wrapped in React.createElement due to Storybook's "Hooks can only be called inside the body of a function component." error
+  .add('uncontrolled', () =>
+    React.createElement(() => (
+      <>
         <Checkbox
-          name='flatEarth'
-          variant='flat'
-          value='flatEarth'
-          label='Earth is flat 🌍'
+          name='cheese'
+          value='cheese'
+          label='Add extra cheese 🧀'
           defaultChecked
         />
-        <Checkbox
-          name='reptilians'
-          variant='flat'
-          defaultChecked={false}
-          value='reptilians'
-          label='Reptilians rule the world 🦎'
-          disabled
-        />
-        <Checkbox
-          name='indeterminate'
-          variant='flat'
-          value='mixed'
-          label='Indeterminate'
-          indeterminate
-        />
-      </div>
-    </StyledCutout>
-  ));
+        <br />
+        <Checkbox name='pineapple' value='pineapple' label='Add pineapple 🍍' />
+      </>
+    ))
+  )
+  .add('indeterminate / mixed value', () => <IndeterminateCheckboxExample />)
+
+  .add('flat', () =>
+    React.createElement(() => (
+      <StyledCutout style={{ padding: '1rem', width: '300px' }}>
+        <p style={{ lineHeight: 1.3 }}>
+          When you want to add input field on a light background (like
+          scrollable content), just use the flat variant:
+        </p>
+        <div style={{ marginTop: '1rem' }}>
+          <Checkbox
+            name='flatEarth'
+            variant='flat'
+            value='flatEarth'
+            label='Earth is flat 🌍'
+            defaultChecked
+          />
+          <Checkbox
+            name='reptilians'
+            variant='flat'
+            defaultChecked={false}
+            value='reptilians'
+            label='Reptilians rule the world 🦎'
+            disabled
+          />
+          <Checkbox
+            name='indeterminate'
+            variant='flat'
+            value='mixed'
+            label='Indeterminate'
+            indeterminate
+          />
+        </div>
+      </StyledCutout>
+    ))
+  );
 
 class ControlledCheckboxGroupExample extends React.Component {
   state = {
