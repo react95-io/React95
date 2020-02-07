@@ -117,6 +117,7 @@ const Radio = ({
       </CheckboxComponent>
       {label && <span>{label}</span>}
       <StyledInput
+        disabled={disabled}
         onChange={disabled ? undefined : onChange}
         readOnly={disabled}
         type='radio'
