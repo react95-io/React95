@@ -45,8 +45,6 @@ const StyledCheckbox = styled(Cutout)`
   height: ${checkboxSize}px;
   background: ${({ theme, isDisabled }) =>
     isDisabled ? theme.material : theme.canvas};
-  box-shadow: ${({ shadow }) =>
-    shadow ? 'inset 3px 3px 10px rgba(0, 0, 0, 0.1)' : 'none'};
   &:before {
     box-shadow: none;
   }
@@ -124,7 +122,6 @@ const Checkbox = ({
   name,
   className,
   style,
-  shadow,
   ...otherProps
 }) => {
   const [state, setState] = useControlledOrUncontrolled({
@@ -151,7 +148,6 @@ const Checkbox = ({
         checked={state}
         indeterminate={indeterminate}
         isDisabled={disabled}
-        shadow={shadow}
         role='presentation'
       >
         {Icon && <Icon isDisabled={disabled} />}
@@ -176,7 +172,6 @@ Checkbox.defaultProps = {
   label: '',
   disabled: false,
   variant: 'default',
-  shadow: true,
   onChange: () => {},
   checked: undefined,
   style: {},
@@ -199,7 +194,6 @@ Checkbox.propTypes = {
   checked: propTypes.bool,
   disabled: propTypes.bool,
   variant: propTypes.oneOf(['default', 'flat']),
-  shadow: propTypes.bool,
   style: propTypes.shape([propTypes.string, propTypes.number]),
   defaultChecked: propTypes.bool,
   indeterminate: propTypes.bool,
