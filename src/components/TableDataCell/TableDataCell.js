@@ -7,22 +7,16 @@ import { padding } from '../common/system';
 const StyledTd = styled.td`
   padding: 0 ${padding.sm};
 `;
-const TableDataCell = ({ className, children, style, ...otherProps }) => (
-  <StyledTd className={className} style={style} {...otherProps}>
-    {children}
-  </StyledTd>
+const TableDataCell = ({ children, ...otherProps }) => (
+  <StyledTd {...otherProps}>{children}</StyledTd>
 );
 
 TableDataCell.defaultProps = {
-  children: null,
-  className: '',
-  style: {}
+  children: null
 };
 
 TableDataCell.propTypes = {
-  children: propTypes.node,
-  className: propTypes.string,
-  style: propTypes.shape([propTypes.string, propTypes.number])
+  children: propTypes.node
 };
 
 export default TableDataCell;
