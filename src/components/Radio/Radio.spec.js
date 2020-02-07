@@ -71,7 +71,6 @@ describe('<Radio />', () => {
       expect(checkbox.checked).toBe(false);
       expect(getByRole('radio')).not.toHaveAttribute('checked');
       expect(getByRole('presentation').firstChild).toBeNull();
-      //   check if proper icon was rendered
     });
   });
 });

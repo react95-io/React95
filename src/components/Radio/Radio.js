@@ -91,18 +91,19 @@ const Icon = styled.span.attrs(() => ({
     isDisabled ? theme.checkmarkDisabled : theme.checkmark};
 `;
 
-const Radio = ({
-  onChange,
-  label,
-  disabled,
-  variant,
-  value,
-  checked,
-  name,
-  className,
-  style,
-  ...otherProps
-}) => {
+const Radio = React.forwardRef(function Radio(props, ref) {
+  const {
+    onChange,
+    label,
+    disabled,
+    variant,
+    value,
+    checked,
+    name,
+    className,
+    style,
+    ...otherProps
+  } = props;
   const CheckboxComponent =
     variant === 'flat' ? StyledFlatCheckbox : StyledCheckbox;
 
@@ -124,11 +125,12 @@ const Radio = ({
         value={value}
         checked={checked}
         name={name}
+        ref={ref}
         {...otherProps}
       />
     </StyledLabel>
   );
-};
+});
 
 Radio.defaultProps = {
   onChange: undefined,
