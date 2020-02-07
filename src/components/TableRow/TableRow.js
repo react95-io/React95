@@ -13,6 +13,10 @@ const StyledTr = styled.tr`
   outline: none;
 
   color: ${({ theme }) => theme.text};
+  &:hover {
+    background: ${({ theme }) => theme.hoverBackground};
+    color: ${({ theme }) => theme.textInvert};
+  }
 `;
 
 const TableRow = ({ children, ...otherProps }) => (
