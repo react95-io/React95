@@ -5,9 +5,14 @@ import styled from 'styled-components';
 const StyledTableHead = styled.thead`
   display: table-header-group;
 `;
-const TableHead = ({ children, ...otherProps }) => (
-  <StyledTableHead {...otherProps}>{children}</StyledTableHead>
-);
+const TableHead = React.forwardRef(function TableHead(props, ref) {
+  const { children, ...otherProps } = props;
+  return (
+    <StyledTableHead ref={ref} {...otherProps}>
+      {children}
+    </StyledTableHead>
+  );
+});
 
 TableHead.defaultProps = {
   children: null
