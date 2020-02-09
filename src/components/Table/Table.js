@@ -17,11 +17,17 @@ const StyledCutout = styled(Cutout)`
   }
 `;
 
-const Table = ({ children, ...otherProps }) => (
-  <StyledCutout>
-    <StyledTable {...otherProps}>{children}</StyledTable>
-  </StyledCutout>
-);
+const Table = React.forwardRef(function Table(props, ref) {
+  const { children, ...otherProps } = props;
+
+  return (
+    <StyledCutout>
+      <StyledTable ref={ref} {...otherProps}>
+        {children}
+      </StyledTable>
+    </StyledCutout>
+  );
+});
 
 Table.defaultProps = {
   children: null
