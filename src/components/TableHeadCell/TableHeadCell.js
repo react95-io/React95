@@ -5,8 +5,6 @@ import styled, { css } from 'styled-components';
 import { createBorderStyles, createDisabledTextStyles } from '../common';
 import { padding } from '../common/system';
 
-// TODO move text down on Click
-
 const StyledHeadCell = styled.th`
 position: relative;
 padding: 0 ${padding.sm};
@@ -38,6 +36,11 @@ user-select: none;
           border-top: none;
           padding-top: 2px;
         }
+
+        & > div {
+          position: relative;
+          top: 2px;
+        }
       }
     `}
 
@@ -63,7 +66,7 @@ const TableHeadCell = React.forwardRef(function TableHeadCell(props, ref) {
       onTouchStart={() => ''}
       {...otherProps}
     >
-      {children}
+      <div>{children}</div>
     </StyledHeadCell>
   );
 });
