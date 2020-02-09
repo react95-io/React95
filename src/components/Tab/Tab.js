@@ -40,22 +40,8 @@ const StyledTab = styled.div`
     left: 2px;
   }
 `;
-const Tab = ({
-  value,
-  onClick,
-  active,
-  children,
-  className,
-  style,
-  ...otherProps
-}) => (
-  <StyledTab
-    className={className}
-    active={active}
-    style={style}
-    {...otherProps}
-    onClick={() => onClick(value)}
-  >
+const Tab = ({ value, onClick, active, children, ...otherProps }) => (
+  <StyledTab active={active} {...otherProps} onClick={() => onClick(value)}>
     {children}
   </StyledTab>
 );
@@ -63,17 +49,13 @@ const Tab = ({
 Tab.defaultProps = {
   onClick: () => {},
   active: false,
-  children: null,
-  className: '',
-  style: {}
+  children: null
 };
 
 Tab.propTypes = {
   value: propTypes.number.isRequired,
   onClick: propTypes.func,
   active: propTypes.bool,
-  children: propTypes.node,
-  className: propTypes.string,
-  style: propTypes.shape([propTypes.string, propTypes.number])
+  children: propTypes.node
 };
 export default Tab;
