@@ -120,6 +120,7 @@ const Button = ({
     primary={primary}
     onClick={disabled ? undefined : onClick}
     style={style}
+    disabled={disabled}
     isDisabled={disabled}
     fullWidth={fullWidth}
     size={size}

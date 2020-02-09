@@ -98,13 +98,21 @@ describe('<Button />', () => {
     expect(button.innerHTML).toBe('click me');
   });
 
-  it('should not fire click when disabled', () => {
-    const onButtonClick = jest.fn();
-    const { getByRole } = render(<Button {...defaultProps} disabled />);
-    const button = getByRole('button');
+  describe('prop: disabled', () => {
+    it('should render disabled', () => {
+      const { getByRole } = render(<Button {...defaultProps} disabled />);
+      const button = getByRole('button');
 
-    fireEvent.click(button);
+      expect(button).toHaveAttribute('disabled');
+    });
+    it('should not fire click when disabled', () => {
+      const onButtonClick = jest.fn();
+      const { getByRole } = render(<Button {...defaultProps} disabled />);
+      const button = getByRole('button');
 
-    expect(onButtonClick).not.toHaveBeenCalled();
+      fireEvent.click(button);
+
+      expect(onButtonClick).not.toHaveBeenCalled();
+    });
   });
 });

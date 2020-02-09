@@ -1,58 +1,86 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import styled from 'styled-components';
-import { createBorderStyles } from '../common';
+import styled, { css } from 'styled-components';
+import { createBorderStyles, createDisabledTextStyles } from '../common';
 import { padding } from '../common/system';
 
-// ⭕⭕⭕⭕ move text down on Click
-
 const StyledHeadCell = styled.th`
-  ${createBorderStyles()}
-  padding: 0 ${padding.sm};
-  display: table-cell;
-  vertical-align: inherit;
-  background: ${({ theme }) => theme.material};
-  &:active {
-    ${createBorderStyles({ invert: true })}
+position: relative;
+padding: 0 ${padding.sm};
+display: table-cell;
+vertical-align: inherit;
+background: ${({ theme }) => theme.material};
+cursor: default;
+user-select: none;
+  &:before {
+    box-sizing: border-box;
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    ${createBorderStyles()}
+
     border-left: none;
     border-top: none;
   }
-  border-left: none;
-  border-top: none;
-  cursor: default;
+  ${({ isDisabled }) =>
+    !isDisabled &&
+    css`
+      &:active {
+        &:before {
+          ${createBorderStyles({ invert: true, windowBorders: true })}
+          border-left: none;
+          border-top: none;
+          padding-top: 2px;
+        }
+
+        & > div {
+          position: relative;
+          top: 2px;
+        }
+      }
+    `}
+
+
+  color: ${({ theme }) => theme.text};
+  ${({ isDisabled }) => isDisabled && createDisabledTextStyles()}
+  &:hover {
+    color: ${({ theme }) => theme.text};
+    ${({ isDisabled }) => isDisabled && createDisabledTextStyles()}
+  }
+
 `;
 
-const TableHeadCell = ({
-  className,
-  children,
-  style,
-  onClick,
-  ...otherProps
-}) => (
-  <StyledHeadCell
-    className={className}
-    style={style}
-    onClick={onClick}
-    onTouchStart={() => ''}
-    {...otherProps}
-  >
-    {children}
-  </StyledHeadCell>
-);
+const TableHeadCell = React.forwardRef(function TableHeadCell(props, ref) {
+  const { disabled, children, onClick, ...otherProps } = props;
+
+  return (
+    <StyledHeadCell
+      ref={ref}
+      isDisabled={disabled}
+      aria-disabled={disabled}
+      onClick={disabled ? undefined : onClick}
+      onTouchStart={() => ''}
+      {...otherProps}
+    >
+      <div>{children}</div>
+    </StyledHeadCell>
+  );
+});
 
 TableHeadCell.defaultProps = {
   onClick: () => {},
   children: null,
-  className: '',
-  style: {}
+  disabled: false
 };
 
 TableHeadCell.propTypes = {
   onClick: propTypes.func,
   children: propTypes.node,
-  className: propTypes.string,
-  style: propTypes.shape([propTypes.string, propTypes.number])
+  disabled: propTypes.bool
 };
 
 export default TableHeadCell;

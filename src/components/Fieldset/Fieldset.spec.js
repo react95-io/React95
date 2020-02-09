@@ -41,6 +41,8 @@ describe('<Fieldset />', () => {
       const { container } = renderWithTheme(<Fieldset disabled />);
       const fieldset = container.firstChild;
 
+      expect(fieldset).toHaveAttribute('aria-disabled', 'true');
+
       expect(fieldset).toHaveStyleRule('color', theme.textDisabled);
       expect(fieldset).toHaveStyleRule(
         'text-shadow',

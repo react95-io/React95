@@ -10,22 +10,22 @@ const StyledTableBody = styled.tbody`
   box-shadow: ${insetShadow};
 `;
 
-const TableBody = ({ className, children, style, ...otherProps }) => (
-  <StyledTableBody className={className} style={style} {...otherProps}>
-    {children}
-  </StyledTableBody>
-);
+const TableBody = React.forwardRef(function TableBody(props, ref) {
+  const { children, ...otherProps } = props;
+
+  return (
+    <StyledTableBody ref={ref} {...otherProps}>
+      {children}
+    </StyledTableBody>
+  );
+});
 
 TableBody.defaultProps = {
-  children: null,
-  className: '',
-  style: {}
+  children: null
 };
 
 TableBody.propTypes = {
-  children: propTypes.node,
-  className: propTypes.string,
-  style: propTypes.shape([propTypes.string, propTypes.number])
+  children: propTypes.node
 };
 
 export default TableBody;
