@@ -7,9 +7,14 @@ import { padding } from '../common/system';
 const StyledTd = styled.td`
   padding: 0 ${padding.sm};
 `;
-const TableDataCell = ({ children, ...otherProps }) => (
-  <StyledTd {...otherProps}>{children}</StyledTd>
-);
+const TableDataCell = React.forwardRef(function TableDataCell(props, ref) {
+  const { children, ...otherProps } = props;
+  return (
+    <StyledTd ref={ref} {...otherProps}>
+      {children}
+    </StyledTd>
+  );
+});
 
 TableDataCell.defaultProps = {
   children: null
