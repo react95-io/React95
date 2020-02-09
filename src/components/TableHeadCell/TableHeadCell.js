@@ -51,16 +51,22 @@ user-select: none;
 
 `;
 
-const TableHeadCell = ({ disabled, children, onClick, ...otherProps }) => (
-  <StyledHeadCell
-    isDisabled={disabled}
-    onClick={disabled ? undefined : onClick}
-    onTouchStart={() => ''}
-    {...otherProps}
-  >
-    {children}
-  </StyledHeadCell>
-);
+const TableHeadCell = React.forwardRef(function TableHeadCell(props, ref) {
+  const { disabled, children, onClick, ...otherProps } = props;
+
+  return (
+    <StyledHeadCell
+      ref={ref}
+      isDisabled={disabled}
+      aria-disabled={disabled}
+      onClick={disabled ? undefined : onClick}
+      onTouchStart={() => ''}
+      {...otherProps}
+    >
+      {children}
+    </StyledHeadCell>
+  );
+});
 
 TableHeadCell.defaultProps = {
   onClick: () => {},
