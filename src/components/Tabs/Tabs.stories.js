@@ -48,31 +48,29 @@ class TabsDemo extends React.Component {
             <Tab value={1}>Accesories</Tab>
             <Tab value={2}>Clothing</Tab>
           </Tabs>
-          <div style={{ height: 300 }}>
+          <TabBody style={{ height: 300 }}>
             {activeTab === 0 && (
-              <TabBody>
-                <Fieldset label='Order:'>
-                  <div style={{ padding: '0.5em 0 0.5em 0' }}>Amount:</div>
-                  <NumberField
-                    width='100%'
-                    min={0}
-                    value={0}
-                    onChange={() => null}
-                  />
-                  <Checkbox
-                    style={{ marginTop: '1rem' }}
-                    name='shipping'
-                    value='fast'
-                    label='Fast shipping'
-                    onChange={() => null}
-                    defaultChecked
-                  />
-                </Fieldset>
-              </TabBody>
+              <Fieldset label='Order:'>
+                <div style={{ padding: '0.5em 0 0.5em 0' }}>Amount:</div>
+                <NumberField
+                  width='100%'
+                  min={0}
+                  value={0}
+                  onChange={() => null}
+                />
+                <Checkbox
+                  style={{ marginTop: '1rem' }}
+                  name='shipping'
+                  value='fast'
+                  label='Fast shipping'
+                  onChange={() => null}
+                  defaultChecked
+                />
+              </Fieldset>
             )}
-            {activeTab === 1 && <TabBody>Accesories stuff here</TabBody>}
-            {activeTab === 2 && <TabBody>Clothing stuff here</TabBody>}
-          </div>
+            {activeTab === 1 && <div>Accesories stuff here</div>}
+            {activeTab === 2 && <div>Clothing stuff here</div>}
+          </TabBody>
         </WindowContent>
       </Window>
     );
