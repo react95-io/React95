@@ -36,7 +36,12 @@ const StyledLegend = styled.legend`
 `;
 
 const Fieldset = ({ label, disabled, variant, children, ...otherProps }) => (
-  <StyledFieldset isDisabled={disabled} variant={variant} {...otherProps}>
+  <StyledFieldset
+    aria-disabled={disabled}
+    isDisabled={disabled}
+    variant={variant}
+    {...otherProps}
+  >
     {label && <StyledLegend variant={variant}>{label}</StyledLegend>}
     {children}
   </StyledFieldset>
