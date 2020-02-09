@@ -17,7 +17,11 @@ const Tabs = ({ value, onChange, children, ...otherProps }) => {
     };
     return React.cloneElement(child, tabProps);
   });
-  return <StyledTabs {...otherProps}>{childrenWithProps}</StyledTabs>;
+  return (
+    <StyledTabs {...otherProps} role='tablist'>
+      {childrenWithProps}
+    </StyledTabs>
+  );
 };
 
 Tabs.defaultProps = {

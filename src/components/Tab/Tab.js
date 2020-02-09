@@ -5,10 +5,14 @@ import styled from 'styled-components';
 import { createBorderStyles, createBoxStyles } from '../common';
 import { blockSizes, padding } from '../common/system';
 
-const StyledTab = styled.div`
+const StyledTab = styled.button`
   ${createBoxStyles()}
   ${createBorderStyles()}
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
   height: ${blockSizes.md};
   line-height: ${blockSizes.md};
   padding: 0 ${padding.sm};
@@ -18,12 +22,17 @@ const StyledTab = styled.div`
   margin-bottom: -2px;
   cursor: default;
   color: ${({ theme }) => theme.text};
+  user-select: none;
+  // &:focus {
+  //   outline: 2px dotted ${({ theme }) => theme.text};
+  //   outline-offset: -8px;
+  // }
   ${props =>
     props.active &&
     `
     z-index: 1;
     height: calc(${blockSizes.md} + 4px);
-    top: -4px;
+    top: -3px;
     margin-bottom: -6px;
     padding: 0 calc(${padding.sm} + 8px);
     margin-left: -8px;
@@ -41,7 +50,13 @@ const StyledTab = styled.div`
   }
 `;
 const Tab = ({ value, onClick, active, children, ...otherProps }) => (
-  <StyledTab active={active} {...otherProps} onClick={() => onClick(value)}>
+  <StyledTab
+    active={active}
+    aria-selected={active}
+    onClick={() => onClick(value)}
+    role='tab'
+    {...otherProps}
+  >
     {children}
   </StyledTab>
 );
