@@ -14,21 +14,15 @@ const StyledTabBody = styled.div`
   padding: ${padding.md};
   padding-top: calc(1.5 * ${padding.md});
 `;
-const TabBody = ({ children, className, style, ...otherProps }) => (
-  <StyledTabBody className={className} style={style} {...otherProps}>
-    {children}
-  </StyledTabBody>
+const TabBody = ({ children, ...otherProps }) => (
+  <StyledTabBody {...otherProps}>{children}</StyledTabBody>
 );
 
 TabBody.defaultProps = {
-  children: null,
-  className: '',
-  style: {}
+  children: null
 };
 
 TabBody.propTypes = {
-  children: propTypes.node,
-  className: propTypes.string,
-  style: propTypes.shape([propTypes.string, propTypes.number])
+  children: propTypes.node
 };
 export default TabBody;
