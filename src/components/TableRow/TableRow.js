@@ -19,9 +19,14 @@ const StyledTr = styled.tr`
   }
 `;
 
-const TableRow = ({ children, ...otherProps }) => (
-  <StyledTr {...otherProps}>{children}</StyledTr>
-);
+const TableRow = React.forwardRef(function TableRow(props, ref) {
+  const { children, ...otherProps } = props;
+  return (
+    <StyledTr ref={ref} {...otherProps}>
+      {children}
+    </StyledTr>
+  );
+});
 
 TableRow.defaultProps = {
   children: null
