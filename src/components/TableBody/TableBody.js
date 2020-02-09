@@ -10,9 +10,15 @@ const StyledTableBody = styled.tbody`
   box-shadow: ${insetShadow};
 `;
 
-const TableBody = ({ children, ...otherProps }) => (
-  <StyledTableBody {...otherProps}>{children}</StyledTableBody>
-);
+const TableBody = React.forwardRef(function TableBody(props, ref) {
+  const { children, ...otherProps } = props;
+
+  return (
+    <StyledTableBody ref={ref} {...otherProps}>
+      {children}
+    </StyledTableBody>
+  );
+});
 
 TableBody.defaultProps = {
   children: null
