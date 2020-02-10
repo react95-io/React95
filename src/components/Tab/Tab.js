@@ -42,10 +42,10 @@ const StyledTab = styled.button`
     content: '';
     position: absolute;
     width: calc(100% - 4px);
-    height: 4px;
+    height: 6px;
 
     background: ${({ theme }) => theme.material};
-    bottom: -2px;
+    bottom: -3px;
     left: 2px;
   }
 `;
