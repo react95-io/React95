@@ -12,7 +12,6 @@ const StyledTabBody = styled.div`
   display: block;
   height: 100%;
   padding: ${padding.md};
-  padding-top: calc(1.5 * ${padding.md});
 `;
 const TabBody = ({ children, ...otherProps }) => (
   <StyledTabBody {...otherProps}>{children}</StyledTabBody>
