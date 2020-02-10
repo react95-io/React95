@@ -28,7 +28,7 @@ const StyledTab = styled.button`
   //   outline-offset: -8px;
   // }
   ${props =>
-    props.active &&
+    props.selected &&
     `
     z-index: 1;
     height: calc(${blockSizes.md} + 4px);
@@ -52,12 +52,12 @@ const StyledTab = styled.button`
 
 // TODO handle tabIndex
 const Tab = React.forwardRef(function Tab(props, ref) {
-  const { value, onClick, active, children, ...otherProps } = props;
+  const { value, onClick, selected, children, ...otherProps } = props;
 
   return (
     <StyledTab
-      active={active}
-      aria-selected={active}
+      selected={selected}
+      aria-selected={selected}
       onClick={() => onClick(value)}
       role='tab'
       ref={ref}
@@ -70,14 +70,14 @@ const Tab = React.forwardRef(function Tab(props, ref) {
 
 Tab.defaultProps = {
   onClick: () => {},
-  active: false,
+  selected: false,
   children: null
 };
 
 Tab.propTypes = {
   value: propTypes.number.isRequired,
   onClick: propTypes.func,
-  active: propTypes.bool,
+  selected: propTypes.bool,
   children: propTypes.node
 };
 export default Tab;

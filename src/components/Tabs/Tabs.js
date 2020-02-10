@@ -12,8 +12,11 @@ const StyledTabs = styled.div`
 const Tabs = React.forwardRef(function Tabs(props, ref) {
   const { value, onChange, children, ...otherProps } = props;
   const childrenWithProps = React.Children.map(children, child => {
+    if (!React.isValidElement(child)) {
+      return null;
+    }
     const tabProps = {
-      active: child.props.value === value,
+      selected: child.props.value === value,
       onClick: onChange
     };
     return React.cloneElement(child, tabProps);
