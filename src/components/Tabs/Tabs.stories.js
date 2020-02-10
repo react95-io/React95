@@ -25,6 +25,27 @@ storiesOf('Tabs', module)
   ))
   .add('default', () => <TabsDemo />);
 
+/* eslint-disable react/prop-types */
+
+const TabPanel = ({ children, value, activeTab, ...other }) => {
+  return (
+    <div
+      role='tabpanel'
+      hidden={value !== activeTab}
+      id={`tabpanel-${value}`}
+      aria-labelledby={`tab-${value}`}
+      {...other}
+    >
+      {value === activeTab && <div p={3}>{children}</div>}
+    </div>
+  );
+};
+function a11yProps(index) {
+  return {
+    id: `tab-${index}`,
+    'aria-controls': `tabpanel-${index}`
+  };
+}
 class TabsDemo extends React.Component {
   state = {
     activeTab: 0
@@ -44,12 +65,18 @@ class TabsDemo extends React.Component {
         </WindowHeader>
         <WindowContent>
           <Tabs value={activeTab} onChange={this.handleChange}>
-            <Tab value={0}>Shoes</Tab>
-            <Tab value={1}>Accesories</Tab>
-            <Tab value={2}>Clothing</Tab>
+            <Tab value={0} {...a11yProps(0)}>
+              Shoes
+            </Tab>
+            <Tab value={1} {...a11yProps(1)}>
+              Accesories
+            </Tab>
+            <Tab value={2} {...a11yProps(2)}>
+              Clothing
+            </Tab>
           </Tabs>
           <TabBody style={{ height: 300 }}>
-            {activeTab === 0 && (
+            <TabPanel value={0} activeTab={activeTab}>
               <Fieldset label='Order:'>
                 <div style={{ padding: '0.5em 0 0.5em 0' }}>Amount:</div>
                 <NumberField
@@ -67,9 +94,13 @@ class TabsDemo extends React.Component {
                   defaultChecked
                 />
               </Fieldset>
-            )}
-            {activeTab === 1 && <div>Accesories stuff here</div>}
-            {activeTab === 2 && <div>Clothing stuff here</div>}
+            </TabPanel>
+            <TabPanel value={1} activeTab={activeTab}>
+              <div>Accesories stuff here</div>
+            </TabPanel>
+            <TabPanel value={2} activeTab={activeTab}>
+              <div>Clothing stuff here</div>
+            </TabPanel>
           </TabBody>
         </WindowContent>
       </Window>

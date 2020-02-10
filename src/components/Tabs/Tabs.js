@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 
 import styled from 'styled-components';
 
-const StyledTabs = styled.nav`
+const StyledTabs = styled.div`
   position: relative;
   left: 8px;
   text-align: left;
