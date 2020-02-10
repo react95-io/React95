@@ -49,17 +49,24 @@ const StyledTab = styled.button`
     left: 2px;
   }
 `;
-const Tab = ({ value, onClick, active, children, ...otherProps }) => (
-  <StyledTab
-    active={active}
-    aria-selected={active}
-    onClick={() => onClick(value)}
-    role='tab'
-    {...otherProps}
-  >
-    {children}
-  </StyledTab>
-);
+
+// TODO handle tabIndex
+const Tab = React.forwardRef(function Tab(props, ref) {
+  const { value, onClick, active, children, ...otherProps } = props;
+
+  return (
+    <StyledTab
+      active={active}
+      aria-selected={active}
+      onClick={() => onClick(value)}
+      role='tab'
+      ref={ref}
+      {...otherProps}
+    >
+      {children}
+    </StyledTab>
+  );
+});
 
 Tab.defaultProps = {
   onClick: () => {},

@@ -9,7 +9,8 @@ const StyledTabs = styled.div`
   text-align: left;
 `;
 
-const Tabs = ({ value, onChange, children, ...otherProps }) => {
+const Tabs = React.forwardRef(function Tabs(props, ref) {
+  const { value, onChange, children, ...otherProps } = props;
   const childrenWithProps = React.Children.map(children, child => {
     const tabProps = {
       active: child.props.value === value,
@@ -18,11 +19,11 @@ const Tabs = ({ value, onChange, children, ...otherProps }) => {
     return React.cloneElement(child, tabProps);
   });
   return (
-    <StyledTabs {...otherProps} role='tablist'>
+    <StyledTabs {...otherProps} role='tablist' ref={ref}>
       {childrenWithProps}
     </StyledTabs>
   );
-};
+});
 
 Tabs.defaultProps = {
   value: 0,
