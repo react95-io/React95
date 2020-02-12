@@ -23,10 +23,7 @@ const StyledTab = styled.button`
   cursor: default;
   color: ${({ theme }) => theme.text};
   user-select: none;
-  // &:focus {
-  //   outline: 2px dotted ${({ theme }) => theme.text};
-  //   outline-offset: -8px;
-  // }
+
   ${props =>
     props.selected &&
     `
