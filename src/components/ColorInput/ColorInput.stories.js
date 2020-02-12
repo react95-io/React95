@@ -16,7 +16,7 @@ const StyledCutout = styled(Cutout)`
 `;
 storiesOf('ColorInput', module)
   .addDecorator(story => <Wrapper>{story()}</Wrapper>)
-  .add('uncontrolled', () =>
+  .add('default', () =>
     React.createElement(() => <ColorInput defaultValue='#00f' />)
   )
 
