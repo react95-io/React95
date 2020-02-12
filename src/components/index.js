@@ -38,6 +38,7 @@ export { default as Tooltip } from './Tooltip/Tooltip';
 export { default as Window } from './Window/Window';
 export { default as WindowContent } from './WindowContent/WindowContent';
 export { default as WindowHeader } from './WindowHeader/WindowHeader';
+export { default as ColorInput } from './ColorInput/ColorInput';
 
 export {
   default as LoadingIndicator
