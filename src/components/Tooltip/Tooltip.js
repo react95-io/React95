@@ -26,31 +26,110 @@ const Wrapper = styled.div`
 
 const Tooltip = ({
   children,
-  text,
-  delay,
   className,
+  disableFocusListener,
+  disableMouseListener,
+  enterDelay,
+  leaveDelay,
+  onBlur,
+  onClose,
+  onFocus,
+  onMouseEnter,
+  onMouseLeave,
+  onOpen,
   style,
+  testId,
+  text,
   ...otherProps
 }) => {
   const [show, setShow] = useState(false);
-  const [delayTimer, setDelayTimer] = useState(null);
+  const [openTimer, setOpenTimer] = useState(null);
+  const [closeTimer, setCloseTimer] = useState(null);
 
-  const handleEnter = () => {
+  const useFocus = !disableFocusListener;
+  const useMouse = !disableMouseListener;
+
+  const handleOpen = evt => {
+    clearTimeout(openTimer);
+    clearTimeout(closeTimer);
+
     const timer = setTimeout(() => {
       setShow(true);
-    }, delay);
 
-    setDelayTimer(timer);
+      if (onOpen) {
+        onOpen(evt);
+      }
+    }, enterDelay);
+
+    setOpenTimer(timer);
   };
 
-  const handleLeave = () => {
-    clearTimeout(delayTimer);
-    setShow(false);
+  const handleEnter = evt => {
+    evt.persist();
+
+    if (evt.type === 'focus' && onFocus) {
+      onFocus(evt);
+    } else if (evt.type === 'mouseenter' && onMouseEnter) {
+      onMouseEnter(evt);
+    }
+
+    handleOpen(evt);
   };
+
+  const handleClose = evt => {
+    clearTimeout(openTimer);
+    clearTimeout(closeTimer);
+
+    const timer = setTimeout(() => {
+      setShow(false);
+
+      if (onClose) {
+        onClose(evt);
+      }
+    }, leaveDelay);
+
+    setCloseTimer(timer);
+  };
+
+  const handleLeave = evt => {
+    evt.persist();
+
+    if (evt.type === 'blur' && onBlur) {
+      onBlur(evt);
+    } else if (evt.type === 'mouseleave' && onMouseLeave) {
+      onMouseLeave(evt);
+    }
+
+    handleClose(evt);
+  };
+
+  // set callbacks for onBlur and onFocus, unless disableFocusListener is true
+  const blurCb = useFocus ? handleLeave : undefined;
+  const focusCb = useFocus ? handleEnter : undefined;
+
+  // set callbacks for onMouseEnter and onMouseLeave, unless disableMouseListener is true
+  const mouseEnterCb = useMouse ? handleEnter : undefined;
+  const mouseLeaveCb = useMouse ? handleLeave : undefined;
+
+  // set the wrapper's tabIndex for focus events, unless disableFocusListener is true
+  const tabIndex = useFocus ? '0' : undefined;
 
   return (
-    <Wrapper onMouseEnter={handleEnter} onMouseLeave={handleLeave}>
-      <Tip show={show} className={className} style={style} {...otherProps}>
+    <Wrapper
+      data-testid={testId ? `${testId}Wrapper` : undefined}
+      onBlur={blurCb}
+      onFocus={focusCb}
+      onMouseEnter={mouseEnterCb}
+      onMouseLeave={mouseLeaveCb}
+      tabIndex={tabIndex}
+    >
+      <Tip
+        className={className}
+        data-testid={testId}
+        show={show}
+        style={style}
+        {...otherProps}
+      >
         {text}
       </Tip>
       {children}
@@ -59,17 +138,37 @@ const Tooltip = ({
 };
 
 Tooltip.defaultProps = {
-  delay: 1000,
   className: '',
-  style: {}
+  disableFocusListener: false,
+  disableMouseListener: false,
+  enterDelay: 1000,
+  leaveDelay: 0,
+  onBlur: undefined,
+  onClose: undefined,
+  onFocus: undefined,
+  onMouseEnter: undefined,
+  onMouseLeave: undefined,
+  onOpen: undefined,
+  style: {},
+  testId: undefined
 };
 
 Tooltip.propTypes = {
   children: propTypes.node.isRequired,
-  text: propTypes.string.isRequired,
   className: propTypes.string,
-  style: propTypes.shape([propTypes.string, propTypes.number]),
-  delay: propTypes.number
+  disableFocusListener: propTypes.bool,
+  disableMouseListener: propTypes.bool,
+  enterDelay: propTypes.number,
+  leaveDelay: propTypes.number,
+  onBlur: propTypes.func,
+  onClose: propTypes.func,
+  onFocus: propTypes.func,
+  onMouseEnter: propTypes.func,
+  onMouseLeave: propTypes.func,
+  onOpen: propTypes.func,
+  style: propTypes.shape({}),
+  testId: propTypes.string,
+  text: propTypes.string.isRequired
 };
 
 export default Tooltip;
