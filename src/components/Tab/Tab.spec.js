@@ -17,8 +17,7 @@ describe('<Tab />', () => {
     it('should render with correct aria attribute', () => {
       const { getByRole } = renderWithTheme(<Tab selected />);
 
-      const tab = getByRole('tab');
-      expect(tab).toHaveAttribute('aria-selected', 'true');
+      expect(getByRole('tab')).toHaveAttribute('aria-selected', 'true');
     });
   });
 
