@@ -114,7 +114,7 @@ describe('<Slider />', () => {
   });
 
   describe('prop: disabled', () => {
-    it("shouldn't render disabled slider", () => {
+    it('should render disabled slider', () => {
       const { getByRole, container } = renderWithTheme(
         <Slider
           step={null}
