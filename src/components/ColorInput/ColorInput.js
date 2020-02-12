@@ -21,6 +21,7 @@ export const StyledColorInput = styled.input`
   top: 0;
   opacity: 0;
 `;
+
 // TODO replace with SVG icon
 const ColorPreview = styled.div`
   box-sizing: border-box;
@@ -43,6 +44,7 @@ const ColorPreview = styled.div`
           border: 2px solid ${({ theme }) => theme.text};
         `}
 `;
+
 const ChevronIcon = styled.span`
   position: relative;
   width: 0px;
@@ -64,19 +66,23 @@ const ChevronIcon = styled.span`
           border-top: 6px solid ${({ theme }) => theme.text};
         `}
 `;
+
 // TODO make sure all aria and role attributes are in place
-const ColorInput = ({
-  value,
-  defaultValue,
-  onChange,
-  disabled,
-  variant,
-  ...otherProps
-}) => {
+const ColorInput = React.forwardRef(function ColorInput(props, ref) {
+  const {
+    value,
+    defaultValue,
+    onChange,
+    disabled,
+    variant,
+    ...otherProps
+  } = props;
+
   const [valueDerived, setValueState] = useControlledOrUncontrolled({
     value,
     defaultValue
   });
+
   const handleChange = e => {
     const color = e.target.value;
     setValueState(color);
@@ -84,9 +90,9 @@ const ColorInput = ({
       onChange(e);
     }
   };
+
   return (
-    // we need only button styles and behaviour when button is :active or disabled,
-    // so we display it as a div and reset type attribute
+    // we only need button styles, so we display it as a div and reset type attribute
     <Button isDisabled={disabled} as='div' type={null} variant={variant}>
       <ColorPreview
         color={valueDerived}
@@ -100,12 +106,14 @@ const ColorInput = ({
         disabled={disabled}
         value={valueDerived || '#008080'}
         type='color'
+        ref={ref}
         {...otherProps}
       />
       <ChevronIcon isDisabled={disabled} />
     </Button>
   );
-};
+});
+
 ColorInput.defaultProps = {
   value: undefined,
   defaultValue: undefined,
