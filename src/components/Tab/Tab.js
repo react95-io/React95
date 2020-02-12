@@ -5,10 +5,14 @@ import styled from 'styled-components';
 import { createBorderStyles, createBoxStyles } from '../common';
 import { blockSizes, padding } from '../common/system';
 
-const StyledTab = styled.div`
+const StyledTab = styled.button`
   ${createBoxStyles()}
   ${createBorderStyles()}
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
   height: ${blockSizes.md};
   line-height: ${blockSizes.md};
   padding: 0 ${padding.sm};
@@ -18,12 +22,14 @@ const StyledTab = styled.div`
   margin-bottom: -2px;
   cursor: default;
   color: ${({ theme }) => theme.text};
+  user-select: none;
+
   ${props =>
-    props.active &&
+    props.selected &&
     `
     z-index: 1;
     height: calc(${blockSizes.md} + 4px);
-    top: -4px;
+    top: -3px;
     margin-bottom: -6px;
     padding: 0 calc(${padding.sm} + 8px);
     margin-left: -8px;
@@ -33,47 +39,42 @@ const StyledTab = styled.div`
     content: '';
     position: absolute;
     width: calc(100% - 4px);
-    height: 4px;
+    height: 6px;
 
     background: ${({ theme }) => theme.material};
-    bottom: -2px;
+    bottom: -3px;
     left: 2px;
   }
 `;
-const Tab = ({
-  value,
-  onClick,
-  active,
-  children,
-  className,
-  style,
-  ...otherProps
-}) => (
-  <StyledTab
-    className={className}
-    active={active}
-    style={style}
-    {...otherProps}
-    onClick={() => onClick(value)}
-  >
-    {children}
-  </StyledTab>
-);
+
+// TODO handle tabIndex
+const Tab = React.forwardRef(function Tab(props, ref) {
+  const { value, onClick, selected, children, ...otherProps } = props;
+
+  return (
+    <StyledTab
+      selected={selected}
+      aria-selected={selected}
+      onClick={() => onClick(value)}
+      role='tab'
+      ref={ref}
+      {...otherProps}
+    >
+      {children}
+    </StyledTab>
+  );
+});
 
 Tab.defaultProps = {
   onClick: () => {},
-  active: false,
-  children: null,
-  className: '',
-  style: {}
+  selected: false,
+  children: null
 };
 
 Tab.propTypes = {
   value: propTypes.number.isRequired,
   onClick: propTypes.func,
-  active: propTypes.bool,
-  children: propTypes.node,
-  className: propTypes.string,
-  style: propTypes.shape([propTypes.string, propTypes.number])
+  selected: propTypes.bool,
+  children: propTypes.node
 };
 export default Tab;

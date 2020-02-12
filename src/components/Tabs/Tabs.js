@@ -3,47 +3,40 @@ import propTypes from 'prop-types';
 
 import styled from 'styled-components';
 
-const StyledTabs = styled.nav`
+const StyledTabs = styled.div`
   position: relative;
   left: 8px;
   text-align: left;
 `;
 
-const Tabs = ({
-  value,
-  onChange,
-  children,
-  className,
-  style,
-  ...otherProps
-}) => {
+const Tabs = React.forwardRef(function Tabs(props, ref) {
+  const { value, onChange, children, ...otherProps } = props;
   const childrenWithProps = React.Children.map(children, child => {
+    if (!React.isValidElement(child)) {
+      return null;
+    }
     const tabProps = {
-      active: child.props.value === value,
+      selected: child.props.value === value,
       onClick: onChange
     };
     return React.cloneElement(child, tabProps);
   });
   return (
-    <StyledTabs className={className} style={style} {...otherProps}>
+    <StyledTabs {...otherProps} role='tablist' ref={ref}>
       {childrenWithProps}
     </StyledTabs>
   );
-};
+});
 
 Tabs.defaultProps = {
   value: 0,
   onChange: () => {},
-  children: null,
-  className: '',
-  style: {}
+  children: null
 };
 
 Tabs.propTypes = {
   value: propTypes.number,
   onChange: propTypes.func,
-  children: propTypes.node,
-  className: propTypes.string,
-  style: propTypes.shape([propTypes.string, propTypes.number])
+  children: propTypes.node
 };
 export default Tabs;
