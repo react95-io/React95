@@ -20,7 +20,7 @@ const getProps = (props = {}) => ({
   text: 'I am the tooltip'
 });
 
-const getTooltip = props => (
+const renderTooltip = props => (
   <Tooltip {...props}>
     <div>Kid</div>
   </Tooltip>
@@ -29,9 +29,7 @@ const getTooltip = props => (
 describe('<Tooltip />', () => {
   describe('render', () => {
     it('should render wrapper element', () => {
-      const props = getProps();
-
-      const { getByTestId } = render(getTooltip(props));
+      const { getByTestId } = render(renderTooltip(getProps()));
 
       const tipWrapper = getByTestId('tipWrapper');
 
@@ -40,9 +38,7 @@ describe('<Tooltip />', () => {
     });
 
     it('should render inner tooltip', () => {
-      const props = getProps();
-
-      const { getByTestId } = render(getTooltip(props));
+      const { getByTestId } = render(renderTooltip(getProps()));
 
       const tip = getByTestId('tip');
 
@@ -51,9 +47,7 @@ describe('<Tooltip />', () => {
     });
 
     it('should render children', () => {
-      const props = getProps();
-
-      const { getByText } = render(getTooltip(props));
+      const { getByText } = render(renderTooltip(getProps()));
 
       const children = getByText('Kid');
 
@@ -62,9 +56,13 @@ describe('<Tooltip />', () => {
     });
 
     it('should render tooltip with provided className', () => {
-      const props = getProps({ className: 'my-tip' });
-
-      const { getByTestId } = render(getTooltip(props));
+      const { getByTestId } = render(
+        renderTooltip(
+          getProps({
+            className: 'my-tip'
+          })
+        )
+      );
 
       const tip = getByTestId('tip');
 
@@ -82,9 +80,13 @@ describe('<Tooltip />', () => {
     });
 
     it('should respect enterDelay', async () => {
-      const props = getProps({ enterDelay: 5 });
-
-      const { getByTestId } = render(getTooltip(props));
+      const { getByTestId } = render(
+        renderTooltip(
+          getProps({
+            enterDelay: 5
+          })
+        )
+      );
 
       const tipWrapper = getByTestId('tipWrapper');
 
@@ -94,9 +96,13 @@ describe('<Tooltip />', () => {
     });
 
     it('should respect leaveDelay', async () => {
-      const props = getProps({ leaveDelay: 6 });
-
-      const { getByTestId } = render(getTooltip(props));
+      const { getByTestId } = render(
+        renderTooltip(
+          getProps({
+            leaveDelay: 6
+          })
+        )
+      );
 
       const tipWrapper = getByTestId('tipWrapper');
 
@@ -110,7 +116,7 @@ describe('<Tooltip />', () => {
     it('should handle onFocus events, and call onOpen', async () => {
       const props = getProps();
 
-      const { getByTestId } = render(getTooltip(props));
+      const { getByTestId } = render(renderTooltip(props));
 
       const tip = getByTestId('tip');
       const tipWrapper = getByTestId('tipWrapper');
@@ -126,7 +132,7 @@ describe('<Tooltip />', () => {
     it('should handle onBlur events, and call onClose', async () => {
       const props = getProps();
 
-      const { getByTestId } = render(getTooltip(props));
+      const { getByTestId } = render(renderTooltip(props));
 
       const tip = getByTestId('tip');
       const tipWrapper = getByTestId('tipWrapper');
@@ -143,7 +149,7 @@ describe('<Tooltip />', () => {
     it('should handle onMouseEnter events, and call onOpen', async () => {
       const props = getProps();
 
-      const { getByTestId } = render(getTooltip(props));
+      const { getByTestId } = render(renderTooltip(props));
 
       const tip = getByTestId('tip');
       const tipWrapper = getByTestId('tipWrapper');
@@ -158,7 +164,7 @@ describe('<Tooltip />', () => {
     it('should handle onMouseLeave events, and call onClose', async () => {
       const props = getProps();
 
-      const { getByTestId } = render(getTooltip(props));
+      const { getByTestId } = render(renderTooltip(props));
 
       const tip = getByTestId('tip');
       const tipWrapper = getByTestId('tipWrapper');
@@ -175,7 +181,7 @@ describe('<Tooltip />', () => {
     it('should not handle onFocus events when disableFocusListener is true', () => {
       const props = getProps({ disableFocusListener: true });
 
-      const { getByTestId } = render(getTooltip(props));
+      const { getByTestId } = render(renderTooltip(props));
 
       const tipWrapper = getByTestId('tipWrapper');
 
@@ -187,7 +193,7 @@ describe('<Tooltip />', () => {
     it('should not handle onBlur events when disableFocusListener is true', () => {
       const props = getProps({ disableFocusListener: true });
 
-      const { getByTestId } = render(getTooltip(props));
+      const { getByTestId } = render(renderTooltip(props));
 
       const tipWrapper = getByTestId('tipWrapper');
 
@@ -199,7 +205,7 @@ describe('<Tooltip />', () => {
     it('should not handle onMouseEnter events when disableMouseListener is true', () => {
       const props = getProps({ disableMouseListener: true });
 
-      const { getByTestId } = render(getTooltip(props));
+      const { getByTestId } = render(renderTooltip(props));
 
       const tipWrapper = getByTestId('tipWrapper');
 
@@ -211,7 +217,7 @@ describe('<Tooltip />', () => {
     it('should not handle onMouseLeave events when disableMouseListener is true', () => {
       const props = getProps({ disableMouseListener: true });
 
-      const { getByTestId } = render(getTooltip(props));
+      const { getByTestId } = render(renderTooltip(props));
 
       const tipWrapper = getByTestId('tipWrapper');
 

@@ -46,8 +46,8 @@ const Tooltip = ({
   const [openTimer, setOpenTimer] = useState(null);
   const [closeTimer, setCloseTimer] = useState(null);
 
-  const useFocus = !disableFocusListener;
-  const useMouse = !disableMouseListener;
+  const isUsingFocus = !disableFocusListener;
+  const isUsingMouse = !disableMouseListener;
 
   const handleOpen = evt => {
     clearTimeout(openTimer);
@@ -104,15 +104,15 @@ const Tooltip = ({
   };
 
   // set callbacks for onBlur and onFocus, unless disableFocusListener is true
-  const blurCb = useFocus ? handleLeave : undefined;
-  const focusCb = useFocus ? handleEnter : undefined;
+  const blurCb = isUsingFocus ? handleLeave : undefined;
+  const focusCb = isUsingFocus ? handleEnter : undefined;
 
   // set callbacks for onMouseEnter and onMouseLeave, unless disableMouseListener is true
-  const mouseEnterCb = useMouse ? handleEnter : undefined;
-  const mouseLeaveCb = useMouse ? handleLeave : undefined;
+  const mouseEnterCb = isUsingMouse ? handleEnter : undefined;
+  const mouseLeaveCb = isUsingMouse ? handleLeave : undefined;
 
   // set the wrapper's tabIndex for focus events, unless disableFocusListener is true
-  const tabIndex = useFocus ? '0' : undefined;
+  const tabIndex = isUsingFocus ? '0' : undefined;
 
   return (
     <Wrapper
