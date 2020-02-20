@@ -24,7 +24,8 @@ const SlyledWindowHeader = styled.div`
     color: ${({ theme }) => theme.textInvert};
   }
   ${StyledButton} {
-    padding: 0;
+    padding-left: 0;
+    padding-right: 0;
     height: 27px;
     width: 31px;
   }
