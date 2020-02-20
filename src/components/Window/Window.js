@@ -41,9 +41,6 @@ const ResizeHandle = styled.span`
   `}
 `;
 
-// TODO how to pass event handlers to resize handler?
-// TODO how to pass refs to both Window component and DragHandle?
-
 const Window = ({ resizable, shadow, children, ...otherProps }) => (
   <StyledWindow shadow={shadow} {...otherProps}>
     {children}
@@ -60,7 +57,6 @@ Window.defaultProps = {
 Window.propTypes = {
   shadow: propTypes.bool,
   resizable: propTypes.bool,
-
   children: propTypes.node
 };
 

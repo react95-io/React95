@@ -29,7 +29,7 @@ const commonButtonStyles = css`
   padding-top: ${({ active, isDisabled }) => active && !isDisabled && '2px'};
 `;
 
-const StyledButton = styled.button`
+export const StyledButton = styled.button`
   ${({ variant, theme, active, isDisabled, primary }) =>
     variant === 'flat'
       ? css`

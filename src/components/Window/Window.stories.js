@@ -28,9 +28,9 @@ storiesOf('Window', module)
         }}
       >
         <span>react95.exe</span>
-        <Button style={{ marginRight: 2, height: 25 }} size='sm' square>
+        <Button>
           <span style={{ fontWeight: 'bold', transform: 'translateY(-1px)' }}>
-            x
+            X
           </span>
         </Button>
       </WindowHeader>

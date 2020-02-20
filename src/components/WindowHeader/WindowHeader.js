@@ -2,11 +2,13 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import styled from 'styled-components';
+import { StyledButton } from '../Button/Button';
 
 const SlyledWindowHeader = styled.div`
-  height: 30px;
-  line-height: 30px;
+  height: 33px;
+  line-height: 33px;
   padding-left: 0.25rem;
+  padding-right: 3px;
   font-weight: bold;
 
   &[data-active='false'] {
@@ -20,6 +22,10 @@ const SlyledWindowHeader = styled.div`
       ${({ theme }) => theme.headerMaterialLight}
     );
     color: ${({ theme }) => theme.textInvert};
+  }
+  ${StyledButton} {
+    height: 27px;
+    width: 31px;
   }
 `;
 // TODO - should we add some aria label indicating if window is currently active?
