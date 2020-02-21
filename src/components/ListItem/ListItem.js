@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { createDisabledTextStyles } from '../common';
 import { padding, blockSizes } from '../common/system';
 
-const StyledListItem = styled.li`
+export const StyledListItem = styled.li`
   box-sizing: border-box;
 
   display: flex;
