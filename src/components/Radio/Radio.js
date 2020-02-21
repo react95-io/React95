@@ -90,6 +90,10 @@ const Icon = styled.span.attrs(() => ({
   background: ${({ theme, isDisabled }) =>
     isDisabled ? theme.checkmarkDisabled : theme.checkmark};
 `;
+const LabelText = styled.span`
+  display: inline-block;
+  line-height: 1;
+`;
 
 const Radio = React.forwardRef(function Radio(props, ref) {
   const {
@@ -116,7 +120,7 @@ const Radio = React.forwardRef(function Radio(props, ref) {
       >
         {checked && <Icon isDisabled={disabled} />}
       </CheckboxComponent>
-      {label && <span>{label}</span>}
+      {label && <LabelText>{label}</LabelText>}
       <StyledInput
         disabled={disabled}
         onChange={disabled ? undefined : onChange}

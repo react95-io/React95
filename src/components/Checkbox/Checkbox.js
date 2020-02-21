@@ -110,6 +110,11 @@ const IndeterminateIcon = styled.span.attrs(() => ({
     outline-offset: -1px;
   }
 `;
+const LabelText = styled.span`
+  display: inline-block;
+  line-height: 1;
+`;
+
 const Checkbox = React.forwardRef(function Checkbox(props, ref) {
   const {
     onChange,
@@ -153,7 +158,7 @@ const Checkbox = React.forwardRef(function Checkbox(props, ref) {
       >
         {Icon && <Icon isDisabled={disabled} />}
       </CheckboxComponent>
-      {label && <span>{label}</span>}
+      {label && <LabelText>{label}</LabelText>}
       <StyledInput
         disabled={disabled}
         onChange={disabled ? undefined : handleChange}
