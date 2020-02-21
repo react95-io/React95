@@ -8,14 +8,17 @@ import { padding, blockSizes } from '../common/system';
 const StyledListItem = styled.li`
   box-sizing: border-box;
 
-  display: block;
+  display: flex;
+  align-items: center;
   position: relative;
   height: ${props => blockSizes[props.size]};
   width: ${props => (props.square ? blockSizes[props.size] : 'auto')};
   padding: 0 ${padding.sm};
 
   white-space: nowrap;
-  text-align: ${props => (props.square ? 'center' : 'left')};
+  justify-content: ${props =>
+    props.square ? 'space-around' : 'space-between'};
+  text-align: center;
   line-height: ${props => blockSizes[props.size]};
   color: ${({ theme }) => theme.text};
   pointer-events: ${({ isDisabled }) => (isDisabled ? 'none' : 'auto')};
