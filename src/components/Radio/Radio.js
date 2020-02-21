@@ -21,7 +21,7 @@ const StyledLabel = styled.label`
   font-size: ${fontSizes.md};
   ${props => props.isDisabled && createDisabledTextStyles()}
 
-  ${StyledListItem}:hover & {
+  ${StyledListItem} & {
     margin: 0;
     height: 100%;
   }
