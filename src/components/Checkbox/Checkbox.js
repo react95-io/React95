@@ -7,6 +7,7 @@ import { createDisabledTextStyles, createHatchedBackground } from '../common';
 import { padding, fontSizes } from '../common/system';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import Cutout from '../Cutout/Cutout';
+import { StyledListItem } from '../ListItem/ListItem';
 
 const checkboxSize = 20;
 
@@ -22,6 +23,11 @@ const StyledLabel = styled.label`
   user-select: none;
   font-size: ${fontSizes.md};
   ${props => props.isDisabled && createDisabledTextStyles()}
+
+  ${StyledListItem} & {
+    margin: 0;
+    height: 100%;
+  }
 `;
 
 const StyledInput = styled.input`
@@ -63,6 +69,21 @@ const StyledFlatCheckbox = styled.div`
   background: ${({ theme, isDisabled }) =>
     isDisabled ? theme.flatLight : theme.canvas};
 `;
+
+const StyledMenuCheckbox = styled.div`
+  position: relative;
+  box-sizing: border-box;
+  display: inline-block;
+  background: ${({ theme, isDisabled }) =>
+    isDisabled ? theme.flatLight : theme.canvas};
+  ${sharedCheckboxStyles}
+  width: ${checkboxSize - 4}px;
+  height: ${checkboxSize - 4}px;
+  background: none;
+  border: none;
+  outline: none;
+`;
+
 const CheckmarkIcon = styled.span.attrs(() => ({
   'data-testid': 'checkmarkIcon'
 }))`
@@ -84,6 +105,28 @@ const CheckmarkIcon = styled.span.attrs(() => ({
         isDisabled ? theme.checkmarkDisabled : theme.checkmark};
     border-width: 0 3px 3px 0;
     transform: translate(-50%, -50%) rotate(45deg);
+    
+    ${({ variant, theme, isDisabled }) =>
+      variant === 'menu'
+        ? css`
+            border-color: ${isDisabled ? theme.textDisabled : theme.text};
+            filter: drop-shadow(
+              1px 1px 0px
+                ${isDisabled ? theme.textDisabledShadow : 'transparent'}
+            );
+          `
+        : css`
+            border-color: ${isDisabled
+              ? theme.checkmarkDisabled
+              : theme.checkmark};
+          `}
+  ${StyledListItem}:hover & {
+    ${({ theme, isDisabled, variant }) =>
+      !isDisabled &&
+      variant === 'menu' &&
+      css`
+        border-color: ${theme.textInvert};
+      `};
   }
 `;
 const IndeterminateIcon = styled.span.attrs(() => ({
@@ -91,8 +134,17 @@ const IndeterminateIcon = styled.span.attrs(() => ({
 }))`
   display: inline-block;
   position: relative;
-  width: 100%;
-  height: 100%;
+
+  ${({ variant }) =>
+    variant === 'menu'
+      ? css`
+          height: calc(100% - 4px);
+          width: calc(100% - 4px);
+        `
+      : css`
+          width: 100%;
+          height: 100%;
+        `}
   &:after {
     content: '';
     display: block;
@@ -104,10 +156,20 @@ const IndeterminateIcon = styled.span.attrs(() => ({
       createHatchedBackground({
         mainColor: isDisabled ? theme.checkmarkDisabled : theme.checkmark
       })}
-    background-position: -1px -1px, 1px 1px;
-    outline: 1px solid
-      ${({ theme, isDisabled }) => (isDisabled ? theme.material : theme.canvas)};
-    outline-offset: -1px;
+    background-position: 0px 0px, 2px 2px;
+
+    ${({ variant, isDisabled, theme }) =>
+      variant === 'menu' &&
+      css`
+        ${StyledListItem}:hover & {
+          ${createHatchedBackground({
+            mainColor: theme.textInvert
+          })}
+        }
+        filter: drop-shadow(
+          1px 1px 0px ${isDisabled ? theme.textDisabledShadow : 'transparent'}
+        );
+      `};
   }
 `;
 const LabelText = styled.span`
@@ -139,8 +201,12 @@ const Checkbox = React.forwardRef(function Checkbox(props, ref) {
     setState(newState);
     if (onChange) onChange(e);
   };
-  const CheckboxComponent =
-    variant === 'flat' ? StyledFlatCheckbox : StyledCheckbox;
+
+  const CheckboxComponent = {
+    flat: StyledFlatCheckbox,
+    default: StyledCheckbox,
+    menu: StyledMenuCheckbox
+  }[variant];
 
   let Icon = null;
   if (indeterminate) {
@@ -156,7 +222,7 @@ const Checkbox = React.forwardRef(function Checkbox(props, ref) {
         isDisabled={disabled}
         role='presentation'
       >
-        {Icon && <Icon isDisabled={disabled} />}
+        {Icon && <Icon isDisabled={disabled} variant={variant} />}
       </CheckboxComponent>
       {label && <LabelText>{label}</LabelText>}
       <StyledInput
@@ -200,7 +266,7 @@ Checkbox.propTypes = {
   label: propTypes.oneOfType([propTypes.string, propTypes.number]),
   checked: propTypes.bool,
   disabled: propTypes.bool,
-  variant: propTypes.oneOf(['default', 'flat']),
+  variant: propTypes.oneOf(['default', 'flat', 'menu']),
   style: propTypes.shape([propTypes.string, propTypes.number]),
   defaultChecked: propTypes.bool,
   indeterminate: propTypes.bool,
