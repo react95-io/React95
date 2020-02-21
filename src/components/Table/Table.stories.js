@@ -13,7 +13,7 @@ import WindowHeader from '../WindowHeader/WindowHeader';
 import WindowContent from '../WindowContent/WindowContent';
 
 const SimpleTable = () => (
-  <Window>
+  <Window style={{ width: 320 }}>
     <WindowHeader>Pokedex.exe</WindowHeader>
     <WindowContent>
       <Table>
@@ -21,7 +21,7 @@ const SimpleTable = () => (
           <TableRow head>
             <TableHeadCell>Type</TableHeadCell>
             <TableHeadCell>Name</TableHeadCell>
-            <TableHeadCell>Lvl.</TableHeadCell>
+            <TableHeadCell disabled>Level</TableHeadCell>
           </TableRow>
         </TableHead>
         <TableBody>

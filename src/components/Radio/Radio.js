@@ -8,65 +8,46 @@ import Cutout from '../Cutout/Cutout';
 
 const radioSize = '20px';
 const StyledLabel = styled.label`
-  display: inline-block;
-
+  display: inline-flex;
+  align-items: center;
   position: relative;
-  padding-left: calc(${radioSize} + ${padding.sm});
   margin: ${padding.sm} 0;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-
   font-size: ${fontSizes.md};
   ${props => props.isDisabled && createDisabledTextStyles()}
 `;
 
 const StyledInput = styled.input`
   position: absolute;
+  left: 0;
+  margin: 0;
+  width: ${radioSize};
+  height: ${radioSize};
   opacity: 0;
+  z-index: -99;
 `;
 
-const createCheckmarkSymbol = ({ checked }) =>
-  checked &&
-  css`
-    &:after {
-      position: absolute;
-      content: '';
-      display: inline-block;
-      top: 50%;
-      left: 50%;
-      width: 6px;
-      height: 6px;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      background: ${({ theme }) => theme.checkmark};
-    }
-  `;
-
-const sharedCheckmarkStyles = css`
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
+const sharedCheckboxStyles = css`
   width: ${radioSize};
   height: ${radioSize};
   border-radius: 50%;
-  ${props => createCheckmarkSymbol(props)}
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-right: 0.5rem;
 `;
-// had to overwrite box-shadow for StyledCheckmark since the default made checkbox too dark
-const StyledCheckmark = styled(Cutout)`
-
-  ${sharedCheckmarkStyles}
-  background: ${({ theme, isDisabled }) =>
-    isDisabled ? theme.material : theme.canvas};
-
-  box-shadow: ${({ shadow }) =>
-    shadow ? 'inset 3px 3px 10px rgba(0, 0, 0, 0.1)' : 'none'};
+// had to overwrite box-shadow for StyledCheckbox since the default made checkbox too dark
+const StyledCheckbox = styled(Cutout)`
+${sharedCheckboxStyles}
+background: ${({ theme, isDisabled }) =>
+  isDisabled ? theme.material : theme.canvas};
 
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     left: 0px;
     top: 0px;
@@ -75,11 +56,10 @@ const StyledCheckmark = styled(Cutout)`
     border-radius: 50%;
     box-shadow: none;
   }
-
 `;
-const StyledFlatCheckmark = styled.div`
+const StyledFlatCheckbox = styled.div`
   ${createFlatBoxStyles()}
-  ${sharedCheckmarkStyles}
+  ${sharedCheckboxStyles}
   outline: none;
   background: ${({ theme, isDisabled }) =>
     isDisabled ? theme.flatLight : theme.canvas};
@@ -95,60 +75,86 @@ const StyledFlatCheckmark = styled.div`
     border-radius: 50%;
   }
 `;
-const Radio = ({
-  onChange,
-  label,
-  disabled,
-  variant,
-  value,
-  checked,
-  name,
-  className,
-  style,
-  shadow,
-  ...otherProps
-}) => {
-  const Checkmark = variant === 'flat' ? StyledFlatCheckmark : StyledCheckmark;
+const Icon = styled.span.attrs(() => ({
+  'data-testid': 'checkmarkIcon'
+}))`
+  position: absolute;
+  content: '';
+  display: inline-block;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: ${({ theme, isDisabled }) =>
+    isDisabled ? theme.checkmarkDisabled : theme.checkmark};
+`;
+
+const Radio = React.forwardRef(function Radio(props, ref) {
+  const {
+    onChange,
+    label,
+    disabled,
+    variant,
+    value,
+    checked,
+    name,
+    className,
+    style,
+    ...otherProps
+  } = props;
+  const CheckboxComponent =
+    variant === 'flat' ? StyledFlatCheckbox : StyledCheckbox;
 
   return (
     <StyledLabel isDisabled={disabled} className={className} style={style}>
-      {label}
+      <CheckboxComponent
+        checked={checked}
+        isDisabled={disabled}
+        role='presentation'
+      >
+        {checked && <Icon isDisabled={disabled} />}
+      </CheckboxComponent>
+      {label && <span>{label}</span>}
       <StyledInput
+        disabled={disabled}
         onChange={disabled ? undefined : onChange}
         readOnly={disabled}
         type='radio'
         value={value}
         checked={checked}
         name={name}
+        ref={ref}
         {...otherProps}
       />
-      <Checkmark checked={checked} isDisabled={disabled} shadow={shadow} />
     </StyledLabel>
   );
-};
+});
 
 Radio.defaultProps = {
+  onChange: undefined,
+  name: null,
+  value: undefined,
   checked: false,
   label: '',
   disabled: false,
   variant: 'default',
-  shadow: true,
   className: '',
   style: {}
 };
 
 Radio.propTypes = {
-  onChange: propTypes.func.isRequired,
-  name: propTypes.string.isRequired,
+  onChange: propTypes.func,
+  name: propTypes.string,
   value: propTypes.oneOfType([
     propTypes.string,
     propTypes.number,
     propTypes.bool
-  ]).isRequired,
+  ]),
   label: propTypes.oneOfType([propTypes.string, propTypes.number]),
   checked: propTypes.bool,
   disabled: propTypes.bool,
-  shadow: propTypes.bool,
   variant: propTypes.oneOf(['default', 'flat']),
   style: propTypes.shape([propTypes.string, propTypes.number]),
   className: propTypes.string

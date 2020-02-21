@@ -9,7 +9,8 @@ import {
   createWellBorderStyles,
   createBoxStyles,
   createFlatBoxStyles,
-  createDisabledTextStyles
+  createDisabledTextStyles,
+  createHatchedBackground
 } from '../common';
 import { blockSizes, fontSizes, padding } from '../common/system';
 
@@ -21,7 +22,7 @@ const commonButtonStyles = css`
   height: ${({ size }) => blockSizes[size]};
   width: ${({ fullWidth, square, size }) =>
     fullWidth ? '100%' : square ? blockSizes[size] : 'auto'};
-  padding: ${({ square }) => (square ? 0 : `0 ${padding.sm}`)};
+  padding: ${({ square }) => (square ? 0 : `0 calc(${padding.sm} + 2px)`)};
   font-size: ${fontSizes.md};
   &:active {
     padding-top: ${({ isDisabled }) => !isDisabled && '2px'};
@@ -30,37 +31,70 @@ const commonButtonStyles = css`
 `;
 
 const StyledButton = styled.button`
-  ${({ variant }) =>
+  ${({ variant, theme, active, isDisabled, primary }) =>
     variant === 'flat'
       ? css`
-          ${createFlatBoxStyles()} /* background: none; */
+          ${createFlatBoxStyles()}
+          ${primary
+            ? `
+          border: 2px solid ${theme.checkmark};
+            outline: 2px solid ${theme.flatDark};
+            outline-offset: -4px;
+          `
+            : `
+          border: 2px solid ${theme.flatDark};
+            outline: 2px solid transparent;
+            outline-offset: -4px;
+          `}
         `
       : variant === 'menu'
       ? css`
           ${createBoxStyles()};
           border: 2px solid transparent;
           &:hover {
-            ${({ isDisabled, active }) =>
-              !isDisabled && !active && createWellBorderStyles(false)}
+            ${!isDisabled && !active && createWellBorderStyles(false)}
           }
           &:active {
-            ${({ isDisabled }) => !isDisabled && createWellBorderStyles(true)}
+            ${!isDisabled && createWellBorderStyles(true)}
           }
-          ${({ active }) => active && createWellBorderStyles(true)}
-          ${({ isDisabled }) => isDisabled && createDisabledTextStyles()}
+          ${active && createWellBorderStyles(true)}
+          ${isDisabled && createDisabledTextStyles()}
         `
       : css`
           ${createBoxStyles()};
-          ${({ active }) =>
-            active ? createBorderStyles(true) : createBorderStyles(false)}
-          ${({ active, theme }) =>
-            active &&
-            `background-image: ${theme.hatchedBackground};`}
+          border: none;
+          ${isDisabled && createDisabledTextStyles()}
+          ${active &&
+            createHatchedBackground({
+              mainColor: theme.material,
+              secondaryColor: theme.borderLightest
+            })}
+          &:before {
+            box-sizing: border-box;
+            content: '';
+            position: absolute;
+            ${primary
+              ? css`
+                  left: 2px;
+                  top: 2px;
+                  width: calc(100% - 4px);
+                  height: calc(100% - 4px);
+                  outline: 2px solid ${theme.borderDarkest};
+                `
+              : css`
+                  left: 0;
+                  top: 0;
+                  width: 100%;
+                  height: 100%;
+                `}
 
-          &:active {
-            ${({ isDisabled }) => !isDisabled && createBorderStyles(true)}
+            ${active
+              ? createBorderStyles({ invert: true })
+              : createBorderStyles({ invert: false })}
           }
-          ${({ isDisabled }) => isDisabled && createDisabledTextStyles()}
+          &:active:before {
+            ${!isDisabled && createBorderStyles({ invert: true })}
+          }
         `}
   ${commonButtonStyles}
 `;
@@ -74,6 +108,7 @@ const Button = ({
   size,
   square,
   active,
+  primary,
   variant,
   className,
   children,
@@ -82,8 +117,10 @@ const Button = ({
   <StyledButton
     type={type}
     variant={variant}
+    primary={primary}
     onClick={disabled ? undefined : onClick}
     style={style}
+    disabled={disabled}
     isDisabled={disabled}
     fullWidth={fullWidth}
     size={size}
@@ -107,6 +144,7 @@ Button.defaultProps = {
   size: 'md',
   square: false,
   active: false,
+  primary: false,
   variant: 'default',
   className: ''
 };
@@ -120,6 +158,8 @@ Button.propTypes = {
   size: propTypes.oneOf(['sm', 'md', 'lg']),
   square: propTypes.bool,
   active: propTypes.bool,
+  primary: propTypes.bool,
+
   variant: propTypes.oneOf(['default', 'menu', 'flat']),
   className: propTypes.string,
   children: propTypes.node.isRequired

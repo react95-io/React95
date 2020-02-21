@@ -20,6 +20,8 @@ export { default as NumberField } from './NumberField/NumberField';
 export { default as Progress } from './Progress/Progress';
 export { default as Radio } from './Radio/Radio';
 export { default as Select } from './Select/Select';
+export { default as Slider } from './Slider/Slider';
+
 export { default as Tab } from './Tab/Tab';
 export { default as Tabs } from './Tabs/Tabs';
 export { default as TabBody } from './TabBody/TabBody';
@@ -36,3 +38,8 @@ export { default as Tooltip } from './Tooltip/Tooltip';
 export { default as Window } from './Window/Window';
 export { default as WindowContent } from './WindowContent/WindowContent';
 export { default as WindowHeader } from './WindowHeader/WindowHeader';
+export { default as ColorInput } from './ColorInput/ColorInput';
+
+export {
+  default as LoadingIndicator
+} from './LoadingIndicator/LoadingIndicator';

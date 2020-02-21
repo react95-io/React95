@@ -43,11 +43,13 @@ const StyledDropdownButton = styled(Button)`
         `
       : css`
           height: 100%;
-          border-left-color: ${({ theme }) => theme.borderLight};
-          border-top-color: ${({ theme }) => theme.borderLight};
-          box-shadow: inset 1px 1px 0px 1px
-              ${({ theme }) => theme.borderLightest},
-            inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
+          &:before {
+            border-left-color: ${({ theme }) => theme.borderLight};
+            border-top-color: ${({ theme }) => theme.borderLight};
+            box-shadow: inset 1px 1px 0px 1px
+                ${({ theme }) => theme.borderLightest},
+              inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
+          }
         `}
 `;
 const StyledDropdownIcon = styled.span`

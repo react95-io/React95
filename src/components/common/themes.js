@@ -1,9 +1,6 @@
 const themes = {};
 
 themes.default = {
-  hatchedBackground:
-    'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIElEQVQYV2P8////fwYGBgZGRkZGMI0hABIFAbgEugAAQFQP/QfjEPcAAAAASUVORK5CYII=)',
-
   canvas: '#ffffff',
   material: '#ced0cf',
   materialDark: '#9a9e9c',
@@ -11,6 +8,7 @@ themes.default = {
   borderDarkest: '#050608',
   borderLightest: '#ffffff',
   borderDark: '#888c8f',
+  checkmarkDisabled: '#888c8f',
   borderLight: '#dfe0e3',
 
   headerMaterialDark: '#000080',
@@ -34,6 +32,7 @@ themes.default = {
 
   hoverBackground: '#000080',
   checkmark: '#050608',
+
   progress: '#000080',
 
   flatLight: '#d8d8d8',
@@ -41,9 +40,6 @@ themes.default = {
 };
 
 themes.water = {
-  hatchedBackground:
-    'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIElEQVQYV2P8////fwYGBgZGRkZGMI0hABIFAbgEugAAQFQP/QfjEPcAAAAASUVORK5CYII=)',
-
   canvas: '#ffffff',
   material: '#ced0cf',
   materialDark: '#9a9e9c',
@@ -51,6 +47,7 @@ themes.water = {
   borderDarkest: '#050608',
   borderLightest: '#ffffff',
   borderDark: '#888c8f',
+  checkmarkDisabled: '#888c8f',
   borderLight: '#dfe0e3',
 
   headerMaterialDark: '#72b3b4',
@@ -81,9 +78,6 @@ themes.water = {
 };
 
 themes.coldGray = {
-  hatchedBackground:
-    'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIElEQVQYV2P8////fwYGBgZGRkZGMI0hABIFAbgEugAAQFQP/QfjEPcAAAAASUVORK5CYII=)',
-
   // background: "#CCF5AC",
   // background: "#416165",
   background: '#4C6663',
@@ -95,6 +89,7 @@ themes.coldGray = {
   borderDarkest: '#010601',
   borderLightest: '#c7c7df',
   borderDark: '#5b57a1',
+  checkmarkDisabled: '#5b57a1',
   borderLight: '#a4a7c8',
 
   headerMaterialDark: '#3B3D64',
@@ -125,9 +120,6 @@ themes.coldGray = {
 };
 
 themes.lilacRoseDark = {
-  hatchedBackground:
-    'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIElEQVQYV2P8////fwYGBgZGRkZGMI0hABIFAbgEugAAQFQP/QfjEPcAAAAASUVORK5CYII=)',
-
   background: '#3B3B58',
 
   canvas: '#dab1c7',
@@ -137,6 +129,7 @@ themes.lilacRoseDark = {
   borderDarkest: '#190000',
   borderLightest: '#FFCAFC',
   borderDark: '#7F3163',
+  checkmarkDisabled: '#7F3163',
   borderLight: '#E597C9',
 
   headerMaterialDark: '#4C0030',
@@ -167,15 +160,13 @@ themes.lilacRoseDark = {
 };
 
 themes.violetDark = {
-  hatchedBackground:
-    'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIElEQVQYV2P8////fwYGBgZGRkZGMI0hABIFAbgEugAAQFQP/QfjEPcAAAAASUVORK5CYII=)',
-
   canvas: '#c47bcc',
   material: '#652a6d',
   materialDark: '#210e23',
   borderDarkest: '#18051a',
   borderLightest: '#c47bcc',
   borderDark: '#3c1f3e',
+  checkmarkDisabled: '#3c1f3e',
   borderLight: '#945b9b',
 
   headerMaterialDark: '#1034a6',

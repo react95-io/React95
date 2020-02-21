@@ -17,24 +17,24 @@ const StyledCutout = styled(Cutout)`
   }
 `;
 
-const Table = ({ className, children, style, ...otherProps }) => (
-  <StyledCutout>
-    <StyledTable className={className} style={style} {...otherProps}>
-      {children}
-    </StyledTable>
-  </StyledCutout>
-);
+const Table = React.forwardRef(function Table(props, ref) {
+  const { children, ...otherProps } = props;
+
+  return (
+    <StyledCutout>
+      <StyledTable ref={ref} {...otherProps}>
+        {children}
+      </StyledTable>
+    </StyledCutout>
+  );
+});
 
 Table.defaultProps = {
-  children: null,
-  className: '',
-  style: {}
+  children: null
 };
 
 Table.propTypes = {
-  children: propTypes.node,
-  className: propTypes.string,
-  style: propTypes.shape([propTypes.string, propTypes.number])
+  children: propTypes.node
 };
 
 export default Table;

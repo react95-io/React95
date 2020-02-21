@@ -13,32 +13,27 @@ const StyledTr = styled.tr`
   outline: none;
 
   color: ${({ theme }) => theme.text};
-  ${({ theme, head }) =>
-    !head &&
-    `&:hover {
-      background: ${theme.hoverBackground};
-      color: ${theme.textInvert}
-    }`}
+  &:hover {
+    background: ${({ theme }) => theme.hoverBackground};
+    color: ${({ theme }) => theme.textInvert};
+  }
 `;
 
-const TableRow = ({ className, children, style, head, ...otherProps }) => (
-  <StyledTr head={head} className={className} style={style} {...otherProps}>
-    {children}
-  </StyledTr>
-);
+const TableRow = React.forwardRef(function TableRow(props, ref) {
+  const { children, ...otherProps } = props;
+  return (
+    <StyledTr ref={ref} {...otherProps}>
+      {children}
+    </StyledTr>
+  );
+});
 
 TableRow.defaultProps = {
-  head: false,
-  children: null,
-  className: '',
-  style: {}
+  children: null
 };
 
 TableRow.propTypes = {
-  children: propTypes.node,
-  className: propTypes.string,
-  style: propTypes.shape([propTypes.string, propTypes.number]),
-  head: propTypes.bool
+  children: propTypes.node
 };
 
 export default TableRow;

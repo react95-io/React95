@@ -33,7 +33,13 @@ storiesOf('Button', module)
       {story()}
     </div>
   ))
-  .add('default', () => <Button {...actions}>default</Button>)
+  .add('default', () => <Button {...actions}>Default</Button>)
+  .add('primary', () => (
+    <Button primary {...actions}>
+      Primary
+    </Button>
+  ))
+
   .add('disabled', () => (
     <Button disabled {...actions}>
       Disabled
@@ -91,11 +97,25 @@ storiesOf('Button', module)
             }}
           >
             <Toolbar>
-              <Button {...actions} variant='flat' fullWidth accent>
-                OK
+              <Button
+                primary
+                {...actions}
+                variant='flat'
+                fullWidth
+                style={{ marginRight: '0.5rem' }}
+              >
+                Primary
               </Button>
-              <Button {...actions} variant='flat' disabled fullWidth accent>
-                Cancel
+              <Button
+                {...actions}
+                variant='flat'
+                fullWidth
+                style={{ marginRight: '0.5rem' }}
+              >
+                Regular
+              </Button>
+              <Button {...actions} variant='flat' disabled fullWidt>
+                Disabled
               </Button>
             </Toolbar>
           </div>
@@ -139,9 +159,12 @@ function MenuButtonExample() {
         >
           {open && (
             <List
-              style={{ zIndex: '9999' }}
-              horizontalAlign='right'
-              verticalAlign='bottom'
+              style={{
+                position: 'absolute',
+                right: '0',
+                top: '100%',
+                zIndex: '9999'
+              }}
               open={open}
               onClick={handleClose}
             >
