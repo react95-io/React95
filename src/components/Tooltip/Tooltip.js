@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 
 import styled from 'styled-components';
 import { shadow } from '../common';
+import { getTestId } from '../common/util';
 
 const Tip = styled.span`
   position: absolute;
@@ -116,7 +117,7 @@ const Tooltip = ({
 
   return (
     <Wrapper
-      data-testid={testId ? `${testId}Wrapper` : undefined}
+      data-testid={getTestId(testId, 'Wrapper')}
       onBlur={blurCb}
       onFocus={focusCb}
       onMouseEnter={mouseEnterCb}
