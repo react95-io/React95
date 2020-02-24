@@ -98,4 +98,7 @@ storiesOf('Select', module)
   ))
   .add('disabled', () => (
     <Select disabled onChange={onChange} options={options} />
+  ))
+  .add('native select', () => (
+    <Select onChange={onChange} native options={options} />
   ));

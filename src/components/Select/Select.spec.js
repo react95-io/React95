@@ -23,6 +23,7 @@ const getProps = (props = {}) => ({
   onOpen: props.onOpen,
   options: props.options || [],
   menuOpen: props.menuOpen,
+  native: props.native,
   shadow: props.shadow,
   style: props.style,
   testId: 'select',
@@ -91,6 +92,15 @@ describe('<Select />', () => {
   });
 
   describe('render', () => {
+    it('should render as native select if native is true', () => {
+      const { getByTestId } = render(renderSelect(getProps({ native: true })));
+
+      const el = getByTestId('select');
+
+      expect(el).toBeInTheDocument();
+      expect(el.tagName).toBe('SELECT');
+    });
+
     it('should render wrapper element', () => {
       const { getByTestId } = render(renderSelect(getProps()));
 

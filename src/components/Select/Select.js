@@ -11,6 +11,8 @@ import {
   StyledDropdownMenu,
   StyledDropdownMenuItem,
   StyledFlatSelectWrapper,
+  StyledNativeOption,
+  StyledNativeSelect,
   StyledSelectContent,
   StyledSelectWrapper
 } from './Select.styles';
@@ -40,6 +42,27 @@ export const getDefaultValue = (defaultValue, options) => {
   }
 
   return undefined;
+};
+
+export const SelectOptions = props => {
+  const { native, options, selectionCallback, testId, value } = props;
+
+  const OptionComponent = native ? StyledNativeOption : StyledDropdownMenuItem;
+
+  return options.map((opt, idx) => {
+    const optionProps = {
+      key: `${value}-${idx}`,
+      'data-testid': getTestId(testId, `MenuItem${idx}`)
+    };
+
+    if (!native) {
+      optionProps.onMouseDown = evt => selectionCallback(evt, opt);
+    } else {
+      optionProps.value = opt.value;
+    }
+
+    return <OptionComponent {...optionProps}>{opt.label}</OptionComponent>;
+  });
 };
 
 const Select = ({
@@ -74,8 +97,20 @@ const Select = ({
     value: menuOpen
   });
 
+  const getSelectedOption = selectedValue =>
+    options.find(opt => {
+      if (selectedValue) {
+        return (
+          opt.value === selectedValue ||
+          opt.value === parseInt(selectedValue, 10)
+        );
+      }
+
+      return opt.value === valueDerived;
+    });
+
   const isEnabled = !disabled;
-  const selectedOption = options.find(opt => opt.value === valueDerived);
+  const selectedOption = getSelectedOption();
   const displayLabel = getDisplayLabel(selectedOption, formatLabel);
 
   const handleToggleOpen = evt => {
@@ -114,11 +149,13 @@ const Select = ({
   const handleSelection = (evt, opt) => {
     evt.stopPropagation();
 
+    const nextSelection = opt || getSelectedOption(evt.target.value);
+
     if (onChange) {
-      onChange(evt, opt, valueDerived);
+      onChange(evt, nextSelection, valueDerived);
     }
 
-    setValueState(opt.value);
+    setValueState(nextSelection.value);
   };
 
   const selectionCallback = isEnabled ? handleSelection : () => {};
@@ -127,23 +164,41 @@ const Select = ({
 
   const Wrapper = getWrapper(variant, native);
 
-  const optionsContent = options.map((opt, idx) => (
-    <StyledDropdownMenuItem
-      key={`${value}-${idx}`}
-      onMouseDown={evt => selectionCallback(evt, opt)}
-      data-testid={getTestId(testId, `MenuItem${idx}`)}
-    >
-      {opt.label}
-    </StyledDropdownMenuItem>
-  ));
+  const optionsContent = (
+    <SelectOptions
+      native={native}
+      options={options}
+      selectionCallback={selectionCallback}
+      testId={testId}
+      value={value}
+    />
+  );
+
+  const wrapperCommonProps = {
+    className: classNames(className, {
+      'is-disabled': disabled,
+      'is-open': openDerived
+    }),
+    'data-testid': testId,
+    style: { ...style, width }
+  };
+
+  if (native) {
+    return (
+      <StyledNativeSelect
+        {...wrapperCommonProps}
+        disabled={disabled}
+        onChange={selectionCallback}
+        {...otherProps}
+      >
+        {optionsContent}
+      </StyledNativeSelect>
+    );
+  }
 
   return (
     <Wrapper
-      className={classNames(className, {
-        'is-disabled': disabled,
-        'is-open': openDerived
-      })}
-      data-testid={testId}
+      {...wrapperCommonProps}
       isDisabled={disabled}
       onBlur={toggleOpenCallback}
       onBlurCapture={toggleOpenCallback}

@@ -30,6 +30,10 @@ export const StyledFlatSelectWrapper = styled.div`
   ${sharedWrapperStyles}
 `;
 
+export const StyledNativeSelect = styled.select`
+  ${sharedWrapperStyles}
+`;
+
 export const StyledSelectContent = styled.div`
   width: 100%;
   padding-left: ${padding.sm};
@@ -120,3 +124,5 @@ export const StyledDropdownMenuItem = styled.li`
     color: ${({ theme }) => theme.inputTextInvert};
   }
 `;
+
+export const StyledNativeOption = styled.option``;
