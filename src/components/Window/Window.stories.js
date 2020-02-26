@@ -28,13 +28,9 @@ storiesOf('Window', module)
         }}
       >
         <span>react95.exe</span>
-        <Button
-          style={{ marginRight: '-6px', marginTop: '1px' }}
-          size='sm'
-          square
-        >
+        <Button>
           <span style={{ fontWeight: 'bold', transform: 'translateY(-1px)' }}>
-            x
+            X
           </span>
         </Button>
       </WindowHeader>
@@ -59,16 +55,17 @@ storiesOf('Window', module)
       </WindowContent>
     </Window>
   ))
-  .add('no shadow', () => (
-    <Window shadow={false}>
+  .add('resizable', () => (
+    <Window resizable>
       <WindowHeader>react95.exe</WindowHeader>
       <WindowContent>
-        <ul>
-          <li>something here</li>
-          <li>something here</li>
-          <li>something here</li>
-          <li>something here</li>
-        </ul>
+        Resizable Window displays resize handle in bottom right corner
       </WindowContent>
+    </Window>
+  ))
+  .add('not Active', () => (
+    <Window>
+      <WindowHeader isActive={false}>react95.exe</WindowHeader>
+      <WindowContent>I am not active</WindowContent>
     </Window>
   ));
