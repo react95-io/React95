@@ -127,6 +127,12 @@ const LabelText = styled.span`
   line-height: 1;
 `;
 
+const CheckboxComponents = {
+  flat: StyledFlatCheckbox,
+  default: StyledCheckbox,
+  menu: StyledMenuCheckbox
+};
+
 const Radio = React.forwardRef(function Radio(props, ref) {
   const {
     onChange,
@@ -141,11 +147,7 @@ const Radio = React.forwardRef(function Radio(props, ref) {
     ...otherProps
   } = props;
 
-  const CheckboxComponent = {
-    flat: StyledFlatCheckbox,
-    default: StyledCheckbox,
-    menu: StyledMenuCheckbox
-  }[variant];
+  const CheckboxComponent = CheckboxComponents[variant];
 
   return (
     <StyledLabel isDisabled={disabled} className={className} style={style}>

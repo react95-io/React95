@@ -177,6 +177,12 @@ const LabelText = styled.span`
   line-height: 1;
 `;
 
+const CheckboxComponents = {
+  flat: StyledFlatCheckbox,
+  default: StyledCheckbox,
+  menu: StyledMenuCheckbox
+};
+
 const Checkbox = React.forwardRef(function Checkbox(props, ref) {
   const {
     onChange,
@@ -202,11 +208,7 @@ const Checkbox = React.forwardRef(function Checkbox(props, ref) {
     if (onChange) onChange(e);
   };
 
-  const CheckboxComponent = {
-    flat: StyledFlatCheckbox,
-    default: StyledCheckbox,
-    menu: StyledMenuCheckbox
-  }[variant];
+  const CheckboxComponent = CheckboxComponents[variant];
 
   let Icon = null;
   if (indeterminate) {
