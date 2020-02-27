@@ -21,49 +21,58 @@
 - [Become a backer or sponsor on Patreon](https://www.patreon.com/arturbien).
 - [One-time donation via PayPal](https://www.paypal.me/react95)
 
+## Motivation
+Create modern mobile/web applications with the retro and old school Windows 95 style. Our goal is not to exactly recreate Windows95 components, but to provide a solid component library for current scenarios.
 
 ## Getting Started
 First, install component library and styled-components in your project directory: 
 ```sh
-$ npm i react95 styled-components
+// yarn
+yarn react95 styled-components
+
+// npm
+npm i react95 styled-components
 ```
 Apply style reset, wrap your app content with ThemeProvider with theme of your choice... and you are ready to go! 🚀
 ```jsx
-import React from "react";
-import { createGlobalStyle, ThemeProvider } from "styled-components";
-import { reset, themes, List, ListItem, Divider } from "react95";
+import React from 'react';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { reset, themes, List, ListItem, Divider } from 'react95';
 
 const ResetStyles = createGlobalStyle`
   ${reset}
 `;
 
-export default props =>
-  <div className="App">
+const App = () => (
+  <div>
     <ResetStyles />
     <ThemeProvider theme={themes.default}>
       <List>
-          <ListItem>🎤 Sing</ListItem>
-          <ListItem>💃🏻 Dance</ListItem>
-          <Divider />
-          <ListItem disabled>😴 Sleep</ListItem>
+        <ListItem>🎤 Sing</ListItem>
+        <ListItem>💃🏻 Dance</ListItem>
+        <Divider />
+        <ListItem disabled>😴 Sleep</ListItem>
       </List>
     </ThemeProvider>
   </div>
-  
+);
+
+export default App;
 ```
 
 ### Explore
 You can view components on [Storybook](https://arturbien.github.io/React95/). If you want to play with it locally, simply clone the repo and run commands below:
+
 ```sh
-$ npm i 
-$ npm run storybook
+$ yarn
+$ yarn storybook
 ```
+
 ### Submit your project
 Apps built with React95 will be submitted on the official React95 [website](https://react95.io) 🤟🏻
 
 ### Contributing
-**We are not attempting to exactly RECREATE Windows95 components. We are going to make them usable in the modern mobile / web apps. 
-Thus, any help from UI / UX designers would be EXTREMELY appreciated. The challenge is to come up with new component designs / layouts that are broadly used in modern UIs, that weren't present back in 95.**
+Any help from UI / UX designers would be EXTREMELY appreciated. The challenge is to come up with new component designs / layouts that are broadly used in modern UIs, that weren't present back in 95.
 
 There's a lot to do. If you want to help with the project, feel free to open pull requests and submit issues. Let's make UI great again 🔥 
 
@@ -80,4 +89,3 @@ There's quite a few things to be done:
 And the boring stuff too:
 - Testing
 - Semantic release
-- eslint
