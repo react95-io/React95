@@ -2,7 +2,15 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
 
-import { Checkbox, Fieldset, Button, Cutout } from '..';
+import {
+  Checkbox,
+  Fieldset,
+  Button,
+  Cutout,
+  List,
+  ListItem,
+  Divider
+} from '..';
 
 const StyledCutout = styled(Cutout)`
   background: ${({ theme }) => theme.canvas};
@@ -63,6 +71,42 @@ storiesOf('Checkbox', module)
           />
         </div>
       </StyledCutout>
+    ))
+  )
+  .add('menu', () =>
+    React.createElement(() => (
+      <List>
+        <ListItem size='md'>
+          <Checkbox
+            name='useGradient'
+            variant='menu'
+            value='useGradient'
+            label='Use gradient'
+            defaultChecked
+          />
+        </ListItem>
+        <ListItem size='md'>
+          <Checkbox
+            name='thickBrush'
+            variant='menu'
+            defaultChecked={false}
+            value='thickBrush'
+            label='Thick brush'
+            indeterminate
+          />
+        </ListItem>
+        <Divider />
+        <ListItem size='md' disabled>
+          <Checkbox
+            name='autoSave'
+            variant='menu'
+            value='autoSave'
+            checked
+            label='Auto-save'
+            disabled
+          />
+        </ListItem>
+      </List>
     ))
   );
 
