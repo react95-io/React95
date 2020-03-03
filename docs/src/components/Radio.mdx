@@ -1,0 +1,33 @@
+---
+name: Radio
+menu: Components
+---
+
+import { Playground, Props } from 'docz';
+import {
+  Fieldset,
+  Radio,
+  Window,
+  WindowContent
+} from '../../../src/components';
+
+# Radio
+
+Yup, just a simple Radio component.
+
+## When To Use
+
+- Used to select a single state from multiple options.
+- The difference from Select is that Radio is visible to the user and can facilitate the comparison of choice, which means there shouldn't be too many of them.
+
+## Basic usage
+
+<Playground>
+  <Window>
+    <WindowContent>
+      <Radio value='Pear' label='🍐 Pear' name='fruits' checked />
+    </WindowContent>
+  </Window>
+</Playground>
+
+## API
