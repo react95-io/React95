@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
-
 import styled from 'styled-components';
+
+import getTestId from '../common/getTestId';
 import { shadow } from '../common';
-import { getTestId } from '../common/util';
 
 const Tip = styled.span`
   position: absolute;

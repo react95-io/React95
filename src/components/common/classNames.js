@@ -1,5 +1,3 @@
-import { isObject, isStringOrNumber } from './util';
-
 /**
  * Given a string, number, object, or array, extract
  * the class names configuration from it, and return
@@ -9,7 +7,7 @@ import { isObject, isStringOrNumber } from './util';
  */
 export const getClassesForValue = value => {
   if (value) {
-    if (isStringOrNumber(value)) {
+    if (typeof value === 'string') {
       return value.toString();
     }
 
@@ -17,7 +15,7 @@ export const getClassesForValue = value => {
       return value.map(getClassesForValue).join(' ');
     }
 
-    if (isObject(value)) {
+    if (typeof value === 'object' && !Array.isArray(value)) {
       return Object.keys(value)
         .filter(key => Boolean(value[key]))
         .map(getClassesForValue)

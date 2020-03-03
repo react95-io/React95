@@ -8,7 +8,16 @@ import {
 
 import { StyledFlatSelectWrapper, StyledSelectWrapper } from './Select.styles';
 
-import Select, { getWrapper, getDisplayLabel, getDefaultValue } from './Select';
+import Select, {
+  getDefaultValue,
+  getDisplayLabel,
+  getWrapper,
+  isEventOfType,
+  isNumber,
+  isObject,
+  isString,
+  isStringOrNumber
+} from './Select';
 
 const getProps = (props = {}) => ({
   className: props.className,
@@ -52,14 +61,18 @@ const testOptions = [
 const nodeCountMenuOpen = 3;
 const nodeCountMenuClosed = 2;
 
-describe('<Select />', () => {
-  describe('getWrapper', () => {
-    it('returns StyledSelectWrapper by default', () => {
-      expect(getWrapper()).toEqual(StyledSelectWrapper);
+describe('Select helper functions', () => {
+  describe('getDefaultValue', () => {
+    it('returns the given defaultValue', () => {
+      expect(getDefaultValue('default')).toEqual('default');
     });
 
-    it('returns StyledFlatSelectWrapper if provided variant is `flat`', () => {
-      expect(getWrapper('flat')).toEqual(StyledFlatSelectWrapper);
+    it('returns the value of the first option, when no defaultValue is provided', () => {
+      expect(getDefaultValue(undefined, [{ value: 'value' }])).toEqual('value');
+    });
+
+    it('returns undefined otherwise', () => {
+      expect(getDefaultValue()).toEqual(undefined);
     });
   });
 
@@ -77,22 +90,103 @@ describe('<Select />', () => {
     });
   });
 
-  describe('getDefaultValue', () => {
-    it('returns the given defaultValue', () => {
-      expect(getDefaultValue('default')).toEqual('default');
+  describe('getWrapper', () => {
+    it('returns StyledSelectWrapper by default', () => {
+      expect(getWrapper()).toEqual(StyledSelectWrapper);
     });
 
-    it('returns the value of the first option, when no defaultValue is provided', () => {
-      expect(getDefaultValue(undefined, [{ value: 'value' }])).toEqual('value');
-    });
-
-    it('returns undefined otherwise', () => {
-      expect(getDefaultValue()).toEqual(undefined);
+    it('returns StyledFlatSelectWrapper if provided variant is `flat`', () => {
+      expect(getWrapper('flat')).toEqual(StyledFlatSelectWrapper);
     });
   });
 
-  describe('render', () => {
-    it('should render as native select if native is true', () => {
+  describe('isEventOfType', () => {
+    it('returns true if object.type matches the given string', () => {
+      const testEvt = { type: 'blur' };
+      expect(isEventOfType(testEvt, 'blur')).toBeTruthy();
+    });
+
+    it('returns false if object.type does not match the given string', () => {
+      const testEvt = { type: 'blur' };
+      expect(isEventOfType(testEvt, 'focus')).toBeFalsy();
+    });
+
+    it('returns false if first arg is undefined', () => {
+      expect(isEventOfType(undefined, 'blur')).toBeFalsy();
+    });
+
+    it('returns false if second arg is undefined', () => {
+      const testEvt = { type: 'blur' };
+      expect(isEventOfType(testEvt)).toBeFalsy();
+    });
+  });
+
+  describe('isNumber', () => {
+    it('returns true for numeric values', () => {
+      const testVals = [1, -1, 1.2, Infinity];
+      testVals.forEach(val => {
+        expect(isNumber(val)).toBeTruthy();
+      });
+    });
+
+    it('returns false for non-numeric values', () => {
+      const testVals = ['1', false, {}, () => {}];
+      testVals.forEach(val => {
+        expect(isNumber(val)).toBeFalsy();
+      });
+    });
+  });
+
+  describe('isObject', () => {
+    it('returns true for (non-array) object values', () => {
+      const testVals = [{}, null, Object.create({})];
+      testVals.forEach(val => {
+        expect(isObject(val)).toBeTruthy();
+      });
+    });
+
+    it('returns false for array and non-object values', () => {
+      const testVals = ['1', false, [], 1];
+      testVals.forEach(val => {
+        expect(isObject(val)).toBeFalsy();
+      });
+    });
+  });
+
+  describe('isString', () => {
+    it('returns true for string values', () => {
+      const testVals = ['hi', '', String(), (1).toString()];
+      testVals.forEach(val => {
+        expect(isString(val)).toBeTruthy();
+      });
+    });
+
+    it('returns false for non-string values', () => {
+      const testVals = [false, [], 1, {}];
+      testVals.forEach(val => {
+        expect(isString(val)).toBeFalsy();
+      });
+    });
+  });
+
+  describe('isStringOrNumber', () => {
+    it('returns true if isString returns true', () => {
+      expect(isStringOrNumber('')).toBeTruthy();
+    });
+
+    it('returns true if isNumber returns true', () => {
+      expect(isStringOrNumber(1)).toBeTruthy();
+    });
+
+    it('returns false if both isString and isNumber return false', () => {
+      expect(isStringOrNumber({})).toBeFalsy();
+    });
+  });
+});
+
+describe('<Select />', () => {
+  describe('renders', () => {
+    it('as native select if native is true', () => {
       const { getByTestId } = render(renderSelect(getProps({ native: true })));
 
       const el = getByTestId('select');
@@ -101,7 +195,7 @@ describe('<Select />', () => {
       expect(el.tagName).toBe('SELECT');
     });
 
-    it('should render wrapper element', () => {
+    it('wrapper element', () => {
       const { getByTestId } = render(renderSelect(getProps()));
 
       const el = getByTestId('select');
@@ -110,7 +204,7 @@ describe('<Select />', () => {
       expect(el.tagName).toBe('DIV');
     });
 
-    it('should render flat wrapper element', () => {
+    it('flat wrapper element', () => {
       const { getByTestId } = render(
         renderSelect(
           getProps({
@@ -125,7 +219,7 @@ describe('<Select />', () => {
       expect(el.tagName).toBe('DIV');
     });
 
-    it('should render label content element', () => {
+    it('label content element', () => {
       const { getByTestId } = render(renderSelect(getProps()));
 
       const el = getByTestId('selectContent');
@@ -134,7 +228,7 @@ describe('<Select />', () => {
       expect(el.tagName).toBe('DIV');
     });
 
-    it('should render dropdown button element', () => {
+    it('dropdown button element', () => {
       const { getByTestId } = render(renderSelect(getProps()));
 
       const el = getByTestId('selectButton');
@@ -143,7 +237,7 @@ describe('<Select />', () => {
       expect(el.tagName).toBe('BUTTON');
     });
 
-    it('should render dropdown button icon element', () => {
+    it('dropdown button icon element', () => {
       const { getByTestId } = render(renderSelect(getProps()));
 
       const el = getByTestId('selectIcon');
@@ -152,7 +246,7 @@ describe('<Select />', () => {
       expect(el.tagName).toBe('SPAN');
     });
 
-    it('should render menu element when menuOpen is true', () => {
+    it('menu element when menuOpen is true', () => {
       const { container, getByTestId } = render(
         renderSelect(getProps({ menuOpen: true }))
       );
@@ -164,7 +258,7 @@ describe('<Select />', () => {
       expect(container.firstChild.childNodes.length).toEqual(nodeCountMenuOpen);
     });
 
-    it('should NOT render menu element when menuOpen is falsy', () => {
+    it('NO menu element when menuOpen is falsy', () => {
       const { container } = render(
         renderSelect(getProps({ options: testOptions }))
       );
@@ -174,7 +268,7 @@ describe('<Select />', () => {
       );
     });
 
-    it('should render menu item elements when menuOpen is true and has options.length', () => {
+    it('menu item elements when menuOpen is true and has options.length', () => {
       const { getByTestId } = render(
         renderSelect(getProps({ menuOpen: true, options: testOptions }))
       );
@@ -185,7 +279,7 @@ describe('<Select />', () => {
       expect(el.tagName).toBe('LI');
     });
 
-    it('should NOT render menu element when disabled', () => {
+    it('NO menu element when disabled', () => {
       const { container } = render(
         renderSelect(
           getProps({ disabled: true, menuOpen: true, options: testOptions })
@@ -197,7 +291,7 @@ describe('<Select />', () => {
       );
     });
 
-    it('should render with provided className', () => {
+    it('with provided className', () => {
       const { getByTestId } = render(
         renderSelect(
           getProps({
@@ -211,7 +305,7 @@ describe('<Select />', () => {
       expect(el.className.includes('my-select')).toBeTruthy();
     });
 
-    it('should render with provided defaultValue', () => {
+    it('with provided defaultValue', () => {
       const { getByText } = render(
         renderSelect(
           getProps({
@@ -226,7 +320,7 @@ describe('<Select />', () => {
       expect(el).toBeInTheDocument();
     });
 
-    it('should render as disabled', () => {
+    it('as disabled', () => {
       const { getByTestId } = render(
         renderSelect(
           getProps({
@@ -240,7 +334,7 @@ describe('<Select />', () => {
       expect(el.className.includes('is-disabled')).toBeTruthy();
     });
 
-    it('should NOT assign a tab index if disabled', () => {
+    it('with NO tab index if disabled', () => {
       const { getByTestId } = render(
         renderSelect(
           getProps({
@@ -254,7 +348,7 @@ describe('<Select />', () => {
       expect(el.getAttribute('tabindex')).toEqual(null);
     });
 
-    it('should assign a tab index if NOT disabled', () => {
+    it('with tab index if NOT disabled', () => {
       const { getByTestId } = render(renderSelect(getProps()));
 
       const el = getByTestId('select');
@@ -262,7 +356,7 @@ describe('<Select />', () => {
       expect(el.getAttribute('tabindex')).toEqual('0');
     });
 
-    it('should render label with provided formatLabel function', () => {
+    it('label with provided formatLabel function', () => {
       const { getByText } = render(
         renderSelect(
           getProps({
@@ -277,7 +371,7 @@ describe('<Select />', () => {
       expect(el).toBeInTheDocument();
     });
 
-    it('should render with provided value', () => {
+    it('with provided value', () => {
       const { getByText } = render(
         renderSelect(
           getProps({
@@ -294,7 +388,7 @@ describe('<Select />', () => {
   });
 
   describe('event callbacks', () => {
-    it('should handle onFucos events and call onOpen, passing event to both', async done => {
+    it('handle onFocus events, calling onOpen, passing event to both', async done => {
       const props = getProps({
         onFocus: jest.fn(),
         onOpen: jest.fn(),
@@ -329,7 +423,7 @@ describe('<Select />', () => {
       fireEvent.focus(el);
     });
 
-    it('should handle onBlur events and call onClose, passing event to both', async done => {
+    it('handle onBlur events, calling onClose, passing event to both', async done => {
       const props = getProps({
         onBlur: jest.fn(),
         onClose: jest.fn(),
@@ -367,7 +461,7 @@ describe('<Select />', () => {
       fireEvent.blur(el);
     });
 
-    it('should call onChange prop with event, selected option, and current value of the select', async done => {
+    it('call onChange prop with event, selected option, and current value of the select', async done => {
       const props = getProps({
         onChange: jest.fn(),
         options: testOptions

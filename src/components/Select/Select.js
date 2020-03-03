@@ -2,8 +2,8 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import classNames from '../common/classNames';
+import getTestId from '../common/getTestId';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
-import { getTestId, isEventType } from '../common/util';
 
 import {
   StyledDropdownButton,
@@ -16,6 +16,16 @@ import {
   StyledSelectContent,
   StyledSelectWrapper
 } from './Select.styles';
+
+export const isEventOfType = (evt, eventType) => evt && evt.type === eventType;
+
+export const isNumber = val => typeof val === 'number';
+
+export const isString = val => typeof val === 'string';
+
+export const isObject = val => typeof val === 'object' && !Array.isArray(val);
+
+export const isStringOrNumber = val => isString(val) || isNumber(val);
 
 export const getWrapper = variant =>
   variant === 'flat' ? StyledFlatSelectWrapper : StyledSelectWrapper;
@@ -45,13 +55,23 @@ export const getDefaultValue = (defaultValue, options) => {
 };
 
 export const SelectOptions = props => {
-  const { native, options, selectionCallback, testId, value } = props;
+  const {
+    native,
+    options,
+    optionClickCallback,
+    selectionCallback,
+    keyUpCallback,
+    testId,
+    value
+  } = props;
 
   const OptionComponent = native ? StyledNativeOption : StyledDropdownMenuItem;
 
   return options.map((opt, idx) => {
     const optionProps = {
       key: `${value}-${idx}`,
+      onClick: optionClickCallback(opt),
+      onKeyUp: keyUpCallback,
       'data-testid': getTestId(testId, `MenuItem${idx}`)
     };
 
@@ -72,6 +92,7 @@ const Select = ({
   formatLabel,
   menuMaxHeight,
   menuOpen,
+  name,
   native,
   onBlur,
   onChange,
@@ -87,6 +108,9 @@ const Select = ({
   width,
   ...otherProps
 }) => {
+  const displayNode = React.useRef();
+  const inputRef = React.useRef();
+
   const [valueDerived, setValueState] = useControlledOrUncontrolled({
     value,
     defaultValue: getDefaultValue(defaultValue, options)
@@ -96,6 +120,85 @@ const Select = ({
     defaultValue: false,
     value: menuOpen
   });
+
+  const update = (isOpening, evt) => {
+    if (isOpening) {
+      if (onOpen) {
+        onOpen(evt);
+      }
+    } else if (onClose) {
+      onClose(evt);
+    }
+
+    setOpenState(isOpening);
+  };
+
+  const handleMouseDown = evt => {
+    // ignore everything but left-click
+    if (evt.button !== 0) {
+      return;
+    }
+
+    // hijack the default focus behavior.
+    evt.preventDefault();
+    displayNode.current.focus();
+
+    update(true, evt);
+  };
+
+  const handleClose = evt => {
+    update(false, evt);
+  };
+
+  const handleOptionClick = opt => evt => {
+    update(false, evt);
+
+    const newValue = opt.value;
+
+    setValueState(newValue);
+
+    if (onChange) {
+      evt.persist();
+      onChange(evt, opt);
+    }
+  };
+
+  const handleKeyDown = evt => {
+    const validKeys = [
+      ' ',
+      'ArrowUp',
+      'ArrowDown',
+      // the native select doesn't respond to enter on mac, but it's recommended by
+      // https://www.w3.org/TR/wai-aria-practices/examples/listbox/listbox-collapsible.html
+      'Enter'
+    ];
+
+    if (validKeys.indexOf(evt.key) !== -1) {
+      evt.preventDefault();
+      update(true, evt);
+    }
+  };
+
+  const open = displayNode !== null && openDerived;
+
+  const handleBlur = evt => {
+    // if open event.stopImmediatePropagation
+    if (!open && onBlur) {
+      evt.persist();
+      onBlur(evt);
+    }
+
+    handleClose(evt);
+  };
+
+  const handleOptionKeyUp = evt => {
+    if (evt.key === ' ') {
+      // otherwise our MenuItems dispatches a click event
+      // it's not behavior of the native <option> and causes
+      // the select to close immediately since we open on space keydown
+      evt.preventDefault();
+    }
+  };
 
   const getSelectedOption = selectedValue =>
     options.find(opt => {
@@ -113,38 +216,38 @@ const Select = ({
   const selectedOption = getSelectedOption();
   const displayLabel = getDisplayLabel(selectedOption, formatLabel);
 
-  const handleToggleOpen = evt => {
-    evt.stopPropagation();
-
-    const isBlur = isEventType(evt, 'blur');
-    const isFocus = isEventType(evt, 'focus');
-
-    const isOpening = isFocus && !openDerived;
-
-    // the menu is opening...
-    if (isOpening) {
-      if (onOpen) {
-        onOpen(evt);
-      }
-
-      // if this is a focus event, trigger callback
-      if (isFocus && onFocus) {
-        onFocus(evt);
-      }
-    } else {
-      // the menu is closing
-      if (onClose) {
-        onClose(evt);
-      }
-
-      // if this is a blur event, trigger callback
-      if (isBlur && onBlur) {
-        onBlur(evt);
-      }
-    }
-
-    setOpenState(isOpening);
-  };
+  // const handleToggleOpen = evt => {
+  //   evt.stopPropagation();
+  //
+  //   const isBlur = isEventOfType(evt, 'blur');
+  //   const isFocus = isEventOfType(evt, 'focus');
+  //
+  //   const isOpening = isFocus && !openDerived;
+  //
+  //   // the menu is opening...
+  //   if (isOpening) {
+  //     if (onOpen) {
+  //       onOpen(evt);
+  //     }
+  //
+  //     // if this is a focus event, trigger callback
+  //     if (isFocus && onFocus) {
+  //       onFocus(evt);
+  //     }
+  //   } else {
+  //     // the menu is closing
+  //     if (onClose) {
+  //       onClose(evt);
+  //     }
+  //
+  //     // if this is a blur event, trigger callback
+  //     if (isBlur && onBlur) {
+  //       onBlur(evt);
+  //     }
+  //   }
+  //
+  //   setOpenState(isOpening);
+  // };
 
   const handleSelection = (evt, opt) => {
     evt.stopPropagation();
@@ -159,7 +262,8 @@ const Select = ({
   };
 
   const selectionCallback = isEnabled ? handleSelection : () => {};
-  const toggleOpenCallback = isEnabled ? handleToggleOpen : () => {};
+  const optionClickCallback = isEnabled ? handleOptionClick : () => () => {};
+  const keyUpCallback = isEnabled ? handleOptionKeyUp : () => {};
   const tabIndex = isEnabled ? '0' : undefined;
 
   const Wrapper = getWrapper(variant, native);
@@ -169,6 +273,8 @@ const Select = ({
       native={native}
       options={options}
       selectionCallback={selectionCallback}
+      optionClickCallback={optionClickCallback}
+      keyUpCallback={keyUpCallback}
       testId={testId}
       value={value}
     />
@@ -200,15 +306,22 @@ const Select = ({
     <Wrapper
       {...wrapperCommonProps}
       isDisabled={disabled}
-      onBlur={toggleOpenCallback}
-      onBlurCapture={toggleOpenCallback}
-      onFocus={toggleOpenCallback}
-      onFocusCapture={toggleOpenCallback}
+      onKeyDown={handleKeyDown}
+      onMouseDown={isEnabled ? handleMouseDown : null}
+      onBlur={handleBlur}
+      onFocus={onFocus}
+      // onBlur={toggleOpenCallback}
+      // onBlurCapture={toggleOpenCallback}
+      // onFocus={toggleOpenCallback}
+      // onFocusCapture={toggleOpenCallback}
+      ref={displayNode}
       shadow={shadow}
       style={{ ...style, width }}
       tabIndex={tabIndex}
       {...otherProps}
     >
+      <input value={value} name={name} ref={inputRef} type='hidden' />
+
       <StyledSelectContent data-testid={getTestId(testId, 'Content')}>
         {displayLabel}
       </StyledSelectContent>
@@ -248,6 +361,7 @@ Select.defaultProps = {
   formatLabel: undefined,
   menuMaxHeight: undefined,
   menuOpen: undefined,
+  name: undefined,
   native: false,
   onBlur: undefined,
   onChange: undefined,
@@ -269,6 +383,7 @@ Select.propTypes = {
   formatLabel: propTypes.func,
   menuMaxHeight: propTypes.oneOfType([propTypes.string, propTypes.number]),
   menuOpen: propTypes.bool,
+  name: propTypes.string,
   native: propTypes.bool,
   onBlur: propTypes.func,
   onChange: propTypes.func,

@@ -32,8 +32,16 @@ storiesOf('Select', module)
   .add('fixed width', () => (
     <Select onChange={onChange} options={options} width={150} />
   ))
-  .add('max menu height', () => (
-    <Select menuMaxHeight={100} onChange={onChange} options={options} />
+  .add('with menuMaxHeight', () => (
+    <React.Fragment>
+      <Select menuMaxHeight={100} onChange={onChange} options={options} />
+      <br />
+      <Select
+        menuMaxHeight={100}
+        onChange={onChange}
+        options={options.slice(0, 2)}
+      />
+    </React.Fragment>
   ))
   .add('flat', () => (
     <Window>

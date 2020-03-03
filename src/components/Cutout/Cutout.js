@@ -37,15 +37,18 @@ const StyledCutout = styled.div`
 `;
 // add padding prop ?
 
-const Cutout = ({ className, style, children, shadow, ...otherProps }) => (
-  <StyledCutout
-    shadow={shadow}
-    className={className}
-    style={style}
-    {...otherProps}
-  >
-    {children}
-  </StyledCutout>
+const Cutout = React.forwardRef(
+  ({ className, style, children, shadow, ...otherProps }, ref) => (
+    <StyledCutout
+      shadow={shadow}
+      className={className}
+      ref={ref}
+      style={style}
+      {...otherProps}
+    >
+      {children}
+    </StyledCutout>
+  )
 );
 
 Cutout.defaultProps = {
