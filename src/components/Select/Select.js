@@ -19,6 +19,8 @@ import {
 
 export const isEventOfType = (evt, eventType) => evt && evt.type === eventType;
 
+export const isEventKey = (evt, key) => evt && evt.key === key;
+
 export const isNumber = val => typeof val === 'number';
 
 export const isString = val => typeof val === 'string';
@@ -54,37 +56,6 @@ export const getDefaultValue = (defaultValue, options) => {
   return undefined;
 };
 
-export const SelectOptions = props => {
-  const {
-    native,
-    options,
-    optionClickCallback,
-    selectionCallback,
-    keyUpCallback,
-    testId,
-    value
-  } = props;
-
-  const OptionComponent = native ? StyledNativeOption : StyledDropdownMenuItem;
-
-  return options.map((opt, idx) => {
-    const optionProps = {
-      key: `${value}-${idx}`,
-      onClick: optionClickCallback(opt),
-      onKeyUp: keyUpCallback,
-      'data-testid': getTestId(testId, `MenuItem${idx}`)
-    };
-
-    if (!native) {
-      optionProps.onMouseDown = evt => selectionCallback(evt, opt);
-    } else {
-      optionProps.value = opt.value;
-    }
-
-    return <OptionComponent {...optionProps}>{opt.label}</OptionComponent>;
-  });
-};
-
 const Select = ({
   className,
   defaultValue,
@@ -109,6 +80,9 @@ const Select = ({
   ...otherProps
 }) => {
   const displayNode = React.useRef();
+
+  const menuNode = React.useRef();
+
   const inputRef = React.useRef();
 
   const [valueDerived, setValueState] = useControlledOrUncontrolled({
@@ -121,16 +95,46 @@ const Select = ({
     value: menuOpen
   });
 
-  const update = (isOpening, evt) => {
-    if (isOpening) {
+  const open = displayNode !== null && openDerived;
+
+  const [activeOption, setActiveOption] = React.useState(-1);
+
+  const getSelectedOption = selectedValue =>
+    options.find(opt => {
+      if (selectedValue) {
+        return (
+          opt.value === selectedValue ||
+          opt.value === parseInt(selectedValue, 10)
+        );
+      }
+
+      return opt.value === valueDerived;
+    });
+
+  const update = (isOpen, evt) => {
+    if (isOpen) {
       if (onOpen) {
         onOpen(evt);
       }
-    } else if (onClose) {
-      onClose(evt);
+
+      if (!openDerived) {
+        const selectedOpt = getSelectedOption();
+        const selectedIdx = options.indexOf(selectedOpt);
+        if (selectedIdx > -1) {
+          setActiveOption(selectedIdx);
+        } else {
+          setActiveOption(0);
+        }
+      }
+    } else {
+      setActiveOption(-1);
+
+      if (onClose) {
+        onClose(evt);
+      }
     }
 
-    setOpenState(isOpening);
+    setOpenState(isOpen);
   };
 
   const handleMouseDown = evt => {
@@ -146,10 +150,6 @@ const Select = ({
     update(true, evt);
   };
 
-  const handleClose = evt => {
-    update(false, evt);
-  };
-
   const handleOptionClick = opt => evt => {
     update(false, evt);
 
@@ -161,25 +161,67 @@ const Select = ({
       evt.persist();
       onChange(evt, opt);
     }
+
+    displayNode.current.focus();
   };
 
   const handleKeyDown = evt => {
     const validKeys = [
       ' ',
       'ArrowUp',
+      'ArrowRight',
+      'ArrowLeft',
       'ArrowDown',
       // the native select doesn't respond to enter on mac, but it's recommended by
       // https://www.w3.org/TR/wai-aria-practices/examples/listbox/listbox-collapsible.html
       'Enter'
     ];
 
-    if (validKeys.indexOf(evt.key) !== -1) {
+    if (validKeys.indexOf(evt.key) > -1) {
       evt.preventDefault();
+
       update(true, evt);
+
+      if (isEventKey(evt, 'ArrowDown')) {
+        if (activeOption < options.length - 1) {
+          const nextFocus = activeOption + 1;
+          setActiveOption(nextFocus);
+          if (menuNode.current) {
+            const focusNode = menuNode.current.childNodes[nextFocus];
+            if (focusNode) {
+              focusNode.focus();
+            }
+          }
+        }
+      } else if (isEventKey(evt, 'ArrowUp')) {
+        if (activeOption > 0) {
+          const nextFocus = activeOption - 1;
+          setActiveOption(nextFocus);
+          if (menuNode.current) {
+            const focusNode = menuNode.current.childNodes[nextFocus];
+            if (focusNode) {
+              focusNode.focus();
+            }
+          }
+        }
+      } else if (isEventKey(evt, 'Enter')) {
+        if (menuNode.current) {
+          const focusNode = menuNode.current.childNodes[activeOption];
+          if (focusNode) {
+            focusNode.click();
+          }
+        }
+      } else if (isEventKey(evt, 'ArrowRight')) {
+        update(true, evt);
+      } else if (isEventKey(evt, 'ArrowLeft')) {
+        update(false, evt);
+        displayNode.current.focus();
+      } else if (isEventKey(evt, ' ')) {
+        update(!openDerived, evt);
+        displayNode.current.focus();
+      }
     }
   };
-
-  const open = displayNode !== null && openDerived;
 
   const handleBlur = evt => {
     // if open event.stopImmediatePropagation
@@ -187,8 +229,6 @@ const Select = ({
       evt.persist();
       onBlur(evt);
     }
-
-    handleClose(evt);
   };
 
   const handleOptionKeyUp = evt => {
@@ -200,54 +240,10 @@ const Select = ({
     }
   };
 
-  const getSelectedOption = selectedValue =>
-    options.find(opt => {
-      if (selectedValue) {
-        return (
-          opt.value === selectedValue ||
-          opt.value === parseInt(selectedValue, 10)
-        );
-      }
-
-      return opt.value === valueDerived;
-    });
-
   const isEnabled = !disabled;
   const selectedOption = getSelectedOption();
   const displayLabel = getDisplayLabel(selectedOption, formatLabel);
-
-  // const handleToggleOpen = evt => {
-  //   evt.stopPropagation();
-  //
-  //   const isBlur = isEventOfType(evt, 'blur');
-  //   const isFocus = isEventOfType(evt, 'focus');
-  //
-  //   const isOpening = isFocus && !openDerived;
-  //
-  //   // the menu is opening...
-  //   if (isOpening) {
-  //     if (onOpen) {
-  //       onOpen(evt);
-  //     }
-  //
-  //     // if this is a focus event, trigger callback
-  //     if (isFocus && onFocus) {
-  //       onFocus(evt);
-  //     }
-  //   } else {
-  //     // the menu is closing
-  //     if (onClose) {
-  //       onClose(evt);
-  //     }
-  //
-  //     // if this is a blur event, trigger callback
-  //     if (isBlur && onBlur) {
-  //       onBlur(evt);
-  //     }
-  //   }
-  //
-  //   setOpenState(isOpening);
-  // };
+  const tabIndex = isEnabled ? '0' : undefined;
 
   const handleSelection = (evt, opt) => {
     evt.stopPropagation();
@@ -259,26 +255,41 @@ const Select = ({
     }
 
     setValueState(nextSelection.value);
+
+    displayNode.current.focus();
   };
 
-  const selectionCallback = isEnabled ? handleSelection : () => {};
-  const optionClickCallback = isEnabled ? handleOptionClick : () => () => {};
-  const keyUpCallback = isEnabled ? handleOptionKeyUp : () => {};
-  const tabIndex = isEnabled ? '0' : undefined;
-
   const Wrapper = getWrapper(variant, native);
+  const OptionComponent = native ? StyledNativeOption : StyledDropdownMenuItem;
 
-  const optionsContent = (
-    <SelectOptions
-      native={native}
-      options={options}
-      selectionCallback={selectionCallback}
-      optionClickCallback={optionClickCallback}
-      keyUpCallback={keyUpCallback}
-      testId={testId}
-      value={value}
-    />
-  );
+  const optionsContent = options.map((opt, idx) => {
+    const optionProps = {
+      key: `${value}-${idx}`,
+      onClick: native ? undefined : handleOptionClick(opt),
+      onKeyUp: native ? undefined : handleOptionKeyUp,
+      tabIndex: native ? undefined : '0',
+      'data-testid': getTestId(testId, `MenuItem${idx}`)
+    };
+
+    if (!native) {
+      optionProps.onMouseDown = evt => handleSelection(evt, opt);
+    } else {
+      optionProps.value = opt.value;
+    }
+
+    return (
+      <OptionComponent
+        ref={el => {
+          if (el && activeOption === idx) {
+            el.focus();
+          }
+        }}
+        {...optionProps}
+      >
+        {opt.label}
+      </OptionComponent>
+    );
+  });
 
   const wrapperCommonProps = {
     className: classNames(className, {
@@ -294,7 +305,7 @@ const Select = ({
       <StyledNativeSelect
         {...wrapperCommonProps}
         disabled={disabled}
-        onChange={selectionCallback}
+        onChange={isEnabled ? handleSelection : undefined}
         {...otherProps}
       >
         {optionsContent}
@@ -339,12 +350,13 @@ const Select = ({
 
       {isEnabled && openDerived && (
         <StyledDropdownMenu
+          data-testid={getTestId(testId, 'Menu')}
+          ref={menuNode}
           shadow={shadow}
           style={
             menuMaxHeight && { overflow: 'scroll', maxHeight: menuMaxHeight }
           }
           tabIndex={tabIndex}
-          data-testid={getTestId(testId, 'Menu')}
           variant={variant}
         >
           {optionsContent}

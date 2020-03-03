@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   padding: 5rem;
 `;
 
-const onChange = value => console.log(value);
+const onChange = (evt, nextSelection) => console.log(nextSelection);
 
 storiesOf('Select', module)
   .addDecorator(story => <Wrapper>{story()}</Wrapper>)
