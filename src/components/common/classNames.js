@@ -7,7 +7,7 @@
  */
 export const getClassesForValue = value => {
   if (value) {
-    if (typeof value === 'string') {
+    if (typeof value === 'string' || typeof value === 'number') {
       return value.toString();
     }
 
@@ -43,14 +43,12 @@ export const getClassesForValue = value => {
  * @return {string}
  */
 const classNames = (...args) => {
-  return args
-    .reduce((classesString, arg) => {
-      const classesForArg = getClassesForValue(arg);
+  return args.reduce((classesString, arg) => {
+    const classesForArg = getClassesForValue(arg);
 
-      // leading whitespace is okay as the final string is trimmed
-      return `${classesString} ${classesForArg}`;
-    }, '')
-    .trim();
+    // leading whitespace is okay as the final string is trimmed
+    return `${classesString} ${classesForArg}`.trim();
+  }, '');
 };
 
 export default classNames;

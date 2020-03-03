@@ -17,16 +17,19 @@ import {
   StyledSelectWrapper
 } from './Select.styles';
 
-export const isEventOfType = (evt, eventType) => evt && evt.type === eventType;
-
-export const isEventKey = (evt, key) => evt && evt.key === key;
-
-export const isNumber = val => typeof val === 'number';
-
-export const isString = val => typeof val === 'string';
+const Key = {
+  ARROW_DOWN: 'ArrowDown',
+  ARROW_LEFT: 'ArrowLeft',
+  ARROW_RIGHT: 'ArrowRight',
+  ARROW_UP: 'ArrowUp',
+  ENTER: 'Enter',
+  ESC: 'Escape',
+  SPACE: ' '
+};
 
 export const isObject = val => typeof val === 'object' && !Array.isArray(val);
-
+export const isNumber = val => typeof val === 'number';
+export const isString = val => typeof val === 'string';
 export const isStringOrNumber = val => isString(val) || isNumber(val);
 
 export const getWrapper = variant =>
@@ -80,24 +83,18 @@ const Select = ({
   ...otherProps
 }) => {
   const displayNode = React.useRef();
-
-  const menuNode = React.useRef();
-
   const inputRef = React.useRef();
-
+  const menuNode = React.useRef();
+  const [activeOption, setActiveOption] = React.useState(-1);
   const [valueDerived, setValueState] = useControlledOrUncontrolled({
     value,
     defaultValue: getDefaultValue(defaultValue, options)
   });
-
   const [openDerived, setOpenState] = useControlledOrUncontrolled({
     defaultValue: false,
     value: menuOpen
   });
-
   const open = displayNode !== null && openDerived;
-
-  const [activeOption, setActiveOption] = React.useState(-1);
 
   const getSelectedOption = selectedValue =>
     options.find(opt => {
@@ -110,6 +107,23 @@ const Select = ({
 
       return opt.value === valueDerived;
     });
+
+  const getFocusedNodeIndex = () => {
+    let focusedIndex = -1;
+
+    if (menuNode && menuNode.current) {
+      const optionNodes = menuNode.current.childNodes;
+
+      for (let i = 0, len = optionNodes.length; i < len; i += 1) {
+        if (optionNodes[i] === document.activeElement) {
+          focusedIndex = i;
+          break;
+        }
+      }
+    }
+
+    return focusedIndex;
+  };
 
   const update = (isOpen, evt) => {
     if (isOpen) {
@@ -137,6 +151,14 @@ const Select = ({
     setOpenState(isOpen);
   };
 
+  const handleOpen = evt => {
+    update(true, evt);
+  };
+
+  const handleClose = evt => {
+    update(false, evt);
+  };
+
   const handleMouseDown = evt => {
     // ignore everything but left-click
     if (evt.button !== 0) {
@@ -147,11 +169,11 @@ const Select = ({
     evt.preventDefault();
     displayNode.current.focus();
 
-    update(true, evt);
+    handleOpen(true, evt);
   };
 
   const handleOptionClick = opt => evt => {
-    update(false, evt);
+    handleClose(evt);
 
     const newValue = opt.value;
 
@@ -165,74 +187,90 @@ const Select = ({
     displayNode.current.focus();
   };
 
+  const getNextFocusIndex = (evtKey, currentFocusIndex) => {
+    let nextFocus = -1;
+
+    if (evtKey === Key.ARROW_DOWN || evtKey === Key.ARROW_RIGHT) {
+      if (currentFocusIndex < options.length - 1) {
+        nextFocus = currentFocusIndex + 1;
+      }
+    } else if (evtKey === Key.ARROW_UP) {
+      if (currentFocusIndex > 0) {
+        nextFocus = currentFocusIndex - 1;
+      }
+    } else if (evtKey === Key.ENTER) {
+      nextFocus = currentFocusIndex;
+    }
+
+    return nextFocus;
+  };
+
+  const updateFocus = evt => {
+    const currentFocusIndex = getFocusedNodeIndex();
+    const nextFocus = getNextFocusIndex(evt && evt.key, currentFocusIndex);
+
+    if (nextFocus > -1 && menuNode.current) {
+      const focusNode = menuNode.current.childNodes[nextFocus];
+
+      if (focusNode) {
+        if (currentFocusIndex === nextFocus) {
+          focusNode.click();
+        } else {
+          focusNode.focus();
+        }
+      }
+
+      setActiveOption(nextFocus);
+    }
+  };
+
   const handleKeyDown = evt => {
+    const { key } = evt;
+
     const validKeys = [
-      ' ',
-      'ArrowUp',
-      'ArrowRight',
-      'ArrowLeft',
-      'ArrowDown',
+      Key.SPACE,
+      Key.ARROW_UP,
+      Key.ARROW_RIGHT,
+      Key.ARROW_LEFT,
+      Key.ARROW_DOWN,
       // the native select doesn't respond to enter on mac, but it's recommended by
       // https://www.w3.org/TR/wai-aria-practices/examples/listbox/listbox-collapsible.html
-      'Enter'
+      Key.ENTER,
+      Key.ESC
     ];
 
-    if (validKeys.indexOf(evt.key) > -1) {
+    if (validKeys.indexOf(key) > -1) {
       evt.preventDefault();
 
-      update(true, evt);
-
-      if (isEventKey(evt, 'ArrowDown')) {
-        if (activeOption < options.length - 1) {
-          const nextFocus = activeOption + 1;
-          setActiveOption(nextFocus);
-          if (menuNode.current) {
-            const focusNode = menuNode.current.childNodes[nextFocus];
-            if (focusNode) {
-              focusNode.focus();
-            }
-          }
-        }
-      } else if (isEventKey(evt, 'ArrowUp')) {
-        if (activeOption > 0) {
-          const nextFocus = activeOption - 1;
-          setActiveOption(nextFocus);
-          if (menuNode.current) {
-            const focusNode = menuNode.current.childNodes[nextFocus];
-            if (focusNode) {
-              focusNode.focus();
-            }
-          }
-        }
-      } else if (isEventKey(evt, 'Enter')) {
-        if (menuNode.current) {
-          const focusNode = menuNode.current.childNodes[activeOption];
-          if (focusNode) {
-            focusNode.click();
-          }
-        }
-      } else if (isEventKey(evt, 'ArrowRight')) {
-        update(true, evt);
-      } else if (isEventKey(evt, 'ArrowLeft')) {
-        update(false, evt);
+      if (key === Key.ARROW_LEFT) {
+        handleClose(evt);
         displayNode.current.focus();
-      } else if (isEventKey(evt, ' ')) {
+      } else if (key === Key.SPACE) {
         update(!openDerived, evt);
         displayNode.current.focus();
+      } else if (key === Key.ESC) {
+        handleClose(evt);
+        displayNode.current.blur();
+      } else {
+        handleOpen(evt);
+        updateFocus(evt);
       }
     }
   };
 
   const handleBlur = evt => {
-    // if open event.stopImmediatePropagation
-    if (!open && onBlur) {
-      evt.persist();
-      onBlur(evt);
+    if (!open) {
+      if (onBlur) {
+        evt.persist();
+        onBlur(evt);
+      }
+
+      handleClose(evt);
     }
   };
 
   const handleOptionKeyUp = evt => {
-    if (evt.key === ' ') {
+    if (evt.key === Key.SPACE) {
       // otherwise our MenuItems dispatches a click event
       // it's not behavior of the native <option> and causes
       // the select to close immediately since we open on space keydown
@@ -256,7 +294,9 @@ const Select = ({
 
     setValueState(nextSelection.value);
 
-    displayNode.current.focus();
+    if (displayNode.current) {
+      displayNode.current.focus();
+    }
   };
 
   const Wrapper = getWrapper(variant, native);
@@ -321,10 +361,6 @@ const Select = ({
       onMouseDown={isEnabled ? handleMouseDown : null}
       onBlur={handleBlur}
       onFocus={onFocus}
-      // onBlur={toggleOpenCallback}
-      // onBlurCapture={toggleOpenCallback}
-      // onFocus={toggleOpenCallback}
-      // onFocusCapture={toggleOpenCallback}
       ref={displayNode}
       shadow={shadow}
       style={{ ...style, width }}
