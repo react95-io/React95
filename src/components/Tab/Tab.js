@@ -72,7 +72,8 @@ Tab.defaultProps = {
 };
 
 Tab.propTypes = {
-  value: propTypes.number.isRequired,
+  // eslint-disable-next-line react/require-default-props, react/forbid-prop-types
+  value: propTypes.any,
   onClick: propTypes.func,
   selected: propTypes.bool,
   children: propTypes.node
