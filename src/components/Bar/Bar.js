@@ -15,18 +15,17 @@ const StyledBar = styled.div`
   background: ${({ theme }) => theme.material};
 `;
 
-const Bar = ({ size, className, style, ...otherProps }) => (
-  <StyledBar size={size} className={className} style={style} {...otherProps} />
-);
+const Bar = React.forwardRef(function Bar(props, ref) {
+  const { size, ...otherProps } = props;
+
+  return <StyledBar size={size} ref={ref} {...otherProps} />;
+});
 
 Bar.defaultProps = {
-  size: 'md',
-  className: '',
-  style: {}
+  size: 'md'
 };
 Bar.propTypes = {
-  className: propTypes.string,
-  style: propTypes.shape([propTypes.string, propTypes.number]),
   size: propTypes.oneOf(['sm', 'md', 'lg'])
 };
+
 export default Bar;
