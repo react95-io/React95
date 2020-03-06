@@ -2,32 +2,29 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import styled from 'styled-components';
-import { fontSizes } from '../common/system';
 
 const StyledAnchor = styled.a`
   color: ${({ theme }) => theme.anchor};
-  font-size: ${({ size }) => (size ? fontSizes[size] : 'inherit')};
+  font-size: inherit;
   text-decoration: underline;
   &:visited {
     color: ${({ theme }) => theme.anchorVisited};
   }
 `;
 
-const Anchor = ({ className, style, href, children, ...otherProps }) => (
-  <StyledAnchor href={href} className={className} style={style} {...otherProps}>
-    {children}
-  </StyledAnchor>
-);
+const Anchor = React.forwardRef(function Anchor(props, ref) {
+  const { children, ...otherProps } = props;
 
-Anchor.defaultProps = {
-  className: '',
-  style: {}
-};
+  return (
+    <StyledAnchor ref={ref} {...otherProps}>
+      {children}
+    </StyledAnchor>
+  );
+});
+
+Anchor.defaultProps = {};
 
 Anchor.propTypes = {
-  className: propTypes.string,
-  href: propTypes.string.isRequired,
-  style: propTypes.shape([propTypes.string, propTypes.number]),
   children: propTypes.node.isRequired
 };
 
