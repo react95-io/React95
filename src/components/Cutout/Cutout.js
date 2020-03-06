@@ -35,31 +35,24 @@ const StyledCutout = styled.div`
     ${props => props.shadow && `box-shadow:${insetShadow};`}
   }
 `;
-// add padding prop ?
 
-const Cutout = ({ className, style, children, shadow, ...otherProps }) => (
-  <StyledCutout
-    shadow={shadow}
-    className={className}
-    style={style}
-    {...otherProps}
-  >
-    {children}
-  </StyledCutout>
-);
+const Cutout = React.forwardRef(function Cutout(props, ref) {
+  const { children, shadow, ...otherProps } = props;
+  return (
+    <StyledCutout shadow={shadow} ref={ref} {...otherProps}>
+      {children}
+    </StyledCutout>
+  );
+});
 
 Cutout.defaultProps = {
   shadow: true,
-  className: '',
-  children: null,
-  style: {}
+  children: null
 };
 
 Cutout.propTypes = {
-  className: propTypes.string,
   shadow: propTypes.bool,
-  children: propTypes.node,
-  style: propTypes.shape([propTypes.string, propTypes.number])
+  children: propTypes.node
 };
 
 export default Cutout;
