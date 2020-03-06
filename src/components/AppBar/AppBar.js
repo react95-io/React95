@@ -26,11 +26,12 @@ const AppBar = React.forwardRef(function AppBar(props, ref) {
 });
 
 AppBar.defaultProps = {
+  children: null,
   fixed: true
 };
 
 AppBar.propTypes = {
-  children: propTypes.node.isRequired,
+  children: propTypes.node,
   fixed: propTypes.bool
 };
 
