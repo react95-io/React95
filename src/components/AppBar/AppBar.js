@@ -16,36 +16,20 @@ const StyledAppBar = styled.header`
   width: 100%;
 `;
 
-const AppBar = ({
-  fixed,
-  children,
-  className,
-  style,
-  shadow,
-  ...otherProps
-}) => (
-  <StyledAppBar
-    fixed={fixed}
-    style={style}
-    className={className}
-    shadow={shadow}
-    {...otherProps}
-  >
-    {children}
-  </StyledAppBar>
-);
+const AppBar = React.forwardRef(function AppBar(props, ref) {
+  const { fixed, children, ...otherProps } = props;
+  return (
+    <StyledAppBar fixed={fixed} ref={ref} {...otherProps}>
+      {children}
+    </StyledAppBar>
+  );
+});
 
 AppBar.defaultProps = {
-  shadow: true,
-  fixed: true,
-  style: {},
-  className: ''
+  fixed: true
 };
 
 AppBar.propTypes = {
-  style: propTypes.shape([propTypes.string, propTypes.number]),
-  shadow: propTypes.bool,
-  className: propTypes.string,
   children: propTypes.node.isRequired,
   fixed: propTypes.bool
 };
