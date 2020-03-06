@@ -29,13 +29,13 @@ const Tabs = React.forwardRef(function Tabs(props, ref) {
 });
 
 Tabs.defaultProps = {
-  value: 0,
   onChange: () => {},
   children: null
 };
 
 Tabs.propTypes = {
-  value: propTypes.number,
+  // eslint-disable-next-line react/require-default-props, react/forbid-prop-types
+  value: propTypes.any,
   onChange: propTypes.func,
   children: propTypes.node
 };
