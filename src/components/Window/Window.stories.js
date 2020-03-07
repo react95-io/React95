@@ -65,7 +65,7 @@ storiesOf('Window', module)
   ))
   .add('not Active', () => (
     <Window>
-      <WindowHeader isActive={false}>react95.exe</WindowHeader>
+      <WindowHeader active={false}>react95.exe</WindowHeader>
       <WindowContent>I am not active</WindowContent>
     </Window>
   ));
