@@ -35,17 +35,21 @@ const StyledLegend = styled.legend`
     variant === 'flat' ? theme.canvas : theme.material};
 `;
 
-const Fieldset = ({ label, disabled, variant, children, ...otherProps }) => (
-  <StyledFieldset
-    aria-disabled={disabled}
-    isDisabled={disabled}
-    variant={variant}
-    {...otherProps}
-  >
-    {label && <StyledLegend variant={variant}>{label}</StyledLegend>}
-    {children}
-  </StyledFieldset>
-);
+const Fieldset = React.forwardRef(function Fieldset(props, ref) {
+  const { label, disabled, variant, children, ...otherProps } = props;
+  return (
+    <StyledFieldset
+      aria-disabled={disabled}
+      isDisabled={disabled}
+      variant={variant}
+      ref={ref}
+      {...otherProps}
+    >
+      {label && <StyledLegend variant={variant}>{label}</StyledLegend>}
+      {children}
+    </StyledFieldset>
+  );
+});
 
 Fieldset.defaultProps = {
   disabled: false,
