@@ -24,24 +24,26 @@ const Wrapper = styled.div`
   white-space: nowrap;
 `;
 
-const Tooltip = ({
-  children,
-  className,
-  disableFocusListener,
-  disableMouseListener,
-  enterDelay,
-  leaveDelay,
-  onBlur,
-  onClose,
-  onFocus,
-  onMouseEnter,
-  onMouseLeave,
-  onOpen,
-  style,
-  testId,
-  text,
-  ...otherProps
-}) => {
+const Tooltip = React.forwardRef(function Tooltip(props, ref) {
+  const {
+    children,
+    className,
+    disableFocusListener,
+    disableMouseListener,
+    enterDelay,
+    leaveDelay,
+    onBlur,
+    onClose,
+    onFocus,
+    onMouseEnter,
+    onMouseLeave,
+    onOpen,
+    style,
+    testId,
+    text,
+    ...otherProps
+  } = props;
+
   const [show, setShow] = useState(false);
   const [openTimer, setOpenTimer] = useState(null);
   const [closeTimer, setCloseTimer] = useState(null);
@@ -128,6 +130,7 @@ const Tooltip = ({
         data-testid={testId}
         show={show}
         style={style}
+        ref={ref}
         {...otherProps}
       >
         {text}
@@ -135,7 +138,7 @@ const Tooltip = ({
       {children}
     </Wrapper>
   );
-};
+});
 
 Tooltip.defaultProps = {
   className: '',
