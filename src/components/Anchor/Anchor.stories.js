@@ -22,6 +22,7 @@ storiesOf('Anchor', module)
   .add('within text', () => (
     <h1>
       Everybody needs
+      {/* eslint-disable-next-line prettier/prettier */}{' '}
       <Anchor href='https://expensive.toys' target='_blank'>
         Expensive Toys
       </Anchor>
