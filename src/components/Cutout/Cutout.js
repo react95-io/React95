@@ -37,22 +37,22 @@ const StyledCutout = styled.div`
 `;
 
 const Cutout = React.forwardRef(function Cutout(props, ref) {
-  const { children, shadow, ...otherProps } = props;
+  const { children, ...otherProps } = props;
   return (
-    <StyledCutout shadow={shadow} ref={ref} {...otherProps}>
+    <StyledCutout ref={ref} {...otherProps}>
       {children}
     </StyledCutout>
   );
 });
 
 Cutout.defaultProps = {
-  shadow: true,
-  children: null
+  children: null,
+  shadow: true
 };
 
 Cutout.propTypes = {
-  shadow: propTypes.bool,
-  children: propTypes.node
+  children: propTypes.node,
+  shadow: propTypes.bool
 };
 
 export default Cutout;
