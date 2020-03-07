@@ -100,32 +100,13 @@ export const StyledButton = styled.button`
 `;
 
 const Button = React.forwardRef(function Button(props, ref) {
-  const {
-    type,
-    onClick,
-    disabled,
-    fullWidth,
-    size,
-    square,
-    active,
-    primary,
-    variant,
-    children,
-    ...otherProps
-  } = props;
+  const { onClick, disabled, children, ...otherProps } = props;
 
   return (
     <StyledButton
-      type={type}
-      variant={variant}
-      primary={primary}
       onClick={disabled ? undefined : onClick}
       disabled={disabled}
       isDisabled={disabled}
-      fullWidth={fullWidth}
-      size={size}
-      square={square}
-      active={active}
       // onTouchStart below to enable button :active style on iOS
       onTouchStart={() => ''}
       ref={ref}
