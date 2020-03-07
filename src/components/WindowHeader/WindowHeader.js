@@ -31,20 +31,28 @@ const SlyledWindowHeader = styled.div`
   }
 `;
 // TODO - should we add some aria label indicating if window is currently active?
-const WindowHeader = ({ isActive, children, ...otherProps }) => (
-  <SlyledWindowHeader data-active={isActive.toString()} {...otherProps}>
-    {children}
-  </SlyledWindowHeader>
-);
+const WindowHeader = React.forwardRef(function WindowHeader(props, ref) {
+  const { active, children, ...otherProps } = props;
+
+  return (
+    <SlyledWindowHeader
+      data-active={active.toString()}
+      ref={ref}
+      {...otherProps}
+    >
+      {children}
+    </SlyledWindowHeader>
+  );
+});
 
 WindowHeader.defaultProps = {
   children: null,
-  isActive: true
+  active: true
 };
 
 WindowHeader.propTypes = {
   children: propTypes.node,
-  isActive: propTypes.bool
+  active: propTypes.bool
 };
 
 export default WindowHeader;
