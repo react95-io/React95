@@ -38,11 +38,14 @@ const SlyledAvatarIMG = styled.img`
   height: 100%;
 `;
 
-const Avatar = ({ children, noBorder, square, src, alt, ...otherProps }) => (
-  <StyledAvatar noBorder={noBorder} square={square} {...otherProps}>
-    {src ? <SlyledAvatarIMG src={src} alt={alt} /> : children}
-  </StyledAvatar>
-);
+const Avatar = React.forwardRef(function Avatar(props, ref) {
+  const { children, noBorder, square, src, alt, ...otherProps } = props;
+  return (
+    <StyledAvatar noBorder={noBorder} square={square} ref={ref} {...otherProps}>
+      {src ? <SlyledAvatarIMG src={src} alt={alt} /> : children}
+    </StyledAvatar>
+  );
+});
 
 Avatar.defaultProps = {
   square: false,
