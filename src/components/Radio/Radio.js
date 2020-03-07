@@ -139,9 +139,7 @@ const Radio = React.forwardRef(function Radio(props, ref) {
     label,
     disabled,
     variant,
-    value,
     checked,
-    name,
     className,
     style,
     ...otherProps
@@ -164,9 +162,7 @@ const Radio = React.forwardRef(function Radio(props, ref) {
         onChange={disabled ? undefined : onChange}
         readOnly={disabled}
         type='radio'
-        value={value}
         checked={checked}
-        name={name}
         ref={ref}
         {...otherProps}
       />
@@ -198,7 +194,8 @@ Radio.propTypes = {
   checked: propTypes.bool,
   disabled: propTypes.bool,
   variant: propTypes.oneOf(['default', 'flat', 'menu']),
-  style: propTypes.shape([propTypes.string, propTypes.number]),
+  // eslint-disable-next-line react/forbid-prop-types
+  style: propTypes.any,
   className: propTypes.string
 };
 
