@@ -17,9 +17,9 @@ const StyledAppBar = styled.header`
 `;
 
 const AppBar = React.forwardRef(function AppBar(props, ref) {
-  const { fixed, children, ...otherProps } = props;
+  const { children, ...otherProps } = props;
   return (
-    <StyledAppBar fixed={fixed} ref={ref} {...otherProps}>
+    <StyledAppBar ref={ref} {...otherProps}>
       {children}
     </StyledAppBar>
   );
