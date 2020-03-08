@@ -13,9 +13,14 @@ const StyledTabBody = styled.div`
   height: 100%;
   padding: ${padding.md};
 `;
-const TabBody = ({ children, ...otherProps }) => (
-  <StyledTabBody {...otherProps}>{children}</StyledTabBody>
-);
+const TabBody = React.forwardRef(function TabBody(props, ref) {
+  const { children, ...otherProps } = props;
+  return (
+    <StyledTabBody ref={ref} {...otherProps}>
+      {children}
+    </StyledTabBody>
+  );
+});
 
 TabBody.defaultProps = {
   children: null
