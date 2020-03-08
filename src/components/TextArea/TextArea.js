@@ -34,17 +34,19 @@ const StyledTextArea = styled.textarea`
     variant !== 'flat' && disabled && createDisabledTextStyles()}
 `;
 
-const TextArea = ({
-  onChange,
-  disabled,
-  variant,
-  width,
-  height,
-  style,
-  className,
-  shadow,
-  ...otherProps
-}) => {
+const TextArea = React.forwardRef(function TextArea(props, ref) {
+  const {
+    onChange,
+    disabled,
+    variant,
+    width,
+    height,
+    style,
+    className,
+    shadow,
+    ...otherProps
+  } = props;
+
   const Wrapper =
     variant === 'flat' ? StyledFlatTextAreaWrapper : StyledTextAreaWrapper;
   return (
@@ -65,11 +67,12 @@ const TextArea = ({
         onChange={disabled ? undefined : onChange}
         disabled={disabled}
         variant={variant}
+        ref={ref}
         {...otherProps}
       />
     </Wrapper>
   );
-};
+});
 
 TextArea.defaultProps = {
   shadow: true,
