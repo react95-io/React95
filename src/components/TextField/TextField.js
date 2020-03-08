@@ -29,17 +29,18 @@ export const StyledTextInput = styled.input`
   ${({ disabled, variant }) =>
     variant !== 'flat' && disabled && createDisabledTextStyles()}
 `;
-const TextField = ({
-  onChange,
-  disabled,
-  variant,
-  type,
-  style,
-  shadow,
-  className,
-  width,
-  ...otherProps
-}) => {
+const TextField = React.forwardRef(function TextField(props, ref) {
+  const {
+    onChange,
+    disabled,
+    variant,
+    type,
+    style,
+    shadow,
+    className,
+    width,
+    ...otherProps
+  } = props;
   const Wrapper = variant === 'flat' ? StyledFlatWrapper : StyledWrapper;
   return (
     <Wrapper
@@ -55,11 +56,12 @@ const TextField = ({
         disabled={disabled}
         variant={variant}
         type={type}
+        ref={ref}
         {...otherProps}
       />
     </Wrapper>
   );
-};
+});
 TextField.defaultProps = {
   disabled: false,
   type: 'text',
