@@ -94,7 +94,6 @@ const Select = ({
     defaultValue: false,
     value: menuOpen
   });
-  const open = displayNode !== null && openDerived;
 
   const getSelectedOption = selectedValue =>
     options.find(opt => {
@@ -169,7 +168,7 @@ const Select = ({
     evt.preventDefault();
     displayNode.current.focus();
 
-    handleOpen(true, evt);
+    handleOpen(evt);
   };
 
   const handleOptionClick = opt => evt => {
@@ -259,9 +258,10 @@ const Select = ({
   };
 
   const handleBlur = evt => {
-    if (!open) {
+    if (!openDerived) {
+      evt.persist();
+
       if (onBlur) {
-        evt.persist();
         onBlur(evt);
       }
 

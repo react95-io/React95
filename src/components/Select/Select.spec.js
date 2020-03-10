@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  fireEvent,
-  render,
-  waitForElementToBeRemoved,
-  wait
-} from '@testing-library/react';
+import { fireEvent, render, wait } from '@testing-library/react';
 
 import { StyledFlatSelectWrapper, StyledSelectWrapper } from './Select.styles';
 
@@ -12,7 +7,6 @@ import Select, {
   getDefaultValue,
   getDisplayLabel,
   getWrapper,
-  isEventOfType,
   isNumber,
   isObject,
   isString,
@@ -58,8 +52,8 @@ const testOptions = [
   }
 ];
 
-const nodeCountMenuOpen = 3;
-const nodeCountMenuClosed = 2;
+const nodeCountMenuOpen = 4;
+const nodeCountMenuClosed = 3;
 
 describe('Select helper functions', () => {
   describe('getDefaultValue', () => {
@@ -97,27 +91,6 @@ describe('Select helper functions', () => {
 
     it('returns StyledFlatSelectWrapper if provided variant is `flat`', () => {
       expect(getWrapper('flat')).toEqual(StyledFlatSelectWrapper);
-    });
-  });
-
-  describe('isEventOfType', () => {
-    it('returns true if object.type matches the given string', () => {
-      const testEvt = { type: 'blur' };
-      expect(isEventOfType(testEvt, 'blur')).toBeTruthy();
-    });
-
-    it('returns false if object.type does not match the given string', () => {
-      const testEvt = { type: 'blur' };
-      expect(isEventOfType(testEvt, 'focus')).toBeFalsy();
-    });
-
-    it('returns false if first arg is undefined', () => {
-      expect(isEventOfType(undefined, 'blur')).toBeFalsy();
-    });
-
-    it('returns false if second arg is undefined', () => {
-      const testEvt = { type: 'blur' };
-      expect(isEventOfType(testEvt)).toBeFalsy();
     });
   });
 
@@ -258,7 +231,7 @@ describe('<Select />', () => {
       expect(container.firstChild.childNodes.length).toEqual(nodeCountMenuOpen);
     });
 
-    it('NO menu element when menuOpen is falsy', () => {
+    it('ZERO menu element when menuOpen is falsy', () => {
       const { container } = render(
         renderSelect(getProps({ options: testOptions }))
       );
@@ -385,92 +358,36 @@ describe('<Select />', () => {
 
       expect(el).toBeInTheDocument();
     });
+
+    it('with menu max height', () => {
+      const { getByTestId } = render(
+        renderSelect(
+          getProps({
+            menuMaxHeight: 220,
+            menuOpen: true
+          })
+        )
+      );
+
+      const el = getByTestId('selectMenu');
+
+      expect(
+        el.getAttribute('style').includes('max-height: 220px')
+      ).toBeTruthy();
+    });
   });
 
   describe('event callbacks', () => {
-    it('handle onFocus events, calling onOpen, passing event to both', async done => {
+    it('handle onFocus events, passing event to both', async done => {
       const props = getProps({
         onFocus: jest.fn(),
         onOpen: jest.fn(),
         options: testOptions
       });
 
-      let focused = false;
-      let opened = false;
-
-      props.onOpen.mockImplementation(evt => {
-        expect(evt.type).toEqual('focus');
-        expect(props.onOpen).toHaveBeenCalled();
-        opened = true;
-        if (opened && focused) {
-          done();
-        }
-      });
-
       props.onFocus.mockImplementation(evt => {
         expect(evt.type).toEqual('focus');
         expect(props.onFocus).toHaveBeenCalled();
-        focused = true;
-        if (focused && opened) {
-          done();
-        }
-      });
-
-      const { getByTestId } = render(renderSelect(props));
-
-      const el = getByTestId('select');
-
-      fireEvent.focus(el);
-    });
-
-    it('handle onBlur events, calling onClose, passing event to both', async done => {
-      const props = getProps({
-        onBlur: jest.fn(),
-        onClose: jest.fn(),
-        options: testOptions
-      });
-
-      let blurred = false;
-      let closed = false;
-
-      props.onClose.mockImplementation(evt => {
-        expect(evt.type).toEqual('blur');
-        expect(props.onClose).toHaveBeenCalled();
-        closed = true;
-        if (closed && blurred) {
-          done();
-        }
-      });
-
-      props.onBlur.mockImplementation(evt => {
-        expect(evt.type).toEqual('blur');
-        expect(props.onBlur).toHaveBeenCalled();
-        blurred = true;
-        if (closed && blurred) {
-          done();
-        }
-      });
-
-      const { getByTestId } = render(renderSelect(props));
-
-      const el = getByTestId('select');
-
-      fireEvent.focus(el);
-      await wait(() => getByTestId('selectMenu'));
-
-      fireEvent.blur(el);
-    });
-
-    it('call onChange prop with event, selected option, and current value of the select', async done => {
-      const props = getProps({
-        onChange: jest.fn(),
-        options: testOptions
-      });
-
-      props.onChange.mockImplementation((evt, opt, value) => {
-        expect(evt.type).toEqual('mousedown');
-        expect(opt).toEqual(testOptions[1]);
-        expect(value).toEqual(testOptions[0].value);
         done();
       });
 
@@ -480,14 +397,26 @@ describe('<Select />', () => {
 
       fireEvent.focus(el);
       await wait(() => getByTestId('selectMenu'));
+    });
 
-      const item = getByTestId('selectMenuItem1');
-
-      waitForElementToBeRemoved(() => {
-        return getByTestId('selectMenu');
+    it('call onOpen prop with event', async done => {
+      const props = getProps({
+        onOpen: jest.fn(),
+        options: testOptions
       });
 
-      fireEvent.mouseDown(item);
+      props.onOpen.mockImplementation(evt => {
+        expect(evt.type).toEqual('mousedown');
+        done();
+      });
+
+      const { getByTestId } = render(renderSelect(props));
+
+      const el = getByTestId('select');
+
+      fireEvent.mouseDown(el, { button: 0 });
+
+      await wait(() => getByTestId('selectMenu'));
     });
   });
 });

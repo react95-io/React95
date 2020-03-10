@@ -24,7 +24,11 @@ const onChange = (evt, nextSelection) => console.log(nextSelection);
 storiesOf('Select', module)
   .addDecorator(story => <Wrapper>{story()}</Wrapper>)
   .add('shadow (default)', () => (
-    <Select onChange={onChange} options={options} />
+    <Select
+      onChange={onChange}
+      options={options}
+      onOpen={() => console.log('open')}
+    />
   ))
   .add('no shadow', () => (
     <Select onChange={onChange} options={options} shadow={false} />
