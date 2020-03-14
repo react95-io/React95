@@ -8,3 +8,9 @@ jobs:
       - run:
           name: install
           command: npm install
+      - run:
+          name: 'build React95'
+          command: npm run build
+      - run:
+          name: release
+          command: npm run semantic-release || true
