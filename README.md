@@ -1,10 +1,10 @@
 <h1 align="center">React95</h1>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/react95"><img src="https://flat.badgen.net/npm/dt/react95" alt="NPM"></a>
   <a href="https://www.npmjs.com/package/react95"><img src="https://flat.badgen.net/npm/v/react95" alt="React95 version"></a>
+  <a href="https://circleci.com/gh/arturbien/React95"><img src="https://flat.badgen.net/circleci/github/arturbien/React95/master" alt="circleCI build"></a>
+  <a href="https://www.npmjs.com/package/react95"><img src="https://flat.badgen.net/npm/dt/react95" alt="NPM"></a>
   <a href="https://www.npmjs.com/package/react95"><img src="https://flat.badgen.net/npm/license/react95" alt="React95 license"></a>
-
 </p>
 <h3 align="center">
   <a href="https://arturbien.github.io/React95/?path=/story/select--fixed-width">Components</a> -

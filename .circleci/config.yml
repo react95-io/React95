@@ -1,16 +1,94 @@
 version: 2
 jobs:
-  build:
+  install:
     docker:
-      - image: 'circleci/node:latest'
+      - image: 'circleci/node:8'
+    working_directory: ~/repo
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - v1-npm-deps-{{ checksum "package-lock.json" }}
+            - v1-npm-deps-
       - run:
-          name: install
-          command: npm install
+          name: 'Install dependencies'
+          command: npm ci
+      - save_cache:
+          key: v1-npm-deps-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - node_modules
+  test:
+    docker:
+      - image: 'circleci/node:8'
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo
       - run:
-          name: 'build React95'
+          name: 'Tests'
+          command: npm run test
+  build-library:
+    docker:
+      - image: 'circleci/node:8'
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: 'Build library'
           command: npm run build
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - dist
+  build-storybook:
+    docker:
+      - image: 'circleci/node:8'
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo
       - run:
-          name: release
+          name: 'Build Storybook'
+          command: npm run build:storybook
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - docs
+  deploy:
+    docker:
+      - image: 'circleci/node:8'
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: 'Deploy via Semantic Release'
           command: npm run semantic-release || true
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - install
+      - test:
+          requires: 
+            - install
+      - build-library:
+          requires: 
+            - install
+      - build-storybook:
+          requires: 
+            - install
+      - deploy:
+          requires: 
+            - test
+            - build-library
+            - build-storybook
