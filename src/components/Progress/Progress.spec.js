@@ -40,21 +40,21 @@ describe('<Progress />', () => {
         expect(queryByTestId('tileProgress')).toBeInTheDocument();
       });
 
-      it('Renders correct number of tiles', () => {
-        const value = 34;
-        const { queryByTestId } = renderWithTheme(
-          <Progress variant='tile' value={value} />
-        );
-        const tileProgress = queryByTestId('tileProgress');
-        const tileProgressWidth = tileProgress.getBoundingClientRect().width;
-        const tile = tileProgress.firstChild;
-        const tileWidth = tile.getBoundingClientRect().width;
+      // it('Renders correct number of tiles', () => {
+      //   const value = 34;
+      //   const { queryByTestId } = renderWithTheme(
+      //     <Progress variant='tile' value={value} />
+      //   );
+      //   const tileProgress = queryByTestId('tileProgress');
+      //   const tileProgressWidth = tileProgress.getBoundingClientRect().width;
+      //   const tile = tileProgress.firstChild;
+      //   const tileWidth = tile.getBoundingClientRect().width;
 
-        const targetTileNumber = Math.floor(
-          ((value / 100) * tileProgressWidth) / tileWidth
-        );
-        expect(tileProgress.childElementCount).toBe(targetTileNumber);
-      });
+      //   const targetTileNumber = Math.floor(
+      //     ((value / 100) * tileProgressWidth) / tileWidth
+      //   );
+      //   expect(tileProgress.childElementCount).toBe(targetTileNumber);
+      // });
     });
   });
 
