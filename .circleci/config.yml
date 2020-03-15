@@ -31,7 +31,7 @@ jobs:
           at: ~/repo
       - run:
           name: 'Tests'
-          command: npm run test
+          command: npm run test:ci
   build-library:
     docker:
       - image: 'circleci/node:latest'
@@ -62,7 +62,7 @@ jobs:
           root: ~/repo
           paths:
             - docs
-  deploy:
+  deploy-library:
     docker:
       - image: 'circleci/node:latest'
     working_directory: ~/repo
@@ -73,6 +73,17 @@ jobs:
       - run:
           name: 'Deploy via Semantic Release'
           command: npm run semantic-release || true
+  deploy-storybook:
+    docker:
+      - image: 'circleci/node:latest'
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: 'Deploy Storybook'
+          command: firebase deploy --token=$FIREBASE_TOKEN
 workflows:
   version: 2
   build-and-deploy:
@@ -87,8 +98,15 @@ workflows:
       - build-storybook:
           requires: 
             - install
-      - deploy:
+      - deploy-library:
           requires: 
             - test
             - build-library
             - build-storybook
+      - deploy-storybook:
+          requires: 
+            - deploy-library
+          filters:
+            branches:
+              only:
+                - beta
