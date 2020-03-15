@@ -11,6 +11,10 @@
 # production
 /dist
 
+# storybook
+/docs
+/.firebase
+
 # misc
 .DS_Store
 .env.local
