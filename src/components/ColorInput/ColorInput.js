@@ -2,6 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import styled, { css } from 'styled-components';
+import { focusOutline } from '../common';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import Button from '../Button/Button';
 import Bar from '../Bar/Bar';
@@ -9,7 +10,7 @@ import Bar from '../Bar/Bar';
 const StyledBar = styled(Bar)`
   height: 23px;
   position: relative;
-  top: -1px;
+  top: 0;
 `;
 
 export const StyledColorInput = styled.input`
@@ -20,6 +21,7 @@ export const StyledColorInput = styled.input`
   left: 0;
   top: 0;
   opacity: 0;
+  z-index: 1;
 `;
 
 // TODO replace with SVG icon
@@ -28,7 +30,7 @@ const ColorPreview = styled.div`
   height: 21px;
   display: inline-block;
   width: 35px;
-  margin-right: 0.5rem;
+  margin-right: 7px;
 
   background: ${({ color }) => color};
 
@@ -46,13 +48,12 @@ const ColorPreview = styled.div`
 `;
 
 const ChevronIcon = styled.span`
-  position: relative;
   width: 0px;
   height: 0px;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
   display: inline-block;
-  margin-left: 0.5rem;
+  margin-left: 6px;
 
   ${({ isDisabled }) =>
     isDisabled
@@ -65,6 +66,18 @@ const ChevronIcon = styled.span`
       : css`
           border-top: 6px solid ${({ theme }) => theme.text};
         `}
+  &:after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: ${({ variant }) => (variant === 'flat' ? '6px' : '8px')};
+    right: 8px;
+    width: 16px;
+    height: 19px;
+  }
+  ${StyledColorInput}:focus + &:after {
+    ${focusOutline}
+  }
 `;
 
 // TODO make sure all aria and role attributes are in place
@@ -109,7 +122,7 @@ const ColorInput = React.forwardRef(function ColorInput(props, ref) {
         ref={ref}
         {...otherProps}
       />
-      <ChevronIcon isDisabled={disabled} />
+      <ChevronIcon isDisabled={disabled} variant={variant} />
     </Button>
   );
 });
