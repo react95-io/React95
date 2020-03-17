@@ -98,3 +98,7 @@ export const createWellBorderStyles = (invert = false) =>
         border-right-color: ${({ theme }) => theme.borderDark};
         border-bottom-color: ${({ theme }) => theme.borderDark};
       `;
+
+export const focusOutline = () => css`
+  outline: 2px dotted ${({ theme }) => theme.text};
+`;
