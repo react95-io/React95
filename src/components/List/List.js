@@ -23,17 +23,10 @@ const StyledList = styled.ul`
 `;
 // TODO keyboard controls
 const List = React.forwardRef(function List(props, ref) {
-  const { inline, shadow, children, fullWidth, ...otherProps } = props;
+  const { children, ...otherProps } = props;
 
   return (
-    <StyledList
-      inline={inline}
-      shadow={shadow}
-      fullWidth={fullWidth}
-      role='menu'
-      ref={ref}
-      {...otherProps}
-    >
+    <StyledList role='menu' ref={ref} {...otherProps}>
       {children}
     </StyledList>
   );

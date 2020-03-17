@@ -31,7 +31,7 @@ describe('<WindowHeader />', () => {
     });
 
     it('renders non-active header when set to false', () => {
-      const { container } = renderWithTheme(<WindowHeader isActive={false} />);
+      const { container } = renderWithTheme(<WindowHeader active={false} />);
       const windowHeader = container.firstChild;
 
       expect(windowHeader).toHaveAttribute('data-active', 'false');

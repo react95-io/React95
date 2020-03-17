@@ -9,9 +9,15 @@ const StyledWindowContent = styled.div`
   margin-right: 2px;
 `;
 
-const WindowContent = ({ children, ...otherProps }) => (
-  <StyledWindowContent {...otherProps}>{children}</StyledWindowContent>
-);
+const WindowContent = React.forwardRef(function WindowContent(props, ref) {
+  const { children, ...otherProps } = props;
+
+  return (
+    <StyledWindowContent ref={ref} {...otherProps}>
+      {children}
+    </StyledWindowContent>
+  );
+});
 
 WindowContent.defaultProps = {
   children: null

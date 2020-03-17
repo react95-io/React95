@@ -99,70 +99,48 @@ export const StyledButton = styled.button`
   ${commonButtonStyles}
 `;
 
-const Button = ({
-  type,
-  onClick,
-  style,
-  disabled,
-  fullWidth,
-  size,
-  square,
-  active,
-  primary,
-  variant,
-  className,
-  children,
-  ...otherProps
-}) => (
-  <StyledButton
-    type={type}
-    variant={variant}
-    primary={primary}
-    onClick={disabled ? undefined : onClick}
-    style={style}
-    disabled={disabled}
-    isDisabled={disabled}
-    fullWidth={fullWidth}
-    size={size}
-    square={square}
-    active={active}
-    className={className}
-    // onTouchStart below to enable button :active style on iOS
-    onTouchStart={() => ''}
-    {...otherProps}
-  >
-    {children}
-  </StyledButton>
-);
+const Button = React.forwardRef(function Button(props, ref) {
+  const { onClick, disabled, children, ...otherProps } = props;
+
+  return (
+    <StyledButton
+      onClick={disabled ? undefined : onClick}
+      disabled={disabled}
+      isDisabled={disabled}
+      // onTouchStart below to enable button :active style on iOS
+      onTouchStart={() => ''}
+      ref={ref}
+      {...otherProps}
+    >
+      {children}
+    </StyledButton>
+  );
+});
 
 Button.defaultProps = {
   type: 'button',
   onClick: null,
-  style: {},
   disabled: false,
   fullWidth: false,
   size: 'md',
   square: false,
   active: false,
   primary: false,
-  variant: 'default',
-  className: ''
+  variant: 'default'
 };
 
 Button.propTypes = {
   type: propTypes.string,
   onClick: propTypes.func,
-  style: propTypes.shape([propTypes.string, propTypes.number]),
   disabled: propTypes.bool,
   fullWidth: propTypes.bool,
   size: propTypes.oneOf(['sm', 'md', 'lg']),
   square: propTypes.bool,
   active: propTypes.bool,
   primary: propTypes.bool,
-
   variant: propTypes.oneOf(['default', 'menu', 'flat']),
-  className: propTypes.string,
-  children: propTypes.node.isRequired
+  // eslint-disable-next-line react/require-default-props
+  children: propTypes.node
 };
 
 export default Button;

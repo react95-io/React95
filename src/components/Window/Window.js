@@ -41,12 +41,16 @@ const ResizeHandle = styled.span`
   `}
 `;
 
-const Window = ({ resizable, shadow, children, ...otherProps }) => (
-  <StyledWindow shadow={shadow} {...otherProps}>
-    {children}
-    {resizable && <ResizeHandle data-testid='resizeHandle' />}
-  </StyledWindow>
-);
+const Window = React.forwardRef(function Window(props, ref) {
+  const { resizable, children, ...otherProps } = props;
+
+  return (
+    <StyledWindow ref={ref} {...otherProps}>
+      {children}
+      {resizable && <ResizeHandle data-testid='resizeHandle' />}
+    </StyledWindow>
+  );
+});
 
 Window.defaultProps = {
   resizable: false,

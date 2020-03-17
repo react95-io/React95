@@ -14,19 +14,19 @@ const StyledBar = styled.div`
   border-right: 2px solid ${({ theme }) => theme.borderDark};
   background: ${({ theme }) => theme.material};
 `;
+// TODO: add horizontal variant
+// TODO: allow user to specify number of bars (like 3 horizontal bars for drag handle)
+const Bar = React.forwardRef(function Bar(props, ref) {
+  const { size, ...otherProps } = props;
 
-const Bar = ({ size, className, style, ...otherProps }) => (
-  <StyledBar size={size} className={className} style={style} {...otherProps} />
-);
+  return <StyledBar size={size} ref={ref} {...otherProps} />;
+});
 
 Bar.defaultProps = {
-  size: 'md',
-  className: '',
-  style: {}
+  size: 'md'
 };
 Bar.propTypes = {
-  className: propTypes.string,
-  style: propTypes.shape([propTypes.string, propTypes.number]),
   size: propTypes.oneOf(['sm', 'md', 'lg'])
 };
+
 export default Bar;

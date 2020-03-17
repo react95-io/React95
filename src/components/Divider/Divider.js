@@ -19,9 +19,9 @@ const StyledDivider = styled.hr`
     `}
 `;
 
-const Divider = ({ vertical, size, ...otherProps }) => (
-  <StyledDivider vertical={vertical} size={size} {...otherProps} />
-);
+const Divider = React.forwardRef(function Divider(props, ref) {
+  return <StyledDivider ref={ref} {...props} />;
+});
 
 Divider.defaultProps = {
   size: '100%',
@@ -29,8 +29,8 @@ Divider.defaultProps = {
 };
 
 Divider.propTypes = {
-  vertical: propTypes.bool,
-  size: propTypes.string
+  size: propTypes.string,
+  vertical: propTypes.bool
 };
 
 export default Divider;
