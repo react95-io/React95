@@ -10,7 +10,8 @@ import {
   createBoxStyles,
   createFlatBoxStyles,
   createDisabledTextStyles,
-  createHatchedBackground
+  createHatchedBackground,
+  focusOutline
 } from '../common';
 import { blockSizes, fontSizes, padding } from '../common/system';
 
@@ -24,10 +25,20 @@ const commonButtonStyles = css`
     fullWidth ? '100%' : square ? blockSizes[size] : 'auto'};
   padding: ${({ square }) => (square ? 0 : `0 calc(${padding.sm} + 2px)`)};
   font-size: ${fontSizes.md};
+  user-select: none;
   &:active {
     padding-top: ${({ isDisabled }) => !isDisabled && '2px'};
   }
   padding-top: ${({ active, isDisabled }) => active && !isDisabled && '2px'};
+  &:after {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
 `;
 
 export const StyledButton = styled.button`
@@ -46,12 +57,17 @@ export const StyledButton = styled.button`
             outline: 2px solid transparent;
             outline-offset: -4px;
           `}
+          &:focus:after {
+            ${focusOutline}
+            outline-offset: -6px;
+          }
         `
       : variant === 'menu'
       ? css`
           ${createBoxStyles()};
           border: 2px solid transparent;
-          &:hover {
+          &:hover,
+          &:focus {
             ${!isDisabled && !active && createWellBorderStyles(false)}
           }
           &:active {
@@ -94,6 +110,13 @@ export const StyledButton = styled.button`
           }
           &:active:before {
             ${!isDisabled && createBorderStyles({ invert: true })}
+          }
+          &:focus:after {
+            ${focusOutline}
+            outline-offset: -8px;
+          }
+          &:active:focus:after {
+            top: ${active ? '0' : '2px'};
           }
         `}
   ${commonButtonStyles}
