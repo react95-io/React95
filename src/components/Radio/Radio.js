@@ -2,44 +2,20 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import styled, { css } from 'styled-components';
-import { createDisabledTextStyles, createFlatBoxStyles } from '../common';
-import { padding, fontSizes } from '../common/system';
+import { createFlatBoxStyles } from '../common';
 import Cutout from '../Cutout/Cutout';
 import { StyledListItem } from '../ListItem/ListItem';
 
-const radioSize = '20px';
-const StyledLabel = styled.label`
-  display: inline-flex;
-  align-items: center;
-  position: relative;
-  margin: ${padding.sm} 0;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  font-size: ${fontSizes.md};
-  ${props => props.isDisabled && createDisabledTextStyles()}
-
-  ${StyledListItem} & {
-    margin: 0;
-    height: 100%;
-  }
-`;
-
-const StyledInput = styled.input`
-  position: absolute;
-  left: 0;
-  margin: 0;
-  width: ${radioSize};
-  height: ${radioSize};
-  opacity: 0;
-  z-index: -99;
-`;
+import {
+  size,
+  StyledInput,
+  StyledLabel,
+  LabelText
+} from '../SwitchBase/SwitchBase';
 
 const sharedCheckboxStyles = css`
-  width: ${radioSize};
-  height: ${radioSize};
+  width: ${size}px;
+  height: ${size}px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -122,10 +98,6 @@ const Icon = styled.span.attrs(() => ({
       `};
   }
 `;
-const LabelText = styled.span`
-  display: inline-block;
-  line-height: 1;
-`;
 
 const CheckboxComponents = {
   flat: StyledFlatCheckbox,
@@ -156,7 +128,6 @@ const Radio = React.forwardRef(function Radio(props, ref) {
       >
         {checked && <Icon isDisabled={disabled} variant={variant} />}
       </CheckboxComponent>
-      {label && <LabelText>{label}</LabelText>}
       <StyledInput
         disabled={disabled}
         onChange={disabled ? undefined : onChange}
@@ -166,6 +137,7 @@ const Radio = React.forwardRef(function Radio(props, ref) {
         ref={ref}
         {...otherProps}
       />
+      {label && <LabelText>{label}</LabelText>}
     </StyledLabel>
   );
 });

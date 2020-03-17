@@ -2,44 +2,21 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import styled, { css } from 'styled-components';
-import { createDisabledTextStyles, createHatchedBackground } from '../common';
+import { createHatchedBackground } from '../common';
 
-import { padding, fontSizes } from '../common/system';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import Cutout from '../Cutout/Cutout';
 import { StyledListItem } from '../ListItem/ListItem';
+import {
+  size,
+  StyledInput,
+  StyledLabel,
+  LabelText
+} from '../SwitchBase/SwitchBase';
 
-const checkboxSize = 20;
-
-const StyledLabel = styled.label`
-  display: inline-flex;
-  align-items: center;
-  position: relative;
-  margin: ${padding.sm} 0;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  font-size: ${fontSizes.md};
-  ${props => props.isDisabled && createDisabledTextStyles()}
-
-  ${StyledListItem} & {
-    margin: 0;
-    height: 100%;
-  }
-`;
-
-const StyledInput = styled.input`
-  position: absolute;
-  left: 0;
-  margin: 0;
-  width: ${checkboxSize}px;
-  height: ${checkboxSize}px;
-  opacity: 0;
-  z-index: -99;
-`;
 const sharedCheckboxStyles = css`
+  width: ${size}px;
+  height: ${size}px;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -47,8 +24,8 @@ const sharedCheckboxStyles = css`
 `;
 const StyledCheckbox = styled(Cutout)`
   ${sharedCheckboxStyles}
-  width: ${checkboxSize}px;
-  height: ${checkboxSize}px;
+  width: ${size}px;
+  height: ${size}px;
   background: ${({ theme, isDisabled }) =>
     isDisabled ? theme.material : theme.canvas};
   &:before {
@@ -62,8 +39,8 @@ const StyledFlatCheckbox = styled.div`
   background: ${({ theme, isDisabled }) =>
     isDisabled ? theme.flatLight : theme.canvas};
   ${sharedCheckboxStyles}
-  width: ${checkboxSize - 4}px;
-  height: ${checkboxSize - 4}px;
+  width: ${size - 4}px;
+  height: ${size - 4}px;
   outline: none;
   border: 2px solid ${({ theme }) => theme.flatDark};
   background: ${({ theme, isDisabled }) =>
@@ -77,8 +54,8 @@ const StyledMenuCheckbox = styled.div`
   background: ${({ theme, isDisabled }) =>
     isDisabled ? theme.flatLight : theme.canvas};
   ${sharedCheckboxStyles}
-  width: ${checkboxSize - 4}px;
-  height: ${checkboxSize - 4}px;
+  width: ${size - 4}px;
+  height: ${size - 4}px;
   background: none;
   border: none;
   outline: none;
@@ -172,10 +149,6 @@ const IndeterminateIcon = styled.span.attrs(() => ({
       `};
   }
 `;
-const LabelText = styled.span`
-  display: inline-block;
-  line-height: 1;
-`;
 
 const CheckboxComponents = {
   flat: StyledFlatCheckbox,
@@ -218,15 +191,6 @@ const Checkbox = React.forwardRef(function Checkbox(props, ref) {
   }
   return (
     <StyledLabel isDisabled={disabled} className={className} style={style}>
-      <CheckboxComponent
-        checked={state}
-        indeterminate={indeterminate}
-        isDisabled={disabled}
-        role='presentation'
-      >
-        {Icon && <Icon isDisabled={disabled} variant={variant} />}
-      </CheckboxComponent>
-      {label && <LabelText>{label}</LabelText>}
       <StyledInput
         disabled={disabled}
         onChange={disabled ? undefined : handleChange}
@@ -239,6 +203,15 @@ const Checkbox = React.forwardRef(function Checkbox(props, ref) {
         ref={ref}
         {...otherProps}
       />
+      <CheckboxComponent
+        checked={state}
+        indeterminate={indeterminate}
+        isDisabled={disabled}
+        role='presentation'
+      >
+        {Icon && <Icon isDisabled={disabled} variant={variant} />}
+      </CheckboxComponent>
+      {label && <LabelText>{label}</LabelText>}
     </StyledLabel>
   );
 });
