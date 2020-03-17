@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import styled from 'styled-components';
-import { createBorderStyles, createBoxStyles } from '../common';
+import { createBorderStyles, createBoxStyles, focusOutline } from '../common';
 import { blockSizes, padding } from '../common/system';
 
 const StyledTab = styled.button`
@@ -23,7 +23,16 @@ const StyledTab = styled.button`
   cursor: default;
   color: ${({ theme }) => theme.text};
   user-select: none;
-
+  &:focus:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    ${focusOutline}
+    outline-offset: -6px;
+  }
   ${props =>
     props.selected &&
     `
@@ -35,7 +44,7 @@ const StyledTab = styled.button`
     margin-left: -8px;
     margin-right: -8px;
   `}
-  &:after {
+  &:before {
     content: '';
     position: absolute;
     width: calc(100% - 4px);
