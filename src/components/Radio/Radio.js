@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components';
 import { createDisabledTextStyles, createFlatBoxStyles } from '../common';
 import { padding, fontSizes } from '../common/system';
 import Cutout from '../Cutout/Cutout';
+import { StyledListItem } from '../ListItem/ListItem';
 
 const radioSize = '20px';
 const StyledLabel = styled.label`
@@ -19,6 +20,11 @@ const StyledLabel = styled.label`
   user-select: none;
   font-size: ${fontSizes.md};
   ${props => props.isDisabled && createDisabledTextStyles()}
+
+  ${StyledListItem} & {
+    margin: 0;
+    height: 100%;
+  }
 `;
 
 const StyledInput = styled.input`
@@ -75,6 +81,15 @@ const StyledFlatCheckbox = styled.div`
     border-radius: 50%;
   }
 `;
+const StyledMenuCheckbox = styled.div`
+  ${sharedCheckboxStyles}
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  background: none;
+`;
 const Icon = styled.span.attrs(() => ({
   'data-testid': 'checkmarkIcon'
 }))`
@@ -87,9 +102,36 @@ const Icon = styled.span.attrs(() => ({
   height: 6px;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background: ${({ theme, isDisabled }) =>
-    isDisabled ? theme.checkmarkDisabled : theme.checkmark};
+  ${({ variant, theme, isDisabled }) =>
+    variant === 'menu'
+      ? css`
+          background: ${isDisabled ? theme.textDisabled : theme.text};
+          filter: drop-shadow(
+            1px 1px 0px ${isDisabled ? theme.textDisabledShadow : 'transparent'}
+          );
+        `
+      : css`
+          background: ${isDisabled ? theme.checkmarkDisabled : theme.checkmark};
+        `}
+  ${StyledListItem}:hover & {
+    ${({ theme, isDisabled, variant }) =>
+      !isDisabled &&
+      variant === 'menu' &&
+      css`
+        background: ${theme.textInvert};
+      `};
+  }
 `;
+const LabelText = styled.span`
+  display: inline-block;
+  line-height: 1;
+`;
+
+const CheckboxComponents = {
+  flat: StyledFlatCheckbox,
+  default: StyledCheckbox,
+  menu: StyledMenuCheckbox
+};
 
 const Radio = React.forwardRef(function Radio(props, ref) {
   const {
@@ -104,8 +146,8 @@ const Radio = React.forwardRef(function Radio(props, ref) {
     style,
     ...otherProps
   } = props;
-  const CheckboxComponent =
-    variant === 'flat' ? StyledFlatCheckbox : StyledCheckbox;
+
+  const CheckboxComponent = CheckboxComponents[variant];
 
   return (
     <StyledLabel isDisabled={disabled} className={className} style={style}>
@@ -114,9 +156,9 @@ const Radio = React.forwardRef(function Radio(props, ref) {
         isDisabled={disabled}
         role='presentation'
       >
-        {checked && <Icon isDisabled={disabled} />}
+        {checked && <Icon isDisabled={disabled} variant={variant} />}
       </CheckboxComponent>
-      {label && <span>{label}</span>}
+      {label && <LabelText>{label}</LabelText>}
       <StyledInput
         disabled={disabled}
         onChange={disabled ? undefined : onChange}
@@ -155,7 +197,7 @@ Radio.propTypes = {
   label: propTypes.oneOfType([propTypes.string, propTypes.number]),
   checked: propTypes.bool,
   disabled: propTypes.bool,
-  variant: propTypes.oneOf(['default', 'flat']),
+  variant: propTypes.oneOf(['default', 'flat', 'menu']),
   style: propTypes.shape([propTypes.string, propTypes.number]),
   className: propTypes.string
 };

@@ -1,7 +1,16 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
-import { Radio, Cutout, Fieldset, Window, WindowContent } from '..';
+import {
+  Radio,
+  Cutout,
+  Fieldset,
+  Window,
+  WindowContent,
+  List,
+  ListItem,
+  Divider
+} from '..';
 
 storiesOf('Radio', module)
   .addDecorator(story => (
@@ -15,7 +24,8 @@ storiesOf('Radio', module)
     </div>
   ))
   .add('default', () => <RadioGroup />)
-  .add('flat', () => <FlatRadioGroup />);
+  .add('flat', () => <FlatRadioGroup />)
+  .add('menu', () => <MenuRadioGroup />);
 
 class RadioGroup extends React.Component {
   state = {
@@ -132,6 +142,69 @@ class FlatRadioGroup extends React.Component {
           </StyledCutout>
         </WindowContent>
       </Window>
+    );
+  }
+}
+
+class MenuRadioGroup extends React.Component {
+  state = {
+    tool: 'Brush',
+    color: 'Black'
+  };
+
+  handleToolChange = e => this.setState({ tool: e.target.value });
+
+  handleColorChange = e => this.setState({ color: e.target.value });
+
+  render() {
+    const { tool, color } = this.state;
+
+    return (
+      <List>
+        <ListItem size='sm'>
+          <Radio
+            variant='menu'
+            checked={tool === 'Brush'}
+            onChange={this.handleToolChange}
+            value='Brush'
+            label='Brush'
+            name='tool'
+          />
+        </ListItem>
+        <ListItem size='sm'>
+          <Radio
+            variant='menu'
+            checked={tool === 'Pencil'}
+            onChange={this.handleToolChange}
+            value='Pencil'
+            label='Pencil'
+            name='tool'
+          />
+        </ListItem>
+        <Divider />
+        <ListItem size='sm' disabled>
+          <Radio
+            disabled
+            variant='menu'
+            checked={color === 'Black'}
+            onChange={this.handleColorChange}
+            value='Black'
+            label='Black'
+            name='color'
+          />
+        </ListItem>
+        <ListItem size='sm' disabled>
+          <Radio
+            disabled
+            variant='menu'
+            checked={color === 'Red'}
+            onChange={this.handleColorChange}
+            value='Red'
+            label='Red'
+            name='color'
+          />
+        </ListItem>
+      </List>
     );
   }
 }

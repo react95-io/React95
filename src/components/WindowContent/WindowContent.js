@@ -9,21 +9,15 @@ const StyledWindowContent = styled.div`
   margin-right: 2px;
 `;
 
-const WindowContent = ({ className, children, style, ...otherProps }) => (
-  <StyledWindowContent className={className} style={style} {...otherProps}>
-    {children}
-  </StyledWindowContent>
+const WindowContent = ({ children, ...otherProps }) => (
+  <StyledWindowContent {...otherProps}>{children}</StyledWindowContent>
 );
 
 WindowContent.defaultProps = {
-  className: '',
-  style: {},
   children: null
 };
 
 WindowContent.propTypes = {
-  className: propTypes.string,
-  style: propTypes.shape([propTypes.string, propTypes.number]),
   children: propTypes.node
 };
 
