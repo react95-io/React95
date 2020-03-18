@@ -32,7 +32,7 @@ First, install component library and styled-components in your project directory
 
 ```sh
 # yarn
-$ yarn react95 styled-components
+$ yarn add react95 styled-components
 
 # npm
 $ npm i react95 styled-components
