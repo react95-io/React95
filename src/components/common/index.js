@@ -1,8 +1,5 @@
 import { css } from 'styled-components';
 
-export const shadow = '4px 4px 10px 0 rgba(0, 0, 0, 0.35)';
-export const insetShadow = 'inset 3px 3px 10px rgba(0, 0, 0, 0.2)';
-
 export const createDisabledTextStyles = () => css`
   color: ${({ theme }) => theme.textDisabled};
   text-shadow: 1px 1px ${({ theme }) => theme.textDisabledShadow};
@@ -36,8 +33,8 @@ export const createBorderStyles = (invert = false) =>
         border-top-color: ${({ theme }) => theme.borderDarkest};
         border-right-color: ${({ theme }) => theme.borderLightest};
         border-bottom-color: ${({ theme }) => theme.borderLightest};
-        box-shadow: ${props => props.shadow && `${shadow}, `} inset 1px 1px 0px
-            1px ${({ theme }) => theme.borderDark},
+        box-shadow: ${({ shadow, theme }) => shadow && `${theme.shadow}, `}
+            inset 1px 1px 0px 1px ${({ theme }) => theme.borderDark},
           inset -1px -1px 0 1px ${({ theme }) => theme.borderLight};
       `
     : css`
@@ -47,8 +44,8 @@ export const createBorderStyles = (invert = false) =>
         border-top-color: ${({ theme }) => theme.borderLightest};
         border-right-color: ${({ theme }) => theme.borderDarkest};
         border-bottom-color: ${({ theme }) => theme.borderDarkest};
-        box-shadow: ${props => props.shadow && `${shadow}, `} inset 1px 1px 0px
-            1px ${({ theme }) => theme.borderLight},
+        box-shadow: ${({ shadow, theme }) => shadow && `${theme.shadow}, `}
+            inset 1px 1px 0px 1px ${({ theme }) => theme.borderLight},
           inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
       `;
 export const createWellBorderStyles = (invert = false) =>

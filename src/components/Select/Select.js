@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import Button from '../Button/Button';
 
-import { shadow as commonShadow, createFlatBoxStyles } from '../common';
+import { createFlatBoxStyles } from '../common';
 import { blockSizes, fontSizes, padding } from '../common/system';
 import Cutout from '../Cutout/Cutout';
 
@@ -87,7 +87,8 @@ const StyledDropdownList = styled.ul`
           border: 2px solid ${({ theme }) => theme.flatDark};
         `
       : css`
-          box-shadow: ${props => (props.shadow ? commonShadow : 'none')};
+          box-shadow: ${({ shadow, theme }) =>
+            shadow ? theme.shadow : 'none'};
           bottom: -2px;
           width: calc(100% - 2px);
           border: 2px solid ${({ theme }) => theme.borderDarkest};

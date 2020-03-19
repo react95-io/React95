@@ -1,7 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
-import { insetShadow } from '../common';
 
 const StyledCutout = styled.div`
   position: relative;
@@ -32,7 +31,8 @@ const StyledCutout = styled.div`
     border-bottom-color: ${({ theme }) => theme.borderLight};
 
     pointer-events: none;
-    ${props => props.shadow && `box-shadow:${insetShadow};`}
+    ${({ shadow, theme }) =>
+      console.log(theme) || (shadow && `box-shadow:${theme.insetShadow};`)}
   }
 `;
 // add padding prop ?

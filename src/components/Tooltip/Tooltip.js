@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
-
 import styled from 'styled-components';
-import { shadow } from '../common';
 
 const Tip = styled.span`
   position: absolute;
@@ -14,7 +12,7 @@ const Tip = styled.span`
   padding: 4px;
   border: 1px solid ${({ theme }) => theme.borderDarkest};
   background: ${({ theme }) => theme.tooltip};
-  box-shadow: ${shadow};
+  box-shadow: ${({ theme }) => theme.shadow};
   text-align: center;
 `;
 

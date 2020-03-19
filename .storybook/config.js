@@ -1,17 +1,18 @@
-import { configure, addDecorator } from "@storybook/react";
-import { withInfo } from "@storybook/addon-info";
-import { withThemesProvider } from "storybook-addon-styled-component-theme";
+import { configure, addDecorator } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
+import { withThemesProvider } from 'storybook-addon-styled-component-theme';
 
-import themes from "../src/components/common/themes";
+import themes from '../src/components/common/themes';
 
-import GlobalStyle from "./decorators/globalStyle";
+import GlobalStyle from './decorators/globalStyle';
 
 const demoThemes = [
   themes.default,
   themes.lilacRoseDark,
   themes.water,
   themes.coldGray,
-  themes.violetDark
+  themes.violetDark,
+  themes.flat
 ];
 
 addDecorator(
@@ -24,7 +25,7 @@ addDecorator(
       // Setting the style with a function
       ...stylesheet,
       table: {
-        background: "red"
+        background: 'red'
       }
     })
   })
@@ -32,7 +33,7 @@ addDecorator(
 addDecorator(GlobalStyle);
 addDecorator(withThemesProvider(demoThemes));
 
-const req = require.context("../src", true, /\.stories\.js$/);
+const req = require.context('../src', true, /\.stories\.js$/);
 function loadStories() {
   req.keys().forEach(filename => req(filename));
 }

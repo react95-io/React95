@@ -59,8 +59,8 @@ const StyledCheckmark = styled(Cutout)`
   ${sharedCheckmarkStyles}
   background: ${({ theme, isDisabled }) =>
     isDisabled ? theme.material : theme.canvas};
-  box-shadow: ${({ shadow }) =>
-    shadow ? 'inset 3px 3px 10px rgba(0, 0, 0, 0.1)' : 'none'};
+  box-shadow: ${({ shadow, theme }) =>
+    shadow ? theme.insetShadowLight : 'none'};
   &:before {
     box-shadow: none;
   }

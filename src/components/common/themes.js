@@ -1,6 +1,10 @@
 const themes = {};
 
 themes.default = {
+  shadow: '4px 4px 10px 0 rgba(0, 0, 0, 0.35)',
+  insetShadow: 'inset 3px 3px 10px rgba(0, 0, 0, 0.2)',
+  insetShadowLight: 'inset 3px 3px 10px rgba(0, 0, 0, 0.1)',
+
   hatchedBackground:
     'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIElEQVQYV2P8////fwYGBgZGRkZGMI0hABIFAbgEugAAQFQP/QfjEPcAAAAASUVORK5CYII=)',
 
@@ -41,6 +45,10 @@ themes.default = {
 };
 
 themes.water = {
+  shadow: '4px 4px 10px 0 rgba(0, 0, 0, 0.35)',
+  insetShadow: 'inset 3px 3px 10px rgba(0, 0, 0, 0.2)',
+  insetShadowLight: 'inset 3px 3px 10px rgba(0, 0, 0, 0.1)',
+
   hatchedBackground:
     'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIElEQVQYV2P8////fwYGBgZGRkZGMI0hABIFAbgEugAAQFQP/QfjEPcAAAAASUVORK5CYII=)',
 
@@ -81,6 +89,10 @@ themes.water = {
 };
 
 themes.coldGray = {
+  shadow: '4px 4px 10px 0 rgba(0, 0, 0, 0.35)',
+  insetShadow: 'inset 3px 3px 10px rgba(0, 0, 0, 0.2)',
+  insetShadowLight: 'inset 3px 3px 10px rgba(0, 0, 0, 0.1)',
+
   hatchedBackground:
     'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIElEQVQYV2P8////fwYGBgZGRkZGMI0hABIFAbgEugAAQFQP/QfjEPcAAAAASUVORK5CYII=)',
 
@@ -125,6 +137,10 @@ themes.coldGray = {
 };
 
 themes.lilacRoseDark = {
+  shadow: '4px 4px 10px 0 rgba(0, 0, 0, 0.35)',
+  insetShadow: 'inset 3px 3px 10px rgba(0, 0, 0, 0.2)',
+  insetShadowLight: 'inset 3px 3px 10px rgba(0, 0, 0, 0.1)',
+
   hatchedBackground:
     'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIElEQVQYV2P8////fwYGBgZGRkZGMI0hABIFAbgEugAAQFQP/QfjEPcAAAAASUVORK5CYII=)',
 
@@ -167,6 +183,10 @@ themes.lilacRoseDark = {
 };
 
 themes.violetDark = {
+  shadow: '4px 4px 10px 0 rgba(0, 0, 0, 0.35)',
+  insetShadow: 'inset 3px 3px 10px rgba(0, 0, 0, 0.2)',
+  insetShadowLight: 'inset 3px 3px 10px rgba(0, 0, 0, 0.1)',
+
   hatchedBackground:
     'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIElEQVQYV2P8////fwYGBgZGRkZGMI0hABIFAbgEugAAQFQP/QfjEPcAAAAASUVORK5CYII=)',
 
@@ -203,4 +223,6 @@ themes.violetDark = {
   flatLight: '#945b9b',
   flatDark: '#3c1f3e'
 };
+
+themes.flat = { ...themes.default, shadow: 'none', insetShadow: 'none' };
 export default themes;
