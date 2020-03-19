@@ -116,7 +116,7 @@ export const StyledButton = styled.button`
             outline-offset: -8px;
           }
           &:active:focus:after {
-            top: ${active ? '0' : '2px'};
+            top: ${active ? '0' : '1px'};
           }
         `}
   ${commonButtonStyles}
