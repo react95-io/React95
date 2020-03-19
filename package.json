@@ -33,7 +33,9 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "lint": "eslint src --ext .js",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "prettier:check": "prettier --check \"{test,src,.storybook}/**/*.{js,jsx}\"",
+    "prettier:fix": "prettier --write \"{test,src,.storybook}/**/*.{js,jsx}\""
   },
   "peerDependencies": {
     "react": "^16.8.2",
