@@ -31,8 +31,7 @@ const StyledCutout = styled.div`
     border-bottom-color: ${({ theme }) => theme.borderLight};
 
     pointer-events: none;
-    ${({ shadow, theme }) =>
-      console.log(theme) || (shadow && `box-shadow:${theme.insetShadow};`)}
+    ${({ shadow, theme }) => shadow && `box-shadow:${theme.insetShadow};`}
   }
 `;
 // add padding prop ?
