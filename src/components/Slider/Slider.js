@@ -1,3 +1,4 @@
+// helper functions and event handling basically copied from Material UI (https://github.com/mui-org/material-ui) Slider component
 import React, { useRef } from 'react';
 import propTypes from 'prop-types';
 
@@ -10,9 +11,10 @@ import {
   createHatchedBackground
 } from '../common';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
+import useForkRef from '../common/hooks/useForkRef';
+import { useIsFocusVisible } from '../common/hooks/focusVisible';
 import Cutout from '../Cutout/Cutout';
 
-// helper functions and event handling basically copied from Material UI (https://github.com/mui-org/material-ui) Slider component
 function trackFinger(event, touchId) {
   if (touchId.current !== undefined && event.changedTouches) {
     for (let i = 0; i < event.changedTouches.length; i += 1) {
@@ -82,19 +84,51 @@ function roundValueToStep(value, step, min) {
   const nearest = Math.round((value - min) / step) * step + min;
   return Number(nearest.toFixed(getDecimalPrecision(step)));
 }
+function focusThumb(sliderRef) {
+  if (!sliderRef.current.contains(document.activeElement)) {
+    sliderRef.current.querySelector(`#swag`).focus();
+  }
+}
 const Wrapper = styled.div`
   display: inline-block;
   position: relative;
   touch-action: none;
+  &:before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: -2px;
+    left: -15px;
+    width: calc(100% + 30px);
+    height: ${({ hasMarks }) => (hasMarks ? '41px' : '39px')};
+  ${({ isFocused, theme }) =>
+    isFocused &&
+    `
+        outline: 2px dotted ${theme.text};
+        `}
+      }
+
   ${({ vertical, size }) =>
     vertical
       ? css`
           height: ${size};
           margin-right: 1.5rem;
+          &:before {
+            left: -2px;
+            top: -15px;
+            height: calc(100% + 30px);
+            width: ${({ hasMarks }) => (hasMarks ? '41px' : '39px')};
+          }
         `
       : css`
           width: ${size};
           margin-bottom: 1.5rem;
+          &:before {
+            top: -2px;
+            left: -15px;
+            width: calc(100% + 30px);
+            height: ${({ hasMarks }) => (hasMarks ? '41px' : '39px')};
+          }
         `}
 
   pointer-events: ${({ isDisabled }) => (isDisabled ? 'none' : 'auto')};
@@ -220,38 +254,124 @@ const Mark = styled.div`
         `}
 `;
 
-const Slider = ({
-  value,
-  defaultValue,
-  step,
-  min,
-  max,
-  size,
-  marks: marksProp,
-  onChange,
-  onChangeCommitted,
-  onMouseDown,
-  name,
-  vertical,
-  variant,
-  disabled,
-  ...otherProps
-}) => {
+const Slider = React.forwardRef(function Slider(props, ref) {
+  const {
+    value,
+    defaultValue,
+    step,
+    min,
+    max,
+    size,
+    marks: marksProp,
+    onChange,
+    onChangeCommitted,
+    onMouseDown,
+    name,
+    vertical,
+    variant,
+    disabled,
+    ...otherProps
+  } = props;
   const Groove = variant === 'flat' ? StyledFlatGroove : StyledGroove;
+
   const [valueDerived, setValueState] = useControlledOrUncontrolled({
     value,
     defaultValue
   });
 
+  const {
+    isFocusVisible,
+    onBlurVisible,
+    ref: focusVisibleRef
+  } = useIsFocusVisible();
+  const [focusVisible, setFocusVisible] = React.useState(false);
   const sliderRef = useRef();
+  const handleFocusRef = useForkRef(focusVisibleRef, sliderRef);
+  const handleRef = useForkRef(ref, handleFocusRef);
+
+  const handleFocus = useEventCallback(event => {
+    if (isFocusVisible(event)) {
+      setFocusVisible(true);
+    }
+  });
+  const handleBlur = useEventCallback(() => {
+    if (focusVisible !== false) {
+      setFocusVisible(false);
+      onBlurVisible();
+    }
+  });
+
   const touchId = React.useRef();
 
   const marks =
-    marksProp === true
-      ? Array(1 + (max - min) / step)
-          .fill({ label: null })
-          .map((mark, i) => ({ ...mark, value: i * step }))
-      : marksProp;
+    marksProp === true && step !== null
+      ? [...Array(Math.floor((max - min) / step) + 1)].map((_, index) => ({
+          value: min + step * index
+        }))
+      : marksProp || [];
+
+  const handleKeyDown = useEventCallback(event => {
+    const tenPercents = (max - min) / 10;
+    const marksValues = marks.map(mark => mark.value);
+    const marksIndex = marksValues.indexOf(valueDerived);
+    let newValue;
+
+    switch (event.key) {
+      case 'Home':
+        newValue = min;
+        break;
+      case 'End':
+        newValue = max;
+        break;
+      case 'PageUp':
+        if (step) {
+          newValue = valueDerived + tenPercents;
+        }
+        break;
+      case 'PageDown':
+        if (step) {
+          newValue = valueDerived - tenPercents;
+        }
+        break;
+      case 'ArrowRight':
+      case 'ArrowUp':
+        if (step) {
+          newValue = valueDerived + step;
+        } else {
+          newValue =
+            marksValues[marksIndex + 1] || marksValues[marksValues.length - 1];
+        }
+        break;
+      case 'ArrowLeft':
+      case 'ArrowDown':
+        if (step) {
+          newValue = valueDerived - step;
+        } else {
+          newValue = marksValues[marksIndex - 1] || marksValues[0];
+        }
+        break;
+      default:
+        return;
+    }
+
+    // Prevent scroll of the page
+    event.preventDefault();
+    if (step) {
+      newValue = roundValueToStep(newValue, step, min);
+    }
+
+    newValue = clamp(newValue, min, max);
+
+    setValueState(newValue);
+    setFocusVisible(true);
+
+    if (onChange) {
+      onChange(newValue);
+    }
+    if (onChangeCommitted) {
+      onChangeCommitted(newValue);
+    }
+  });
 
   const getNewValue = React.useCallback(
     finger => {
@@ -288,7 +408,9 @@ const Slider = ({
     }
     const newValue = getNewValue(finger);
 
+    focusThumb(sliderRef);
     setValueState(newValue);
+    setFocusVisible(true);
 
     if (onChange) {
       onChange(newValue);
@@ -302,6 +424,7 @@ const Slider = ({
     }
 
     const newValue = getNewValue(finger);
+
     if (onChangeCommitted) {
       onChangeCommitted(newValue);
     }
@@ -322,8 +445,11 @@ const Slider = ({
     event.preventDefault();
     const finger = trackFinger(event, touchId);
     const newValue = getNewValue(finger);
+    focusThumb(sliderRef);
 
     setValueState(newValue);
+    setFocusVisible(true);
+
     if (onChange) {
       onChange(newValue);
     }
@@ -341,7 +467,10 @@ const Slider = ({
     }
     const finger = trackFinger(event, touchId);
     const newValue = getNewValue(finger);
+    focusThumb(sliderRef);
+
     setValueState(newValue);
+    setFocusVisible(true);
 
     if (onChange) {
       onChange(newValue);
@@ -371,7 +500,9 @@ const Slider = ({
       vertical={vertical}
       size={size}
       onMouseDown={handleMouseDown}
-      ref={sliderRef}
+      ref={handleRef}
+      isFocused={focusVisible}
+      hasMarks={marks.length}
       {...otherProps}
     >
       {/* should we keep the hidden input ? */}
@@ -403,10 +534,12 @@ const Slider = ({
       <Groove vertical={vertical} variant={variant} />
       <Thumb
         role='slider'
+        id='swag'
         style={{
           [vertical ? 'bottom' : 'left']: `${(vertical ? -100 : 0) +
             (100 * valueDerived) / (max - min)}%`
         }}
+        tabIndex={disabled ? null : 0}
         vertical={vertical}
         variant={variant}
         isDisabled={disabled}
@@ -415,10 +548,13 @@ const Slider = ({
         aria-valuemax={max}
         aria-valuemin={min}
         aria-valuenow={valueDerived}
+        onKeyDown={handleKeyDown}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       />
     </Wrapper>
   );
-};
+});
 
 Slider.defaultProps = {
   defaultValue: undefined,

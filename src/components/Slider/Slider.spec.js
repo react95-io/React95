@@ -1,3 +1,5 @@
+// Pretty much straight out copied from https://github.com/mui-org/material-ui 😂
+
 import React from 'react';
 import { fireEvent } from '@testing-library/react';
 
@@ -21,7 +23,7 @@ describe('<Slider />', () => {
     const handleChange = jest.fn();
     const handleChangeCommitted = jest.fn();
 
-    const { container } = renderWithTheme(
+    const { container, getByRole } = renderWithTheme(
       <Slider
         onChange={handleChange}
         onChangeCommitted={handleChangeCommitted}
@@ -34,6 +36,13 @@ describe('<Slider />', () => {
 
     expect(handleChange).toHaveBeenCalledTimes(1);
     expect(handleChangeCommitted).toHaveBeenCalledTimes(1);
+
+    getByRole('slider').focus();
+    fireEvent.keyDown(document.activeElement, {
+      key: 'Home'
+    });
+    expect(handleChange).toHaveBeenCalledTimes(2);
+    expect(handleChangeCommitted).toHaveBeenCalledTimes(2);
   });
 
   it('should only listen to changes from the same touchpoint', () => {
@@ -110,6 +119,17 @@ describe('<Slider />', () => {
         createTouches([{ identifier: 1, clientX: 22, clientY: 0 }])
       );
       expect(thumb).toHaveAttribute('aria-valuenow', '20');
+
+      thumb.focus();
+      fireEvent.keyDown(document.activeElement, {
+        key: 'ArrowUp'
+      });
+      expect(thumb).toHaveAttribute('aria-valuenow', '30');
+
+      fireEvent.keyDown(document.activeElement, {
+        key: 'ArrowDown'
+      });
+      expect(thumb).toHaveAttribute('aria-valuenow', '20');
     });
   });
 
@@ -130,6 +150,143 @@ describe('<Slider />', () => {
           .getPropertyValue('pointer-events')
       ).toBe('none');
       expect(thumb).toHaveAttribute('aria-disabled', 'true');
+    });
+  });
+
+  describe('keyboard', () => {
+    it('should handle all the keys', () => {
+      const { getByRole } = renderWithTheme(<Slider defaultValue={50} />);
+      const thumb = getByRole('slider');
+      thumb.focus();
+
+      fireEvent.keyDown(document.activeElement, {
+        key: 'Home'
+      });
+      expect(thumb).toHaveAttribute('aria-valuenow', '0');
+
+      fireEvent.keyDown(document.activeElement, {
+        key: 'End'
+      });
+      expect(thumb).toHaveAttribute('aria-valuenow', '100');
+
+      fireEvent.keyDown(document.activeElement, {
+        key: 'PageDown'
+      });
+      expect(thumb).toHaveAttribute('aria-valuenow', '90');
+
+      fireEvent.keyDown(document.activeElement, {
+        key: 'Escape'
+      });
+      expect(thumb).toHaveAttribute('aria-valuenow', '90');
+
+      fireEvent.keyDown(document.activeElement, {
+        key: 'PageUp'
+      });
+      expect(thumb).toHaveAttribute('aria-valuenow', '100');
+    });
+
+    const moveLeftEvent = {
+      key: 'ArrowLeft'
+    };
+    const moveRightEvent = {
+      key: 'ArrowRight'
+    };
+
+    it('should use min as the step origin', () => {
+      const { getByRole } = renderWithTheme(
+        <Slider defaultValue={150} step={100} max={750} min={150} />
+      );
+      const thumb = getByRole('slider');
+      thumb.focus();
+
+      fireEvent.keyDown(document.activeElement, moveRightEvent);
+      expect(thumb).toHaveAttribute('aria-valuenow', '250');
+
+      fireEvent.keyDown(document.activeElement, moveLeftEvent);
+      expect(thumb).toHaveAttribute('aria-valuenow', '150');
+    });
+
+    it('should reach right edge value', () => {
+      const { getByRole } = renderWithTheme(
+        <Slider defaultValue={90} min={6} max={108} step={10} />
+      );
+      const thumb = getByRole('slider');
+      thumb.focus();
+
+      fireEvent.keyDown(document.activeElement, moveRightEvent);
+      expect(thumb).toHaveAttribute('aria-valuenow', '96');
+
+      fireEvent.keyDown(document.activeElement, moveRightEvent);
+      expect(thumb).toHaveAttribute('aria-valuenow', '106');
+
+      fireEvent.keyDown(document.activeElement, moveRightEvent);
+      expect(thumb).toHaveAttribute('aria-valuenow', '108');
+
+      fireEvent.keyDown(document.activeElement, moveLeftEvent);
+      expect(thumb).toHaveAttribute('aria-valuenow', '96');
+
+      fireEvent.keyDown(document.activeElement, moveLeftEvent);
+      expect(thumb).toHaveAttribute('aria-valuenow', '86');
+    });
+
+    it('should reach left edge value', () => {
+      const { getByRole } = renderWithTheme(
+        <Slider defaultValue={20} min={6} max={108} step={10} />
+      );
+      const thumb = getByRole('slider');
+      thumb.focus();
+
+      fireEvent.keyDown(document.activeElement, moveLeftEvent);
+      expect(thumb).toHaveAttribute('aria-valuenow', '6');
+
+      fireEvent.keyDown(document.activeElement, moveRightEvent);
+      expect(thumb).toHaveAttribute('aria-valuenow', '16');
+
+      fireEvent.keyDown(document.activeElement, moveRightEvent);
+      expect(thumb).toHaveAttribute('aria-valuenow', '26');
+    });
+
+    it('should round value to step precision', () => {
+      const { getByRole } = renderWithTheme(
+        <Slider defaultValue={0.2} min={0} max={1} step={0.1} />
+      );
+      const thumb = getByRole('slider');
+      thumb.focus();
+
+      fireEvent.keyDown(document.activeElement, moveRightEvent);
+      expect(thumb).toHaveAttribute('aria-valuenow', '0.3');
+    });
+
+    it('should not fail to round value to step precision when step is very small', () => {
+      const { getByRole } = renderWithTheme(
+        <Slider
+          defaultValue={0.00000002}
+          min={0}
+          max={0.00000005}
+          step={0.00000001}
+        />
+      );
+      const thumb = getByRole('slider');
+      thumb.focus();
+
+      fireEvent.keyDown(document.activeElement, moveRightEvent);
+      expect(thumb).toHaveAttribute('aria-valuenow', '3e-8');
+    });
+
+    it('should not fail to round value to step precision when step is very small and negative', () => {
+      const { getByRole } = renderWithTheme(
+        <Slider
+          defaultValue={-0.00000002}
+          min={-0.00000005}
+          max={0}
+          step={0.00000001}
+        />
+      );
+      const thumb = getByRole('slider');
+      thumb.focus();
+
+      fireEvent.keyDown(document.activeElement, moveLeftEvent);
+      expect(thumb).toHaveAttribute('aria-valuenow', '-3e-8');
     });
   });
 
