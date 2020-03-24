@@ -191,14 +191,6 @@ const Checkbox = React.forwardRef(function Checkbox(props, ref) {
   }
   return (
     <StyledLabel isDisabled={disabled} className={className} style={style}>
-      <CheckboxComponent
-        checked={state}
-        indeterminate={indeterminate}
-        isDisabled={disabled}
-        role='presentation'
-      >
-        {Icon && <Icon isDisabled={disabled} variant={variant} />}
-      </CheckboxComponent>
       <StyledInput
         disabled={disabled}
         onChange={disabled ? undefined : handleChange}
@@ -211,6 +203,14 @@ const Checkbox = React.forwardRef(function Checkbox(props, ref) {
         ref={ref}
         {...otherProps}
       />
+      <CheckboxComponent
+        checked={state}
+        indeterminate={indeterminate}
+        isDisabled={disabled}
+        role='presentation'
+      >
+        {Icon && <Icon isDisabled={disabled} variant={variant} />}
+      </CheckboxComponent>
       {label && <LabelText>{label}</LabelText>}
     </StyledLabel>
   );

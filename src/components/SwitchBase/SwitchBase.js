@@ -40,7 +40,7 @@ export const LabelText = styled.span`
   display: inline-block;
   line-height: 1;
   padding: 2px;
-  ${StyledInput}:focus + & {
+  ${StyledInput}:focus ~ & {
     ${focusOutline}
   }
 `;
