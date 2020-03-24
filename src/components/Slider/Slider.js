@@ -10,6 +10,7 @@ import {
   createDisabledTextStyles,
   createHatchedBackground
 } from '../common';
+import { clamp, percentToValue, roundValueToStep } from '../common/utils';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import useForkRef from '../common/hooks/useForkRef';
 import { useIsFocusVisible } from '../common/hooks/focusVisible';
@@ -61,29 +62,7 @@ function findClosest(values, currentValue) {
   }, null);
   return closestIndex;
 }
-function clamp(value, min, max) {
-  return Math.min(Math.max(min, value), max);
-}
-function percentToValue(percent, min, max) {
-  return (max - min) * percent + min;
-}
-function getDecimalPrecision(num) {
-  if (Math.abs(num) < 1) {
-    const parts = num.toExponential().split('e-');
-    const matissaDecimalPart = parts[0].split('.')[1];
-    return (
-      (matissaDecimalPart ? matissaDecimalPart.length : 0) +
-      parseInt(parts[1], 10)
-    );
-  }
 
-  const decimalPart = num.toString().split('.')[1];
-  return decimalPart ? decimalPart.length : 0;
-}
-function roundValueToStep(value, step, min) {
-  const nearest = Math.round((value - min) / step) * step + min;
-  return Number(nearest.toFixed(getDecimalPrecision(step)));
-}
 function focusThumb(sliderRef) {
   if (!sliderRef.current.contains(document.activeElement)) {
     sliderRef.current.querySelector(`#swag`).focus();
