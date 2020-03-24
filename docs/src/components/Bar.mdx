@@ -1,0 +1,37 @@
+---
+name: Bar
+menu: Components
+---
+
+import { Playground, Props } from 'docz';
+
+import { Bar, AppBar, Toolbar, Button } from 'react95';
+
+# Bar
+
+## Usage
+
+<Playground>
+  <AppBar>
+    <Toolbar>
+      <Bar />
+      <Button variant='menu'>Edit</Button>
+      <Button variant='menu' disabled>
+        Save
+      </Button>
+      <Bar />
+    </Toolbar>
+  </AppBar>
+</Playground>
+
+## API
+
+### Import
+
+```
+import { Bar } from 'react95'
+```
+
+### Props
+
+<Props of={Bar} />
