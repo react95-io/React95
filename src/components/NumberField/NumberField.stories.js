@@ -14,32 +14,13 @@ const Wrapper = styled.div`
 
 storiesOf('NumberField', module)
   .addDecorator(story => <Wrapper>{story()}</Wrapper>)
-  .add('default', () => (
-    <NumberField value={1991} onChange={value => console.log(value)} />
-  ))
+  .add('default', () => <NumberField defaultValue={2} />)
+  .add('decimal step', () => <NumberField defaultValue={2} step={0.01} />)
   .add('fixed width', () => (
-    <NumberField
-      value={1991}
-      width={94}
-      onChange={value => console.log(value)}
-    />
+    <NumberField defaultValue={1991} min={1990} max={2000} width={94} />
   ))
   .add('disabled', () => (
-    <NumberField disabled value={1991} onChange={value => console.log(value)} />
-  ))
-  .add('disabled keyboard input', () => (
-    <NumberField
-      disableKeyboardInput
-      value={1991}
-      onChange={value => console.log(value)}
-    />
-  ))
-  .add('no shadow', () => (
-    <NumberField
-      shadow={false}
-      value={1991}
-      onChange={value => console.log(value)}
-    />
+    <NumberField disabled defaultValue={1991} min={1990} max={2000} />
   ))
   .add('flat', () => (
     <StyledCutout style={{ padding: '2rem', width: '300px' }}>
@@ -47,11 +28,21 @@ storiesOf('NumberField', module)
         When you want to use NumberField on a light background (like scrollable
         content), just use the flat variant:
       </p>
+      <NumberField variant='flat' defaultValue={1991} min={1990} max={2000} />
+    </StyledCutout>
+  ))
+  .add('flat disabled', () => (
+    <StyledCutout style={{ padding: '2rem', width: '300px' }}>
+      <p style={{ lineHeight: 1.3, marginBottom: '1rem' }}>
+        When you want to use NumberField on a light background (like scrollable
+        content), just use the flat variant:
+      </p>
       <NumberField
+        disabled
         variant='flat'
-        shadow={false}
-        value={1991}
-        onChange={value => console.log(value)}
+        defaultValue={1991}
+        min={1990}
+        max={2000}
       />
     </StyledCutout>
   ));

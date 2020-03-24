@@ -1,171 +1,198 @@
 import React from 'react';
 import propTypes from 'prop-types';
-
 import styled, { css } from 'styled-components';
+
+import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
+import { clamp } from '../common/utils';
 
 import Button from '../Button/Button';
 import { blockSizes } from '../common/system';
 import TextField from '../TextField/TextField';
-
-// ⭕⭕⭕⭕⭕ fix functionality and use hooks
 
 const StyledNumberFieldWrapper = styled.div`
   display: inline-flex;
   align-items: center;
 `;
 
-const StyledButtonWrapper = styled.div`
-  height: ${blockSizes.md};
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  margin-left: 2px;
-  margin-top: ${({ variant }) => (variant === 'default' ? '-2px' : '0')};
-`;
-
 const StyledButton = styled(Button)`
-  height: 50%;
   width: 30px;
   padding: 0;
   flex-shrink: 0;
 
   ${({ isFlat }) =>
-    !isFlat &&
-    css`
-      &:before {
-        border-left-color: ${({ theme }) => theme.borderLight};
-        border-top-color: ${({ theme }) => theme.borderLight};
-        box-shadow: inset 1px 1px 0px 1px ${({ theme }) => theme.borderLightest},
-          inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
-      }
-    `}
+    isFlat
+      ? css`
+          height: calc(50% - 1px);
+        `
+      : css`
+          height: 50%;
+          &:before {
+            border-left-color: ${({ theme }) => theme.borderLight};
+            border-top-color: ${({ theme }) => theme.borderLight};
+            box-shadow: inset 1px 1px 0px 1px
+                ${({ theme }) => theme.borderLightest},
+              inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
+          }
+        `}
+`;
+
+const StyledButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+
+  ${({ isFlat }) =>
+    isFlat
+      ? css`
+          height: calc(${blockSizes.md} - 4px);
+        `
+      : css`
+          height: ${blockSizes.md};
+          margin-left: 2px;
+        `}
 `;
 
 const StyledButtonIcon = styled.span`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%) ${props => props.invert && 'rotateZ(180deg)'};
   width: 0px;
   height: 0px;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
   display: inline-block;
-  border-top: 4px solid ${({ theme }) => theme.text};
-  ${StyledButton}:active & {
-    margin-top: 2px;
+  ${({ invert }) =>
+    invert
+      ? css`
+          border-left: 4px solid transparent;
+          border-right: 4px solid transparent;
+          border-bottom: 4px solid ${({ theme }) => theme.text};
+        `
+      : css`
+          border-left: 4px solid transparent;
+          border-right: 4px solid transparent;
+          border-top: 4px solid ${({ theme }) => theme.text};
+        `}
+  ${StyledButton}:disabled & {
+    filter: drop-shadow(1px 1px 0px ${({ theme }) => theme.textDisabledShadow});
+    ${({ invert }) =>
+      invert
+        ? css`
+            border-bottom-color: ${({ theme }) => theme.textDisabled};
+          `
+        : css`
+            border-top-color: ${({ theme }) => theme.textDisabled};
+          `}
   }
 `;
 
-class NumberField extends React.Component {
-  static propTypes = {
-    variant: propTypes.oneOf(['default', 'flat']),
-    onChange: propTypes.func.isRequired,
-    value: propTypes.number.isRequired,
-    min: propTypes.number,
-    max: propTypes.number,
-    width: propTypes.oneOfType([propTypes.string, propTypes.number]),
-    disabled: propTypes.bool,
-    disableKeyboardInput: propTypes.bool,
-    className: propTypes.string,
-    style: propTypes.shape([propTypes.string, propTypes.number])
+const NumberField = React.forwardRef(function NumberField(props, ref) {
+  const {
+    value,
+    defaultValue,
+    disabled,
+    className,
+    variant,
+    step,
+    width,
+    min,
+    max,
+    onChange,
+    style
+  } = props;
+
+  const [valueDerived, setValueState] = useControlledOrUncontrolled({
+    value,
+    defaultValue
+  });
+
+  const handleInputChange = e => {
+    const newValue = e.target.value;
+    setValueState(newValue);
   };
 
-  static defaultProps = {
-    variant: 'default',
-    disabled: false,
-    min: null,
-    max: null,
-    width: null,
-    disableKeyboardInput: false,
-    className: '',
-    style: {}
-  };
+  const handleClick = val => {
+    const newValue = clamp(
+      +parseFloat(valueDerived + val).toFixed(2),
+      min,
+      max
+    );
 
-  state = {
-    // eslint-disable-next-line
-    value: parseInt(this.props.value, 10) || 0
-  };
+    setValueState(newValue);
 
-  add = addValue => {
-    const { value } = this.state;
-    const { onChange } = this.props;
-
-    const newValue = this.normalize(value + addValue);
-    onChange(newValue);
-    this.setState({ value: newValue });
-  };
-
-  handleChange = e => {
-    let newValue =
-      e.target.value === '-' ? '-' : this.normalize(e.target.value);
-    // eslint-disable-next-line
-    newValue = newValue ? newValue : newValue === 0 ? 0 : '';
-
-    if (e.target.validity.valid) {
-      const { onChange } = this.props;
-      this.setState({ value: newValue });
+    if (onChange) {
       onChange(newValue);
     }
   };
 
-  normalize = value => {
-    const { min, max } = this.props;
-
-    if (min && value < min) return min;
-    if (max && value > max) return max;
-
-    return parseInt(value, 10);
+  const onBlur = () => {
+    if (onChange) {
+      onChange(valueDerived);
+    }
   };
 
-  render() {
-    const {
-      disabled,
-      disableKeyboardInput,
-      className,
-      variant,
-      width,
-      style
-    } = this.props;
-    const { value } = this.state;
-    return (
-      <StyledNumberFieldWrapper
-        className={className}
-        style={{ ...style, width: width || 'auto' }}
-      >
-        <TextField
-          value={value}
+  return (
+    <StyledNumberFieldWrapper
+      className={className}
+      style={{ ...style, width: width || 'auto' }}
+    >
+      <TextField
+        value={valueDerived}
+        variant={variant}
+        onChange={handleInputChange}
+        disabled={disabled}
+        type='number'
+        ref={ref}
+        width='100%'
+        data-testid='input'
+        onBlur={onBlur}
+      />
+      <StyledButtonWrapper isFlat={variant === 'flat'}>
+        <StyledButton
+          data-testid='increment'
+          isFlat={variant === 'flat'}
           variant={variant}
-          onChange={
-            disabled || disableKeyboardInput ? undefined : this.handleChange
-          }
-          readOnly={disabled || disableKeyboardInput}
           disabled={disabled}
-          type='tel'
-          pattern='^-?[0-9]\d*\.?\d*$'
-          width='100%'
-        />
-        <StyledButtonWrapper>
-          <StyledButton
-            isFlat={variant === 'flat'}
-            variant={variant}
-            disabled={disabled}
-            onClick={() => this.add(1)}
-          >
-            <StyledButtonIcon invert />
-          </StyledButton>
-          <StyledButton
-            isFlat={variant === 'flat'}
-            variant={variant}
-            disabled={disabled}
-            onClick={() => this.add(-1)}
-          >
-            <StyledButtonIcon />
-          </StyledButton>
-        </StyledButtonWrapper>
-      </StyledNumberFieldWrapper>
-    );
-  }
-}
+          onClick={() => handleClick(step)}
+        >
+          <StyledButtonIcon invert />
+        </StyledButton>
+        <StyledButton
+          data-testid='decrement'
+          isFlat={variant === 'flat'}
+          variant={variant}
+          disabled={disabled}
+          onClick={() => handleClick(-step)}
+        >
+          <StyledButtonIcon />
+        </StyledButton>
+      </StyledButtonWrapper>
+    </StyledNumberFieldWrapper>
+  );
+});
+
+NumberField.defaultProps = {
+  className: '',
+  defaultValue: undefined,
+  disabled: false,
+  max: null,
+  min: null,
+  step: 1,
+  onChange: null,
+  style: {},
+  value: undefined,
+  variant: 'default',
+  width: null
+};
+
+NumberField.propTypes = {
+  className: propTypes.string,
+  defaultValue: propTypes.number,
+  disabled: propTypes.bool,
+  max: propTypes.number,
+  min: propTypes.number,
+  step: propTypes.number,
+  onChange: propTypes.func,
+  style: propTypes.shape([propTypes.string, propTypes.number]),
+  value: propTypes.number,
+  variant: propTypes.oneOf(['default', 'flat']),
+  width: propTypes.oneOfType([propTypes.string, propTypes.number])
+};
 
 export default NumberField;
