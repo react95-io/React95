@@ -38,10 +38,10 @@ describe('<NumberField />', () => {
   it('should not call onChange on blur, when clicked element is one of the spin buttons', () => {
     const handleChange = jest.fn();
 
-    const { getByTestId } = renderWithTheme(
+    const { getByTestId, container } = renderWithTheme(
       <NumberField onChange={handleChange} value={0} />
     );
-    const input = getByTestId('input');
+    const input = container.querySelector('input');
     const incrementButton = getByTestId('increment');
 
     input.focus();
@@ -53,10 +53,10 @@ describe('<NumberField />', () => {
   });
 
   it('should reach max value', () => {
-    const { getByTestId } = renderWithTheme(
+    const { getByTestId, container } = renderWithTheme(
       <NumberField defaultValue={90} min={0} max={100} step={10} />
     );
-    const input = getByTestId('input');
+    const input = container.querySelector('input');
     const incrementButton = getByTestId('increment');
     incrementButton.click();
 
@@ -64,10 +64,10 @@ describe('<NumberField />', () => {
   });
 
   it('should reach min value', () => {
-    const { getByTestId } = renderWithTheme(
+    const { getByTestId, container } = renderWithTheme(
       <NumberField defaultValue={10} min={0} max={100} step={10} />
     );
-    const input = getByTestId('input');
+    const input = container.querySelector('input');
     const decrementButton = getByTestId('decrement');
     decrementButton.click();
 
@@ -76,8 +76,10 @@ describe('<NumberField />', () => {
 
   describe('prop: step', () => {
     it('should be 1 by default', () => {
-      const { getByTestId } = renderWithTheme(<NumberField defaultValue={0} />);
-      const input = getByTestId('input');
+      const { getByTestId, container } = renderWithTheme(
+        <NumberField defaultValue={0} />
+      );
+      const input = container.querySelector('input');
       const incrementButton = getByTestId('increment');
       incrementButton.click();
 
@@ -85,10 +87,10 @@ describe('<NumberField />', () => {
     });
 
     it('should change value by specified step', () => {
-      const { getByTestId } = renderWithTheme(
+      const { getByTestId, container } = renderWithTheme(
         <NumberField defaultValue={10} step={3} />
       );
-      const input = getByTestId('input');
+      const input = container.querySelector('input');
       const decrementButton = getByTestId('decrement');
       decrementButton.click();
 
@@ -96,10 +98,10 @@ describe('<NumberField />', () => {
     });
 
     it('should handle decimal step', () => {
-      const { getByTestId } = renderWithTheme(
+      const { getByTestId, container } = renderWithTheme(
         <NumberField defaultValue={10} step={0.3} />
       );
-      const input = getByTestId('input');
+      const input = container.querySelector('input');
       const decrementButton = getByTestId('decrement');
       decrementButton.click();
 
@@ -109,10 +111,10 @@ describe('<NumberField />', () => {
 
   describe('prop: disabled', () => {
     it('should render disabled', () => {
-      const { getByTestId } = renderWithTheme(
+      const { getByTestId, container } = renderWithTheme(
         <NumberField defaultValue={10} disabled />
       );
-      const input = getByTestId('input');
+      const input = container.querySelector('input');
       const incrementButton = getByTestId('increment');
       const decrementButton = getByTestId('decrement');
 
@@ -122,10 +124,10 @@ describe('<NumberField />', () => {
     });
 
     it('should not react to button clicks', () => {
-      const { getByTestId } = renderWithTheme(
+      const { getByTestId, container } = renderWithTheme(
         <NumberField defaultValue={10} disabled />
       );
-      const input = getByTestId('input');
+      const input = container.querySelector('input');
       const incrementButton = getByTestId('increment');
       const decrementButton = getByTestId('decrement');
 
