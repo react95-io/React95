@@ -33,7 +33,13 @@ storiesOf('Checkbox', module)
           defaultChecked
         />
         <br />
-        <Checkbox name='pineapple' value='pineapple' label='Add pineapple 🍍' />
+        <Checkbox
+          name='pineapple'
+          value='pineapple'
+          label='Add pineapple 🍍'
+          defaultChecked
+          disabled
+        />
       </>
     ))
   )

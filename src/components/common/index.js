@@ -4,15 +4,15 @@ export const shadow = '4px 4px 10px 0 rgba(0, 0, 0, 0.35)';
 export const insetShadow = 'inset 3px 3px 10px rgba(0, 0, 0, 0.2)';
 
 export const createDisabledTextStyles = () => css`
+  -webkit-text-fill-color: ${({ theme }) => theme.textDisabled};
   color: ${({ theme }) => theme.textDisabled};
   text-shadow: 1px 1px ${({ theme }) => theme.textDisabledShadow};
   /* filter: grayscale(100%); */
-  -webkit-text-fill-color: ${({ theme }) => theme.inputTextDisabled};
 `;
 export const createBoxStyles = () => css`
   box-sizing: border-box;
   display: inline-block;
-  background-color: ${({ theme }) => theme.material};
+  background: ${({ theme }) => theme.material};
   color: ${({ theme }) => theme.text};
 `;
 // TODO for flat box styles add checkered background when disabled (not solid color)
