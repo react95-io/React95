@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { createDisabledTextStyles, focusOutline } from '../common';
 
 import { padding, fontSizes } from '../common/system';
@@ -27,11 +27,19 @@ export const StyledLabel = styled.label`
   -ms-user-select: none;
   user-select: none;
   font-size: ${fontSizes.md};
+  color: ${({ theme }) => theme.text};
   ${props => props.isDisabled && createDisabledTextStyles()}
 
   ${StyledListItem} & {
     margin: 0;
     height: 100%;
+  }
+  ${StyledListItem}:hover & {
+    ${({ theme, isDisabled }) =>
+      !isDisabled &&
+      css`
+        color: ${theme.textInvert};
+      `};
   }
 `;
 

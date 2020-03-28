@@ -12,16 +12,12 @@ const SlyledWindowHeader = styled.div`
   font-weight: bold;
 
   &[data-active='false'] {
-    background: ${({ theme }) => theme.headerNotActive};
-    color: ${({ theme }) => theme.material};
+    background: ${({ theme }) => theme.headerNotActiveBackground};
+    color: ${({ theme }) => theme.headerNotActiveText};
   }
   &[data-active='true'] {
-    background: linear-gradient(
-      to right,
-      ${({ theme }) => theme.headerMaterialDark},
-      ${({ theme }) => theme.headerMaterialLight}
-    );
-    color: ${({ theme }) => theme.textInvert};
+    background: ${({ theme }) => theme.headerBackground};
+    color: ${({ theme }) => theme.headerText};
   }
   ${StyledButton} {
     padding-left: 0;

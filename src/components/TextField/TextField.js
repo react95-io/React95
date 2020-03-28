@@ -26,6 +26,7 @@ export const StyledTextInput = styled.input`
   background: none;
   font-size: ${fontSizes.md};
   font-family: ${fontFamily};
+  color: ${({ theme }) => theme.inputText};
   ${({ disabled, variant }) =>
     variant !== 'flat' && disabled && createDisabledTextStyles()}
 `;
