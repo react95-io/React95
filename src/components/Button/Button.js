@@ -57,8 +57,8 @@ export const StyledButton = styled.button`
             outline: 2px solid transparent;
             outline-offset: -4px;
           `}
-          &:focus:after {
-            ${focusOutline}
+          &:focus:after, &:active:after {
+            ${!active && !isDisabled && focusOutline}
             outline-offset: -6px;
           }
         `
@@ -111,11 +111,13 @@ export const StyledButton = styled.button`
           &:active:before {
             ${!isDisabled && createBorderStyles({ invert: true })}
           }
-          &:focus:after {
-            ${focusOutline}
+          &:focus:after,
+          &:active:after {
+            ${!active && !isDisabled && focusOutline}
             outline-offset: -8px;
           }
-          &:active:focus:after {
+          &:active:focus:after,
+          &:active:after {
             top: ${active ? '0' : '1px'};
           }
         `}
