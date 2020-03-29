@@ -284,7 +284,7 @@ const Slider = React.forwardRef(function Slider(props, ref) {
 
   const marks =
     marksProp === true && step !== null
-      ? [...Array(Math.floor((max - min) / step) + 1)].map((_, index) => ({
+      ? [...Array(Math.round((max - min) / step) + 1)].map((_, index) => ({
           value: min + step * index
         }))
       : marksProp || [];
@@ -497,7 +497,8 @@ const Slider = React.forwardRef(function Slider(props, ref) {
             isDisabled={disabled}
             vertical={vertical}
             style={{
-              [vertical ? 'bottom' : 'left']: `${(m.value / (max - min)) *
+              [vertical ? 'bottom' : 'left']: `${((m.value - min) /
+                (max - min)) *
                 100}%`
             }}
             key={(m.value / (max - min)) * 100}
@@ -516,7 +517,7 @@ const Slider = React.forwardRef(function Slider(props, ref) {
         id='swag'
         style={{
           [vertical ? 'bottom' : 'left']: `${(vertical ? -100 : 0) +
-            (100 * valueDerived) / (max - min)}%`
+            (100 * (valueDerived - min)) / (max - min)}%`
         }}
         tabIndex={disabled ? null : 0}
         vertical={vertical}

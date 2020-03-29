@@ -46,15 +46,24 @@ storiesOf('Slider', module)
   .add('restricted values', () => (
     <Slider
       size='300px'
-      min={0}
+      min={1.35}
       max={6}
       step={null}
-      defaultValue={0}
       marks={[
-        { value: 0, label: '0°C' },
         { value: 1.35, label: '1.35°C' },
+        { value: 2.75, label: '2.75°C' },
         { value: 6, label: '6°C' }
       ]}
+    />
+  ))
+  .add('decimal values', () => (
+    <Slider
+      size='300px'
+      min={0.8}
+      max={1.2}
+      defaultValue={1}
+      step={0.1}
+      marks
     />
   ))
   .add('disabled', () => (
