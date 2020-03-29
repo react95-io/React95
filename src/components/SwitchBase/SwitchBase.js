@@ -51,4 +51,7 @@ export const LabelText = styled.span`
   ${StyledInput}:focus ~ & {
     ${focusOutline}
   }
+  ${StyledInput}:not(:disabled) ~ &:active {
+    ${focusOutline}
+  }
 `;
