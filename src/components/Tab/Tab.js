@@ -19,7 +19,7 @@ const StyledTab = styled.button`
   border-bottom: none;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  margin-bottom: -2px;
+  margin: 0 0 -2px 0;
   cursor: default;
   color: ${({ theme }) => theme.text};
   user-select: none;
