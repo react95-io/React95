@@ -194,16 +194,18 @@ describe('<Slider />', () => {
 
     it('should use min as the step origin', () => {
       const { getByRole } = renderWithTheme(
-        <Slider defaultValue={150} step={100} max={750} min={150} />
+        <Slider defaultValue={4} step={2} max={12} min={2} />
       );
       const thumb = getByRole('slider');
       thumb.focus();
 
       fireEvent.keyDown(document.activeElement, moveRightEvent);
-      expect(thumb).toHaveAttribute('aria-valuenow', '250');
+      expect(thumb).toHaveAttribute('aria-valuenow', '6');
 
       fireEvent.keyDown(document.activeElement, moveLeftEvent);
-      expect(thumb).toHaveAttribute('aria-valuenow', '150');
+      expect(thumb).toHaveAttribute('aria-valuenow', '4');
+
+      expect(thumb.style.left).toBe('20%');
     });
 
     it('should reach right edge value', () => {
