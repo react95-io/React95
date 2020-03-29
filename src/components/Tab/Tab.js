@@ -23,7 +23,8 @@ const StyledTab = styled.button`
   cursor: default;
   color: ${({ theme }) => theme.text};
   user-select: none;
-  &:focus:after {
+  &:focus:after,
+  &:active:after {
     content: '';
     position: absolute;
     left: 0;
