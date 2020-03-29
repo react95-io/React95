@@ -2,13 +2,17 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import styled, { css } from 'styled-components';
-import { focusOutline } from '../common';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
-import Button from '../Button/Button';
-import Bar from '../Bar/Bar';
+import { focusOutline } from '../common';
+import { StyledButton } from '../Button/Button';
+import Divider from '../Divider/Divider';
 
-const StyledBar = styled(Bar)`
-  height: 23px;
+const Trigger = styled(StyledButton)`
+  padding-left: 8px;
+`;
+
+const StyledDivider = styled(Divider)`
+  height: 21px;
   position: relative;
   top: 0;
 `;
@@ -27,10 +31,10 @@ export const StyledColorInput = styled.input`
 // TODO replace with SVG icon
 const ColorPreview = styled.div`
   box-sizing: border-box;
-  height: 21px;
+  height: 19px;
   display: inline-block;
   width: 35px;
-  margin-right: 7px;
+  margin-right: 5px;
 
   background: ${({ color }) => color};
 
@@ -45,6 +49,16 @@ const ColorPreview = styled.div`
       : css`
           border: 2px solid ${({ theme }) => theme.text};
         `}
+  ${StyledColorInput}:focus:not(:active) + &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    ${focusOutline}
+    outline-offset: -8px;
+  }
 `;
 
 const ChevronIcon = styled.span`
@@ -75,9 +89,6 @@ const ChevronIcon = styled.span`
     width: 16px;
     height: 19px;
   }
-  ${StyledColorInput}:focus + &:after {
-    ${focusOutline}
-  }
 `;
 
 // TODO make sure all aria and role attributes are in place
@@ -105,14 +116,15 @@ const ColorInput = React.forwardRef(function ColorInput(props, ref) {
   };
 
   return (
-    // we only need button styles, so we display it as a div and reset type attribute
-    <Button isDisabled={disabled} as='div' type={null} variant={variant}>
-      <ColorPreview
-        color={valueDerived}
-        isDisabled={disabled}
-        role='presentation'
-      />
-      {variant === 'default' && <StyledBar />}
+    //  we only need button styles, so we display
+    // it as a div and reset type attribute
+    <Trigger
+      isDisabled={disabled}
+      as='div'
+      type={null}
+      variant={variant}
+      size='md'
+    >
       <StyledColorInput
         onChange={handleChange}
         readOnly={disabled}
@@ -122,8 +134,14 @@ const ColorInput = React.forwardRef(function ColorInput(props, ref) {
         ref={ref}
         {...otherProps}
       />
+      <ColorPreview
+        color={valueDerived}
+        isDisabled={disabled}
+        role='presentation'
+      />
+      {variant === 'default' && <StyledDivider vertical />}
       <ChevronIcon isDisabled={disabled} variant={variant} />
-    </Button>
+    </Trigger>
   );
 });
 
