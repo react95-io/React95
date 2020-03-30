@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 
 import styled from 'styled-components';
 import { createDisabledTextStyles } from '../common';
-import { padding, blockSizes } from '../common/system';
+import { blockSizes } from '../common/system';
 
 export const StyledListItem = styled.li`
   box-sizing: border-box;
@@ -13,8 +13,8 @@ export const StyledListItem = styled.li`
   position: relative;
   height: ${props => blockSizes[props.size]};
   width: ${props => (props.square ? blockSizes[props.size] : 'auto')};
-  padding: 0 ${padding.sm};
-
+  padding: 0 8px;
+  font-size: 1rem;
   white-space: nowrap;
   justify-content: ${props =>
     props.square ? 'space-around' : 'space-between'};

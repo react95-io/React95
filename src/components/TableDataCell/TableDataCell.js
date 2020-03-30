@@ -2,10 +2,9 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import styled from 'styled-components';
-import { padding } from '../common/system';
 
 const StyledTd = styled.td`
-  padding: 0 ${padding.sm};
+  padding: 0 8px;
 `;
 const TableDataCell = React.forwardRef(function TableDataCell(props, ref) {
   const { children, ...otherProps } = props;

@@ -9,6 +9,7 @@ const StyledTable = styled.table`
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
+  font-size: 1rem;
 `;
 
 const StyledCutout = styled(Cutout)`

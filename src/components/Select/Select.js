@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 import Button from '../Button/Button';
 
 import { shadow as commonShadow, createFlatBoxStyles } from '../common';
-import { blockSizes, fontSizes, padding } from '../common/system';
+import { blockSizes } from '../common/system';
 import Cutout from '../Cutout/Cutout';
 
 const sharedWrapperStyles = css`
@@ -15,7 +15,7 @@ const sharedWrapperStyles = css`
   justify-content: space-between;
   background: ${({ theme }) => theme.canvas};
   color: ${({ theme }) => theme.inputText};
-  font-size: ${fontSizes.md};
+  font-size: 1rem;
 `;
 const StyledSelectWrapper = styled(Cutout)`
   ${sharedWrapperStyles}
@@ -26,7 +26,7 @@ const StyledFlatSelectWrapper = styled.div`
 `;
 const StyledSelectContent = styled.div`
   width: 100%;
-  padding-left: ${padding.sm};
+  padding-left: 8px;
   overflow: hidden;
   white-space: nowrap;
 `;
@@ -71,7 +71,7 @@ const StyledDropdownIcon = styled.span`
 const StyledDropdownList = styled.ul`
   box-sizing: border-box;
 
-  font-size: ${fontSizes.md};
+  font-size: 1rem;
   position: absolute;
   transform: translateY(100%);
   left: 0px;
@@ -99,11 +99,11 @@ const StyledDropdownListItem = styled.li`
   box-sizing: border-box;
 
   width: 100%;
-  padding-left: ${padding.sm};
+  padding-left: 8px;
 
   height: calc(${blockSizes.md} - 4px);
   line-height: calc(${blockSizes.md} - 4px);
-  font-size: ${fontSizes.md};
+  font-size: 1rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

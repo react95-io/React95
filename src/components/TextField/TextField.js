@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 
 import styled from 'styled-components';
 import { createDisabledTextStyles, createFlatBoxStyles } from '../common';
-import { blockSizes, fontSizes, padding, fontFamily } from '../common/system';
+import { blockSizes, fontFamily } from '../common/system';
 import Cutout from '../Cutout/Cutout';
 
 const StyledWrapper = styled(Cutout)`
@@ -20,11 +20,11 @@ export const StyledTextInput = styled.input`
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  padding: 0 ${padding.sm};
+  padding: 0 8px;
   outline: none;
   border: none;
   background: none;
-  font-size: ${fontSizes.md};
+  font-size: 1rem;
   font-family: ${fontFamily};
   color: ${({ theme }) => theme.inputText};
   ${({ disabled, variant }) =>

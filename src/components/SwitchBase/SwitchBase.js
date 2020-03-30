@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import { createDisabledTextStyles, focusOutline } from '../common';
 
-import { padding, fontSizes } from '../common/system';
 import { StyledListItem } from '../ListItem/ListItem';
 
 export const size = 20;
@@ -20,13 +19,13 @@ export const StyledLabel = styled.label`
   display: inline-flex;
   align-items: center;
   position: relative;
-  margin: ${padding.sm} 0;
+  margin: 8px 0;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-size: ${fontSizes.md};
+  font-size: 1rem;
   color: ${({ theme }) => theme.text};
   ${props => props.isDisabled && createDisabledTextStyles()}
 
