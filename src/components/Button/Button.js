@@ -13,7 +13,7 @@ import {
   createHatchedBackground,
   focusOutline
 } from '../common';
-import { blockSizes, fontSizes, padding } from '../common/system';
+import { blockSizes } from '../common/system';
 
 const commonButtonStyles = css`
   position: relative;
@@ -23,8 +23,8 @@ const commonButtonStyles = css`
   height: ${({ size }) => blockSizes[size]};
   width: ${({ fullWidth, square, size }) =>
     fullWidth ? '100%' : square ? blockSizes[size] : 'auto'};
-  padding: ${({ square }) => (square ? 0 : `0 calc(${padding.sm} + 2px)`)};
-  font-size: ${fontSizes.md};
+  padding: ${({ square }) => (square ? 0 : `0 10px`)};
+  font-size: 1rem;
   user-select: none;
   &:active {
     padding-top: ${({ isDisabled }) => !isDisabled && '2px'};

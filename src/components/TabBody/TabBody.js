@@ -3,7 +3,6 @@ import propTypes from 'prop-types';
 
 import styled from 'styled-components';
 import { createBorderStyles, createBoxStyles } from '../common';
-import { padding } from '../common/system';
 
 const StyledTabBody = styled.div`
   ${createBoxStyles()}
@@ -11,7 +10,8 @@ const StyledTabBody = styled.div`
   position: relative;
   display: block;
   height: 100%;
-  padding: ${padding.md};
+  padding: 16px;
+  font-size: 1rem;
 `;
 const TabBody = React.forwardRef(function TabBody(props, ref) {
   const { children, ...otherProps } = props;

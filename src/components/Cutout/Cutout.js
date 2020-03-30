@@ -7,7 +7,7 @@ const StyledCutout = styled.div`
   position: relative;
   box-sizing: border-box;
   padding: 2px;
-
+  font-size: 1rem;
   border-style: solid;
   border-width: 2px;
   border-left-color: ${({ theme }) => theme.borderDark};

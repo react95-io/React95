@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 
 import styled from 'styled-components';
 import { createBorderStyles, createBoxStyles, focusOutline } from '../common';
-import { blockSizes, padding } from '../common/system';
+import { blockSizes } from '../common/system';
 
 const StyledTab = styled.button`
   ${createBoxStyles()}
@@ -15,7 +15,7 @@ const StyledTab = styled.button`
   font-size: 1rem;
   height: ${blockSizes.md};
   line-height: ${blockSizes.md};
-  padding: 0 ${padding.sm};
+  padding: 0 8px;
   border-bottom: none;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -41,7 +41,7 @@ const StyledTab = styled.button`
     height: calc(${blockSizes.md} + 4px);
     top: -3px;
     margin-bottom: -6px;
-    padding: 0 calc(${padding.sm} + 8px);
+    padding: 0 16px;
     margin-left: -8px;
     margin-right: -8px;
   `}

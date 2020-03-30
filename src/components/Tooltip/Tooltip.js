@@ -16,6 +16,7 @@ const Tip = styled.span`
   background: ${({ theme }) => theme.tooltip};
   box-shadow: ${shadow};
   text-align: center;
+  font-size: 1rem;
 `;
 
 const Wrapper = styled.div`

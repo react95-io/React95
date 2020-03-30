@@ -3,11 +3,10 @@ import propTypes from 'prop-types';
 
 import styled, { css } from 'styled-components';
 import { createBorderStyles, createDisabledTextStyles } from '../common';
-import { padding } from '../common/system';
 
 const StyledHeadCell = styled.th`
 position: relative;
-padding: 0 ${padding.sm};
+padding: 0 8px;
 display: table-cell;
 vertical-align: inherit;
 background: ${({ theme }) => theme.material};

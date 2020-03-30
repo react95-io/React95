@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 
 import styled from 'styled-components';
 import { createDisabledTextStyles, createFlatBoxStyles } from '../common';
-import { blockSizes, fontSizes, padding, fontFamily } from '../common/system';
+import { blockSizes, fontFamily } from '../common/system';
 import Cutout from '../Cutout/Cutout';
 
 const StyledTextAreaWrapper = styled(Cutout)`
@@ -22,12 +22,12 @@ const StyledTextArea = styled.textarea`
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  padding: ${padding.sm};
+  padding: 8px;
   outline: none;
   border: none;
   background: none;
   resize: none;
-  font-size: ${fontSizes.md};
+  font-size: 1rem;
   font-family: ${fontFamily};
 
   ${({ disabled, variant }) =>

@@ -3,16 +3,15 @@ import propTypes from 'prop-types';
 
 import styled, { css } from 'styled-components';
 import { createDisabledTextStyles } from '../common';
-import { fontSizes, padding } from '../common/system';
 
 const StyledFieldset = styled.fieldset`
   position: relative;
   border: 2px solid
     ${({ theme, variant }) =>
       variant === 'flat' ? theme.flatDark : theme.borderLightest};
-  padding: ${padding.md};
-  margin-top: ${padding.sm};
-  font-size: ${fontSizes.md};
+  padding: 16px;
+  margin-top: 8px;
+  font-size: 1rem;
   color: ${({ theme }) => theme.text};
   ${({ variant }) =>
     variant !== 'flat' &&
@@ -26,11 +25,11 @@ const StyledLegend = styled.legend`
   display: flex;
   position: absolute;
   top: 0;
-  left: ${padding.sm};
+  left: 8px;
   transform: translateY(calc(-50% - 2px));
-  padding: 0 ${padding.sm};
+  padding: 0 8px;
 
-  font-size: ${fontSizes.md};
+  font-size: 1rem;
   background: ${({ theme, variant }) =>
     variant === 'flat' ? theme.canvas : theme.material};
 `;
