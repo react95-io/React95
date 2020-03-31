@@ -168,7 +168,11 @@ const Select = ({
     evt.preventDefault();
     displayNode.current.focus();
 
-    handleOpen(evt);
+    if (openDerived) {
+      handleClose(evt);
+    } else {
+      handleOpen(evt);
+    }
   };
 
   const handleOptionClick = opt => evt => {
