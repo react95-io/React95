@@ -1,10 +1,11 @@
+/* eslint-disable no-console */
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
 
 import { Select, Window, WindowContent, Cutout } from '..';
 
-const items = [
+const options = [
   { value: 1, label: '⚡ Pikachu' },
   { value: 2, label: '🌿 Bulbasaur' },
   { value: 3, label: '💦 Squirtle' },
@@ -19,27 +20,42 @@ const Wrapper = styled.div`
   padding: 5rem;
 `;
 
-const onChange = value => console.log(value);
+const onChange = (evt, nextSelection) => console.log(nextSelection);
 
 storiesOf('Select', module)
   .addDecorator(story => <Wrapper>{story()}</Wrapper>)
-  .add('fixed width', () => (
-    <Select items={items} onChange={onChange} width={150} />
-  ))
-  .add('fixed height', () => (
-    <Select items={items} onChange={onChange} height={100} width={150} />
+  .add('shadow (default)', () => (
+    <Select
+      onChange={onChange}
+      options={options}
+      onOpen={() => console.log('open')}
+    />
   ))
   .add('no shadow', () => (
-    <Select shadow={false} items={items} onChange={onChange} />
+    <Select onChange={onChange} options={options} shadow={false} />
+  ))
+  .add('fixed width', () => (
+    <Select onChange={onChange} options={options} width={150} />
+  ))
+  .add('with menuMaxHeight', () => (
+    <React.Fragment>
+      <Select menuMaxHeight={100} onChange={onChange} options={options} />
+      <br />
+      <Select
+        menuMaxHeight={100}
+        onChange={onChange}
+        options={options.slice(0, 2)}
+      />
+    </React.Fragment>
   ))
   .add('flat', () => (
     <Window>
       <WindowContent>
         <Cutout
           style={{
+            background: 'white',
             padding: '1rem',
             paddingBottom: '3rem',
-            background: 'white',
             width: '300px'
           }}
         >
@@ -53,14 +69,49 @@ storiesOf('Select', module)
             }}
           >
             <Select
-              variant='flat'
-              items={items}
+              menuMaxHeight={100}
               onChange={onChange}
-              height={100}
-              width={150}
+              options={options}
+              variant='flat'
+            />
+            <p
+              style={{
+                marginTop: '1rem',
+                marginBottom: '1rem',
+                lineHeight: 1.3
+              }}
+            >
+              When disabled:
+            </p>
+            <Select
+              disabled
+              menuMaxHeight={100}
+              onChange={onChange}
+              options={options}
+              variant='flat'
             />
           </div>
         </Cutout>
       </WindowContent>
     </Window>
+  ))
+  .add('controlled', () => (
+    <Select
+      onChange={onChange}
+      options={[{ value: 0, label: '🚫 I will not change' }, ...options]}
+      value={0}
+    />
+  ))
+  .add('custom formatLabel', () => (
+    <Select
+      formatLabel={opt => `${opt.label.toUpperCase()} 👍 👍`}
+      onChange={onChange}
+      options={options}
+    />
+  ))
+  .add('disabled', () => (
+    <Select disabled onChange={onChange} options={options} />
+  ))
+  .add('native select', () => (
+    <Select onChange={onChange} native options={options} />
   ));
