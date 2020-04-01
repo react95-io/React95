@@ -3,7 +3,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
 
-import { Select, Window, WindowContent, Cutout } from '..';
+import { Select, Window, WindowContent, Cutout, Fieldset } from '..';
 
 const options = [
   { value: 1, label: '⚡ Pikachu' },
@@ -24,29 +24,43 @@ const onChange = (evt, nextSelection) => console.log(nextSelection);
 
 storiesOf('Select', module)
   .addDecorator(story => <Wrapper>{story()}</Wrapper>)
-  .add('shadow (default)', () => (
-    <Select
-      onChange={onChange}
-      options={options}
-      onOpen={() => console.log('open')}
-    />
-  ))
-  .add('no shadow', () => (
-    <Select onChange={onChange} options={options} shadow={false} />
-  ))
-  .add('fixed width', () => (
-    <Select onChange={onChange} options={options} width={150} />
-  ))
-  .add('with menuMaxHeight', () => (
-    <React.Fragment>
-      <Select menuMaxHeight={100} onChange={onChange} options={options} />
+  .add('default', () => (
+    <div style={{ width: 300 }}>
+      <Fieldset label='default'>
+        <Select
+          onChange={onChange}
+          options={options}
+          menuMaxHeight={160}
+          onOpen={() => console.log('open')}
+        />
+        <br />
+        <Select
+          disabled
+          onChange={onChange}
+          options={options}
+          menuMaxHeight={160}
+        />
+      </Fieldset>
       <br />
-      <Select
-        menuMaxHeight={100}
-        onChange={onChange}
-        options={options.slice(0, 2)}
-      />
-    </React.Fragment>
+      <br />
+      <Fieldset label='default native'>
+        <Select
+          native
+          onChange={onChange}
+          options={options}
+          menuMaxHeight={160}
+          onOpen={() => console.log('open')}
+        />
+        <br />
+        <Select
+          native
+          disabled
+          onChange={onChange}
+          options={options}
+          menuMaxHeight={160}
+        />
+      </Fieldset>
+    </div>
   ))
   .add('flat', () => (
     <Window>
@@ -68,50 +82,50 @@ storiesOf('Select', module)
               marginTop: '1.5rem'
             }}
           >
-            <Select
-              menuMaxHeight={100}
-              onChange={onChange}
-              options={options}
-              variant='flat'
-            />
-            <p
-              style={{
-                marginTop: '1rem',
-                marginBottom: '1rem',
-                lineHeight: 1.3
-              }}
-            >
-              When disabled:
-            </p>
-            <Select
-              disabled
-              menuMaxHeight={100}
-              onChange={onChange}
-              options={options}
-              variant='flat'
-            />
+            <Fieldset label='flat' variant='flat'>
+              <Select
+                variant='flat'
+                onChange={onChange}
+                options={options}
+                onOpen={() => console.log('open')}
+              />
+              <br />
+              <Select
+                variant='flat'
+                disabled
+                onChange={onChange}
+                options={options}
+              />
+            </Fieldset>
+            <br />
+            <br />
+            <Fieldset label='flat native' variant='flat'>
+              <Select
+                variant='flat'
+                native
+                onChange={onChange}
+                options={options}
+                onOpen={() => console.log('open')}
+              />
+              <br />
+              <Select
+                variant='flat'
+                native
+                disabled
+                onChange={onChange}
+                options={options}
+              />
+            </Fieldset>
           </div>
         </Cutout>
       </WindowContent>
     </Window>
   ))
-  .add('controlled', () => (
-    <Select
-      onChange={onChange}
-      options={[{ value: 0, label: '🚫 I will not change' }, ...options]}
-      value={0}
-    />
-  ))
   .add('custom formatLabel', () => (
     <Select
       formatLabel={opt => `${opt.label.toUpperCase()} 👍 👍`}
+      width={300}
       onChange={onChange}
       options={options}
     />
-  ))
-  .add('disabled', () => (
-    <Select disabled onChange={onChange} options={options} />
-  ))
-  .add('native select', () => (
-    <Select onChange={onChange} native options={options} />
   ));
