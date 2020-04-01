@@ -344,19 +344,34 @@ const Select = ({
     style: { ...style, width }
   };
 
+  const DropdownButton = (
+    <StyledDropdownButton
+      tabIndex={-1}
+      data-testid={getTestId(testId, 'Button')}
+      disabled={disabled}
+      variant={variant}
+      native={native}
+    >
+      <StyledDropdownIcon
+        data-testid={getTestId(testId, 'Icon')}
+        isDisabled={disabled}
+      />
+    </StyledDropdownButton>
+  );
   if (native) {
     return (
-      <StyledNativeSelect
-        {...wrapperCommonProps}
-        disabled={disabled}
-        onChange={isEnabled ? handleSelection : undefined}
-        {...otherProps}
-      >
-        {optionsContent}
-      </StyledNativeSelect>
+      <Wrapper {...wrapperCommonProps}>
+        <StyledNativeSelect
+          disabled={disabled}
+          onChange={isEnabled ? handleSelection : undefined}
+          {...otherProps}
+        >
+          {optionsContent}
+        </StyledNativeSelect>
+        {DropdownButton}
+      </Wrapper>
     );
   }
-
   return (
     <Wrapper
       {...wrapperCommonProps}
@@ -377,16 +392,7 @@ const Select = ({
         {displayLabel}
       </StyledSelectContent>
 
-      <StyledDropdownButton
-        data-testid={getTestId(testId, 'Button')}
-        disabled={disabled}
-        variant={variant}
-      >
-        <StyledDropdownIcon
-          data-testid={getTestId(testId, 'Icon')}
-          isDisabled={disabled}
-        />
-      </StyledDropdownButton>
+      {DropdownButton}
 
       {isEnabled && openDerived && (
         <StyledDropdownMenu
