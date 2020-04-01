@@ -17,6 +17,7 @@
     "@emotion/core": "^10.0.14",
     "@emotion/styled": "^10.0.14",
     "docz": "latest",
+    "gatsby-theme-docz": "^2.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react95": "^2.0.0",
