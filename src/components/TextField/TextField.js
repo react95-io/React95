@@ -1,87 +1,113 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { createDisabledTextStyles, createFlatBoxStyles } from '../common';
 import { blockSizes, fontFamily } from '../common/system';
 import Cutout from '../Cutout/Cutout';
 
-const StyledWrapper = styled(Cutout)`
-  height: ${blockSizes.md};
+const sharedWrapperStyles = css`
+  display: flex;
+  align-items: center;
+  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
+  min-height: ${blockSizes.md};
+`;
+
+const Wrapper = styled(Cutout)`
+  ${sharedWrapperStyles}
   background: ${({ theme, isDisabled }) =>
     isDisabled ? theme.material : theme.canvas};
 `;
-const StyledFlatWrapper = styled.div`
-  position: relative;
-  height: ${blockSizes.md};
+
+const FlatWrapper = styled.div`
   ${createFlatBoxStyles()}
+  ${sharedWrapperStyles}
+  position: relative;
 `;
-export const StyledTextInput = styled.input`
+
+const sharedInputStyles = css`
+  display: block;
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  padding: 0 8px;
   outline: none;
   border: none;
   background: none;
   font-size: 1rem;
+  min-height: 27px;
   font-family: ${fontFamily};
   color: ${({ theme }) => theme.inputText};
   ${({ disabled, variant }) =>
     variant !== 'flat' && disabled && createDisabledTextStyles()}
 `;
+
+export const StyledTextInput = styled.input`
+  ${sharedInputStyles}
+  padding: 0 8px;
+`;
+
+const StyledTextArea = styled.textarea`
+  ${sharedInputStyles}
+  padding: 8px;
+  resize: none;
+`;
+
 const TextField = React.forwardRef(function TextField(props, ref) {
   const {
-    onChange,
-    disabled,
-    variant,
-    type,
-    style,
-    shadow,
     className,
-    width,
+    disabled,
+    fullWidth,
+    multiline,
+    onChange,
+    shadow,
+    style,
+    type,
+    variant,
     ...otherProps
   } = props;
-  const Wrapper = variant === 'flat' ? StyledFlatWrapper : StyledWrapper;
+  const WrapperComponent = variant === 'flat' ? FlatWrapper : Wrapper;
+  const Input = multiline ? StyledTextArea : StyledTextInput;
   return (
-    <Wrapper
-      width={width}
-      shadow={shadow}
-      isDisabled={disabled}
-      style={{ ...style, width: width || 'auto' }}
+    <WrapperComponent
       className={className}
+      fullWidth={fullWidth}
+      isDisabled={disabled}
+      shadow={shadow}
+      style={style}
     >
-      <StyledTextInput
+      <Input
+        disabled={disabled}
         onChange={disabled ? undefined : onChange}
         readOnly={disabled}
-        disabled={disabled}
-        variant={variant}
-        type={type}
         ref={ref}
+        type={type}
+        variant={variant}
         {...otherProps}
       />
-    </Wrapper>
+    </WrapperComponent>
   );
 });
 TextField.defaultProps = {
+  className: '',
   disabled: false,
-  type: 'text',
-  shadow: true,
-  variant: 'default',
-  style: {},
-  width: null,
+  fullWidth: null,
+  multiline: false,
   onChange: () => {},
-  className: ''
+  shadow: true,
+  style: {},
+  type: 'text',
+  variant: 'default'
 };
 
 TextField.propTypes = {
-  width: propTypes.oneOfType([propTypes.string, propTypes.number]),
-  onChange: propTypes.func,
-  disabled: propTypes.bool,
-  variant: propTypes.oneOf(['default', 'flat']),
-  shadow: propTypes.bool,
-  type: propTypes.string,
   className: propTypes.string,
-  style: propTypes.shape([propTypes.string, propTypes.number])
+  disabled: propTypes.bool,
+  fullWidth: propTypes.bool,
+  multiline: propTypes.bool,
+  onChange: propTypes.func,
+  shadow: propTypes.bool,
+  style: propTypes.shape([propTypes.string, propTypes.number]),
+  type: propTypes.string,
+  variant: propTypes.oneOf(['default', 'flat'])
 };
 export default TextField;
