@@ -59,7 +59,7 @@ export const StyledButton = styled.button`
           `}
           &:focus:after, &:active:after {
             ${!active && !isDisabled && focusOutline}
-            outline-offset: -6px;
+            outline-offset: -4px;
           }
         `
       : variant === 'menu'
