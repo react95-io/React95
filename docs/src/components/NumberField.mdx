@@ -1,0 +1,79 @@
+---
+name: NumberField
+menu: Components
+---
+
+import { Playground, Props } from 'docz';
+
+import { NumberField, Cutout } from 'react95';
+
+# NumberField
+
+## Usage
+
+#### Default
+
+<Playground>
+  <NumberField value={1991} onChange={value => console.log(value)} />
+</Playground>
+
+#### Fixed width
+
+<Playground>
+  <NumberField value={1991} width={94} onChange={value => console.log(value)} />
+</Playground>
+
+#### Disabled
+
+<Playground>
+  <NumberField disabled value={1991} onChange={value => console.log(value)} />
+</Playground>
+
+#### Disabled keyboard input
+
+<Playground>
+  <NumberField
+    disableKeyboardInput
+    value={1991}
+    onChange={value => console.log(value)}
+  />
+</Playground>
+
+#### No shadow
+
+<Playground>
+  <NumberField
+    shadow={false}
+    value={1991}
+    onChange={value => console.log(value)}
+  />
+</Playground>
+
+#### Flat
+
+<Playground>
+  <Cutout style={{ padding: '2rem', width: '300px' }}>
+      <p style={{ lineHeight: 1.3, marginBottom: '1rem' }}>
+        When you want to use NumberField on a light background (like scrollable
+        content), just use the flat variant:
+      </p>
+      <NumberField
+        variant='flat'
+        shadow={false}
+        value={1991}
+        onChange={value => console.log(value)}
+      />
+    </Cutout>
+</Playground>
+
+## API
+
+### Import
+
+```
+import { NumberField } from 'react95'
+```
+
+### Props
+
+<Props of={NumberField} />
