@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 
 import styled, { css } from 'styled-components';
 import { createBorderStyles, createDisabledTextStyles } from '../common';
+import { noOp } from '../common/utils';
 
 const StyledHeadCell = styled.th`
 position: relative;
@@ -62,7 +63,6 @@ const TableHeadCell = React.forwardRef(function TableHeadCell(props, ref) {
       isDisabled={disabled}
       aria-disabled={disabled}
       onClick={disabled ? undefined : onClick}
-      onTouchStart={() => ''}
       {...otherProps}
     >
       <div>{children}</div>
@@ -71,15 +71,18 @@ const TableHeadCell = React.forwardRef(function TableHeadCell(props, ref) {
 });
 
 TableHeadCell.defaultProps = {
-  onClick: () => {},
   children: null,
-  disabled: false
+  disabled: false,
+  onClick: null,
+  // onTouchStart below to enable :active style on iOS
+  onTouchStart: noOp
 };
 
 TableHeadCell.propTypes = {
-  onClick: propTypes.func,
   children: propTypes.node,
-  disabled: propTypes.bool
+  disabled: propTypes.bool,
+  onClick: propTypes.func,
+  onTouchStart: propTypes.func
 };
 
 export default TableHeadCell;
