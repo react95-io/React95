@@ -5,24 +5,24 @@ import { renderWithTheme } from '../../../test/utils';
 import TableBody from './TableBody';
 
 describe('<TableBody />', () => {
+  function mountInTable(node) {
+    const { container, getByTestId } = renderWithTheme(<table>{node}</table>);
+    return {
+      tbody: container.querySelector('table').firstChild,
+      getByTestId
+    };
+  }
+
   it('renders TableBody', () => {
-    const { container } = renderWithTheme(<TableBody />);
-    const list = container.firstChild;
+    const { tbody } = mountInTable(<TableBody />);
 
-    expect(list).toBeInTheDocument();
+    expect(tbody).toBeInTheDocument();
+    expect(tbody.tagName).toBe('TBODY');
   });
-  it('renders tbody element', () => {
-    const { container } = renderWithTheme(<TableBody />);
 
-    expect(container.querySelector('tbody')).toBeInTheDocument();
-  });
   it('renders children', () => {
-    const textContent = 'Hi there!';
-    const { getByText } = renderWithTheme(
-      <TableBody>
-        <span>{textContent}</span>
-      </TableBody>
-    );
-    expect(getByText(textContent)).toBeInTheDocument();
+    const children = <tr data-testid='tr' />;
+    const { getByTestId } = mountInTable(<TableBody>{children}</TableBody>);
+    expect(getByTestId('tr')).toBeInTheDocument();
   });
 });

@@ -92,4 +92,22 @@ describe('<TextField />', () => {
       expect(input).not.toHaveAttribute('disabled');
     });
   });
+
+  describe('prop: variant', () => {
+    it('should be "default" by default', () => {
+      const { getByTestId } = renderWithTheme(<TextField />);
+      expect(getByTestId('variant-default')).toBeInTheDocument();
+    });
+    it('should handle "flat" variant', () => {
+      const { getByTestId } = renderWithTheme(<TextField variant='flat' />);
+      expect(getByTestId('variant-flat')).toBeInTheDocument();
+    });
+  });
+
+  describe('prop: fullWidth', () => {
+    it('should make component take 100% width', () => {
+      const { container } = renderWithTheme(<TextField fullWidth />);
+      expect(window.getComputedStyle(container.firstChild).width).toBe('100%');
+    });
+  });
 });

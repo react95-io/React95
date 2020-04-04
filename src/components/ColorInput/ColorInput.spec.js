@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { fireEvent } from '@testing-library/react';
 import { renderWithTheme } from '../../../test/utils';
 import ColorInput from './ColorInput';
 
@@ -12,8 +12,14 @@ function rgb2hex(str) {
 }
 
 describe('<ColorInput />', () => {
-  // TODO
-  it('should call handlers', () => {});
+  it('should call handlers', () => {
+    const color = '#f0f0dd';
+    const onChange = jest.fn();
+    const { container } = renderWithTheme(<ColorInput onChange={onChange} />);
+    const input = container.querySelector(`[type="color"]`);
+    fireEvent.change(input, { target: { value: color } });
+    expect(onChange).toBeCalledTimes(1);
+  });
 
   it('should properly pass value to input element', () => {
     const color = '#f0f0dd';

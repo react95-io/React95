@@ -5,24 +5,27 @@ import { renderWithTheme } from '../../../test/utils';
 import TableDataCell from './TableDataCell';
 
 describe('<TableDataCell />', () => {
-  it('renders TableDataCell', () => {
-    const { container } = renderWithTheme(<TableDataCell />);
-    const list = container.firstChild;
-
-    expect(list).toBeInTheDocument();
-  });
-  it('renders td element', () => {
-    const { container } = renderWithTheme(<TableDataCell />);
-
-    expect(container.querySelector('td')).toBeInTheDocument();
-  });
-  it('renders children', () => {
-    const textContent = 'Hi there!';
-    const { getByText } = renderWithTheme(
-      <TableDataCell>
-        <span>{textContent}</span>
-      </TableDataCell>
+  function mountInTable(node) {
+    const { container, getByText } = renderWithTheme(
+      <table>
+        <tbody>
+          <tr>{node}</tr>
+        </tbody>
+      </table>
     );
-    expect(getByText(textContent)).toBeInTheDocument();
+    return {
+      td: container.querySelector('tr').firstChild,
+      getByText
+    };
+  }
+
+  it('renders TableDataCell', () => {
+    const { td } = mountInTable(<TableDataCell />);
+    expect(td.tagName).toBe('TD');
+  });
+
+  it('renders children', () => {
+    const { getByText } = mountInTable(<TableDataCell>children</TableDataCell>);
+    expect(getByText('children')).toBeInTheDocument();
   });
 });
