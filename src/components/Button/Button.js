@@ -13,6 +13,7 @@ import {
   createHatchedBackground,
   focusOutline
 } from '../common';
+import { noOp } from '../common/utils';
 import { blockSizes } from '../common/system';
 
 const commonButtonStyles = css`
@@ -132,8 +133,6 @@ const Button = React.forwardRef(function Button(props, ref) {
       onClick={disabled ? undefined : onClick}
       disabled={disabled}
       isDisabled={disabled}
-      // onTouchStart below to enable button :active style on iOS
-      onTouchStart={() => ''}
       ref={ref}
       {...otherProps}
     >
@@ -150,6 +149,8 @@ Button.defaultProps = {
   size: 'md',
   square: false,
   active: false,
+  // onTouchStart below to enable button :active style on iOS
+  onTouchStart: noOp,
   primary: false,
   variant: 'default'
 };
@@ -162,6 +163,7 @@ Button.propTypes = {
   size: propTypes.oneOf(['sm', 'md', 'lg']),
   square: propTypes.bool,
   active: propTypes.bool,
+  onTouchStart: propTypes.func,
   primary: propTypes.bool,
   variant: propTypes.oneOf(['default', 'menu', 'flat']),
   // eslint-disable-next-line react/require-default-props
