@@ -146,7 +146,7 @@ Radio.defaultProps = {
   onChange: undefined,
   name: null,
   value: undefined,
-  checked: false,
+  checked: undefined,
   label: '',
   disabled: false,
   variant: 'default',

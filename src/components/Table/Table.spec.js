@@ -17,12 +17,11 @@ describe('<Table />', () => {
     expect(getByRole('table')).toBeInTheDocument();
   });
   it('renders children', () => {
-    const textContent = 'Hi there!';
-    const { getByText } = renderWithTheme(
+    const { getByTestId } = renderWithTheme(
       <Table>
-        <span>{textContent}</span>
+        <tbody data-testid='children' />
       </Table>
     );
-    expect(getByText(textContent)).toBeInTheDocument();
+    expect(getByTestId('children')).toBeInTheDocument();
   });
 });

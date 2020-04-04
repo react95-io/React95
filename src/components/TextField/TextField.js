@@ -13,13 +13,17 @@ const sharedWrapperStyles = css`
   min-height: ${blockSizes.md};
 `;
 
-const Wrapper = styled(Cutout)`
+const Wrapper = styled(Cutout).attrs({
+  'data-testid': 'variant-default'
+})`
   ${sharedWrapperStyles}
   background: ${({ theme, isDisabled }) =>
     isDisabled ? theme.material : theme.canvas};
 `;
 
-const FlatWrapper = styled.div`
+const FlatWrapper = styled.div.attrs({
+  'data-testid': 'variant-flat'
+})`
   ${createFlatBoxStyles()}
   ${sharedWrapperStyles}
   position: relative;
