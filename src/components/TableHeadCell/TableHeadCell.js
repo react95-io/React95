@@ -55,14 +55,18 @@ user-select: none;
 `;
 
 const TableHeadCell = React.forwardRef(function TableHeadCell(props, ref) {
-  const { disabled, children, onClick, ...otherProps } = props;
-
+  const { disabled, children, onClick, sort, ...otherProps } = props;
+  let sortDirection = null;
+  if (sort) {
+    sortDirection = sort === 'asc' ? 'ascending' : 'descending';
+  }
   return (
     <StyledHeadCell
       ref={ref}
       isDisabled={disabled}
       aria-disabled={disabled}
       onClick={disabled ? undefined : onClick}
+      aria-sort={sortDirection}
       {...otherProps}
     >
       <div>{children}</div>
@@ -75,14 +79,16 @@ TableHeadCell.defaultProps = {
   disabled: false,
   onClick: null,
   // onTouchStart below to enable :active style on iOS
-  onTouchStart: noOp
+  onTouchStart: noOp,
+  sort: null
 };
 
 TableHeadCell.propTypes = {
   children: propTypes.node,
   disabled: propTypes.bool,
   onClick: propTypes.func,
-  onTouchStart: propTypes.func
+  onTouchStart: propTypes.func,
+  sort: propTypes.oneOf(['asc', 'desc', null])
 };
 
 export default TableHeadCell;
