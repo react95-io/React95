@@ -1,422 +1,424 @@
+// Bsased on https://github.com/mui-org/material-ui
 import React from 'react';
-import { fireEvent, render, wait } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
+import { renderWithTheme } from '../../../test/utils';
+import Select from './Select';
 
-import { StyledFlatSelectWrapper, StyledSelectWrapper } from './Select.styles';
-
-import Select, {
-  getDefaultValue,
-  getDisplayLabel,
-  getWrapper,
-  isNumber,
-  isObject,
-  isString,
-  isStringOrNumber
-} from './Select';
-
-const getProps = (props = {}) => ({
-  className: props.className,
-  defaultValue: props.defaultValue,
-  disabled: props.disabled,
-  formatLabel: props.formatLabel,
-  menuMaxHeight: props.menuMaxHeight,
-  onBlur: props.onBlur,
-  onChange: props.onChange,
-  onClose: props.onClose,
-  onFocus: props.onFocus,
-  onOpen: props.onOpen,
-  options: props.options || [],
-  menuOpen: props.menuOpen,
-  native: props.native,
-  shadow: props.shadow,
-  style: props.style,
-  testId: 'select',
-  value: props.value,
-  variant: props.variant,
-  width: props.width
-});
-
-const renderSelect = (props = getProps()) => <Select {...props} />;
-
-const testOptions = [
-  {
-    label: 'Alpaca',
-    value: 'alpaca'
-  },
-  {
-    label: 'Bear',
-    value: 'bear'
-  },
-  {
-    label: 'Cat',
-    value: 'cat'
-  }
+const options = [
+  { label: 'ten', value: 10 },
+  { label: 'twenty', value: 20 },
+  { label: 'thirty', value: 30 }
 ];
 
-const nodeCountMenuOpen = 4;
-const nodeCountMenuClosed = 3;
-
-describe('Select helper functions', () => {
-  describe('getDefaultValue', () => {
-    it('returns the given defaultValue', () => {
-      expect(getDefaultValue('default')).toEqual('default');
-    });
-
-    it('returns the value of the first option, when no defaultValue is provided', () => {
-      expect(getDefaultValue(undefined, [{ value: 'value' }])).toEqual('value');
-    });
-
-    it('returns undefined otherwise', () => {
-      expect(getDefaultValue()).toEqual(undefined);
-    });
-  });
-
-  describe('getDisplayLabel', () => {
-    it('returns empty string if no selected option is provided', () => {
-      expect(getDisplayLabel()).toEqual('');
-    });
-
-    it('returns label of given selected option, if no formatLabel function is provided', () => {
-      expect(getDisplayLabel({ label: 'Label' })).toEqual('Label');
-    });
-
-    it('returns result of provided formatLabel function', () => {
-      expect(getDisplayLabel({}, () => 'Custom')).toEqual('Custom');
-    });
-  });
-
-  describe('getWrapper', () => {
-    it('returns StyledSelectWrapper by default', () => {
-      expect(getWrapper()).toEqual(StyledSelectWrapper);
-    });
-
-    it('returns StyledFlatSelectWrapper if provided variant is `flat`', () => {
-      expect(getWrapper('flat')).toEqual(StyledFlatSelectWrapper);
-    });
-  });
-
-  describe('isNumber', () => {
-    it('returns true for numeric values', () => {
-      const testVals = [1, -1, 1.2, Infinity];
-      testVals.forEach(val => {
-        expect(isNumber(val)).toBeTruthy();
-      });
-    });
-
-    it('returns false for non-numeric values', () => {
-      const testVals = ['1', false, {}, () => {}];
-      testVals.forEach(val => {
-        expect(isNumber(val)).toBeFalsy();
-      });
-    });
-  });
-
-  describe('isObject', () => {
-    it('returns true for (non-array) object values', () => {
-      const testVals = [{}, null, Object.create({})];
-      testVals.forEach(val => {
-        expect(isObject(val)).toBeTruthy();
-      });
-    });
-
-    it('returns false for array and non-object values', () => {
-      const testVals = ['1', false, [], 1];
-      testVals.forEach(val => {
-        expect(isObject(val)).toBeFalsy();
-      });
-    });
-  });
-
-  describe('isString', () => {
-    it('returns true for string values', () => {
-      const testVals = ['hi', '', String(), (1).toString()];
-      testVals.forEach(val => {
-        expect(isString(val)).toBeTruthy();
-      });
-    });
-
-    it('returns false for non-string values', () => {
-      const testVals = [false, [], 1, {}];
-      testVals.forEach(val => {
-        expect(isString(val)).toBeFalsy();
-      });
-    });
-  });
-
-  describe('isStringOrNumber', () => {
-    it('returns true if isString returns true', () => {
-      expect(isStringOrNumber('')).toBeTruthy();
-    });
-
-    it('returns true if isNumber returns true', () => {
-      expect(isStringOrNumber(1)).toBeTruthy();
-    });
-
-    it('returns false if both isString and isNumber return false', () => {
-      expect(isStringOrNumber({})).toBeFalsy();
-    });
-  });
-});
-
 describe('<Select />', () => {
-  describe('renders', () => {
-    it('as native select if native is true', () => {
-      const { getByTestId } = render(renderSelect(getProps({ native: true })));
+  it('should be able to mount the component', () => {
+    const { container } = renderWithTheme(
+      <Select value={10} options={options} />
+    );
+    expect(container.querySelector('input').value).toBe('10');
+  });
 
-      const el = getByTestId('select');
+  it('renders dropdown button with icon', () => {
+    const { getByTestId } = renderWithTheme(
+      <Select value={10} options={options} />
+    );
 
-      expect(el).toBeInTheDocument();
-      expect(el.tagName).toBe('SELECT');
+    const button = getByTestId('select-button');
+    expect(button).toBeInTheDocument();
+    // we render styled.button, but as='div'
+    // because it's used only for aesthetic purposes
+    expect(button.tagName).not.toBe('BUTTON');
+    expect(button.firstChild).toHaveAttribute('data-testid', 'select-icon');
+  });
+
+  it('the trigger is in tab order', () => {
+    const { getByRole } = renderWithTheme(
+      <Select value={10} options={options} />
+    );
+    expect(getByRole('button')).toHaveProperty('tabIndex', 1);
+  });
+  it('should accept null child', () => {
+    renderWithTheme(<Select value={10} options={[options, null]} />);
+  });
+  it('should have an input with [type="hidden"] by default', () => {
+    const { container } = renderWithTheme(
+      <Select value={10} options={options} />
+    );
+    expect(container.querySelector('input')).toHaveAttribute('type', 'hidden');
+  });
+  it('should ignore onBlur when the menu opens', () => {
+    // mousedown calls focus while click opens moving the focus to an item
+    // this means the trigger is blurred immediately
+    const handleBlur = jest.fn();
+    const { getByRole, getAllByRole, queryByRole } = renderWithTheme(
+      <Select
+        onBlur={handleBlur}
+        value=''
+        onMouseDown={event => {
+          // simulating certain platforms that focus on mousedown
+          if (event.defaultPrevented === false) {
+            event.currentTarget.focus();
+          }
+        }}
+        options={[
+          { label: 'ten', value: 10 },
+          { label: 'none', value: '' }
+        ]}
+      />
+    );
+    const trigger = getByRole('button');
+    fireEvent.mouseDown(trigger);
+    expect(handleBlur).toHaveBeenCalledTimes(0);
+    expect(getByRole('listbox')).toBeInTheDocument();
+    const o = getAllByRole('option');
+    fireEvent.mouseDown(o[0]);
+    o[0].click();
+    expect(handleBlur).toHaveBeenCalledTimes(0);
+    expect(queryByRole('listbox', { hidden: false })).toBe(null);
+  });
+  it('options should have a data-value attribute', () => {
+    const { getAllByRole } = renderWithTheme(
+      <Select open value={10} options={options} />
+    );
+    const o = getAllByRole('option');
+    expect(o[0]).toHaveAttribute('data-value', '10');
+    expect(o[1]).toHaveAttribute('data-value', '20');
+  });
+  [' ', 'ArrowUp', 'ArrowDown', 'Enter'].forEach(key => {
+    it(`should open menu when pressed ${key} key on select`, () => {
+      const { getByRole } = renderWithTheme(
+        <Select value='' options={[{ label: 'none', value: '' }]} />
+      );
+      getByRole('button').focus();
+      fireEvent.keyDown(document.activeElement, { key });
+      expect(getByRole('listbox', { hidden: false })).toBeInTheDocument();
+      fireEvent.keyUp(document.activeElement, { key });
+      expect(getByRole('listbox', { hidden: false })).toBeInTheDocument();
     });
+  });
+  it('should pass "name" as part of the event.target for onBlur', () => {
+    const handleBlur = jest.fn(event => event.target.name);
+    const { getByRole } = renderWithTheme(
+      <Select
+        onBlur={handleBlur}
+        name='blur-testing'
+        value=''
+        options={[{ label: 'none', value: '' }]}
+      />
+    );
+    const button = getByRole('button');
+    button.focus();
+    button.blur();
+    expect(handleBlur).toHaveBeenCalledTimes(1);
+    expect(handleBlur.mock.results[0].value).toBe('blur-testing');
+  });
 
-    it('wrapper element', () => {
-      const { getByTestId } = render(renderSelect(getProps()));
+  // TODO why it doesn't work ?
+  // it('should call onClose when user clicks outside of component', () => {
+  //   const handleClose = jest.fn();
+  //   const { getByTestId } = renderWithTheme(
+  //     <div>
+  //       <Select onClose={handleClose} open value='' options={options} />
+  //       <div data-testid='el'>swag</div>
+  //     </div>
+  //   );
+  //   expect(handleClose).toHaveBeenCalledTimes(0);
+  //   act(() => {
+  //     fireEvent.click(getByTestId('el'));
+  //   });
+  //   expect(handleClose).toHaveBeenCalledTimes(1);
+  // });
 
-      const el = getByTestId('select');
-
-      expect(el).toBeInTheDocument();
-      expect(el.tagName).toBe('DIV');
-    });
-
-    it('flat wrapper element', () => {
-      const { getByTestId } = render(
-        renderSelect(
-          getProps({
-            variant: 'flat'
-          })
-        )
+  describe('prop: menuMaxHeight', () => {
+    it('sets max-height to dropdown', () => {
+      const { getByRole } = renderWithTheme(
+        <Select value={10} open options={options} menuMaxHeight={220} />
       );
 
-      const el = getByTestId('select');
-
-      expect(el).toBeInTheDocument();
-      expect(el.tagName).toBe('DIV');
-    });
-
-    it('label content element', () => {
-      const { getByTestId } = render(renderSelect(getProps()));
-
-      const el = getByTestId('selectContent');
-
-      expect(el).toBeInTheDocument();
-      expect(el.tagName).toBe('DIV');
-    });
-
-    it('dropdown button element', () => {
-      const { getByTestId } = render(renderSelect(getProps()));
-
-      const el = getByTestId('selectButton');
-
-      expect(el).toBeInTheDocument();
-      expect(el.tagName).toBe('BUTTON');
-    });
-
-    it('dropdown button icon element', () => {
-      const { getByTestId } = render(renderSelect(getProps()));
-
-      const el = getByTestId('selectIcon');
-
-      expect(el).toBeInTheDocument();
-      expect(el.tagName).toBe('SPAN');
-    });
-
-    it('menu element when menuOpen is true', () => {
-      const { container, getByTestId } = render(
-        renderSelect(getProps({ menuOpen: true }))
-      );
-
-      const el = getByTestId('selectMenu');
-
-      expect(el).toBeInTheDocument();
-      expect(el.tagName).toBe('UL');
-      expect(container.firstChild.childNodes.length).toEqual(nodeCountMenuOpen);
-    });
-
-    it('ZERO menu element when menuOpen is falsy', () => {
-      const { container } = render(
-        renderSelect(getProps({ options: testOptions }))
-      );
-
-      expect(container.firstChild.childNodes.length).toEqual(
-        nodeCountMenuClosed
-      );
-    });
-
-    it('menu item elements when menuOpen is true and has options.length', () => {
-      const { getByTestId } = render(
-        renderSelect(getProps({ menuOpen: true, options: testOptions }))
-      );
-
-      const el = getByTestId(`selectMenuItem${testOptions.length - 1}`);
-
-      expect(el).toBeInTheDocument();
-      expect(el.tagName).toBe('LI');
-    });
-
-    it('NO menu element when disabled', () => {
-      const { container } = render(
-        renderSelect(
-          getProps({ disabled: true, menuOpen: true, options: testOptions })
-        )
-      );
-
-      expect(container.firstChild.childNodes.length).toEqual(
-        nodeCountMenuClosed
-      );
-    });
-
-    it('with provided className', () => {
-      const { getByTestId } = render(
-        renderSelect(
-          getProps({
-            className: 'my-select'
-          })
-        )
-      );
-
-      const el = getByTestId('select');
-
-      expect(el.className.includes('my-select')).toBeTruthy();
-    });
-
-    it('with provided defaultValue', () => {
-      const { getByText } = render(
-        renderSelect(
-          getProps({
-            defaultValue: testOptions[1].value,
-            options: testOptions
-          })
-        )
-      );
-
-      const el = getByText(testOptions[1].label);
-
-      expect(el).toBeInTheDocument();
-    });
-
-    it('as disabled', () => {
-      const { getByTestId } = render(
-        renderSelect(
-          getProps({
-            disabled: true
-          })
-        )
-      );
-
-      const el = getByTestId('select');
-
-      expect(el.className.includes('is-disabled')).toBeTruthy();
-    });
-
-    it('with NO tab index if disabled', () => {
-      const { getByTestId } = render(
-        renderSelect(
-          getProps({
-            disabled: true
-          })
-        )
-      );
-
-      const el = getByTestId('select');
-
-      expect(el.getAttribute('tabindex')).toEqual(null);
-    });
-
-    it('with tab index if NOT disabled', () => {
-      const { getByTestId } = render(renderSelect(getProps()));
-
-      const el = getByTestId('select');
-
-      expect(el.getAttribute('tabindex')).toEqual('0');
-    });
-
-    it('label with provided formatLabel function', () => {
-      const { getByText } = render(
-        renderSelect(
-          getProps({
-            formatLabel: () => 'Custom label',
-            options: testOptions
-          })
-        )
-      );
-
-      const el = getByText('Custom label');
-
-      expect(el).toBeInTheDocument();
-    });
-
-    it('with provided value', () => {
-      const { getByText } = render(
-        renderSelect(
-          getProps({
-            options: testOptions,
-            value: testOptions[2].value
-          })
-        )
-      );
-
-      const el = getByText(testOptions[2].label);
-
-      expect(el).toBeInTheDocument();
-    });
-
-    it('with menu max height', () => {
-      const { getByTestId } = render(
-        renderSelect(
-          getProps({
-            menuMaxHeight: 220,
-            menuOpen: true
-          })
-        )
-      );
-
-      const el = getByTestId('selectMenu');
-
+      const listbox = getByRole('listbox');
       expect(
-        el.getAttribute('style').includes('max-height: 220px')
+        listbox.getAttribute('style').includes('max-height: 220px')
       ).toBeTruthy();
     });
   });
 
-  describe('event callbacks', () => {
-    it('handle onFocus events, passing event to both', async done => {
-      const props = getProps({
-        onFocus: jest.fn(),
-        onOpen: jest.fn(),
-        options: testOptions
-      });
+  describe('prop: onChange', () => {
+    it('should get selected option from arguments', () => {
+      const onChange = jest.fn();
+      const { getAllByRole, getByRole } = renderWithTheme(
+        <Select onChange={onChange} value='0' options={options} />
+      );
+      fireEvent.mouseDown(getByRole('button'));
+      getAllByRole('option')[1].click();
+      expect(onChange).toHaveBeenCalledTimes(1);
+      const selected = onChange.mock.calls[0][1];
+      expect(selected.value).toBe(20);
+      expect(selected.label).toBe('twenty');
+    });
+  });
+  describe('prop: value', () => {
+    it('should select the option based on the number value', () => {
+      const { getAllByRole } = renderWithTheme(
+        <Select value={20} options={options} open />
+      );
+      const o = getAllByRole('option');
+      expect(o[0]).not.toHaveAttribute('aria-selected');
+      expect(o[1]).toHaveAttribute('aria-selected', 'true');
+      expect(o[2]).not.toHaveAttribute('aria-selected');
+    });
+    it('should select the option based on the string value', () => {
+      const { getAllByRole } = renderWithTheme(
+        <Select value='20' options={options} open />
+      );
+      const o = getAllByRole('option');
+      expect(o[0]).not.toHaveAttribute('aria-selected');
+      expect(o[1]).toHaveAttribute('aria-selected', 'true');
+      expect(o[2]).not.toHaveAttribute('aria-selected');
+    });
+    it('should select only the option that matches the object', () => {
+      const obj1 = { id: 1 };
+      const obj2 = { id: 2 };
+      const { getAllByRole } = renderWithTheme(
+        <Select
+          open
+          value={obj1}
+          options={[{ value: obj1 }, { value: obj2 }]}
+        />
+      );
+      const o = getAllByRole('option');
+      expect(o[0]).toHaveAttribute('aria-selected', 'true');
+      expect(o[1]).not.toHaveAttribute('aria-selected');
+    });
+    it('should be able to use an object', () => {
+      const value = {};
+      const { getByRole } = renderWithTheme(
+        <Select
+          open
+          value={value}
+          options={[...options, { value, label: 'object-label' }]}
+        />
+      );
+      expect(getByRole('button')).toHaveTextContent('object-label');
+    });
+  });
 
-      props.onFocus.mockImplementation(evt => {
-        expect(evt.type).toEqual('focus');
-        expect(props.onFocus).toHaveBeenCalled();
-        done();
-      });
-
-      const { getByTestId } = render(renderSelect(props));
-
-      const el = getByTestId('select');
-
-      fireEvent.focus(el);
-      await wait(() => getByTestId('selectMenu'));
+  describe('accessibility', () => {
+    it('sets aria-expanded="true" when the listbox is displayed', () => {
+      // since we make the rest of the UI inaccessible when open this doesn't
+      // technically matter. This is only here in case we keep the rest accessible
+      const { getByRole } = renderWithTheme(<Select open value='' />);
+      expect(getByRole('button', { hidden: true })).toHaveAttribute(
+        'aria-expanded',
+        'true'
+      );
+    });
+    it('aria-expanded is not present if the listbox isnt displayed', () => {
+      const { getByRole } = renderWithTheme(<Select value='' />);
+      expect(getByRole('button')).not.toHaveAttribute('aria-expanded');
+    });
+    it('indicates that activating the button displays a listbox', () => {
+      const { getByRole } = renderWithTheme(<Select value='' />);
+      expect(getByRole('button')).toHaveAttribute('aria-haspopup', 'listbox');
+    });
+    it('renders an element with listbox behavior', () => {
+      const { getByRole } = renderWithTheme(<Select open value='' />);
+      expect(getByRole('listbox')).toBeVisible();
     });
 
-    it('call onOpen prop with event', async done => {
-      const props = getProps({
-        onOpen: jest.fn(),
-        options: testOptions
-      });
+    it('the listbox is focusable', () => {
+      const { getByRole } = renderWithTheme(<Select open options={options} />);
+      const listbox = getByRole('listbox');
+      listbox.focus();
+      expect(listbox).toHaveFocus();
+    });
+    it('identifies each selectable element containing an option', () => {
+      const { getAllByRole } = renderWithTheme(
+        <Select open value='' options={options} />
+      );
+      const o = getAllByRole('option');
+      expect(o[0]).toHaveTextContent('ten');
+      expect(o[1]).toHaveTextContent('twenty');
+    });
+    it('indicates the selected option', () => {
+      const { getAllByRole } = renderWithTheme(
+        <Select open value={20} options={options} />
+      );
+      expect(getAllByRole('option')[1]).toHaveAttribute(
+        'aria-selected',
+        'true'
+      );
+    });
+    it('it will fallback to its content for the accessible name when it has no name', () => {
+      const { getByRole } = renderWithTheme(<Select value='' />);
+      expect(getByRole('button')).not.toHaveAttribute('aria-labelledby');
+    });
+    it('is labelled by itself when it has a name', () => {
+      const { getByRole } = renderWithTheme(<Select name='select' value='' />);
+      const button = getByRole('button');
+      expect(button).toHaveAttribute(
+        'aria-labelledby',
+        button.getAttribute('id')
+      );
+    });
+    it('is labelled by itself when it has an id which is preferred over name', () => {
+      const { getAllByRole } = renderWithTheme(
+        <>
+          <span id='select-1-label'>Chose first option:</span>
+          <Select
+            id='select-1'
+            labelId='select-1-label'
+            name='select'
+            value=''
+          />
+          <span id='select-2-label'>Chose second option:</span>
+          <Select
+            id='select-2'
+            labelId='select-2-label'
+            name='select'
+            value=''
+          />
+        </>
+      );
+      const triggers = getAllByRole('button');
+      expect(triggers[0]).toHaveAttribute(
+        'aria-labelledby',
+        `select-1-label ${triggers[0].getAttribute('id')}`
+      );
+      expect(triggers[1]).toHaveAttribute(
+        'aria-labelledby',
+        `select-2-label ${triggers[1].getAttribute('id')}`
+      );
+    });
+    it('can be labelled by an additional element if its id is provided in `labelId`', () => {
+      const { getByRole } = renderWithTheme(
+        <>
+          <span id='select-label'>Choose one:</span>
+          <Select labelId='select-label' name='select' value='' />
+        </>
+      );
+      expect(getByRole('button')).toHaveAttribute(
+        'aria-labelledby',
+        `select-label ${getByRole('button').getAttribute('id')}`
+      );
+    });
+    it('the list of options is not labelled by default', () => {
+      const { getByRole } = renderWithTheme(<Select open value='' />);
+      expect(getByRole('listbox')).not.toHaveAttribute('aria-labelledby');
+    });
+    it('the list of options can be labelled by providing `labelId`', () => {
+      const { getByRole } = renderWithTheme(
+        <React.Fragment>
+          <span id='select-label'>Choose one:</span>
+          <Select labelId='select-label' open value='' />
+        </React.Fragment>
+      );
+      expect(getByRole('listbox')).toHaveAttribute(
+        'aria-labelledby',
+        'select-label'
+      );
+    });
+  });
+  describe('prop: readOnly', () => {
+    it('should not trigger any event with readOnly', () => {
+      const { getByRole, queryByRole } = renderWithTheme(
+        <Select readOnly value='10' options={options} />
+      );
+      getByRole('button').focus();
+      fireEvent.keyDown(document.activeElement, { key: 'ArrowDown' });
+      expect(queryByRole('listbox')).not.toBeInTheDocument();
+      fireEvent.keyUp(document.activeElement, { key: 'ArrowDown' });
+      expect(queryByRole('listbox')).not.toBeInTheDocument();
+    });
+  });
 
-      props.onOpen.mockImplementation(evt => {
-        expect(evt.type).toEqual('mousedown');
-        done();
-      });
+  describe('prop: SelectDisplayProps', () => {
+    it('should apply additional props to trigger element', () => {
+      const { getByRole } = renderWithTheme(
+        <Select
+          SelectDisplayProps={{ 'data-test': 'SelectDisplay' }}
+          value='10'
+          options={options}
+        />
+      );
+      expect(getByRole('button')).toHaveAttribute('data-test', 'SelectDisplay');
+    });
+  });
 
-      const { getByTestId } = render(renderSelect(props));
+  describe('prop: renderValue', () => {
+    it('should use the prop to render the value', () => {
+      const formatDisplay = x => `0b${x.value.toString(2)}`;
+      const { getByRole } = renderWithTheme(
+        <Select
+          formatDisplay={formatDisplay}
+          options={[{ value: 2, label: '2' }]}
+        />
+      );
+      expect(getByRole('button')).toHaveTextContent('0b10');
+    });
+  });
 
-      const el = getByTestId('select');
+  describe('prop: open (controlled)', () => {
+    // TODO add more tests
+    it('should be open when initially true', () => {
+      const { getByRole } = renderWithTheme(
+        <Select open value='' options={options} />
+      );
+      expect(getByRole('listbox')).toBeInTheDocument();
+    });
+    it('open only with the left mouse button click', () => {
+      // Right/middle mouse click shouldn't open the Select
+      const { getByRole, queryByRole } = renderWithTheme(
+        <Select value={10} options={options} />
+      );
+      const trigger = getByRole('button');
+      // If clicked by the right/middle mouse button, no options list should be opened
+      fireEvent.mouseDown(trigger, { button: 1 });
+      expect(queryByRole('listbox')).not.toBeInTheDocument();
+      fireEvent.mouseDown(trigger, { button: 2 });
+      expect(queryByRole('listbox')).not.toBeInTheDocument();
+    });
+  });
 
-      fireEvent.mouseDown(el, { button: 0 });
+  describe('prop: inputRef', () => {
+    it('should be able to return the input node via a ref object', () => {
+      const ref = React.createRef();
+      renderWithTheme(<Select inputRef={ref} value='' />);
+      expect(ref.current.node).toHaveProperty('tagName', 'INPUT');
+    });
 
-      await wait(() => getByTestId('selectMenu'));
+    it('should be able focus the trigger imperatively', () => {
+      const ref = React.createRef();
+      const { getByRole } = renderWithTheme(<Select inputRef={ref} value='' />);
+      ref.current.focus();
+      expect(getByRole('button')).toHaveFocus();
+    });
+  });
+  describe('prop: name', () => {
+    it('should have no id when name is not provided', () => {
+      const { getByRole } = renderWithTheme(<Select value='' />);
+      expect(getByRole('button')).not.toHaveAttribute('id');
+    });
+    it('should have select-`name` id when name is provided', () => {
+      const { getByRole } = renderWithTheme(<Select name='foo' value='' />);
+      expect(getByRole('button')).toHaveAttribute(
+        'id',
+        'react95-component-select-foo'
+      );
+    });
+  });
+  describe('prop: native', () => {
+    it('renders a <select />', () => {
+      const { container } = renderWithTheme(<Select native />);
+      expect(container.querySelector('select')).toBeInTheDocument();
+    });
+    it('can be labelled with a <label />', () => {
+      const { getByLabelText } = renderWithTheme(
+        <React.Fragment>
+          <label htmlFor='select'>A select</label>
+          <Select id='select' native />
+        </React.Fragment>
+      );
+      expect(getByLabelText('A select')).toHaveProperty('tagName', 'SELECT');
     });
   });
 });

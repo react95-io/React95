@@ -18,112 +18,144 @@ const options = [
 const Wrapper = styled.div`
   background: ${({ theme }) => theme.material};
   padding: 5rem;
+  fieldset,
+  fieldset {
+    margin-bottom: 2rem;
+  }
+  legend + * {
+    margin-bottom: 1rem;
+  }
 `;
 
-const onChange = (evt, nextSelection) => console.log(nextSelection);
+const onChange = (evt, nextSelection) => console.log(evt, nextSelection);
 
 storiesOf('Select', module)
   .addDecorator(story => <Wrapper>{story()}</Wrapper>)
-  .add('default', () => (
-    <div style={{ width: 300 }}>
-      <Fieldset label='default'>
-        <Select
-          onChange={onChange}
-          options={options}
-          menuMaxHeight={160}
-          onOpen={() => console.log('open')}
-        />
-        <br />
-        <Select
-          disabled
-          onChange={onChange}
-          options={options}
-          menuMaxHeight={160}
-        />
-      </Fieldset>
-      <br />
-      <br />
-      <Fieldset label='default native'>
-        <Select
-          native
-          onChange={onChange}
-          options={options}
-          menuMaxHeight={160}
-          onOpen={() => console.log('open')}
-        />
-        <br />
-        <Select
-          native
-          disabled
-          onChange={onChange}
-          options={options}
-          menuMaxHeight={160}
-        />
-      </Fieldset>
-    </div>
-  ))
-  .add('flat', () => (
-    <Window>
-      <WindowContent>
-        <Cutout
-          style={{
-            background: 'white',
-            padding: '1rem',
-            paddingBottom: '3rem',
-            width: '300px'
-          }}
-        >
-          <p style={{ lineHeight: 1.3 }}>
-            When you want to use Select on a light background (like scrollable
-            content), just use the flat variant:
-          </p>
-          <div
+  .add('default', () => {
+    const ref = React.useRef();
+    React.useEffect(() => {
+      if (ref.current) {
+        console.log('CURRENT', ref.current);
+        ref.current.focus();
+      }
+    });
+    return (
+      <div style={{ width: 180 }}>
+        <Fieldset label='default'>
+          <Select
+            onChange={onChange}
+            defaultValue={2}
+            options={options}
+            menuMaxHeight={160}
+            width={160}
+            onOpen={() => console.log('open')}
+            onClose={() => console.log('close')}
+            onBlur={() => console.log('blur')}
+            onFocus={() => console.log('focus')}
+          />
+          <Select
+            disabled
+            onChange={onChange}
+            defaultValue={2}
+            options={options}
+            width={160}
+            menuMaxHeight={160}
+          />
+        </Fieldset>
+        <Fieldset label='default native'>
+          <Select
+            native
+            onChange={onChange}
+            defaultValue={2}
+            options={options}
+            width={160}
+            menuMaxHeight={160}
+            ref={ref}
+            onClose={() => console.log('native close')}
+            onBlur={() => console.log('native blur')}
+            onFocus={() => console.log('native focus')}
+          />
+          <Select
+            native
+            disabled
+            onChange={onChange}
+            width={160}
+            defaultValue={2}
+            options={options}
+            menuMaxHeight={160}
+          />
+        </Fieldset>
+      </div>
+    );
+  })
+  .add('flat', () => {
+    const ref = React.useRef();
+    React.useEffect(() => {
+      if (ref.current) {
+        ref.current.focus();
+      }
+    });
+    return (
+      <Window>
+        <WindowContent>
+          <Cutout
             style={{
-              marginTop: '1.5rem'
+              background: 'white',
+              padding: '1rem',
+              width: '300px'
             }}
           >
-            <Fieldset label='flat' variant='flat'>
-              <Select
-                variant='flat'
-                onChange={onChange}
-                options={options}
-                onOpen={() => console.log('open')}
-              />
-              <br />
-              <Select
-                variant='flat'
-                disabled
-                onChange={onChange}
-                options={options}
-              />
-            </Fieldset>
-            <br />
-            <br />
-            <Fieldset label='flat native' variant='flat'>
-              <Select
-                variant='flat'
-                native
-                onChange={onChange}
-                options={options}
-                onOpen={() => console.log('open')}
-              />
-              <br />
-              <Select
-                variant='flat'
-                native
-                disabled
-                onChange={onChange}
-                options={options}
-              />
-            </Fieldset>
-          </div>
-        </Cutout>
-      </WindowContent>
-    </Window>
-  ))
-  .add('custom formatLabel', () => (
+            <p style={{ lineHeight: 1.3 }}>
+              When you want to use Select on a light background (like scrollable
+              content), just use the flat variant:
+            </p>
+            <div
+              style={{
+                marginTop: '1.5rem'
+              }}
+            >
+              <Fieldset label='flat' variant='flat'>
+                <Select
+                  ref={ref}
+                  variant='flat'
+                  onChange={onChange}
+                  options={options}
+                  width='100%'
+                />
+                <Select
+                  variant='flat'
+                  disabled
+                  onChange={onChange}
+                  options={options}
+                  width='100%'
+                />
+              </Fieldset>
+              <Fieldset label='flat native' variant='flat'>
+                <Select
+                  variant='flat'
+                  native
+                  onChange={onChange}
+                  options={options}
+                  width='100%'
+                />
+                <Select
+                  variant='flat'
+                  native
+                  disabled
+                  onChange={onChange}
+                  width='100%'
+                  options={options}
+                />
+              </Fieldset>
+            </div>
+          </Cutout>
+        </WindowContent>
+      </Window>
+    );
+  })
+  .add('custom formatDisplay', () => (
     <Select
-      formatLabel={opt => `${opt.label.toUpperCase()} 👍 👍`}
+      formatDisplay={opt => `${opt.label.toUpperCase()} 👍 👍`}
       width={300}
       onChange={onChange}
       options={options}

@@ -1,11 +1,10 @@
 import styled, { css } from 'styled-components';
-import Button from '../Button/Button';
+import { StyledButton as Button } from '../Button/Button';
 
 import {
   shadow as commonShadow,
   createDisabledTextStyles,
-  createFlatBoxStyles,
-  focusOutline
+  createFlatBoxStyles
 } from '../common';
 import { blockSizes } from '../common/system';
 import Cutout from '../Cutout/Cutout';
@@ -18,36 +17,42 @@ const sharedInputContentStyles = css`
   user-select: none;
   line-height: 100%;
 `;
+
+const sharedHoverStyles = css`
+  background: ${({ theme }) => theme.hoverBackground};
+  color: ${({ theme }) => theme.inputTextInvert};
+`;
+export const StyledInner = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  &:focus {
+    outline: none;
+  }
+`;
+
 export const StyledSelectContent = styled.div`
   ${sharedInputContentStyles}
+  padding-right: 8px;
   align-items: center;
   display: flex;
   height: calc(100% - 4px);
   width: calc(100% - 4px);
   margin: 0 2px;
   border: 2px solid transparent;
+  ${StyledInner}:focus & {
+    ${sharedHoverStyles}
+    border: 2px dotted ${({ theme }) => theme.focusSecondary};
+  }
 `;
-
-const sharedHoverStyles = css`
-  background: ${({ theme }) => theme.hoverBackground};
-  color: ${({ theme }) => theme.inputTextInvert};
-`;
-
 const sharedWrapperStyles = css`
   height: ${blockSizes.md};
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: inline-block;
   color: ${({ theme, isDisabled }) =>
     isDisabled ? createDisabledTextStyles() : theme.inputText};
   font-size: 1rem;
-
-  &:focus ${StyledSelectContent} {
-    ${sharedHoverStyles}
-    ${focusOutline}
-    border: 2px solid ${({ theme }) => theme.focusSecondary};
-    outline-offset: -2px;
-  }
   cursor: ${({ isDisabled }) => (isDisabled ? 'default' : 'pointer')};
 `;
 
@@ -80,6 +85,7 @@ export const StyledNativeSelect = styled.select`
   background: none;
   -webkit-tap-highlight-color: transparent;
   border-radius: 0;
+  padding-right: 30px;
   ${sharedInputContentStyles}
   cursor: pointer;
   &:disabled {
@@ -117,15 +123,15 @@ export const StyledDropdownButton = styled(Button)`
       position: absolute;
       right: 0;
       height: 100%;
-      pointer-events: none;
       `
       : `
     position: absolute;
     top: 2px;
     right: 2px;
     height: calc(100% - 4px);
-    pointer-events: none;
     `)}
+    pointer-events: ${({ isDisabled, native }) =>
+      isDisabled || native ? 'none' : 'auto'}
 `;
 
 export const StyledDropdownIcon = styled.span`
@@ -140,12 +146,14 @@ export const StyledDropdownIcon = styled.span`
   display: inline-block;
   border-top: 6px solid
     ${({ theme, isDisabled }) => (isDisabled ? theme.textDisabled : theme.text)};
+  ${({ theme, isDisabled }) =>
+    isDisabled &&
+    `
+    filter: drop-shadow(1px 1px 0px ${theme.textDisabledShadow});
+    border-top-color: ${theme.textDisabled};
+    `}
   ${StyledDropdownButton}:active & {
     margin-top: 2px;
-  }
-  ${StyledDropdownButton}:disabled & {
-    filter: drop-shadow(1px 1px 0px ${({ theme }) => theme.textDisabledShadow});
-    border-top-color: ${({ theme }) => theme.textDisabled};
   }
 `;
 
@@ -162,6 +170,7 @@ export const StyledDropdownMenu = styled.ul`
   cursor: default;
   z-index: 99;
   cursor: pointer;
+  box-shadow: ${props => (props.shadow ? commonShadow : 'none')};
   ${({ variant }) =>
     variant === 'flat'
       ? css`
@@ -170,7 +179,6 @@ export const StyledDropdownMenu = styled.ul`
           border: 2px solid ${({ theme }) => theme.flatDark};
         `
       : css`
-          box-shadow: ${props => (props.shadow ? commonShadow : 'none')};
           bottom: -2px;
           width: calc(100% - 2px);
           border: 2px solid ${({ theme }) => theme.borderDarkest};

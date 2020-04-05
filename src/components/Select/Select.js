@@ -1,9 +1,10 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import classNames from '../common/classNames';
-import getTestId from '../common/getTestId';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
+import useForkRef from '../common/hooks/useForkRef';
+
+import { clamp, areEqualValues } from '../common/utils';
 
 import {
   StyledDropdownButton,
@@ -11,39 +12,34 @@ import {
   StyledDropdownMenu,
   StyledDropdownMenuItem,
   StyledFlatSelectWrapper,
+  StyledInner,
   StyledNativeOption,
   StyledNativeSelect,
   StyledSelectContent,
   StyledSelectWrapper
 } from './Select.styles';
 
-const Key = {
+const KEYS = {
   ARROW_DOWN: 'ArrowDown',
   ARROW_LEFT: 'ArrowLeft',
   ARROW_RIGHT: 'ArrowRight',
   ARROW_UP: 'ArrowUp',
   ENTER: 'Enter',
   ESC: 'Escape',
-  SPACE: ' '
+  SPACE: ' ',
+  TAB: 'Tab'
 };
-
-export const isObject = val => typeof val === 'object' && !Array.isArray(val);
-export const isNumber = val => typeof val === 'number';
-export const isString = val => typeof val === 'string';
-export const isStringOrNumber = val => isString(val) || isNumber(val);
 
 export const getWrapper = variant =>
   variant === 'flat' ? StyledFlatSelectWrapper : StyledSelectWrapper;
 
-export const getDisplayLabel = (selectedOption, formatLabel) => {
+export const getDisplayLabel = (selectedOption, formatDisplay) => {
   if (selectedOption) {
-    if (formatLabel) {
-      return formatLabel(selectedOption);
+    if (formatDisplay) {
+      return formatDisplay(selectedOption);
     }
-
     return selectedOption.label;
   }
-
   return '';
 };
 
@@ -51,49 +47,68 @@ export const getDefaultValue = (defaultValue, options) => {
   if (defaultValue) {
     return defaultValue;
   }
-
   if (options && options[0]) {
     return options[0].value;
   }
-
   return undefined;
 };
 
-const Select = ({
-  className,
-  defaultValue,
-  disabled,
-  formatLabel,
-  menuMaxHeight,
-  menuOpen,
-  name,
-  native,
-  onBlur,
-  onChange,
-  onClose,
-  onFocus,
-  onOpen,
-  options,
-  shadow,
-  style,
-  testId,
-  value,
-  variant,
-  width,
-  ...otherProps
-}) => {
-  const displayNode = React.useRef();
+const Select = React.forwardRef(function Select(props, ref) {
+  const {
+    'aria-label': ariaLabel,
+    className,
+    defaultValue,
+    disabled,
+    formatDisplay,
+    inputRef: inputRefProp,
+    labelId,
+    menuMaxHeight,
+    name,
+    native,
+    onBlur,
+    onChange,
+    onClose,
+    onFocus,
+    onOpen,
+    open: openProp,
+    options: optionsProp,
+    readOnly,
+    SelectDisplayProps,
+    shadow,
+    style,
+    value: valueProp,
+    variant,
+    width,
+    ...otherProps
+  } = props;
+  const wrapperRef = React.useRef();
+  const mainRef = React.useRef();
   const inputRef = React.useRef();
-  const menuNode = React.useRef();
-  const [activeOption, setActiveOption] = React.useState(-1);
-  const [valueDerived, setValueState] = useControlledOrUncontrolled({
-    value,
+  const dropdownRef = React.useRef();
+  const options = optionsProp.filter(Boolean);
+  const [value, setValueState] = useControlledOrUncontrolled({
+    value: valueProp,
     defaultValue: getDefaultValue(defaultValue, options)
   });
-  const [openDerived, setOpenState] = useControlledOrUncontrolled({
-    defaultValue: false,
-    value: menuOpen
-  });
+
+  const { current: isOpenControlled } = React.useRef(openProp != null);
+  const [openState, setOpenState] = React.useState(false);
+  const open = mainRef !== null && (isOpenControlled ? openProp : openState);
+  const handleRef = useForkRef(ref, inputRefProp);
+
+  // to hijack native focus. when somebody passes ref
+  // and triggers focus, we focus mainRef instead of input
+  React.useImperativeHandle(
+    handleRef,
+    () => ({
+      focus: () => {
+        mainRef.current.focus();
+      },
+      node: inputRef.current,
+      value
+    }),
+    [mainRef, value]
+  );
 
   const getSelectedOption = selectedValue =>
     options.find(opt => {
@@ -103,220 +118,207 @@ const Select = ({
           opt.value === parseInt(selectedValue, 10)
         );
       }
-
-      return opt.value === valueDerived;
+      return opt.value === value;
     });
 
   const getFocusedNodeIndex = () => {
     let focusedIndex = -1;
 
-    if (menuNode && menuNode.current) {
-      const optionNodes = menuNode.current.childNodes;
-
-      for (let i = 0, len = optionNodes.length; i < len; i += 1) {
-        if (optionNodes[i] === document.activeElement) {
-          focusedIndex = i;
-          break;
-        }
-      }
+    if (dropdownRef && dropdownRef.current) {
+      const optionNodes = Array.from(dropdownRef.current.childNodes);
+      focusedIndex = optionNodes.findIndex(
+        node => node === document.activeElement
+      );
     }
-
     return focusedIndex;
   };
 
-  const update = (isOpen, evt) => {
-    if (isOpen) {
+  const update = (opens, e) => {
+    if (opens) {
       if (onOpen) {
-        onOpen(evt);
+        onOpen(e);
       }
+    } else if (onClose) {
+      onClose(e);
+    }
 
-      if (!openDerived) {
-        const selectedOpt = getSelectedOption();
-        const selectedIdx = options.indexOf(selectedOpt);
-        if (selectedIdx > -1) {
-          setActiveOption(selectedIdx);
-        } else {
-          setActiveOption(0);
+    if (!isOpenControlled) {
+      setOpenState(opens);
+    }
+  };
+
+  const handleOpen = e => {
+    update(true, e);
+  };
+
+  const handleClose = e => {
+    update(false, e);
+  };
+
+  const toggleOpen = e => {
+    update(!open, e);
+  };
+
+  React.useEffect(() => {
+    const handleClick = e => {
+      if (openState) {
+        if (!wrapperRef.current.contains(e.target)) {
+          handleClose(e);
+          // TODO call onBlur here?
         }
       }
-    } else {
-      setActiveOption(-1);
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => {
+      document.removeEventListener('mousedown', handleClick);
+    };
+  }, [openState]);
 
-      if (onClose) {
-        onClose(evt);
-      }
-    }
-
-    setOpenState(isOpen);
-  };
-
-  const handleOpen = evt => {
-    update(true, evt);
-  };
-
-  const handleClose = evt => {
-    update(false, evt);
-  };
-
-  const handleMouseDown = evt => {
+  const handleMouseDown = e => {
     // ignore everything but left-click
-    if (evt.button !== 0) {
+    if (e.button !== 0) {
       return;
     }
-
     // hijack the default focus behavior.
-    evt.preventDefault();
-    displayNode.current.focus();
+    e.preventDefault();
+    mainRef.current.focus();
 
-    if (openDerived) {
-      handleClose(evt);
+    if (open) {
+      handleClose(e);
     } else {
-      handleOpen(evt);
+      handleOpen(e);
     }
   };
 
-  const handleOptionClick = opt => evt => {
-    handleClose(evt);
-
+  const handleOptionClick = opt => e => {
     const newValue = opt.value;
-
     setValueState(newValue);
 
     if (onChange) {
-      evt.persist();
-      onChange(evt, opt);
+      e.persist();
+      Object.defineProperty(e, 'target', {
+        writable: true,
+        value: { value: newValue, name }
+      });
+      onChange(e, opt);
     }
-
-    displayNode.current.focus();
+    handleClose(e);
+    mainRef.current.focus();
   };
 
-  const getNextFocusIndex = (evtKey, currentFocusIndex) => {
-    let nextFocus = -1;
+  const handleKeyDown = e => {
+    const { key } = e;
+    // the native select doesn't respond to enter on mac, but it's recommended by
+    // https://www.w3.org/TR/wai-aria-practices/examples/listbox/listbox-collapsible.html
+    const { ARROW_DOWN, ARROW_UP, ENTER, SPACE, TAB } = KEYS;
 
-    if (evtKey === Key.ARROW_DOWN || evtKey === Key.ARROW_RIGHT) {
-      if (currentFocusIndex < options.length - 1) {
-        nextFocus = currentFocusIndex + 1;
+    if (key === TAB) {
+      if (open) {
+        // if dropdown is open- close it
+        // prevent default behaviour (focusing on next element)
+        // and focus select instead
+        e.preventDefault();
+        toggleOpen(e);
+        mainRef.current.focus();
       }
-    } else if (evtKey === Key.ARROW_UP) {
-      if (currentFocusIndex > 0) {
-        nextFocus = currentFocusIndex - 1;
-      }
-    } else if (evtKey === Key.ENTER) {
-      nextFocus = currentFocusIndex;
-    }
-
-    return nextFocus;
-  };
-
-  const updateFocus = evt => {
-    const currentFocusIndex = getFocusedNodeIndex();
-    const nextFocus = getNextFocusIndex(evt && evt.key, currentFocusIndex);
-
-    if (nextFocus > -1 && menuNode.current) {
-      const focusNode = menuNode.current.childNodes[nextFocus];
-
-      if (focusNode) {
-        if (currentFocusIndex === nextFocus) {
-          focusNode.click();
-        } else {
-          focusNode.focus();
+    } else {
+      e.preventDefault();
+      if (key === SPACE) {
+        // space toggles the dropdown (open/closed) while keeping focus
+        toggleOpen(e);
+        mainRef.current.focus();
+      } else if ([ARROW_DOWN, ARROW_UP, ENTER].includes(key)) {
+        if (!open) {
+          handleOpen(e);
+        }
+        const currentFocusIndex = getFocusedNodeIndex();
+        if ([ARROW_UP, ARROW_DOWN].includes(key)) {
+          const change = key === ARROW_UP ? -1 : 1;
+          const nextOptionIndex = clamp(
+            currentFocusIndex + change,
+            0,
+            options.length - 1
+          );
+          if (dropdownRef.current) {
+            const nextOption = dropdownRef.current.childNodes[nextOptionIndex];
+            nextOption.focus();
+          }
+        } else if (
+          key === ENTER &&
+          currentFocusIndex > -1 &&
+          dropdownRef.current
+        ) {
+          setValueState(options[currentFocusIndex].value);
+          handleClose(e);
+          mainRef.current.focus();
+          if (onChange) {
+            e.persist();
+            onChange(e, options[currentFocusIndex]);
+          }
         }
       }
-
-      setActiveOption(nextFocus);
     }
   };
 
-  const handleKeyDown = evt => {
-    const { key } = evt;
-
-    const validKeys = [
-      Key.SPACE,
-      Key.ARROW_UP,
-      Key.ARROW_RIGHT,
-      Key.ARROW_LEFT,
-      Key.ARROW_DOWN,
-      // the native select doesn't respond to enter on mac, but it's recommended by
-      // https://www.w3.org/TR/wai-aria-practices/examples/listbox/listbox-collapsible.html
-      Key.ENTER,
-      Key.ESC
-    ];
-
-    if (validKeys.indexOf(key) > -1) {
-      evt.preventDefault();
-
-      if (key === Key.ARROW_LEFT) {
-        handleClose(evt);
-        displayNode.current.focus();
-      } else if (key === Key.SPACE) {
-        update(!openDerived, evt);
-        displayNode.current.focus();
-      } else if (key === Key.ESC) {
-        handleClose(evt);
-        displayNode.current.blur();
-      } else {
-        handleOpen(evt);
-        updateFocus(evt);
-      }
+  const handleBlur = e => {
+    // if open event.stopImmediatePropagation
+    if (!open && onBlur) {
+      e.persist();
+      // Preact support, target is read only property on a native event.
+      Object.defineProperty(e, 'target', {
+        writable: true,
+        value: { value, name }
+      });
+      onBlur(e);
     }
   };
-
-  const handleBlur = evt => {
-    if (!openDerived) {
-      evt.persist();
-
-      if (onBlur) {
-        onBlur(evt);
-      }
-
-      handleClose(evt);
-    }
-  };
-
-  const handleOptionKeyUp = evt => {
-    if (evt.key === Key.SPACE) {
+  const handleOptionKeyUp = e => {
+    if (e.key === KEYS.SPACE) {
       // otherwise our MenuItems dispatches a click event
       // it's not behavior of the native <option> and causes
       // the select to close immediately since we open on space keydown
-      evt.preventDefault();
+      e.preventDefault();
     }
   };
 
-  const isEnabled = !disabled;
-  const selectedOption = getSelectedOption();
-  const displayLabel = getDisplayLabel(selectedOption, formatLabel);
-  const tabIndex = isEnabled ? '0' : undefined;
+  // function below to enable using
+  // value/defaultValue in native select
+  const handleNativeSelection = (e, opt) => {
+    e.stopPropagation();
 
-  const handleSelection = (evt, opt) => {
-    evt.stopPropagation();
-
-    const nextSelection = opt || getSelectedOption(evt.target.value);
+    const nextSelection = opt || getSelectedOption(e.target.value);
 
     if (onChange) {
-      onChange(evt, nextSelection, valueDerived);
+      onChange(e, nextSelection);
     }
 
     setValueState(nextSelection.value);
 
-    if (displayNode.current) {
-      displayNode.current.focus();
+    if (mainRef.current) {
+      mainRef.current.focus();
     }
   };
 
+  const isEnabled = !(disabled || readOnly);
+  const selectedOption = getSelectedOption();
+  const displayLabel = getDisplayLabel(selectedOption, formatDisplay);
+  const tabIndex = isEnabled ? '1' : undefined;
   const Wrapper = getWrapper(variant, native);
   const OptionComponent = native ? StyledNativeOption : StyledDropdownMenuItem;
 
-  const optionsContent = options.map((opt, idx) => {
+  const optionsContent = options.map((opt, i) => {
     const optionProps = {
-      key: `${value}-${idx}`,
+      'data-value': native ? undefined : opt.value,
+      key: `${value}-${i}`,
       onClick: native ? undefined : handleOptionClick(opt),
       onKeyUp: native ? undefined : handleOptionKeyUp,
-      tabIndex: native ? undefined : '0',
-      'data-testid': getTestId(testId, `MenuItem${idx}`)
+      role: native ? null : 'option',
+      tabIndex: native ? undefined : '0'
     };
 
+    const selected = areEqualValues(opt.value, value);
     if (!native) {
-      optionProps.onMouseDown = evt => handleSelection(evt, opt);
+      optionProps['aria-selected'] = selected ? 'true' : undefined;
     } else {
       optionProps.value = opt.value;
     }
@@ -324,7 +326,7 @@ const Select = ({
     return (
       <OptionComponent
         ref={el => {
-          if (el && activeOption === idx) {
+          if (el && opt.value === value) {
             el.focus();
           }
         }}
@@ -336,89 +338,115 @@ const Select = ({
   });
 
   const wrapperCommonProps = {
-    className: classNames(className, {
-      'is-disabled': disabled,
-      'is-open': openDerived
-    }),
-    'data-testid': testId,
+    className,
     style: { ...style, width }
   };
 
   const DropdownButton = (
     <StyledDropdownButton
-      tabIndex={-1}
-      data-testid={getTestId(testId, 'Button')}
-      disabled={disabled}
-      variant={variant}
+      as='div'
+      data-testid='select-button'
+      isDisabled={disabled}
       native={native}
+      tabIndex={-1}
+      variant={variant}
     >
-      <StyledDropdownIcon
-        data-testid={getTestId(testId, 'Icon')}
-        isDisabled={disabled}
-      />
+      <StyledDropdownIcon data-testid='select-icon' isDisabled={disabled} />
     </StyledDropdownButton>
   );
   if (native) {
     return (
       <Wrapper {...wrapperCommonProps}>
-        <StyledNativeSelect
-          disabled={disabled}
-          onChange={isEnabled ? handleSelection : undefined}
-          {...otherProps}
-        >
-          {optionsContent}
-        </StyledNativeSelect>
-        {DropdownButton}
+        <StyledInner>
+          <StyledNativeSelect
+            {...otherProps}
+            onBlur={onBlur}
+            onFocus={onFocus}
+            onClose={onClose}
+            disabled={disabled}
+            onChange={isEnabled ? handleNativeSelection : undefined}
+            ref={mainRef}
+            value={value}
+          >
+            {optionsContent}
+          </StyledNativeSelect>
+          {DropdownButton}
+        </StyledInner>
       </Wrapper>
     );
   }
+  const buttonId =
+    SelectDisplayProps.id ||
+    (name ? `react95-component-select-${name}` : undefined);
   return (
-    <Wrapper
-      {...wrapperCommonProps}
-      isDisabled={disabled}
-      onKeyDown={handleKeyDown}
-      onMouseDown={isEnabled ? handleMouseDown : null}
-      onBlur={handleBlur}
-      onFocus={onFocus}
-      ref={displayNode}
-      shadow={shadow}
-      style={{ ...style, width }}
-      tabIndex={tabIndex}
-      {...otherProps}
-    >
-      <input value={value} name={name} ref={inputRef} type='hidden' />
-
-      <StyledSelectContent data-testid={getTestId(testId, 'Content')}>
-        {displayLabel}
-      </StyledSelectContent>
-
-      {DropdownButton}
-
-      {isEnabled && openDerived && (
-        <StyledDropdownMenu
-          data-testid={getTestId(testId, 'Menu')}
-          ref={menuNode}
-          shadow={shadow}
-          style={
-            menuMaxHeight && { overflow: 'scroll', maxHeight: menuMaxHeight }
+    <>
+      <Wrapper
+        {...wrapperCommonProps}
+        isDisabled={disabled}
+        ref={wrapperRef}
+        shadow={shadow}
+        style={{ ...style, width }}
+      >
+        <input
+          name={name}
+          ref={inputRef}
+          type='hidden'
+          value={value}
+          {...otherProps}
+        />
+        <StyledInner
+          aria-disabled={disabled}
+          aria-expanded={open ? 'true' : undefined}
+          aria-haspopup='listbox'
+          aria-label={ariaLabel}
+          aria-labelledby={
+            [labelId, buttonId].filter(Boolean).join(' ') || undefined
           }
+          // The id is required for proper a11y
+          id={buttonId}
+          onBlur={handleBlur}
+          onFocus={onFocus}
+          onKeyDown={handleKeyDown}
+          onMouseDown={isEnabled ? handleMouseDown : null}
+          ref={mainRef}
+          role='button'
           tabIndex={tabIndex}
-          variant={variant}
+          {...SelectDisplayProps}
         >
-          {optionsContent}
-        </StyledDropdownMenu>
-      )}
-    </Wrapper>
+          <StyledSelectContent>{displayLabel}</StyledSelectContent>
+
+          {DropdownButton}
+        </StyledInner>
+        {isEnabled && open && (
+          <StyledDropdownMenu
+            aria-labelledby={labelId}
+            onKeyDown={handleKeyDown}
+            ref={dropdownRef}
+            role='listbox'
+            shadow={shadow}
+            style={
+              menuMaxHeight && { overflow: 'scroll', maxHeight: menuMaxHeight }
+            }
+            tabIndex={0}
+            variant={variant}
+          >
+            {optionsContent}
+          </StyledDropdownMenu>
+        )}
+      </Wrapper>
+    </>
   );
-};
+});
 
 Select.defaultProps = {
+  'aria-label': undefined,
   className: undefined,
   defaultValue: undefined,
   disabled: undefined,
-  formatLabel: undefined,
+  formatDisplay: undefined,
+  inputRef: undefined,
+  labelId: undefined,
   menuMaxHeight: undefined,
-  menuOpen: undefined,
   name: undefined,
   native: false,
   onBlur: undefined,
@@ -426,21 +454,27 @@ Select.defaultProps = {
   onClose: undefined,
   onFocus: undefined,
   onOpen: undefined,
+  open: undefined,
+  options: [],
+  readOnly: undefined,
+  SelectDisplayProps: {},
   shadow: true,
   style: {},
-  testId: undefined,
   value: undefined,
   variant: 'default',
   width: 'auto'
 };
 
 Select.propTypes = {
+  'aria-label': propTypes.string,
   className: propTypes.string,
-  defaultValue: propTypes.oneOfType([propTypes.string, propTypes.number]),
+  // eslint-disable-next-line react/forbid-prop-types
+  defaultValue: propTypes.any,
   disabled: propTypes.bool,
-  formatLabel: propTypes.func,
+  formatDisplay: propTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
+  inputRef: propTypes.any,
   menuMaxHeight: propTypes.oneOfType([propTypes.string, propTypes.number]),
-  menuOpen: propTypes.bool,
   name: propTypes.string,
   native: propTypes.bool,
   onBlur: propTypes.func,
@@ -448,17 +482,21 @@ Select.propTypes = {
   onClose: propTypes.func,
   onFocus: propTypes.func,
   onOpen: propTypes.func,
+  labelId: propTypes.string,
+  open: propTypes.bool,
   options: propTypes.arrayOf(
     propTypes.shape({
-      label: propTypes.string.isRequired,
-      value: propTypes.oneOfType([propTypes.string, propTypes.number])
-        .isRequired
+      label: propTypes.string,
+      value: propTypes.any
     })
-  ).isRequired,
+  ),
+  readOnly: propTypes.bool,
+  // eslint-disable-next-line react/forbid-prop-types
+  SelectDisplayProps: propTypes.object,
   shadow: propTypes.bool,
   style: propTypes.shape([propTypes.string, propTypes.number]),
-  testId: propTypes.string,
-  value: propTypes.oneOfType([propTypes.string, propTypes.number]),
+  // eslint-disable-next-line react/forbid-prop-types
+  value: propTypes.any,
   variant: propTypes.oneOf(['default', 'flat']),
   width: propTypes.oneOfType([propTypes.string, propTypes.number])
 };
