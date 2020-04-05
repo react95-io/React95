@@ -1,0 +1,106 @@
+---
+name: TextArea
+menu: Components
+---
+
+import { Playground, Props } from 'docz';
+
+import { TextArea, Cutout } from 'react95';
+
+# TextArea
+
+## Usage
+
+#### Default
+
+<Playground>
+  <TextArea
+    defaultValue='User ReactGirl was the first one to find 🐛 here.'
+    placeholder='Type in here..'
+    onChange={e => console.log(e.target.value)}
+  />
+</Playground>
+
+#### Disabled
+
+<Playground>
+  <TextArea
+    placeholder='Typing disabled '
+    onChange={e => console.log(e.target.value)}
+    disabled
+  />
+</Playground>
+
+#### Fixed size
+
+<Playground>
+  <TextArea
+    width={200}
+    height={200}
+    placeholder='Type in here..'
+    onChange={e => console.log(e.target.value)}
+  />
+</Playground>
+
+#### No shadow
+
+<Playground>
+  <TextArea
+    shadow={false}
+    placeholder='Type in here..'
+    onChange={e => console.log(e.target.value)}
+  />
+</Playground>
+
+#### Flat
+
+<Playground>
+  <Cutout style={{ padding: '2rem', width: '300px' }}>
+    <p style={{ lineHeight: 1.3 }}>
+      When you want to add text area on a light background (like scrollable
+      content), just use the flat variant:
+    </p>
+    <div style={{ display: 'flex', alignItems: 'center', marginTop: '1rem' }}>
+      <TextArea
+        variant='flat'
+        width='100%'
+        height={200}
+        placeholder='Type in here..'
+        onChange={e => console.log(e.target.value)}
+      />
+    </div>
+  </Cutout>
+</Playground>
+
+#### Flat disabled
+
+<Playground>
+  <Cutout style={{ padding: '2rem', width: '300px' }}>
+    <p style={{ lineHeight: 1.3 }}>
+      When you want to add text area on a light background (like scrollable
+      content), just use the flat variant:
+    </p>
+    <div style={{ display: 'flex', alignItems: 'center', marginTop: '1rem' }}>
+      <TextArea
+        variant='flat'
+        disabled
+        width='100%'
+        height={200}
+        placeholder='Type in here..'
+        onChange={e => console.log(e.target.value)}
+      />
+    </div>
+  </Cutout>
+</Playground>
+
+## API
+
+### Import
+
+```
+import { TextArea } from 'react95'
+```
+
+### Props
+
+<Props of={TextArea} />

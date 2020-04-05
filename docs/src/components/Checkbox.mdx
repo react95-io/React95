@@ -1,0 +1,180 @@
+---
+name: Checkbox
+menu: Components
+---
+
+import { Playground, Props } from 'docz';
+
+import {
+  Checkbox,
+  Fieldset,
+  Button,
+  Cutout,
+  List,
+  ListItem,
+  Divider
+} from 'react95';
+
+# Checkbox
+
+## Usage
+
+#### Controlled group
+
+<Playground>
+  {() => {
+    const [steak, setSteak] = React.useState(true)
+    const [tortilla, setTortilla] = React.useState(false)
+    const [pizza, setPizza] = React.useState(false)
+    const handleChange = event => {
+      const { target: { value } } = event;
+      if (value === 'steak') {
+        setSteak(!steak)
+        return
+      }
+      if (value === 'tortilla') {
+        setTortilla(!tortilla)
+        return
+      }
+      if (value === 'pizza') {
+        setPizza(!pizza)
+        return
+      }
+    };
+    const reset = () => {
+      setSteak(false)
+      setTortilla(false)
+      setPizza(false)
+    }
+    return (
+      <div style={{ maxWidth: '250px' }}>
+        <Fieldset label='Party food'>
+          <Checkbox
+            checked={steak}
+            onChange={handleChange}
+            value='steak'
+            label='Steak 🥩'
+            name='food'
+          />
+          <br />
+          <Checkbox
+            checked={tortilla}
+            onChange={handleChange}
+            value='tortilla'
+            label='Tortilla 🌯'
+            name='food'
+          />
+          <br />
+          <Checkbox
+            checked={pizza}
+            onChange={handleChange}
+            value='pizza'
+            label='Pizza 🍕'
+            name='food'
+            disabled
+          />
+        </Fieldset>
+        <Button fullWidth style={{ marginTop: '1em' }} onClick={reset}>
+          Diet mode
+        </Button>
+      </div>
+    );
+  }}
+</Playground>
+
+#### Uncontrolled
+
+<Playground>
+  <>
+    <Checkbox
+      name='cheese'
+      value='cheese'
+      label='Add extra cheese 🧀'
+      defaultChecked
+    />
+    <br />
+    <Checkbox name='pineapple' value='pineapple' label='Add pineapple 🍍' />
+  </>
+</Playground>
+
+#### Flat
+<Playground>
+  <Cutout style={{ padding: '1rem', width: '300px' }}>
+    <p style={{ lineHeight: 1.3 }}>
+      When you want to add input field on a light background (like
+      scrollable content), just use the flat variant:
+    </p>
+    <div style={{ marginTop: '1rem' }}>
+      <Checkbox
+        name='flatEarth'
+        variant='flat'
+        value='flatEarth'
+        label='Earth is flat 🌍'
+        defaultChecked
+      />
+      <Checkbox
+        name='reptilians'
+        variant='flat'
+        defaultChecked={false}
+        value='reptilians'
+        label='Reptilians rule the world 🦎'
+        disabled
+      />
+      <Checkbox
+        name='indeterminate'
+        variant='flat'
+        value='mixed'
+        label='Indeterminate'
+        indeterminate
+      />
+    </div>
+  </Cutout>
+</Playground>
+
+#### Menu
+<Playground>
+  <List>
+    <ListItem size='md'>
+      <Checkbox
+        name='useGradient'
+        variant='menu'
+        value='useGradient'
+        label='Use gradient'
+        defaultChecked
+      />
+    </ListItem>
+    <ListItem size='md'>
+      <Checkbox
+        name='thickBrush'
+        variant='menu'
+        defaultChecked={false}
+        value='thickBrush'
+        label='Thick brush'
+        indeterminate
+      />
+    </ListItem>
+    <Divider />
+    <ListItem size='md' disabled>
+      <Checkbox
+        name='autoSave'
+        variant='menu'
+        value='autoSave'
+        checked
+        label='Auto-save'
+        disabled
+      />
+    </ListItem>
+  </List>
+</Playground>
+
+## API
+
+### Import
+
+```
+import { Checkbox } from 'react95'
+```
+
+### Props
+
+<Props of={Checkbox} />
