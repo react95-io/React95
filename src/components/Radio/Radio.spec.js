@@ -29,9 +29,7 @@ describe('<Radio />', () => {
     it('should disable radio', () => {
       const handleChange = jest.fn();
 
-      const { getByRole } = renderWithTheme(
-        <Radio disabled onChange={handleChange} />
-      );
+      const { getByRole } = renderWithTheme(<Radio disabled />);
       const checkbox = getByRole('radio');
       expect(checkbox).toHaveAttribute('disabled');
 
@@ -49,10 +47,10 @@ describe('<Radio />', () => {
   describe('controlled', () => {
     it('should check the radio', () => {
       const { getByRole, rerender } = renderWithTheme(
-        <Radio checked={false} />
+        <Radio checked={false} readOnly />
       );
 
-      rerender(<Radio checked />);
+      rerender(<Radio checked readOnly />);
       const checkbox = getByRole('radio');
 
       expect(checkbox.checked).toBe(true);
@@ -64,8 +62,10 @@ describe('<Radio />', () => {
     });
 
     it('should uncheck the checkbox', () => {
-      const { getByRole, rerender } = renderWithTheme(<Radio checked />);
-      rerender(<Radio checked={false} />);
+      const { getByRole, rerender } = renderWithTheme(
+        <Radio checked readOnly />
+      );
+      rerender(<Radio checked={false} readOnly />);
       const checkbox = getByRole('radio');
 
       expect(checkbox.checked).toBe(false);

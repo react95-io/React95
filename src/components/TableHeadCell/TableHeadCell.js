@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 
 import styled, { css } from 'styled-components';
 import { createBorderStyles, createDisabledTextStyles } from '../common';
+import { noOp } from '../common/utils';
 
 const StyledHeadCell = styled.th`
 position: relative;
@@ -54,15 +55,18 @@ user-select: none;
 `;
 
 const TableHeadCell = React.forwardRef(function TableHeadCell(props, ref) {
-  const { disabled, children, onClick, ...otherProps } = props;
-
+  const { disabled, children, onClick, sort, ...otherProps } = props;
+  let sortDirection = null;
+  if (sort) {
+    sortDirection = sort === 'asc' ? 'ascending' : 'descending';
+  }
   return (
     <StyledHeadCell
       ref={ref}
       isDisabled={disabled}
       aria-disabled={disabled}
       onClick={disabled ? undefined : onClick}
-      onTouchStart={() => ''}
+      aria-sort={sortDirection}
       {...otherProps}
     >
       <div>{children}</div>
@@ -71,15 +75,20 @@ const TableHeadCell = React.forwardRef(function TableHeadCell(props, ref) {
 });
 
 TableHeadCell.defaultProps = {
-  onClick: () => {},
   children: null,
-  disabled: false
+  disabled: false,
+  onClick: null,
+  // onTouchStart below to enable :active style on iOS
+  onTouchStart: noOp,
+  sort: null
 };
 
 TableHeadCell.propTypes = {
-  onClick: propTypes.func,
   children: propTypes.node,
-  disabled: propTypes.bool
+  disabled: propTypes.bool,
+  onClick: propTypes.func,
+  onTouchStart: propTypes.func,
+  sort: propTypes.oneOf(['asc', 'desc', null])
 };
 
 export default TableHeadCell;

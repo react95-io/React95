@@ -43,6 +43,126 @@ themes.default = {
   focusSecondary: '#fefe03'
 };
 
+themes.molecule = {
+  canvas: '#f1f5f6',
+  material: '#c2c1c2',
+  materialDark: '#9a9e9c',
+
+  borderDarkest: '#4b4d4e',
+  borderLightest: '#d79099',
+  borderDark: '#993845',
+  checkmarkDisabled: '#993845',
+  borderLight: '#dfe0e3',
+
+  headerBackground: '#a03d49',
+  headerText: '#f1f5f6',
+  headerNotActiveBackground: '#7f7f7f',
+  headerNotActiveText: '#c2c1c2',
+
+  text: '#020102',
+  textInvert: '#f1f5f6',
+  textDisabled: '#993845',
+  textDisabledShadow: '#d79099',
+
+  inputText: '#020102',
+  inputTextInvert: '#f1f5f6',
+  inputTextDisabled: '#993845',
+  inputTextDisabledShadow: '#d79099',
+
+  tooltip: '#fefbcc',
+
+  anchor: '#1034a6',
+  anchorVisited: '#440381',
+
+  hoverBackground: '#70a3ce',
+  checkmark: '#020102',
+
+  progress: '#a03d49',
+
+  flatLight: '#d8d8d8',
+  flatDark: '#9e9e9e'
+};
+
+themes.travel = {
+  canvas: '#d8d0c8',
+  material: '#908070',
+  materialDark: '#9a9e9c',
+
+  borderDarkest: '#28251e',
+  borderLightest: '#baae9f',
+  borderDark: '#695f50',
+  checkmarkDisabled: '#695f50',
+  borderLight: '#9d8f80',
+
+  headerBackground: '#404878',
+  headerText: '#d8d0c8',
+  headerNotActiveBackground: '#605848',
+  headerNotActiveText: '#908070',
+
+  text: '#28251e',
+  textInvert: '#ffffff',
+  textDisabled: '#695f50',
+  textDisabledShadow: '#baae9f',
+
+  inputText: '#28251e',
+  inputTextInvert: '#ffffff',
+  inputTextDisabled: '#695f50',
+  inputTextDisabledShadow: '#baae9f',
+
+  tooltip: '#fefbcc',
+
+  anchor: '#1034a6',
+  anchorVisited: '#440381',
+
+  hoverBackground: '#48604f',
+  checkmark: '#28251e',
+
+  progress: '#48604f',
+
+  flatLight: '#9d8f80',
+  flatDark: '#695f50'
+};
+
+themes.theSixtiesUSA = {
+  canvas: '#ffffff',
+  material: '#d067d7',
+  materialDark: '#9a9e9c',
+
+  borderDarkest: '#010001',
+  borderLightest: '#df9be7',
+  borderDark: '#6c1f71',
+  checkmarkDisabled: '#6c1f71',
+  borderLight: '#d982de',
+
+  headerBackground: '#050080',
+  headerText: '#ffffff',
+  headerNotActiveBackground: '#a130a9',
+  headerNotActiveText: '#df9be7',
+
+  text: '#010001',
+  textInvert: '#010001',
+  textDisabled: '#6c1f71',
+  textDisabledShadow: '#df9be7',
+
+  inputText: '#010001',
+  inputTextInvert: '#010001',
+  inputTextDisabled: '#6c1f71',
+  inputTextDisabledShadow: '#df9be7',
+
+  tooltip: '#fefbcc',
+
+  anchor: '#1034a6',
+  anchorVisited: '#440381',
+
+  hoverBackground: '#0f0',
+  checkmark: '#010001',
+
+  progress: '#0f0',
+
+  flatLight: '#df9be7',
+  flatDark: '#d067d7'
+};
+
 themes.candy = {
   canvas: '#EFF1F3',
   material: '#E5A4CB',

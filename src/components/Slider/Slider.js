@@ -13,7 +13,7 @@ import {
 import { clamp, percentToValue, roundValueToStep } from '../common/utils';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import useForkRef from '../common/hooks/useForkRef';
-import { useIsFocusVisible } from '../common/hooks/focusVisible';
+import { useIsFocusVisible } from '../common/hooks/useIsFocusVisible';
 import Cutout from '../Cutout/Cutout';
 
 function trackFinger(event, touchId) {

@@ -21,8 +21,8 @@ const Hourglass = React.forwardRef(function HourGlass(props, ref) {
     <StyledContainer
       style={{
         ...style,
-        width: size || '30px',
-        height: size || '30px'
+        width: size,
+        height: size
       }}
       ref={ref}
       {...otherProps}

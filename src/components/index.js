@@ -31,7 +31,6 @@ export { default as TableDataCell } from './TableDataCell/TableDataCell';
 export { default as TableHead } from './TableHead/TableHead';
 export { default as TableHeadCell } from './TableHeadCell/TableHeadCell';
 export { default as TableRow } from './TableRow/TableRow';
-export { default as TextArea } from './TextArea/TextArea';
 export { default as TextField } from './TextField/TextField';
 export { default as Toolbar } from './Toolbar/Toolbar';
 export { default as Tooltip } from './Tooltip/Tooltip';
@@ -40,6 +39,4 @@ export { default as WindowContent } from './WindowContent/WindowContent';
 export { default as WindowHeader } from './WindowHeader/WindowHeader';
 export { default as ColorInput } from './ColorInput/ColorInput';
 
-export {
-  default as LoadingIndicator
-} from './LoadingIndicator/LoadingIndicator';
+export { default as LoadingIndicator } from './LoadingIndicator/LoadingIndicator';

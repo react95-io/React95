@@ -1,3 +1,5 @@
+export const noOp = () => {};
+
 export function clamp(value, min, max) {
   if (min !== null && value > max) {
     return max;
