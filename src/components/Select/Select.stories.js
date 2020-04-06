@@ -43,15 +43,15 @@ storiesOf('Select', module)
       <div style={{ width: 180 }}>
         <Fieldset label='default'>
           <Select
-            onChange={onChange}
             defaultValue={2}
             options={options}
             menuMaxHeight={160}
             width={160}
-            onOpen={() => console.log('open')}
-            onClose={() => console.log('close')}
-            onBlur={() => console.log('blur')}
-            onFocus={() => console.log('focus')}
+            onChange={onChange}
+            onOpen={e => console.log('open', e)}
+            onClose={e => console.log('close', e)}
+            onBlur={e => console.log('blur', e)}
+            onFocus={e => console.log('focus', e)}
           />
           <Select
             disabled

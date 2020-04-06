@@ -82,7 +82,7 @@ const Select = React.forwardRef(function Select(props, ref) {
     ...otherProps
   } = props;
   const wrapperRef = React.useRef();
-  const mainRef = React.useRef();
+  const displayNode = React.useRef();
   const inputRef = React.useRef();
   const dropdownRef = React.useRef();
   const options = optionsProp.filter(Boolean);
@@ -93,21 +93,22 @@ const Select = React.forwardRef(function Select(props, ref) {
 
   const { current: isOpenControlled } = React.useRef(openProp != null);
   const [openState, setOpenState] = React.useState(false);
-  const open = mainRef !== null && (isOpenControlled ? openProp : openState);
+  const open =
+    displayNode !== null && (isOpenControlled ? openProp : openState);
   const handleRef = useForkRef(ref, inputRefProp);
 
   // to hijack native focus. when somebody passes ref
-  // and triggers focus, we focus mainRef instead of input
+  // and triggers focus, we focus displayNode instead of input
   React.useImperativeHandle(
     handleRef,
     () => ({
       focus: () => {
-        mainRef.current.focus();
+        displayNode.current.focus();
       },
       node: inputRef.current,
       value
     }),
-    [mainRef, value]
+    [displayNode, value]
   );
 
   const getSelectedOption = selectedValue =>
@@ -163,8 +164,9 @@ const Select = React.forwardRef(function Select(props, ref) {
     const handleClick = e => {
       if (openState) {
         if (!wrapperRef.current.contains(e.target)) {
+          e.preventDefault();
           handleClose(e);
-          // TODO call onBlur here?
+          displayNode.current.focus();
         }
       }
     };
@@ -172,7 +174,7 @@ const Select = React.forwardRef(function Select(props, ref) {
     return () => {
       document.removeEventListener('mousedown', handleClick);
     };
-  }, [openState]);
+  });
 
   const handleMouseDown = e => {
     // ignore everything but left-click
@@ -181,7 +183,7 @@ const Select = React.forwardRef(function Select(props, ref) {
     }
     // hijack the default focus behavior.
     e.preventDefault();
-    mainRef.current.focus();
+    displayNode.current.focus();
 
     if (open) {
       handleClose(e);
@@ -203,7 +205,7 @@ const Select = React.forwardRef(function Select(props, ref) {
       onChange(e, opt);
     }
     handleClose(e);
-    mainRef.current.focus();
+    displayNode.current.focus();
   };
 
   const handleKeyDown = e => {
@@ -219,14 +221,14 @@ const Select = React.forwardRef(function Select(props, ref) {
         // and focus select instead
         e.preventDefault();
         toggleOpen(e);
-        mainRef.current.focus();
+        displayNode.current.focus();
       }
     } else {
       e.preventDefault();
       if (key === SPACE) {
         // space toggles the dropdown (open/closed) while keeping focus
         toggleOpen(e);
-        mainRef.current.focus();
+        displayNode.current.focus();
       } else if ([ARROW_DOWN, ARROW_UP, ENTER].includes(key)) {
         if (!open) {
           handleOpen(e);
@@ -250,7 +252,7 @@ const Select = React.forwardRef(function Select(props, ref) {
         ) {
           setValueState(options[currentFocusIndex].value);
           handleClose(e);
-          mainRef.current.focus();
+          displayNode.current.focus();
           if (onChange) {
             e.persist();
             onChange(e, options[currentFocusIndex]);
@@ -261,7 +263,9 @@ const Select = React.forwardRef(function Select(props, ref) {
   };
 
   const handleBlur = e => {
-    // if open event.stopImmediatePropagation
+    // trigger onBlur only when dropdown is closesd
+    // otherwise onBlur would be triggered when switching focus
+    // from display node to
     if (!open && onBlur) {
       e.persist();
       // Preact support, target is read only property on a native event.
@@ -272,6 +276,7 @@ const Select = React.forwardRef(function Select(props, ref) {
       onBlur(e);
     }
   };
+
   const handleOptionKeyUp = e => {
     if (e.key === KEYS.SPACE) {
       // otherwise our MenuItems dispatches a click event
@@ -294,8 +299,8 @@ const Select = React.forwardRef(function Select(props, ref) {
 
     setValueState(nextSelection.value);
 
-    if (mainRef.current) {
-      mainRef.current.focus();
+    if (displayNode.current) {
+      displayNode.current.focus();
     }
   };
 
@@ -365,7 +370,7 @@ const Select = React.forwardRef(function Select(props, ref) {
             onClose={onClose}
             disabled={disabled}
             onChange={isEnabled ? handleNativeSelection : undefined}
-            ref={mainRef}
+            ref={displayNode}
             value={value}
           >
             {optionsContent}
@@ -408,7 +413,7 @@ const Select = React.forwardRef(function Select(props, ref) {
           onFocus={onFocus}
           onKeyDown={handleKeyDown}
           onMouseDown={isEnabled ? handleMouseDown : null}
-          ref={mainRef}
+          ref={displayNode}
           role='button'
           tabIndex={tabIndex}
           {...SelectDisplayProps}
