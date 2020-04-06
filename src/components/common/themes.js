@@ -39,7 +39,8 @@ themes.default = {
   progress: '#000080',
 
   flatLight: '#d8d8d8',
-  flatDark: '#9e9e9e'
+  flatDark: '#9e9e9e',
+  focusSecondary: '#fefe03'
 };
 
 themes.molecule = {
@@ -199,7 +200,8 @@ themes.candy = {
   progress: '#256EFF',
 
   flatLight: '#d8d8d8',
-  flatDark: '#9e9e9e'
+  flatDark: '#9e9e9e',
+  focusSecondary: '#fefe03'
 };
 
 themes.modernDark = {
@@ -239,7 +241,8 @@ themes.modernDark = {
   progress: '#f88702',
 
   flatLight: '#d8d8d8',
-  flatDark: '#9e9e9e'
+  flatDark: '#9e9e9e',
+  focusSecondary: '#fefe03'
 };
 
 themes.storm = {
@@ -291,7 +294,8 @@ themes.millenium = {
   progress: '#00256e',
 
   flatLight: '#d8d8d8',
-  flatDark: '#9e9e9e'
+  flatDark: '#9e9e9e',
+  focusSecondary: '#fefe03'
 };
 
 themes.spruce = {
@@ -331,7 +335,8 @@ themes.spruce = {
   progress: '#3d9961',
 
   flatLight: '#d8d8d8',
-  flatDark: '#9e9e9e'
+  flatDark: '#9e9e9e',
+  focusSecondary: '#fefe03'
 };
 
 themes.slate = {
@@ -371,7 +376,8 @@ themes.slate = {
   progress: '#448199',
 
   flatLight: '#d8d8d8',
-  flatDark: '#9e9e9e'
+  flatDark: '#9e9e9e',
+  focusSecondary: '#fefe03'
 };
 
 themes.rose = {
@@ -411,7 +417,8 @@ themes.rose = {
   progress: '#ab5a71',
 
   flatLight: '#d8d8d8',
-  flatDark: '#9e9e9e'
+  flatDark: '#9e9e9e',
+  focusSecondary: '#fefe03'
 };
 
 themes.rainyDay = {
@@ -451,7 +458,8 @@ themes.rainyDay = {
   progress: '#4b6480',
 
   flatLight: '#d8d8d8',
-  flatDark: '#9e9e9e'
+  flatDark: '#9e9e9e',
+  focusSecondary: '#fefe03'
 };
 
 themes.plum = {
@@ -491,7 +499,8 @@ themes.plum = {
   progress: '#483f63',
 
   flatLight: '#d8d8d8',
-  flatDark: '#9e9e9e'
+  flatDark: '#9e9e9e',
+  focusSecondary: '#fefe03'
 };
 
 themes.marine = {
@@ -531,7 +540,8 @@ themes.marine = {
   progress: '#000080',
 
   flatLight: '#d8d8d8',
-  flatDark: '#9e9e9e'
+  flatDark: '#9e9e9e',
+  focusSecondary: '#fefe03'
 };
 
 themes.maple = {
@@ -571,7 +581,8 @@ themes.maple = {
   progress: '#8e0101',
 
   flatLight: '#d8d8d8',
-  flatDark: '#9e9e9e'
+  flatDark: '#9e9e9e',
+  focusSecondary: '#fefe03'
 };
 
 themes.lilac = {
@@ -611,7 +622,8 @@ themes.lilac = {
   progress: '#5e4dba',
 
   flatLight: '#d8d8d8',
-  flatDark: '#9e9e9e'
+  flatDark: '#9e9e9e',
+  focusSecondary: '#fefe03'
 };
 
 themes.blackAndWhite = {
@@ -651,7 +663,8 @@ themes.blackAndWhite = {
   progress: '#000000',
 
   flatLight: '#d8d8d8',
-  flatDark: '#9e9e9e'
+  flatDark: '#9e9e9e',
+  focusSecondary: '#fefe03'
 };
 
 themes.highContrast = {
@@ -691,7 +704,8 @@ themes.highContrast = {
   progress: '#8e0284',
 
   flatLight: '#d8d8d8',
-  flatDark: '#9e9e9e'
+  flatDark: '#9e9e9e',
+  focusSecondary: '#fefe03'
 };
 
 themes.eggplant = {
@@ -731,7 +745,8 @@ themes.eggplant = {
   progress: '#4b8178',
 
   flatLight: '#d8d8d8',
-  flatDark: '#9e9e9e'
+  flatDark: '#9e9e9e',
+  focusSecondary: '#fefe03'
 };
 
 themes.brick = {
@@ -771,7 +786,8 @@ themes.brick = {
   progress: '#8e0101',
 
   flatLight: '#d8d8d8',
-  flatDark: '#9e9e9e'
+  flatDark: '#9e9e9e',
+  focusSecondary: '#fefe03'
 };
 
 themes.water = {
@@ -810,7 +826,8 @@ themes.water = {
   progress: '#72b3b4',
 
   flatLight: '#d8d8d8',
-  flatDark: '#9e9e9e'
+  flatDark: '#9e9e9e',
+  focusSecondary: '#fefe03'
 };
 
 themes.coldGray = {
@@ -853,7 +870,8 @@ themes.coldGray = {
   progress: '#8d88c2',
 
   flatLight: '#a4a7c8',
-  flatDark: '#5b57a1'
+  flatDark: '#5b57a1',
+  focusSecondary: '#fefe03'
 };
 
 themes.lilacRoseDark = {
@@ -894,7 +912,8 @@ themes.lilacRoseDark = {
   progress: '#713259',
 
   flatLight: '#E597C9',
-  flatDark: '#7F3163'
+  flatDark: '#7F3163',
+  focusSecondary: '#fefe03'
 };
 
 themes.violetDark = {
@@ -933,6 +952,7 @@ themes.violetDark = {
   progress: '#000080',
 
   flatLight: '#945b9b',
-  flatDark: '#3c1f3e'
+  flatDark: '#3c1f3e',
+  focusSecondary: '#fefe03'
 };
 export default themes;

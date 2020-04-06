@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
-
 import styled from 'styled-components';
+
+import getTestId from '../common/getTestId';
 import { shadow } from '../common';
 
 const Tip = styled.span`
@@ -119,7 +120,7 @@ const Tooltip = React.forwardRef(function Tooltip(props, ref) {
 
   return (
     <Wrapper
-      data-testid={testId ? `${testId}Wrapper` : undefined}
+      data-testid={getTestId(testId, 'Wrapper')}
       onBlur={blurCb}
       onFocus={focusCb}
       onMouseEnter={mouseEnterCb}

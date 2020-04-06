@@ -40,6 +40,9 @@ const commonButtonStyles = css`
     height: 100%;
     width: 100%;
   }
+  &:not(:disabled) {
+    cursor: pointer;
+  }
 `;
 
 export const StyledButton = styled.button`

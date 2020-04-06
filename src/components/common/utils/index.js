@@ -33,3 +33,10 @@ export function roundValueToStep(value, step, min) {
   const nearest = Math.round((value - min) / step) * step + min;
   return Number(nearest.toFixed(getDecimalPrecision(step)));
 }
+
+export function areEqualValues(a, b) {
+  if (typeof b === 'object' && b !== null) {
+    return a === b;
+  }
+  return String(a) === String(b);
+}
