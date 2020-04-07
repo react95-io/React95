@@ -80,7 +80,8 @@ themes.molecule = {
   progress: '#a03d49',
 
   flatLight: '#d8d8d8',
-  flatDark: '#9e9e9e'
+  flatDark: '#9e9e9e',
+  focusSecondary: '#fefe03'
 };
 
 themes.travel = {
@@ -120,7 +121,8 @@ themes.travel = {
   progress: '#48604f',
 
   flatLight: '#9d8f80',
-  flatDark: '#695f50'
+  flatDark: '#695f50',
+  focusSecondary: '#fefe03'
 };
 
 themes.theSixtiesUSA = {
@@ -160,7 +162,8 @@ themes.theSixtiesUSA = {
   progress: '#0f0',
 
   flatLight: '#df9be7',
-  flatDark: '#d067d7'
+  flatDark: '#d067d7',
+  focusSecondary: '#fefe03'
 };
 
 themes.candy = {
