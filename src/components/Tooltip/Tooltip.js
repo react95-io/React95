@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
 
-import getTestId from '../common/getTestId';
 import { shadow } from '../common';
 
 const Tip = styled.span`
@@ -41,7 +40,6 @@ const Tooltip = React.forwardRef(function Tooltip(props, ref) {
     onMouseLeave,
     onOpen,
     style,
-    testId,
     text,
     ...otherProps
   } = props;
@@ -120,7 +118,7 @@ const Tooltip = React.forwardRef(function Tooltip(props, ref) {
 
   return (
     <Wrapper
-      data-testid={getTestId(testId, 'Wrapper')}
+      data-testid='tooltip-wrapper'
       onBlur={blurCb}
       onFocus={focusCb}
       onMouseEnter={mouseEnterCb}
@@ -129,7 +127,7 @@ const Tooltip = React.forwardRef(function Tooltip(props, ref) {
     >
       <Tip
         className={className}
-        data-testid={testId}
+        data-testid='tooltip'
         show={show}
         style={style}
         ref={ref}
@@ -154,8 +152,7 @@ Tooltip.defaultProps = {
   onMouseEnter: undefined,
   onMouseLeave: undefined,
   onOpen: undefined,
-  style: {},
-  testId: undefined
+  style: {}
 };
 
 Tooltip.propTypes = {
@@ -172,7 +169,6 @@ Tooltip.propTypes = {
   onMouseLeave: propTypes.func,
   onOpen: propTypes.func,
   style: propTypes.shape({}),
-  testId: propTypes.string,
   text: propTypes.string.isRequired
 };
 

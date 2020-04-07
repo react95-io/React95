@@ -16,7 +16,6 @@ const getProps = (props = {}) => ({
   onMouseLeave: jest.fn(),
   onOpen: jest.fn(),
   style: props.style,
-  testId: 'tip',
   text: 'I am the tooltip'
 });
 
@@ -31,16 +30,16 @@ describe('<Tooltip />', () => {
     it('should render wrapper element', () => {
       const { getByTestId } = render(renderTooltip(getProps()));
 
-      const tipWrapper = getByTestId('tipWrapper');
+      const wrapper = getByTestId('tooltip-wrapper');
 
-      expect(tipWrapper).toBeInTheDocument();
-      expect(tipWrapper.tagName).toBe('DIV');
+      expect(wrapper).toBeInTheDocument();
+      expect(wrapper.tagName).toBe('DIV');
     });
 
     it('should render inner tooltip', () => {
       const { getByTestId } = render(renderTooltip(getProps()));
 
-      const tip = getByTestId('tip');
+      const tip = getByTestId('tooltip');
 
       expect(tip).toBeInTheDocument();
       expect(tip.tagName).toBe('SPAN');
@@ -64,7 +63,7 @@ describe('<Tooltip />', () => {
         )
       );
 
-      const tip = getByTestId('tip');
+      const tip = getByTestId('tooltip');
 
       expect(tip.className.includes('my-tip')).toBeTruthy();
     });
@@ -88,9 +87,9 @@ describe('<Tooltip />', () => {
         )
       );
 
-      const tipWrapper = getByTestId('tipWrapper');
+      const wrapper = getByTestId('tooltip-wrapper');
 
-      fireEvent.focus(tipWrapper);
+      fireEvent.focus(wrapper);
 
       expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 5);
     });
@@ -104,9 +103,9 @@ describe('<Tooltip />', () => {
         )
       );
 
-      const tipWrapper = getByTestId('tipWrapper');
+      const wrapper = getByTestId('tooltip-wrapper');
 
-      fireEvent.blur(tipWrapper);
+      fireEvent.blur(wrapper);
 
       expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 6);
     });
@@ -118,10 +117,10 @@ describe('<Tooltip />', () => {
 
       const { getByTestId } = render(renderTooltip(props));
 
-      const tip = getByTestId('tip');
-      const tipWrapper = getByTestId('tipWrapper');
+      const tip = getByTestId('tooltip');
+      const wrapper = getByTestId('tooltip-wrapper');
 
-      fireEvent.focus(tipWrapper);
+      fireEvent.focus(wrapper);
 
       await waitForDomChange({ container: tip });
 
@@ -134,12 +133,12 @@ describe('<Tooltip />', () => {
 
       const { getByTestId } = render(renderTooltip(props));
 
-      const tip = getByTestId('tip');
-      const tipWrapper = getByTestId('tipWrapper');
+      const tip = getByTestId('tooltip');
+      const wrapper = getByTestId('tooltip-wrapper');
 
-      fireEvent.focus(tipWrapper);
+      fireEvent.focus(wrapper);
       await waitForDomChange({ container: tip });
-      fireEvent.blur(tipWrapper);
+      fireEvent.blur(wrapper);
       await waitForDomChange({ container: tip });
 
       expect(props.onBlur).toHaveBeenCalled();
@@ -151,10 +150,10 @@ describe('<Tooltip />', () => {
 
       const { getByTestId } = render(renderTooltip(props));
 
-      const tip = getByTestId('tip');
-      const tipWrapper = getByTestId('tipWrapper');
+      const tip = getByTestId('tooltip');
+      const wrapper = getByTestId('tooltip-wrapper');
 
-      fireEvent.mouseEnter(tipWrapper);
+      fireEvent.mouseEnter(wrapper);
       await waitForDomChange({ container: tip });
 
       expect(props.onMouseEnter).toHaveBeenCalled();
@@ -166,12 +165,12 @@ describe('<Tooltip />', () => {
 
       const { getByTestId } = render(renderTooltip(props));
 
-      const tip = getByTestId('tip');
-      const tipWrapper = getByTestId('tipWrapper');
+      const tip = getByTestId('tooltip');
+      const wrapper = getByTestId('tooltip-wrapper');
 
-      fireEvent.mouseEnter(tipWrapper);
+      fireEvent.mouseEnter(wrapper);
       await waitForDomChange({ container: tip });
-      fireEvent.mouseLeave(tipWrapper);
+      fireEvent.mouseLeave(wrapper);
       await waitForDomChange({ container: tip });
 
       expect(props.onMouseLeave).toHaveBeenCalled();
@@ -183,9 +182,9 @@ describe('<Tooltip />', () => {
 
       const { getByTestId } = render(renderTooltip(props));
 
-      const tipWrapper = getByTestId('tipWrapper');
+      const wrapper = getByTestId('tooltip-wrapper');
 
-      fireEvent.focus(tipWrapper);
+      fireEvent.focus(wrapper);
 
       expect(props.onFocus).not.toHaveBeenCalled();
     });
@@ -195,9 +194,9 @@ describe('<Tooltip />', () => {
 
       const { getByTestId } = render(renderTooltip(props));
 
-      const tipWrapper = getByTestId('tipWrapper');
+      const wrapper = getByTestId('tooltip-wrapper');
 
-      fireEvent.blur(tipWrapper);
+      fireEvent.blur(wrapper);
 
       expect(props.onBlur).not.toHaveBeenCalled();
     });
@@ -207,9 +206,9 @@ describe('<Tooltip />', () => {
 
       const { getByTestId } = render(renderTooltip(props));
 
-      const tipWrapper = getByTestId('tipWrapper');
+      const wrapper = getByTestId('tooltip-wrapper');
 
-      fireEvent.mouseEnter(tipWrapper);
+      fireEvent.mouseEnter(wrapper);
 
       expect(props.onMouseEnter).not.toHaveBeenCalled();
     });
@@ -219,9 +218,9 @@ describe('<Tooltip />', () => {
 
       const { getByTestId } = render(renderTooltip(props));
 
-      const tipWrapper = getByTestId('tipWrapper');
+      const wrapper = getByTestId('tooltip-wrapper');
 
-      fireEvent.mouseLeave(tipWrapper);
+      fireEvent.mouseLeave(wrapper);
 
       expect(props.onMouseLeave).not.toHaveBeenCalled();
     });
