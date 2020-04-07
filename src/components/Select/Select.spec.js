@@ -38,7 +38,7 @@ describe('<Select />', () => {
     expect(getByRole('button')).toHaveProperty('tabIndex', 1);
   });
   it('should accept null child', () => {
-    renderWithTheme(<Select value={10} options={[options, null]} />);
+    renderWithTheme(<Select value={10} options={[...options, null]} />);
   });
   it('should have an input with [type="hidden"] by default', () => {
     const { container } = renderWithTheme(
