@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import useForkRef from '../common/hooks/useForkRef';
 
-import { clamp, areEqualValues } from '../common/utils';
+import { clamp } from '../common/utils';
 
 import {
   StyledDropdownButton,
@@ -30,10 +30,17 @@ const KEYS = {
   TAB: 'Tab'
 };
 
-export const getWrapper = variant =>
+function areEqualValues(a, b) {
+  if (typeof b === 'object' && b !== null) {
+    return a === b;
+  }
+  return String(a) === String(b);
+}
+
+const getWrapper = variant =>
   variant === 'flat' ? StyledFlatSelectWrapper : StyledSelectWrapper;
 
-export const getDisplayLabel = (selectedOption, formatDisplay) => {
+const getDisplayLabel = (selectedOption, formatDisplay) => {
   if (selectedOption) {
     if (formatDisplay) {
       return formatDisplay(selectedOption);
@@ -43,7 +50,7 @@ export const getDisplayLabel = (selectedOption, formatDisplay) => {
   return '';
 };
 
-export const getDefaultValue = (defaultValue, options) => {
+const getDefaultValue = (defaultValue, options) => {
   if (defaultValue) {
     return defaultValue;
   }

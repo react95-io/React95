@@ -10,11 +10,15 @@ import {
   createDisabledTextStyles,
   createHatchedBackground
 } from '../common';
-import { clamp, percentToValue, roundValueToStep } from '../common/utils';
+import { clamp, roundValueToStep } from '../common/utils';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import useForkRef from '../common/hooks/useForkRef';
 import { useIsFocusVisible } from '../common/hooks/useIsFocusVisible';
 import Cutout from '../Cutout/Cutout';
+
+function percentToValue(percent, min, max) {
+  return (max - min) * percent + min;
+}
 
 function trackFinger(event, touchId) {
   if (touchId.current !== undefined && event.changedTouches) {
