@@ -6,30 +6,25 @@ const StyledToolbar = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  padding: ${props => (props.noPadding ? '0px' : '4px')};
+  padding: ${props => (props.noPadding ? '0' : '4px')};
 `;
 
-const Toolbar = ({ children, className, style, noPadding, ...otherProps }) => (
-  <StyledToolbar
-    noPadding={noPadding}
-    className={className}
-    style={style}
-    {...otherProps}
-  >
-    {children}
-  </StyledToolbar>
-);
+const Toolbar = React.forwardRef(function Toolbar(props, ref) {
+  const { children, noPadding, ...otherProps } = props;
+  return (
+    <StyledToolbar noPadding={noPadding} ref={ref} {...otherProps}>
+      {children}
+    </StyledToolbar>
+  );
+});
 
 Toolbar.defaultProps = {
-  noPadding: false,
-  style: {},
-  className: ''
+  children: null,
+  noPadding: false
 };
 
 Toolbar.propTypes = {
-  style: propTypes.shape([propTypes.string, propTypes.number]),
-  className: propTypes.string,
-  children: propTypes.node.isRequired,
+  children: propTypes.node,
   noPadding: propTypes.bool
 };
 
