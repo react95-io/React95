@@ -43,15 +43,15 @@ Apply style reset, wrap your app content with ThemeProvider with theme of your c
 ```jsx
 import React from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import { reset, themes, List, ListItem, Divider } from 'react95';
+import { styleReset, themes, List, ListItem, Divider } from 'react95';
 
-const ResetStyles = createGlobalStyle`
-  ${reset}
+const GlobalStyles = createGlobalStyle`
+  ${styleReset}
 `;
 
 const App = () => (
   <div>
-    <ResetStyles />
+    <GlobalStyles />
     <ThemeProvider theme={themes.default}>
       <List>
         <ListItem>🎤 Sing</ListItem>

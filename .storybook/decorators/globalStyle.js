@@ -1,10 +1,10 @@
-import React from "react";
-import { createGlobalStyle } from "styled-components";
+import React from 'react';
+import { createGlobalStyle } from 'styled-components';
 
-import reset from "../../src/components/common/reset";
+import styleReset from '../../src/components/common/styleReset';
 
 const GlobalStyle = createGlobalStyle`
-  ${reset}
+  ${styleReset}
 `;
 
 export default storyFn => (
