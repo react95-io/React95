@@ -23,6 +23,7 @@ const StyledTab = styled.button`
   cursor: default;
   color: ${({ theme }) => theme.text};
   user-select: none;
+  font-family: inherit;
   &:focus:after,
   &:active:after {
     content: '';
@@ -57,7 +58,6 @@ const StyledTab = styled.button`
   }
 `;
 
-// TODO handle tabIndex
 const Tab = React.forwardRef(function Tab(props, ref) {
   const { value, onClick, selected, children, ...otherProps } = props;
 

@@ -43,6 +43,7 @@ const commonButtonStyles = css`
   &:not(:disabled) {
     cursor: pointer;
   }
+  font-family: inherit;
 `;
 
 export const StyledButton = styled.button`
