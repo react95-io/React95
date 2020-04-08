@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 
 import styled, { css } from 'styled-components';
 import { createDisabledTextStyles, createFlatBoxStyles } from '../common';
-import { blockSizes, fontFamily } from '../common/system';
+import { blockSizes } from '../common/system';
 import Cutout from '../Cutout/Cutout';
 
 const sharedWrapperStyles = css`
@@ -39,7 +39,7 @@ const sharedInputStyles = css`
   background: none;
   font-size: 1rem;
   min-height: 27px;
-  font-family: ${fontFamily};
+  font-family: inherit;
   color: ${({ theme }) => theme.inputText};
   ${({ disabled, variant }) =>
     variant !== 'flat' && disabled && createDisabledTextStyles()}
