@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import logoIMG from '../../images/logo.png';
+import logoIMG from '../assets/images/logo.png';
 
 const LogoIcon = ({ style }) => {
   const baseClass = 'LogoIcon';
