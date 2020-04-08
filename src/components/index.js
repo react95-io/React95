@@ -1,5 +1,5 @@
 /* common */
-export { default as reset } from './common/reset';
+export { default as styleReset } from './common/styleReset';
 export { default as themes } from './common/themes';
 
 /* components */
