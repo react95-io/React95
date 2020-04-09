@@ -31,8 +31,8 @@ Divider.defaultProps = {
 };
 
 Divider.propTypes = {
-  size: propTypes.oneOf([propTypes.string, propTypes.number]),
-  orientation: propTypes.oneOf(['horizontal, vertical'])
+  size: propTypes.oneOfType([propTypes.string, propTypes.number]),
+  orientation: propTypes.oneOf(['horizontal', 'vertical'])
 };
 
 export default Divider;
