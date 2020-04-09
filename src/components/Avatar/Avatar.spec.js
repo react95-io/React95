@@ -65,4 +65,22 @@ describe('<Avatar />', () => {
 
     expect(content).toBeNull();
   });
+
+  describe('prop: size', () => {
+    it('should set proper size', () => {
+      const { container } = renderWithTheme(<Avatar size='85%' />);
+      const avatarEl = container.firstChild;
+
+      expect(avatarEl).toHaveStyleRule('width', '85%');
+      expect(avatarEl).toHaveStyleRule('height', '85%');
+    });
+
+    it('when passed a number, sets size in px', () => {
+      const { container } = renderWithTheme(<Avatar size={25} />);
+      const avatarEl = container.firstChild;
+
+      expect(avatarEl).toHaveStyleRule('width', '25px');
+      expect(avatarEl).toHaveStyleRule('height', '25px');
+    });
+  });
 });

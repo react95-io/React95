@@ -1,14 +1,16 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
-import { blockSizes } from '../common/system';
 
 const StyledAvatar = styled.div`
   display: inline-block;
   box-sizing: border-box;
   object-fit: contain;
-  height: calc(${() => blockSizes.md} - 2px);
-  width: calc(${() => blockSizes.md} - 2px);
+  ${({ size }) =>
+    `
+    height: ${size};
+    width: ${size};
+    `}
   border-radius: ${({ square }) => (square ? 0 : '50%')};
   overflow: hidden;
   ${({ noBorder, theme }) =>
@@ -39,28 +41,46 @@ const SlyledAvatarIMG = styled.img`
 `;
 
 const Avatar = React.forwardRef(function Avatar(props, ref) {
-  const { children, noBorder, square, src, alt, ...otherProps } = props;
+  const {
+    alt,
+    children,
+    noBorder,
+    size: sizeProp,
+    square,
+    src,
+    ...otherProps
+  } = props;
+
+  const size = typeof sizeProp === 'number' ? `${sizeProp}px` : sizeProp;
   return (
-    <StyledAvatar noBorder={noBorder} square={square} ref={ref} {...otherProps}>
+    <StyledAvatar
+      noBorder={noBorder}
+      ref={ref}
+      size={size}
+      square={square}
+      {...otherProps}
+    >
       {src ? <SlyledAvatarIMG src={src} alt={alt} /> : children}
     </StyledAvatar>
   );
 });
 
 Avatar.defaultProps = {
-  square: false,
-  noBorder: false,
-  src: undefined,
+  alt: '',
   children: null,
-  alt: ''
+  noBorder: false,
+  size: 35,
+  square: false,
+  src: undefined
 };
 
 Avatar.propTypes = {
-  square: propTypes.bool,
-  noBorder: propTypes.bool,
+  alt: propTypes.string,
   children: propTypes.node,
-  src: propTypes.string,
-  alt: propTypes.string
+  noBorder: propTypes.bool,
+  size: propTypes.oneOf([propTypes.string, propTypes.number]),
+  square: propTypes.bool,
+  src: propTypes.string
 };
 
 export default Avatar;
