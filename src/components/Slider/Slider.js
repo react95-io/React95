@@ -216,7 +216,7 @@ const Tick = styled.span`
     isDisabled &&
     css`
       ${createDisabledTextStyles()}
-      box-shadow: 1px 1px 1px ${theme.textDisabledShadow};
+      box-shadow: 1px 1px 0px ${theme.textDisabledShadow};
       border-color: ${theme.textDisabled};
     `}
 `;
