@@ -30,7 +30,7 @@ storiesOf('List', module)
           🌿
         </span>
       </ListItem>
-      <Bar />
+      <Bar size={38} />
       <ListItem>Tackle</ListItem>
       <ListItem>Growl</ListItem>
       <ListItem disabled>Razor Leaf</ListItem>
