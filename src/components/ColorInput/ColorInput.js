@@ -143,7 +143,7 @@ const ColorInput = React.forwardRef(function ColorInput(props, ref) {
         isDisabled={disabled}
         role='presentation'
       />
-      {variant === 'default' && <StyledDivider vertical />}
+      {variant === 'default' && <StyledDivider orientation='vertical' />}
       <ChevronIcon isDisabled={disabled} variant={variant} />
     </Trigger>
   );
