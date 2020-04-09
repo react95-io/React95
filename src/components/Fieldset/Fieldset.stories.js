@@ -17,73 +17,48 @@ storiesOf('Fieldset', module)
   .add('default', () => (
     <Window>
       <WindowContent>
-        <Fieldset>
-          Some content here
-          <span role='img' aria-label='😍'>
-            😍
-          </span>
-        </Fieldset>
-      </WindowContent>
-    </Window>
-  ))
-  .add('with label', () => (
-    <Window>
-      <WindowContent>
         <Fieldset label='Label here'>
           Some content here
           <span role='img' aria-label='😍'>
             😍
           </span>
         </Fieldset>
+        <br />
+        <Fieldset label='Disabled' disabled>
+          Some content here
+          <span role='img' aria-label='😍'>
+            😍
+          </span>
+        </Fieldset>
       </WindowContent>
     </Window>
   ))
-  .add('disabled', () => <DisabledFieldset />)
-  .add('flat', () => <FlatFieldset />);
-
-const FlatFieldset = () => {
-  const [state, setState] = useState(true);
-  return (
+  .add('flat', () => (
     <Window>
       <WindowContent>
         <Cutout
           style={{ padding: '1rem', background: 'white', width: '300px' }}
         >
-          <p style={{ lineHeight: 1.3 }}>
-            When you want to use Fieldset on a light background (like scrollable
-            content), just use the flat variant:
-          </p>
-          <div
-            style={{
-              marginTop: '1.5rem'
-            }}
-          >
-            <Fieldset
-              variant='flat'
-              label={
-                <Checkbox
-                  variant='flat'
-                  style={{ margin: 0 }}
-                  label='Enable'
-                  checked={!state}
-                  value={!state}
-                  onChange={() => setState(!state)}
-                />
-              }
-              disabled={state}
-            >
-              Some content here
-              <span role='img' aria-label='😍'>
-                😍
-              </span>
-            </Fieldset>
-          </div>
+          <Fieldset variant='flat' label='Label here'>
+            Some content here
+            <span role='img' aria-label='😍'>
+              😍
+            </span>
+          </Fieldset>
+          <br />
+          <Fieldset variant='flat' label='Disabled' disabled>
+            Some content here
+            <span role='img' aria-label='😍'>
+              😍
+            </span>
+          </Fieldset>
         </Cutout>
       </WindowContent>
     </Window>
-  );
-};
-const DisabledFieldset = () => {
+  ))
+  .add('toggle example', () => <FieldsetToggle />);
+
+const FieldsetToggle = () => {
   const [state, setState] = useState(true);
   return (
     <Window>
