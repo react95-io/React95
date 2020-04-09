@@ -20,12 +20,12 @@ storiesOf('Bar', module)
   .add('default', () => (
     <AppBar>
       <Toolbar>
-        <Bar />
+        <Bar size={35} />
         <Button variant='menu'>Edit</Button>
         <Button variant='menu' disabled>
           Save
         </Button>
-        <Bar />
+        <Bar size={35} />
       </Toolbar>
     </AppBar>
   ));
