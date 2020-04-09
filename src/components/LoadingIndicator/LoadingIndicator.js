@@ -98,6 +98,7 @@ const sharedIndeterminateInnerStyles = css`
   width: 100%;
   display: inline-block;
   background: ${({ theme }) => theme.progress};
+  position: absolute;
 `;
 const IndeterminateWrapper = styled.div`
   width: 100%;
