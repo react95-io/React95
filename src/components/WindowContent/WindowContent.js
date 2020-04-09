@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 const StyledWindowContent = styled.div`
   padding: 16px;
-  margin-right: 2px;
 `;
 
 const WindowContent = React.forwardRef(function WindowContent(props, ref) {

@@ -10,7 +10,7 @@ const SlyledWindowHeader = styled.div`
   padding-left: 0.25rem;
   padding-right: 3px;
   font-weight: bold;
-
+  border: 2px solid ${({ theme }) => theme.material};
   &[data-active='false'] {
     background: ${({ theme }) => theme.headerNotActiveBackground};
     color: ${({ theme }) => theme.headerNotActiveText};
