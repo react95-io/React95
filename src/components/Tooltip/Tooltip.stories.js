@@ -17,8 +17,8 @@ storiesOf('Tooltip', module)
   ))
   .add('default', () =>
     React.createElement(() => (
-      <Tooltip text='Nothing really 🤷‍'>
-        <Button>Whad do I do?</Button>
+      <Tooltip text='I see you! 🤷‍'>
+        <Button>Hover me</Button>
       </Tooltip>
     ))
   );
