@@ -20,7 +20,7 @@ storiesOf('List', module)
     <List>
       <ListItem>Photos</ListItem>
       <ListItem>Videos</ListItem>
-      <ListItem>Other</ListItem>
+      <ListItem disabled>Other</ListItem>
     </List>
   ))
   .add('inline', () => (
@@ -34,19 +34,5 @@ storiesOf('List', module)
       <ListItem>Tackle</ListItem>
       <ListItem>Growl</ListItem>
       <ListItem disabled>Razor Leaf</ListItem>
-    </List>
-  ))
-  .add('no shadow', () => (
-    <List shadow={false}>
-      <ListItem>Photos</ListItem>
-      <ListItem>Videos</ListItem>
-      <ListItem>Other</ListItem>
-    </List>
-  ))
-  .add('fullWidth', () => (
-    <List fullWidth>
-      <ListItem>Photos</ListItem>
-      <ListItem>Videos</ListItem>
-      <ListItem>Other</ListItem>
     </List>
   ));
