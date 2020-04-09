@@ -79,12 +79,7 @@ class TabsDemo extends React.Component {
             <TabPanel value={0} activeTab={activeTab}>
               <Fieldset label='Order:'>
                 <div style={{ padding: '0.5em 0 0.5em 0' }}>Amount:</div>
-                <NumberField
-                  width='100%'
-                  min={0}
-                  value={0}
-                  onChange={() => null}
-                />
+                <NumberField width='100%' min={0} defaultValue={0} />
                 <Checkbox
                   style={{ marginTop: '1rem' }}
                   name='shipping'
