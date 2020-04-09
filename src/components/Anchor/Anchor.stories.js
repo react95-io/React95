@@ -1,27 +1,19 @@
 import React from 'react';
+import styled from 'styled-components';
 import { storiesOf } from '@storybook/react';
 
 import Anchor from './Anchor';
 
+const Wrapper = styled.div`
+  padding: 5rem;
+  background: ${({ theme }) => theme.material};
+`;
+
 storiesOf('Anchor', module)
-  .addDecorator(story => (
-    <div
-      style={{
-        padding: '5rem',
-        background: '#ced0cf'
-      }}
-    >
-      {story()}
-    </div>
-  ))
+  .addDecorator(story => <Wrapper>{story()}</Wrapper>)
   .add('default', () => (
-    <Anchor href='https://expensive.toys' target='_blank'>
-      Expensive Toys
-    </Anchor>
-  ))
-  .add('within text', () => (
     <h1>
-      Everybody needs
+      Everybody likes
       {/* eslint-disable-next-line prettier/prettier */}{' '}
       <Anchor href='https://expensive.toys' target='_blank'>
         Expensive Toys
