@@ -153,7 +153,7 @@ storiesOf('Select', module)
       </Window>
     );
   })
-  .add('custom formatDisplay', () => (
+  .add('custom display formatting', () => (
     <Select
       formatDisplay={opt => `${opt.label.toUpperCase()} 👍 👍`}
       width={300}
