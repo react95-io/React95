@@ -89,7 +89,7 @@ class DatePicker extends Component {
     return { day, month, year };
   };
 
-  handleMonthSelect = month => this.setState({ month });
+  handleMonthSelect = e => this.setState({ month: e.target.value });
 
   handleYearSelect = year => this.setState({ year });
 
@@ -167,11 +167,11 @@ class DatePicker extends Component {
         <WindowContent>
           <Toolbar noPadding style={{ justifyContent: 'space-between' }}>
             <Select
-              items={months}
-              selectedIndex={month}
+              options={months}
+              value={month}
               onChange={this.handleMonthSelect}
               width={128}
-              height={200}
+              menuMaxHeight={200}
             />
             <NumberField
               value={year}
