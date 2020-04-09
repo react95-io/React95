@@ -17,20 +17,20 @@ storiesOf('Divider', module)
     </div>
   ))
   .add('default', () => (
-    <List>
-      <ListItem>Item 1</ListItem>
-      <Divider />
-      <ListItem>Item 2</ListItem>
-      <Divider />
-      <ListItem>Item 3</ListItem>
-    </List>
-  ))
-  .add('vertical', () => (
-    <List inline>
-      <ListItem>Item 1</ListItem>
-      <Divider vertical size='43px' />
-      <ListItem>Item 2</ListItem>
-      <Divider vertical size='43px' />
-      <ListItem>Item 3</ListItem>
-    </List>
+    <>
+      <List>
+        <ListItem>Item 1</ListItem>
+        <Divider />
+        <ListItem>Item 2</ListItem>
+        <Divider />
+        <ListItem>Item 3</ListItem>
+      </List>
+      <List inline style={{ margin: 30 }}>
+        <ListItem>Item 1</ListItem>
+        <Divider orientation='vertical' size='43px' />
+        <ListItem>Item 2</ListItem>
+        <Divider orientation='vertical' size='43px' />
+        <ListItem>Item 3</ListItem>
+      </List>
+    </>
   ));
