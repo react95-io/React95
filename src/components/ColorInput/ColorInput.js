@@ -26,6 +26,10 @@ export const StyledColorInput = styled.input`
   top: 0;
   opacity: 0;
   z-index: 1;
+  cursor: pointer;
+  &:disabled {
+    cursor: default;
+  }
 `;
 
 // TODO replace with SVG icon
