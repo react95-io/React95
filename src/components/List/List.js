@@ -6,9 +6,8 @@ import { createBorderStyles, createBoxStyles } from '../common';
 
 const StyledList = styled.ul`
   box-sizing: border-box;
-
   width: ${props => (props.fullWidth ? '100%' : 'auto')};
-  padding: 2px 4px 4px 2px;
+  padding: 4px;
   ${createBorderStyles({ windowBorders: true })}
   ${createBoxStyles()}
   ${props =>
