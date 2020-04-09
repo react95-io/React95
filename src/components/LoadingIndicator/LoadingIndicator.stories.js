@@ -11,5 +11,9 @@ const Wrapper = styled.div`
 `;
 storiesOf('LoadingIndicator', module)
   .addDecorator(story => <Wrapper>{story()}</Wrapper>)
-  .add('default', () => <LoadingIndicator />)
-  .add('not loading', () => <LoadingIndicator isLoading={false} />);
+  .add('default', () => (
+    <>
+      <p style={{ textAlign: 'center', marginBottom: '0.5rem' }}>Loading...</p>
+      <LoadingIndicator isLoading />
+    </>
+  ));
