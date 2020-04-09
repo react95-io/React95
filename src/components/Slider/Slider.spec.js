@@ -292,9 +292,11 @@ describe('<Slider />', () => {
     });
   });
 
-  describe('prop: vertical', () => {
-    it('should render with aria-orientation attribute set to "vertical" ', () => {
-      const { getByRole } = renderWithTheme(<Slider vertical value={0} />);
+  describe('prop: orientation', () => {
+    it('when vertical, should render with aria-orientation attribute set to "vertical" ', () => {
+      const { getByRole } = renderWithTheme(
+        <Slider orientation='vertical' value={0} />
+      );
 
       expect(getByRole('slider')).toHaveAttribute(
         'aria-orientation',
@@ -305,7 +307,11 @@ describe('<Slider />', () => {
     it('should report the right position', () => {
       const handleChange = jest.fn();
       const { container } = renderWithTheme(
-        <Slider vertical defaultValue={20} onChange={handleChange} />
+        <Slider
+          orientation='vertical'
+          defaultValue={20}
+          onChange={handleChange}
+        />
       );
 
       // mocking containers size

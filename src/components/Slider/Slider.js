@@ -244,19 +244,19 @@ const Slider = React.forwardRef(function Slider(props, ref) {
     step,
     min,
     max,
-    size,
+    size: sizeProp,
     marks: marksProp,
     onChange,
     onChangeCommitted,
     onMouseDown,
     name,
-    vertical,
+    orientation,
     variant,
     disabled,
     ...otherProps
   } = props;
   const Groove = variant === 'flat' ? StyledFlatGroove : StyledGroove;
-
+  const vertical = orientation === 'vertical';
   const [valueDerived, setValueState] = useControlledOrUncontrolled({
     value,
     defaultValue
@@ -477,6 +477,8 @@ const Slider = React.forwardRef(function Slider(props, ref) {
     };
   }, [handleTouchEnd, handleTouchMove, handleTouchStart]);
 
+  const size = typeof sizeProp === 'number' ? `${sizeProp}px` : sizeProp;
+
   return (
     <Wrapper
       isDisabled={disabled}
@@ -528,7 +530,7 @@ const Slider = React.forwardRef(function Slider(props, ref) {
         variant={variant}
         isDisabled={disabled}
         aria-disabled={disabled.toString()}
-        aria-orientation={vertical ? 'vertical' : 'horizontal'}
+        aria-orientation={orientation}
         aria-valuemax={max}
         aria-valuemin={min}
         aria-valuenow={valueDerived}
@@ -553,8 +555,8 @@ Slider.defaultProps = {
 
   name: null,
   marks: false,
-  vertical: false,
   variant: 'default',
+  orientation: 'horizontal',
   disabled: false
 };
 
@@ -565,15 +567,15 @@ Slider.propTypes = {
   step: propTypes.number,
   min: propTypes.number,
   max: propTypes.number,
-  size: propTypes.string,
+  size: propTypes.oneOfType([propTypes.string, propTypes.number]),
   onChange: propTypes.func,
   onChangeCommitted: propTypes.func,
   onMouseDown: propTypes.func,
 
   name: propTypes.string,
   marks: propTypes.oneOfType([propTypes.bool, propTypes.array]),
-  vertical: propTypes.bool,
   variant: propTypes.oneOf(['default', 'flat']),
+  orientation: propTypes.oneOf(['horizontal', 'vertical']),
   disabled: propTypes.bool
 };
 export default Slider;

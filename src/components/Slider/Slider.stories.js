@@ -26,7 +26,7 @@ storiesOf('Slider', module)
       step={1.5}
       defaultValue={0}
       marks
-      vertical
+      orientation='vertical'
     />
   ))
   .add('with custom marks', () => (
