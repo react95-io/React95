@@ -3,8 +3,8 @@ import propTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledDivider = styled.hr`
-  ${({ vertical, theme, size }) =>
-    vertical
+  ${({ orientation, theme, size }) =>
+    orientation === 'vertical'
       ? `
     height: ${size};
     border-left: 2px solid ${theme.borderDark};
@@ -20,17 +20,19 @@ const StyledDivider = styled.hr`
 `;
 
 const Divider = React.forwardRef(function Divider(props, ref) {
-  return <StyledDivider ref={ref} {...props} />;
+  const { size: sizeProp, ...otherProps } = props;
+  const size = typeof sizeProp === 'number' ? `${sizeProp}px` : sizeProp;
+  return <StyledDivider ref={ref} size={size} {...otherProps} />;
 });
 
 Divider.defaultProps = {
   size: '100%',
-  vertical: false
+  orientation: 'horizontal'
 };
 
 Divider.propTypes = {
-  size: propTypes.string,
-  vertical: propTypes.bool
+  size: propTypes.oneOf([propTypes.string, propTypes.number]),
+  orientation: propTypes.oneOf(['horizontal, vertical'])
 };
 
 export default Divider;
