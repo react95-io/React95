@@ -139,7 +139,7 @@ const NumberField = React.forwardRef(function NumberField(props, ref) {
         disabled={disabled}
         type='number'
         ref={ref}
-        width='100%'
+        fullWidth
         onBlur={onBlur}
       />
       <StyledButtonWrapper isFlat={variant === 'flat'}>
