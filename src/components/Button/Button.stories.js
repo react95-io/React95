@@ -22,68 +22,54 @@ const StyledCutout = styled(Cutout)`
   background: ${({ theme }) => theme.canvas};
 `;
 
+const Wrapper = styled.div`
+  padding: 5rem;
+  background: ${({ theme }) => theme.material};
+`;
+const ButtonWrapper = styled.div`
+  button {
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+  }
+`;
 storiesOf('Button', module)
-  .addDecorator(story => (
-    <div
-      style={{
-        padding: '5rem',
-        background: 'teal'
-      }}
-    >
-      {story()}
-    </div>
-  ))
-  .add('default', () => <Button {...actions}>Default</Button>)
-  .add('primary', () => (
-    <Button primary {...actions}>
-      Primary
-    </Button>
-  ))
-
-  .add('disabled', () => (
-    <Button disabled {...actions}>
-      Disabled
-    </Button>
-  ))
-  .add('active', () => (
-    <Button active {...actions}>
-      Active
-    </Button>
-  ))
-  .add('fullWidth', () => (
-    <Button fullWidth {...actions}>
-      Full width
-    </Button>
-  ))
-  .add('square', () => (
-    <Button {...actions} square>
-      <span role='img' aria-label='🎂'>
-        🎂
-      </span>
-    </Button>
-  ))
-  .add('sizes', () => (
-    <div
-      style={{
-        alignItems: 'center',
-        display: 'flex',
-        width: 200,
-        justifyContent: 'space-between'
-      }}
-    >
-      <Button {...actions} size='sm'>
-        small
+  .addDecorator(story => <Wrapper>{story()}</Wrapper>)
+  .add('default', () => (
+    <ButtonWrapper>
+      <Button {...actions}>Default</Button>
+      <br />
+      <Button primary {...actions}>
+        Primary
       </Button>
-      <Button {...actions} size='md'>
-        medium
+      <br />
+      <Button disabled {...actions}>
+        Disabled
       </Button>
-      <Button {...actions} size='lg'>
-        large
+      <br />
+      <Button active {...actions}>
+        Active
       </Button>
-    </div>
+      <br />
+      <Button {...actions} square>
+        <span role='img' aria-label='🎂'>
+          ♻︎
+        </span>
+      </Button>
+      <br />
+      <Button fullWidth {...actions}>
+        Full width
+      </Button>
+      <br />
+      <Button size='sm' {...actions}>
+        Size small
+      </Button>
+      <Button size='lg' {...actions}>
+        Size large
+      </Button>
+    </ButtonWrapper>
   ))
-  .add('menu button', () => <MenuButtonExample />)
-  .add('flat button', () => (
+  .add('menu', () => <MenuButtonExample />)
+  .add('flat', () => (
     <Window>
       <WindowContent>
         <StyledCutout style={{ padding: '1rem', width: '300px' }}>
@@ -98,23 +84,23 @@ storiesOf('Button', module)
           >
             <Toolbar>
               <Button
-                primary
-                {...actions}
                 variant='flat'
+                primary
                 fullWidth
                 style={{ marginRight: '0.5rem' }}
+                {...actions}
               >
                 Primary
               </Button>
               <Button
-                {...actions}
                 variant='flat'
                 fullWidth
                 style={{ marginRight: '0.5rem' }}
+                {...actions}
               >
                 Regular
               </Button>
-              <Button {...actions} variant='flat' disabled fullWidt>
+              <Button variant='flat' disabled fullWidt {...actions}>
                 Disabled
               </Button>
             </Toolbar>
