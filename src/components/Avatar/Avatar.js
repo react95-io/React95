@@ -78,7 +78,7 @@ Avatar.propTypes = {
   alt: propTypes.string,
   children: propTypes.node,
   noBorder: propTypes.bool,
-  size: propTypes.oneOf([propTypes.string, propTypes.number]),
+  size: propTypes.oneOfType([propTypes.string, propTypes.number]),
   square: propTypes.bool,
   src: propTypes.string
 };
