@@ -26,7 +26,7 @@ Bar.defaultProps = {
   size: '100%'
 };
 Bar.propTypes = {
-  size: propTypes.oneOf([propTypes.string, propTypes.number])
+  size: propTypes.oneOfType([propTypes.string, propTypes.number])
 };
 
 export default Bar;
