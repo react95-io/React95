@@ -261,8 +261,13 @@ const Select = React.forwardRef(function Select(props, ref) {
           handleClose(e);
           displayNode.current.focus();
           if (onChange) {
+            const option = options[currentFocusIndex];
             e.persist();
-            onChange(e, options[currentFocusIndex]);
+            Object.defineProperty(e, 'target', {
+              writable: true,
+              value: { value: option.value, name }
+            });
+            onChange(e, option);
           }
         }
       }
