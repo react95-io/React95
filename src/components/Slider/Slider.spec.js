@@ -332,8 +332,8 @@ describe('<Slider />', () => {
       );
 
       expect(handleChange).toHaveBeenCalledTimes(2);
-      expect(handleChange.mock.calls[0][0]).toBe(80);
-      expect(handleChange.mock.calls[1][0]).toBe(78);
+      expect(handleChange.mock.calls[0][1]).toBe(80);
+      expect(handleChange.mock.calls[1][1]).toBe(78);
     });
   });
 
