@@ -65,7 +65,7 @@ const Tab = React.forwardRef(function Tab(props, ref) {
     <StyledTab
       selected={selected}
       aria-selected={selected}
-      onClick={() => onClick(value)}
+      onClick={e => onClick(e, value)}
       role='tab'
       ref={ref}
       {...otherProps}
