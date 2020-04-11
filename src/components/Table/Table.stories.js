@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import Table from './Table';
 import TableBody from '../TableBody/TableBody';
@@ -12,7 +11,32 @@ import Window from '../Window/Window';
 import WindowHeader from '../WindowHeader/WindowHeader';
 import WindowContent from '../WindowContent/WindowContent';
 
-const SimpleTable = () => (
+export default {
+  title: 'Table',
+  component: Table,
+  subcomponents: {
+    Table,
+    TableBody,
+    TableHead,
+    TableRow,
+    TableHeadCell,
+    TableDataCell
+  },
+  decorators: [
+    story => (
+      <div
+        style={{
+          padding: '5rem',
+          background: 'teal'
+        }}
+      >
+        {story()}
+      </div>
+    )
+  ]
+};
+
+export const Default = () => (
   <Window style={{ width: 320 }}>
     <WindowHeader>Pokedex.exe</WindowHeader>
     <WindowContent>
@@ -27,7 +51,7 @@ const SimpleTable = () => (
         <TableBody>
           <TableRow>
             <TableDataCell style={{ textAlign: 'center' }}>
-              <span role='img' aria-label='🌿'>
+              <span role='img' aria-label='LEAF'>
                 🌿
               </span>
             </TableDataCell>
@@ -36,7 +60,7 @@ const SimpleTable = () => (
           </TableRow>
           <TableRow>
             <TableDataCell style={{ textAlign: 'center' }}>
-              <span role='img' aria-label='🔥'>
+              <span role='img' aria-label='fire'>
                 🔥
               </span>
             </TableDataCell>
@@ -45,7 +69,7 @@ const SimpleTable = () => (
           </TableRow>
           <TableRow>
             <TableDataCell style={{ textAlign: 'center' }}>
-              <span role='img' aria-label='⚡'>
+              <span role='img' aria-label='lightning'>
                 ⚡
               </span>
             </TableDataCell>
@@ -58,15 +82,6 @@ const SimpleTable = () => (
   </Window>
 );
 
-storiesOf('Table', module)
-  .addDecorator(story => (
-    <div
-      style={{
-        padding: '5rem',
-        background: 'teal'
-      }}
-    >
-      {story()}
-    </div>
-  ))
-  .add('default', () => <SimpleTable />);
+Default.story = {
+  name: 'default'
+};

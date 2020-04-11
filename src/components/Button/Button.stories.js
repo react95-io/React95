@@ -1,7 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-
 import styled from 'styled-components';
 
 import {
@@ -16,115 +13,63 @@ import {
   Toolbar
 } from '..';
 
-const actions = { onClick: action('onClick') };
-
-const StyledCutout = styled(Cutout)`
-  background: ${({ theme }) => theme.canvas};
-`;
-
 const Wrapper = styled.div`
   padding: 5rem;
   background: ${({ theme }) => theme.material};
-`;
-const ButtonWrapper = styled.div`
-  button {
+  #default-buttons button {
     margin-bottom: 1rem;
     margin-right: 1rem;
   }
+
+  #cutout {
+    background: ${({ theme }) => theme.canvas};
+    padding: 1rem;
+    width: 300px;
+  }
 `;
-storiesOf('Button', module)
-  .addDecorator(story => <Wrapper>{story()}</Wrapper>)
-  .add('default', () => (
-    <ButtonWrapper>
-      <Button {...actions}>Default</Button>
-      <br />
-      <Button primary {...actions}>
-        Primary
-      </Button>
-      <br />
-      <Button disabled {...actions}>
-        Disabled
-      </Button>
-      <br />
-      <Button active {...actions}>
-        Active
-      </Button>
-      <br />
-      <Button {...actions} square>
-        <span role='img' aria-label='🎂'>
-          ♻︎
-        </span>
-      </Button>
-      <br />
-      <Button fullWidth {...actions}>
-        Full width
-      </Button>
-      <br />
-      <Button size='sm' {...actions}>
-        Size small
-      </Button>
-      <Button size='lg' {...actions}>
-        Size large
-      </Button>
-    </ButtonWrapper>
-  ))
-  .add('menu', () => <MenuButtonExample />)
-  .add('flat', () => (
-    <Window>
-      <WindowContent>
-        <StyledCutout style={{ padding: '1rem', width: '300px' }}>
-          <p style={{ lineHeight: 1.3 }}>
-            When you want to use Buttons on a light background (like scrollable
-            content), just use the flat variant:
-          </p>
-          <div
-            style={{
-              marginTop: '1.5rem'
-            }}
-          >
-            <Toolbar>
-              <Button
-                variant='flat'
-                primary
-                fullWidth
-                style={{ marginRight: '0.5rem' }}
-                {...actions}
-              >
-                Primary
-              </Button>
-              <Button
-                variant='flat'
-                fullWidth
-                style={{ marginRight: '0.5rem' }}
-                {...actions}
-              >
-                Regular
-              </Button>
-              <Button variant='flat' disabled fullWidt {...actions}>
-                Disabled
-              </Button>
-            </Toolbar>
-          </div>
-        </StyledCutout>
-      </WindowContent>
-    </Window>
-  ));
 
-function MenuButtonExample() {
+export default {
+  title: 'Button',
+  component: Button,
+  decorators: [story => <Wrapper>{story()}</Wrapper>]
+};
+
+export const Default = () => (
+  <div id='default-buttons'>
+    <Button>Default</Button>
+    <br />
+    <Button primary>Primary</Button>
+    <br />
+    <Button disabled>Disabled</Button>
+    <br />
+    <Button active>Active</Button>
+    <br />
+    <Button square>
+      <span role='img' aria-label='recycle'>
+        ♻︎
+      </span>
+    </Button>
+    <br />
+    <Button fullWidth>Full width</Button>
+    <br />
+    <Button size='sm'>Size small</Button>
+    <Button size='lg'>Size large</Button>
+  </div>
+);
+
+Default.story = {
+  name: 'default'
+};
+
+const imageSrc =
+  'https://image.freepik.com/foto-gratuito/la-frutta-fresca-del-kiwi-tagliata-a-meta-con-la-decorazione-completa-del-pezzo-e-bella-sulla-tavola-di-legno_47436-1.jpg';
+export const Menu = () => {
   const [open, setOpen] = React.useState(false);
-
-  function handleClick() {
-    setOpen(!open);
-  }
-
-  function handleClose() {
-    setOpen(false);
-  }
 
   return (
     <Window style={{ maxWidth: '250px' }}>
       <WindowHeader>
-        <span role='img' aria-label='🥝'>
+        <span role='img' aria-label='Kiwi'>
           🥝
         </span>
         Kiwi.app
@@ -143,6 +88,14 @@ function MenuButtonExample() {
             alignSelf: 'left'
           }}
         >
+          <Button
+            variant='menu'
+            onClick={() => setOpen(!open)}
+            size='sm'
+            active={open}
+          >
+            Share
+          </Button>
           {open && (
             <List
               style={{
@@ -152,7 +105,7 @@ function MenuButtonExample() {
                 zIndex: '9999'
               }}
               open={open}
-              onClick={handleClose}
+              onClick={() => setOpen(false)}
             >
               <ListItem size='sm'>Copy link</ListItem>
               <Divider />
@@ -165,20 +118,55 @@ function MenuButtonExample() {
               </ListItem>
             </List>
           )}
-          <Button variant='menu' onClick={handleClick} size='sm' active={open}>
-            Share
-          </Button>
         </div>
       </Toolbar>
       <WindowContent style={{ padding: '0.25rem' }}>
         <Cutout>
           <img
             style={{ width: '100%', height: '1uto', display: 'block' }}
-            src='https://image.freepik.com/foto-gratuito/la-frutta-fresca-del-kiwi-tagliata-a-meta-con-la-decorazione-completa-del-pezzo-e-bella-sulla-tavola-di-legno_47436-1.jpg'
+            src={imageSrc}
             alt='kiwi'
           />
         </Cutout>
       </WindowContent>
     </Window>
   );
-}
+};
+
+Menu.story = {
+  name: 'menu'
+};
+
+export const Flat = () => (
+  <Window>
+    <WindowContent>
+      <Cutout id='cutout'>
+        <p style={{ lineHeight: 1.3 }}>
+          When you want to use Buttons on a light background (like scrollable
+          content), just use the flat variant:
+        </p>
+        <div
+          style={{
+            marginTop: '1.5rem'
+          }}
+        >
+          <Toolbar>
+            <Button variant='flat' primary style={{ marginRight: '0.5rem' }}>
+              Primary
+            </Button>
+            <Button variant='flat' style={{ marginRight: '0.5rem' }}>
+              Regular
+            </Button>
+            <Button variant='flat' disabled>
+              Disabled
+            </Button>
+          </Toolbar>
+        </div>
+      </Cutout>
+    </WindowContent>
+  </Window>
+);
+
+Flat.story = {
+  name: 'flat'
+};

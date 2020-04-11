@@ -1,5 +1,12 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+import React, { useState } from 'react';
+// import {
+//   Title,
+//   Subtitle,
+//   Description,
+//   Primary,
+//   Props,
+//   Stories
+// } from '@storybook/addon-docs/blocks';
 
 import Tabs from './Tabs';
 import Tab from '../Tab/Tab';
@@ -12,76 +19,63 @@ import Fieldset from '../Fieldset/Fieldset';
 import NumberField from '../NumberField/NumberField';
 import Checkbox from '../Checkbox/Checkbox';
 
-storiesOf('Tabs', module)
-  .addDecorator(story => (
-    <div
-      style={{
-        padding: '5rem',
-        background: '#008080'
-      }}
-    >
-      {story()}
-    </div>
-  ))
-  .add('default', () => <TabsDemo />);
-
-/* eslint-disable react/prop-types */
-
-const TabPanel = ({ children, value, activeTab, ...other }) => {
-  return (
-    <div
-      role='tabpanel'
-      hidden={value !== activeTab}
-      id={`tabpanel-${value}`}
-      aria-labelledby={`tab-${value}`}
-      {...other}
-    >
-      {value === activeTab && <div p={3}>{children}</div>}
-    </div>
-  );
+export default {
+  title: 'Tabs',
+  component: Tabs,
+  subcomponents: { Tab, TabBody },
+  decorators: [
+    story => (
+      <div
+        style={{
+          padding: '5rem',
+          background: '#008080'
+        }}
+      >
+        {story()}
+      </div>
+    )
+  ]
+  // parameters: {
+  //   docs: {
+  //     page: () => (
+  //       <>
+  //         <Title />
+  //         <Props />
+  //       </>
+  //     )
+  //   }
+  // }
 };
-function a11yProps(index) {
-  return {
-    id: `tab-${index}`,
-    'aria-controls': `tabpanel-${index}`
-  };
-}
-class TabsDemo extends React.Component {
-  state = {
+export const Default = () => {
+  const [state, setState] = useState({
     activeTab: 0
-  };
+  });
 
-  handleChange = value => this.setState({ activeTab: value });
+  const handleChange = value => setState({ activeTab: value });
 
-  render() {
-    const { activeTab } = this.state;
-    return (
-      <Window style={{ width: 350 }}>
-        <WindowHeader>
-          <span role='img' aria-label='👗'>
-            👗
-          </span>
-          store.exe
-        </WindowHeader>
-        <WindowContent>
-          <Tabs value={activeTab} onChange={this.handleChange}>
-            <Tab value={0} {...a11yProps(0)}>
-              Shoes
-            </Tab>
-            <Tab value={1} {...a11yProps(1)}>
-              Accesories
-            </Tab>
-            <Tab value={2} {...a11yProps(2)}>
-              Clothing
-            </Tab>
-          </Tabs>
-          <TabBody style={{ height: 300 }}>
-            <TabPanel value={0} activeTab={activeTab}>
+  const { activeTab } = state;
+  return (
+    <Window style={{ width: 350 }}>
+      <WindowHeader>
+        <span role='img' aria-label='dress'>
+          👗
+        </span>
+        store.exe
+      </WindowHeader>
+      <WindowContent>
+        <Tabs value={activeTab} onChange={handleChange}>
+          <Tab value={0}>Shoes</Tab>
+          <Tab value={1}>Accesories</Tab>
+          <Tab value={2}>Clothing</Tab>
+        </Tabs>
+        <TabBody style={{ height: 300 }}>
+          {activeTab === 0 && (
+            <div>
               <Fieldset label='Order:'>
                 <div style={{ padding: '0.5em 0 0.5em 0' }}>Amount:</div>
                 <NumberField width='100%' min={0} defaultValue={0} />
+                <br />
                 <Checkbox
-                  style={{ marginTop: '1rem' }}
                   name='shipping'
                   value='fast'
                   label='Fast shipping'
@@ -89,16 +83,24 @@ class TabsDemo extends React.Component {
                   defaultChecked
                 />
               </Fieldset>
-            </TabPanel>
-            <TabPanel value={1} activeTab={activeTab}>
+            </div>
+          )}
+          {activeTab === 1 && (
+            <div>
               <div>Accesories stuff here</div>
-            </TabPanel>
-            <TabPanel value={2} activeTab={activeTab}>
+            </div>
+          )}
+          {activeTab === 2 && (
+            <div>
               <div>Clothing stuff here</div>
-            </TabPanel>
-          </TabBody>
-        </WindowContent>
-      </Window>
-    );
-  }
-}
+            </div>
+          )}
+        </TabBody>
+      </WindowContent>
+    </Window>
+  );
+};
+
+Default.story = {
+  name: 'default'
+};

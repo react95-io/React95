@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { storiesOf } from '@storybook/react';
 
 import Anchor from './Anchor';
 
@@ -9,14 +8,21 @@ const Wrapper = styled.div`
   background: ${({ theme }) => theme.material};
 `;
 
-storiesOf('Anchor', module)
-  .addDecorator(story => <Wrapper>{story()}</Wrapper>)
-  .add('default', () => (
-    <h1>
-      Everybody likes
-      {/* eslint-disable-next-line prettier/prettier */}{' '}
-      <Anchor href='https://expensive.toys' target='_blank'>
-        Expensive Toys
-      </Anchor>
-    </h1>
-  ));
+export default {
+  title: 'Anchor',
+  component: Anchor,
+  decorators: [story => <Wrapper>{story()}</Wrapper>]
+};
+
+export const Default = () => (
+  <h1>
+    Everybody likes{' '}
+    <Anchor href='https://expensive.toys' target='_blank'>
+      Expensive Toys
+    </Anchor>
+  </h1>
+);
+
+Default.story = {
+  name: 'default'
+};

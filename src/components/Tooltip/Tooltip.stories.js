@@ -1,24 +1,31 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import Tooltip from './Tooltip';
 import Button from '../Button/Button';
 
-storiesOf('Tooltip', module)
-  .addDecorator(story => (
-    <div
-      style={{
-        padding: '5rem',
-        background: '#008080'
-      }}
-    >
-      {story()}
-    </div>
-  ))
-  .add('default', () =>
-    React.createElement(() => (
-      <Tooltip text='I see you! 🤷‍'>
-        <Button>Hover me</Button>
-      </Tooltip>
-    ))
-  );
+export default {
+  title: 'Tooltip',
+  component: Tooltip,
+  decorators: [
+    story => (
+      <div
+        style={{
+          padding: '5rem',
+          background: '#008080'
+        }}
+      >
+        {story()}
+      </div>
+    )
+  ]
+};
+
+export const Default = () => (
+  <Tooltip text='I see you! 🤷‍' enterDelay={100} leaveDelay={500}>
+    <Button>Hover me</Button>
+  </Tooltip>
+);
+
+Default.story = {
+  name: 'default'
+};
