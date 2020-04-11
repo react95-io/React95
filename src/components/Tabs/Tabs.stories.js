@@ -51,7 +51,7 @@ export const Default = () => {
     activeTab: 0
   });
 
-  const handleChange = value => setState({ activeTab: value });
+  const handleChange = (e, value) => setState({ activeTab: value });
 
   const { activeTab } = state;
   return (
