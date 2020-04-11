@@ -349,10 +349,10 @@ const Slider = React.forwardRef(function Slider(props, ref) {
     setFocusVisible(true);
 
     if (onChange) {
-      onChange(newValue);
+      onChange(event, newValue);
     }
     if (onChangeCommitted) {
-      onChangeCommitted(newValue);
+      onChangeCommitted(event, newValue);
     }
   });
 
@@ -396,7 +396,7 @@ const Slider = React.forwardRef(function Slider(props, ref) {
     setFocusVisible(true);
 
     if (onChange) {
-      onChange(newValue);
+      onChange(event, newValue);
     }
   });
   const handleTouchEnd = useEventCallback(event => {
@@ -409,7 +409,7 @@ const Slider = React.forwardRef(function Slider(props, ref) {
     const newValue = getNewValue(finger);
 
     if (onChangeCommitted) {
-      onChangeCommitted(newValue);
+      onChangeCommitted(event, newValue);
     }
 
     touchId.current = undefined;
@@ -434,7 +434,7 @@ const Slider = React.forwardRef(function Slider(props, ref) {
     setFocusVisible(true);
 
     if (onChange) {
-      onChange(newValue);
+      onChange(event, newValue);
     }
     const doc = ownerDocument(sliderRef.current);
     doc.addEventListener('mousemove', handleTouchMove);
@@ -456,7 +456,7 @@ const Slider = React.forwardRef(function Slider(props, ref) {
     setFocusVisible(true);
 
     if (onChange) {
-      onChange(newValue);
+      onChange(event, newValue);
     }
 
     const doc = ownerDocument(sliderRef.current);
