@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import styled from 'styled-components';
 
@@ -9,11 +8,20 @@ const Wrapper = styled.div`
   background: ${({ theme }) => theme.material};
   padding: 5rem;
 `;
-storiesOf('LoadingIndicator', module)
-  .addDecorator(story => <Wrapper>{story()}</Wrapper>)
-  .add('default', () => (
-    <>
-      <p style={{ textAlign: 'center', marginBottom: '0.5rem' }}>Loading...</p>
-      <LoadingIndicator isLoading />
-    </>
-  ));
+
+export default {
+  title: 'LoadingIndicator',
+  component: LoadingIndicator,
+  decorators: [story => <Wrapper>{story()}</Wrapper>]
+};
+
+export const Default = () => (
+  <>
+    <p style={{ textAlign: 'center', marginBottom: '0.5rem' }}>Loading...</p>
+    <LoadingIndicator isLoading />
+  </>
+);
+
+Default.story = {
+  name: 'default'
+};

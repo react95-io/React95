@@ -1,9 +1,13 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import { Cutout, Window, WindowContent } from '..';
 
-storiesOf('Cutout', module).add('default', () => (
+export default {
+  title: 'Cutout',
+  component: Cutout
+};
+
+export const Default = () => (
   <Window>
     <WindowContent>
       <Cutout style={{ width: '300px', height: '200px' }}>
@@ -20,4 +24,8 @@ storiesOf('Cutout', module).add('default', () => (
       </Cutout>
     </WindowContent>
   </Window>
-));
+);
+
+Default.story = {
+  name: 'default'
+};
