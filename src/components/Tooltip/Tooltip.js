@@ -166,7 +166,7 @@ Tooltip.propTypes = {
   onMouseEnter: propTypes.func,
   onMouseLeave: propTypes.func,
   onOpen: propTypes.func,
-  style: propTypes.shape({}),
+  style: propTypes.object,
   testId: propTypes.string,
   text: propTypes.string.isRequired
 };

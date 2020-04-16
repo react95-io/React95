@@ -152,7 +152,7 @@ Button.defaultProps = {
 Button.propTypes = {
   type: propTypes.string,
   onClick: propTypes.func,
-  style: propTypes.shape([propTypes.string, propTypes.number]),
+  style: propTypes.object,
   disabled: propTypes.bool,
   fullWidth: propTypes.bool,
   size: propTypes.oneOf(['sm', 'md', 'lg']),

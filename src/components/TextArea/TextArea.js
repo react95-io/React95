@@ -90,7 +90,7 @@ TextArea.propTypes = {
   variant: propTypes.oneOf(['default', 'flat']),
   className: propTypes.string,
   shadow: propTypes.bool,
-  style: propTypes.shape([propTypes.string, propTypes.number])
+  style: propTypes.object
 };
 
 export default TextArea;

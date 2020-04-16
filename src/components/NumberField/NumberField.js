@@ -68,7 +68,7 @@ class NumberField extends React.Component {
     disabled: propTypes.bool,
     disableKeyboardInput: propTypes.bool,
     className: propTypes.string,
-    style: propTypes.shape([propTypes.string, propTypes.number])
+    style: propTypes.object
   };
 
   static defaultProps = {

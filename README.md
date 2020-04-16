@@ -1,9 +1,9 @@
 <h1 align="center">React95</h1>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/react95"><img src="https://flat.badgen.net/npm/dt/react95" alt="NPM"></a>
-  <a href="https://www.npmjs.com/package/react95"><img src="https://flat.badgen.net/npm/v/react95" alt="React95 version"></a>
-  <a href="https://www.npmjs.com/package/react95"><img src="https://flat.badgen.net/npm/license/react95" alt="React95 license"></a>
+  <a href="https://www.npmjs.com/package/react95"><img src="https://flat.badgen.net/npm/dt/react95" alt="NPM" /></a>
+  <a href="https://www.npmjs.com/package/react95"><img src="https://flat.badgen.net/npm/v/react95" alt="React95 version" /></a>
+  <a href="https://www.npmjs.com/package/react95"><img src="https://flat.badgen.net/npm/license/react95" alt="React95 license" /></a>
 
 </p>
 <h3 align="center">
@@ -13,7 +13,7 @@
   <a href="https://www.paypal.me/react95">PayPal donation 💰</a>
 </h3>
 <p align="center">
-  <b>Refreshed</b> Windows95 UI components for your modern React apps. <br> Built with styled-components 💅</p>
+  <b>Refreshed</b> Windows95 UI components for your modern React apps. <br /> Built with styled-components 💅</p>
 
 ![demo](https://user-images.githubusercontent.com/28541613/56099388-7513f800-5f0c-11e9-893b-532eded39f92.png)
 
@@ -87,6 +87,8 @@ Apps built with React95 will be submitted on the official React95 [website](http
 Any help from UI / UX designers would be EXTREMELY appreciated. The challenge is to come up with new component designs / layouts that are broadly used in modern UIs, that weren't present back in 95.
 
 There's a lot to do. If you want to help with the project, feel free to open pull requests and submit issues. Let's make UI great again 🔥
+
+For every component, we have a `.stories` file for Storybook and a `.mdx` file for Docz. In order to create a `.mdx` file we recommend copying [this template](https://github.com/arturbien/React95/blob/chore/docs-docz/docs/template) file and replaceing ___component_ with the component name.
 
 ### Roadmap
 

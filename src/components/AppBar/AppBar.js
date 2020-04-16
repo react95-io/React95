@@ -38,12 +38,12 @@ const AppBar = ({
 AppBar.defaultProps = {
   shadow: true,
   fixed: true,
-  style: {},
+  style: null,
   className: ''
 };
 
 AppBar.propTypes = {
-  style: propTypes.shape([propTypes.string, propTypes.number]),
+  style: propTypes.object,
   shadow: propTypes.bool,
   className: propTypes.string,
   children: propTypes.node.isRequired,

@@ -7,16 +7,14 @@ import cx from 'classnames';
 
 import './FileIcon.css';
 
-const FileIcon = ({
-  imageURL, className, style, ...otherProps
-}) => {
+const FileIcon = ({ imageURL, className, style, ...otherProps }) => {
   const baseClass = 'FileIcon';
   const rootClass = cx(baseClass, className);
 
   return (
     <span className={rootClass} style={style} {...otherProps}>
       {imageURL && (
-        <img className={`${baseClass}__img`} src={imageURL} alt="icon" />
+        <img className={`${baseClass}__img`} src={imageURL} alt='icon' />
       )}
     </span>
   );
@@ -25,16 +23,13 @@ const FileIcon = ({
 FileIcon.defaultProps = {
   imageURL: null,
   className: '',
-  style: {},
+  style: {}
 };
 
 FileIcon.propTypes = {
   imageURL: propTypes.string,
   className: propTypes.string,
-  style: propTypes.shape([
-    propTypes.string,
-    propTypes.number,
-  ]),
+  style: propTypes.object
 };
 
 export default FileIcon;

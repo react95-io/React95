@@ -189,7 +189,7 @@ Select.propTypes = {
   selectedIndex: propTypes.number,
   shadow: propTypes.bool,
   variant: propTypes.oneOf(['default', 'flat']),
-  style: propTypes.shape([propTypes.string, propTypes.number]),
+  style: propTypes.object,
   onChange: propTypes.func
 };
 
