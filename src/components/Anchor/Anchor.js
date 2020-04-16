@@ -27,7 +27,7 @@ Anchor.defaultProps = {
 Anchor.propTypes = {
   className: propTypes.string,
   href: propTypes.string.isRequired,
-  style: propTypes.shape([propTypes.string, propTypes.number]),
+  style: propTypes.object,
   children: propTypes.node.isRequired
 };
 

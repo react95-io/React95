@@ -59,7 +59,7 @@ Cutout.propTypes = {
   className: propTypes.string,
   shadow: propTypes.bool,
   children: propTypes.node,
-  style: propTypes.shape([propTypes.string, propTypes.number])
+  style: propTypes.object
 };
 
 export default Cutout;

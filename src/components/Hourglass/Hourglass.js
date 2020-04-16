@@ -39,6 +39,6 @@ Hourglass.defaultProps = {
 Hourglass.propTypes = {
   size: propTypes.oneOfType([propTypes.string, propTypes.number]),
   className: propTypes.string,
-  style: propTypes.shape([propTypes.string, propTypes.number])
+  style: propTypes.object
 };
 export default Hourglass;

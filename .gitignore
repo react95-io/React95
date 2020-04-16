@@ -26,5 +26,5 @@ yarn-error.log*
 .idea/*
 
 # Docs
-docs/node_modules
-docs/.docz
+.docz
+/docs/build

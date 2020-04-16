@@ -79,6 +79,6 @@ TextField.propTypes = {
   shadow: propTypes.bool,
   type: propTypes.string,
   className: propTypes.string,
-  style: propTypes.shape([propTypes.string, propTypes.number])
+  style: propTypes.object
 };
 export default TextField;

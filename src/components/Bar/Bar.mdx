@@ -5,14 +5,17 @@ menu: Components
 
 import { Playground, Props } from 'docz';
 
-import { Bar, AppBar, Toolbar, Button } from 'react95';
+import Bar from '../Bar/Bar'
+import AppBar from '../AppBar/AppBar.js'
+import Toolbar from '../Toolbar/Toolbar.js'
+import Button from '../Button/Button.js'
 
 # Bar
 
 ## Usage
 
 <Playground>
-  <AppBar>
+  <AppBar style={{ position: 'relative' }}>
     <Toolbar>
       <Bar />
       <Button variant='menu'>Edit</Button>
@@ -27,10 +30,6 @@ import { Bar, AppBar, Toolbar, Button } from 'react95';
 ## API
 
 ### Import
-
-```
-import { Bar } from 'react95'
-```
 
 ### Props
 

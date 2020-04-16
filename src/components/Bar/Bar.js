@@ -26,7 +26,7 @@ Bar.defaultProps = {
 };
 Bar.propTypes = {
   className: propTypes.string,
-  style: propTypes.shape([propTypes.string, propTypes.number]),
+  style: propTypes.object,
   size: propTypes.oneOf(['sm', 'md', 'lg'])
 };
 export default Bar;

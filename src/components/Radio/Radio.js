@@ -198,7 +198,7 @@ Radio.propTypes = {
   checked: propTypes.bool,
   disabled: propTypes.bool,
   variant: propTypes.oneOf(['default', 'flat', 'menu']),
-  style: propTypes.shape([propTypes.string, propTypes.number]),
+  style: propTypes.object,
   className: propTypes.string
 };
 

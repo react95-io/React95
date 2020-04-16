@@ -27,7 +27,7 @@ Toolbar.defaultProps = {
 };
 
 Toolbar.propTypes = {
-  style: propTypes.shape([propTypes.string, propTypes.number]),
+  style: propTypes.object,
   className: propTypes.string,
   children: propTypes.node.isRequired,
   noPadding: propTypes.bool
