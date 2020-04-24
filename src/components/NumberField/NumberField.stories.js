@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { NumberField, Cutout } from '..';
+import { NumberField, Cutout } from 'react95';
 
 const Wrapper = styled.div`
   background: ${({ theme }) => theme.material};

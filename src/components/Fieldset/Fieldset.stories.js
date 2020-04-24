@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Checkbox, Cutout, Fieldset, Window, WindowContent } from '..';
+import { Checkbox, Cutout, Fieldset, Window, WindowContent } from 'react95';
 
 export default {
   title: 'Fieldset',

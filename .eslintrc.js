@@ -8,6 +8,7 @@ module.exports = {
     jest: true
   },
   rules: {
+    'import/no-unresolved': ['error', { ignore: ['react95'] }],
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'jsx-a11y/label-has-associated-control': [

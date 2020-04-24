@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Select, Window, WindowContent, Cutout, Fieldset } from '..';
+import { Select, Window, WindowContent, Cutout, Fieldset } from 'react95';
 
 const options = [
   { value: 1, label: '⚡ Pikachu' },
