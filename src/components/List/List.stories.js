@@ -1,10 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import List from './List';
-import ListItem from '../ListItem/ListItem';
-import Bar from '../Bar/Bar';
-import Divider from '../Divider/Divider';
+import { List, ListItem, Bar, Divider } from 'react95';
 
 const Wrapper = styled.div`
   padding: 5rem;

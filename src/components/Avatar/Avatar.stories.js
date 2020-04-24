@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Avatar from './Avatar';
+import { Avatar } from 'react95';
 
 const Wrapper = styled.div`
   padding: 5rem;

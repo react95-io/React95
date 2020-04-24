@@ -1,10 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Window from './Window';
-import WindowContent from '../WindowContent/WindowContent';
-import WindowHeader from '../WindowHeader/WindowHeader';
-import Button from '../Button/Button';
-import Toolbar from '../Toolbar/Toolbar';
+import { Window, WindowContent, WindowHeader, Button, Toolbar } from 'react95';
 
 export default {
   title: 'Window',

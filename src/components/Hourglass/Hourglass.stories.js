@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Hourglass from './Hourglass';
+import { Hourglass } from 'react95';
 
 export default {
   title: 'Hourglass',

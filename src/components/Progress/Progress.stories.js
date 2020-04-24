@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import styled from 'styled-components';
 
-import { Progress } from '..';
+import { Progress } from 'react95';
 
 const Wrapper = styled.div`
   background: ${({ theme }) => theme.material};
