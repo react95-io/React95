@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import styled from 'styled-components';
 
-import { TextField, Button, Toolbar, Cutout } from '..';
+import { TextField, Button, Toolbar, Cutout } from 'react95';
 
 const onChange = e => console.log(e.target.value);
 

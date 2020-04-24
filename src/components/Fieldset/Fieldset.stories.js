@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 
-import { Checkbox, Cutout, Fieldset, Window, WindowContent } from '..';
+import { Checkbox, Cutout, Fieldset, Window, WindowContent } from 'react95';
 
 storiesOf('Fieldset', module)
   .addDecorator(story => (

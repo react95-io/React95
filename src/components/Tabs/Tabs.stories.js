@@ -1,16 +1,17 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Tabs from './Tabs';
-import Tab from '../Tab/Tab';
-import TabBody from '../TabBody/TabBody';
-
-import Window from '../Window/Window';
-import WindowHeader from '../WindowHeader/WindowHeader';
-import WindowContent from '../WindowContent/WindowContent';
-import Fieldset from '../Fieldset/Fieldset';
-import NumberField from '../NumberField/NumberField';
-import Checkbox from '../Checkbox/Checkbox';
+import {
+  Tabs,
+  Tab,
+  TabBody,
+  Window,
+  WindowHeader,
+  WindowContent,
+  Fieldset,
+  NumberField,
+  Checkbox
+} from 'react95';
 
 storiesOf('Tabs', module)
   .addDecorator(story => (

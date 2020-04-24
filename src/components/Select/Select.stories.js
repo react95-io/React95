@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
 
-import { Select, Window, WindowContent, Cutout } from '..';
+import { Select, Window, WindowContent, Cutout } from 'react95';
 
 const items = [
   { value: 1, label: '⚡ Pikachu' },

@@ -1,10 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Avatar from './Avatar';
-import AppBar from '../AppBar/AppBar';
-import Toolbar from '../Toolbar/Toolbar';
-import Button from '../Button/Button';
+import { Avatar, AppBar, Toolbar, Button } from 'react95';
 
 storiesOf('Avatar', module)
   .addDecorator(story => (

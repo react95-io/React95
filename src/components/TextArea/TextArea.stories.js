@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
 
-import { TextArea, Button, Cutout } from '..';
+import { TextArea, Button, Cutout } from 'react95';
 
 const onChange = e => console.log(e.target.value);
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Hourglass from './Hourglass';
+import { Hourglass } from 'react95';
 
 storiesOf('Hourglass', module)
   .addDecorator(story => (

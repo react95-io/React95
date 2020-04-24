@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import DatePicker from './DatePicker';
+import { DatePicker } from 'react95';
 
 storiesOf('DatePicker', module)
   .addDecorator(story => (

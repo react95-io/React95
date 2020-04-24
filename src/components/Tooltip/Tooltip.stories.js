@@ -1,8 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Tooltip from './Tooltip';
-import Button from '../Button/Button';
+import { Tooltip, Button } from 'react95';
 
 storiesOf('Tooltip', module)
   .addDecorator(story => (

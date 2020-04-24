@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import { Cutout, Window, WindowContent } from '..';
+import { Cutout, Window, WindowContent } from 'react95';
 
 storiesOf('Cutout', module).add('default', () => (
   <Window>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
-import { Radio, Cutout, Fieldset, Window, WindowContent } from '..';
+import { Radio, Cutout, Fieldset, Window, WindowContent } from 'react95';
 
 storiesOf('Radio', module)
   .addDecorator(story => (

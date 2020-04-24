@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import styled from 'styled-components';
 
-import { Progress } from '..';
+import { Progress } from 'react95';
 
 const Wrapper = styled.div`
   background: ${({ theme }) => theme.material};

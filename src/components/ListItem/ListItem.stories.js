@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { ListItem, List, Divider } from '..';
+import { ListItem, List, Divider } from 'react95';
 
 const actions = { onClick: action('onClick') };
 

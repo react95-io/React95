@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
 
-import { Checkbox, Fieldset, Button, Cutout } from '..';
+import { Checkbox, Fieldset, Button, Cutout } from 'react95';
 
 const StyledCutout = styled(Cutout)`
   background: ${({ theme }) => theme.canvas};

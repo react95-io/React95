@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Anchor from './Anchor';
+import { Anchor } from 'react95';
 
 storiesOf('Anchor', module)
   .addDecorator(story => (

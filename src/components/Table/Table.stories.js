@@ -1,16 +1,17 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Table from './Table';
-import TableBody from '../TableBody/TableBody';
-import TableHead from '../TableHead/TableHead';
-import TableRow from '../TableRow/TableRow';
-import TableHeadCell from '../TableHeadCell/TableHeadCell';
-import TableDataCell from '../TableDataCell/TableDataCell';
-
-import Window from '../Window/Window';
-import WindowHeader from '../WindowHeader/WindowHeader';
-import WindowContent from '../WindowContent/WindowContent';
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TableRow,
+  TableHeadCell,
+  TableDataCell,
+  Window,
+  WindowHeader,
+  WindowContent
+} from 'react95';
 
 const SimpleTable = () => (
   <Window>

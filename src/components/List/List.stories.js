@@ -1,9 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import List from './List';
-import ListItem from '../ListItem/ListItem';
-import Bar from '../Bar/Bar';
+import { List, ListItem, Bar } from 'react95';
 
 storiesOf('List', module)
   .addDecorator(story => (

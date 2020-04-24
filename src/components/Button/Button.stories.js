@@ -14,7 +14,7 @@ import {
   Divider,
   Cutout,
   Toolbar
-} from '..';
+} from 'react95';
 
 const actions = { onClick: action('onClick') };
 
