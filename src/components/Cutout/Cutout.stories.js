@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Cutout, Window, WindowContent } from '..';
+import { Cutout, Window, WindowContent } from 'react95';
 
 export default {
   title: 'Cutout',

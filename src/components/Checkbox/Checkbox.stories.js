@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { Checkbox, Fieldset, Cutout, List, ListItem, Divider } from '..';
+import { Checkbox, Fieldset, Cutout, List, ListItem, Divider } from 'react95';
 
 const Wrapper = styled.div`
   background: ${({ theme }) => theme.material};

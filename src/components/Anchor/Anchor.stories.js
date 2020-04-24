@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Anchor from './Anchor';
+import { Anchor } from 'react95';
 
 const Wrapper = styled.div`
   padding: 5rem;
@@ -16,7 +16,7 @@ export default {
 
 export const Default = () => (
   <h1>
-    Everybody likes{' '}
+    Everybody likes
     <Anchor href='https://expensive.toys' target='_blank'>
       Expensive Toys
     </Anchor>

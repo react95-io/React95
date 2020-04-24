@@ -9,7 +9,7 @@ import {
   List,
   ListItem,
   Divider
-} from '..';
+} from 'react95';
 
 const Wrapper = styled.div`
   padding: 5rem;

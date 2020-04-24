@@ -11,7 +11,7 @@ import {
   Divider,
   Cutout,
   Toolbar
-} from '..';
+} from 'react95';
 
 const Wrapper = styled.div`
   padding: 5rem;

@@ -1,13 +1,14 @@
 import React from 'react';
 
-import AppBar from './AppBar';
-import Toolbar from '../Toolbar/Toolbar';
-import TextField from '../TextField/TextField';
-
-import Button from '../Button/Button';
-import List from '../List/List';
-import ListItem from '../ListItem/ListItem';
-import Divider from '../Divider/Divider';
+import {
+  AppBar,
+  Toolbar,
+  TextField,
+  Button,
+  List,
+  ListItem,
+  Divider
+} from 'react95';
 
 import LogoIcon from '../Icon/LogoIcon';
 
