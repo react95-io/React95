@@ -6,7 +6,7 @@ module.exports = ({ config }) => {
     loaders: [require.resolve('@storybook/addon-storysource/loader')],
     enforce: 'pre'
   });
-  console.log(path.resolve(__dirname, '../src/components/index'));
+
   config.resolve = Object.assign(config.resolve, {
     alias: {
       ...config.resolve.alias,
