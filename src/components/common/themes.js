@@ -3,6 +3,7 @@ const themes = {};
 // https://www.youtube.com/watch?v=5OGOwzGbnFw
 
 themes.default = {
+  name: 'default',
   canvas: '#ffffff',
   material: '#ced0cf',
   materialDark: '#9a9e9c',
@@ -44,6 +45,7 @@ themes.default = {
 };
 
 themes.molecule = {
+  name: 'molecule',
   canvas: '#f1f5f6',
   material: '#c2c1c2',
   materialDark: '#9a9e9c',
@@ -85,6 +87,7 @@ themes.molecule = {
 };
 
 themes.travel = {
+  name: 'travel',
   canvas: '#d8d0c8',
   material: '#908070',
   materialDark: '#9a9e9c',
@@ -126,6 +129,7 @@ themes.travel = {
 };
 
 themes.theSixtiesUSA = {
+  name: 'theSixtiesUSA',
   canvas: '#ffffff',
   material: '#d067d7',
   materialDark: '#9a9e9c',
@@ -167,6 +171,7 @@ themes.theSixtiesUSA = {
 };
 
 themes.candy = {
+  name: 'candy',
   canvas: '#EFF1F3',
   material: '#E5A4CB',
   materialDark: '#9a9e9c',
@@ -208,6 +213,7 @@ themes.candy = {
 };
 
 themes.modernDark = {
+  name: 'modernDark',
   canvas: '#4b4d58',
   material: '#202127',
   materialDark: '#9a9e9c',
@@ -250,6 +256,7 @@ themes.modernDark = {
 
 themes.storm = {
   ...themes.default,
+  name: 'storm',
 
   headerBackground: 'linear-gradient(to right, #8c0184, #0089ad)',
   headerText: '#ffffff',
@@ -261,6 +268,7 @@ themes.storm = {
 };
 
 themes.millenium = {
+  name: 'millenium',
   canvas: '#ffffff',
   material: '#d6cfc7',
   materialDark: '#9a9e9c',
@@ -302,6 +310,7 @@ themes.millenium = {
 };
 
 themes.spruce = {
+  name: 'spruce',
   canvas: '#fcfff6',
   material: '#99c9a8',
   materialDark: '#9a9e9c',
@@ -343,6 +352,7 @@ themes.spruce = {
 };
 
 themes.slate = {
+  name: 'slate',
   canvas: '#f2ffff',
   material: '#97b9cb',
   materialDark: '#9a9e9c',
@@ -384,6 +394,7 @@ themes.slate = {
 };
 
 themes.rose = {
+  name: 'rose',
   canvas: '#ffffff',
   material: '#d6adb8',
   materialDark: '#9a9e9c',
@@ -425,6 +436,7 @@ themes.rose = {
 };
 
 themes.rainyDay = {
+  name: 'rainyDay',
   canvas: '#ffffff',
   material: '#7a99b3',
   materialDark: '#9a9e9c',
@@ -466,6 +478,7 @@ themes.rainyDay = {
 };
 
 themes.plum = {
+  name: 'plum',
   canvas: '#dad0c7',
   material: '#ac978f',
   materialDark: '#9a9e9c',
@@ -507,6 +520,7 @@ themes.plum = {
 };
 
 themes.marine = {
+  name: 'marine',
   canvas: '#c3e2da',
   material: '#75c1ba',
   materialDark: '#9a9e9c',
@@ -548,6 +562,7 @@ themes.marine = {
 };
 
 themes.maple = {
+  name: 'maple',
   canvas: '#ffffff',
   material: '#e5cc90',
   materialDark: '#9a9e9c',
@@ -589,6 +604,7 @@ themes.maple = {
 };
 
 themes.lilac = {
+  name: 'lilac',
   canvas: '#ffffff',
   material: '#b1a7df',
   materialDark: '#9a9e9c',
@@ -630,6 +646,7 @@ themes.lilac = {
 };
 
 themes.blackAndWhite = {
+  name: 'blackAndWhite',
   canvas: '#ffffff',
   material: '#ffffff',
   materialDark: '#9a9e9c',
@@ -671,6 +688,7 @@ themes.blackAndWhite = {
 };
 
 themes.highContrast = {
+  name: 'highContrast',
   canvas: '#353535',
   material: '#000000',
   materialDark: '#9a9e9c',
@@ -712,6 +730,7 @@ themes.highContrast = {
 };
 
 themes.eggplant = {
+  name: 'eggplant',
   canvas: '#ffffff',
   material: '#89b0a8',
   materialDark: '#9a9e9c',
@@ -753,6 +772,7 @@ themes.eggplant = {
 };
 
 themes.brick = {
+  name: 'brick',
   canvas: '#ffffff',
   material: '#c2bfa3',
   materialDark: '#9a9e9c',
@@ -794,6 +814,7 @@ themes.brick = {
 };
 
 themes.water = {
+  name: 'water',
   canvas: '#ffffff',
   material: '#ced0cf',
   materialDark: '#9a9e9c',
@@ -834,6 +855,7 @@ themes.water = {
 };
 
 themes.coldGray = {
+  name: 'coldGray',
   // background: "#CCF5AC",
   // background: "#416165",
   background: '#4C6663',
@@ -878,6 +900,7 @@ themes.coldGray = {
 };
 
 themes.lilacRoseDark = {
+  name: 'lilacRoseDark',
   background: '#3B3B58',
 
   canvas: '#dab1c7',
@@ -920,6 +943,7 @@ themes.lilacRoseDark = {
 };
 
 themes.violetDark = {
+  name: 'violetDark',
   canvas: '#c47bcc',
   material: '#652a6d',
   materialDark: '#210e23',
