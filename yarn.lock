@@ -14343,11 +14343,6 @@ react-textarea-autosize@^7.1.0:
     "@babel/runtime" "^7.1.2"
     prop-types "^15.6.0"
 
-react95@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/react95/-/react95-2.0.0.tgz#fa921b968a588612c36ceb8fa77deeac5d271b86"
-  integrity sha512-0Y299Rbqhdz3bu5u1NC1sLbrPiQEXaOGthToitT/W/ta4C2Ct+A2YF1jxcPU9jBFv6mAUdl183luwjZ/0XJCJg==
-
 react@^16.10.1, react@^16.8.3:
   version "16.13.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.13.0.tgz#d046eabcdf64e457bbeed1e792e235e1b9934cf7"
