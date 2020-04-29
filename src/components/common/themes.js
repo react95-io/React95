@@ -44,6 +44,48 @@ themes.default = {
   focusSecondary: '#fefe03'
 };
 
+themes.tokyoDark = {
+  name: 'tokyoDark',
+  canvas: '#2f3435',
+  material: '#465051',
+  materialDark: '#1f2223',
+
+  borderDarkest: '#070809',
+  borderLightest: '#93a0a1',
+  borderDark: '#1f2223',
+  checkmarkDisabled: '#1f2223',
+  borderLight: '#5e696a',
+
+  headerBackground: '#1f2223',
+  headerText: '#F4F4ED',
+  headerNotActiveBackground: '#5e696a',
+  headerNotActiveText: '#F4F4ED',
+
+  text: '#F4F4ED',
+  textInvert: '#ffffff',
+  textDisabled: '#1f2223',
+  textDisabledShadow: '#93a0a1',
+
+  inputText: '#F4F4ED',
+  inputTextInvert: '#ffffff',
+  inputTextDisabled: '#1f2223',
+  inputTextDisabledShadow: '#93a0a1',
+
+  tooltip: '#fefbcc',
+
+  anchor: '#1034a6',
+  anchorVisited: '#440381',
+
+  hoverBackground: '#F61067',
+  checkmark: '#F4F4ED',
+
+  progress: '#F61067',
+
+  flatLight: '#d8d8d8',
+  flatDark: '#9e9e9e',
+  focusSecondary: '#20FC8F'
+};
+
 themes.molecule = {
   name: 'molecule',
   canvas: '#f1f5f6',
