@@ -43,10 +43,10 @@ describe('<Fieldset />', () => {
 
       expect(fieldset).toHaveAttribute('aria-disabled', 'true');
 
-      expect(fieldset).toHaveStyleRule('color', theme.textDisabled);
+      expect(fieldset).toHaveStyleRule('color', theme.materialTextDisabled);
       expect(fieldset).toHaveStyleRule(
         'text-shadow',
-        `1px 1px ${theme.textDisabledShadow}`
+        `1px 1px ${theme.materialTextDisabledShadow}`
       );
     });
   });

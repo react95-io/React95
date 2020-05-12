@@ -28,7 +28,7 @@ const Wrapper = styled.div`
     &:after {
       content: '';
       position: absolute;
-      background: ${({ theme }) => theme.text};
+      background: ${({ theme }) => theme.materialText};
     }
     &:before {
       height: 100%;

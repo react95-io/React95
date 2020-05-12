@@ -45,10 +45,10 @@ user-select: none;
     `}
 
 
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.materialText};
   ${({ isDisabled }) => isDisabled && createDisabledTextStyles()}
   &:hover {
-    color: ${({ theme }) => theme.text};
+    color: ${({ theme }) => theme.materialText};
     ${({ isDisabled }) => isDisabled && createDisabledTextStyles()}
   }
 

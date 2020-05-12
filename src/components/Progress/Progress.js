@@ -28,7 +28,7 @@ const WhiteBar = styled.div`
   color: #000;
   margin-left: 2px;
   margin-top: -2px;
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.materialText};
 `;
 
 const BlueBar = styled.div`
@@ -41,7 +41,7 @@ const BlueBar = styled.div`
 
   line-height: ${blockSizes.md};
 
-  color: ${({ theme }) => theme.textInvert};
+  color: ${({ theme }) => theme.materialTextInvert};
   background: ${({ theme }) => theme.progress};
   clip-path: polygon(
     0 0,

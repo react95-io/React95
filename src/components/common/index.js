@@ -4,16 +4,16 @@ export const shadow = '4px 4px 10px 0 rgba(0, 0, 0, 0.35)';
 export const insetShadow = 'inset 3px 3px 10px rgba(0, 0, 0, 0.2)';
 
 export const createDisabledTextStyles = () => css`
-  -webkit-text-fill-color: ${({ theme }) => theme.textDisabled};
-  color: ${({ theme }) => theme.textDisabled};
-  text-shadow: 1px 1px ${({ theme }) => theme.textDisabledShadow};
+  -webkit-text-fill-color: ${({ theme }) => theme.materialTextDisabled};
+  color: ${({ theme }) => theme.materialTextDisabled};
+  text-shadow: 1px 1px ${({ theme }) => theme.materialTextDisabledShadow};
   /* filter: grayscale(100%); */
 `;
 export const createBoxStyles = () => css`
   box-sizing: border-box;
   display: inline-block;
   background: ${({ theme }) => theme.material};
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.materialText};
 `;
 // TODO for flat box styles add checkered background when disabled (not solid color)
 export const createHatchedBackground = ({
@@ -42,7 +42,7 @@ export const createFlatBoxStyles = () => css`
   position: relative;
   box-sizing: border-box;
   display: inline-block;
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.materialText};
   background: ${({ theme, isDisabled }) =>
     isDisabled ? theme.flatLight : theme.canvas};
   border: 2px solid ${({ theme }) => theme.canvas};
@@ -100,5 +100,5 @@ export const createWellBorderStyles = (invert = false) =>
       `;
 
 export const focusOutline = () => css`
-  outline: 2px dotted ${({ theme }) => theme.text};
+  outline: 2px dotted ${({ theme }) => theme.materialText};
 `;

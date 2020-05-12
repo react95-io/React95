@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   background: teal;
   #cutout {
     background: ${({ theme }) => theme.canvas};
-    color: ${({ theme }) => theme.text};
+    color: ${({ theme }) => theme.materialText};
     padding: 1rem;
     width: 300px;
     & > p {

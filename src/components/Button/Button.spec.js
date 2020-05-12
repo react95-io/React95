@@ -43,17 +43,17 @@ describe('<Button />', () => {
       <Button {...defaultProps} disabled />
     );
     const button = getByRole('button');
-    const disabledTextShadow = `1px 1px ${theme.textDisabledShadow}`;
+    const disabledTextShadow = `1px 1px ${theme.materialTextDisabledShadow}`;
 
-    expect(button).toHaveStyleRule('color', theme.textDisabled);
+    expect(button).toHaveStyleRule('color', theme.materialTextDisabled);
     expect(button).toHaveStyleRule('text-shadow', disabledTextShadow);
 
     rerender(<Button {...defaultProps} variant='menu' />);
-    expect(button).toHaveStyleRule('color', theme.textDisabled);
+    expect(button).toHaveStyleRule('color', theme.materialTextDisabled);
     expect(button).toHaveStyleRule('text-shadow', disabledTextShadow);
 
     rerender(<Button {...defaultProps} variant='flat' />);
-    expect(button).toHaveStyleRule('color', theme.textDisabled);
+    expect(button).toHaveStyleRule('color', theme.materialTextDisabled);
     expect(button).toHaveStyleRule('text-shadow', disabledTextShadow);
   });
 
