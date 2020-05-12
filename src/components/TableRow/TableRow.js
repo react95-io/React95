@@ -12,10 +12,10 @@ const StyledTr = styled.tr`
   vertical-align: middle;
   outline: none;
 
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.canvasText};
   &:hover {
     background: ${({ theme }) => theme.hoverBackground};
-    color: ${({ theme }) => theme.textInvert};
+    color: ${({ theme }) => theme.canvasTextInvert};
   }
 `;
 

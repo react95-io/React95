@@ -86,10 +86,12 @@ const CheckmarkIcon = styled.span.attrs(() => ({
     ${({ variant, theme, isDisabled }) =>
       variant === 'menu'
         ? css`
-            border-color: ${isDisabled ? theme.textDisabled : theme.text};
+            border-color: ${isDisabled
+              ? theme.materialTextDisabled
+              : theme.materialText};
             filter: drop-shadow(
               1px 1px 0px
-                ${isDisabled ? theme.textDisabledShadow : 'transparent'}
+                ${isDisabled ? theme.materialTextDisabledShadow : 'transparent'}
             );
           `
         : css`
@@ -102,7 +104,7 @@ const CheckmarkIcon = styled.span.attrs(() => ({
       !isDisabled &&
       variant === 'menu' &&
       css`
-        border-color: ${theme.textInvert};
+        border-color: ${theme.materialTextInvert};
       `};
   }
 `;
@@ -140,11 +142,12 @@ const IndeterminateIcon = styled.span.attrs(() => ({
       css`
         ${StyledListItem}:hover & {
           ${createHatchedBackground({
-            mainColor: theme.textInvert
+            mainColor: theme.materialTextInvert
           })}
         }
         filter: drop-shadow(
-          1px 1px 0px ${isDisabled ? theme.textDisabledShadow : 'transparent'}
+          1px 1px 0px
+            ${isDisabled ? theme.materialTextDisabledShadow : 'transparent'}
         );
       `};
   }

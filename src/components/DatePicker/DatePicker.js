@@ -41,7 +41,8 @@ const DateItemContent = styled.span`
 
   background: ${({ active, theme }) =>
     active ? theme.hoverBackground : 'transparent'};
-  color: ${({ active, theme }) => (active ? theme.textInvert : 'initial')};
+  color: ${({ active, theme }) =>
+    active ? theme.canvasTextInvert : theme.canvasText};
 
   &:hover {
     border: 2px dashed

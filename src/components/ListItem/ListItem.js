@@ -20,14 +20,14 @@ export const StyledListItem = styled.li`
     props.square ? 'space-around' : 'space-between'};
   text-align: center;
   line-height: ${props => blockSizes[props.size]};
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.materialText};
   pointer-events: ${({ isDisabled }) => (isDisabled ? 'none' : 'auto')};
 
   &:hover {
     ${({ theme, isDisabled }) =>
       !isDisabled &&
       `
-        color: ${theme.textInvert};
+        color: ${theme.materialTextInvert};
         background: ${theme.hoverBackground};
       `}
 

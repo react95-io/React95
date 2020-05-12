@@ -62,22 +62,24 @@ const StyledButtonIcon = styled.span`
       ? css`
           border-left: 4px solid transparent;
           border-right: 4px solid transparent;
-          border-bottom: 4px solid ${({ theme }) => theme.text};
+          border-bottom: 4px solid ${({ theme }) => theme.materialText};
         `
       : css`
           border-left: 4px solid transparent;
           border-right: 4px solid transparent;
-          border-top: 4px solid ${({ theme }) => theme.text};
+          border-top: 4px solid ${({ theme }) => theme.materialText};
         `}
   ${StyledButton}:disabled & {
-    filter: drop-shadow(1px 1px 0px ${({ theme }) => theme.textDisabledShadow});
+    filter: drop-shadow(
+      1px 1px 0px ${({ theme }) => theme.materialTextDisabledShadow}
+    );
     ${({ invert }) =>
       invert
         ? css`
-            border-bottom-color: ${({ theme }) => theme.textDisabled};
+            border-bottom-color: ${({ theme }) => theme.materialTextDisabled};
           `
         : css`
-            border-top-color: ${({ theme }) => theme.textDisabled};
+            border-top-color: ${({ theme }) => theme.materialTextDisabled};
           `}
   }
 `;

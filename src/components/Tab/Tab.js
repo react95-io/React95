@@ -21,7 +21,7 @@ const StyledTab = styled.button`
   border-top-right-radius: 5px;
   margin: 0 0 -2px 0;
   cursor: default;
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.materialText};
   user-select: none;
   font-family: inherit;
   &:focus:after,

@@ -20,7 +20,7 @@ const sharedInputContentStyles = css`
 
 const sharedHoverStyles = css`
   background: ${({ theme }) => theme.hoverBackground};
-  color: ${({ theme }) => theme.inputTextInvert};
+  color: ${({ theme }) => theme.canvasTextInvert};
 `;
 export const StyledInner = styled.div`
   display: flex;
@@ -51,7 +51,7 @@ const sharedWrapperStyles = css`
   height: ${blockSizes.md};
   display: inline-block;
   color: ${({ theme, isDisabled }) =>
-    isDisabled ? createDisabledTextStyles() : theme.inputText};
+    isDisabled ? createDisabledTextStyles() : theme.canvasText};
   font-size: 1rem;
   cursor: ${({ isDisabled }) => (isDisabled ? 'default' : 'pointer')};
 `;
@@ -145,12 +145,13 @@ export const StyledDropdownIcon = styled.span`
   border-right: 6px solid transparent;
   display: inline-block;
   border-top: 6px solid
-    ${({ theme, isDisabled }) => (isDisabled ? theme.textDisabled : theme.text)};
+    ${({ theme, isDisabled }) =>
+      isDisabled ? theme.materialTextDisabled : theme.materialText};
   ${({ theme, isDisabled }) =>
     isDisabled &&
     `
-    filter: drop-shadow(1px 1px 0px ${theme.textDisabledShadow});
-    border-top-color: ${theme.textDisabled};
+    filter: drop-shadow(1px 1px 0px ${theme.materialTextDisabledShadow});
+    border-top-color: ${theme.materialTextDisabled};
     `}
   ${StyledDropdownButton}:active & {
     margin-top: 2px;
@@ -197,7 +198,7 @@ export const StyledDropdownMenuItem = styled.li`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: ${({ theme }) => theme.inputText};
+  color: ${({ theme }) => theme.canvasText};
   &:hover,
   &:focus {
     ${sharedHoverStyles}

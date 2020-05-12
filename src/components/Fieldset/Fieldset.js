@@ -12,7 +12,7 @@ const StyledFieldset = styled.fieldset`
   padding: 16px;
   margin-top: 8px;
   font-size: 1rem;
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.materialText};
   ${({ variant }) =>
     variant !== 'flat' &&
     css`

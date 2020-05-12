@@ -81,9 +81,12 @@ const Icon = styled.span.attrs(() => ({
   ${({ variant, theme, isDisabled }) =>
     variant === 'menu'
       ? css`
-          background: ${isDisabled ? theme.textDisabled : theme.text};
+          background: ${isDisabled
+            ? theme.materialTextDisabled
+            : theme.materialText};
           filter: drop-shadow(
-            1px 1px 0px ${isDisabled ? theme.textDisabledShadow : 'transparent'}
+            1px 1px 0px
+              ${isDisabled ? theme.materialTextDisabledShadow : 'transparent'}
           );
         `
       : css`
@@ -94,7 +97,7 @@ const Icon = styled.span.attrs(() => ({
       !isDisabled &&
       variant === 'menu' &&
       css`
-        background: ${theme.textInvert};
+        background: ${theme.materialTextInvert};
       `};
   }
 `;

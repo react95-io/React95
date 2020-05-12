@@ -87,7 +87,7 @@ const Wrapper = styled.div`
   ${({ isFocused, theme }) =>
     isFocused &&
     `
-        outline: 2px dotted ${theme.text};
+        outline: 2px dotted ${theme.materialText};
         `}
       }
 
@@ -201,23 +201,23 @@ const Tick = styled.span`
           bottom: 0px;
           transform: translateY(1px);
           width: ${tickHeight}px;
-          border-bottom: 2px solid ${({ theme }) => theme.text};
+          border-bottom: 2px solid ${({ theme }) => theme.materialText};
         `
       : css`
           bottom: ${-tickHeight}px;
           height: ${tickHeight}px;
           transform: translateX(-1px);
-          border-left: 1px solid ${({ theme }) => theme.text};
-          border-right: 1px solid ${({ theme }) => theme.text};
+          border-left: 1px solid ${({ theme }) => theme.materialText};
+          border-right: 1px solid ${({ theme }) => theme.materialText};
         `}
 
-        color:  ${({ theme }) => theme.text};
+        color:  ${({ theme }) => theme.materialText};
   ${({ isDisabled, theme }) =>
     isDisabled &&
     css`
       ${createDisabledTextStyles()}
-      box-shadow: 1px 1px 0px ${theme.textDisabledShadow};
-      border-color: ${theme.textDisabled};
+      box-shadow: 1px 1px 0px ${theme.materialTextDisabledShadow};
+      border-color: ${theme.materialTextDisabled};
     `}
 `;
 const Mark = styled.div`

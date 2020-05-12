@@ -19,15 +19,15 @@ themes.default = {
   headerNotActiveBackground: '#7f787f',
   headerNotActiveText: '#c6c6c6',
 
-  text: '#0a0a0a',
-  textInvert: '#fefefe',
-  textDisabled: '#848584',
-  textDisabledShadow: '#fefefe',
+  materialText: '#0a0a0a',
+  materialTextInvert: '#fefefe',
+  materialTextDisabled: '#848584',
+  materialTextDisabledShadow: '#fefefe',
 
-  inputText: '#0a0a0a',
-  inputTextInvert: '#fefefe',
-  inputTextDisabled: '#848584',
-  inputTextDisabledShadow: '#fefefe',
+  canvasText: '#0a0a0a',
+  canvasTextInvert: '#fefefe',
+  canvasTextDisabled: '#848584',
+  canvasTextDisabledShadow: '#fefefe',
 
   tooltip: '#fefbcc',
 
@@ -61,15 +61,15 @@ themes.bee = {
   headerNotActiveBackground: '#7F7B82',
   headerNotActiveText: '#e5bd03',
 
-  text: '#0C1618',
-  textInvert: '#ffffff',
-  textDisabled: '#846d06',
-  textDisabledShadow: '#f8df6e',
+  materialText: '#0C1618',
+  materialTextInvert: '#ffffff',
+  materialTextDisabled: '#846d06',
+  materialTextDisabledShadow: '#f8df6e',
 
-  inputText: '#0C1618',
-  inputTextInvert: '#ffffff',
-  inputTextDisabled: '#846d06',
-  inputTextDisabledShadow: '#f8df6e',
+  canvasText: '#0C1618',
+  canvasTextInvert: '#ffffff',
+  canvasTextDisabled: '#846d06',
+  canvasTextDisabledShadow: '#f8df6e',
 
   tooltip: '#fefbcc',
 
@@ -103,15 +103,15 @@ themes.pamelaAnderson = {
   headerNotActiveBackground: '#95818D',
   headerNotActiveText: '#ff0080',
 
-  text: '#000000',
-  textInvert: '#F1E4E8',
-  textDisabled: '#7e0541',
-  textDisabledShadow: '#ff7ebf',
+  materialText: '#000000',
+  materialTextInvert: '#F1E4E8',
+  materialTextDisabled: '#7e0541',
+  materialTextDisabledShadow: '#ff7ebf',
 
-  inputText: '#000000',
-  inputTextInvert: '#F1E4E8',
-  inputTextDisabled: '#7e0541',
-  inputTextDisabledShadow: '#ff7ebf',
+  canvasText: '#000000',
+  canvasTextInvert: '#F1E4E8',
+  canvasTextDisabled: '#7e0541',
+  canvasTextDisabledShadow: '#ff7ebf',
 
   tooltip: '#fefbcc',
 
@@ -145,15 +145,15 @@ themes.azureOrange = {
   headerNotActiveBackground: '#4E6766',
   headerNotActiveText: '#0180ff',
 
-  text: '#000000',
-  textInvert: '#000000',
-  textDisabled: '#05427f',
-  textDisabledShadow: '#7ebfff',
+  materialText: '#000000',
+  materialTextInvert: '#000000',
+  materialTextDisabled: '#05427f',
+  materialTextDisabledShadow: '#7ebfff',
 
-  inputText: '#000000',
-  inputTextInvert: '#000000',
-  inputTextDisabled: '#05427f',
-  inputTextDisabledShadow: '#7ebfff',
+  canvasText: '#000000',
+  canvasTextInvert: '#000000',
+  canvasTextDisabled: '#05427f',
+  canvasTextDisabledShadow: '#7ebfff',
 
   tooltip: '#fefbcc',
 
@@ -187,15 +187,15 @@ themes.olive = {
   headerNotActiveBackground: '#4f4c02',
   headerNotActiveText: '#807f00',
 
-  text: '#000000',
-  textInvert: '#000000',
-  textDisabled: '#4f4c02',
-  textDisabledShadow: '#fcfd3e',
+  materialText: '#000000',
+  materialTextInvert: '#000000',
+  materialTextDisabled: '#4f4c02',
+  materialTextDisabledShadow: '#fcfd3e',
 
-  inputText: '#000000',
-  inputTextInvert: '#000000',
-  inputTextDisabled: '#4f4c02',
-  inputTextDisabledShadow: '#fcfd3e',
+  canvasText: '#000000',
+  canvasTextInvert: '#000000',
+  canvasTextDisabled: '#4f4c02',
+  canvasTextDisabledShadow: '#fcfd3e',
 
   tooltip: '#fefbcc',
 
@@ -229,15 +229,15 @@ themes.vaporTeal = {
   headerNotActiveBackground: '#2fcecd',
   headerNotActiveText: '#246A73',
 
-  text: '#000000',
-  textInvert: '#000000',
-  textDisabled: '#00706f',
-  textDisabledShadow: '#58ffff',
+  materialText: '#000000',
+  materialTextInvert: '#000000',
+  materialTextDisabled: '#00706f',
+  materialTextDisabledShadow: '#58ffff',
 
-  inputText: '#000000',
-  inputTextInvert: '#000000',
-  inputTextDisabled: '#00706f',
-  inputTextDisabledShadow: '#58ffff',
+  canvasText: '#000000',
+  canvasTextInvert: '#000000',
+  canvasTextDisabled: '#00706f',
+  canvasTextDisabledShadow: '#58ffff',
 
   tooltip: '#fefbcc',
 
@@ -271,15 +271,15 @@ themes.matrix = {
   headerNotActiveBackground: '#7f7f7f',
   headerNotActiveText: '#535353',
 
-  text: '#35FF69',
-  textInvert: '#ffffff',
-  textDisabled: '#282828',
-  textDisabledShadow: '#a7a7a7',
+  materialText: '#35FF69',
+  materialTextInvert: '#ffffff',
+  materialTextDisabled: '#282828',
+  materialTextDisabledShadow: '#a7a7a7',
 
-  inputText: '#000000',
-  inputTextInvert: '#ffffff',
-  inputTextDisabled: '#282828',
-  inputTextDisabledShadow: '#ff0000',
+  canvasText: '#000000',
+  canvasTextInvert: '#ffffff',
+  canvasTextDisabled: '#282828',
+  canvasTextDisabledShadow: '#ff0000',
 
   tooltip: '#fefbcc',
 
@@ -313,15 +313,15 @@ themes.vermillion = {
   headerNotActiveBackground: '#7f2120',
   headerNotActiveText: '#EFE9F4',
 
-  text: '#130405',
-  textInvert: '#EFE9F4',
-  textDisabled: '#7f2120',
-  textDisabledShadow: '#e59697',
+  materialText: '#130405',
+  materialTextInvert: '#EFE9F4',
+  materialTextDisabled: '#7f2120',
+  materialTextDisabledShadow: '#e59697',
 
-  inputText: '#130405',
-  inputTextInvert: '#EFE9F4',
-  inputTextDisabled: '#7f2120',
-  inputTextDisabledShadow: '#e59697',
+  canvasText: '#130405',
+  canvasTextInvert: '#EFE9F4',
+  canvasTextDisabled: '#7f2120',
+  canvasTextDisabledShadow: '#e59697',
 
   tooltip: '#fefbcc',
 
@@ -355,15 +355,15 @@ themes.tooSexy = {
   headerNotActiveBackground: '#5a0302',
   headerNotActiveText: '#B80100',
 
-  text: '#000000',
-  textInvert: '#ffffff',
-  textDisabled: '#5a0302',
-  textDisabledShadow: '#fe5757',
+  materialText: '#000000',
+  materialTextInvert: '#ffffff',
+  materialTextDisabled: '#5a0302',
+  materialTextDisabledShadow: '#fe5757',
 
-  inputText: '#000000',
-  inputTextInvert: '#ffffff',
-  inputTextDisabled: '#5a0302',
-  inputTextDisabledShadow: '#FFF1D0',
+  canvasText: '#000000',
+  canvasTextInvert: '#ffffff',
+  canvasTextDisabled: '#5a0302',
+  canvasTextDisabledShadow: '#FFF1D0',
 
   tooltip: '#fefbcc',
 
@@ -397,15 +397,15 @@ themes.ninjaTurtles = {
   headerNotActiveBackground: '#7f7f7f',
   headerNotActiveText: '#000000',
 
-  text: '#000000',
-  textInvert: '#000000',
-  textDisabled: '#017401',
-  textDisabledShadow: '#55fd55',
+  materialText: '#000000',
+  materialTextInvert: '#000000',
+  materialTextDisabled: '#017401',
+  materialTextDisabledShadow: '#55fd55',
 
-  inputText: '#000000',
-  inputTextInvert: '#000000',
-  inputTextDisabled: '#017401',
-  inputTextDisabledShadow: '#55fd55',
+  canvasText: '#000000',
+  canvasTextInvert: '#000000',
+  canvasTextDisabled: '#017401',
+  canvasTextDisabledShadow: '#55fd55',
 
   tooltip: '#fefbcc',
 
@@ -439,15 +439,15 @@ themes.tokyoDark = {
   headerNotActiveBackground: '#5e696a',
   headerNotActiveText: '#F4F4ED',
 
-  text: '#F4F4ED',
-  textInvert: '#ffffff',
-  textDisabled: '#1f2223',
-  textDisabledShadow: '#93a0a1',
+  materialText: '#F4F4ED',
+  materialTextInvert: '#ffffff',
+  materialTextDisabled: '#1f2223',
+  materialTextDisabledShadow: '#93a0a1',
 
-  inputText: '#F4F4ED',
-  inputTextInvert: '#ffffff',
-  inputTextDisabled: '#1f2223',
-  inputTextDisabledShadow: '#93a0a1',
+  canvasText: '#F4F4ED',
+  canvasTextInvert: '#ffffff',
+  canvasTextDisabled: '#1f2223',
+  canvasTextDisabledShadow: '#93a0a1',
 
   tooltip: '#fefbcc',
 
@@ -481,15 +481,15 @@ themes.molecule = {
   headerNotActiveBackground: '#7f7f7f',
   headerNotActiveText: '#c2c1c2',
 
-  text: '#020102',
-  textInvert: '#f1f5f6',
-  textDisabled: '#993845',
-  textDisabledShadow: '#d79099',
+  materialText: '#020102',
+  materialTextInvert: '#f1f5f6',
+  materialTextDisabled: '#993845',
+  materialTextDisabledShadow: '#d79099',
 
-  inputText: '#020102',
-  inputTextInvert: '#f1f5f6',
-  inputTextDisabled: '#993845',
-  inputTextDisabledShadow: '#d79099',
+  canvasText: '#020102',
+  canvasTextInvert: '#f1f5f6',
+  canvasTextDisabled: '#993845',
+  canvasTextDisabledShadow: '#d79099',
 
   tooltip: '#fefbcc',
 
@@ -523,15 +523,15 @@ themes.travel = {
   headerNotActiveBackground: '#605848',
   headerNotActiveText: '#908070',
 
-  text: '#28251e',
-  textInvert: '#ffffff',
-  textDisabled: '#695f50',
-  textDisabledShadow: '#baae9f',
+  materialText: '#28251e',
+  materialTextInvert: '#ffffff',
+  materialTextDisabled: '#695f50',
+  materialTextDisabledShadow: '#baae9f',
 
-  inputText: '#28251e',
-  inputTextInvert: '#ffffff',
-  inputTextDisabled: '#695f50',
-  inputTextDisabledShadow: '#baae9f',
+  canvasText: '#28251e',
+  canvasTextInvert: '#ffffff',
+  canvasTextDisabled: '#695f50',
+  canvasTextDisabledShadow: '#baae9f',
 
   tooltip: '#fefbcc',
 
@@ -565,15 +565,15 @@ themes.theSixtiesUSA = {
   headerNotActiveBackground: '#a130a9',
   headerNotActiveText: '#df9be7',
 
-  text: '#010001',
-  textInvert: '#010001',
-  textDisabled: '#6c1f71',
-  textDisabledShadow: '#df9be7',
+  materialText: '#010001',
+  materialTextInvert: '#010001',
+  materialTextDisabled: '#6c1f71',
+  materialTextDisabledShadow: '#df9be7',
 
-  inputText: '#010001',
-  inputTextInvert: '#010001',
-  inputTextDisabled: '#6c1f71',
-  inputTextDisabledShadow: '#df9be7',
+  canvasText: '#010001',
+  canvasTextInvert: '#010001',
+  canvasTextDisabled: '#6c1f71',
+  canvasTextDisabledShadow: '#df9be7',
 
   tooltip: '#fefbcc',
 
@@ -607,15 +607,15 @@ themes.candy = {
   headerNotActiveBackground: '#a08796',
   headerNotActiveText: '#EBD2BE',
 
-  text: '#000000',
-  textInvert: '#EFF1F3',
-  textDisabled: '#d1579e',
-  textDisabledShadow: '#EFF1F3',
+  materialText: '#000000',
+  materialTextInvert: '#EFF1F3',
+  materialTextDisabled: '#d1579e',
+  materialTextDisabledShadow: '#EFF1F3',
 
-  inputText: '#000000',
-  inputTextInvert: '#EFF1F3',
-  inputTextDisabled: '#d1579e',
-  inputTextDisabledShadow: '#EFF1F3',
+  canvasText: '#000000',
+  canvasTextInvert: '#EFF1F3',
+  canvasTextDisabled: '#d1579e',
+  canvasTextDisabledShadow: '#EFF1F3',
 
   tooltip: '#fefbcc',
 
@@ -649,15 +649,15 @@ themes.modernDark = {
   headerNotActiveBackground: 'transparent',
   headerNotActiveText: '#4b4d58',
 
-  text: '#f88702',
-  textInvert: '#202127',
-  textDisabled: '#4b4d58',
-  textDisabledShadow: '#121317',
+  materialText: '#f88702',
+  materialTextInvert: '#202127',
+  materialTextDisabled: '#4b4d58',
+  materialTextDisabledShadow: '#121317',
 
-  inputText: '#000000',
-  inputTextInvert: '#202127',
-  inputTextDisabled: '#4b4d58',
-  inputTextDisabledShadow: '#4b4d58',
+  canvasText: '#000000',
+  canvasTextInvert: '#202127',
+  canvasTextDisabled: '#4b4d58',
+  canvasTextDisabledShadow: '#4b4d58',
 
   tooltip: '#fefbcc',
 
@@ -704,15 +704,15 @@ themes.millenium = {
   headerNotActiveBackground: '#7f7f7f',
   headerNotActiveText: '#d6cfc7',
 
-  text: 'black',
-  textInvert: '#ffffff',
-  textDisabled: '#828282',
-  textDisabledShadow: '#ffffff',
+  materialText: 'black',
+  materialTextInvert: '#ffffff',
+  materialTextDisabled: '#828282',
+  materialTextDisabledShadow: '#ffffff',
 
-  inputText: 'black',
-  inputTextInvert: '#ffffff',
-  inputTextDisabled: '#828282',
-  inputTextDisabledShadow: '#ffffff',
+  canvasText: 'black',
+  canvasTextInvert: '#ffffff',
+  canvasTextDisabled: '#828282',
+  canvasTextDisabledShadow: '#ffffff',
 
   tooltip: '#fefbcc',
 
@@ -746,15 +746,15 @@ themes.spruce = {
   headerNotActiveBackground: '#807f80',
   headerNotActiveText: '#d4deda',
 
-  text: '#050608',
-  textInvert: '#fcfff6',
-  textDisabled: '#3d5367',
-  textDisabledShadow: '#cdead2',
+  materialText: '#050608',
+  materialTextInvert: '#fcfff6',
+  materialTextDisabled: '#3d5367',
+  materialTextDisabledShadow: '#cdead2',
 
-  inputText: '#050608',
-  inputTextInvert: '#fcfff6',
-  inputTextDisabled: '#3d5367',
-  inputTextDisabledShadow: '#cdead2',
+  canvasText: '#050608',
+  canvasTextInvert: '#fcfff6',
+  canvasTextDisabled: '#3d5367',
+  canvasTextDisabledShadow: '#cdead2',
 
   tooltip: '#fefbcc',
 
@@ -788,15 +788,15 @@ themes.slate = {
   headerNotActiveBackground: '#807f80',
   headerNotActiveText: '#c2c1c2',
 
-  text: '#00010f',
-  textInvert: '#f2ffff',
-  textDisabled: '#446b7c',
-  textDisabledShadow: '#c3d9e9',
+  materialText: '#00010f',
+  materialTextInvert: '#f2ffff',
+  materialTextDisabled: '#446b7c',
+  materialTextDisabledShadow: '#c3d9e9',
 
-  inputText: '#00010f',
-  inputTextInvert: '#f2ffff',
-  inputTextDisabled: '#446b7c',
-  inputTextDisabledShadow: '#c3d9e9',
+  canvasText: '#00010f',
+  canvasTextInvert: '#f2ffff',
+  canvasTextDisabled: '#446b7c',
+  canvasTextDisabledShadow: '#c3d9e9',
 
   tooltip: '#fefbcc',
 
@@ -830,15 +830,15 @@ themes.rose = {
   headerNotActiveBackground: '#a19fa5',
   headerNotActiveText: '#615f68',
 
-  text: '#050608',
-  textInvert: '#ffffff',
-  textDisabled: '#8a5b68',
-  textDisabledShadow: '#f1d4dc',
+  materialText: '#050608',
+  materialTextInvert: '#ffffff',
+  materialTextDisabled: '#8a5b68',
+  materialTextDisabledShadow: '#f1d4dc',
 
-  inputText: '#050608',
-  inputTextInvert: '#ffffff',
-  inputTextDisabled: '#8a5b68',
-  inputTextDisabledShadow: '#f1d4dc',
+  canvasText: '#050608',
+  canvasTextInvert: '#ffffff',
+  canvasTextDisabled: '#8a5b68',
+  canvasTextDisabledShadow: '#f1d4dc',
 
   tooltip: '#fefbcc',
 
@@ -872,15 +872,15 @@ themes.rainyDay = {
   headerNotActiveBackground: '#7f7f81',
   headerNotActiveText: '#ced0d9',
 
-  text: '#050608',
-  textInvert: '#ffffff',
-  textDisabled: '#3d5367',
-  textDisabledShadow: '#b7cee5',
+  materialText: '#050608',
+  materialTextInvert: '#ffffff',
+  materialTextDisabled: '#3d5367',
+  materialTextDisabledShadow: '#b7cee5',
 
-  inputText: '#050608',
-  inputTextInvert: '#ffffff',
-  inputTextDisabled: '#3d5367',
-  inputTextDisabledShadow: '#b7cee5',
+  canvasText: '#050608',
+  canvasTextInvert: '#ffffff',
+  canvasTextDisabled: '#3d5367',
+  canvasTextDisabledShadow: '#b7cee5',
 
   tooltip: '#fefbcc',
 
@@ -914,15 +914,15 @@ themes.plum = {
   headerNotActiveBackground: '#7d5e58',
   headerNotActiveText: '#e8dad6',
 
-  text: '#050608',
-  textInvert: '#ffffff',
-  textDisabled: '#7b5f5b',
-  textDisabledShadow: '#e8dad6',
+  materialText: '#050608',
+  materialTextInvert: '#ffffff',
+  materialTextDisabled: '#7b5f5b',
+  materialTextDisabledShadow: '#e8dad6',
 
-  inputText: '#050608',
-  inputTextInvert: '#e8dad6',
-  inputTextDisabled: '#7b5f5b',
-  inputTextDisabledShadow: '#e8dad6',
+  canvasText: '#050608',
+  canvasTextInvert: '#e8dad6',
+  canvasTextDisabled: '#7b5f5b',
+  canvasTextDisabledShadow: '#e8dad6',
 
   tooltip: '#fefbcc',
 
@@ -956,15 +956,15 @@ themes.marine = {
   headerNotActiveBackground: '#7f7f7f',
   headerNotActiveText: '#ced0cf',
 
-  text: '#050608',
-  textInvert: '#ffffff',
-  textDisabled: '#3c8d88',
-  textDisabledShadow: '#ffffff',
+  materialText: '#050608',
+  materialTextInvert: '#ffffff',
+  materialTextDisabled: '#3c8d88',
+  materialTextDisabledShadow: '#ffffff',
 
-  inputText: '#050608',
-  inputTextInvert: '#ffffff',
-  inputTextDisabled: '#3c8d88',
-  inputTextDisabledShadow: '#ffffff',
+  canvasText: '#050608',
+  canvasTextInvert: '#ffffff',
+  canvasTextDisabled: '#3c8d88',
+  canvasTextDisabledShadow: '#ffffff',
 
   tooltip: '#fefbcc',
 
@@ -998,15 +998,15 @@ themes.maple = {
   headerNotActiveBackground: '#a1a0a5',
   headerNotActiveText: '#f5e2bb',
 
-  text: '#2a1801',
-  textInvert: '#ffffff',
-  textDisabled: '#ab9042',
-  textDisabledShadow: '#ffffff',
+  materialText: '#2a1801',
+  materialTextInvert: '#ffffff',
+  materialTextDisabled: '#ab9042',
+  materialTextDisabledShadow: '#ffffff',
 
-  inputText: '#2a1801',
-  inputTextInvert: '#ffffff',
-  inputTextDisabled: '#ab9042',
-  inputTextDisabledShadow: '#ffffff',
+  canvasText: '#2a1801',
+  canvasTextInvert: '#ffffff',
+  canvasTextDisabled: '#ab9042',
+  canvasTextDisabledShadow: '#ffffff',
 
   tooltip: '#fefbcc',
 
@@ -1040,15 +1040,15 @@ themes.lilac = {
   headerNotActiveBackground: '#7f7f81',
   headerNotActiveText: '#ced0cf',
 
-  text: '#050608',
-  textInvert: '#ffffff',
-  textDisabled: '#5f549b',
-  textDisabledShadow: '#ffffff',
+  materialText: '#050608',
+  materialTextInvert: '#ffffff',
+  materialTextDisabled: '#5f549b',
+  materialTextDisabledShadow: '#ffffff',
 
-  inputText: '#050608',
-  inputTextInvert: '#ffffff',
-  inputTextDisabled: '#5f549b',
-  inputTextDisabledShadow: '#ffffff',
+  canvasText: '#050608',
+  canvasTextInvert: '#ffffff',
+  canvasTextDisabled: '#5f549b',
+  canvasTextDisabledShadow: '#ffffff',
 
   tooltip: '#fefbcc',
 
@@ -1082,15 +1082,15 @@ themes.blackAndWhite = {
   headerNotActiveBackground: '#ffffff',
   headerNotActiveText: '#000000',
 
-  text: '#000000',
-  textInvert: '#ffffff',
-  textDisabled: '#888c8f',
-  textDisabledShadow: '#ffffff',
+  materialText: '#000000',
+  materialTextInvert: '#ffffff',
+  materialTextDisabled: '#888c8f',
+  materialTextDisabledShadow: '#ffffff',
 
-  inputText: '#000000',
-  inputTextInvert: '#ffffff',
-  inputTextDisabled: '#888c8f',
-  inputTextDisabledShadow: '#ffffff',
+  canvasText: '#000000',
+  canvasTextInvert: '#ffffff',
+  canvasTextDisabled: '#888c8f',
+  canvasTextDisabledShadow: '#ffffff',
 
   tooltip: '#fefbcc',
 
@@ -1124,15 +1124,15 @@ themes.highContrast = {
   headerNotActiveBackground: '#7f7f7f',
   headerNotActiveText: '#ced0cf',
 
-  text: '#ffffff',
-  textInvert: '#ffffff',
-  textDisabled: '#888c8f',
-  textDisabledShadow: '#ffffff',
+  materialText: '#ffffff',
+  materialTextInvert: '#ffffff',
+  materialTextDisabled: '#888c8f',
+  materialTextDisabledShadow: '#ffffff',
 
-  inputText: '#ffffff',
-  inputTextInvert: '#ffffff',
-  inputTextDisabled: '#888c8f',
-  inputTextDisabledShadow: '#ffffff',
+  canvasText: '#ffffff',
+  canvasTextInvert: '#ffffff',
+  canvasTextDisabled: '#888c8f',
+  canvasTextDisabledShadow: '#ffffff',
 
   tooltip: '#fefbcc',
 
@@ -1166,15 +1166,15 @@ themes.eggplant = {
   headerNotActiveBackground: '#89b0a8',
   headerNotActiveText: '#4b8178',
 
-  text: '#050608',
-  textInvert: '#ffffff',
-  textDisabled: '#526d67',
-  textDisabledShadow: '#cee8e3',
+  materialText: '#050608',
+  materialTextInvert: '#ffffff',
+  materialTextDisabled: '#526d67',
+  materialTextDisabledShadow: '#cee8e3',
 
-  inputText: '#050608',
-  inputTextInvert: '#cee8e3',
-  inputTextDisabled: '#526d67',
-  inputTextDisabledShadow: '#cee8e3',
+  canvasText: '#050608',
+  canvasTextInvert: '#cee8e3',
+  canvasTextDisabled: '#526d67',
+  canvasTextDisabledShadow: '#cee8e3',
 
   tooltip: '#fefbcc',
 
@@ -1208,15 +1208,15 @@ themes.brick = {
   headerNotActiveBackground: '#90885c',
   headerNotActiveText: '#c2bfa3',
 
-  text: '#020000',
-  textInvert: '#ffffff',
-  textDisabled: '#6c684b',
-  textDisabledShadow: '#ffffff',
+  materialText: '#020000',
+  materialTextInvert: '#ffffff',
+  materialTextDisabled: '#6c684b',
+  materialTextDisabledShadow: '#ffffff',
 
-  inputText: '#020000',
-  inputTextInvert: '#ffffff',
-  inputTextDisabled: '#6c684b',
-  inputTextDisabledShadow: '#ffffff',
+  canvasText: '#020000',
+  canvasTextInvert: '#ffffff',
+  canvasTextDisabled: '#6c684b',
+  canvasTextDisabledShadow: '#ffffff',
 
   tooltip: '#fefbcc',
 
@@ -1250,15 +1250,15 @@ themes.water = {
   headerNotActiveBackground: '#9a9e9c',
   headerNotActiveText: '#ced0cf',
 
-  text: '#050608',
-  textInvert: '#ffffff',
-  textDisabled: '#888c8f',
-  textDisabledShadow: '#ffffff',
+  materialText: '#050608',
+  materialTextInvert: '#ffffff',
+  materialTextDisabled: '#888c8f',
+  materialTextDisabledShadow: '#ffffff',
 
-  inputText: '#050608',
-  inputTextInvert: '#ffffff',
-  inputTextDisabled: '#888c8f',
-  inputTextDisabledShadow: '#ffffff',
+  canvasText: '#050608',
+  canvasTextInvert: '#ffffff',
+  canvasTextDisabled: '#888c8f',
+  canvasTextDisabledShadow: '#ffffff',
 
   tooltip: '#fefbcc',
 
@@ -1295,15 +1295,15 @@ themes.coldGray = {
   headerNotActiveBackground: '#6063a5',
   headerNotActiveText: '#a1a3ca',
 
-  text: '#010601',
-  textInvert: '#c7c7df',
-  textDisabled: '#5b57a1',
-  textDisabledShadow: '#c7c7df',
+  materialText: '#010601',
+  materialTextInvert: '#c7c7df',
+  materialTextDisabled: '#5b57a1',
+  materialTextDisabledShadow: '#c7c7df',
 
-  inputText: '#050608',
-  inputTextInvert: '#ffffff',
-  inputTextDisabled: '#888c8f',
-  inputTextDisabledShadow: '#ffffff',
+  canvasText: '#050608',
+  canvasTextInvert: '#ffffff',
+  canvasTextDisabled: '#888c8f',
+  canvasTextDisabledShadow: '#ffffff',
 
   tooltip: '#fefbcc',
 
@@ -1338,15 +1338,15 @@ themes.lilacRoseDark = {
   headerNotActiveBackground: '#763a60',
   headerNotActiveText: '#b26496',
 
-  text: '#000000',
-  textInvert: '#ecbfe3',
-  textDisabled: '#82416d',
-  textDisabledShadow: '#ecbfe3',
+  materialText: '#000000',
+  materialTextInvert: '#ecbfe3',
+  materialTextDisabled: '#82416d',
+  materialTextDisabledShadow: '#ecbfe3',
 
-  inputText: '#000000',
-  inputTextInvert: '#ecbfe3',
-  inputTextDisabled: '#000000',
-  inputTextDisabledShadow: '#000000',
+  canvasText: '#000000',
+  canvasTextInvert: '#ecbfe3',
+  canvasTextDisabled: '#000000',
+  canvasTextDisabledShadow: '#000000',
 
   tooltip: '#fefbcc',
 
@@ -1379,15 +1379,15 @@ themes.violetDark = {
   headerNotActiveBackground: '#210e23',
   headerNotActiveText: '#652a6d',
 
-  text: '#c57ece',
-  textInvert: '#c47bcc',
-  textDisabled: '#3c1f3e',
-  textDisabledShadow: '#c47bcc',
+  materialText: '#c57ece',
+  materialTextInvert: '#c47bcc',
+  materialTextDisabled: '#3c1f3e',
+  materialTextDisabledShadow: '#c47bcc',
 
-  inputText: '#18051a',
-  inputTextInvert: '#c57ece',
-  inputTextDisabled: '#000000',
-  inputTextDisabledShadow: '#000000',
+  canvasText: '#18051a',
+  canvasTextInvert: '#c57ece',
+  canvasTextDisabled: '#000000',
+  canvasTextDisabledShadow: '#000000',
 
   tooltip: '#fefbcc',
 

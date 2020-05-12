@@ -54,10 +54,10 @@ describe('<ListItem />', () => {
       const { container } = renderWithTheme(<ListItem disabled />);
       const listItem = container.firstChild;
       expect(listItem).toHaveStyleRule('pointer-events', 'none');
-      expect(listItem).toHaveStyleRule('color', theme.textDisabled);
+      expect(listItem).toHaveStyleRule('color', theme.materialTextDisabled);
       expect(listItem).toHaveStyleRule(
         'text-shadow',
-        `1px 1px ${theme.textDisabledShadow}`
+        `1px 1px ${theme.materialTextDisabledShadow}`
       );
     });
   });

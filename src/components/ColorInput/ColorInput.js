@@ -45,13 +45,13 @@ const ColorPreview = styled.div`
   ${({ isDisabled }) =>
     isDisabled
       ? css`
-          border: 2px solid ${({ theme }) => theme.textDisabled};
+          border: 2px solid ${({ theme }) => theme.materialTextDisabled};
           filter: drop-shadow(
-            1px 1px 0px ${({ theme }) => theme.textDisabledShadow}
+            1px 1px 0px ${({ theme }) => theme.materialTextDisabledShadow}
           );
         `
       : css`
-          border: 2px solid ${({ theme }) => theme.text};
+          border: 2px solid ${({ theme }) => theme.materialText};
         `}
   ${StyledColorInput}:focus:not(:active) + &:after {
     content: '';
@@ -76,13 +76,13 @@ const ChevronIcon = styled.span`
   ${({ isDisabled }) =>
     isDisabled
       ? css`
-          border-top: 6px solid ${({ theme }) => theme.textDisabled};
+          border-top: 6px solid ${({ theme }) => theme.materialTextDisabled};
           filter: drop-shadow(
-            1px 1px 0px ${({ theme }) => theme.textDisabledShadow}
+            1px 1px 0px ${({ theme }) => theme.materialTextDisabledShadow}
           );
         `
       : css`
-          border-top: 6px solid ${({ theme }) => theme.text};
+          border-top: 6px solid ${({ theme }) => theme.materialText};
         `}
   &:after {
     content: '';

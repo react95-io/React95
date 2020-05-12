@@ -40,7 +40,7 @@ const sharedInputStyles = css`
   font-size: 1rem;
   min-height: 27px;
   font-family: inherit;
-  color: ${({ theme }) => theme.inputText};
+  color: ${({ theme }) => theme.canvasText};
   ${({ disabled, variant }) =>
     variant !== 'flat' && disabled && createDisabledTextStyles()}
 `;

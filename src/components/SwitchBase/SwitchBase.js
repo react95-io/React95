@@ -26,7 +26,7 @@ export const StyledLabel = styled.label`
   -ms-user-select: none;
   user-select: none;
   font-size: 1rem;
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.materialText};
   ${props => props.isDisabled && createDisabledTextStyles()}
 
   ${StyledListItem} & {
@@ -37,7 +37,7 @@ export const StyledLabel = styled.label`
     ${({ theme, isDisabled }) =>
       !isDisabled &&
       css`
-        color: ${theme.textInvert};
+        color: ${theme.materialTextInvert};
       `};
   }
 `;
