@@ -15,7 +15,7 @@
 <p align="center">
   <b>Refreshed</b> Windows95 UI components for your modern React apps. <br> Built with styled-components 💅</p>
 
-![demo](https://user-images.githubusercontent.com/28541613/56099388-7513f800-5f0c-11e9-893b-532eded39f92.png)
+![hero](https://user-images.githubusercontent.com/28541613/81947711-28b05580-9601-11ea-964a-c3a6de998496.png)
 
 ### Support
 
