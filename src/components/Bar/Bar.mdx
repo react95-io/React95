@@ -1,0 +1,36 @@
+---
+name: Bar
+menu: Components
+---
+
+import { Playground, Props } from 'docz';
+
+import Bar from '../Bar/Bar'
+import AppBar from '../AppBar/AppBar.js'
+import Toolbar from '../Toolbar/Toolbar.js'
+import Button from '../Button/Button.js'
+
+# Bar
+
+## Usage
+
+<Playground>
+  <AppBar style={{ position: 'relative' }}>
+    <Toolbar>
+      <Bar />
+      <Button variant='menu'>Edit</Button>
+      <Button variant='menu' disabled>
+        Save
+      </Button>
+      <Bar />
+    </Toolbar>
+  </AppBar>
+</Playground>
+
+## API
+
+### Import
+
+### Props
+
+<Props of={Bar} />

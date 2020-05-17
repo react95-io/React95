@@ -82,7 +82,7 @@ const CheckmarkIcon = styled.span.attrs(() => ({
         isDisabled ? theme.checkmarkDisabled : theme.checkmark};
     border-width: 0 3px 3px 0;
     transform: translate(-50%, -50%) rotate(45deg);
-    
+
     ${({ variant, theme, isDisabled }) =>
       variant === 'menu'
         ? css`
@@ -245,7 +245,7 @@ Checkbox.propTypes = {
   checked: propTypes.bool,
   disabled: propTypes.bool,
   variant: propTypes.oneOf(['default', 'flat', 'menu']),
-  style: propTypes.shape([propTypes.string, propTypes.number]),
+  style: propTypes.object,
   defaultChecked: propTypes.bool,
   indeterminate: propTypes.bool,
   className: propTypes.string

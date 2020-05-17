@@ -1,0 +1,93 @@
+---
+name: AppBar
+menu: Components
+---
+
+import { Playground, Props } from 'docz';
+
+import AppBar from './AppBar'
+import Toolbar from '../Toolbar/Toolbar'
+import Button from '../Button/Button'
+import TextField from '../TextField/TextField'
+import List from '../List/List'
+import ListItem from '../ListItem/ListItem'
+import Divider from '../Divider/Divider'
+
+# AppBar
+
+## Usage
+
+#### Default
+
+
+<Playground>
+  {() => {
+    const [open, setOpen] = React.useState(false);
+    function handleClick() {
+      setOpen(!open);
+    }
+    function handleClose() {
+      setOpen(false);
+    }
+    const renderMenu = () => {
+      return (
+        <div>
+          {open && (
+            <List onClick={handleClose}>
+              <ListItem>
+                <span role='img' aria-label='👨‍💻'>
+                  👨‍💻
+                </span>
+                Profile
+              </ListItem>
+              <ListItem>
+                <span role='img' aria-label='📁'>
+                  📁
+                </span>
+                My account
+              </ListItem>
+              <Divider />
+              <ListItem disabled>
+                <span role='img' aria-label='🔙'>
+                  🔙
+                </span>
+                Logout
+              </ListItem>
+            </List>
+          )}
+          <Button
+            onClick={handleClick}
+            active={open}
+            style={{ fontWeight: 'bold' }}
+          >
+            Start
+          </Button>
+        </div>
+      );
+    }
+    return (
+      <AppBar style={{ position: 'relative' }}>
+        <Toolbar style={{ justifyContent: 'space-between' }}>
+          {renderMenu()}
+          <TextField
+            placeholder='Search...'
+            width={150}
+            style={{ marginLeft: 4 }}
+          />
+        </Toolbar>
+      </AppBar>
+    )
+  }}
+</Playground>
+
+## API
+
+### Import
+
+```
+import { AppBar } from 'react95'
+```
+
+### Props
+
+<Props of={AppBar} />

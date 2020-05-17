@@ -28,3 +28,7 @@ yarn-error.log*
 
 # JetBrains IDEs
 .idea/*
+
+# Docs
+.docz
+/docs/build

@@ -24,7 +24,7 @@
   },
   "scripts": {
     "storybook": "start-storybook -p 9009 -s public",
-    "build:storybook": "build-storybook -s public -o ./docs",
+    "build:storybook": "build-storybook -s public -o ./storybook",
     "build": "npm run build:prod",
     "build:dev": "cross-env NODE_ENV=development rollup -c",
     "build:prod": "cross-env NODE_ENV=production rollup -c",
@@ -35,7 +35,9 @@
     "lint": "eslint src --ext .js",
     "lint:fix": "npm run lint -- --fix",
     "semantic-release": "semantic-release",
-    "cz": "git-cz"
+    "cz": "git-cz",
+    "docs:dev": "docz dev",
+    "docs:build": "docz build"
   },
   "peerDependencies": {
     "react": "^16.8.2",
@@ -61,6 +63,7 @@
     "commitizen": "^4.0.4",
     "cross-env": "^6.0.3",
     "cz-conventional-changelog": "^3.1.0",
+    "docz": "latest",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-config-prettier": "^6.10.0",
@@ -71,6 +74,7 @@
     "firebase-tools": "^7.15.0",
     "husky": "^3.1.0",
     "jest": "^24.9.0",
+    "gatsby-theme-docz": "^2.2.0",
     "jest-styled-components": "^6.3.4",
     "lint-staged": "^9.5.0",
     "prettier": "^1.19.1",

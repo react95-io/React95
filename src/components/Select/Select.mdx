@@ -1,0 +1,145 @@
+---
+name: Select
+menu: Components
+---
+
+import { Playground, Props } from 'docz';
+
+import Select from './Select'
+import Window from '../Window/Window'
+import WindowContent from '../WindowContent/WindowContent'
+import Cutout from '../Cutout/Cutout'
+
+# Select
+
+## Usage
+
+#### Fixed Width
+
+<Playground>
+  {() => {
+    const items = [
+      { value: 1, label: '⚡ Pikachu' },
+      { value: 2, label: '🌿 Bulbasaur' },
+      { value: 3, label: '💦 Squirtle' },
+      { value: 4, label: '🔥 Charizard' },
+      { value: 5, label: '🎤 Jigglypuff' },
+      { value: 6, label: '🛌🏻 Snorlax' },
+      { value: 7, label: '⛰ Geodude' }
+    ];
+    return (
+      <Select
+        items={items}
+        onChange={value => console.log(value)}
+        width={150}
+      />
+    );
+  }}
+</Playground>
+
+#### Fixed Height
+
+<Playground>
+  {() => {
+    const items = [
+      { value: 1, label: '⚡ Pikachu' },
+      { value: 2, label: '🌿 Bulbasaur' },
+      { value: 3, label: '💦 Squirtle' },
+      { value: 4, label: '🔥 Charizard' },
+      { value: 5, label: '🎤 Jigglypuff' },
+      { value: 6, label: '🛌🏻 Snorlax' },
+      { value: 7, label: '⛰ Geodude' }
+    ];
+    return (
+      <Select
+        items={items}
+        onChange={value => console.log(value)}
+        height={100}
+        width={150}
+      />
+    );
+  }}
+</Playground>
+
+#### No shadow
+
+<Playground>
+  {() => {
+    const items = [
+      { value: 1, label: '⚡ Pikachu' },
+      { value: 2, label: '🌿 Bulbasaur' },
+      { value: 3, label: '💦 Squirtle' },
+      { value: 4, label: '🔥 Charizard' },
+      { value: 5, label: '🎤 Jigglypuff' },
+      { value: 6, label: '🛌🏻 Snorlax' },
+      { value: 7, label: '⛰ Geodude' }
+    ];
+    return (
+      <Select
+        shadow={false}
+        items={items}
+        onChange={value => console.log(value)}
+      />
+    );
+  }}
+</Playground>
+
+#### Flat
+
+<Playground>
+  {() => {
+    const items = [
+      { value: 1, label: '⚡ Pikachu' },
+      { value: 2, label: '🌿 Bulbasaur' },
+      { value: 3, label: '💦 Squirtle' },
+      { value: 4, label: '🔥 Charizard' },
+      { value: 5, label: '🎤 Jigglypuff' },
+      { value: 6, label: '🛌🏻 Snorlax' },
+      { value: 7, label: '⛰ Geodude' }
+    ];
+    return (
+      <Window>
+        <WindowContent>
+          <Cutout
+            style={{
+              padding: '1rem',
+              paddingBottom: '3rem',
+              background: 'white',
+              width: '300px'
+            }}
+          >
+            <p style={{ lineHeight: 1.3 }}>
+              When you want to use Select on a light background (like scrollable
+              content), just use the flat variant:
+            </p>
+            <div
+              style={{
+                marginTop: '1.5rem'
+              }}
+            >
+              <Select
+                variant='flat'
+                items={items}
+                onChange={value => console.log(value)}
+                height={100}
+                width={150}
+              />
+            </div>
+          </Cutout>
+        </WindowContent>
+      </Window>
+    );
+  }}
+</Playground>
+
+## API
+
+### Import
+
+```
+import { Select } from 'react95'
+```
+
+### Props
+
+<Props of={Select} />

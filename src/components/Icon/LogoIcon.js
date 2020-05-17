@@ -23,7 +23,7 @@ LogoIcon.defaultProps = {
 };
 
 LogoIcon.propTypes = {
-  style: propTypes.shape([propTypes.string, propTypes.number])
+  style: propTypes.object
 };
 
 export default LogoIcon;

@@ -1,0 +1,48 @@
+---
+name: Divider
+menu: Components
+---import { Playground, Props } from 'docz';
+
+import Divider from './Divider'
+import List from '../List/List'
+import ListItem from '../ListItem/ListItem'
+
+# Divider
+
+## Usage
+
+#### Default
+
+<Playground>
+  <List>
+    <ListItem>Item 1</ListItem>
+    <Divider />
+    <ListItem>Item 2</ListItem>
+    <Divider />
+    <ListItem>Item 3</ListItem>
+  </List>
+</Playground>
+
+#### vertical
+
+<Playground>
+  <List inline>
+    <ListItem>Item 1</ListItem>
+    <Divider vertical size='43px' />
+    <ListItem>Item 2</ListItem>
+    <Divider vertical size='43px' />
+    <ListItem>Item 3</ListItem>
+  </List>
+</Playground>
+
+## API
+
+### Import
+
+```
+import { Divider } from 'react95'
+```
+
+### Props
+
+<Props of={Divider} />

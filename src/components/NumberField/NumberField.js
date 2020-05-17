@@ -190,7 +190,7 @@ NumberField.propTypes = {
   min: propTypes.number,
   step: propTypes.number,
   onChange: propTypes.func,
-  style: propTypes.shape([propTypes.string, propTypes.number]),
+  style: propTypes.object,
   value: propTypes.number,
   variant: propTypes.oneOf(['default', 'flat']),
   width: propTypes.oneOfType([propTypes.string, propTypes.number])

@@ -511,7 +511,7 @@ Select.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   SelectDisplayProps: propTypes.object,
   shadow: propTypes.bool,
-  style: propTypes.shape([propTypes.string, propTypes.number]),
+  style: propTypes.object,
   // eslint-disable-next-line react/forbid-prop-types
   value: propTypes.any,
   variant: propTypes.oneOf(['default', 'flat']),
