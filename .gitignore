@@ -31,4 +31,4 @@ yarn-error.log*
 
 # Docs
 .docz
-/docs
+/docs/build
