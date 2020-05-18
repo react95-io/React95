@@ -12,7 +12,7 @@
 /dist
 
 # storybook
-/docs
+/storybook
 /.firebase
 
 # misc
@@ -31,4 +31,4 @@ yarn-error.log*
 
 # Docs
 .docz
-/docs/build
+/docs
