@@ -61,7 +61,7 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths:
-            - docs
+            - storybook
   deploy-library:
     docker:
       - image: 'circleci/node:latest'
