@@ -17,9 +17,6 @@ const Wrapper = styled.div`
     & > * {
       margin-bottom: 1rem;
     }
-    & > p {
-      line-height: 1.3l;
-    }
   }
 `;
 

@@ -14,9 +14,6 @@ const Wrapper = styled.div`
     padding: 1rem;
     width: 400px;
     background: ${({ theme }) => theme.canvas};
-    & > p {
-      line-height: 1.3;
-    }
   }
 `;
 

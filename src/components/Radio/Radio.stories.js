@@ -21,7 +21,6 @@ const Wrapper = styled.div`
     width: 300px;
     & > p {
       margin-bottom: 2rem;
-      line-height: 1.3;
     }
   }
 `;
