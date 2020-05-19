@@ -98,7 +98,6 @@ export const StyledNativeSelect = styled.select`
 export const StyledDropdownButton = styled(Button)`
   width: 30px;
   padding: 0;
-  z-index: 1;
   flex-shrink: 0;
   ${({ variant }) =>
     variant === 'flat'
@@ -169,7 +168,7 @@ export const StyledDropdownMenu = styled.ul`
   padding: 2px;
   border-top: none;
   cursor: default;
-  z-index: 99;
+  z-index: 1;
   cursor: pointer;
   box-shadow: ${props => (props.shadow ? commonShadow : 'none')};
   ${({ variant }) =>

@@ -19,7 +19,6 @@ const StyledCutout = styled.div`
     position: absolute;
     left: 0;
     top: 0;
-    z-index: 1;
     content: '';
     width: calc(100% - 4px);
     height: calc(100% - 4px);

@@ -12,7 +12,7 @@ export const StyledInput = styled.input`
   width: ${size}px;
   height: ${size}px;
   opacity: 0;
-  z-index: -99;
+  z-index: -1;
 `;
 
 export const StyledLabel = styled.label`

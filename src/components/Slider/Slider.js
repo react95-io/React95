@@ -154,9 +154,6 @@ const StyledFlatGroove = styled(Cutout)`
 `;
 const Thumb = styled.span`
   position: relative;
-
-  z-index: 1;
-  
   ${({ vertical }) =>
     vertical
       ? css`
