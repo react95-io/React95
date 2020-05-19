@@ -8,7 +8,7 @@ const Tip = styled.span`
   position: absolute;
   bottom: -4px;
   left: 50%;
-  z-index: 10;
+  z-index: 1;
   transform: translate(-50%, 100%);
   display: ${props => (props.show ? 'block' : 'none')};
   padding: 4px;
