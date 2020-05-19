@@ -32,7 +32,6 @@ const Wrapper = styled.div`
     padding: 1rem;
     background: ${({ theme }) => theme.canvas};
     & > p {
-      line-height: 1.3;
       margin-bottom: 2rem;
     }
   }
