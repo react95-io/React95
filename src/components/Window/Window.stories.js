@@ -1,6 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Window, WindowContent, WindowHeader, Button, Toolbar } from 'react95';
+import {
+  Window,
+  WindowContent,
+  WindowHeader,
+  Button,
+  Toolbar,
+  Panel
+} from 'react95';
 
 export default {
   title: 'Window',
@@ -44,15 +51,19 @@ const Wrapper = styled.div`
       transform: translateY(-50%);
     }
   }
-  p {
-    line-height: 1.4;
-  }
   .window {
     width: 400px;
     min-height: 200px;
   }
   .window:nth-child(2) {
     margin: 2rem;
+  }
+  .footer {
+    display: block;
+    margin: 0.25rem;
+    height: 31px;
+    line-height: 31px;
+    padding-left: 0.25rem;
   }
 `;
 export const Default = () => (
@@ -82,6 +93,9 @@ export const Default = () => (
           tho!)
         </p>
       </WindowContent>
+      <Panel variant='well' className='footer'>
+        Put some useful informations here
+      </Panel>
     </Window>
 
     <Window className='window'>
@@ -98,17 +112,4 @@ export const Default = () => (
 
 Default.story = {
   name: 'default'
-};
-
-export const Resizable = () => (
-  <Window resizable>
-    <WindowHeader>react95.exe</WindowHeader>
-    <WindowContent>
-      Resizable Window displays resize handle in bottom right corner
-    </WindowContent>
-  </Window>
-);
-
-Resizable.story = {
-  name: 'resizable'
 };
