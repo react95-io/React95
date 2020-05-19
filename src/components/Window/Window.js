@@ -15,8 +15,8 @@ const ResizeHandle = styled.span`
   ${({ theme }) => css`
     display: inline-block;
     position: absolute;
-    bottom: 4px;
-    right: 4px;
+    bottom: 10px;
+    right: 10px;
     width: 25px;
     height: 25px;
     background-image: linear-gradient(
@@ -35,9 +35,6 @@ const ResizeHandle = styled.span`
     );
     background-size: 8.49px 8.49px;
     clip-path: polygon(100% 0px, 0px 100%, 100% 100%);
-    border-width: 2px;
-    border-style: solid;
-    border-color: ${theme.material};
     cursor: nwse-resize;
   `}
 `;
