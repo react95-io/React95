@@ -1,7 +1,7 @@
 import React, { forwardRef, useRef, useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import Cutout from '../Cutout/Cutout';
 import { blockSizes } from '../common/system';
@@ -20,10 +20,18 @@ const ProgressCutout = styled(Cutout)`
   padding: 0;
   overflow: hidden;
 `;
-const WhiteBar = styled.div`
+const commonBarStyles = css`
   width: calc(100% - 4px);
-  height: ${blockSizes.md};
-  line-height: ${blockSizes.md};
+  height: calc(100% - 4px);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`;
+const WhiteBar = styled.div`
+  position: relative;
+  top: 4px;
+  ${commonBarStyles}
   background: ${({ theme }) => theme.canvas};
   color: #000;
   margin-left: 2px;
@@ -33,14 +41,9 @@ const WhiteBar = styled.div`
 
 const BlueBar = styled.div`
   position: absolute;
-
-  top: -2px;
+  top: 2px;
   left: 2px;
-  width: calc(100% - 4px);
-  height: ${blockSizes.md};
-
-  line-height: ${blockSizes.md};
-
+  ${commonBarStyles}
   color: ${({ theme }) => theme.materialTextInvert};
   background: ${({ theme }) => theme.progress};
   clip-path: polygon(
