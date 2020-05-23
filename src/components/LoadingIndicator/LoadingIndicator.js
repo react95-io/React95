@@ -101,8 +101,12 @@ const sharedIndeterminateInnerStyles = css`
   position: absolute;
 `;
 const IndeterminateWrapper = styled.div`
-  width: 100%;
-  height: 100%;
+  position: relative;
+  top: 2px;
+  left: 2px;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  overflow: hidden;
 `;
 const IndeterminatePrimary = styled.div`
   ${sharedIndeterminateStyles}
