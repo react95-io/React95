@@ -1,6 +1,5 @@
 /* common */
 export { default as styleReset } from './common/styleReset';
-export { default as themes } from './common/themes';
 
 /* components */
 export { default as Anchor } from './Anchor/Anchor';

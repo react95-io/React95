@@ -44,7 +44,9 @@ Apply style reset, wrap your app content with ThemeProvider with theme of your c
 ```jsx
 import React from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import { styleReset, themes, List, ListItem, Divider } from 'react95';
+import { styleReset, List, ListItem, Divider } from 'react95';
+import theme from 'react95/themes/default';
+
 
 const GlobalStyles = createGlobalStyle`
   ${styleReset}
@@ -53,7 +55,7 @@ const GlobalStyles = createGlobalStyle`
 const App = () => (
   <div>
     <GlobalStyles />
-    <ThemeProvider theme={themes.default}>
+    <ThemeProvider theme={themes}>
       <List>
         <ListItem>🎤 Sing</ListItem>
         <ListItem>💃🏻 Dance</ListItem>
