@@ -44,6 +44,48 @@ themes.default = {
   focusSecondary: '#fefe03'
 };
 
+themes.counterStrike = {
+  name: 'counterStrike',
+  canvas: '#3e4639',
+  material: '#4b5844',
+  materialDark: '#2f3428',
+
+  borderDarkest: '#0a0a0a',
+  borderLightest: '#788475',
+  borderDark: '#2c3125',
+  checkmarkDisabled: '#2c3125',
+  borderLight: '#5d6d54',
+
+  headerBackground: '#4b5844',
+  headerText: '#fefefe',
+  headerNotActiveBackground: '#4b5844',
+  headerNotActiveText: '#74806e',
+
+  materialText: '#f6fbf5',
+  materialTextInvert: '#fefefe',
+  materialTextDisabled: '#2c3125',
+  materialTextDisabledShadow: '#788475',
+
+  canvasText: '#f6fbf5',
+  canvasTextInvert: '#f6fbf5',
+  canvasTextDisabled: '#2c3125',
+  canvasTextDisabledShadow: '#788475',
+
+  tooltip: '#fefbcc',
+
+  anchor: '#1034a6',
+  anchorVisited: '#440381',
+
+  hoverBackground: '#978830',
+  checkmark: '#f6fbf5',
+
+  progress: '#978830',
+
+  flatLight: '#d8d8d8',
+  flatDark: '#9e9e9e',
+  focusSecondary: '#fefe03'
+};
+
 themes.bee = {
   name: 'bee',
   canvas: '#ffffff',
