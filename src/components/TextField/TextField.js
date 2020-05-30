@@ -45,7 +45,7 @@ const sharedInputStyles = css`
     variant !== 'flat' && disabled && createDisabledTextStyles()}
 `;
 
-export const StyledTextInput = styled.input`
+const StyledTextInput = styled.input`
   ${sharedInputStyles}
   padding: 0 8px;
 `;
