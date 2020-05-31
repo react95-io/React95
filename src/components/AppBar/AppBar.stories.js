@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
   AppBar,
   Toolbar,
@@ -9,8 +8,7 @@ import {
   ListItem,
   Divider
 } from 'react95';
-
-import LogoIcon from '../Icon/LogoIcon';
+import logoIMG from '../assets/images/logo.png';
 
 export default {
   title: 'AppBar',
@@ -41,7 +39,11 @@ export const Default = () => {
             active={open}
             style={{ fontWeight: 'bold' }}
           >
-            <LogoIcon style={{ marginLeft: -2, marginRight: 4 }} />
+            <img
+              src={logoIMG}
+              alt='react95 logo'
+              style={{ height: '20px', marginRight: 4 }}
+            />
             Start
           </Button>
           {open && (
