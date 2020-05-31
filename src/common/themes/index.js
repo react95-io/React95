@@ -4,6 +4,7 @@ import blackAndWhite from './blackAndWhite';
 import brick from './brick';
 import candy from './candy';
 import coldGray from './coldGray';
+import counterStrike from './counterStrike';
 import eggplant from './eggplant';
 import highContrast from './highContrast';
 import lilac from './lilac';
@@ -39,6 +40,7 @@ export default {
   brick,
   candy,
   coldGray,
+  counterStrike,
   eggplant,
   highContrast,
   lilac,
