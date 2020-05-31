@@ -2,9 +2,9 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { render } from '@testing-library/react';
 
-import themes from '../src/components/common/themes';
+import themes from '../src/common/themes';
 
-export const theme = themes.default;
+export const theme = themes.original;
 
 export const renderWithTheme = component =>
   render(<ThemeProvider theme={theme}>{component}</ThemeProvider>);

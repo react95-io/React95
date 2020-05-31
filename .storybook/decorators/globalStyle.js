@@ -1,8 +1,8 @@
 import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 
-import styleReset from '../../src/components/common/styleReset';
-import MSSansSerif from '../../src/components/assets/fonts/MS-Sans-Serif.woff2';
+import styleReset from '../../src/common/styleReset';
+import MSSansSerif from '../../src/assets/fonts/MS-Sans-Serif.woff2';
 
 const GlobalStyle = createGlobalStyle`
   ${styleReset}

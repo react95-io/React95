@@ -8,7 +8,12 @@
 # testing
 /coverage
 
-# production
+# library build
+/cjs
+/esm
+/themes
+/images
+/fonts
 /dist
 
 # storybook

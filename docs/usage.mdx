@@ -11,16 +11,28 @@ Apply style reset, wrap your app content with ThemeProvider with theme of your c
 ```jsx
 import React from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import { reset, themes, List, ListItem, Divider } from 'react95';
 
-const ResetStyles = createGlobalStyle`
-  ${reset}
+import { styleReset, List, ListItem, Divider } from 'react95';
+// pick a theme of your choice
+import original from "react95/dist/themes/original";
+// original Windows95 font (optionally)
+import MSSansSerif from "react95/dist/fonts/MS-Sans-Serif.woff2";
+
+const GlobalStyles = createGlobalStyle`
+  @font-face {
+    font-family: 'MS-Sans-Serif';
+    src:  url('${MSSansSerif}') format('woff2');
+  }
+  body {
+    font-family: "MS-Sans-Serif";
+  }
+  ${styleReset}
 `;
 
 const App = () => (
   <div>
-    <ResetStyles />
-    <ThemeProvider theme={themes.default}>
+    <GlobalStyles />
+    <ThemeProvider theme={original}>
       <List>
         <ListItem>🎤 Sing</ListItem>
         <ListItem>💃🏻 Dance</ListItem>

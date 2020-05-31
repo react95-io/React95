@@ -10,7 +10,7 @@ module.exports = ({ config }) => {
   config.resolve = Object.assign(config.resolve, {
     alias: {
       ...config.resolve.alias,
-      react95: path.resolve(__dirname, '../src/components/index')
+      react95: path.resolve(__dirname, '../src/index')
     }
   });
 
