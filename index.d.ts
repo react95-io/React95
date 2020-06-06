@@ -2,78 +2,78 @@ import { ReactNode, FunctionComponent } from 'react';
 
 interface Theme {
   name: string;
-  canvas: string;
-  material: string;
-  materialDark: string;
-  borderDarkest: string;
-  borderLightest: string;
-  borderDark: string;
-  checkmarkDisabled: string;
-  borderLight: string;
-  headerBackground: string;
-  headerText: string;
-  headerNotActiveBackground: string;
-  headerNotActiveText: string;
-  materialText: string;
-  materialTextInvert: string;
-  materialTextDisabled: string;
-  materialTextDisabledShadow: string;
-  canvasText: string;
-  canvasTextInvert: string;
-  canvasTextDisabled: string;
-  canvasTextDisabledShadow: string;
-  tooltip: string;
   anchor: string;
   anchorVisited: string;
-  hoverBackground: string;
+  borderDark: string;
+  borderDarkest: string;
+  borderLight: string;
+  borderLightest: string;
+  canvas: string;
+  canvasText: string;
+  canvasTextDisabled: string;
+  canvasTextDisabledShadow: string;
+  canvasTextInvert: string;
   checkmark: string;
-  progress: string;
-  flatLight: string;
+  checkmarkDisabled: string;
   flatDark: string;
+  flatLight: string;
   focusSecondary: string;
+  headerBackground: string;
+  headerNotActiveBackground: string;
+  headerNotActiveText: string;
+  headerText: string;
+  hoverBackground: string;
+  material: string;
+  materialDark: string;
+  materialText: string;
+  materialTextDisabled: string;
+  materialTextDisabledShadow: string;
+  materialTextInvert: string;
+  progress: string;
+  tooltip: string;
 }
 
+//TODO: is there a way to generate Themes types at build time?
+// this way we wouldn't have to update declaration file
+// every time we add a new theme
 interface Themes {
-  default: Theme;
-  bee: Theme;
-  pamelaAnderson: Theme;
   azureOrange: Theme;
-  olive: Theme;
-  vaporTeal: Theme;
-  matrix: Theme;
-  vermillion: Theme;
-  tooSexy: Theme;
-  ninjaTurtles: Theme;
-  tokyoDark: Theme;
-  molecule: Theme;
-  travel: Theme;
-  theSixtiesUSA: Theme;
-  candy: Theme;
-  modernDark: Theme;
-  storm: Theme;
-  default: Theme;
-  millenium: Theme;
-  spruce: Theme;
-  slate: Theme;
-  rose: Theme;
-  rainyDay: Theme;
-  plum: Theme;
-  marine: Theme;
-  maple: Theme;
-  lilac: Theme;
+  bee: Theme;
   blackAndWhite: Theme;
-  highContrast: Theme;
-  eggplant: Theme;
   brick: Theme;
-  water: Theme;
+  candy: Theme;
   coldGray: Theme;
+  eggplant: Theme;
+  highContrast: Theme;
+  lilac: Theme;
   lilacRoseDark: Theme;
+  maple: Theme;
+  marine: Theme;
+  matrix: Theme;
+  millenium: Theme;
+  modernDark: Theme;
+  molecule: Theme;
+  ninjaTurtles: Theme;
+  olive: Theme;
+  original: Theme;
+  pamelaAnderson: Theme;
+  plum: Theme;
+  rainyDay: Theme;
+  rose: Theme;
+  slate: Theme;
+  spruce: Theme;
+  theSixtiesUSA: Theme;
+  tokyoDark: Theme;
+  tooSexy: Theme;
+  travel: Theme;
+  vaporTeal: Theme;
+  vermillion: Theme;
   violetDark: Theme;
+  water: Theme;
 }
 
 /* common */
 export const styleReset: string;
-export const themes: Themes;
 
 /* components */
 export const Anchor: FunctionComponent<{
