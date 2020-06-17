@@ -1,28 +1,29 @@
-import React from 'react';
+// ⭕️ DON'T SHOW DATEPICKER BEFORE IT'S FINISHED AND TESTED ⭕️
 
-import { DatePicker } from 'react95';
+// import React from 'react';
+// import { DatePicker } from 'react95';
 
-export default {
-  title: 'DatePicker',
-  component: DatePicker,
-  decorators: [
-    story => (
-      <div
-        style={{
-          padding: '5rem',
-          background: 'teal'
-        }}
-      >
-        {story()}
-      </div>
-    )
-  ]
-};
+// export default {
+//   title: 'DatePicker',
+//   component: DatePicker,
+//   decorators: [
+//     story => (
+//       <div
+//         style={{
+//           padding: '5rem',
+//           background: 'teal'
+//         }}
+//       >
+//         {story()}
+//       </div>
+//     )
+//   ]
+// };
 
-export const Default = () => (
-  <DatePicker onAccept={date => console.log(date)} />
-);
+// export const Default = () => (
+//   <DatePicker onAccept={date => console.log(date)} />
+// );
 
-Default.story = {
-  name: 'default'
-};
+// Default.story = {
+//   name: 'default'
+// };
