@@ -12,7 +12,7 @@ const Tip = styled.span`
   transform: translate(-50%, 100%);
   display: ${props => (props.show ? 'block' : 'none')};
   padding: 4px;
-  border: 1px solid ${({ theme }) => theme.borderDarkest};
+  border: 2px solid ${({ theme }) => theme.borderDarkest};
   background: ${({ theme }) => theme.tooltip};
   box-shadow: ${shadow};
   text-align: center;
