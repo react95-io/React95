@@ -18,7 +18,8 @@ export const Default = () => (
   <h1>
     Everybody likes
     <Anchor href='https://expensive.toys' target='_blank'>
-      Expensive Toys
+      {' '}
+      https://expensive.toys
     </Anchor>
   </h1>
 );
