@@ -1,12 +1,4 @@
 import React, { useState } from 'react';
-// import {
-//   Title,
-//   Subtitle,
-//   Description,
-//   Primary,
-//   Props,
-//   Stories
-// } from '@storybook/addon-docs/blocks';
 
 import {
   Tabs,
@@ -36,16 +28,6 @@ export default {
       </div>
     )
   ]
-  // parameters: {
-  //   docs: {
-  //     page: () => (
-  //       <>
-  //         <Title />
-  //         <Props />
-  //       </>
-  //     )
-  //   }
-  // }
 };
 export const Default = () => {
   const [state, setState] = useState({
