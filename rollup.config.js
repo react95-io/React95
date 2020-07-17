@@ -44,7 +44,10 @@ export default [
     preserveModules: true,
     plugins: [
       copy({
-        targets: [{ src: './src/assets/*', dest: './dist/' }]
+        targets: [
+          { src: './src/assets/fonts/dist/*', dest: './dist/fonts' },
+          { src: './src/assets/images/*', dest: './dist/images' }
+        ]
       }),
       replace({
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
