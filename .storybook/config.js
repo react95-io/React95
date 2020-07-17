@@ -33,4 +33,3 @@ const reorderedThemes = {
 
 addDecorator(GlobalStyle);
 addDecorator(withThemesProvider(Object.values(reorderedThemes)));
-configure(require.context('../src/', true, /\.stories\.js$/), module);
