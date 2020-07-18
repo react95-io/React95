@@ -8,24 +8,21 @@
 
 </p>
 <h3 align="center">
-  <a href="https://arturbien.github.io/React95/?path=/story/select--fixed-width">Components</a> -
+  <a href="https://storybook.react95.io/?path=/story/window--default">Components</a> -
+  <a href="https://coins95.web.app/">Demo app</a> -
   <a href="https://react95.io/">Website</a> -
-  <a href="https://join.slack.com/t/react95/shared_invite/enQtODExMzQ1Nzc2MjQ1LTMyNWVlYjllMzJhNTU3N2E2MDY1ZmM2ZTk3NzZkMjQ3YWIwMTlmNTZmMzc4OWU2MGVmYzZjMzNiNDI5NjgyMzA">Slack</a> -
+  <a href="https://join.slack.com/t/react95/shared_invite/enQtOTA1NzEyNjAyNTc4LWYxZjU3NWRiMWJlMGJiMjhkNzE2MDA3ZmZjZDc1YmY0ODdlZjMwZDA1NWJiYWExYmY1NTJmNmE4OWVjNWFhMTE">Slack</a> -
   <a href="https://www.paypal.me/react95">PayPal donation 💰</a>
 </h3>
 <p align="center">
   <b>Refreshed</b> Windows95 UI components for your modern React apps. <br /> Built with styled-components 💅</p>
 
-![demo](https://user-images.githubusercontent.com/28541613/56099388-7513f800-5f0c-11e9-893b-532eded39f92.png)
+![hero](https://user-images.githubusercontent.com/28541613/81947711-28b05580-9601-11ea-964a-c3a6de998496.png)
 
 ### Support
 
-- [Become a backer or sponsor on Patreon](https://www.patreon.com/arturbien).
+- [Become a backer or sponsor on Patreon](https://www.patreon.com/arturbien)
 - [One-time donation via PayPal](https://www.paypal.me/react95)
-
-## Motivation
-
-Create modern mobile/web applications with the retro and old school Windows 95 style. Our goal is not to exactly recreate Windows95 components, but to provide a solid component library for current scenarios.
 
 ## Getting Started
 
@@ -39,7 +36,7 @@ $ yarn react95 styled-components
 $ npm i react95 styled-components
 ```
 
-Apply style reset, wrap your app content with ThemeProvider with theme of your choice... and you are ready to go! 🚀
+Apply style reset, wrap your app with ThemeProvider with theme of your choice... and you are ready to go! 🚀
 
 ```jsx
 import React from 'react';
@@ -88,43 +85,13 @@ const App = () => (
 export default App;
 ```
 
-### Explore
-
-You can view components on [Storybook](https://arturbien.github.io/React95/). If you want to play with it locally, simply clone the repo and run commands below:
-
-```sh
-# yarn
-$ yarn && yarn storybook
-
-# npm
-$ npm i && npm run storybook
-```
-
 ### Submit your project
 
-Apps built with React95 will be submitted on the official React95 [website](https://react95.io) 🤟🏻
+Apps built with React95 will be featured on the official React95 [website](https://react95.io) 🤟🏻
 
 ### Contributing
 
 Any help from UI / UX designers would be EXTREMELY appreciated. The challenge is to come up with new component designs / layouts that are broadly used in modern UIs, that weren't present back in 95.
 
-There's a lot to do. If you want to help with the project, feel free to open pull requests and submit issues. Let's make UI great again 🔥
+If you want to help with the project, feel free to open pull requests and submit issues or component proposals. Let's bring this UI back to life ♥️
 
-For every component, we have a `.stories` file for Storybook and a `.mdx` file for Docz. In order to create a `.mdx` file we recommend copying [this template](https://github.com/arturbien/React95/blob/chore/docs-docz/docs/template) file and replaceing ___component_ with the component name.
-
-### Roadmap
-
-There's quite a few things to be done:
-
-- Styled system
-- Lots of tacky color schemes 🌈
-- Custom icons maybe? (Emojis from Windows 10 seem to go very well with the lib)
-- Typography
-- Range slider component
-- Avatar component
-- Components common in all modern UIs (FAB, Badge, Avatar, Snackbar, Steppers)
-
-And the boring stuff too:
-
-- Testing
-- Semantic release
