@@ -110,11 +110,12 @@ const NumberField = React.forwardRef(function NumberField(props, ref) {
   };
 
   const handleClick = val => {
+    const stateValue = parseFloat(valueDerived);
     const newValue = clamp(
-      +parseFloat(valueDerived + val).toFixed(2),
+      +parseFloat(stateValue + val).toFixed(2),
       min,
       max
-    );
+    ).toString();
 
     setValueState(newValue);
 
