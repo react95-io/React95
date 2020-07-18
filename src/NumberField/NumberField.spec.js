@@ -15,7 +15,7 @@ describe('<NumberField />', () => {
     const spinButton = getByTestId('increment');
     spinButton.click();
     expect(handleChange).toHaveBeenCalledTimes(1);
-    expect(handleChange).toHaveBeenCalledWith(3);
+    expect(handleChange).toHaveBeenCalledWith('3');
   });
 
   it('should call onChange on blur after keyboard input', () => {
@@ -50,6 +50,20 @@ describe('<NumberField />', () => {
     });
     incrementButton.click();
     expect(handleChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('should give correct result after user changes input value and then clicks increment button', () => {
+    const handleChange = jest.fn();
+    const { container, getByTestId } = renderWithTheme(
+      <NumberField onChange={handleChange} defaultValue={0} />
+    );
+    const input = container.querySelector('input');
+    const incrementButton = getByTestId('increment');
+
+    fireEvent.change(input, { target: { value: 2 } });
+    incrementButton.click();
+
+    expect(handleChange).toHaveBeenCalledWith('3');
   });
 
   it('should reach max value', () => {

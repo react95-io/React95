@@ -28,7 +28,7 @@ export default {
 
 export const Default = () => (
   <>
-    <NumberField defaultValue={1.5} min={0} max={9} width={130} />
+    <NumberField defaultValue={3} step={1.5} min={1.5} max={9} width={130} />
     <br />
     <NumberField defaultValue={1995} width={130} />
     <br />
