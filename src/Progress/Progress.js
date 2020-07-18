@@ -19,6 +19,9 @@ const ProgressCutout = styled(Cutout)`
   text-align: center;
   padding: 0;
   overflow: hidden;
+  &:before {
+    z-index: 1;
+  }
 `;
 const commonBarStyles = css`
   width: calc(100% - 4px);
