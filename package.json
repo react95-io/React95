@@ -1,15 +1,12 @@
 {
   "name": "react95",
   "version": "0.0.0-development",
-  "authors": [
-    "Artur Bień"
-  ],
   "description": "Refreshed Windows95 UI components for modern web apps - React95",
   "keywords": [
     "react",
     "styled-components",
     "windows95",
-    "component",
+    "components",
     "vaporwave"
   ],
   "license": "MIT",
