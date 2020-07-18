@@ -1,39 +1,35 @@
-import { configure, addDecorator } from "@storybook/react";
-import { withInfo } from "@storybook/addon-info";
-import { withThemesProvider } from "storybook-addon-styled-component-theme";
+import { configure, addDecorator } from '@storybook/react';
+import { withThemesProvider } from 'storybook-addon-styled-component-theme';
+import themes from '../src/common/themes';
+import GlobalStyle from './decorators/globalStyle';
 
-import themes from "../src/components/common/themes";
+const {
+  original,
+  rainyDay,
+  vaporTeal,
+  theSixtiesUSA,
+  olive,
+  tokyoDark,
+  rose,
+  plum,
+  matrix,
+  travel,
+  ...otherThemes
+} = themes;
 
-import GlobalStyle from "./decorators/globalStyle";
+const reorderedThemes = {
+  original,
+  rainyDay,
+  vaporTeal,
+  theSixtiesUSA,
+  olive,
+  tokyoDark,
+  rose,
+  plum,
+  matrix,
+  travel,
+  ...otherThemes
+};
 
-const demoThemes = [
-  themes.default,
-  themes.lilacRoseDark,
-  themes.water,
-  themes.coldGray,
-  themes.violetDark
-];
-
-addDecorator(
-  withInfo({
-    inline: true,
-    header: false,
-    source: false,
-    maxPropsIntoLine: 1,
-    styles: stylesheet => ({
-      // Setting the style with a function
-      ...stylesheet,
-      table: {
-        background: "red"
-      }
-    })
-  })
-);
 addDecorator(GlobalStyle);
-addDecorator(withThemesProvider(demoThemes));
-
-const req = require.context("../src", true, /\.stories\.js$/);
-function loadStories() {
-  req.keys().forEach(filename => req(filename));
-}
-configure(loadStories, module);
+addDecorator(withThemesProvider(Object.values(reorderedThemes)));

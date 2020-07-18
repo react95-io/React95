@@ -1,0 +1,65 @@
+import React from 'react';
+import styled from 'styled-components';
+
+import { NumberField, Cutout } from 'react95';
+
+const Wrapper = styled.div`
+  background: ${({ theme }) => theme.material};
+  padding: 5rem;
+  & > * {
+    margin-bottom: 1rem;
+  }
+
+  #cutout {
+    background: ${({ theme }) => theme.canvas};
+    padding: 2rem;
+    width: 300px;
+    & > * {
+      margin-bottom: 1rem;
+    }
+  }
+`;
+
+export default {
+  title: 'NumberField',
+  component: NumberField,
+  decorators: [story => <Wrapper>{story()}</Wrapper>]
+};
+
+export const Default = () => (
+  <>
+    <NumberField defaultValue={3} step={1.5} min={1.5} max={9} width={130} />
+    <br />
+    <NumberField defaultValue={1995} width={130} />
+    <br />
+    <NumberField disabled defaultValue={2020} width={130} />
+  </>
+);
+
+Default.story = {
+  name: 'default'
+};
+
+export const Flat = () => (
+  <Cutout id='cutout'>
+    <p>
+      When you want to use NumberField on a light background (like scrollable
+      content), just use the flat variant:
+    </p>
+    <NumberField
+      variant='flat'
+      defaultValue={1.5}
+      min={0}
+      max={9}
+      width='130px'
+    />
+    <br />
+    <NumberField variant='flat' defaultValue={1995} width='130px' />
+    <br />
+    <NumberField variant='flat' disabled defaultValue={2020} width='130px' />
+  </Cutout>
+);
+
+Flat.story = {
+  name: 'flat'
+};

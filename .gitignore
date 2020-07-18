@@ -8,8 +8,17 @@
 # testing
 /coverage
 
-# production
+# library build
+/cjs
+/esm
+/themes
+/images
+/fonts
 /dist
+
+# storybook
+/storybook
+/.firebase
 
 # misc
 .DS_Store
@@ -24,3 +33,7 @@ yarn-error.log*
 
 # JetBrains IDEs
 .idea/*
+
+# Docs
+.docz
+/docs/build
