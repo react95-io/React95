@@ -109,4 +109,4 @@ workflows:
           filters:
             branches:
               only:
-                - beta
+                - master
