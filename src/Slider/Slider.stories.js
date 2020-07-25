@@ -90,9 +90,14 @@ export const Default = () => (
           size='300px'
           min={0}
           max={6}
-          step={1.5}
+          step={1}
           defaultValue={0}
-          marks
+          marks={[
+            { value: 0, label: '0°C' },
+            { value: 2, label: '2°C' },
+            { value: 4, label: '4°C' },
+            { value: 6, label: '6°C' }
+          ]}
           orientation='vertical'
         />
       </div>
