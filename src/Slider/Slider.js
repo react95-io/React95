@@ -221,7 +221,7 @@ const Mark = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
-
+  line-height: 1;
   font-size: 0.875rem;
 
   ${({ vertical }) =>
