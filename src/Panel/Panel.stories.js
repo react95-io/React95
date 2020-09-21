@@ -34,7 +34,7 @@ export const Default = () => (
       Notice the subtle difference in borders. The lightest border is not on the
       edge of this panel.
     </p>
-    <Panel variant='default' style={{ margin: '1rem', padding: '1rem' }}>
+    <Panel variant='inside' style={{ margin: '1rem', padding: '1rem' }}>
       This panel on the other hand has the lightest border on the edge. Use this
       panel inside &apos;outside&apos; panels.
       <br />
