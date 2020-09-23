@@ -4,10 +4,11 @@ import { StyledButton as Button } from '../Button/Button';
 import {
   shadow as commonShadow,
   createDisabledTextStyles,
-  createFlatBoxStyles
+  createFlatBoxStyles,
+  createScrollbars
 } from '../common';
 import { blockSizes } from '../common/system';
-import Cutout from '../Cutout/Cutout';
+import { StyledCutout } from '../Cutout/Cutout';
 
 const sharedInputContentStyles = css`
   box-sizing: border-box;
@@ -56,7 +57,7 @@ const sharedWrapperStyles = css`
   cursor: ${({ isDisabled }) => (isDisabled ? 'default' : 'pointer')};
 `;
 
-export const StyledSelectWrapper = styled(Cutout)`
+export const StyledSelectWrapper = styled(StyledCutout)`
   ${sharedWrapperStyles}
   background: ${({ theme, isDisabled }) =>
     isDisabled ? theme.material : theme.canvas};
@@ -170,7 +171,7 @@ export const StyledDropdownMenu = styled.ul`
   cursor: default;
   z-index: 1;
   cursor: pointer;
-  box-shadow: ${props => (props.shadow ? commonShadow : 'none')};
+  box-shadow: ${commonShadow};
   ${({ variant }) =>
     variant === 'flat'
       ? css`
@@ -183,6 +184,7 @@ export const StyledDropdownMenu = styled.ul`
           width: calc(100% - 2px);
           border: 2px solid ${({ theme }) => theme.borderDarkest};
         `}
+  ${({ variant }) => createScrollbars(variant)}
 `;
 
 export const StyledDropdownMenuItem = styled.li`

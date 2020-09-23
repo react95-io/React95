@@ -2,9 +2,13 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import styled, { css } from 'styled-components';
-import { createDisabledTextStyles, createFlatBoxStyles } from '../common';
+import {
+  createDisabledTextStyles,
+  createFlatBoxStyles,
+  createScrollbars
+} from '../common';
 import { blockSizes } from '../common/system';
-import Cutout from '../Cutout/Cutout';
+import { StyledCutout } from '../Cutout/Cutout';
 
 const sharedWrapperStyles = css`
   display: flex;
@@ -13,7 +17,7 @@ const sharedWrapperStyles = css`
   min-height: ${blockSizes.md};
 `;
 
-const Wrapper = styled(Cutout).attrs({
+const Wrapper = styled(StyledCutout).attrs({
   'data-testid': 'variant-default'
 })`
   ${sharedWrapperStyles}
@@ -54,6 +58,7 @@ const StyledTextArea = styled.textarea`
   ${sharedInputStyles}
   padding: 8px;
   resize: none;
+  ${({ variant }) => createScrollbars(variant)}
 `;
 
 const TextField = React.forwardRef(function TextField(props, ref) {

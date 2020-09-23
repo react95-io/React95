@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 
 import styled, { css } from 'styled-components';
 import { createFlatBoxStyles } from '../common';
-import Cutout from '../Cutout/Cutout';
+import { StyledCutout } from '../Cutout/Cutout';
 import { StyledListItem } from '../ListItem/ListItem';
 
 import {
@@ -23,7 +23,7 @@ const sharedCheckboxStyles = css`
   margin-right: 0.5rem;
 `;
 // had to overwrite box-shadow for StyledCheckbox since the default made checkbox too dark
-const StyledCheckbox = styled(Cutout)`
+const StyledCheckbox = styled(StyledCutout)`
 ${sharedCheckboxStyles}
 background: ${({ theme, isDisabled }) =>
   isDisabled ? theme.material : theme.canvas};

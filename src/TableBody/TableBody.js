@@ -8,6 +8,7 @@ const StyledTableBody = styled.tbody`
   background: ${({ theme }) => theme.canvas};
   display: table-row-group;
   box-shadow: ${insetShadow};
+  overflow-y: auto;
 `;
 
 const TableBody = React.forwardRef(function TableBody(props, ref) {

@@ -19,9 +19,12 @@ const Wrapper = styled.div`
     }
   }
   #cutout {
+    width: 400px;
+  }
+  #cutout > div {
     background: ${({ theme }) => theme.canvas};
     padding: 1rem;
-    width: 400px;
+
     & > * {
       margin-bottom: 2rem;
     }

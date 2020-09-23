@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import styled from 'styled-components';
-import Cutout from '../Cutout/Cutout';
+import { StyledCutout } from '../Cutout/Cutout';
 
 const StyledTable = styled.table`
   display: table;
@@ -12,7 +12,7 @@ const StyledTable = styled.table`
   font-size: 1rem;
 `;
 
-const StyledCutout = styled(Cutout)`
+const Wrapper = styled(StyledCutout)`
   &:before {
     box-shadow: none;
   }
@@ -22,11 +22,11 @@ const Table = React.forwardRef(function Table(props, ref) {
   const { children, ...otherProps } = props;
 
   return (
-    <StyledCutout>
+    <Wrapper>
       <StyledTable ref={ref} {...otherProps}>
         {children}
       </StyledTable>
-    </StyledCutout>
+    </Wrapper>
   );
 });
 
