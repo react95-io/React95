@@ -97,7 +97,7 @@ const Wrapper = styled.div`
           height: ${size};
           margin-right: 1.5rem;
           &:before {
-            left: -2px;
+            left: -6px;
             top: -15px;
             height: calc(100% + 30px);
             width: ${({ hasMarks }) => (hasMarks ? '41px' : '39px')};
@@ -159,11 +159,13 @@ const Thumb = styled.span`
       ? css`
           width: 32px;
           height: 18px;
+          right: 2px;
           transform: translateY(-50%);
         `
       : css`
           height: 32px;
           width: 18px;
+          top: 2px;
           transform: translateX(-50%);
         `}
   ${({ variant }) =>
