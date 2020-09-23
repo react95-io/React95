@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 
 import styled, { css } from 'styled-components';
 
-import Cutout from '../Cutout/Cutout';
+import { StyledCutout } from '../Cutout/Cutout';
 import { blockSizes } from '../common/system';
 
 const Wrapper = styled.div`
@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   height: ${blockSizes.md};
   width: 100%;
 `;
-const ProgressCutout = styled(Cutout)`
+const ProgressCutout = styled(StyledCutout)`
   width: 100%;
   height: 100%;
   width: 100%;

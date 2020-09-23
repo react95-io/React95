@@ -19,7 +19,7 @@ const Wrapper = styled.div`
     color: ${({ theme }) => theme.materialText};
     padding: 1rem;
     width: 300px;
-    & > p {
+    & p {
       margin-bottom: 2rem;
     }
   }

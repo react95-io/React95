@@ -440,9 +440,8 @@ const Select = React.forwardRef(function Select(props, ref) {
             onKeyDown={handleKeyDown}
             ref={dropdownRef}
             role='listbox'
-            shadow={shadow}
             style={
-              menuMaxHeight && { overflow: 'scroll', maxHeight: menuMaxHeight }
+              menuMaxHeight && { overflow: 'auto', maxHeight: menuMaxHeight }
             }
             tabIndex={0}
             variant={variant}

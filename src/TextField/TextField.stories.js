@@ -40,7 +40,7 @@ export const Default = () => {
           onChange={handleChange}
           fullWidth
         />
-        <Button onClick={reset} style={{ marginLeft: '2px' }}>
+        <Button onClick={reset} style={{ marginLeft: 4 }}>
           Reset
         </Button>
       </div>

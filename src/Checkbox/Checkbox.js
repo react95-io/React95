@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 import { createHatchedBackground } from '../common';
 
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
-import Cutout from '../Cutout/Cutout';
+import { StyledCutout } from '../Cutout/Cutout';
 import { StyledListItem } from '../ListItem/ListItem';
 import {
   size,
@@ -22,7 +22,7 @@ const sharedCheckboxStyles = css`
   justify-content: space-around;
   margin-right: 0.5rem;
 `;
-const StyledCheckbox = styled(Cutout)`
+const StyledCheckbox = styled(StyledCutout)`
   ${sharedCheckboxStyles}
   width: ${size}px;
   height: ${size}px;

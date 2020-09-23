@@ -1,9 +1,9 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
-import { insetShadow } from '../common';
+import { insetShadow, createScrollbars } from '../common';
 
-const StyledCutout = styled.div`
+export const StyledCutout = styled.div`
   position: relative;
   box-sizing: border-box;
   padding: 2px;
@@ -14,7 +14,7 @@ const StyledCutout = styled.div`
   border-top-color: ${({ theme }) => theme.borderDark};
   border-right-color: ${({ theme }) => theme.borderLightest};
   border-bottom-color: ${({ theme }) => theme.borderLightest};
-
+  line-height: 1.5;
   &:before {
     position: absolute;
     left: 0;
@@ -35,11 +35,20 @@ const StyledCutout = styled.div`
   }
 `;
 
+const Content = styled.div`
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 4px;
+  overflow: auto;
+  ${createScrollbars()}
+`;
+
 const Cutout = React.forwardRef(function Cutout(props, ref) {
   const { children, ...otherProps } = props;
   return (
     <StyledCutout ref={ref} {...otherProps}>
-      {children}
+      <Content>{children}</Content>
     </StyledCutout>
   );
 });

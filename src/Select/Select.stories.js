@@ -8,7 +8,7 @@ const options = [
   { value: 1, label: '⚡ Pikachu' },
   { value: 2, label: '🌿 Bulbasaur' },
   { value: 3, label: '💦 Squirtle' },
-  { value: 4, label: '🔥 Charizard' },
+  { value: 4, label: '🔥 Mega Charizard Y' },
   { value: 5, label: '🎤 Jigglypuff' },
   { value: 6, label: '🛌🏻 Snorlax' },
   { value: 7, label: '⛰ Geodude' }
@@ -27,7 +27,7 @@ const Wrapper = styled.div`
   #default-selects {
     width: 200px;
   }
-  #cutout {
+  #cutout > div {
     width: 250px;
     padding: 1rem;
     background: ${({ theme }) => theme.canvas};
@@ -111,6 +111,7 @@ export const Flat = () => (
             onChange={onChange}
             options={options}
             width='100%'
+            menuMaxHeight={160}
           />
           <Select
             variant='flat'
@@ -152,7 +153,6 @@ export const CustomDisplayFormatting = () => (
     onChange={onChange}
     options={options}
     width={220}
-    menuMaxHeight={100}
   />
 );
 

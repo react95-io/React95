@@ -14,7 +14,7 @@ const Wrapper = styled.div`
     background: ${({ theme }) => theme.canvas};
     padding: 2rem;
     width: 300px;
-    & > * {
+    & > div > * {
       margin-bottom: 1rem;
     }
   }

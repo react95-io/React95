@@ -14,9 +14,14 @@ const Wrapper = styled.div`
   #cutout {
     background: ${({ theme }) => theme.canvas};
     display: inline-block;
+  }
+  .content {
     padding: 1rem;
-    & > span {
-      margin-left: 1rem;
+    & > div {
+      margin: 1rem 0;
+    }
+
+    & > div > span {
       margin-right: 0.5rem;
     }
   }
@@ -43,10 +48,16 @@ Default.story = {
 
 export const Flat = () => (
   <Cutout id='cutout'>
-    <span>enabled: </span>
-    <ColorInput variant='flat' defaultValue='#00f' />
-    <span>disabled: </span>
-    <ColorInput variant='flat' disabled defaultValue='#00f' />
+    <div className='content'>
+      <div>
+        <span>enabled: </span>
+        <ColorInput variant='flat' defaultValue='#00f' />
+      </div>
+      <div>
+        <span>disabled: </span>
+        <ColorInput variant='flat' disabled defaultValue='#00f' />
+      </div>
+    </div>
   </Cutout>
 );
 

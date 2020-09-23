@@ -3,14 +3,14 @@ import propTypes from 'prop-types';
 
 import styled, { keyframes, css } from 'styled-components';
 
-import Cutout from '../Cutout/Cutout';
+import { StyledCutout } from '../Cutout/Cutout';
 
 const Wrapper = styled.div`
   display: inline-block;
   height: 15px;
   width: 100%;
 `;
-const ProgressCutout = styled(Cutout)`
+const ProgressCutout = styled(StyledCutout)`
   width: 100%;
   height: 100%;
   width: 100%;

@@ -14,7 +14,7 @@ import { clamp, roundValueToStep } from '../common/utils';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import useForkRef from '../common/hooks/useForkRef';
 import { useIsFocusVisible } from '../common/hooks/useIsFocusVisible';
-import Cutout from '../Cutout/Cutout';
+import { StyledCutout } from '../Cutout/Cutout';
 
 function percentToValue(percent, min, max) {
   return (max - min) * percent + min;
@@ -135,10 +135,10 @@ const sharedGrooveStyles = () => css`
           width: 100%;
         `}
 `;
-const StyledGroove = styled(Cutout)`
+const StyledGroove = styled(StyledCutout)`
   ${sharedGrooveStyles()}
 `;
-const StyledFlatGroove = styled(Cutout)`
+const StyledFlatGroove = styled(StyledCutout)`
   ${sharedGrooveStyles()}
 
   border-left-color: ${({ theme }) => theme.flatLight};
