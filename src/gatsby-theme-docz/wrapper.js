@@ -11,43 +11,36 @@ const ThemedComponent = ({ children }) => {
   temporary solution, for some reason when importing theme from the src/ folder docz doesn't work :(
 */
 const defaultTheme = {
-  canvas: '#ffffff',
-  material: '#ced0cf',
-  materialDark: '#9a9e9c',
-
-  borderDarkest: '#050608',
-  borderLightest: '#ffffff',
-  borderDark: '#888c8f',
-  checkmarkDisabled: '#888c8f',
-  borderLight: '#dfe0e3',
-
-  headerMaterialDark: '#000080',
-  headerMaterialLight: '#000080',
-  headerText: '#ffffff',
-  headerNotActive: '#7f7f7f',
-
-  text: '#050608',
-  textInvert: '#ffffff',
-  textDisabled: '#888c8f',
-  textDisabledShadow: '#ffffff',
-
-  inputText: '#050608',
-  inputTextInvert: '#ffffff',
-  inputTextDisabled: '#888c8f',
-  inputTextDisabledShadow: '#ffffff',
-
-  tooltip: '#fefbcc',
-
+  name: 'original',
   anchor: '#1034a6',
   anchorVisited: '#440381',
-
-  hoverBackground: '#000080',
-  checkmark: '#050608',
-
-  progress: '#000080',
-
+  borderDark: '#848584',
+  borderDarkest: '#0a0a0a',
+  borderLight: '#dfdfdf',
+  borderLightest: '#fefefe',
+  canvas: '#ffffff',
+  canvasText: '#0a0a0a',
+  canvasTextDisabled: '#848584',
+  canvasTextDisabledShadow: '#fefefe',
+  canvasTextInvert: '#fefefe',
+  checkmark: '#0a0a0a',
+  checkmarkDisabled: '#848584',
+  flatDark: '#9e9e9e',
   flatLight: '#d8d8d8',
-  flatDark: '#9e9e9e'
+  focusSecondary: '#fefe03',
+  headerBackground: '#060084',
+  headerNotActiveBackground: '#7f787f',
+  headerNotActiveText: '#c6c6c6',
+  headerText: '#fefefe',
+  hoverBackground: '#060084',
+  material: '#c6c6c6',
+  materialDark: '#9a9e9c',
+  materialText: '#0a0a0a',
+  materialTextDisabled: '#848584',
+  materialTextDisabledShadow: '#fefefe',
+  materialTextInvert: '#fefefe',
+  progress: '#060084',
+  tooltip: '#fefbcc'
 };
 
 ThemedComponent.propTypes = {
