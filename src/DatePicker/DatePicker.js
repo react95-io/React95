@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import propTypes from 'prop-types';
 
 import styled from 'styled-components';
@@ -58,161 +58,129 @@ function dayIndex(year, month, day) {
   return new Date(year, month, day).getDay();
 }
 
-class DatePicker extends Component {
-  static propTypes = {
-    className: propTypes.string,
-    shadow: propTypes.bool,
-    onAccept: propTypes.func,
-    onCancel: propTypes.func,
-    date: propTypes.instanceOf(Date)
-  };
+const months = [
+  { value: 0, label: 'January' },
+  { value: 1, label: 'February' },
+  { value: 2, label: 'March' },
+  { value: 3, label: 'April' },
+  { value: 4, label: 'May' },
+  { value: 5, label: 'June' },
+  { value: 6, label: 'July' },
+  { value: 7, label: 'August' },
+  { value: 8, label: 'September' },
+  { value: 9, label: 'October' },
+  { value: 10, label: 'November' },
+  { value: 11, label: 'December' }
+];
 
-  static defaultProps = {
-    shadow: true,
-    className: '',
-    onAccept: null,
-    onCancel: null,
-    date: null
-  };
+const DatePicker = props => {
+  const { className, shadow, onAccept, onCancel, date } = props;
 
-  constructor(props) {
-    super(props);
+  const initialDate = date || new Date();
 
-    const initialDate = this.convertDateToState(props.date || new Date());
-    this.state = initialDate;
-  }
+  const [day, setDay] = useState(initialDate.getDate());
+  const [month, setMonth] = useState(initialDate.getMonth());
+  const [year, setYear] = useState(initialDate.getFullYear());
 
-  convertDateToState = date => {
-    const day = date.getDate();
-    const month = date.getMonth();
-    const year = date.getFullYear();
+  // eslint-disable-next-line
+  const dayPickerItems = Array.apply(null, { length: 35 });
+  const firstDayIndex = dayIndex(year, month, 1);
 
-    return { day, month, year };
-  };
+  const daysNumber = daysInMonth(year, month);
 
-  handleMonthSelect = e => this.setState({ month: e.target.value });
+  dayPickerItems.forEach((_, i) => {
+    if (i >= firstDayIndex && i < daysNumber + firstDayIndex) {
+      const dayNumber = i - firstDayIndex + 1;
 
-  handleYearSelect = year => this.setState({ year });
+      dayPickerItems[i] = (
+        <DateItem key={i} onClick={() => setDay(dayNumber)}>
+          <DateItemContent active={dayNumber === day}>
+            {dayNumber}
+          </DateItemContent>
+        </DateItem>
+      );
+    } else {
+      dayPickerItems[i] = <DateItem key={i} />;
+    }
+  });
 
-  handleDaySelect = day => this.setState({ day });
-
-  handleAccept = () => {
-    const { year, month, day } = this.state;
-    const { onAccept } = this.props;
-    const date = new Date(year, month, day);
-
-    onAccept(date);
-  };
-
-  render() {
-    let { day } = this.state;
-    const { month, year } = this.state;
-    const { shadow, className, onAccept, onCancel } = this.props;
-
-    const months = [
-      { value: 0, label: 'January' },
-      { value: 1, label: 'February' },
-      { value: 2, label: 'March' },
-      { value: 3, label: 'April' },
-      { value: 4, label: 'May' },
-      { value: 5, label: 'June' },
-      { value: 6, label: 'July' },
-      { value: 7, label: 'August' },
-      { value: 8, label: 'September' },
-      { value: 9, label: 'October' },
-      { value: 10, label: 'November' },
-      { value: 11, label: 'December' }
-    ];
-
-    // eslint-disable-next-line
-    const dayPickerItems = Array.apply(null, { length: 35 });
-    const firstDayIndex = dayIndex(year, month, 1);
-
-    const daysNumber = daysInMonth(year, month);
-    day = day < daysNumber ? day : daysNumber;
-    dayPickerItems.forEach((item, i) => {
-      if (i >= firstDayIndex && i < daysNumber + firstDayIndex) {
-        const dayNumber = i - firstDayIndex + 1;
-
-        dayPickerItems[i] = (
-          <DateItem
-            // eslint-disable-next-line
-            key={i}
-            onClick={() => {
-              this.handleDaySelect(dayNumber);
-            }}
-          >
-            <DateItemContent active={dayNumber === day}>
-              {dayNumber}
-            </DateItemContent>
-          </DateItem>
-        );
-      } else {
-        dayPickerItems[i] = (
-          <DateItem
-            // eslint-disable-next-line
-            key={i}
+  return (
+    <Window style={{ margin: 20 }} className={className} shadow={shadow}>
+      <WindowHeader>
+        <span role='img' aria-label='📆'>
+          📆
+        </span>
+        Date
+      </WindowHeader>
+      <WindowContent>
+        <Toolbar noPadding style={{ justifyContent: 'space-between' }}>
+          <Select
+            options={months}
+            value={month}
+            onChange={e => setMonth(e.target.value)}
+            width={128}
+            menuMaxHeight={200}
           />
-        );
-      }
-    });
+          <NumberField
+            value={year}
+            disableKeyboardInput
+            onChange={y => setYear(parseInt(y, 10))}
+            width={100}
+          />
+        </Toolbar>
+        <Calendar>
+          <WeekDays>
+            <DateItem>S</DateItem>
+            <DateItem>M</DateItem>
+            <DateItem>T</DateItem>
+            <DateItem>W</DateItem>
+            <DateItem>T</DateItem>
+            <DateItem>F</DateItem>
+            <DateItem>S</DateItem>
+          </WeekDays>
+          <Dates>{dayPickerItems}</Dates>
+        </Calendar>
+        <Toolbar noPadding style={{ justifyContent: 'space-between' }}>
+          <Button
+            data-testid='cancel'
+            fullWidth
+            onClick={() => {
+              onCancel();
+            }}
+            disabled={!onCancel}
+          >
+            Cancel
+          </Button>
+          <Button
+            data-testid='ok'
+            fullWidth
+            onClick={() => {
+              onAccept(new Date(year, month, day));
+            }}
+            disabled={!onAccept}
+          >
+            OK
+          </Button>
+        </Toolbar>
+      </WindowContent>
+    </Window>
+  );
+};
 
-    return (
-      <Window style={{ margin: 20 }} className={className} shadow={shadow}>
-        <WindowHeader>
-          <span role='img' aria-label='📆'>
-            📆
-          </span>
-          Date
-        </WindowHeader>
-        <WindowContent>
-          <Toolbar noPadding style={{ justifyContent: 'space-between' }}>
-            <Select
-              options={months}
-              value={month}
-              onChange={this.handleMonthSelect}
-              width={128}
-              menuMaxHeight={200}
-            />
-            <NumberField
-              value={year}
-              disableKeyboardInput
-              onChange={this.handleYearSelect}
-              width={100}
-            />
-          </Toolbar>
-          <Calendar>
-            <WeekDays>
-              <DateItem>S</DateItem>
-              <DateItem>M</DateItem>
-              <DateItem>T</DateItem>
-              <DateItem>W</DateItem>
-              <DateItem>T</DateItem>
-              <DateItem>F</DateItem>
-              <DateItem>S</DateItem>
-            </WeekDays>
-            <Dates>{dayPickerItems}</Dates>
-          </Calendar>
-          <Toolbar noPadding style={{ justifyContent: 'space-between' }}>
-            <Button
-              fullWidth
-              onClick={onCancel || undefined}
-              disabled={!onCancel}
-            >
-              Cancel
-            </Button>
-            <Button
-              fullWidth
-              onClick={onAccept ? this.handleAccept : undefined}
-              disabled={!onAccept}
-            >
-              OK
-            </Button>
-          </Toolbar>
-        </WindowContent>
-      </Window>
-    );
-  }
-}
+DatePicker.defaultProps = {
+  shadow: true,
+  className: '',
+  onAccept: null,
+  onCancel: null,
+  date: null
+};
+
+DatePicker.propTypes = {
+  className: propTypes.string,
+  shadow: propTypes.bool,
+  onAccept: propTypes.func,
+  onCancel: propTypes.func,
+  date: propTypes.instanceOf(Date)
+};
 
 export default DatePicker;
