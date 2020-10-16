@@ -31,16 +31,16 @@ describe('<Bar />', () => {
   describe('prop: size', () => {
     it('should set proper size', () => {
       const { container } = renderWithTheme(<Bar size='85%' />);
-      const avatarEl = container.firstChild;
+      const barEl = container.firstChild;
 
-      expect(avatarEl).toHaveStyleRule('height', '85%');
+      expect(barEl).toHaveStyleRule('height', '85%');
     });
 
     it('when passed a number, sets size in px', () => {
       const { container } = renderWithTheme(<Bar size={25} />);
-      const avatarEl = container.firstChild;
+      const barEl = container.firstChild;
 
-      expect(avatarEl).toHaveStyleRule('height', '25px');
+      expect(barEl).toHaveStyleRule('height', '25px');
     });
   });
 });
