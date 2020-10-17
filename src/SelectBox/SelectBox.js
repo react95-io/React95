@@ -12,8 +12,7 @@ const SelectBox = React.forwardRef(function SelectBox(props) {
   const selectedListItemRef = useRef(null);
   const listRef = useRef(null);
 
-  const handleKeyDown = event => {
-    const { key } = event;
+  const handleKeyDown = ({ key }) => {
     switch (key) {
       case 'ArrowDown':
         if (value < options.length - 1) onSelect(value + 1);
@@ -40,16 +39,16 @@ const SelectBox = React.forwardRef(function SelectBox(props) {
         ref={listRef}
         onKeyDown={handleKeyDown}
       >
-        {options.map(o => (
-          <StyledOptionsListItem key={o.value.toString()}>
+        {options.map(option => (
+          <StyledOptionsListItem key={option.value.toString()}>
             <StyledOptionsListItemInnerButton
-              onClick={() => onSelect(o.value)}
+              onClick={() => onSelect(option.value)}
               type='button'
-              autoFocus={o.value === value}
-              isSelected={o.value === value}
-              ref={o.value === value ? selectedListItemRef : null}
+              autoFocus={option.value === value}
+              isSelected={option.value === value}
+              ref={option.value === value ? selectedListItemRef : null}
             >
-              {o.label}
+              {option.label}
             </StyledOptionsListItemInnerButton>
           </StyledOptionsListItem>
         ))}
