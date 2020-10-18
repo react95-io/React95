@@ -18,25 +18,28 @@ export const createBoxStyles = () => css`
 // TODO for flat box styles add checkered background when disabled (not solid color)
 export const createHatchedBackground = ({
   mainColor = 'black',
-  secondaryColor = 'transparent'
+  secondaryColor = 'transparent',
+  pixelSize = 2
 }) => css`
-  background-image: linear-gradient(
+  background-image: ${[
+    `linear-gradient(
       45deg,
       ${mainColor} 25%,
       transparent 25%,
       transparent 75%,
       ${mainColor} 75%
-    ),
-    linear-gradient(
+    )`,
+    `linear-gradient(
       45deg,
       ${mainColor} 25%,
       transparent 25%,
       transparent 75%,
       ${mainColor} 75%
-    );
+    )`
+  ].join(',')};
   background-color: ${secondaryColor};
-  background-size: 4px 4px;
-  background-position: 0 0, 2px 2px;
+  background-size: ${`${pixelSize * 2}px ${pixelSize * 2}px`};
+  background-position: 0 0, ${`${pixelSize}px ${pixelSize}px`};
 `;
 export const createFlatBoxStyles = () => css`
   position: relative;
