@@ -8,33 +8,26 @@ export const StyledOptionsList = styled.ul`
   box-sizing: border-box;
   background-color: #fff;
   font-size: 1rem;
-  border-style: solid;
-  border-width: 2px;
-  border-left-color: ${({ theme }) => theme.borderDark};
-  border-top-color: ${({ theme }) => theme.borderDark};
-  border-right-color: ${({ theme }) => theme.borderLightest};
-  border-bottom-color: ${({ theme }) => theme.borderLightest};
   line-height: 1.5;
   overflow-y: auto;
   ${({ variant }) => createScrollbars(variant)}
+  outline: none;
 `;
 
 export const StyledOptionsListItem = styled.li`
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   height: ${blockSizes.md};
-`;
-
-export const StyledOptionsListItemInnerButton = styled.button`
-  outline: 0;
-  border: none;
-  width: 100%;
-  height: 100%;
-  text-align: left;
-  font-size: 1rem;
+  line-height: calc(${blockSizes.md} - 4px);
   background: ${({ theme, isSelected }) =>
     isSelected ? theme.hoverBackground : 'none'};
   color: ${({ theme, isSelected }) =>
     isSelected ? theme.canvasTextInvert : '#000'};
-  outline: 0;
+  width: 100%;
+  padding-left: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  user-select: none;
 `;

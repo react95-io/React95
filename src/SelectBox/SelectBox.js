@@ -1,10 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import propTypes from 'prop-types';
-import {
-  StyledOptionsList,
-  StyledOptionsListItemInnerButton,
-  StyledOptionsListItem
-} from './SelectBox.styles';
+import { StyledOptionsList, StyledOptionsListItem } from './SelectBox.styles';
 import { StyledCutout } from '../Cutout/Cutout';
 
 const SelectBox = React.forwardRef(function SelectBox(props) {
@@ -12,13 +8,37 @@ const SelectBox = React.forwardRef(function SelectBox(props) {
   const selectedListItemRef = useRef(null);
   const listRef = useRef(null);
 
-  const handleKeyDown = ({ key }) => {
-    switch (key) {
+  const handleKeyDown = event => {
+    switch (event.key) {
       case 'ArrowDown':
-        if (value < options.length - 1) onSelect(value + 1);
+        if (value < options.length - 1) {
+          event.preventDefault();
+          onSelect(value + 1);
+          listRef.current.childNodes[value + 1].scrollIntoView({
+            block: 'end'
+          });
+        }
         break;
       case 'ArrowUp':
-        if (value > 0) onSelect(value - 1);
+        if (value > 0) {
+          event.preventDefault();
+          onSelect(value - 1);
+          listRef.current.childNodes[value - 1].scrollIntoView({
+            block: 'nearest'
+          });
+        }
+        break;
+      case 'Home':
+        onSelect(0);
+        listRef.current.childNodes[0].scrollIntoView({
+          block: 'start'
+        });
+        break;
+      case 'End':
+        onSelect(options.length - 1);
+        listRef.current.childNodes[options.length - 1].scrollIntoView({
+          block: 'end'
+        });
         break;
       default:
         break;
@@ -27,10 +47,16 @@ const SelectBox = React.forwardRef(function SelectBox(props) {
 
   useEffect(() => {
     selectedListItemRef.current.scrollIntoView({
-      behavior: 'smooth',
       block: 'start'
     });
   }, [selectedListItemRef]);
+
+  const handleClickOnItem = itemValue => {
+    onSelect(itemValue);
+    listRef.current.childNodes[itemValue].scrollIntoView({
+      block: 'nearest'
+    });
+  };
 
   return (
     <StyledCutout>
@@ -38,18 +64,17 @@ const SelectBox = React.forwardRef(function SelectBox(props) {
         style={{ width, height }}
         ref={listRef}
         onKeyDown={handleKeyDown}
+        tabIndex={-1}
       >
         {options.map(option => (
-          <StyledOptionsListItem key={option.value.toString()}>
-            <StyledOptionsListItemInnerButton
-              onClick={() => onSelect(option.value)}
-              type='button'
-              autoFocus={option.value === value}
-              isSelected={option.value === value}
-              ref={option.value === value ? selectedListItemRef : null}
-            >
-              {option.label}
-            </StyledOptionsListItemInnerButton>
+          <StyledOptionsListItem
+            key={option.value.toString()}
+            onClick={() => handleClickOnItem(option.value)}
+            type='button'
+            isSelected={option.value === value}
+            ref={option.value === value ? selectedListItemRef : null}
+          >
+            {option.label}
           </StyledOptionsListItem>
         ))}
       </StyledOptionsList>
