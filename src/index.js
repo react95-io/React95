@@ -10,6 +10,7 @@ export { default as Bar } from './Bar/Bar';
 export { default as Button } from './Button/Button';
 export { default as Checkbox } from './Checkbox/Checkbox';
 export { default as ColorInput } from './ColorInput/ColorInput';
+export { default as Counter } from './Counter/Counter';
 export { default as Cutout } from './Cutout/Cutout';
 export { default as Desktop } from './Desktop/Desktop';
 export { default as Divider } from './Divider/Divider';
