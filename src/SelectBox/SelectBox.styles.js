@@ -18,7 +18,7 @@ export const StyledOptionsListItem = styled.li`
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  height: ${blockSizes.md};
+  height: 31px;
   line-height: calc(${blockSizes.md} - 4px);
   background: ${({ theme, isSelected }) =>
     isSelected ? theme.hoverBackground : 'none'};

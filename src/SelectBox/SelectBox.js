@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import { StyledOptionsList, StyledOptionsListItem } from './SelectBox.styles';
 import { StyledCutout } from '../Cutout/Cutout';
 
-const SelectBox = React.forwardRef(function SelectBox(props) {
+const SelectBox = React.forwardRef(function SelectBox(props, ref) {
   const { options, value, onSelect, width, height } = props;
   const selectedListItemRef = useRef(null);
   const listRef = useRef(null);
@@ -59,7 +59,7 @@ const SelectBox = React.forwardRef(function SelectBox(props) {
   };
 
   return (
-    <StyledCutout>
+    <StyledCutout ref={ref}>
       <StyledOptionsList
         style={{ width, height }}
         ref={listRef}
@@ -93,7 +93,7 @@ SelectBox.defaultProps = {
 SelectBox.propTypes = {
   onSelect: propTypes.func,
   options: propTypes.arrayOf(
-    propTypes.objectOf({ value: propTypes.number, label: propTypes.string })
+    propTypes.shape({ value: propTypes.number, label: propTypes.string })
   ),
   value: propTypes.number,
   width: propTypes.string,
