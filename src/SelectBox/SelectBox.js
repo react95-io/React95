@@ -49,6 +49,7 @@ const SelectBox = React.forwardRef(function SelectBox(props, ref) {
     selectedListItemRef.current.scrollIntoView({
       block: 'start'
     });
+    listRef.current.focus();
   }, [selectedListItemRef]);
 
   const handleClickOnItem = itemValue => {
