@@ -14,8 +14,7 @@ const CounterWrapper = styled.div`
 const pixelSizes = {
   sm: 1,
   md: 2,
-  lg: 3,
-  xl: 4
+  lg: 3
 };
 
 const Counter = React.forwardRef(function Counter(props, ref) {
