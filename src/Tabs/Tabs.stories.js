@@ -9,7 +9,8 @@ import {
   WindowContent,
   Fieldset,
   NumberField,
-  Checkbox
+  Checkbox,
+  Anchor
 } from 'react95';
 
 export default {
@@ -39,12 +40,7 @@ export const Default = () => {
   const { activeTab } = state;
   return (
     <Window style={{ width: 350 }}>
-      <WindowHeader>
-        <span role='img' aria-label='dress'>
-          👗
-        </span>
-        store.exe
-      </WindowHeader>
+      <WindowHeader>store.exe</WindowHeader>
       <WindowContent>
         <Tabs value={activeTab} onChange={handleChange}>
           <Tab value={0}>Shoes</Tab>
@@ -86,4 +82,50 @@ export const Default = () => {
 
 Default.story = {
   name: 'default'
+};
+
+export const MultiRow = () => {
+  const [state, setState] = useState({
+    activeTab: 'Shoes'
+  });
+
+  const handleChange = (e, value) => setState({ activeTab: value });
+
+  const { activeTab } = state;
+  return (
+    <Window style={{ width: 450 }}>
+      <WindowHeader>store.exe</WindowHeader>
+      <WindowContent>
+        <Tabs rows={2} value={activeTab} onChange={handleChange}>
+          <Tab value='Shoes'>Shoes</Tab>
+          <Tab value='Accesories'>Accesories</Tab>
+          <Tab value='Clothing'>Clothing</Tab>
+          <Tab value='Cars'>Cars</Tab>
+          <Tab value='Electronics'>Electronics</Tab>
+          <Tab value='Art'>Art</Tab>
+          <Tab value='Perfumes'>Perfumes</Tab>
+          <Tab value='Games'>Games</Tab>
+          <Tab value='Food'>Food</Tab>
+        </Tabs>
+        <TabBody style={{ height: 300 }}>
+          <p>
+            Currently active tab: <mark>{activeTab}</mark>
+          </p>
+          <br />
+          <p>
+            Keep in mind that multi row tabs are{' '}
+            <Anchor href='http://hallofshame.gp.co.at/tabs.htm' target='_blank'>
+              REALLY bad UX
+            </Anchor>
+            . We&apos;ve added them just because it was a thing back in the day,
+            but there are better ways to handle navigation with many options.
+          </p>
+        </TabBody>
+      </WindowContent>
+    </Window>
+  );
+};
+
+MultiRow.story = {
+  name: 'multi row'
 };

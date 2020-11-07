@@ -40,20 +40,21 @@ const StyledTab = styled.button`
     `
     z-index: 1;
     height: calc(${blockSizes.md} + 4px);
-    top: -3px;
+    top: -4px;
     margin-bottom: -6px;
     padding: 0 16px;
     margin-left: -8px;
-    margin-right: -8px;
+    &:not(:last-child) {
+      margin-right: -8px;
+    }
   `}
   &:before {
     content: '';
     position: absolute;
     width: calc(100% - 4px);
     height: 6px;
-
     background: ${({ theme }) => theme.material};
-    bottom: -3px;
+    bottom: -4px;
     left: 2px;
   }
 `;
