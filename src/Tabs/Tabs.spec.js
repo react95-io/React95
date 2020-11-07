@@ -64,4 +64,55 @@ describe('<Tabs />', () => {
       expect(handleChange.mock.calls[0][1]).toBe(1);
     });
   });
+
+  describe('prop: rows', () => {
+    it('should render specified number of rows', () => {
+      const tabs = (
+        <Tabs value={1} rows={4}>
+          {/* row 1 */}
+          <Tab value={0} />
+          <Tab value={1} />
+          <Tab value={3} />
+
+          {/* row 2 */}
+          <Tab value={4} />
+          <Tab value={5} />
+
+          {/* row 3  */}
+          <Tab value={6} />
+          <Tab value={7} />
+
+          {/* row 4 */}
+          <Tab value={8} />
+          <Tab value={9} />
+        </Tabs>
+      );
+      const { getAllByTestId } = renderWithTheme(tabs);
+      const rowElements = getAllByTestId('tab-row');
+      expect(rowElements.length).toBe(4);
+    });
+
+    it('row containing currently selected tab should be at the bottom (last row)', () => {
+      const tabs = (
+        <Tabs value={4} rows={3}>
+          <Tab value={0} />
+          <Tab value={1} />
+          <Tab value={3} />
+
+          <Tab value={4} />
+          <Tab value={5} />
+          <Tab value={6} />
+
+          <Tab value={7} />
+          <Tab value={8} />
+          <Tab value={9} />
+        </Tabs>
+      );
+      const { container, getAllByTestId } = renderWithTheme(tabs);
+      const rowElements = getAllByTestId('tab-row');
+      const selectedTab = container.querySelector('[aria-selected=true]');
+
+      expect(rowElements.pop().contains(selectedTab)).toBe(true);
+    });
+  });
 });
