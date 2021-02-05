@@ -8,7 +8,7 @@ export default {
   anchorVisited: 'rgb(47, 138, 202)',
   borderDark: 'rgb(27, 33, 39)',
   borderDarkest: 'rgb(7, 9, 10)',
-  borderLight: 'rgb(69 82 94)',
+  borderLight: 'rgb(69, 82, 94)',
   borderLightest: 'rgb(107, 113, 122)',
   canvas: 'rgb(23, 27, 31)',
   canvasText: 'rgb(245, 247, 250)',
