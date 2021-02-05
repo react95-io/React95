@@ -37,9 +37,4 @@ const theme = {
   WindowText: 'rgb(0, 0, 0)'
 };
 
-export default mapFromWindowsTheme('peggysPastels', theme, false);
-export const peggysPastelsG = mapFromWindowsTheme(
-  'peggysPastelsG',
-  theme,
-  true
-);
+export default mapFromWindowsTheme('peggysPastels', theme, true);
