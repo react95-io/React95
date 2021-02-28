@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-
+import Draggable from 'react-draggable';
 import styled, { css } from 'styled-components';
 import { createBorderStyles, createBoxStyles } from '../common';
 
@@ -40,18 +40,33 @@ const ResizeHandle = styled.span`
 `;
 
 const Window = React.forwardRef(function Window(props, ref) {
-  const { resizable, children, ...otherProps } = props;
+  const { resizable, children, draggable, ...otherProps } = props;
 
   return (
-    <StyledWindow ref={ref} {...otherProps}>
-      {children}
-      {resizable && <ResizeHandle data-testid='resizeHandle' />}
-    </StyledWindow>
+    <>
+      {draggable ? (
+        <Draggable
+          defaultPosition={{ ...otherProps }.defaultPosition}
+          bounds='parent'
+        >
+          <StyledWindow ref={ref} {...otherProps}>
+            {children}
+            {resizable && <ResizeHandle data-testid='resizeHandle' />}
+          </StyledWindow>
+        </Draggable>
+      ) : (
+        <StyledWindow ref={ref} {...otherProps}>
+          {children}
+          {resizable && <ResizeHandle data-testid='resizeHandle' />}
+        </StyledWindow>
+      )}
+    </>
   );
 });
 
 Window.defaultProps = {
   resizable: false,
+  draggable: false,
   shadow: true,
   children: null
 };
@@ -59,6 +74,7 @@ Window.defaultProps = {
 Window.propTypes = {
   shadow: propTypes.bool,
   resizable: propTypes.bool,
+  draggable: propTypes.bool,
   children: propTypes.node
 };
 
