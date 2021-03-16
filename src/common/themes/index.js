@@ -10,10 +10,13 @@ import cherry from './cherry';
 import coldGray from './coldGray';
 import counterStrike from './counterStrike';
 import darkTeal from './darkTeal';
+import denim from './denim';
 import eggplant from './eggplant';
 import fxDev from './fxDev';
 import highContrast from './highContrast';
+import honey from './honey';
 import hotChocolate from './hotChocolate';
+import hotdogStand from './hotdogStand';
 import lilac from './lilac';
 import lilacRoseDark from './lilacRoseDark';
 import maple from './maple';
@@ -35,6 +38,7 @@ import raspberry from './raspberry';
 import redWine from './redWine';
 import rose from './rose';
 import seawater from './seawater';
+import shelbiTeal from './shelbiTeal';
 import slate from './slate';
 import solarizedDark from './solarizedDark';
 import solarizedLight from './solarizedLight';
@@ -42,12 +46,16 @@ import spruce from './spruce';
 import stormClouds from './stormClouds';
 import theSixtiesUSA from './theSixtiesUSA';
 import tokyoDark from './tokyoDark';
+import toner from './toner';
 import tooSexy from './tooSexy';
 import travel from './travel';
 import vaporTeal from './vaporTeal';
 import vermillion from './vermillion';
 import violetDark from './violetDark';
+import vistaesqueMidnight from './vistaesqueMidnight';
 import water from './water';
+import white from './white';
+import windows1 from './windows1';
 import wmii from './wmii';
 
 export default {
@@ -63,10 +71,13 @@ export default {
   coldGray,
   counterStrike,
   darkTeal,
+  denim,
   eggplant,
   fxDev,
   highContrast,
+  honey,
   hotChocolate,
+  hotdogStand,
   lilac,
   lilacRoseDark,
   maple,
@@ -88,6 +99,7 @@ export default {
   redWine,
   rose,
   seawater,
+  shelbiTeal,
   slate,
   solarizedDark,
   solarizedLight,
@@ -95,11 +107,15 @@ export default {
   stormClouds,
   theSixtiesUSA,
   tokyoDark,
+  toner,
   tooSexy,
   travel,
   vaporTeal,
   vermillion,
   violetDark,
+  vistaesqueMidnight,
   water,
+  white,
+  windows1,
   wmii
 };
