@@ -125,7 +125,7 @@ class DatePicker extends Component {
     ];
 
     // eslint-disable-next-line
-    const dayPickerItems = Array.apply(null, { length: 35 });
+    const dayPickerItems = Array.apply(null, { length: 42 });
     const firstDayIndex = dayIndex(year, month, 1);
 
     const daysNumber = daysInMonth(year, month);
