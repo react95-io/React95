@@ -12,6 +12,7 @@ export { default as Checkbox } from './Checkbox/Checkbox';
 export { default as ColorInput } from './ColorInput/ColorInput';
 export { default as Counter } from './Counter/Counter';
 export { default as Cutout } from './Cutout/Cutout';
+export { default as DatePicker } from './DatePicker/DatePicker';
 export { default as Desktop } from './Desktop/Desktop';
 export { default as Divider } from './Divider/Divider';
 export { default as Fieldset } from './Fieldset/Fieldset';
