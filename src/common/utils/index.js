@@ -67,6 +67,7 @@ export function mapFromWindowsTheme(name, windowsTheme, useGradients) {
     canvasTextInvert: HilightText,
     checkmark: WindowText,
     checkmarkDisabled: GrayText,
+    desktopBackground: Background,
     flatDark: ButtonShadow,
     flatLight: ButtonLight,
     focusSecondary: ButtonHilight, // should be Hilight inverted
