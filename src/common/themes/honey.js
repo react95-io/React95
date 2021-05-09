@@ -17,6 +17,7 @@ export default {
   canvasTextInvert: 'rgb(255, 255, 0)',
   checkmark: 'rgb(0, 0, 0)',
   checkmarkDisabled: 'rgb(170, 123, 0)',
+  desktopBackground: 'rgb(170, 123, 0)',
   flatDark: 'rgb(170, 123, 0)',
   flatLight: 'rgb(255, 186, 0)',
   focusSecondary: 'rgb(255, 220, 128)',

@@ -1,4 +1,4 @@
-/* "Seawater" by tPenguinLTG
+/* "FxDev" by tPenguinLTG
  * https://www.deviantart.com/tpenguinltg/art/FxDev-701274128
  */
 
@@ -17,6 +17,7 @@ export default {
   canvasTextInvert: 'rgb(255, 255, 255)',
   checkmark: 'rgb(245, 247, 250)',
   checkmarkDisabled: 'rgb(133, 136, 140)',
+  desktopBackground: 'rgb(26, 58, 99)',
   flatDark: 'rgb(27, 33, 39)',
   flatLight: 'rgb(57, 66, 77)',
   focusSecondary: 'rgb(107, 113, 122)',
