@@ -106,13 +106,16 @@ export const focusOutline = () => css`
   outline: 2px dotted ${({ theme }) => theme.materialText};
 `;
 
+const nodeBtoa = b => Buffer.from(b).toString('base64');
+const base64encode = typeof btoa !== 'undefined' ? btoa : nodeBtoa;
+
 const createTriangleSVG = (color, angle = 0) => {
   const svg = `<svg height="26" width="26" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <g transform="rotate(${angle} 13 13)">
       <polygon fill="${color}" points="6,10 20,10 13,17"/>
     </g>
   </svg>`;
-  const encoded = window.btoa(svg);
+  const encoded = base64encode(svg);
   return `url(data:image/svg+xml;base64,${encoded})`;
 };
 
