@@ -23,7 +23,7 @@ export default {
 export const Default = () => (
   <>
     <List>
-      <ListItem>Photos</ListItem>
+      <ListItem primary>Photos</ListItem>
       <ListItem as='a' href='https://expensive.toys' target='_blank'>
         Link
       </ListItem>
@@ -41,7 +41,9 @@ export const Default = () => (
       <ListItem disabled>Razor Leaf</ListItem>
     </List>
     <List>
-      <ListItem size='sm'>View</ListItem>
+      <ListItem primary size='sm'>
+        View
+      </ListItem>
       <Divider />
       <ListItem size='sm'>Paste</ListItem>
       <ListItem size='sm'>Paste Shortcut</ListItem>
