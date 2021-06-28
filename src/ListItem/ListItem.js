@@ -22,7 +22,7 @@ export const StyledListItem = styled.li`
   line-height: ${props => blockSizes[props.size]};
   color: ${({ theme }) => theme.materialText};
   pointer-events: ${({ isDisabled }) => (isDisabled ? 'none' : 'auto')};
-
+  font-weight: ${({ primary }) => (primary ? 'bold' : 'normal')};
   &:hover {
     ${({ theme, isDisabled }) =>
       !isDisabled &&
@@ -44,6 +44,7 @@ const ListItem = React.forwardRef(function ListItem(props, ref) {
     square,
     children,
     onClick,
+    primary,
     ...otherProps
   } = props;
   // let tabIndex;
@@ -57,6 +58,7 @@ const ListItem = React.forwardRef(function ListItem(props, ref) {
       isDisabled={disabled}
       square={square}
       onClick={disabled ? undefined : onClick}
+      primary={primary}
       // tabIndex={tabIndex}
       role='menuitem'
       ref={ref}
@@ -73,8 +75,8 @@ ListItem.defaultProps = {
   size: 'lg',
   square: false,
   onClick: null,
-
-  children: null
+  children: null,
+  primary: false
   // tabIndex: undefined
 };
 
@@ -83,7 +85,8 @@ ListItem.propTypes = {
   disabled: propTypes.bool,
   square: propTypes.bool,
   children: propTypes.node,
-  onClick: propTypes.func
+  onClick: propTypes.func,
+  primary: propTypes.bool
   // tabIndex: propTypes.number
 };
 
