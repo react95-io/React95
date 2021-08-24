@@ -46,7 +46,8 @@ export default [
       copy({
         targets: [
           { src: './src/assets/fonts/dist/*', dest: './dist/fonts' },
-          { src: './src/assets/images/*', dest: './dist/images' }
+          { src: './src/assets/images/*', dest: './dist/images' },
+          { src: './src/common/utils/index.js', dest: './dist/utils' }
         ]
       }),
       replace({
