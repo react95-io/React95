@@ -1,0 +1,73 @@
+---
+name: Chip
+---
+
+import { Playground, Props } from 'docz';
+
+import Chip from './Chip'
+import Window from '../Window/Window'
+import WindowContent from '../WindowContent/WindowContent'
+import Cutout from '../Cutout/Cutout'
+import Toolbar from '../Toolbar/Toolbar'
+
+# Chip
+
+## Usage
+
+#### Default
+
+<Playground>
+  <Chip label='Default' >Default</Chip>
+</Playground>
+
+#### Full Width
+
+<Playground>
+  <Chip label='Default' fullWidth >Full Width</Chip>
+</Playground>
+
+#### Background Color
+
+<Playground>
+  <Chip label='Background Color' backgroundColor='#d4d1ca' >Background</Chip>
+</Playground>
+
+#### Text Color
+
+<Playground>
+  <Chip label='Text Color' color='#1ea7fd' >Text Color</Chip>
+</Playground>
+
+#### Different sizes
+
+<Playground>
+  <div
+    style={{
+      alignItems: 'center',
+      display: 'flex',
+      width: 200,
+      justifyContent: 'space-between'
+    }}
+  >
+    <Chip size='sm'>
+      Small
+    </Chip>
+    <Chip size='md'>
+      Medium
+    </Chip>
+    <Chip size='lg'>
+      Large
+    </Chip>
+  </div>
+</Playground>
+
+## API
+
+### Import
+
+```
+import Chip from './Chip'
+```
+
+### Props
+<Props of={Button} />
