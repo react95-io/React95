@@ -1,23 +1,17 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import { Bar, AppBar, Toolbar, Button } from 'react95';
 
 export default {
   title: 'Bar',
   component: Bar,
-  decorators: [
-    story => (
-      <div
-        style={{
-          padding: '5rem',
-          background: 'teal'
-        }}
-      >
-        {story()}
-      </div>
-    )
-  ]
+  decorators: [story => <Wrapper>{story()}</Wrapper>]
 };
+const Wrapper = styled.div`
+  padding: 5rem;
+  background: ${({ theme }) => theme.desktopBackground};
+`;
 
 export const Default = () => (
   <AppBar>

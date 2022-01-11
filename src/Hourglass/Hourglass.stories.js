@@ -1,23 +1,17 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import { Hourglass } from 'react95';
 
 export default {
   title: 'Hourglass',
   component: Hourglass,
-  decorators: [
-    story => (
-      <div
-        style={{
-          padding: '5rem',
-          background: '#008080'
-        }}
-      >
-        {story()}
-      </div>
-    )
-  ]
+  decorators: [story => <Wrapper>{story()}</Wrapper>]
 };
+const Wrapper = styled.div`
+  padding: 5rem;
+  background: ${({ theme }) => theme.desktopBackground};
+`;
 
 export const Default = () => <Hourglass size={32} />;
 

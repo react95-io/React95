@@ -5,7 +5,7 @@ import { Counter, Panel, Button } from 'react95';
 
 const Wrapper = styled.div`
   padding: 5rem;
-  background: teal;
+  background: ${({ theme }) => theme.desktopBackground};
   .counter-wrapper {
     display: flex;
     margin-top: 1rem;

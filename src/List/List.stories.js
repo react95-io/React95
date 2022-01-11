@@ -5,7 +5,7 @@ import { List, ListItem, Bar, Divider } from 'react95';
 
 const Wrapper = styled.div`
   padding: 5rem;
-  background: teal;
+  background: ${({ theme }) => theme.desktopBackground};
   display: flex;
   align-items: center;
   & > * {

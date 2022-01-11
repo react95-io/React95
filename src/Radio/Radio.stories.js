@@ -13,7 +13,7 @@ import {
 
 const Wrapper = styled.div`
   padding: 5rem;
-  background: teal;
+  background: ${({ theme }) => theme.desktopBackground};
   #cutout {
     background: ${({ theme }) => theme.canvas};
     color: ${({ theme }) => theme.materialText};
