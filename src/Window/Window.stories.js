@@ -17,7 +17,7 @@ export default {
 };
 const Wrapper = styled.div`
   padding: 5rem;
-  background: teal;
+  background: ${({ theme }) => theme.desktopBackground};
   .window-header {
     display: flex;
     align-items: center;

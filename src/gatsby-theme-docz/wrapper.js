@@ -25,6 +25,7 @@ const defaultTheme = {
   canvasTextInvert: '#fefefe',
   checkmark: '#0a0a0a',
   checkmarkDisabled: '#848584',
+  desktopBackground: '#008080',
   flatDark: '#9e9e9e',
   flatLight: '#d8d8d8',
   focusSecondary: '#fefe03',

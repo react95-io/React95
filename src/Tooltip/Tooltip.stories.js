@@ -1,23 +1,17 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import { Tooltip, Button } from 'react95';
 
 export default {
   title: 'Tooltip',
   component: Tooltip,
-  decorators: [
-    story => (
-      <div
-        style={{
-          padding: '5rem',
-          background: '#008080'
-        }}
-      >
-        {story()}
-      </div>
-    )
-  ]
+  decorators: [story => <Wrapper>{story()}</Wrapper>]
 };
+const Wrapper = styled.div`
+  padding: 5rem;
+  background: ${({ theme }) => theme.desktopBackground};
+`;
 
 export const Default = () => (
   <Tooltip text='I see you! 🤷‍' enterDelay={100} leaveDelay={500}>

@@ -1,23 +1,17 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import { Divider, List, ListItem } from 'react95';
 
 export default {
   title: 'Divider',
   component: Divider,
-  decorators: [
-    story => (
-      <div
-        style={{
-          padding: '5rem',
-          background: 'teal'
-        }}
-      >
-        {story()}
-      </div>
-    )
-  ]
+  decorators: [story => <Wrapper>{story()}</Wrapper>]
 };
+const Wrapper = styled.div`
+  padding: 5rem;
+  background: ${({ theme }) => theme.desktopBackground};
+`;
 
 export const Default = () => (
   <>

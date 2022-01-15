@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
 import {
   Tabs,
@@ -17,19 +18,12 @@ export default {
   title: 'Tabs',
   component: Tabs,
   subcomponents: { Tab, TabBody },
-  decorators: [
-    story => (
-      <div
-        style={{
-          padding: '5rem',
-          background: '#008080'
-        }}
-      >
-        {story()}
-      </div>
-    )
-  ]
+  decorators: [story => <Wrapper>{story()}</Wrapper>]
 };
+const Wrapper = styled.div`
+  padding: 5rem;
+  background: ${({ theme }) => theme.desktopBackground};
+`;
 export const Default = () => {
   const [state, setState] = useState({
     activeTab: 0

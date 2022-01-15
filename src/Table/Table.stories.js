@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import {
   Table,
@@ -23,19 +24,12 @@ export default {
     TableHeadCell,
     TableDataCell
   },
-  decorators: [
-    story => (
-      <div
-        style={{
-          padding: '5rem',
-          background: 'teal'
-        }}
-      >
-        {story()}
-      </div>
-    )
-  ]
+  decorators: [story => <Wrapper>{story()}</Wrapper>]
 };
+const Wrapper = styled.div`
+  padding: 5rem;
+  background: ${({ theme }) => theme.desktopBackground};
+`;
 
 export const Default = () => (
   <Window style={{ width: 320 }}>
