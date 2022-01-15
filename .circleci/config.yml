@@ -2,7 +2,7 @@ version: 2
 jobs:
   install:
     docker:
-      - image: 'circleci/node:latest'
+      - image: 'circleci/node:lts'
     working_directory: ~/repo
     steps:
       - checkout
@@ -23,7 +23,7 @@ jobs:
             - node_modules
   test:
     docker:
-      - image: 'circleci/node:latest'
+      - image: 'circleci/node:lts'
     working_directory: ~/repo
     steps:
       - checkout
@@ -34,7 +34,7 @@ jobs:
           command: npm run test:ci
   build-library:
     docker:
-      - image: 'circleci/node:latest'
+      - image: 'circleci/node:lts'
     working_directory: ~/repo
     steps:
       - checkout
@@ -49,7 +49,7 @@ jobs:
             - dist
   build-storybook:
     docker:
-      - image: 'circleci/node:latest'
+      - image: 'circleci/node:lts'
     working_directory: ~/repo
     steps:
       - checkout
@@ -64,7 +64,7 @@ jobs:
             - storybook
   deploy-library:
     docker:
-      - image: 'circleci/node:latest'
+      - image: 'circleci/node:lts'
     working_directory: ~/repo
     steps:
       - checkout
@@ -75,7 +75,7 @@ jobs:
           command: npm run semantic-release || true
   deploy-storybook:
     docker:
-      - image: 'circleci/node:latest'
+      - image: 'circleci/node:lts'
     working_directory: ~/repo
     steps:
       - checkout
@@ -90,21 +90,21 @@ workflows:
     jobs:
       - install
       - test:
-          requires: 
+          requires:
             - install
       - build-library:
-          requires: 
+          requires:
             - install
       - build-storybook:
-          requires: 
+          requires:
             - install
       - deploy-library:
-          requires: 
+          requires:
             - test
             - build-library
             - build-storybook
       - deploy-storybook:
-          requires: 
+          requires:
             - deploy-library
           filters:
             branches:
