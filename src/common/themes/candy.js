@@ -14,7 +14,7 @@ export default {
   canvasTextInvert: '#EFF1F3',
   checkmark: '#000000',
   checkmarkDisabled: '#d1579e',
-  desktopBackground: '#008080',
+  desktopBackground: '#b477bd',
   flatDark: '#9e9e9e',
   flatLight: '#d8d8d8',
   focusSecondary: '#fefe03',
