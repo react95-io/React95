@@ -4,12 +4,25 @@ import styled from 'styled-components';
 
 import { shadow } from '../common';
 
+const positioningStyles = {
+  top: `top: -4px;
+        left: 50%;
+        transform: translate(-50%, -100%);`,
+  bottom: `bottom: -4px;
+           left: 50%;
+           transform: translate(-50%, 100%);`,
+  left: `left: -4px;
+         top: 50%;
+         transform: translate(-100%, -50%);`,
+  right: `right: -4px;
+          top: 50%;
+          transform: translate(100%, -50%);`
+};
+
 const Tip = styled.span`
   position: absolute;
-  bottom: -4px;
-  left: 50%;
+
   z-index: 1;
-  transform: translate(-50%, 100%);
   display: ${props => (props.show ? 'block' : 'none')};
   padding: 4px;
   border: 2px solid ${({ theme }) => theme.borderDarkest};
@@ -17,6 +30,7 @@ const Tip = styled.span`
   box-shadow: ${shadow};
   text-align: center;
   font-size: 1rem;
+  ${props => positioningStyles[props.position]}
 `;
 
 const Wrapper = styled.div`
@@ -152,7 +166,8 @@ Tooltip.defaultProps = {
   onMouseEnter: undefined,
   onMouseLeave: undefined,
   onOpen: undefined,
-  style: {}
+  style: {},
+  position: 'top'
 };
 
 Tooltip.propTypes = {
@@ -169,7 +184,8 @@ Tooltip.propTypes = {
   onMouseLeave: propTypes.func,
   onOpen: propTypes.func,
   style: propTypes.shape({}),
-  text: propTypes.string.isRequired
+  text: propTypes.string.isRequired,
+  position: propTypes.oneOf(['top', 'bottom', 'left', 'right'])
 };
 
 export default Tooltip;
