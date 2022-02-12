@@ -9,6 +9,17 @@
     "components",
     "vaporwave"
   ],
+  "author": "Artur Bień <artur.bien+react95@gmail.com> (https://www.linkedin.com/in/arturbien/)",
+  "funding": [
+    {
+      "type" : "paypal",
+      "url" : "https://www.paypal.me/react95"
+    },
+    {
+      "type" : "patreon",
+      "url" : "https://www.patreon.com/arturbien"
+    }
+  ],
   "license": "MIT",
   "repository": "git@github.com:arturbien/React95.git",
   "homepage": "https://react95.io",
