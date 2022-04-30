@@ -187,7 +187,7 @@ Digit.defaultProps = {
 
 Digit.propTypes = {
   pixelSize: propTypes.number,
-  digit: propTypes.oneOfType(propTypes.number, propTypes.string)
+  digit: propTypes.oneOfType([propTypes.number, propTypes.string])
 };
 
 export default Digit;

@@ -20,10 +20,7 @@ export const StyledLabel = styled.label`
   align-items: center;
   position: relative;
   margin: 8px 0;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  cursor: ${({ isDisabled }) => (!isDisabled ? 'pointer' : 'auto')};
   user-select: none;
   font-size: 1rem;
   color: ${({ theme }) => theme.materialText};
