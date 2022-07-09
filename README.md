@@ -44,12 +44,13 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 import { styleReset, List, ListItem, Divider } from 'react95';
 // pick a theme of your choice
-import original from "react95/dist/themes/original";
+import original from 'react95/dist/themes/original';
 // original Windows95 font (optionally)
-import ms_sans_serif from "react95/dist/fonts/ms_sans_serif.woff2";
-import ms_sans_serif_bold from "react95/dist/fonts/ms_sans_serif_bold.woff2";
+import ms_sans_serif from 'react95/dist/fonts/ms_sans_serif.woff2';
+import ms_sans_serif_bold from 'react95/dist/fonts/ms_sans_serif_bold.woff2';
 
 const GlobalStyles = createGlobalStyle`
+  ${styleReset}
   @font-face {
     font-family: 'ms_sans_serif';
     src: url('${ms_sans_serif}') format('woff2');
@@ -65,7 +66,6 @@ const GlobalStyles = createGlobalStyle`
   body {
     font-family: 'ms_sans_serif';
   }
-  ${styleReset}
 `;
 
 const App = () => (
@@ -94,4 +94,3 @@ Apps built with React95 will be featured on the official React95 [website](https
 Any help from UI / UX designers would be EXTREMELY appreciated. The challenge is to come up with new component designs / layouts that are broadly used in modern UIs, that weren't present back in 95.
 
 If you want to help with the project, feel free to open pull requests and submit issues or component proposals. Let's bring this UI back to life ♥️
-
