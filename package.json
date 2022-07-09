@@ -12,12 +12,12 @@
   "author": "Artur Bień <artur.bien+react95@gmail.com> (https://www.linkedin.com/in/arturbien/)",
   "funding": [
     {
-      "type" : "paypal",
-      "url" : "https://www.paypal.me/react95"
+      "type": "paypal",
+      "url": "https://www.paypal.me/react95"
     },
     {
-      "type" : "patreon",
-      "url" : "https://www.patreon.com/arturbien"
+      "type": "patreon",
+      "url": "https://www.patreon.com/arturbien"
     }
   ],
   "license": "MIT",
@@ -49,9 +49,9 @@
     "docs:build": "docz build"
   },
   "peerDependencies": {
-    "react": "^16.8.2 || ^17.0.0",
-    "react-dom": "^16.8.2 || ^17.0.0",
-    "styled-components": "^5.0.0"
+    "react": ">= 16.8.0",
+    "react-dom": ">= 16.8.0",
+    "styled-components": ">= 5.3.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.0",
