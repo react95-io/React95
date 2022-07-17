@@ -4,8 +4,15 @@ module.exports = {
     '../.storybook/**/*.stories.(js|mdx)'
   ],
   addons: [
-    '@storybook/addon-docs',
-    'storybook-addon-styled-component-theme/dist/register',
-    '@storybook/addon-storysource'
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        sourceLoaderOptions: {
+          injectStoryParameters: false
+        }
+      }
+    },
+    '@storybook/addon-storysource',
+    'storybook-addon-styled-component-theme/dist/register'
   ]
 };
