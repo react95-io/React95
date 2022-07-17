@@ -33,7 +33,7 @@ const List = React.forwardRef(function List(props, ref) {
 
 List.defaultProps = {
   fullWidth: false,
-  shadow: true,
+  shadow: false,
   inline: false,
   children: null
 };

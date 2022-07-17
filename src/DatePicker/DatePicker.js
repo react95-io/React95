@@ -68,7 +68,7 @@ class DatePicker extends Component {
   };
 
   static defaultProps = {
-    shadow: true,
+    shadow: false,
     className: '',
     onAccept: null,
     onCancel: null,

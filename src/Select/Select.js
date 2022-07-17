@@ -474,7 +474,7 @@ Select.defaultProps = {
   options: [],
   readOnly: undefined,
   SelectDisplayProps: {},
-  shadow: true,
+  shadow: false,
   style: {},
   value: undefined,
   variant: 'default',

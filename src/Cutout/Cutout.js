@@ -55,7 +55,7 @@ const Cutout = React.forwardRef(function Cutout(props, ref) {
 
 Cutout.defaultProps = {
   children: null,
-  shadow: true
+  shadow: false
 };
 
 Cutout.propTypes = {

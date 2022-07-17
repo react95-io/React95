@@ -52,7 +52,7 @@ const Window = React.forwardRef(function Window(props, ref) {
 
 Window.defaultProps = {
   resizable: false,
-  shadow: true,
+  shadow: false,
   children: null
 };
 

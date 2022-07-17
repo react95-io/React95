@@ -152,7 +152,7 @@ const Progress = forwardRef(function Progress(props, ref) {
 
 Progress.defaultProps = {
   value: 0,
-  shadow: true,
+  shadow: false,
   variant: 'default',
   hideValue: false
 };

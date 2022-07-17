@@ -102,7 +102,7 @@ TextField.defaultProps = {
   fullWidth: null,
   multiline: false,
   onChange: () => {},
-  shadow: true,
+  shadow: false,
   style: {},
   type: 'text',
   variant: 'default'
