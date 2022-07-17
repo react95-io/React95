@@ -1,4 +1,3 @@
-import { configure, addDecorator } from '@storybook/react';
 import { withThemesProvider } from 'storybook-addon-styled-component-theme';
 import themes from '../src/common/themes';
 import GlobalStyle from './decorators/globalStyle';
@@ -31,5 +30,11 @@ const reorderedThemes = {
   ...otherThemes
 };
 
-addDecorator(GlobalStyle);
-addDecorator(withThemesProvider(Object.values(reorderedThemes)));
+export const decorators = [
+  GlobalStyle,
+  withThemesProvider(Object.values(reorderedThemes))
+];
+
+export const parameters = {
+  layout: 'fullscreen'
+};
