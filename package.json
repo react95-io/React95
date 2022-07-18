@@ -97,7 +97,7 @@
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-node-resolve": "^4.2.4",
     "rollup-plugin-replace": "^2.2.0",
-    "semantic-release": "^17.0.4",
+    "semantic-release": "^19.0.3",
     "storybook-addon-styled-component-theme": "^2.0.0",
     "styled-components": "^5.1.1"
   },
