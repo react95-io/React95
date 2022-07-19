@@ -8,13 +8,13 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-npm-deps-{{ checksum "package-lock.json" }}
-            - v1-npm-deps-
+            - v1-yarn-deps-{{ checksum "yarn.lock" }}
+            - v1-yarn-deps-
       - run:
           name: 'Install dependencies'
-          command: npm ci
+          command: yarn install --ignore-optional --frozen-lockfile
       - save_cache:
-          key: v1-npm-deps-{{ checksum "package-lock.json" }}
+          key: v1-yarn-deps-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
       - persist_to_workspace:
@@ -31,7 +31,7 @@ jobs:
           at: ~/repo
       - run:
           name: 'Tests'
-          command: npm run test:ci
+          command: yarn run test:ci
   build-library:
     docker:
       - image: 'circleci/node:lts'
@@ -42,7 +42,7 @@ jobs:
           at: ~/repo
       - run:
           name: 'Build library'
-          command: npm run build
+          command: yarn run build
       - persist_to_workspace:
           root: ~/repo
           paths:
@@ -57,7 +57,7 @@ jobs:
           at: ~/repo
       - run:
           name: 'Build Storybook'
-          command: npm run build:storybook
+          command: yarn run build:storybook
       - persist_to_workspace:
           root: ~/repo
           paths:
@@ -72,7 +72,7 @@ jobs:
           at: ~/repo
       - run:
           name: 'Deploy via Semantic Release'
-          command: npm run semantic-release || true
+          command: yarn run semantic-release || true
   deploy-storybook:
     docker:
       - image: 'circleci/node:lts'
