@@ -32,8 +32,10 @@ describe('<ColorInput />', () => {
     const color = '#f0f0dd';
     const { getByRole } = renderWithTheme(<ColorInput value={color} />);
     const colorPreview = getByRole('presentation');
-    const displayedColor = window.getComputedStyle(colorPreview, null)
-      .background;
+    const displayedColor = window.getComputedStyle(
+      colorPreview,
+      null
+    ).background;
 
     const displayedColorHex = rgb2hex(displayedColor);
     expect(displayedColorHex).toBe(color);

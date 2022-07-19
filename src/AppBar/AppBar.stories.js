@@ -21,7 +21,7 @@ const Wrapper = styled.div`
   background: ${({ theme }) => theme.desktopBackground};
 `;
 
-export const Default = () => {
+export function Default() {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -76,7 +76,7 @@ export const Default = () => {
       </Toolbar>
     </AppBar>
   );
-};
+}
 
 Default.story = {
   name: 'default'

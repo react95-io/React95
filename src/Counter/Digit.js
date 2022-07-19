@@ -167,7 +167,7 @@ const digitActiveSegments = [
   [1, 1, 1, 1, 1, 0, 1] // 9
 ];
 
-const Digit = ({ digit, pixelSize, ...otherProps }) => {
+function Digit({ digit, pixelSize, ...otherProps }) {
   const segmentClasses = digitActiveSegments[digit].map((isActive, i) =>
     isActive ? `${segments[i]} active` : segments[i]
   );
@@ -178,7 +178,7 @@ const Digit = ({ digit, pixelSize, ...otherProps }) => {
       ))}
     </DigitWrapper>
   );
-};
+}
 
 Digit.defaultProps = {
   pixelSize: 2,

@@ -15,7 +15,7 @@ export default {
   decorators: [story => <Wrapper>{story()}</Wrapper>]
 };
 
-export const Default = () => {
+export function Default() {
   const [percent, setPercent] = useState(0);
 
   useEffect(() => {
@@ -34,13 +34,13 @@ export const Default = () => {
   }, []);
 
   return <Progress value={Math.floor(percent)} />;
-};
+}
 
 Default.story = {
   name: 'default'
 };
 
-export const Tile = () => {
+export function Tile() {
   const [percent, setPercent] = useState(0);
 
   useEffect(() => {
@@ -59,13 +59,13 @@ export const Tile = () => {
   }, []);
 
   return <Progress variant='tile' value={Math.floor(percent)} />;
-};
+}
 
 Tile.story = {
   name: 'tile'
 };
 
-export const HideValue = () => {
+export function HideValue() {
   const [percent, setPercent] = useState(0);
 
   useEffect(() => {
@@ -84,7 +84,7 @@ export const HideValue = () => {
   }, []);
 
   return <Progress hideValue value={Math.floor(percent)} />;
-};
+}
 
 HideValue.story = {
   name: 'hide value'

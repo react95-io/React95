@@ -319,6 +319,8 @@ const treeDataShape = {
 treeDataShape.items = propTypes.arrayOf(propTypes.shape(treeDataShape));
 
 Tree.propTypes = {
+  // TODO: Figure out how to make react/no-unused-prop-types happy with this component
+  /* eslint-disable react/no-unused-prop-types */
   style: propTypes.object,
   className: propTypes.string,
   tree: propTypes.arrayOf(propTypes.shape(treeDataShape)),
@@ -329,6 +331,7 @@ Tree.propTypes = {
   onNodeSelect: propTypes.func,
   onNodeToggle: propTypes.func,
   disabled: propTypes.bool
+  /* eslint-enable react/no-unused-prop-types */
 };
 
 export default Tree;

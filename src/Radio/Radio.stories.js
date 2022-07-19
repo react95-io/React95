@@ -30,7 +30,7 @@ export default {
   decorators: [story => <Wrapper>{story()}</Wrapper>]
 };
 
-export const Default = () => {
+export function Default() {
   const [state, setState] = useState('Pear');
   const handleChange = e => setState(e.target.value);
 
@@ -74,13 +74,13 @@ export const Default = () => {
       </WindowContent>
     </Window>
   );
-};
+}
 
 Default.story = {
   name: 'default'
 };
 
-export const Flat = () => {
+export function Flat() {
   const [state, setState] = useState('Pear');
   const handleChange = e => setState(e.target.value);
 
@@ -135,13 +135,13 @@ export const Flat = () => {
       </WindowContent>
     </Window>
   );
-};
+}
 
 Flat.story = {
   name: 'flat'
 };
 
-export const Menu = () => {
+export function Menu() {
   const [state, setState] = useState({
     tool: 'Brush',
     color: 'Black'
@@ -198,7 +198,7 @@ export const Menu = () => {
       </ListItem>
     </List>
   );
-};
+}
 Menu.story = {
   name: 'menu'
 };

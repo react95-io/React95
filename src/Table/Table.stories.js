@@ -31,51 +31,53 @@ const Wrapper = styled.div`
   background: ${({ theme }) => theme.desktopBackground};
 `;
 
-export const Default = () => (
-  <Window style={{ width: 320 }}>
-    <WindowHeader>Pokedex.exe</WindowHeader>
-    <WindowContent>
-      <Table>
-        <TableHead>
-          <TableRow head>
-            <TableHeadCell>Type</TableHeadCell>
-            <TableHeadCell>Name</TableHeadCell>
-            <TableHeadCell disabled>Level</TableHeadCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          <TableRow>
-            <TableDataCell style={{ textAlign: 'center' }}>
-              <span role='img' aria-label='LEAF'>
-                🌿
-              </span>
-            </TableDataCell>
-            <TableDataCell>Bulbasaur</TableDataCell>
-            <TableDataCell>64</TableDataCell>
-          </TableRow>
-          <TableRow>
-            <TableDataCell style={{ textAlign: 'center' }}>
-              <span role='img' aria-label='fire'>
-                🔥
-              </span>
-            </TableDataCell>
-            <TableDataCell>Charizard</TableDataCell>
-            <TableDataCell>209</TableDataCell>
-          </TableRow>
-          <TableRow>
-            <TableDataCell style={{ textAlign: 'center' }}>
-              <span role='img' aria-label='lightning'>
-                ⚡
-              </span>
-            </TableDataCell>
-            <TableDataCell>Pikachu</TableDataCell>
-            <TableDataCell>82</TableDataCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </WindowContent>
-  </Window>
-);
+export function Default() {
+  return (
+    <Window style={{ width: 320 }}>
+      <WindowHeader>Pokedex.exe</WindowHeader>
+      <WindowContent>
+        <Table>
+          <TableHead>
+            <TableRow head>
+              <TableHeadCell>Type</TableHeadCell>
+              <TableHeadCell>Name</TableHeadCell>
+              <TableHeadCell disabled>Level</TableHeadCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableDataCell style={{ textAlign: 'center' }}>
+                <span role='img' aria-label='LEAF'>
+                  🌿
+                </span>
+              </TableDataCell>
+              <TableDataCell>Bulbasaur</TableDataCell>
+              <TableDataCell>64</TableDataCell>
+            </TableRow>
+            <TableRow>
+              <TableDataCell style={{ textAlign: 'center' }}>
+                <span role='img' aria-label='fire'>
+                  🔥
+                </span>
+              </TableDataCell>
+              <TableDataCell>Charizard</TableDataCell>
+              <TableDataCell>209</TableDataCell>
+            </TableRow>
+            <TableRow>
+              <TableDataCell style={{ textAlign: 'center' }}>
+                <span role='img' aria-label='lightning'>
+                  ⚡
+                </span>
+              </TableDataCell>
+              <TableDataCell>Pikachu</TableDataCell>
+              <TableDataCell>82</TableDataCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </WindowContent>
+    </Window>
+  );
+}
 
 Default.story = {
   name: 'default'

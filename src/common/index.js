@@ -158,8 +158,9 @@ export const createScrollbars = (variant = 'default') => css`
   ::-webkit-scrollbar-button:active,
   ::-webkit-scrollbar-button:active {
     background-position: 0 1px;
-    ${variant === 'default' &&
-      createBorderStyles({ windowBorders: true, invert: true })}
+    ${variant === 'default'
+      ? createBorderStyles({ windowBorders: true, invert: true })
+      : ''}
   }
 
   ::-webkit-scrollbar-button:horizontal:increment:start,

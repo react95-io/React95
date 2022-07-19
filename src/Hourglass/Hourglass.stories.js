@@ -13,7 +13,9 @@ const Wrapper = styled.div`
   background: ${({ theme }) => theme.desktopBackground};
 `;
 
-export const Default = () => <Hourglass size={32} />;
+export function Default() {
+  return <Hourglass size={32} />;
+}
 
 Default.story = {
   name: 'default'

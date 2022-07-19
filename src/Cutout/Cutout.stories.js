@@ -7,27 +7,29 @@ export default {
   component: Cutout
 };
 
-export const Default = () => (
-  <Window>
-    <WindowContent>
-      <Cutout style={{ width: '300px', height: '200px' }}>
-        <div>
-          <p style={{ width: 400 }}>
-            React95 is the best UI library ever created
-          </p>
-          <p>React95 is the best UI library ever created</p>
-          <p>React95 is the best UI library ever created</p>
-          <p>React95 is the best UI library ever created</p>
-          <p>React95 is the best UI library ever created</p>
-          <p>React95 is the best UI library ever created</p>
-          <p>React95 is the best UI library ever created</p>
-          <p>React95 is the best UI library ever created</p>
-          <p>React95 is the best UI library ever created</p>
-        </div>
-      </Cutout>
-    </WindowContent>
-  </Window>
-);
+export function Default() {
+  return (
+    <Window>
+      <WindowContent>
+        <Cutout style={{ width: '300px', height: '200px' }}>
+          <div>
+            <p style={{ width: 400 }}>
+              React95 is the best UI library ever created
+            </p>
+            <p>React95 is the best UI library ever created</p>
+            <p>React95 is the best UI library ever created</p>
+            <p>React95 is the best UI library ever created</p>
+            <p>React95 is the best UI library ever created</p>
+            <p>React95 is the best UI library ever created</p>
+            <p>React95 is the best UI library ever created</p>
+            <p>React95 is the best UI library ever created</p>
+            <p>React95 is the best UI library ever created</p>
+          </div>
+        </Cutout>
+      </WindowContent>
+    </Window>
+  );
+}
 
 Default.story = {
   name: 'default'

@@ -97,14 +97,8 @@ const ChevronIcon = styled.span`
 
 // TODO make sure all aria and role attributes are in place
 const ColorInput = React.forwardRef(function ColorInput(props, ref) {
-  const {
-    value,
-    defaultValue,
-    onChange,
-    disabled,
-    variant,
-    ...otherProps
-  } = props;
+  const { value, defaultValue, onChange, disabled, variant, ...otherProps } =
+    props;
 
   const [valueDerived, setValueState] = useControlledOrUncontrolled({
     value,

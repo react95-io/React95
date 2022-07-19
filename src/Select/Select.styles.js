@@ -131,7 +131,7 @@ export const StyledDropdownButton = styled(Button)`
     height: calc(100% - 4px);
     `)}
     pointer-events: ${({ isDisabled, native }) =>
-      isDisabled || native ? 'none' : 'auto'}
+    isDisabled || native ? 'none' : 'auto'}
 `;
 
 export const StyledDropdownIcon = styled.span`

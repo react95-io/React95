@@ -307,10 +307,10 @@ describe('<Select />', () => {
     });
     it('the list of options can be labelled by providing `labelId`', () => {
       const { getByRole } = renderWithTheme(
-        <React.Fragment>
+        <>
           <span id='select-label'>Choose one:</span>
           <Select labelId='select-label' open value='' />
-        </React.Fragment>
+        </>
       );
       expect(getByRole('listbox')).toHaveAttribute(
         'aria-labelledby',
@@ -413,10 +413,10 @@ describe('<Select />', () => {
     });
     it('can be labelled with a <label />', () => {
       const { getByLabelText } = renderWithTheme(
-        <React.Fragment>
+        <>
           <label htmlFor='select'>A select</label>
           <Select id='select' native />
-        </React.Fragment>
+        </>
       );
       expect(getByLabelText('A select')).toHaveProperty('tagName', 'SELECT');
     });

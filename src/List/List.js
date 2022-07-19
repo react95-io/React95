@@ -18,7 +18,6 @@ const StyledList = styled.ul`
   `}
   list-style: none;
   position: relative;
-
 `;
 // TODO keyboard controls
 const List = React.forwardRef(function List(props, ref) {

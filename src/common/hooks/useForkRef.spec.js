@@ -65,6 +65,8 @@ describe('useForkRef', () => {
       return React.cloneElement(children, { ref: handleRef });
     });
 
+    // TODO: Figure out how to make react/no-unused-prop-types happy with the children
+    // eslint-disable-next-line react/no-unused-prop-types
     Outer.propTypes = { children: propTypes.element.isRequired };
 
     function Inner() {

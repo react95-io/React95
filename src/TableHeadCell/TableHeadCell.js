@@ -6,13 +6,13 @@ import { createBorderStyles, createDisabledTextStyles } from '../common';
 import { noOp } from '../common/utils';
 
 const StyledHeadCell = styled.th`
-position: relative;
-padding: 0 8px;
-display: table-cell;
-vertical-align: inherit;
-background: ${({ theme }) => theme.material};
-cursor: default;
-user-select: none;
+  position: relative;
+  padding: 0 8px;
+  display: table-cell;
+  vertical-align: inherit;
+  background: ${({ theme }) => theme.material};
+  cursor: default;
+  user-select: none;
   &:before {
     box-sizing: border-box;
     content: '';
@@ -44,14 +44,12 @@ user-select: none;
       }
     `}
 
-
   color: ${({ theme }) => theme.materialText};
   ${({ isDisabled }) => isDisabled && createDisabledTextStyles()}
   &:hover {
     color: ${({ theme }) => theme.materialText};
     ${({ isDisabled }) => isDisabled && createDisabledTextStyles()}
   }
-
 `;
 
 const TableHeadCell = React.forwardRef(function TableHeadCell(props, ref) {

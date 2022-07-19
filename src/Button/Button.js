@@ -85,11 +85,12 @@ export const StyledButton = styled.button`
           ${createBoxStyles()};
           border: none;
           ${isDisabled && createDisabledTextStyles()}
-          ${active &&
-            createHatchedBackground({
-              mainColor: theme.material,
-              secondaryColor: theme.borderLightest
-            })}
+          ${active
+            ? createHatchedBackground({
+                mainColor: theme.material,
+                secondaryColor: theme.borderLightest
+              })
+            : ''}
           &:before {
             box-sizing: border-box;
             content: '';

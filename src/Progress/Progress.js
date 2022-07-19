@@ -95,8 +95,8 @@ const Progress = forwardRef(function Progress(props, ref) {
   // TODO debounce this function
   function updateTilesNumber() {
     if (tilesWrapperRef.current) {
-      const progressWidth = tilesWrapperRef.current.getBoundingClientRect()
-        .width;
+      const progressWidth =
+        tilesWrapperRef.current.getBoundingClientRect().width;
       const newTilesNumber = Math.round(
         ((value / 100) * progressWidth) / tileWidth
       );

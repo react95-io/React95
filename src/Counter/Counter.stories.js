@@ -25,7 +25,7 @@ export default {
   decorators: [story => <Wrapper>{story()}</Wrapper>]
 };
 
-export const Default = () => {
+export function Default() {
   const [count, setCount] = useState(13);
   const handleClick = () => setCount(count + 1);
   return (
@@ -38,7 +38,7 @@ export const Default = () => {
       </div>
     </Panel>
   );
-};
+}
 
 Default.story = {
   name: 'default'

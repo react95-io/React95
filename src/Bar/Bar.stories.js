@@ -13,18 +13,20 @@ const Wrapper = styled.div`
   background: ${({ theme }) => theme.desktopBackground};
 `;
 
-export const Default = () => (
-  <AppBar>
-    <Toolbar>
-      <Bar size={35} />
-      <Button variant='menu'>Edit</Button>
-      <Button variant='menu' disabled>
-        Save
-      </Button>
-      <Bar size={35} />
-    </Toolbar>
-  </AppBar>
-);
+export function Default() {
+  return (
+    <AppBar>
+      <Toolbar>
+        <Bar size={35} />
+        <Button variant='menu'>Edit</Button>
+        <Button variant='menu' disabled>
+          Save
+        </Button>
+        <Bar size={35} />
+      </Toolbar>
+    </AppBar>
+  );
+}
 
 Default.story = {
   name: 'default'

@@ -2,10 +2,10 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { node } from 'prop-types';
 
-const ThemedComponent = ({ children }) => {
+function ThemedComponent({ children }) {
   /* eslint-disable no-use-before-define */
   return <ThemeProvider theme={defaultTheme}>{children}</ThemeProvider>;
-};
+}
 
 /*
   temporary solution, for some reason when importing theme from the src/ folder docz doesn't work :(

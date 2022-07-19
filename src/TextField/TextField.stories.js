@@ -23,7 +23,7 @@ export default {
   decorators: [story => <Wrapper>{story()}</Wrapper>]
 };
 
-export const Default = () => {
+export function Default() {
   const [state, setState] = useState({
     value: ''
   });
@@ -58,57 +58,59 @@ export const Default = () => {
       />
     </div>
   );
-};
+}
 
 Default.story = {
   name: 'default'
 };
 
-export const Flat = () => (
-  <Cutout id='cutout'>
-    <p>
-      When you want to add input field on a light background (like scrollable
-      content), just use the flat variant:
-    </p>
-    <br />
-    <TextField
-      variant='flat'
-      placeholder='type here...'
-      width={150}
-      onChange={onChange}
-      fullWidth
-    />
-    <br />
-    <TextField
-      id='disabled'
-      variant='flat'
-      placeholder='Disabled'
-      width={150}
-      onChange={onChange}
-      disabled
-      fullWidth
-    />
-    <br />
-    <TextField
-      multiline
-      variant='flat'
-      rows={4}
-      defaultValue={loremIpsum}
-      onChange={onChange}
-      fullWidth
-    />
-    <br />
-    <TextField
-      multiline
-      variant='flat'
-      disabled
-      rows={4}
-      defaultValue={loremIpsum}
-      onChange={onChange}
-      fullWidth
-    />
-  </Cutout>
-);
+export function Flat() {
+  return (
+    <Cutout id='cutout'>
+      <p>
+        When you want to add input field on a light background (like scrollable
+        content), just use the flat variant:
+      </p>
+      <br />
+      <TextField
+        variant='flat'
+        placeholder='type here...'
+        width={150}
+        onChange={onChange}
+        fullWidth
+      />
+      <br />
+      <TextField
+        id='disabled'
+        variant='flat'
+        placeholder='Disabled'
+        width={150}
+        onChange={onChange}
+        disabled
+        fullWidth
+      />
+      <br />
+      <TextField
+        multiline
+        variant='flat'
+        rows={4}
+        defaultValue={loremIpsum}
+        onChange={onChange}
+        fullWidth
+      />
+      <br />
+      <TextField
+        multiline
+        variant='flat'
+        disabled
+        rows={4}
+        defaultValue={loremIpsum}
+        onChange={onChange}
+        fullWidth
+      />
+    </Cutout>
+  );
+}
 
 Flat.story = {
   name: 'flat'

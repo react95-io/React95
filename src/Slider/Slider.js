@@ -84,12 +84,12 @@ const Wrapper = styled.div`
     left: -15px;
     width: calc(100% + 30px);
     height: ${({ hasMarks }) => (hasMarks ? '41px' : '39px')};
-  ${({ isFocused, theme }) =>
-    isFocused &&
-    `
+    ${({ isFocused, theme }) =>
+      isFocused &&
+      `
         outline: 2px dotted ${theme.materialText};
         `}
-      }
+  }
 
   ${({ vertical, size }) =>
     vertical
@@ -174,18 +174,17 @@ const Thumb = styled.span`
           ${createFlatBoxStyles()}
           outline: 2px solid ${({ theme }) => theme.flatDark};
           background: ${({ theme }) => theme.flatLight};
-
         `
       : css`
           ${createBoxStyles()}
           ${createBorderStyles()}
         `}
     ${({ isDisabled, theme }) =>
-      isDisabled &&
-      createHatchedBackground({
-        mainColor: theme.material,
-        secondaryColor: theme.borderLightest
-      })}
+    isDisabled &&
+    createHatchedBackground({
+      mainColor: theme.material,
+      secondaryColor: theme.borderLightest
+    })}
 `;
 
 const tickHeight = 6;
@@ -210,7 +209,7 @@ const Tick = styled.span`
           border-right: 1px solid ${({ theme }) => theme.materialText};
         `}
 
-        color:  ${({ theme }) => theme.materialText};
+  color:  ${({ theme }) => theme.materialText};
   ${({ isDisabled, theme }) =>
     isDisabled &&
     css`
@@ -502,9 +501,9 @@ const Slider = React.forwardRef(function Slider(props, ref) {
             isDisabled={disabled}
             vertical={vertical}
             style={{
-              [vertical ? 'bottom' : 'left']: `${((m.value - min) /
-                (max - min)) *
-                100}%`
+              [vertical ? 'bottom' : 'left']: `${
+                ((m.value - min) / (max - min)) * 100
+              }%`
             }}
             key={(m.value / (max - min)) * 100}
             data-testid='tick'
@@ -521,8 +520,9 @@ const Slider = React.forwardRef(function Slider(props, ref) {
         role='slider'
         id='swag'
         style={{
-          [vertical ? 'bottom' : 'left']: `${(vertical ? -100 : 0) +
-            (100 * (valueDerived - min)) / (max - min)}%`
+          [vertical ? 'bottom' : 'left']: `${
+            (vertical ? -100 : 0) + (100 * (valueDerived - min)) / (max - min)
+          }%`
         }}
         tabIndex={disabled ? null : 0}
         vertical={vertical}
