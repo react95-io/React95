@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, waitForDomChange } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 
 import Tooltip from './Tooltip';
 
@@ -71,7 +71,9 @@ describe('<Tooltip />', () => {
 
   describe('transition delays', () => {
     beforeEach(() => {
-      jest.useFakeTimers();
+      jest.useFakeTimers({
+        legacyFakeTimers: true
+      });
     });
 
     afterEach(() => {
@@ -91,7 +93,7 @@ describe('<Tooltip />', () => {
 
       fireEvent.focus(wrapper);
 
-      expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 5);
+      expect(window.setTimeout).toHaveBeenCalledWith(expect.any(Function), 5);
     });
 
     it('should respect leaveDelay', async () => {
@@ -107,7 +109,7 @@ describe('<Tooltip />', () => {
 
       fireEvent.blur(wrapper);
 
-      expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 6);
+      expect(window.setTimeout).toHaveBeenCalledWith(expect.any(Function), 6);
     });
   });
 
@@ -117,15 +119,15 @@ describe('<Tooltip />', () => {
 
       const { getByTestId } = render(renderTooltip(props));
 
-      const tip = getByTestId('tooltip');
       const wrapper = getByTestId('tooltip-wrapper');
 
       fireEvent.focus(wrapper);
-
-      await waitForDomChange({ container: tip });
-
-      expect(props.onFocus).toHaveBeenCalled();
-      expect(props.onOpen).toHaveBeenCalled();
+      await waitFor(() => {
+        expect(props.onFocus).toHaveBeenCalled();
+      });
+      await waitFor(() => {
+        expect(props.onOpen).toHaveBeenCalled();
+      });
     });
 
     it('should handle onBlur events, and call onClose', async () => {
@@ -133,16 +135,20 @@ describe('<Tooltip />', () => {
 
       const { getByTestId } = render(renderTooltip(props));
 
-      const tip = getByTestId('tooltip');
       const wrapper = getByTestId('tooltip-wrapper');
 
       fireEvent.focus(wrapper);
-      await waitForDomChange({ container: tip });
-      fireEvent.blur(wrapper);
-      await waitForDomChange({ container: tip });
+      await waitFor(() => {
+        expect(props.onFocus).toHaveBeenCalled();
+      });
 
-      expect(props.onBlur).toHaveBeenCalled();
-      expect(props.onClose).toHaveBeenCalled();
+      fireEvent.blur(wrapper);
+      await waitFor(() => {
+        expect(props.onBlur).toHaveBeenCalled();
+      });
+      await waitFor(() => {
+        expect(props.onClose).toHaveBeenCalled();
+      });
     });
 
     it('should handle onMouseEnter events, and call onOpen', async () => {
@@ -150,14 +156,16 @@ describe('<Tooltip />', () => {
 
       const { getByTestId } = render(renderTooltip(props));
 
-      const tip = getByTestId('tooltip');
       const wrapper = getByTestId('tooltip-wrapper');
 
       fireEvent.mouseEnter(wrapper);
-      await waitForDomChange({ container: tip });
 
-      expect(props.onMouseEnter).toHaveBeenCalled();
-      expect(props.onOpen).toHaveBeenCalled();
+      await waitFor(() => {
+        expect(props.onMouseEnter).toHaveBeenCalled();
+      });
+      await waitFor(() => {
+        expect(props.onOpen).toHaveBeenCalled();
+      });
     });
 
     it('should handle onMouseLeave events, and call onClose', async () => {
@@ -165,16 +173,20 @@ describe('<Tooltip />', () => {
 
       const { getByTestId } = render(renderTooltip(props));
 
-      const tip = getByTestId('tooltip');
       const wrapper = getByTestId('tooltip-wrapper');
 
       fireEvent.mouseEnter(wrapper);
-      await waitForDomChange({ container: tip });
-      fireEvent.mouseLeave(wrapper);
-      await waitForDomChange({ container: tip });
+      await waitFor(() => {
+        expect(props.onMouseEnter).toHaveBeenCalled();
+      });
 
-      expect(props.onMouseLeave).toHaveBeenCalled();
-      expect(props.onClose).toHaveBeenCalled();
+      fireEvent.mouseLeave(wrapper);
+      await waitFor(() => {
+        expect(props.onMouseLeave).toHaveBeenCalled();
+      });
+      await waitFor(() => {
+        expect(props.onClose).toHaveBeenCalled();
+      });
     });
 
     it('should not handle onFocus events when disableFocusListener is true', () => {
