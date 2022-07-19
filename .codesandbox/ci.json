@@ -1,4 +1,0 @@
-{
-  "buildCommand": "build:prod",
-  "sandboxes": ["react95-template-xkfj0"]
-}
