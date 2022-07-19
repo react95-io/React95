@@ -66,8 +66,8 @@ describe('<Progress />', () => {
       );
       expect(queryByTestId('defaultProgress1')).toBeInTheDocument();
       expect(queryByTestId('defaultProgress2')).toBeInTheDocument();
-      expect(queryByTestId('defaultProgress1')).toBeEmpty();
-      expect(queryByTestId('defaultProgress2')).toBeEmpty();
+      expect(queryByTestId('defaultProgress1')).toBeEmptyDOMElement();
+      expect(queryByTestId('defaultProgress2')).toBeEmptyDOMElement();
     });
   });
 });
