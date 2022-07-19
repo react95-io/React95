@@ -35,5 +35,6 @@ export default {
   materialTextDisabledShadow: 'rgb(253, 246, 227)',
   materialTextInvert: 'rgb(238, 232, 213)',
   progress: 'rgb(211, 54, 130)',
+  shadow: true,
   tooltip: 'rgb(253, 246, 227)'
 };

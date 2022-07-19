@@ -37,4 +37,7 @@ const theme = {
   WindowText: 'rgb(0, 0, 0)'
 };
 
-export default mapFromWindowsTheme('peggysPastels', theme, true);
+export default mapFromWindowsTheme('peggysPastels', theme, {
+  useGradients: true,
+  useShadows: true
+});
