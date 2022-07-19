@@ -39,6 +39,7 @@ export default [
     input: './src/common/themes/index.js',
     output: {
       dir: 'dist/themes',
+      exports: 'default',
       format: 'cjs'
     },
     preserveModules: true,
