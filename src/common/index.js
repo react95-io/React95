@@ -64,8 +64,9 @@ export const createBorderStyles = ({
         border-top-color: ${({ theme }) => theme.borderDarkest};
         border-right-color: ${({ theme }) => theme.borderLightest};
         border-bottom-color: ${({ theme }) => theme.borderLightest};
-        box-shadow: ${props => props.shadow && `${shadow}, `} inset 1px 1px 0px
-            1px ${({ theme }) => theme.borderDark},
+        box-shadow: ${props =>
+              props.theme.shadow && props.shadow && `${shadow}, `}
+            inset 1px 1px 0px 1px ${({ theme }) => theme.borderDark},
           inset -1px -1px 0 1px ${({ theme }) => theme.borderLight};
       `
     : css`
@@ -77,8 +78,9 @@ export const createBorderStyles = ({
           windowBorders ? theme.borderLight : theme.borderLightest};
         border-right-color: ${({ theme }) => theme.borderDarkest};
         border-bottom-color: ${({ theme }) => theme.borderDarkest};
-        box-shadow: ${props => props.shadow && `${shadow}, `} inset 1px 1px 0px
-            1px
+        box-shadow: ${props =>
+              props.theme.shadow && props.shadow && `${shadow}, `}
+            inset 1px 1px 0px 1px
             ${({ theme }) =>
               windowBorders ? theme.borderLightest : theme.borderLight},
           inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};

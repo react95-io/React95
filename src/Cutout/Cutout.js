@@ -31,7 +31,8 @@ export const StyledCutout = styled.div`
     border-bottom-color: ${({ theme }) => theme.borderLight};
 
     pointer-events: none;
-    ${props => props.shadow && `box-shadow:${insetShadow};`}
+    ${props =>
+      props.theme.shadow && props.shadow && `box-shadow:${insetShadow};`}
   }
 `;
 
