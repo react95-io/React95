@@ -24,35 +24,43 @@ export default {
   decorators: [story => <Wrapper>{story()}</Wrapper>]
 };
 
-export const Default = () => (
-  <Panel
-    variant='outside'
-    shadow
-    style={{ padding: '0.5rem', lineHeight: '1.5', width: 600 }}
-  >
-    <p style={{ padding: '0.5rem' }}>
-      Notice the subtle difference in borders. The lightest border is not on the
-      edge of this panel.
-    </p>
-    <Panel variant='inside' style={{ margin: '1rem', padding: '1rem' }}>
-      This panel on the other hand has the lightest border on the edge. Use this
-      panel inside &apos;outside&apos; panels.
-      <br />
+export function Default() {
+  return (
+    <Panel
+      variant='outside'
+      shadow
+      style={{ padding: '0.5rem', lineHeight: '1.5', width: 600 }}
+    >
+      <p style={{ padding: '0.5rem' }}>
+        Notice the subtle difference in borders. The lightest border is not on
+        the edge of this panel.
+      </p>
+      <Panel variant='inside' style={{ margin: '1rem', padding: '1rem' }}>
+        This panel on the other hand has the lightest border on the edge. Use
+        this panel inside &apos;outside&apos; panels.
+        <br />
+        <Panel
+          variant='well'
+          style={{
+            marginTop: '1rem',
+            padding: '1rem',
+            height: 200,
+            width: 100
+          }}
+        >
+          Put some content here
+        </Panel>
+      </Panel>
       <Panel
         variant='well'
-        style={{ marginTop: '1rem', padding: '1rem', height: 200, width: 100 }}
+        style={{ marginTop: '1rem', padding: '0.1rem 0.25rem', width: '100%' }}
       >
-        Put some content here
+        The &apos;well&apos; variant of a panel is often used as a window
+        footer.
       </Panel>
     </Panel>
-    <Panel
-      variant='well'
-      style={{ marginTop: '1rem', padding: '0.1rem 0.25rem', width: '100%' }}
-    >
-      The &apos;well&apos; variant of a panel is often used as a window footer.
-    </Panel>
-  </Panel>
-);
+  );
+}
 
 Default.story = {
   name: 'default'

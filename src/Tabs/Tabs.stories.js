@@ -24,7 +24,7 @@ const Wrapper = styled.div`
   padding: 5rem;
   background: ${({ theme }) => theme.desktopBackground};
 `;
-export const Default = () => {
+export function Default() {
   const [state, setState] = useState({
     activeTab: 0
   });
@@ -72,13 +72,13 @@ export const Default = () => {
       </WindowContent>
     </Window>
   );
-};
+}
 
 Default.story = {
   name: 'default'
 };
 
-export const MultiRow = () => {
+export function MultiRow() {
   const [state, setState] = useState({
     activeTab: 'Shoes'
   });
@@ -118,7 +118,7 @@ export const MultiRow = () => {
       </WindowContent>
     </Window>
   );
-};
+}
 
 MultiRow.story = {
   name: 'multi row'

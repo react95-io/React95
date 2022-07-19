@@ -75,20 +75,20 @@ class DatePicker extends Component {
     date: null
   };
 
-  constructor(props) {
-    super(props);
-
-    const initialDate = this.convertDateToState(props.date || new Date());
-    this.state = initialDate;
-  }
-
-  convertDateToState = date => {
+  static convertDateToState(date) {
     const day = date.getDate();
     const month = date.getMonth();
     const year = date.getFullYear();
 
     return { day, month, year };
-  };
+  }
+
+  constructor(props) {
+    super(props);
+
+    const initialDate = DatePicker.convertDateToState(props.date || new Date());
+    this.state = initialDate;
+  }
 
   handleMonthSelect = e => this.setState({ month: e.target.value });
 

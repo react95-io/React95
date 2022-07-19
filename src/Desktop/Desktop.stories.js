@@ -13,9 +13,9 @@ const Wrapper = styled.div`
   background: ${({ theme }) => theme.desktopBackground};
 `;
 
-export const Default = () => (
-  <Desktop backgroundStyles={{ background: 'blue' }} />
-);
+export function Default() {
+  return <Desktop backgroundStyles={{ background: 'blue' }} />;
+}
 
 Default.story = {
   name: 'default'

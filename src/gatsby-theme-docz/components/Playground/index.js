@@ -9,10 +9,10 @@ const Wrapper = styled.div`
 `;
 
 /* eslint-disable import/prefer-default-export */
-export const Playground = props => {
+export function Playground(props) {
   return (
     <Wrapper>
       <OriginalPlayground {...props} />
     </Wrapper>
   );
-};
+}

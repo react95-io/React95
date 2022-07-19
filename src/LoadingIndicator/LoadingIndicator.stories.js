@@ -15,12 +15,14 @@ export default {
   decorators: [story => <Wrapper>{story()}</Wrapper>]
 };
 
-export const Default = () => (
-  <>
-    <p style={{ textAlign: 'center', marginBottom: '0.5rem' }}>Loading...</p>
-    <LoadingIndicator isLoading />
-  </>
-);
+export function Default() {
+  return (
+    <>
+      <p style={{ textAlign: 'center', marginBottom: '0.5rem' }}>Loading...</p>
+      <LoadingIndicator isLoading />
+    </>
+  );
+}
 
 Default.story = {
   name: 'default'

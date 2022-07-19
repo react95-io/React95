@@ -13,57 +13,63 @@ const Wrapper = styled.div`
   background: ${({ theme }) => theme.desktopBackground};
 `;
 
-export const Default = () => (
-  <Window>
-    <WindowContent>
-      <Fieldset label='Label here'>
-        Some content here
-        <span role='img' aria-label='😍'>
-          😍
-        </span>
-      </Fieldset>
-      <br />
-      <Fieldset label='Disabled' disabled>
-        Some content here
-        <span role='img' aria-label='😍'>
-          😍
-        </span>
-      </Fieldset>
-    </WindowContent>
-  </Window>
-);
-
-Default.story = {
-  name: 'default'
-};
-
-export const Flat = () => (
-  <Window>
-    <WindowContent>
-      <Cutout style={{ padding: '1rem', background: 'white', width: '300px' }}>
-        <Fieldset variant='flat' label='Label here'>
+export function Default() {
+  return (
+    <Window>
+      <WindowContent>
+        <Fieldset label='Label here'>
           Some content here
           <span role='img' aria-label='😍'>
             😍
           </span>
         </Fieldset>
         <br />
-        <Fieldset variant='flat' label='Disabled' disabled>
+        <Fieldset label='Disabled' disabled>
           Some content here
           <span role='img' aria-label='😍'>
             😍
           </span>
         </Fieldset>
-      </Cutout>
-    </WindowContent>
-  </Window>
-);
+      </WindowContent>
+    </Window>
+  );
+}
+
+Default.story = {
+  name: 'default'
+};
+
+export function Flat() {
+  return (
+    <Window>
+      <WindowContent>
+        <Cutout
+          style={{ padding: '1rem', background: 'white', width: '300px' }}
+        >
+          <Fieldset variant='flat' label='Label here'>
+            Some content here
+            <span role='img' aria-label='😍'>
+              😍
+            </span>
+          </Fieldset>
+          <br />
+          <Fieldset variant='flat' label='Disabled' disabled>
+            Some content here
+            <span role='img' aria-label='😍'>
+              😍
+            </span>
+          </Fieldset>
+        </Cutout>
+      </WindowContent>
+    </Window>
+  );
+}
 
 Flat.story = {
   name: 'flat'
 };
 
-export const ToggleExample = () => {
+export function ToggleExample() {
   const [state, setState] = useState(true);
   return (
     <Window>
@@ -88,7 +94,7 @@ export const ToggleExample = () => {
       </WindowContent>
     </Window>
   );
-};
+}
 
 ToggleExample.story = {
   name: 'toggle example'

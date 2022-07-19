@@ -23,7 +23,7 @@ export default {
   decorators: [story => <Wrapper>{story()}</Wrapper>]
 };
 
-export const Default = () => {
+export function Default() {
   const [state, setState] = useState({
     cheese: true,
     bacon: false,
@@ -119,13 +119,13 @@ export const Default = () => {
       />
     </div>
   );
-};
+}
 
 Default.story = {
   name: 'default'
 };
 
-export const Flat = () => {
+export function Flat() {
   const [state, setState] = useState({
     cheese: true,
     bacon: false,
@@ -228,46 +228,48 @@ export const Flat = () => {
       </div>
     </Cutout>
   );
-};
+}
 
 Flat.story = {
   name: 'flat'
 };
 
-export const Menu = () => (
-  <List>
-    <ListItem size='md'>
-      <Checkbox
-        name='useGradient'
-        variant='menu'
-        value='useGradient'
-        label='Use gradient'
-        defaultChecked
-      />
-    </ListItem>
-    <ListItem size='md'>
-      <Checkbox
-        name='thickBrush'
-        variant='menu'
-        defaultChecked={false}
-        value='thickBrush'
-        label='Thick brush'
-        indeterminate
-      />
-    </ListItem>
-    <Divider />
-    <ListItem size='md' disabled>
-      <Checkbox
-        name='autoSave'
-        variant='menu'
-        value='autoSave'
-        checked
-        label='Auto-save'
-        disabled
-      />
-    </ListItem>
-  </List>
-);
+export function Menu() {
+  return (
+    <List>
+      <ListItem size='md'>
+        <Checkbox
+          name='useGradient'
+          variant='menu'
+          value='useGradient'
+          label='Use gradient'
+          defaultChecked
+        />
+      </ListItem>
+      <ListItem size='md'>
+        <Checkbox
+          name='thickBrush'
+          variant='menu'
+          defaultChecked={false}
+          value='thickBrush'
+          label='Thick brush'
+          indeterminate
+        />
+      </ListItem>
+      <Divider />
+      <ListItem size='md' disabled>
+        <Checkbox
+          name='autoSave'
+          variant='menu'
+          value='autoSave'
+          checked
+          label='Auto-save'
+          disabled
+        />
+      </ListItem>
+    </List>
+  );
+}
 
 Menu.story = {
   name: 'menu'

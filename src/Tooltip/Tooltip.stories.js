@@ -13,11 +13,13 @@ const Wrapper = styled.div`
   background: ${({ theme }) => theme.desktopBackground};
 `;
 
-export const Default = () => (
-  <Tooltip text='I see you! 🤷‍' enterDelay={100} leaveDelay={500}>
-    <Button>Hover me</Button>
-  </Tooltip>
-);
+export function Default() {
+  return (
+    <Tooltip text='I see you! 🤷‍' enterDelay={100} leaveDelay={500}>
+      <Button>Hover me</Button>
+    </Tooltip>
+  );
+}
 
 Default.story = {
   name: 'default'

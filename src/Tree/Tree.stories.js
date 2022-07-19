@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 
 import { Tree, Fieldset } from 'react95';
@@ -94,7 +94,7 @@ function getIds(item) {
 
 categories.forEach(getIds);
 
-export const Basic = () => {
+export function Basic() {
   return (
     <div style={{ maxWidth: '250px' }}>
       <Fieldset label='Catalog'>
@@ -102,19 +102,19 @@ export const Basic = () => {
       </Fieldset>
     </div>
   );
-};
+}
 
 Basic.story = {
   name: 'basic'
 };
 
-export const Controlled = () => {
+export function Controlled() {
   const [selected, setSelected] = useState('oat-milk');
   const [expanded, setExpanded] = useState(['dairy', 'milk']);
 
-  function handleExpandClick() {
+  const handleExpandClick = useCallback(() => {
     setExpanded(oldExpanded => (oldExpanded.length === 0 ? allIds : []));
-  }
+  });
 
   return (
     <div style={{ maxWidth: '250px' }}>
@@ -135,13 +135,13 @@ export const Controlled = () => {
       </Fieldset>
     </div>
   );
-};
+}
 
 Controlled.story = {
   name: 'controlled'
 };
 
-export const Disabled = () => {
+export function Disabled() {
   return (
     <div style={{ maxWidth: '250px' }}>
       <Fieldset label='Catalog'>
@@ -149,13 +149,13 @@ export const Disabled = () => {
       </Fieldset>
     </div>
   );
-};
+}
 
 Disabled.story = {
   name: 'disabled'
 };
 
-export const DisabledTreeItems = () => {
+export function DisabledTreeItems() {
   const modifiedTree = categories.map((item, index) =>
     index !== 1 ? item : { ...item, disabled: true }
   );
@@ -167,7 +167,7 @@ export const DisabledTreeItems = () => {
       </Fieldset>
     </div>
   );
-};
+}
 
 DisabledTreeItems.story = {
   name: 'disabled tree items'

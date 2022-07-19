@@ -33,33 +33,37 @@ export default {
   decorators: [story => <Wrapper>{story()}</Wrapper>]
 };
 
-export const Default = () => (
-  <>
-    <span>enabled: </span>
-    <ColorInput defaultValue='#00f' />
-    <span>disabled: </span>
-    <ColorInput disabled defaultValue='#00f' />
-  </>
-);
+export function Default() {
+  return (
+    <>
+      <span>enabled: </span>
+      <ColorInput defaultValue='#00f' />
+      <span>disabled: </span>
+      <ColorInput disabled defaultValue='#00f' />
+    </>
+  );
+}
 
 Default.story = {
   name: 'default'
 };
 
-export const Flat = () => (
-  <Cutout id='cutout'>
-    <div className='content'>
-      <div>
-        <span>enabled: </span>
-        <ColorInput variant='flat' defaultValue='#00f' />
+export function Flat() {
+  return (
+    <Cutout id='cutout'>
+      <div className='content'>
+        <div>
+          <span>enabled: </span>
+          <ColorInput variant='flat' defaultValue='#00f' />
+        </div>
+        <div>
+          <span>disabled: </span>
+          <ColorInput variant='flat' disabled defaultValue='#00f' />
+        </div>
       </div>
-      <div>
-        <span>disabled: </span>
-        <ColorInput variant='flat' disabled defaultValue='#00f' />
-      </div>
-    </div>
-  </Cutout>
-);
+    </Cutout>
+  );
+}
 
 Flat.story = {
   name: 'flat'

@@ -24,9 +24,9 @@ const sharedCheckboxStyles = css`
 `;
 // had to overwrite box-shadow for StyledCheckbox since the default made checkbox too dark
 const StyledCheckbox = styled(StyledCutout)`
-${sharedCheckboxStyles}
-background: ${({ theme, isDisabled }) =>
-  isDisabled ? theme.material : theme.canvas};
+  ${sharedCheckboxStyles}
+  background: ${({ theme, isDisabled }) =>
+    isDisabled ? theme.material : theme.canvas};
 
   &:before {
     content: '';

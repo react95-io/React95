@@ -396,61 +396,59 @@ const Select = React.forwardRef(function Select(props, ref) {
     SelectDisplayProps.id ||
     (name ? `react95-component-select-${name}` : undefined);
   return (
-    <>
-      <Wrapper
-        {...wrapperCommonProps}
-        isDisabled={disabled}
-        ref={wrapperRef}
-        shadow={shadow}
-        style={{ ...style, width }}
+    <Wrapper
+      {...wrapperCommonProps}
+      isDisabled={disabled}
+      ref={wrapperRef}
+      shadow={shadow}
+      style={{ ...style, width }}
+    >
+      <input
+        name={name}
+        ref={inputRef}
+        type='hidden'
+        value={value}
+        {...otherProps}
+      />
+      <StyledInner
+        aria-disabled={disabled}
+        aria-expanded={open ? 'true' : undefined}
+        aria-haspopup='listbox'
+        aria-label={ariaLabel}
+        aria-labelledby={
+          [labelId, buttonId].filter(Boolean).join(' ') || undefined
+        }
+        // The id is required for proper a11y
+        id={buttonId}
+        onBlur={handleBlur}
+        onFocus={onFocus}
+        onKeyDown={handleKeyDown}
+        onMouseDown={isEnabled ? handleMouseDown : null}
+        ref={displayNode}
+        role='button'
+        tabIndex={tabIndex}
+        {...SelectDisplayProps}
       >
-        <input
-          name={name}
-          ref={inputRef}
-          type='hidden'
-          value={value}
-          {...otherProps}
-        />
-        <StyledInner
-          aria-disabled={disabled}
-          aria-expanded={open ? 'true' : undefined}
-          aria-haspopup='listbox'
-          aria-label={ariaLabel}
-          aria-labelledby={
-            [labelId, buttonId].filter(Boolean).join(' ') || undefined
-          }
-          // The id is required for proper a11y
-          id={buttonId}
-          onBlur={handleBlur}
-          onFocus={onFocus}
-          onKeyDown={handleKeyDown}
-          onMouseDown={isEnabled ? handleMouseDown : null}
-          ref={displayNode}
-          role='button'
-          tabIndex={tabIndex}
-          {...SelectDisplayProps}
-        >
-          <StyledSelectContent>{displayLabel}</StyledSelectContent>
+        <StyledSelectContent>{displayLabel}</StyledSelectContent>
 
-          {DropdownButton}
-        </StyledInner>
-        {isEnabled && open && (
-          <StyledDropdownMenu
-            aria-labelledby={labelId}
-            onKeyDown={handleKeyDown}
-            ref={dropdownRef}
-            role='listbox'
-            style={
-              menuMaxHeight && { overflow: 'auto', maxHeight: menuMaxHeight }
-            }
-            tabIndex={0}
-            variant={variant}
-          >
-            {optionsContent}
-          </StyledDropdownMenu>
-        )}
-      </Wrapper>
-    </>
+        {DropdownButton}
+      </StyledInner>
+      {isEnabled && open && (
+        <StyledDropdownMenu
+          aria-labelledby={labelId}
+          onKeyDown={handleKeyDown}
+          ref={dropdownRef}
+          role='listbox'
+          style={
+            menuMaxHeight && { overflow: 'auto', maxHeight: menuMaxHeight }
+          }
+          tabIndex={0}
+          variant={variant}
+        >
+          {optionsContent}
+        </StyledDropdownMenu>
+      )}
+    </Wrapper>
   );
 });
 

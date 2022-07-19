@@ -14,15 +14,17 @@ export default {
   decorators: [story => <Wrapper>{story()}</Wrapper>]
 };
 
-export const Default = () => (
-  <h1>
-    Everybody likes
-    <Anchor href='https://expensive.toys' target='_blank'>
-      {' '}
-      https://expensive.toys
-    </Anchor>
-  </h1>
-);
+export function Default() {
+  return (
+    <h1>
+      Everybody likes
+      <Anchor href='https://expensive.toys' target='_blank'>
+        {' '}
+        https://expensive.toys
+      </Anchor>
+    </h1>
+  );
+}
 
 Default.story = {
   name: 'default'
