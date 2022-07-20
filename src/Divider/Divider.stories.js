@@ -3,15 +3,16 @@ import styled from 'styled-components';
 
 import { Divider, List, ListItem } from 'react95';
 
+const Wrapper = styled.div`
+  padding: 5rem;
+  background: ${({ theme }) => theme.desktopBackground};
+`;
+
 export default {
   title: 'Divider',
   component: Divider,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
 };
-const Wrapper = styled.div`
-  padding: 5rem;
-  background: ${({ theme }) => theme.desktopBackground};
-`;
 
 export function Default() {
   return (

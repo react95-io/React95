@@ -15,7 +15,7 @@ function linearGradient(left, right) {
 }
 
 export function mapFromWindowsTheme(name, windowsTheme, useGradients) {
-  /* eslint-disable no-unused-vars */
+  /* eslint-disable no-unused-vars, @typescript-eslint/no-unused-vars */
   const {
     ButtonAlternateFace,
     ButtonDkShadow,
@@ -49,7 +49,7 @@ export function mapFromWindowsTheme(name, windowsTheme, useGradients) {
     InfoText,
     InfoWindow
   } = windowsTheme;
-  /* eslint-enable no-unused-vars */
+  /* eslint-enable no-unused-vars, @typescript-eslint/no-unused-vars */
 
   return {
     name,

@@ -1,15 +1,45 @@
-import babel from 'rollup-plugin-babel';
-import commonjs from 'rollup-plugin-commonjs';
-import resolve from 'rollup-plugin-node-resolve';
-import replace from 'rollup-plugin-replace';
+import esbuild from 'rollup-plugin-esbuild';
 import copy from 'rollup-plugin-copy';
+import dts from 'rollup-plugin-dts';
+import replace from 'rollup-plugin-replace';
 import packageJson from './package.json';
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
-export default [
+const bundle = config => [
   {
-    input: './src/index.js',
+    ...config,
+    external: id => !/^[./]/.test(id),
+    plugins: [
+      ...config.plugins,
+      replace({
+        'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
+      }),
+      esbuild({ loaders: { '.js': 'jsx' } })
+    ]
+  },
+  {
+    ...config,
+    output: config.output.dir
+      ? config.output
+      : {
+          file: packageJson.types,
+          format: 'es'
+        },
+    external: id => !/^[./]/.test(id),
+    plugins: [
+      ...config.plugins,
+      replace({
+        'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
+      }),
+      dts()
+    ]
+  }
+];
+
+export default [
+  ...bundle({
+    input: './src/index.ts',
     output: [
       {
         file: packageJson.main,
@@ -18,25 +48,14 @@ export default [
       },
       {
         file: packageJson.module,
-        format: 'esm',
+        format: 'es',
         sourcemap: true
       }
     ],
-    plugins: [
-      replace({
-        'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
-      }),
-      babel({
-        exclude: 'node_modules/**',
-        runtimeHelpers: true
-      }),
-      resolve(),
-      commonjs()
-    ],
-    external: id => /^react|react-dom|styled-components/.test(id)
-  },
-  {
-    input: './src/common/themes/index.js',
+    plugins: []
+  }),
+  ...bundle({
+    input: './src/common/themes/index.ts',
     output: {
       dir: 'dist/themes',
       exports: 'default',
@@ -49,17 +68,7 @@ export default [
           { src: './src/assets/fonts/dist/*', dest: './dist/fonts' },
           { src: './src/assets/images/*', dest: './dist/images' }
         ]
-      }),
-      replace({
-        'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
-      }),
-      babel({
-        exclude: 'node_modules/**',
-        runtimeHelpers: true
-      }),
-      resolve(),
-      commonjs()
-    ],
-    external: id => /^react|react-dom|styled-components/.test(id)
-  }
+      })
+    ]
+  })
 ];

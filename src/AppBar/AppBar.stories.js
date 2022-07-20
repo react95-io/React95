@@ -11,15 +11,16 @@ import {
 } from 'react95';
 import logoIMG from '../assets/images/logo.png';
 
+const Wrapper = styled.div`
+  padding: 5rem;
+  background: ${({ theme }) => theme.desktopBackground};
+`;
+
 export default {
   title: 'AppBar',
   component: AppBar,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
 };
-const Wrapper = styled.div`
-  padding: 5rem;
-  background: ${({ theme }) => theme.desktopBackground};
-`;
 
 export function Default() {
   const [open, setOpen] = React.useState(false);
