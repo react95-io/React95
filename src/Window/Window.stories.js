@@ -9,12 +9,6 @@ import {
   Panel
 } from 'react95';
 
-export default {
-  title: 'Window',
-  component: Window,
-  subcomponents: { WindowHeader, WindowContent },
-  decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
 const Wrapper = styled.div`
   padding: 5rem;
   background: ${({ theme }) => theme.desktopBackground};
@@ -66,6 +60,14 @@ const Wrapper = styled.div`
     padding-left: 0.25rem;
   }
 `;
+
+export default {
+  title: 'Window',
+  component: Window,
+  subcomponents: { WindowHeader, WindowContent },
+  decorators: [story => <Wrapper>{story()}</Wrapper>]
+};
+
 export function Default() {
   return (
     <>

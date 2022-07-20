@@ -25,7 +25,7 @@ describe('<Progress />', () => {
 
         expect(queryByTestId('defaultProgress2')).toHaveStyleRule(
           'clip-path',
-          `polygon( 0 0,${value}% 0,${value}% 100%,0 100% )`
+          `polygon( 0 0, ${value}% 0, ${value}% 100%, 0 100% )`
         );
 
         expect(queryByTestId('indeterminateProgress')).not.toBeInTheDocument();

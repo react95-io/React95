@@ -13,6 +13,11 @@ import {
   WindowContent
 } from 'react95';
 
+const Wrapper = styled.div`
+  padding: 5rem;
+  background: ${({ theme }) => theme.desktopBackground};
+`;
+
 export default {
   title: 'Table',
   component: Table,
@@ -26,10 +31,6 @@ export default {
   },
   decorators: [story => <Wrapper>{story()}</Wrapper>]
 };
-const Wrapper = styled.div`
-  padding: 5rem;
-  background: ${({ theme }) => theme.desktopBackground};
-`;
 
 export function Default() {
   return (
