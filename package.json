@@ -34,7 +34,7 @@
   "scripts": {
     "start": "start-storybook -p 9009",
     "build:storybook": "build-storybook -o ./storybook",
-    "build": "rm -rf dist && npm run build:prod",
+    "build": "rm -rf dist && yarn run build:prod",
     "build:dev": "cross-env NODE_ENV=development rollup -c",
     "build:prod": "cross-env NODE_ENV=production rollup -c",
     "test": "jest ./src",
@@ -42,7 +42,7 @@
     "test:watch": "jest ./src --watch",
     "test:coverage": "jest ./src --coverage",
     "lint": "eslint src --ext .js",
-    "lint:fix": "npm run lint -- --fix",
+    "lint:fix": "yarn run lint --fix",
     "semantic-release": "semantic-release",
     "cz": "git-cz"
   },

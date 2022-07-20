@@ -1,0 +1,77 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+      - next
+      - beta
+      - alpha
+      - '*.x' # maintenance releases
+
+jobs:
+  release-library:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Cache packages
+        uses: actions/cache@v3
+        with:
+          key: node_modules-v4-${{ hashFiles('yarn.lock') }}
+          path: |-
+            node_modules
+            */node_modules
+          restore-keys: 'node_modules-v4-'
+
+      - name: Yarn install
+        run: yarn install --ignore-optional --frozen-lockfile
+
+      - name: Build library
+        run: yarn run build
+
+      - name: Deploy library
+        run: yarn run semantic-release || true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  release-storybook:
+    needs:
+      - release-library
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Cache packages
+        uses: actions/cache@v3
+        with:
+          key: node_modules-v4-${{ hashFiles('yarn.lock') }}
+          path: |-
+            node_modules
+            */node_modules
+          restore-keys: 'node_modules-v4-'
+
+      - name: Yarn install
+        run: yarn install --ignore-optional --frozen-lockfile
+
+      - name: Build Storybook
+        run: yarn run build:storybook
+
+      - name: Deploy Storybook
+        run: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
