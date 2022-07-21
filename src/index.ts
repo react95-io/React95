@@ -3,7 +3,7 @@ export { default as styleReset } from './common/styleReset';
 export { createScrollbars } from './common/index';
 
 /* components */
-export { default as Anchor } from './Anchor/Anchor';
+export * from './Anchor/Anchor';
 export { default as AppBar } from './AppBar/AppBar';
 export { default as Avatar } from './Avatar/Avatar';
 export { default as Bar } from './Bar/Bar';

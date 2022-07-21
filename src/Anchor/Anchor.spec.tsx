@@ -1,7 +1,6 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 
-import Anchor from './Anchor';
+import { Anchor } from './Anchor';
 
 const defaultProps = {
   children: '',

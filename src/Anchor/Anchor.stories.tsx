@@ -1,7 +1,7 @@
-import React from 'react';
+import { ComponentMeta } from '@storybook/react';
 import styled from 'styled-components';
 
-import { Anchor } from 'react95';
+import { Anchor } from './Anchor';
 
 const Wrapper = styled.div`
   padding: 5rem;
@@ -12,7 +12,7 @@ export default {
   title: 'Anchor',
   component: Anchor,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
+} as ComponentMeta<typeof Anchor>;
 
 export function Default() {
   return (
