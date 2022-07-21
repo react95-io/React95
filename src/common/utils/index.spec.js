@@ -93,10 +93,16 @@ describe('mapFromWindowsTheme', () => {
       materialTextDisabledShadow: '#000003',
       materialTextInvert: '#00001b',
       progress: '#00001a',
+      shadow: false,
       tooltip: '#00001e'
     };
 
-    expect(mapFromWindowsTheme('theme', theme, false)).toEqual(expectedTheme);
+    expect(
+      mapFromWindowsTheme('theme', theme, {
+        useGradients: false,
+        useShadows: false
+      })
+    ).toEqual(expectedTheme);
   });
 
   it('should map corresponding properties with gradients if gradients are enabled', () => {
@@ -164,10 +170,16 @@ describe('mapFromWindowsTheme', () => {
       materialTextDisabledShadow: '#000003',
       materialTextInvert: '#00001b',
       progress: '#00001a',
+      shadow: true,
       tooltip: '#00001e'
     };
 
-    expect(mapFromWindowsTheme('theme', theme, true)).toEqual(expectedTheme);
+    expect(
+      mapFromWindowsTheme('theme', theme, {
+        useGradients: true,
+        useShadows: true
+      })
+    ).toEqual(expectedTheme);
   });
 });
 

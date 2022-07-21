@@ -14,7 +14,11 @@ function linearGradient(left, right) {
   return `linear-gradient(to right, ${left}, ${right})`;
 }
 
-export function mapFromWindowsTheme(name, windowsTheme, useGradients) {
+export function mapFromWindowsTheme(
+  name,
+  windowsTheme,
+  { useGradients, useShadows } = {}
+) {
   /* eslint-disable no-unused-vars */
   const {
     ButtonAlternateFace,
@@ -87,6 +91,7 @@ export function mapFromWindowsTheme(name, windowsTheme, useGradients) {
     materialTextDisabledShadow: ButtonHilight,
     materialTextInvert: HilightText,
     progress: Hilight,
+    shadow: useShadows,
     tooltip: InfoWindow
   };
 }

@@ -30,5 +30,6 @@ export default {
   materialTextDisabledShadow: '#c47bcc',
   materialTextInvert: '#c47bcc',
   progress: '#000080',
+  shadow: true,
   tooltip: '#fefbcc'
 };
