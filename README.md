@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://www.npmjs.com/package/react95"><img src="https://flat.badgen.net/npm/dt/react95" alt="NPM" /></a>
-  <a href="https://circleci.com/gh/arturbien/React95"><img src="https://flat.badgen.net/circleci/github/arturbien/React95/master" alt="circleCI build" /></a>
+  <a href="https://github.com/arturbien/React95/actions/workflows/release.yml"><img src="https://github.com/arturbien/React95/actions/workflows/release.yml/badge.svg" alt="release status" /></a>
   <a href="https://www.npmjs.com/package/react95"><img src="https://flat.badgen.net/npm/v/react95" alt="React95 version" /></a>
   <a href="https://www.npmjs.com/package/react95"><img src="https://flat.badgen.net/npm/license/react95" alt="React95 license" /></a>
   <a href="https://twitter.com/intent/follow?screen_name=react95_io"><img src="https://img.shields.io/twitter/follow/react95_io" alt="React95 license" /></a>
