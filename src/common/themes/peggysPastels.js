@@ -2,39 +2,38 @@
  * https://www.deviantart.com/tpenguinltg/art/Peggy-s-Pastels-505540096
  */
 
-const { mapFromWindowsTheme } = require('../utils');
-
-const theme = {
-  ActiveBorder: 'rgb(244, 193, 202)',
-  ActiveTitle: 'rgb(0, 191, 188)',
-  AppWorkspace: 'rgb(255, 184, 182)',
-  Background: 'rgb(162, 219, 210)',
-  ButtonAlternateFace: 'rgb(181, 181, 181)',
-  ButtonDkShadow: 'rgb(64, 64, 64)',
-  ButtonFace: 'rgb(244, 193, 202)',
-  ButtonHilight: 'rgb(250, 224, 228)',
-  ButtonLight: 'rgb(247, 219, 215)',
-  ButtonShadow: 'rgb(222, 69, 96)',
-  ButtonText: 'rgb(0, 0, 0)',
-  GradientActiveTitle: 'rgb(202, 156, 185)',
-  GradientInactiveTitle: 'rgb(236, 145, 162)',
-  GrayText: 'rgb(222, 69, 96)',
-  Hilight: 'rgb(162, 219, 210)',
-  HilightText: 'rgb(0, 0, 0)',
-  HotTrackingColor: 'rgb(0, 128, 128)',
-  InactiveBorder: 'rgb(244, 193, 202)',
-  InactiveTitle: 'rgb(0, 187, 169)',
-  InactiveTitleText: 'rgb(0, 85, 77)',
-  InfoText: 'rgb(0, 0, 0)',
-  InfoWindow: 'rgb(204, 255, 255)',
-  Menu: 'rgb(244, 193, 202)',
-  MenuHilight: 'rgb(162, 219, 210)',
-  MenuText: 'rgb(0, 0, 0)',
-  Scrollbar: 'rgb(250, 224, 228)',
-  TitleText: 'rgb(255, 255, 255)',
-  Window: 'rgb(244, 255, 255)',
-  WindowFrame: 'rgb(0, 0, 0)',
-  WindowText: 'rgb(0, 0, 0)'
+export default {
+  name: 'peggysPastels',
+  anchor: 'rgb(0, 128, 128)',
+  anchorVisited: 'rgb(0, 128, 128)',
+  borderDark: 'rgb(222, 69, 96)',
+  borderDarkest: 'rgb(64, 64, 64)',
+  borderLight: 'rgb(247, 219, 215)',
+  borderLightest: 'rgb(250, 224, 228)',
+  canvas: 'rgb(244, 255, 255)',
+  canvasText: 'rgb(0, 0, 0)',
+  canvasTextDisabled: 'rgb(222, 69, 96)',
+  canvasTextDisabledShadow: 'rgb(250, 224, 228)',
+  canvasTextInvert: 'rgb(0, 0, 0)',
+  checkmark: 'rgb(0, 0, 0)',
+  checkmarkDisabled: 'rgb(222, 69, 96)',
+  desktopBackground: 'rgb(162, 219, 210)',
+  flatDark: 'rgb(222, 69, 96)',
+  flatLight: 'rgb(247, 219, 215)',
+  focusSecondary: 'rgb(250, 224, 228)',
+  headerBackground:
+    'linear-gradient(to right, rgb(0, 191, 188), rgb(202, 156, 185))',
+  headerNotActiveBackground:
+    'linear-gradient(to right, rgb(0, 187, 169), rgb(236, 145, 162))',
+  headerNotActiveText: 'rgb(0, 85, 77)',
+  headerText: 'rgb(255, 255, 255)',
+  hoverBackground: 'rgb(162, 219, 210)',
+  material: 'rgb(244, 193, 202)',
+  materialDark: 'rgb(0, 187, 169)',
+  materialText: 'rgb(0, 0, 0)',
+  materialTextDisabled: 'rgb(222, 69, 96)',
+  materialTextDisabledShadow: 'rgb(250, 224, 228)',
+  materialTextInvert: 'rgb(0, 0, 0)',
+  progress: 'rgb(162, 219, 210)',
+  tooltip: 'rgb(204, 255, 255)'
 };
-
-export default mapFromWindowsTheme('peggysPastels', theme, true);
