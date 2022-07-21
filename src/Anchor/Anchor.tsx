@@ -1,5 +1,4 @@
-import React from 'react';
-import propTypes from 'prop-types';
+import React, { forwardRef } from 'react';
 
 import styled from 'styled-components';
 
@@ -12,9 +11,14 @@ const StyledAnchor = styled.a`
   }
 `;
 
-const Anchor = React.forwardRef(function Anchor(props, ref) {
-  const { children, ...otherProps } = props;
+interface AnchorProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  children: React.ReactNode;
+}
 
+const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(function Anchor(
+  { children, ...otherProps }: AnchorProps,
+  ref
+) {
   return (
     <StyledAnchor ref={ref} {...otherProps}>
       {children}
@@ -22,10 +26,4 @@ const Anchor = React.forwardRef(function Anchor(props, ref) {
   );
 });
 
-Anchor.defaultProps = {};
-
-Anchor.propTypes = {
-  children: propTypes.node.isRequired
-};
-
-export default Anchor;
+export { Anchor, AnchorProps };
