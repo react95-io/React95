@@ -44,6 +44,7 @@
     "lint": "eslint src --ext .js",
     "lint:fix": "yarn run lint --fix",
     "semantic-release": "semantic-release",
+    "install:codesandbox": "yarn --ignore-engines",
     "cz": "git-cz"
   },
   "peerDependencies": {
