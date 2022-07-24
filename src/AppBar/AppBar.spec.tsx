@@ -1,4 +1,3 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 
 import AppBar from './AppBar';
@@ -8,21 +7,21 @@ const defaultProps = { children: '' };
 describe('<AppBar />', () => {
   it('should render header', () => {
     const { container } = render(<AppBar {...defaultProps} />);
-    const headerEl = container.firstChild;
+    const headerEl = container.firstElementChild;
 
-    expect(headerEl.tagName).toBe('HEADER');
+    expect(headerEl && headerEl.tagName).toBe('HEADER');
   });
 
   it('should render children', () => {
     const { container } = render(<AppBar>A nice app bar</AppBar>);
-    const headerEl = container.firstChild;
+    const headerEl = container.firstElementChild;
 
     expect(headerEl).toHaveTextContent('A nice app bar');
   });
 
   it('should render fixed prop properly', () => {
     const { container, rerender } = render(<AppBar {...defaultProps} fixed />);
-    const headerEl = container.firstChild;
+    const headerEl = container.firstElementChild;
 
     expect(headerEl).toHaveStyleRule('position', 'fixed');
 
@@ -35,7 +34,7 @@ describe('<AppBar />', () => {
     const { container } = render(
       <AppBar {...defaultProps} style={{ backgroundColor: 'papayawhip' }} />
     );
-    const headerEl = container.firstChild;
+    const headerEl = container.firstElementChild;
 
     expect(headerEl).toHaveAttribute('style', 'background-color: papayawhip;');
   });
@@ -43,7 +42,7 @@ describe('<AppBar />', () => {
   it('should render custom props', () => {
     const customProps = { title: 'cool-header' };
     const { container } = render(<AppBar {...defaultProps} {...customProps} />);
-    const headerEl = container.firstChild;
+    const headerEl = container.firstElementChild;
 
     expect(headerEl).toHaveAttribute('title', 'cool-header');
   });
