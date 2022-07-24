@@ -9,6 +9,7 @@ import {
   ListItem,
   Divider
 } from 'react95';
+import { ComponentMeta } from '@storybook/react';
 import logoIMG from '../assets/images/logo.png';
 
 const Wrapper = styled.div`
@@ -20,7 +21,7 @@ export default {
   title: 'AppBar',
   component: AppBar,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
+} as ComponentMeta<typeof AppBar>;
 
 export function Default() {
   const [open, setOpen] = React.useState(false);
