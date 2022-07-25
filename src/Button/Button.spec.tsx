@@ -1,10 +1,9 @@
-import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 
 import { renderWithTheme, theme } from '../../test/utils';
 import { blockSizes } from '../common/system';
 
-import Button from './Button';
+import { Button } from './Button';
 
 const defaultProps = {
   children: 'click me'

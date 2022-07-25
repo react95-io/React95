@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 
 import { Tree, Fieldset } from 'react95';
-import Button from '../Button/Button';
+import { Button } from '../Button/Button';
 
 const Wrapper = styled.div`
   background: ${({ theme }) => theme.material};

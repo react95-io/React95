@@ -9,7 +9,7 @@ import WindowContent from '../WindowContent/WindowContent';
 import Select from '../Select/Select';
 import NumberField from '../NumberField/NumberField';
 import Cutout from '../Cutout/Cutout';
-import Button from '../Button/Button';
+import { Button } from '../Button/Button';
 import Toolbar from '../Toolbar/Toolbar';
 
 const Calendar = styled(Cutout)`

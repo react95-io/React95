@@ -1,17 +1,17 @@
-import React from 'react';
-import styled from 'styled-components';
-
+import { ComponentMeta } from '@storybook/react';
+import { useState } from 'react';
 import {
   Button,
-  Window,
-  WindowHeader,
-  WindowContent,
+  Cutout,
+  Divider,
   List,
   ListItem,
-  Divider,
-  Cutout,
-  Toolbar
+  Toolbar,
+  Window,
+  WindowContent,
+  WindowHeader
 } from 'react95';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   padding: 5rem;
@@ -32,7 +32,7 @@ export default {
   title: 'Button',
   component: Button,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
+} as ComponentMeta<typeof Button>;
 
 export function Default() {
   return (
@@ -66,7 +66,7 @@ Default.story = {
 const imageSrc =
   'https://image.freepik.com/foto-gratuito/la-frutta-fresca-del-kiwi-tagliata-a-meta-con-la-decorazione-completa-del-pezzo-e-bella-sulla-tavola-di-legno_47436-1.jpg';
 export function Menu() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <Window style={{ maxWidth: '250px' }}>

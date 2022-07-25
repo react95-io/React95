@@ -7,7 +7,7 @@ export * from './Anchor/Anchor';
 export * from './AppBar/AppBar';
 export * from './Avatar/Avatar';
 export * from './Bar/Bar';
-export { default as Button } from './Button/Button';
+export * from './Button/Button';
 export * from './Checkbox/Checkbox';
 export { default as ColorInput } from './ColorInput/ColorInput';
 export * from './Counter/Counter';
