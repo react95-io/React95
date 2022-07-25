@@ -1,20 +1,22 @@
 import React from 'react';
 import { renderWithTheme } from '../../test/utils';
 
-import Desktop from './Desktop';
+import { Desktop } from './Desktop';
 
 describe('<Desktop />', () => {
   it('should render', () => {
     const { container } = renderWithTheme(<Desktop />);
-    const desktopElement = container.firstChild;
+    const desktopElement = container.firstElementChild;
 
     expect(desktopElement).toBeInTheDocument();
   });
 
   it('should handle custom props', () => {
-    const customProps = { title: 'potatoe' };
+    const customProps: React.HTMLAttributes<HTMLDivElement> = {
+      title: 'potatoe'
+    };
     const { container } = renderWithTheme(<Desktop {...customProps} />);
-    const desktopElement = container.firstChild;
+    const desktopElement = container.firstElementChild;
 
     expect(desktopElement).toHaveAttribute('title', 'potatoe');
   });

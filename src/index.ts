@@ -12,7 +12,7 @@ export { default as Checkbox } from './Checkbox/Checkbox';
 export { default as ColorInput } from './ColorInput/ColorInput';
 export * from './Counter/Counter';
 export { default as Cutout } from './Cutout/Cutout';
-export { default as Desktop } from './Desktop/Desktop';
+export * from './Desktop/Desktop';
 export * from './Divider/Divider';
 export { default as Fieldset } from './Fieldset/Fieldset';
 export { default as Hourglass } from './Hourglass/Hourglass';
