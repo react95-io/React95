@@ -1,12 +1,11 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 
-import Cutout from './Cutout';
+import { Cutout } from './Cutout';
 
 describe('<Cutout />', () => {
   it('should render cutout', () => {
     const { container } = render(<Cutout />);
-    const cutout = container.firstChild;
+    const cutout = container.firstElementChild;
 
     expect(cutout).toBeInTheDocument();
   });
@@ -15,7 +14,7 @@ describe('<Cutout />', () => {
     const { container } = render(
       <Cutout style={{ backgroundColor: 'papayawhip' }} />
     );
-    const cutout = container.firstChild;
+    const cutout = container.firstElementChild;
 
     expect(cutout).toHaveAttribute('style', 'background-color: papayawhip;');
   });
@@ -34,7 +33,7 @@ describe('<Cutout />', () => {
   it('should render custom props', () => {
     const customProps = { title: 'cutout' };
     const { container } = render(<Cutout {...customProps} />);
-    const cutout = container.firstChild;
+    const cutout = container.firstElementChild;
 
     expect(cutout).toHaveAttribute('title', 'cutout');
   });

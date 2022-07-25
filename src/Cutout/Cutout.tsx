@@ -1,9 +1,15 @@
-import React from 'react';
-import propTypes from 'prop-types';
+import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 import { insetShadow, createScrollbars } from '../common';
+import { CommonStyledProps } from '../types';
 
-export const StyledCutout = styled.div`
+type CutoutProps = {
+  children?: React.ReactNode;
+  shadow?: boolean;
+} & React.HTMLAttributes<HTMLDivElement> &
+  CommonStyledProps;
+
+export const StyledCutout = styled.div<Pick<CutoutProps, 'shadow'>>`
   position: relative;
   box-sizing: border-box;
   padding: 2px;
@@ -44,23 +50,15 @@ const Content = styled.div`
   ${createScrollbars()}
 `;
 
-const Cutout = React.forwardRef(function Cutout(props, ref) {
-  const { children, ...otherProps } = props;
+const Cutout = forwardRef<HTMLDivElement, CutoutProps>(function Cutout(
+  { children, shadow = true, ...otherProps },
+  ref
+) {
   return (
-    <StyledCutout ref={ref} {...otherProps}>
+    <StyledCutout ref={ref} shadow={shadow} {...otherProps}>
       <Content>{children}</Content>
     </StyledCutout>
   );
 });
 
-Cutout.defaultProps = {
-  children: null,
-  shadow: true
-};
-
-Cutout.propTypes = {
-  children: propTypes.node,
-  shadow: propTypes.bool
-};
-
-export default Cutout;
+export { Cutout, CutoutProps };

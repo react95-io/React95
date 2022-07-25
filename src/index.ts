@@ -11,7 +11,7 @@ export * from './Button/Button';
 export * from './Checkbox/Checkbox';
 export { default as ColorInput } from './ColorInput/ColorInput';
 export * from './Counter/Counter';
-export { default as Cutout } from './Cutout/Cutout';
+export * from './Cutout/Cutout';
 export * from './Desktop/Desktop';
 export * from './Divider/Divider';
 export { default as Fieldset } from './Fieldset/Fieldset';
