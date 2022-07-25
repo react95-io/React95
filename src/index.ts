@@ -20,7 +20,7 @@ export { default as List } from './List/List';
 export { default as ListItem } from './ListItem/ListItem';
 export { default as LoadingIndicator } from './LoadingIndicator/LoadingIndicator';
 export { default as NumberField } from './NumberField/NumberField';
-export { default as Panel } from './Panel/Panel';
+export * from './Panel/Panel';
 export { default as Progress } from './Progress/Progress';
 export { default as Radio } from './Radio/Radio';
 export { default as Select } from './Select/Select';
