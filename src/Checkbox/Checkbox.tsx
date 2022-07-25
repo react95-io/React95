@@ -1,18 +1,37 @@
-import React from 'react';
-import propTypes from 'prop-types';
-
+import React, { forwardRef, useCallback } from 'react';
 import styled, { css } from 'styled-components';
-import { createHatchedBackground } from '../common';
 
+import { createHatchedBackground } from '../common';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
+import { noOp } from '../common/utils';
 import { StyledCutout } from '../Cutout/Cutout';
 import { StyledListItem } from '../ListItem/ListItem';
 import {
+  LabelText,
   size,
   StyledInput,
-  StyledLabel,
-  LabelText
+  StyledLabel
 } from '../SwitchBase/SwitchBase';
+import { CommonThemeProps } from '../types';
+
+type CheckboxProps = {
+  checked?: boolean;
+  className?: string;
+  defaultChecked?: boolean;
+  disabled?: boolean;
+  indeterminate?: boolean;
+  label?: number | string;
+  name?: string;
+  onChange?: React.InputHTMLAttributes<HTMLInputElement>['onChange'];
+  style?: React.CSSProperties;
+  value?: number | string;
+  variant?: 'default' | 'flat' | 'menu';
+} & React.InputHTMLAttributes<HTMLInputElement>;
+
+type CheckmarkProps = {
+  $disabled: boolean;
+  variant: 'default' | 'flat' | 'menu';
+};
 
 const sharedCheckboxStyles = css`
   width: ${size}px;
@@ -22,37 +41,37 @@ const sharedCheckboxStyles = css`
   justify-content: space-around;
   margin-right: 0.5rem;
 `;
-const StyledCheckbox = styled(StyledCutout)`
+const StyledCheckbox = styled(StyledCutout)<CommonThemeProps>`
   ${sharedCheckboxStyles}
   width: ${size}px;
   height: ${size}px;
-  background: ${({ theme, isDisabled }) =>
-    isDisabled ? theme.material : theme.canvas};
+  background: ${({ $disabled, theme }) =>
+    $disabled ? theme.material : theme.canvas};
   &:before {
     box-shadow: none;
   }
 `;
-const StyledFlatCheckbox = styled.div`
+const StyledFlatCheckbox = styled.div<CommonThemeProps>`
   position: relative;
   box-sizing: border-box;
   display: inline-block;
-  background: ${({ theme, isDisabled }) =>
-    isDisabled ? theme.flatLight : theme.canvas};
+  background: ${({ $disabled, theme }) =>
+    $disabled ? theme.flatLight : theme.canvas};
   ${sharedCheckboxStyles}
   width: ${size - 4}px;
   height: ${size - 4}px;
   outline: none;
   border: 2px solid ${({ theme }) => theme.flatDark};
-  background: ${({ theme, isDisabled }) =>
-    isDisabled ? theme.flatLight : theme.canvas};
+  background: ${({ $disabled, theme }) =>
+    $disabled ? theme.flatLight : theme.canvas};
 `;
 
-const StyledMenuCheckbox = styled.div`
+const StyledMenuCheckbox = styled.div<CommonThemeProps>`
   position: relative;
   box-sizing: border-box;
   display: inline-block;
-  background: ${({ theme, isDisabled }) =>
-    isDisabled ? theme.flatLight : theme.canvas};
+  background: ${({ $disabled, theme }) =>
+    $disabled ? theme.flatLight : theme.canvas};
   ${sharedCheckboxStyles}
   width: ${size - 4}px;
   height: ${size - 4}px;
@@ -63,7 +82,7 @@ const StyledMenuCheckbox = styled.div`
 
 const CheckmarkIcon = styled.span.attrs(() => ({
   'data-testid': 'checkmarkIcon'
-}))`
+}))<CheckmarkProps>`
   display: inline-block;
   position: relative;
   width: 100%;
@@ -78,30 +97,30 @@ const CheckmarkIcon = styled.span.attrs(() => ({
     height: 7px;
 
     border: solid
-      ${({ theme, isDisabled }) =>
-        isDisabled ? theme.checkmarkDisabled : theme.checkmark};
+      ${({ $disabled, theme }) =>
+        $disabled ? theme.checkmarkDisabled : theme.checkmark};
     border-width: 0 3px 3px 0;
     transform: translate(-50%, -50%) rotate(45deg);
 
-    ${({ variant, theme, isDisabled }) =>
+    ${({ $disabled, theme, variant }) =>
       variant === 'menu'
         ? css`
-            border-color: ${isDisabled
+            border-color: ${$disabled
               ? theme.materialTextDisabled
               : theme.materialText};
             filter: drop-shadow(
               1px 1px 0px
-                ${isDisabled ? theme.materialTextDisabledShadow : 'transparent'}
+                ${$disabled ? theme.materialTextDisabledShadow : 'transparent'}
             );
           `
         : css`
-            border-color: ${isDisabled
+            border-color: ${$disabled
               ? theme.checkmarkDisabled
               : theme.checkmark};
           `}
   ${StyledListItem}:hover & {
-    ${({ theme, isDisabled, variant }) =>
-      !isDisabled &&
+    ${({ $disabled, theme, variant }) =>
+      !$disabled &&
       variant === 'menu' &&
       css`
         border-color: ${theme.materialTextInvert};
@@ -110,7 +129,7 @@ const CheckmarkIcon = styled.span.attrs(() => ({
 `;
 const IndeterminateIcon = styled.span.attrs(() => ({
   'data-testid': 'indeterminateIcon'
-}))`
+}))<CheckmarkProps>`
   display: inline-block;
   position: relative;
 
@@ -131,13 +150,13 @@ const IndeterminateIcon = styled.span.attrs(() => ({
     width: 100%;
     height: 100%;
 
-    ${({ theme, isDisabled }) =>
+    ${({ $disabled, theme }) =>
       createHatchedBackground({
-        mainColor: isDisabled ? theme.checkmarkDisabled : theme.checkmark
+        mainColor: $disabled ? theme.checkmarkDisabled : theme.checkmark
       })}
     background-position: 0px 0px, 2px 2px;
 
-    ${({ variant, isDisabled, theme }) =>
+    ${({ $disabled, theme, variant }) =>
       variant === 'menu' &&
       css`
         ${StyledListItem}:hover & {
@@ -147,7 +166,7 @@ const IndeterminateIcon = styled.span.attrs(() => ({
         }
         filter: drop-shadow(
           1px 1px 0px
-            ${isDisabled ? theme.materialTextDisabledShadow : 'transparent'}
+            ${$disabled ? theme.materialTextDisabledShadow : 'transparent'}
         );
       `};
   }
@@ -159,30 +178,35 @@ const CheckboxComponents = {
   menu: StyledMenuCheckbox
 };
 
-const Checkbox = React.forwardRef(function Checkbox(props, ref) {
-  const {
-    onChange,
-    label,
-    disabled,
-    variant,
-    value,
+const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Checkbox(
+  {
     checked,
-    defaultChecked,
-    indeterminate,
-    name,
-    className,
-    style,
+    className = '',
+    defaultChecked = false,
+    disabled = false,
+    indeterminate = false,
+    label = '',
+    onChange = noOp,
+    style = {},
+    value,
+    variant = 'default',
     ...otherProps
-  } = props;
+  },
+  ref
+) {
   const [state, setState] = useControlledOrUncontrolled({
     value: checked,
     defaultValue: defaultChecked
   });
-  const handleChange = e => {
-    const newState = e.target.checked;
-    setState(newState);
-    if (onChange) onChange(e);
-  };
+
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newState = e.target.checked;
+      setState(newState);
+      onChange(e);
+    },
+    [onChange]
+  );
 
   const CheckboxComponent = CheckboxComponents[variant];
 
@@ -192,8 +216,9 @@ const Checkbox = React.forwardRef(function Checkbox(props, ref) {
   } else if (state) {
     Icon = CheckmarkIcon;
   }
+
   return (
-    <StyledLabel isDisabled={disabled} className={className} style={style}>
+    <StyledLabel $disabled={disabled} className={className} style={style}>
       <StyledInput
         disabled={disabled}
         onChange={disabled ? undefined : handleChange}
@@ -201,54 +226,16 @@ const Checkbox = React.forwardRef(function Checkbox(props, ref) {
         type='checkbox'
         value={value}
         checked={state}
-        name={name}
         data-indeterminate={indeterminate}
         ref={ref}
         {...otherProps}
       />
-      <CheckboxComponent
-        checked={state}
-        indeterminate={indeterminate}
-        isDisabled={disabled}
-        role='presentation'
-      >
-        {Icon && <Icon isDisabled={disabled} variant={variant} />}
+      <CheckboxComponent $disabled={disabled} role='presentation'>
+        {Icon && <Icon $disabled={disabled} variant={variant} />}
       </CheckboxComponent>
       {label && <LabelText>{label}</LabelText>}
     </StyledLabel>
   );
 });
 
-Checkbox.defaultProps = {
-  label: '',
-  disabled: false,
-  variant: 'default',
-  onChange: () => {},
-  checked: undefined,
-  style: {},
-  defaultChecked: false,
-  className: '',
-  indeterminate: false,
-  value: undefined,
-  name: null
-};
-
-Checkbox.propTypes = {
-  onChange: propTypes.func,
-  name: propTypes.string,
-  value: propTypes.oneOfType([
-    propTypes.string,
-    propTypes.number,
-    propTypes.bool
-  ]),
-  label: propTypes.oneOfType([propTypes.string, propTypes.number]),
-  checked: propTypes.bool,
-  disabled: propTypes.bool,
-  variant: propTypes.oneOf(['default', 'flat', 'menu']),
-  style: propTypes.object,
-  defaultChecked: propTypes.bool,
-  indeterminate: propTypes.bool,
-  className: propTypes.string
-};
-
-export default Checkbox;
+export { Checkbox, CheckboxProps };

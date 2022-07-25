@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { Checkbox, Fieldset, Cutout, List, ListItem, Divider } from 'react95';
+import { ComponentMeta } from '@storybook/react';
 
 const Wrapper = styled.div`
   background: ${({ theme }) => theme.material};
@@ -21,7 +22,7 @@ export default {
   title: 'Checkbox',
   component: Checkbox,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
+} as ComponentMeta<typeof Checkbox>;
 
 export function Default() {
   const [state, setState] = useState({
@@ -33,7 +34,7 @@ export function Default() {
   const { cheese, bacon, broccoli } = state;
   const ingredientsArr = Object.values(state).map(val => (val ? 1 : 0));
   const possibleIngredients = Object.keys(state).length;
-  const chosenIngredients = ingredientsArr.reduce((a, b) => a + b, 0);
+  const chosenIngredients = ingredientsArr.reduce<number>((a, b) => a + b, 0);
 
   const isIndeterminate = ![0, possibleIngredients].includes(chosenIngredients);
 
@@ -60,10 +61,8 @@ export function Default() {
     }
   };
 
-  const toggleIngredient = e => {
-    const {
-      target: { value }
-    } = e;
+  const toggleIngredient = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value as 'cheese' | 'bacon' | 'broccoli';
     setState({
       ...state,
       [value]: !state[value]
@@ -135,7 +134,7 @@ export function Flat() {
   const { cheese, bacon, broccoli } = state;
   const ingredientsArr = Object.values(state).map(val => (val ? 1 : 0));
   const possibleIngredients = Object.keys(state).length;
-  const chosenIngredients = ingredientsArr.reduce((a, b) => a + b, 0);
+  const chosenIngredients = ingredientsArr.reduce<number>((a, b) => a + b, 0);
 
   const isIndeterminate = ![0, possibleIngredients].includes(chosenIngredients);
 
@@ -162,10 +161,8 @@ export function Flat() {
     }
   };
 
-  const toggleIngredient = e => {
-    const {
-      target: { value }
-    } = e;
+  const toggleIngredient = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value as 'cheese' | 'bacon' | 'broccoli';
     setState({
       ...state,
       [value]: !state[value]

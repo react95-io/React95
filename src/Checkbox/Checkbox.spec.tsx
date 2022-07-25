@@ -1,6 +1,5 @@
-import React from 'react';
 import { renderWithTheme } from '../../test/utils';
-import Checkbox from './Checkbox';
+import { Checkbox } from './Checkbox';
 
 describe('<Checkbox />', () => {
   describe('label', () => {
@@ -106,7 +105,7 @@ describe('<Checkbox />', () => {
       );
 
       rerender(<Checkbox checked />);
-      const checkbox = getByRole('checkbox');
+      const checkbox = getByRole('checkbox') as HTMLInputElement;
 
       expect(checkbox.checked).toBe(true);
       expect(getByRole('checkbox')).toHaveAttribute('checked');
@@ -119,7 +118,7 @@ describe('<Checkbox />', () => {
     it('should uncheck the checkbox', () => {
       const { getByRole, rerender } = renderWithTheme(<Checkbox checked />);
       rerender(<Checkbox checked={false} />);
-      const checkbox = getByRole('checkbox');
+      const checkbox = getByRole('checkbox') as HTMLInputElement;
 
       expect(checkbox.checked).toBe(false);
       expect(getByRole('checkbox')).not.toHaveAttribute('checked');
@@ -131,7 +130,7 @@ describe('<Checkbox />', () => {
   describe('uncontrolled', () => {
     it('can change checked state uncontrolled starting from defaultChecked', () => {
       const { getByRole } = renderWithTheme(<Checkbox defaultChecked />);
-      const checkbox = getByRole('checkbox');
+      const checkbox = getByRole('checkbox') as HTMLInputElement;
 
       expect(checkbox.checked).toBe(true);
 
