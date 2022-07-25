@@ -39,6 +39,7 @@ export type Theme = {
   canvasTextInvert: Color;
   checkmark: Color;
   checkmarkDisabled: Color;
+  desktopBackground: Color;
   flatDark: Color;
   flatLight: Color;
   focusSecondary: Color;
