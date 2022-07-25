@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import propTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import {
@@ -6,8 +6,16 @@ import {
   createBoxStyles,
   createWellBorderStyles
 } from '../common';
+import { CommonStyledProps } from '../types';
 
-const createPanelStyles = (variant = 'default') => {
+type PanelProps = {
+  children?: React.ReactNode;
+  shadow?: boolean;
+  variant?: 'outside' | 'inside' | 'well';
+} & React.HTMLAttributes<HTMLDivElement> &
+  CommonStyledProps;
+
+const createPanelStyles = (variant: PanelProps['variant']) => {
   switch (variant) {
     case 'well':
       return css`
@@ -24,17 +32,19 @@ const createPanelStyles = (variant = 'default') => {
   }
 };
 
-const StyledPanel = styled.div`
+const StyledPanel = styled.div<Required<Pick<PanelProps, 'variant'>>>`
   position: relative;
   font-size: 1rem;
   ${({ variant }) => createPanelStyles(variant)}
   ${createBoxStyles()}
 `;
 
-const Panel = React.forwardRef(function Panel(props, ref) {
-  const { children, variant, ...otherProps } = props;
+const Panel = forwardRef<HTMLDivElement, PanelProps>(function Panel(
+  { children, shadow = false, variant = 'outside', ...otherProps },
+  ref
+) {
   return (
-    <StyledPanel ref={ref} variant={variant} {...otherProps}>
+    <StyledPanel ref={ref} shadow={shadow} variant={variant} {...otherProps}>
       {children}
     </StyledPanel>
   );
@@ -52,4 +62,4 @@ Panel.propTypes = {
   shadow: propTypes.bool
 };
 
-export default Panel;
+export { Panel, PanelProps };

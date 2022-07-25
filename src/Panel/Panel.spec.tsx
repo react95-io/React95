@@ -1,12 +1,11 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 
-import Panel from './Panel';
+import { Panel } from './Panel';
 
 describe('<Panel />', () => {
   it('should render panel', () => {
     const { container } = render(<Panel />);
-    const panel = container.firstChild;
+    const panel = container.firstElementChild;
 
     expect(panel).toBeInTheDocument();
   });
@@ -15,7 +14,7 @@ describe('<Panel />', () => {
     const { container } = render(
       <Panel style={{ backgroundColor: 'papayawhip' }} />
     );
-    const panel = container.firstChild;
+    const panel = container.firstElementChild;
 
     expect(panel).toHaveAttribute('style', 'background-color: papayawhip;');
   });
@@ -34,7 +33,7 @@ describe('<Panel />', () => {
   it('should render custom props', () => {
     const customProps = { title: 'panel' };
     const { container } = render(<Panel {...customProps} />);
-    const panel = container.firstChild;
+    const panel = container.firstElementChild;
 
     expect(panel).toHaveAttribute('title', 'panel');
   });

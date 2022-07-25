@@ -1,7 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-
+import { ComponentMeta } from '@storybook/react';
 import { Panel } from 'react95';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   padding: 5rem;
@@ -22,7 +21,7 @@ export default {
   title: 'Panel',
   component: Panel,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
+} as ComponentMeta<typeof Panel>;
 
 export function Default() {
   return (
