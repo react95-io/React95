@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
-import { CommonStyledProps } from 'src/types';
-
 import styled from 'styled-components';
+
+import { CommonStyledProps } from '../types';
 
 const StyledAnchor = styled.a`
   color: ${({ theme }) => theme.anchor};
