@@ -9,7 +9,7 @@ export * from './Avatar/Avatar';
 export * from './Bar/Bar';
 export * from './Button/Button';
 export * from './Checkbox/Checkbox';
-export { default as ColorInput } from './ColorInput/ColorInput';
+export * from './ColorInput/ColorInput';
 export * from './Counter/Counter';
 export * from './Cutout/Cutout';
 export * from './Desktop/Desktop';

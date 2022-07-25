@@ -1,8 +1,7 @@
-import React from 'react';
-
+import { ComponentMeta } from '@storybook/react';
 import styled from 'styled-components';
 
-import { ColorInput, Cutout } from '..';
+import { ColorInput, Cutout } from 'react95';
 
 const Wrapper = styled.div`
   background: ${({ theme }) => theme.material};
@@ -31,7 +30,7 @@ export default {
   title: 'ColorInput',
   component: ColorInput,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
+} as ComponentMeta<typeof ColorInput>;
 
 export function Default() {
   return (

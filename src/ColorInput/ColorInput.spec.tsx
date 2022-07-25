@@ -1,14 +1,13 @@
-import React from 'react';
 import { fireEvent } from '@testing-library/react';
 import { renderWithTheme } from '../../test/utils';
-import ColorInput from './ColorInput';
+import { ColorInput } from './ColorInput';
 
-function rgb2hex(str) {
+function rgb2hex(str: string) {
   const rgb = str.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-  function hex(x) {
+  function hex(x: string) {
     return `0${parseInt(x, 10).toString(16)}`.slice(-2);
   }
-  return `#${hex(rgb[1])}${hex(rgb[2])}${hex(rgb[3])}`;
+  return rgb ? `#${hex(rgb[1])}${hex(rgb[2])}${hex(rgb[3])}` : '';
 }
 
 describe('<ColorInput />', () => {
@@ -16,7 +15,7 @@ describe('<ColorInput />', () => {
     const color = '#f0f0dd';
     const onChange = jest.fn();
     const { container } = renderWithTheme(<ColorInput onChange={onChange} />);
-    const input = container.querySelector(`[type="color"]`);
+    const input = container.querySelector(`[type="color"]`) as HTMLInputElement;
     fireEvent.change(input, { target: { value: color } });
     expect(onChange).toBeCalledTimes(1);
   });
@@ -24,7 +23,7 @@ describe('<ColorInput />', () => {
   it('should properly pass value to input element', () => {
     const color = '#f0f0dd';
     const { container } = renderWithTheme(<ColorInput value={color} />);
-    const input = container.querySelector(`[type="color"]`);
+    const input = container.querySelector(`[type="color"]`) as HTMLInputElement;
 
     expect(input.value).toBe(color);
   });
