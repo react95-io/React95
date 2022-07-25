@@ -51,6 +51,13 @@ module.exports = {
       rules: {
         'no-console': 'off'
       }
+    },
+    {
+      files: ['*.@(ts|tsx)'],
+      rules: {
+        // This is handled by @typescript-eslint/no-unused-vars
+        'no-undef': 'off'
+      }
     }
   ],
   settings: {
