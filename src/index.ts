@@ -15,7 +15,7 @@ export { default as Cutout } from './Cutout/Cutout';
 export * from './Desktop/Desktop';
 export * from './Divider/Divider';
 export { default as Fieldset } from './Fieldset/Fieldset';
-export { default as Hourglass } from './Hourglass/Hourglass';
+export * from './Hourglass/Hourglass';
 export { default as List } from './List/List';
 export { default as ListItem } from './ListItem/ListItem';
 export { default as LoadingIndicator } from './LoadingIndicator/LoadingIndicator';
