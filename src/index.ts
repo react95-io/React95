@@ -12,6 +12,7 @@ export * from './Checkbox/Checkbox';
 export * from './ColorInput/ColorInput';
 export * from './Counter/Counter';
 export * from './Cutout/Cutout';
+export * from './DatePicker/DatePicker';
 export * from './Desktop/Desktop';
 export * from './Divider/Divider';
 export * from './Fieldset/Fieldset';
