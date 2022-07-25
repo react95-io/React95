@@ -3,11 +3,11 @@ name: Button
 menu: Components
 ---
 
-import Button from './Button'
-import Window from '../Window/Window'
-import WindowContent from '../WindowContent/WindowContent'
-import Cutout from '../Cutout/Cutout'
-import Toolbar from '../Toolbar/Toolbar'
+import { Button } from './Button';
+import Window from '../Window/Window';
+import WindowContent from '../WindowContent/WindowContent';
+import Cutout from '../Cutout/Cutout';
+import Toolbar from '../Toolbar/Toolbar';
 
 # Button
 
@@ -16,7 +16,7 @@ import Toolbar from '../Toolbar/Toolbar'
 #### Default
 
 <Playground>
-  <Button >Default</Button>
+  <Button>Default</Button>
 </Playground>
 
 #### Disabled
@@ -58,15 +58,9 @@ import Toolbar from '../Toolbar/Toolbar'
       justifyContent: 'space-between'
     }}
   >
-    <Button size='sm'>
-      small
-    </Button>
-    <Button size='md'>
-      medium
-    </Button>
-    <Button size='lg'>
-      large
-    </Button>
+    <Button size='sm'>small</Button>
+    <Button size='md'>medium</Button>
+    <Button size='lg'>large</Button>
   </div>
 </Playground>
 
@@ -90,14 +84,10 @@ import Toolbar from '../Toolbar/Toolbar'
             >
               Primary
             </Button>
-            <Button
-              variant='flat'
-              fullWidth
-              style={{ marginRight: '0.5rem' }}
-            >
+            <Button variant='flat' fullWidth style={{ marginRight: '0.5rem' }}>
               Regular
             </Button>
-            <Button  variant='flat' disabled fullWidt>
+            <Button variant='flat' disabled fullWidt>
               Disabled
             </Button>
           </Toolbar>

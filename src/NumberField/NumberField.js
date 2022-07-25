@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import { clamp } from '../common/utils';
 
-import Button from '../Button/Button';
+import { Button } from '../Button/Button';
 import { blockSizes } from '../common/system';
 import TextField from '../TextField/TextField';
 

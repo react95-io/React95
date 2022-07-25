@@ -1,36 +1,61 @@
 /* eslint-disable no-nested-ternary */
 
-import React from 'react';
-import propTypes from 'prop-types';
-
+import React, { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import {
   createBorderStyles,
-  createWellBorderStyles,
   createBoxStyles,
-  createFlatBoxStyles,
   createDisabledTextStyles,
+  createFlatBoxStyles,
   createHatchedBackground,
+  createWellBorderStyles,
   focusOutline
 } from '../common';
-import { noOp } from '../common/utils';
 import { blockSizes } from '../common/system';
+import { noOp } from '../common/utils';
+import { CommonStyledProps, Sizes } from '../types';
 
-const commonButtonStyles = css`
+type ButtonProps = {
+  active?: boolean;
+  children?: React.ReactNode;
+  disabled?: boolean;
+  fullWidth?: boolean;
+  onClick?: React.ButtonHTMLAttributes<HTMLButtonElement>['onClick'];
+  onTouchStart?: React.ButtonHTMLAttributes<HTMLButtonElement>['onTouchStart'];
+  primary?: boolean;
+  size?: Sizes;
+  square?: boolean;
+  type?: string;
+  variant?: 'default' | 'menu' | 'flat';
+} & React.ButtonHTMLAttributes<HTMLButtonElement> &
+  CommonStyledProps;
+
+type StyledButtonProps = Pick<
+  ButtonProps,
+  | 'active'
+  | 'disabled'
+  | 'fullWidth'
+  | 'primary'
+  | 'size'
+  | 'square'
+  | 'variant'
+>;
+
+const commonButtonStyles = css<StyledButtonProps>`
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: ${({ size }) => blockSizes[size]};
-  width: ${({ fullWidth, square, size }) =>
+  height: ${({ size = 'md' }) => blockSizes[size]};
+  width: ${({ fullWidth, size = 'md', square }) =>
     fullWidth ? '100%' : square ? blockSizes[size] : 'auto'};
   padding: ${({ square }) => (square ? 0 : `0 10px`)};
   font-size: 1rem;
   user-select: none;
   &:active {
-    padding-top: ${({ isDisabled }) => !isDisabled && '2px'};
+    padding-top: ${({ disabled }) => !disabled && '2px'};
   }
-  padding-top: ${({ active, isDisabled }) => active && !isDisabled && '2px'};
+  padding-top: ${({ active, disabled }) => active && !disabled && '2px'};
   &:after {
     content: '';
     position: absolute;
@@ -46,8 +71,8 @@ const commonButtonStyles = css`
   font-family: inherit;
 `;
 
-export const StyledButton = styled.button`
-  ${({ variant, theme, active, isDisabled, primary }) =>
+export const StyledButton = styled.button<StyledButtonProps>`
+  ${({ active, disabled, primary, theme, variant }) =>
     variant === 'flat'
       ? css`
           ${createFlatBoxStyles()}
@@ -63,7 +88,7 @@ export const StyledButton = styled.button`
             outline-offset: -4px;
           `}
           &:focus:after, &:active:after {
-            ${!active && !isDisabled && focusOutline}
+            ${!active && !disabled && focusOutline}
             outline-offset: -4px;
           }
         `
@@ -73,18 +98,18 @@ export const StyledButton = styled.button`
           border: 2px solid transparent;
           &:hover,
           &:focus {
-            ${!isDisabled && !active && createWellBorderStyles(false)}
+            ${!disabled && !active && createWellBorderStyles(false)}
           }
           &:active {
-            ${!isDisabled && createWellBorderStyles(true)}
+            ${!disabled && createWellBorderStyles(true)}
           }
           ${active && createWellBorderStyles(true)}
-          ${isDisabled && createDisabledTextStyles()}
+          ${disabled && createDisabledTextStyles()}
         `
       : css`
           ${createBoxStyles()};
           border: none;
-          ${isDisabled && createDisabledTextStyles()}
+          ${disabled && createDisabledTextStyles()}
           ${active
             ? createHatchedBackground({
                 mainColor: theme.material,
@@ -115,11 +140,11 @@ export const StyledButton = styled.button`
               : createBorderStyles({ invert: false })}
           }
           &:active:before {
-            ${!isDisabled && createBorderStyles({ invert: true })}
+            ${!disabled && createBorderStyles({ invert: true })}
           }
           &:focus:after,
           &:active:after {
-            ${!active && !isDisabled && focusOutline}
+            ${!active && !disabled && focusOutline}
             outline-offset: -8px;
           }
           &:active:focus:after,
@@ -130,15 +155,36 @@ export const StyledButton = styled.button`
   ${commonButtonStyles}
 `;
 
-const Button = React.forwardRef(function Button(props, ref) {
-  const { onClick, disabled, children, ...otherProps } = props;
-
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  {
+    onClick,
+    disabled = false,
+    children,
+    type = 'button',
+    fullWidth = false,
+    size = 'md',
+    square = false,
+    active = false,
+    onTouchStart = noOp,
+    primary = false,
+    variant = 'default',
+    ...otherProps
+  },
+  ref
+) {
   return (
     <StyledButton
-      onClick={disabled ? undefined : onClick}
+      active={active}
       disabled={disabled}
-      isDisabled={disabled}
+      fullWidth={fullWidth}
+      onClick={disabled ? undefined : onClick}
+      onTouchStart={onTouchStart}
+      primary={primary}
       ref={ref}
+      size={size}
+      square={square}
+      type={type}
+      variant={variant}
       {...otherProps}
     >
       {children}
@@ -146,33 +192,4 @@ const Button = React.forwardRef(function Button(props, ref) {
   );
 });
 
-Button.defaultProps = {
-  type: 'button',
-  onClick: null,
-  disabled: false,
-  fullWidth: false,
-  size: 'md',
-  square: false,
-  active: false,
-  // onTouchStart below to enable button :active style on iOS
-  onTouchStart: noOp,
-  primary: false,
-  variant: 'default'
-};
-
-Button.propTypes = {
-  type: propTypes.string,
-  onClick: propTypes.func,
-  disabled: propTypes.bool,
-  fullWidth: propTypes.bool,
-  size: propTypes.oneOf(['sm', 'md', 'lg']),
-  square: propTypes.bool,
-  active: propTypes.bool,
-  onTouchStart: propTypes.func,
-  primary: propTypes.bool,
-  variant: propTypes.oneOf(['default', 'menu', 'flat']),
-  // eslint-disable-next-line react/require-default-props
-  children: propTypes.node
-};
-
-export default Button;
+export { Button, ButtonProps };
