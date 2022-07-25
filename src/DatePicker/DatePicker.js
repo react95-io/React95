@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
 import propTypes from 'prop-types';
-
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import Window from '../Window/Window';
-import WindowHeader from '../WindowHeader/WindowHeader';
-import WindowContent from '../WindowContent/WindowContent';
-import Select from '../Select/Select';
-import NumberField from '../NumberField/NumberField';
-import Cutout from '../Cutout/Cutout';
 import { Button } from '../Button/Button';
+import { Cutout } from '../Cutout/Cutout';
+import NumberField from '../NumberField/NumberField';
+import Select from '../Select/Select';
 import Toolbar from '../Toolbar/Toolbar';
+import Window from '../Window/Window';
+import WindowContent from '../WindowContent/WindowContent';
+import WindowHeader from '../WindowHeader/WindowHeader';
 
 const Calendar = styled(Cutout)`
   width: 234px;

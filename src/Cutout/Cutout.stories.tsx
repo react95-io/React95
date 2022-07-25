@@ -1,11 +1,17 @@
-import React from 'react';
-
+import { ComponentMeta } from '@storybook/react';
 import { Cutout, Window, WindowContent } from 'react95';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  padding: 5rem;
+  background: ${({ theme }) => theme.desktopBackground};
+`;
 
 export default {
   title: 'Cutout',
-  component: Cutout
-};
+  component: Cutout,
+  decorators: [story => <Wrapper>{story()}</Wrapper>]
+} as ComponentMeta<typeof Cutout>;
 
 export function Default() {
   return (
