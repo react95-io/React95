@@ -1,10 +1,23 @@
-import React, { forwardRef, useRef, useState, useEffect } from 'react';
-import propTypes from 'prop-types';
-
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 import styled, { css } from 'styled-components';
 
-import { StyledCutout } from '../Cutout/Cutout';
 import { blockSizes } from '../common/system';
+import { StyledCutout } from '../Cutout/Cutout';
+import { CommonStyledProps } from '../types';
+
+type ProgressProps = {
+  hideValue?: boolean;
+  shadow?: boolean;
+  value?: number;
+  variant?: 'default' | 'tile';
+} & React.HTMLAttributes<HTMLDivElement> &
+  CommonStyledProps;
 
 const Wrapper = styled.div`
   display: inline-block;
@@ -42,7 +55,7 @@ const WhiteBar = styled.div`
   color: ${({ theme }) => theme.materialText};
 `;
 
-const BlueBar = styled.div`
+const BlueBar = styled.div<Required<Pick<ProgressProps, 'value'>>>`
   position: absolute;
   top: 2px;
   left: 2px;
@@ -79,53 +92,45 @@ const Tile = styled.span`
   border-style: solid;
 `;
 
-const Progress = forwardRef(function Progress(props, ref) {
-  const { value, variant, shadow, hideValue, ...otherProps } = props;
+const Progress = forwardRef<HTMLDivElement, ProgressProps>(function Progress(
+  {
+    hideValue = false,
+    shadow = true,
+    value = 0,
+    variant = 'default',
+    ...otherProps
+  },
+  ref
+) {
   const displayValue = hideValue ? null : `${value}%`;
 
-  const progressProps = {};
-  if (value !== undefined) {
-    progressProps['aria-valuenow'] = Math.round(value);
-  }
-
-  const tilesWrapperRef = useRef();
-  const savedCallback = useRef();
-  const [tilesNumber, setTilesNumber] = useState(0);
+  const tilesWrapperRef = useRef<HTMLDivElement | null>(null);
+  const [tiles, setTiles] = useState([]);
 
   // TODO debounce this function
-  function updateTilesNumber() {
-    if (tilesWrapperRef.current) {
-      const progressWidth =
-        tilesWrapperRef.current.getBoundingClientRect().width;
-      const newTilesNumber = Math.round(
-        ((value / 100) * progressWidth) / tileWidth
-      );
-      setTilesNumber(newTilesNumber);
+  const updateTilesNumber = useCallback(() => {
+    if (!tilesWrapperRef.current) {
+      return;
     }
-  }
-  useEffect(() => {
-    savedCallback.current = updateTilesNumber;
-  });
-  useEffect(() => {
-    function update() {
-      savedCallback.current();
-    }
-
-    // then listen on window resize to recalculate number of tiles
-    window.addEventListener('resize', update);
-    return () => window.removeEventListener('resize', update);
-  }, []);
-
-  // recalculate number of tiles when value changes
-  useEffect(() => {
-    savedCallback.current();
+    const progressWidth = tilesWrapperRef.current.getBoundingClientRect().width;
+    const newTilesNumber = Math.round(
+      ((value / 100) * progressWidth) / tileWidth
+    );
+    setTiles(Array.from({ length: newTilesNumber }));
   }, [value]);
+
+  useEffect(() => {
+    updateTilesNumber();
+
+    window.addEventListener('resize', updateTilesNumber);
+    return () => window.removeEventListener('resize', updateTilesNumber);
+  }, [updateTilesNumber]);
+
   return (
     <Wrapper
-      // TODO what to do with ref from forwardRef ?
+      aria-valuenow={value !== undefined ? Math.round(value) : undefined}
       ref={ref}
       role='progressbar'
-      {...progressProps}
       {...otherProps}
     >
       <ProgressCutout shadow={shadow}>
@@ -138,11 +143,9 @@ const Progress = forwardRef(function Progress(props, ref) {
           </>
         ) : (
           <TilesWrapper ref={tilesWrapperRef} data-testid='tileProgress'>
-            {Array(tilesNumber)
-              .fill(null)
-              .map((_, index) => (
-                <Tile key={index} />
-              ))}
+            {tiles.map((_, index) => (
+              <Tile key={index} />
+            ))}
           </TilesWrapper>
         )}
       </ProgressCutout>
@@ -150,18 +153,4 @@ const Progress = forwardRef(function Progress(props, ref) {
   );
 });
 
-Progress.defaultProps = {
-  value: 0,
-  shadow: true,
-  variant: 'default',
-  hideValue: false
-};
-
-Progress.propTypes = {
-  value: propTypes.number,
-  shadow: propTypes.bool,
-  variant: propTypes.oneOf(['default', 'tile']),
-  hideValue: propTypes.bool
-};
-
-export default Progress;
+export { Progress, ProgressProps };

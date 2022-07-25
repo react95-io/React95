@@ -1,7 +1,5 @@
-import React from 'react';
-
 import { renderWithTheme } from '../../test/utils';
-import Progress from './Progress';
+import { Progress } from './Progress';
 
 describe('<Progress />', () => {
   it('renders Progress', () => {
@@ -20,8 +18,12 @@ describe('<Progress />', () => {
         const value = 32;
         const { queryByTestId } = renderWithTheme(<Progress value={value} />);
 
-        expect(queryByTestId('defaultProgress1').textContent).toBe(`${value}%`);
-        expect(queryByTestId('defaultProgress2').textContent).toBe(`${value}%`);
+        expect(queryByTestId('defaultProgress1')?.textContent).toBe(
+          `${value}%`
+        );
+        expect(queryByTestId('defaultProgress2')?.textContent).toBe(
+          `${value}%`
+        );
 
         expect(queryByTestId('defaultProgress2')).toHaveStyleRule(
           'clip-path',

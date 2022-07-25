@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
-
-import styled from 'styled-components';
-
+import { ComponentMeta } from '@storybook/react';
+import { useEffect, useState } from 'react';
 import { Progress } from 'react95';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   background: ${({ theme }) => theme.material};
@@ -13,7 +12,7 @@ export default {
   title: 'Progress',
   component: Progress,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
+} as ComponentMeta<typeof Progress>;
 
 export function Default() {
   const [percent, setPercent] = useState(0);

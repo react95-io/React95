@@ -21,7 +21,7 @@ export { default as ListItem } from './ListItem/ListItem';
 export { default as LoadingIndicator } from './LoadingIndicator/LoadingIndicator';
 export { default as NumberField } from './NumberField/NumberField';
 export * from './Panel/Panel';
-export { default as Progress } from './Progress/Progress';
+export * from './Progress/Progress';
 export * from './Radio/Radio';
 export { default as Select } from './Select/Select';
 export { default as Slider } from './Slider/Slider';
