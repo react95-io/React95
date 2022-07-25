@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import AppBar from './AppBar';
+import { AppBar } from './AppBar';
 
 const defaultProps = { children: '' };
 

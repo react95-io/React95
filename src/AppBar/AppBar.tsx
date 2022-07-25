@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { CommonStyledProps } from '../types';
 import { createBorderStyles, createBoxStyles } from '../common';
 
-export type AppBarProps = {
+type AppBarProps = {
   children: React.ReactNode;
   fixed?: boolean;
 } & React.HTMLAttributes<HTMLElement> &
@@ -33,4 +33,4 @@ const AppBar = forwardRef<HTMLElement, AppBarProps>(function AppBar(
   );
 });
 
-export default AppBar;
+export { AppBar, AppBarProps };
