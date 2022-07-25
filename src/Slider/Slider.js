@@ -10,7 +10,7 @@ import {
   createDisabledTextStyles,
   createHatchedBackground
 } from '../common';
-import { clamp, roundValueToStep } from '../common/utils';
+import { clamp, getSize, roundValueToStep } from '../common/utils';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import useForkRef from '../common/hooks/useForkRef';
 import { useIsFocusVisible } from '../common/hooks/useIsFocusVisible';
@@ -242,7 +242,7 @@ const Slider = React.forwardRef(function Slider(props, ref) {
     step,
     min,
     max,
-    size: sizeProp,
+    size,
     marks: marksProp,
     onChange,
     onChangeCommitted,
@@ -475,13 +475,12 @@ const Slider = React.forwardRef(function Slider(props, ref) {
     };
   }, [handleTouchEnd, handleTouchMove, handleTouchStart]);
 
-  const size = typeof sizeProp === 'number' ? `${sizeProp}px` : sizeProp;
 
   return (
     <Wrapper
       isDisabled={disabled}
       vertical={vertical}
-      size={size}
+      size={getSize(size)}
       onMouseDown={handleMouseDown}
       ref={handleRef}
       isFocused={focusVisible}
