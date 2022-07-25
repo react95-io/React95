@@ -1,9 +1,21 @@
-import React from 'react';
-import propTypes from 'prop-types';
+import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 import { getSize } from '../common/utils';
+import { CommonStyledProps } from '../types';
 
-const StyledAvatar = styled.div`
+type AvatarProps = {
+  alt?: string;
+  children?: React.ReactNode;
+  noBorder?: boolean;
+  size?: string | number;
+  square?: boolean;
+  src?: string;
+} & React.HTMLAttributes<HTMLDivElement> &
+  CommonStyledProps;
+
+const StyledAvatar = styled.div<
+  Pick<AvatarProps, 'noBorder' | 'square' | 'src'> & { size?: string }
+>`
   display: inline-block;
   box-sizing: border-box;
   object-fit: contain;
@@ -34,45 +46,37 @@ const StyledAvatar = styled.div`
   `}
 `;
 
-const SlyledAvatarIMG = styled.img`
+const StyledAvatarImg = styled.img`
   display: block;
   object-fit: contain;
   width: 100%;
   height: 100%;
 `;
 
-const Avatar = React.forwardRef(function Avatar(props, ref) {
-  const { alt, children, noBorder, size, square, src, ...otherProps } = props;
-
+const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
+  {
+    alt = '',
+    children,
+    noBorder = false,
+    size = 35,
+    square = false,
+    src,
+    ...otherProps
+  },
+  ref
+) {
   return (
     <StyledAvatar
       noBorder={noBorder}
       ref={ref}
       size={getSize(size)}
       square={square}
+      src={src}
       {...otherProps}
     >
-      {src ? <SlyledAvatarIMG src={src} alt={alt} /> : children}
+      {src ? <StyledAvatarImg src={src} alt={alt} /> : children}
     </StyledAvatar>
   );
 });
 
-Avatar.defaultProps = {
-  alt: '',
-  children: null,
-  noBorder: false,
-  size: 35,
-  square: false,
-  src: undefined
-};
-
-Avatar.propTypes = {
-  alt: propTypes.string,
-  children: propTypes.node,
-  noBorder: propTypes.bool,
-  size: propTypes.oneOfType([propTypes.string, propTypes.number]),
-  square: propTypes.bool,
-  src: propTypes.string
-};
-
-export default Avatar;
+export { Avatar, AvatarProps };

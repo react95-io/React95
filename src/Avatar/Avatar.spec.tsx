@@ -1,9 +1,8 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 
 import { renderWithTheme, theme } from '../../test/utils';
 
-import Avatar from './Avatar';
+import { Avatar } from './Avatar';
 
 describe('<Avatar />', () => {
   it('should render component', () => {
@@ -14,16 +13,16 @@ describe('<Avatar />', () => {
 
   it('should render children', () => {
     const { container } = render(<Avatar>Avatar children</Avatar>);
-    const avatarEl = container.firstChild;
+    const avatarEl = container.firstElementChild;
 
-    expect(avatarEl.innerHTML).toBe('Avatar children');
+    expect(avatarEl && avatarEl.innerHTML).toBe('Avatar children');
   });
 
   it('should handle border properly', () => {
     const { container, rerender } = renderWithTheme(
       <Avatar noBorder={false} />
     );
-    const avatarEl = container.firstChild;
+    const avatarEl = container.firstElementChild;
 
     expect(avatarEl).toHaveStyleRule(
       'border-top',
@@ -37,7 +36,7 @@ describe('<Avatar />', () => {
 
   it('should handle square properly', () => {
     const { container, rerender } = render(<Avatar square />);
-    const avatarEl = container.firstChild;
+    const avatarEl = container.firstElementChild;
 
     expect(avatarEl).toHaveStyleRule('border-radius', '0');
 
@@ -49,9 +48,9 @@ describe('<Avatar />', () => {
   it('should render with source', async () => {
     const catGif = 'https://cdn2.thecatapi.com/images/1ac.gif';
     const { findByAltText } = render(<Avatar src={catGif} alt='cat avatar' />);
-    const imageEl = await findByAltText('cat avatar');
+    const imageEl = (await findByAltText('cat avatar')) as HTMLImageElement;
 
-    expect(imageEl.src).toBe(catGif);
+    expect(imageEl && imageEl.src).toBe(catGif);
   });
 
   it('should render source with priority over children', async () => {
@@ -69,7 +68,7 @@ describe('<Avatar />', () => {
   describe('prop: size', () => {
     it('should set proper size', () => {
       const { container } = renderWithTheme(<Avatar size='85%' />);
-      const avatarEl = container.firstChild;
+      const avatarEl = container.firstElementChild;
 
       expect(avatarEl).toHaveStyleRule('width', '85%');
       expect(avatarEl).toHaveStyleRule('height', '85%');
@@ -77,7 +76,7 @@ describe('<Avatar />', () => {
 
     it('when passed a number, sets size in px', () => {
       const { container } = renderWithTheme(<Avatar size={25} />);
-      const avatarEl = container.firstChild;
+      const avatarEl = container.firstElementChild;
 
       expect(avatarEl).toHaveStyleRule('width', '25px');
       expect(avatarEl).toHaveStyleRule('height', '25px');

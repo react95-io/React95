@@ -5,7 +5,7 @@ export { createScrollbars } from './common/index';
 /* components */
 export * from './Anchor/Anchor';
 export { default as AppBar } from './AppBar/AppBar';
-export { default as Avatar } from './Avatar/Avatar';
+export * from './Avatar/Avatar';
 export * from './Bar/Bar';
 export { default as Button } from './Button/Button';
 export { default as Checkbox } from './Checkbox/Checkbox';
