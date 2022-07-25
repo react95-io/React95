@@ -3,13 +3,13 @@ name: Checkbox
 menu: Components
 ---
 
-import Checkbox from './Checkbox'
-import Fieldset from '../Fieldset/Fieldset'
-import Button from '../Button/Button'
-import Cutout from '../Cutout/Cutout'
-import List from '../List/List'
-import ListItem from '../ListItem/ListItem'
-import Divider from '../Divider/Divider'
+import { Checkbox } from './Checkbox';
+import Fieldset from '../Fieldset/Fieldset';
+import Button from '../Button/Button';
+import Cutout from '../Cutout/Cutout';
+import List from '../List/List';
+import ListItem from '../ListItem/ListItem';
+import Divider from '../Divider/Divider';
 
 # Checkbox
 
@@ -19,29 +19,31 @@ import Divider from '../Divider/Divider'
 
 <Playground>
   {() => {
-    const [steak, setSteak] = React.useState(true)
-    const [tortilla, setTortilla] = React.useState(false)
-    const [pizza, setPizza] = React.useState(false)
+    const [steak, setSteak] = React.useState(true);
+    const [tortilla, setTortilla] = React.useState(false);
+    const [pizza, setPizza] = React.useState(false);
     const handleChange = event => {
-      const { target: { value } } = event;
+      const {
+        target: { value }
+      } = event;
       if (value === 'steak') {
-        setSteak(!steak)
-        return
+        setSteak(!steak);
+        return;
       }
       if (value === 'tortilla') {
-        setTortilla(!tortilla)
-        return
+        setTortilla(!tortilla);
+        return;
       }
       if (value === 'pizza') {
-        setPizza(!pizza)
-        return
+        setPizza(!pizza);
+        return;
       }
     };
     const reset = () => {
-      setSteak(false)
-      setTortilla(false)
-      setPizza(false)
-    }
+      setSteak(false);
+      setTortilla(false);
+      setPizza(false);
+    };
     return (
       <div style={{ maxWidth: '250px' }}>
         <Fieldset label='Party food'>
@@ -94,11 +96,12 @@ import Divider from '../Divider/Divider'
 </Playground>
 
 #### Flat
+
 <Playground>
   <Cutout style={{ padding: '1rem', width: '300px' }}>
     <p style={{ lineHeight: 1.3 }}>
-      When you want to add input field on a light background (like
-      scrollable content), just use the flat variant:
+      When you want to add input field on a light background (like scrollable
+      content), just use the flat variant:
     </p>
     <div style={{ marginTop: '1rem' }}>
       <Checkbox
@@ -128,6 +131,7 @@ import Divider from '../Divider/Divider'
 </Playground>
 
 #### Menu
+
 <Playground>
   <List>
     <ListItem size='md'>

@@ -8,7 +8,7 @@ export * from './AppBar/AppBar';
 export * from './Avatar/Avatar';
 export * from './Bar/Bar';
 export { default as Button } from './Button/Button';
-export { default as Checkbox } from './Checkbox/Checkbox';
+export * from './Checkbox/Checkbox';
 export { default as ColorInput } from './ColorInput/ColorInput';
 export * from './Counter/Counter';
 export { default as Cutout } from './Cutout/Cutout';
