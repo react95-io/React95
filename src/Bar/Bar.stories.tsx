@@ -1,7 +1,6 @@
-import React from 'react';
+import { ComponentMeta } from '@storybook/react';
+import { AppBar, Bar, Button, Toolbar } from 'react95';
 import styled from 'styled-components';
-
-import { Bar, AppBar, Toolbar, Button } from 'react95';
 
 const Wrapper = styled.div`
   padding: 5rem;
@@ -12,7 +11,7 @@ export default {
   title: 'Bar',
   component: Bar,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
+} as ComponentMeta<typeof Bar>;
 
 export function Default() {
   return (
