@@ -18,7 +18,7 @@ export { default as Fieldset } from './Fieldset/Fieldset';
 export * from './Hourglass/Hourglass';
 export { default as List } from './List/List';
 export { default as ListItem } from './ListItem/ListItem';
-export { default as LoadingIndicator } from './LoadingIndicator/LoadingIndicator';
+export * from './LoadingIndicator/LoadingIndicator';
 export { default as NumberField } from './NumberField/NumberField';
 export * from './Panel/Panel';
 export * from './Progress/Progress';

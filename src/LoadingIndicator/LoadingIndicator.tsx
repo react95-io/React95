@@ -1,9 +1,13 @@
 import React, { forwardRef } from 'react';
-import propTypes from 'prop-types';
-
-import styled, { keyframes, css } from 'styled-components';
-
+import styled, { css, keyframes } from 'styled-components';
 import { StyledCutout } from '../Cutout/Cutout';
+import { CommonStyledProps } from '../types';
+
+type LoadingIndicatorProps = {
+  isLoading?: boolean;
+  shadow?: boolean;
+} & React.HTMLAttributes<HTMLDivElement> &
+  CommonStyledProps;
 
 const Wrapper = styled.div`
   display: inline-block;
@@ -127,35 +131,28 @@ const IndeterminateSecondaryInner = styled.span`
   animation: ${secondaryScale} 2s infinite linear;
 `;
 
-const LoadingIndicator = forwardRef(function LoadingIndicator(props, ref) {
-  const { isLoading, shadow, ...otherProps } = props;
+const LoadingIndicator = forwardRef<HTMLDivElement, LoadingIndicatorProps>(
+  function LoadingIndicator(
+    { isLoading = true, shadow = false, ...otherProps },
+    ref
+  ) {
+    return (
+      <Wrapper ref={ref} role='progressbar' {...otherProps}>
+        <ProgressCutout shadow={shadow}>
+          {isLoading && (
+            <IndeterminateWrapper data-testid='loading-wrapper'>
+              <IndeterminatePrimary>
+                <IndeterminatePrimaryInner />
+              </IndeterminatePrimary>
+              <IndeterminateSecondary>
+                <IndeterminateSecondaryInner />
+              </IndeterminateSecondary>
+            </IndeterminateWrapper>
+          )}
+        </ProgressCutout>
+      </Wrapper>
+    );
+  }
+);
 
-  return (
-    <Wrapper ref={ref} role='progressbar' {...otherProps}>
-      <ProgressCutout shadow={shadow}>
-        {isLoading && (
-          <IndeterminateWrapper data-testid='loading-wrapper'>
-            <IndeterminatePrimary>
-              <IndeterminatePrimaryInner />
-            </IndeterminatePrimary>
-            <IndeterminateSecondary>
-              <IndeterminateSecondaryInner />
-            </IndeterminateSecondary>
-          </IndeterminateWrapper>
-        )}
-      </ProgressCutout>
-    </Wrapper>
-  );
-});
-
-LoadingIndicator.defaultProps = {
-  shadow: false,
-  isLoading: true
-};
-
-LoadingIndicator.propTypes = {
-  shadow: propTypes.bool,
-  isLoading: propTypes.bool
-};
-
-export default LoadingIndicator;
+export { LoadingIndicator, LoadingIndicatorProps };

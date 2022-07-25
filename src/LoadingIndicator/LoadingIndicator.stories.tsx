@@ -1,8 +1,7 @@
-import React from 'react';
-
+import { ComponentMeta } from '@storybook/react';
 import styled from 'styled-components';
 
-import { LoadingIndicator } from '..';
+import { LoadingIndicator } from 'react95';
 
 const Wrapper = styled.div`
   background: ${({ theme }) => theme.material};
@@ -13,7 +12,7 @@ export default {
   title: 'LoadingIndicator',
   component: LoadingIndicator,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
+} as ComponentMeta<typeof LoadingIndicator>;
 
 export function Default() {
   return (

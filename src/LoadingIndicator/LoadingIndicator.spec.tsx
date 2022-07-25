@@ -1,7 +1,5 @@
-import React from 'react';
-
 import { renderWithTheme } from '../../test/utils';
-import LoadingIndicator from './LoadingIndicator';
+import { LoadingIndicator } from './LoadingIndicator';
 
 describe('<LoadingIndicator />', () => {
   it('renders LoadingIndicator', () => {
