@@ -2,7 +2,6 @@
   "compilerOptions": {
     "allowJs": true,
     "alwaysStrict": true,
-    "baseUrl": "./",
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,
