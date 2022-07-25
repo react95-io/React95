@@ -1,4 +1,3 @@
-import React from 'react';
 import { renderWithTheme } from '../../test/utils';
 
 import Bar from './Bar';
