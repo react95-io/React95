@@ -1,8 +1,12 @@
-import React from 'react';
-import propTypes from 'prop-types';
+import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 
 import { StyledCutout } from '../Cutout/Cutout';
+
+type DesktopProps = {
+  backgroundStyles?: React.CSSProperties;
+  children?: React.ReactNode;
+};
 
 const Wrapper = styled.div`
   position: relative;
@@ -102,9 +106,10 @@ const Stand = styled.div`
   }
 `;
 
-const Desktop = React.forwardRef(function Desktop(props, ref) {
-  const { backgroundStyles, children, ...otherProps } = props;
-
+const Desktop = forwardRef<HTMLDivElement, DesktopProps>(function Desktop(
+  { backgroundStyles, children, ...otherProps },
+  ref
+) {
   return (
     <Wrapper ref={ref} {...otherProps}>
       <Inner>
@@ -117,14 +122,4 @@ const Desktop = React.forwardRef(function Desktop(props, ref) {
   );
 });
 
-Desktop.defaultProps = {
-  backgroundStyles: null
-};
-
-Desktop.propTypes = {
-  backgroundStyles: propTypes.object,
-  // eslint-disable-next-line react/require-default-props
-  children: propTypes.node
-};
-
-export default Desktop;
+export { Desktop, DesktopProps };
