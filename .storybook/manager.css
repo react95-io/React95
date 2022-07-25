@@ -1,0 +1,7 @@
+/* Remove from the sidebar menu stories that contains "unstable" */
+a[data-item-id$='-unstable'].sidebar-item,
+a[data-item-id*='-unstable-'].sidebar-item,
+button[data-item-id$='-unstable'].sidebar-item,
+button[data-item-id$='-unstable-'].sidebar-item {
+  display: none !important;
+}
