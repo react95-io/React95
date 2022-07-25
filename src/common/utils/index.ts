@@ -103,3 +103,7 @@ export function roundValueToStep(value: number, step: number, min: number) {
   const nearest = Math.round((value - min) / step) * step + min;
   return Number(nearest.toFixed(getDecimalPrecision(step)));
 }
+
+export function getSize(value: string | number) {
+  return typeof value === 'number' ? `${value}px` : value;
+}

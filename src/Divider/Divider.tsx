@@ -1,13 +1,11 @@
 import styled from 'styled-components';
+import { getSize } from '../common/utils';
 import { Orientation } from '../types';
 
-function getSize(value: string | number) {
-  return typeof value === 'number' ? `${value}px` : value;
-}
-interface DividerProps {
+type DividerProps = {
   size?: string | number;
   orientation?: Orientation;
-}
+};
 const Divider = styled.div<DividerProps>`
   ${({ orientation, theme, size = '100%' }) =>
     orientation === 'vertical'

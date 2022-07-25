@@ -1,6 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
+import { getSize } from '../common/utils';
 
 const StyledAvatar = styled.div`
   display: inline-block;
@@ -41,22 +42,13 @@ const SlyledAvatarIMG = styled.img`
 `;
 
 const Avatar = React.forwardRef(function Avatar(props, ref) {
-  const {
-    alt,
-    children,
-    noBorder,
-    size: sizeProp,
-    square,
-    src,
-    ...otherProps
-  } = props;
+  const { alt, children, noBorder, size, square, src, ...otherProps } = props;
 
-  const size = typeof sizeProp === 'number' ? `${sizeProp}px` : sizeProp;
   return (
     <StyledAvatar
       noBorder={noBorder}
       ref={ref}
-      size={size}
+      size={getSize(size)}
       square={square}
       {...otherProps}
     >

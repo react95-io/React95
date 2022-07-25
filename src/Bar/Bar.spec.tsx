@@ -1,6 +1,6 @@
 import { renderWithTheme } from '../../test/utils';
 
-import Bar from './Bar';
+import { Bar } from './Bar';
 
 describe('<Bar />', () => {
   it('should render bar', () => {
