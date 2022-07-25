@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { ComponentMeta } from '@storybook/react';
+import { useState } from 'react';
+import { Button, Counter, Panel } from 'react95';
 import styled from 'styled-components';
-
-import { Counter, Panel, Button } from 'react95';
 
 const Wrapper = styled.div`
   padding: 5rem;
@@ -23,7 +23,7 @@ export default {
   title: 'Counter',
   component: Counter,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
+} as ComponentMeta<typeof Counter>;
 
 export function Default() {
   const [count, setCount] = useState(13);

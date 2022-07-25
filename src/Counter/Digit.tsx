@@ -1,10 +1,16 @@
 import React from 'react';
-import propTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import { createHatchedBackground } from '../common';
+import { CommonStyledProps } from '../types';
 
-const DigitWrapper = styled.div`
+type DigitProps = {
+  pixelSize?: number;
+  digit?: number | string;
+} & React.HTMLAttributes<HTMLDivElement> &
+  CommonStyledProps;
+
+const DigitWrapper = styled.div<Required<Pick<DigitProps, 'pixelSize'>>>`
   position: relative;
   --react95-digit-primary-color: #ff0102;
   --react95-digit-secondary-color: #740201;
@@ -167,8 +173,8 @@ const digitActiveSegments = [
   [1, 1, 1, 1, 1, 0, 1] // 9
 ];
 
-function Digit({ digit, pixelSize, ...otherProps }) {
-  const segmentClasses = digitActiveSegments[digit].map((isActive, i) =>
+function Digit({ digit = 0, pixelSize = 2, ...otherProps }: DigitProps) {
+  const segmentClasses = digitActiveSegments[Number(digit)].map((isActive, i) =>
     isActive ? `${segments[i]} active` : segments[i]
   );
   return (
@@ -180,14 +186,4 @@ function Digit({ digit, pixelSize, ...otherProps }) {
   );
 }
 
-Digit.defaultProps = {
-  pixelSize: 2,
-  digit: 0
-};
-
-Digit.propTypes = {
-  pixelSize: propTypes.number,
-  digit: propTypes.oneOfType([propTypes.number, propTypes.string])
-};
-
-export default Digit;
+export { Digit, DigitProps };
