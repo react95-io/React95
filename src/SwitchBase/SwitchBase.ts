@@ -15,24 +15,24 @@ export const StyledInput = styled.input`
   z-index: -1;
 `;
 
-export const StyledLabel = styled.label`
+export const StyledLabel = styled.label<{ $disabled: boolean }>`
   display: inline-flex;
   align-items: center;
   position: relative;
   margin: 8px 0;
-  cursor: ${({ isDisabled }) => (!isDisabled ? 'pointer' : 'auto')};
+  cursor: ${({ $disabled }) => (!$disabled ? 'pointer' : 'auto')};
   user-select: none;
   font-size: 1rem;
   color: ${({ theme }) => theme.materialText};
-  ${props => props.isDisabled && createDisabledTextStyles()}
+  ${props => props.$disabled && createDisabledTextStyles()}
 
   ${StyledListItem} & {
     margin: 0;
     height: 100%;
   }
   ${StyledListItem}:hover & {
-    ${({ theme, isDisabled }) =>
-      !isDisabled &&
+    ${({ $disabled, theme }) =>
+      !$disabled &&
       css`
         color: ${theme.materialTextInvert};
       `};
