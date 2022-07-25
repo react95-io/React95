@@ -1,13 +1,11 @@
-import React from 'react';
-
 import { renderWithTheme } from '../../test/utils';
 
-import Divider from './Divider';
+import { Divider } from './Divider';
 
 describe('<Divider />', () => {
   it('should render Divider', () => {
     const { container } = renderWithTheme(<Divider />);
-    const divider = container.firstChild;
+    const divider = container.firstElementChild;
 
     expect(divider).toBeInTheDocument();
   });
@@ -15,13 +13,13 @@ describe('<Divider />', () => {
   describe('prop: size', () => {
     it('defaults to 100%', () => {
       const { container } = renderWithTheme(<Divider />);
-      const divider = container.firstChild;
+      const divider = container.firstElementChild;
       expect(divider).toHaveStyleRule('width', '100%');
     });
     it('sets size passed correctly', () => {
       const size = '53px';
       const { container } = renderWithTheme(<Divider size={size} />);
-      const divider = container.firstChild;
+      const divider = container.firstElementChild;
 
       expect(divider).toHaveStyleRule('width', size);
     });
@@ -31,7 +29,7 @@ describe('<Divider />', () => {
     it('renders horizontal line by default', () => {
       const size = '53px';
       const { container } = renderWithTheme(<Divider size={size} />);
-      const divider = container.firstChild;
+      const divider = container.firstElementChild;
 
       expect(divider).toHaveStyleRule('width', size);
     });
@@ -41,7 +39,7 @@ describe('<Divider />', () => {
       const { container } = renderWithTheme(
         <Divider orientation='vertical' size={size} />
       );
-      const divider = container.firstChild;
+      const divider = container.firstElementChild;
 
       expect(divider).toHaveStyleRule('height', size);
     });
@@ -49,14 +47,14 @@ describe('<Divider />', () => {
   describe('prop: size', () => {
     it('should set proper size', () => {
       const { container } = renderWithTheme(<Divider size='85%' />);
-      const avatarEl = container.firstChild;
+      const avatarEl = container.firstElementChild;
 
       expect(avatarEl).toHaveStyleRule('width', '85%');
     });
 
     it('when passed a number, sets size in px', () => {
       const { container } = renderWithTheme(<Divider size={25} />);
-      const avatarEl = container.firstChild;
+      const avatarEl = container.firstElementChild;
 
       expect(avatarEl).toHaveStyleRule('width', '25px');
     });
@@ -65,7 +63,7 @@ describe('<Divider />', () => {
       const { container } = renderWithTheme(
         <Divider size={25} orientation='vertical' />
       );
-      const avatarEl = container.firstChild;
+      const avatarEl = container.firstElementChild;
 
       expect(avatarEl).toHaveStyleRule('height', '25px');
     });

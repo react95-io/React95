@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import { focusOutline } from '../common';
 import { StyledButton } from '../Button/Button';
-import Divider from '../Divider/Divider';
+import { Divider } from '../Divider/Divider';
 
 const Trigger = styled(StyledButton)`
   padding-left: 8px;

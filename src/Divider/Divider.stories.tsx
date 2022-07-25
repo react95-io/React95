@@ -1,4 +1,4 @@
-import React from 'react';
+import { ComponentMeta } from '@storybook/react';
 import styled from 'styled-components';
 
 import { Divider, List, ListItem } from 'react95';
@@ -12,7 +12,7 @@ export default {
   title: 'Divider',
   component: Divider,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
+} as ComponentMeta<typeof Divider>;
 
 export function Default() {
   return (
