@@ -1,15 +1,13 @@
-import React from 'react';
-
 import { renderWithTheme } from '../../test/utils';
 
-import Table from './Table';
+import { Table } from './Table';
 
 describe('<Table />', () => {
   it('renders Table', () => {
     const { container } = renderWithTheme(<Table />);
-    const list = container.firstChild;
+    const table = container.firstElementChild;
 
-    expect(list).toBeInTheDocument();
+    expect(table).toBeInTheDocument();
   });
   it('renders table element', () => {
     const { getByRole } = renderWithTheme(<Table />);

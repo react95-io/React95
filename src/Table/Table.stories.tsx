@@ -1,17 +1,16 @@
-import React from 'react';
-import styled from 'styled-components';
-
+import { ComponentMeta } from '@storybook/react';
 import {
   Table,
   TableBody,
-  TableHead,
-  TableRow,
-  TableHeadCell,
   TableDataCell,
+  TableHead,
+  TableHeadCell,
+  TableRow,
   Window,
-  WindowHeader,
-  WindowContent
+  WindowContent,
+  WindowHeader
 } from 'react95';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   padding: 5rem;
@@ -30,7 +29,7 @@ export default {
     TableDataCell
   },
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
+} as ComponentMeta<typeof Table>;
 
 export function Default() {
   return (
@@ -39,7 +38,7 @@ export function Default() {
       <WindowContent>
         <Table>
           <TableHead>
-            <TableRow head>
+            <TableRow>
               <TableHeadCell>Type</TableHeadCell>
               <TableHeadCell>Name</TableHeadCell>
               <TableHeadCell disabled>Level</TableHeadCell>

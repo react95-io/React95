@@ -2,10 +2,10 @@ import React from 'react';
 
 import { renderWithTheme } from '../../test/utils';
 
-import TableDataCell from './TableDataCell';
+import { TableDataCell } from './TableDataCell';
 
 describe('<TableDataCell />', () => {
-  function mountInTable(node) {
+  function mountInTable(node: React.ReactNode) {
     const { container, getByText } = renderWithTheme(
       <table>
         <tbody>
@@ -14,14 +14,14 @@ describe('<TableDataCell />', () => {
       </table>
     );
     return {
-      td: container.querySelector('tr').firstChild,
+      td: container.querySelector('tr')?.firstElementChild,
       getByText
     };
   }
 
   it('renders TableDataCell', () => {
     const { td } = mountInTable(<TableDataCell />);
-    expect(td.tagName).toBe('TD');
+    expect(td?.tagName).toBe('TD');
   });
 
   it('renders children', () => {

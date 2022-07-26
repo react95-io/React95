@@ -1,8 +1,12 @@
-import React from 'react';
-import propTypes from 'prop-types';
-
+import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 import { StyledCutout } from '../Cutout/Cutout';
+import { CommonStyledProps } from '../types';
+
+type TableProps = {
+  children?: React.ReactNode;
+} & React.TableHTMLAttributes<HTMLTableElement> &
+  CommonStyledProps;
 
 const StyledTable = styled.table`
   display: table;
@@ -18,9 +22,10 @@ const Wrapper = styled(StyledCutout)`
   }
 `;
 
-const Table = React.forwardRef(function Table(props, ref) {
-  const { children, ...otherProps } = props;
-
+const Table = forwardRef<HTMLTableElement, TableProps>(function Table(
+  { children, ...otherProps },
+  ref
+) {
   return (
     <Wrapper>
       <StyledTable ref={ref} {...otherProps}>
@@ -30,12 +35,4 @@ const Table = React.forwardRef(function Table(props, ref) {
   );
 });
 
-Table.defaultProps = {
-  children: null
-};
-
-Table.propTypes = {
-  children: propTypes.node
-};
-
-export default Table;
+export { Table, TableProps };
