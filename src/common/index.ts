@@ -1,7 +1,5 @@
-import { css, ThemedStyledProps } from 'styled-components';
-import { Color, CommonThemeProps, Theme } from '../types';
-
-type CSSProps = ThemedStyledProps<CommonThemeProps, Theme>;
+import { css } from 'styled-components';
+import { Color, CommonThemeProps } from '../types';
 
 export const shadow = '4px 4px 10px 0 rgba(0, 0, 0, 0.35)';
 export const insetShadow = 'inset 2px 2px 3px rgba(0,0,0,0.2)';
@@ -47,13 +45,13 @@ export const createHatchedBackground = ({
   background-position: 0 0, ${`${pixelSize}px ${pixelSize}px`};
 `;
 
-export const createFlatBoxStyles = () => css`
+export const createFlatBoxStyles = () => css<CommonThemeProps>`
   position: relative;
   box-sizing: border-box;
   display: inline-block;
   color: ${({ theme }) => theme.materialText};
-  background: ${({ theme, isDisabled }: CSSProps) =>
-    isDisabled ? theme.flatLight : theme.canvas};
+  background: ${({ $disabled, theme }) =>
+    $disabled ? theme.flatLight : theme.canvas};
   border: 2px solid ${({ theme }) => theme.canvas};
   outline: 2px solid ${({ theme }) => theme.flatDark};
   outline-offset: -4px;
@@ -64,18 +62,18 @@ export const createBorderStyles = ({
   windowBorders = false
 } = {}) =>
   invert
-    ? css`
+    ? css<CommonThemeProps>`
         border-style: solid;
         border-width: 2px;
         border-left-color: ${({ theme }) => theme.borderDarkest};
         border-top-color: ${({ theme }) => theme.borderDarkest};
         border-right-color: ${({ theme }) => theme.borderLightest};
         border-bottom-color: ${({ theme }) => theme.borderLightest};
-        box-shadow: ${(props: CSSProps) => props.shadow && `${shadow}, `} inset
-            1px 1px 0px 1px ${({ theme }) => theme.borderDark},
+        box-shadow: ${props => props.shadow && `${shadow}, `} inset 1px 1px 0px
+            1px ${({ theme }) => theme.borderDark},
           inset -1px -1px 0 1px ${({ theme }) => theme.borderLight};
       `
-    : css`
+    : css<CommonThemeProps>`
         border-style: solid;
         border-width: 2px;
         border-left-color: ${({ theme }) =>
@@ -84,8 +82,8 @@ export const createBorderStyles = ({
           windowBorders ? theme.borderLight : theme.borderLightest};
         border-right-color: ${({ theme }) => theme.borderDarkest};
         border-bottom-color: ${({ theme }) => theme.borderDarkest};
-        box-shadow: ${(props: CSSProps) => props.shadow && `${shadow}, `} inset
-            1px 1px 0px 1px
+        box-shadow: ${props => props.shadow && `${shadow}, `} inset 1px 1px 0px
+            1px
             ${({ theme }) =>
               windowBorders ? theme.borderLightest : theme.borderLight},
           inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
