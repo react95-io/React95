@@ -1,17 +1,31 @@
-import React from 'react';
-import propTypes from 'prop-types';
+import React, { forwardRef } from 'react';
+import styled, { css, CSSProperties } from 'styled-components';
 
-import styled, { css } from 'styled-components';
 import { createFlatBoxStyles } from '../common';
 import { StyledCutout } from '../Cutout/Cutout';
 import { StyledListItem } from '../ListItem/ListItem';
-
 import {
+  LabelText,
   size,
   StyledInput,
-  StyledLabel,
-  LabelText
+  StyledLabel
 } from '../SwitchBase/SwitchBase';
+import { CommonStyledProps } from '../types';
+
+type RadioVariant = 'default' | 'flat' | 'menu';
+
+type RadioProps = {
+  checked?: boolean;
+  className?: string;
+  disabled?: boolean;
+  label?: string | number;
+  name?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  style?: CSSProperties;
+  value?: string | number | boolean;
+  variant?: RadioVariant;
+} & React.InputHTMLAttributes<HTMLInputElement> &
+  CommonStyledProps;
 
 const sharedCheckboxStyles = css`
   width: ${size}px;
@@ -22,11 +36,15 @@ const sharedCheckboxStyles = css`
   justify-content: space-around;
   margin-right: 0.5rem;
 `;
-// had to overwrite box-shadow for StyledCheckbox since the default made checkbox too dark
-const StyledCheckbox = styled(StyledCutout)`
+
+type StyledCheckboxProps = {
+  $disabled: boolean;
+};
+
+const StyledCheckbox = styled(StyledCutout)<StyledCheckboxProps>`
   ${sharedCheckboxStyles}
-  background: ${({ theme, isDisabled }) =>
-    isDisabled ? theme.material : theme.canvas};
+  background: ${({ $disabled, theme }) =>
+    $disabled ? theme.material : theme.canvas};
 
   &:before {
     content: '';
@@ -39,12 +57,12 @@ const StyledCheckbox = styled(StyledCutout)`
     box-shadow: none;
   }
 `;
-const StyledFlatCheckbox = styled.div`
+const StyledFlatCheckbox = styled.div<StyledCheckboxProps>`
   ${createFlatBoxStyles()}
   ${sharedCheckboxStyles}
   outline: none;
-  background: ${({ theme, isDisabled }) =>
-    isDisabled ? theme.flatLight : theme.canvas};
+  background: ${({ $disabled, theme }) =>
+    $disabled ? theme.flatLight : theme.canvas};
   &:before {
     content: '';
     display: inline-block;
@@ -66,9 +84,16 @@ const StyledMenuCheckbox = styled.div`
   outline: none;
   background: none;
 `;
+
+type IconProps = {
+  'data-testid': 'checkmarkIcon';
+  $disabled: boolean;
+  variant: RadioVariant;
+};
+
 const Icon = styled.span.attrs(() => ({
   'data-testid': 'checkmarkIcon'
-}))`
+}))<IconProps>`
   position: absolute;
   content: '';
   display: inline-block;
@@ -78,23 +103,23 @@ const Icon = styled.span.attrs(() => ({
   height: 6px;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  ${({ variant, theme, isDisabled }) =>
+  ${({ $disabled, theme, variant }) =>
     variant === 'menu'
       ? css`
-          background: ${isDisabled
+          background: ${$disabled
             ? theme.materialTextDisabled
             : theme.materialText};
           filter: drop-shadow(
             1px 1px 0px
-              ${isDisabled ? theme.materialTextDisabledShadow : 'transparent'}
+              ${$disabled ? theme.materialTextDisabledShadow : 'transparent'}
           );
         `
       : css`
-          background: ${isDisabled ? theme.checkmarkDisabled : theme.checkmark};
+          background: ${$disabled ? theme.checkmarkDisabled : theme.checkmark};
         `}
   ${StyledListItem}:hover & {
-    ${({ theme, isDisabled, variant }) =>
-      !isDisabled &&
+    ${({ $disabled, theme, variant }) =>
+      !$disabled &&
       variant === 'menu' &&
       css`
         background: ${theme.materialTextInvert};
@@ -108,28 +133,25 @@ const CheckboxComponents = {
   menu: StyledMenuCheckbox
 };
 
-const Radio = React.forwardRef(function Radio(props, ref) {
-  const {
-    onChange,
-    label,
-    disabled,
-    variant,
+const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
+  {
     checked,
-    className,
-    style,
+    className = '',
+    disabled = false,
+    label = '',
+    onChange,
+    style = {},
+    variant = 'default',
     ...otherProps
-  } = props;
-
+  },
+  ref
+) {
   const CheckboxComponent = CheckboxComponents[variant];
 
   return (
-    <StyledLabel isDisabled={disabled} className={className} style={style}>
-      <CheckboxComponent
-        checked={checked}
-        isDisabled={disabled}
-        role='presentation'
-      >
-        {checked && <Icon isDisabled={disabled} variant={variant} />}
+    <StyledLabel $disabled={disabled} className={className} style={style}>
+      <CheckboxComponent $disabled={disabled} role='presentation'>
+        {checked && <Icon $disabled={disabled} variant={variant} />}
       </CheckboxComponent>
       <StyledInput
         disabled={disabled}
@@ -145,33 +167,4 @@ const Radio = React.forwardRef(function Radio(props, ref) {
   );
 });
 
-Radio.defaultProps = {
-  onChange: undefined,
-  name: null,
-  value: undefined,
-  checked: undefined,
-  label: '',
-  disabled: false,
-  variant: 'default',
-  className: '',
-  style: {}
-};
-
-Radio.propTypes = {
-  onChange: propTypes.func,
-  name: propTypes.string,
-  value: propTypes.oneOfType([
-    propTypes.string,
-    propTypes.number,
-    propTypes.bool
-  ]),
-  label: propTypes.oneOfType([propTypes.string, propTypes.number]),
-  checked: propTypes.bool,
-  disabled: propTypes.bool,
-  variant: propTypes.oneOf(['default', 'flat', 'menu']),
-  // eslint-disable-next-line react/forbid-prop-types
-  style: propTypes.any,
-  className: propTypes.string
-};
-
-export default Radio;
+export { Radio, RadioProps };
