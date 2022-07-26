@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { Button } from '../Button/Button';
 import { Cutout } from '../Cutout/Cutout';
-import NumberField from '../NumberField/NumberField';
+import { NumberField } from '../NumberField/NumberField';
 import Select from '../Select/Select';
 import Toolbar from '../Toolbar/Toolbar';
 import Window from '../Window/Window';

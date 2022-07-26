@@ -4,7 +4,7 @@ import React from 'react';
 import { fireEvent } from '@testing-library/react';
 
 import { renderWithTheme } from '../../test/utils';
-import TextField from './TextField';
+import { TextField } from './TextField';
 
 describe('<TextField />', () => {
   it('should render an <input /> inside the div', () => {
@@ -36,13 +36,13 @@ describe('<TextField />', () => {
     input.focus();
     expect(handleFocus).toHaveBeenCalledTimes(1);
 
-    fireEvent.keyDown(document.activeElement, { key: 'a' });
+    fireEvent.keyDown(document.activeElement as HTMLInputElement, { key: 'a' });
     expect(handleKeyDown).toHaveBeenCalledTimes(1);
 
     fireEvent.change(input, { target: { value: 'a' } });
     expect(handleChange).toHaveBeenCalledTimes(1);
 
-    fireEvent.keyUp(document.activeElement, { key: 'a' });
+    fireEvent.keyUp(document.activeElement as HTMLInputElement, { key: 'a' });
     expect(handleKeyUp).toHaveBeenCalledTimes(1);
 
     input.blur();
@@ -59,7 +59,7 @@ describe('<TextField />', () => {
   });
 
   it('should forwardRef to native input', () => {
-    const inputRef = React.createRef();
+    const inputRef = React.createRef<HTMLInputElement>();
     const { getByRole } = renderWithTheme(<TextField ref={inputRef} />);
     const input = getByRole('textbox');
     expect(inputRef.current).toBe(input);
@@ -107,7 +107,9 @@ describe('<TextField />', () => {
   describe('prop: fullWidth', () => {
     it('should make component take 100% width', () => {
       const { container } = renderWithTheme(<TextField fullWidth />);
-      expect(window.getComputedStyle(container.firstChild).width).toBe('100%');
+      expect(
+        window.getComputedStyle(container.firstChild as HTMLInputElement).width
+      ).toBe('100%');
     });
   });
 });

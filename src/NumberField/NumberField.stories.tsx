@@ -1,7 +1,6 @@
-import React from 'react';
+import { ComponentMeta } from '@storybook/react';
+import { Cutout, NumberField } from 'react95';
 import styled from 'styled-components';
-
-import { NumberField, Cutout } from 'react95';
 
 const Wrapper = styled.div`
   background: ${({ theme }) => theme.material};
@@ -24,7 +23,7 @@ export default {
   title: 'NumberField',
   component: NumberField,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
+} as ComponentMeta<typeof NumberField>;
 
 export function Default() {
   return (

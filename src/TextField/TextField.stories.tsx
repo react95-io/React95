@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-
+import { ComponentMeta } from '@storybook/react';
+import { useState } from 'react';
+import { Button, Cutout, TextField } from 'react95';
 import styled from 'styled-components';
 
-import { TextField, Button, Cutout } from 'react95';
-
 const loremIpsum = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin, ante vel porttitor posuere, tellus nisi interdum ipsum, non bibendum ante risus ut purus. Curabitur vel posuere odio. Vivamus rutrum, nunc et ullamcorper sagittis, tellus ligula maximus quam, id dapibus sapien metus lobortis diam. Proin luctus, dolor in finibus feugiat, lacus enim gravida sem, quis aliquet tellus leo nec enim. Morbi varius bibendum augue quis venenatis. Curabitur ut elit augue. Pellentesque posuere enim a mattis interdum. Donec sodales convallis turpis, a vulputate elit. Suspendisse potenti.`;
-const onChange = e => console.log(e.target.value);
+const onChange = (
+  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+) => console.log(e.target.value);
 
 const Wrapper = styled.div`
   background: ${({ theme }) => theme.material};
@@ -21,14 +22,15 @@ export default {
   title: 'TextField',
   component: TextField,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
+} as ComponentMeta<typeof TextField>;
 
 export function Default() {
   const [state, setState] = useState({
     value: ''
   });
 
-  const handleChange = e => setState({ value: e.target.value });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setState({ value: e.target.value });
   const reset = () => setState({ value: '' });
 
   return (

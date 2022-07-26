@@ -3,7 +3,7 @@ name: NumberField
 menu: Components
 ---
 
-import NumberField from './NumberField';
+import { NumberField } from './NumberField';
 import { Cutout } from '../Cutout/Cutout';
 
 # NumberField
@@ -52,17 +52,17 @@ import { Cutout } from '../Cutout/Cutout';
 
 <Playground>
   <Cutout style={{ padding: '2rem', width: '300px' }}>
-      <p style={{ lineHeight: 1.3, marginBottom: '1rem' }}>
-        When you want to use NumberField on a light background (like scrollable
-        content), just use the flat variant:
-      </p>
-      <NumberField
-        variant='flat'
-        shadow={false}
-        value={1991}
-        onChange={value => console.log(value)}
-      />
-    </Cutout>
+    <p style={{ lineHeight: 1.3, marginBottom: '1rem' }}>
+      When you want to use NumberField on a light background (like scrollable
+      content), just use the flat variant:
+    </p>
+    <NumberField
+      variant='flat'
+      shadow={false}
+      value={1991}
+      onChange={value => console.log(value)}
+    />
+  </Cutout>
 </Playground>
 
 ## API
