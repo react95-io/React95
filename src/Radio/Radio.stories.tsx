@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import { ComponentMeta } from '@storybook/react';
+import { useState } from 'react';
 import {
-  Radio,
   Cutout,
+  Divider,
   Fieldset,
-  Window,
-  WindowContent,
   List,
   ListItem,
-  Divider
+  Radio,
+  Window,
+  WindowContent
 } from 'react95';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   padding: 5rem;
@@ -28,7 +29,7 @@ export default {
   title: 'Radio',
   component: Radio,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
+} as ComponentMeta<typeof Radio>;
 
 export function Default() {
   const [state, setState] = useState('Pear');

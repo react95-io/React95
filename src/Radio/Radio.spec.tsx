@@ -1,6 +1,5 @@
-import React from 'react';
 import { renderWithTheme } from '../../test/utils';
-import Radio from './Radio';
+import { Radio } from './Radio';
 
 describe('<Radio />', () => {
   describe('label', () => {
@@ -51,7 +50,7 @@ describe('<Radio />', () => {
       );
 
       rerender(<Radio checked readOnly />);
-      const checkbox = getByRole('radio');
+      const checkbox = getByRole('radio') as HTMLInputElement;
 
       expect(checkbox.checked).toBe(true);
       expect(getByRole('radio')).toHaveAttribute('checked');
@@ -66,7 +65,7 @@ describe('<Radio />', () => {
         <Radio checked readOnly />
       );
       rerender(<Radio checked={false} readOnly />);
-      const checkbox = getByRole('radio');
+      const checkbox = getByRole('radio') as HTMLInputElement;
 
       expect(checkbox.checked).toBe(false);
       expect(getByRole('radio')).not.toHaveAttribute('checked');
