@@ -35,7 +35,7 @@ export * from './TableHeadCell/TableHeadCell';
 export * from './TableRow/TableRow';
 export * from './Tabs/Tabs';
 export * from './TextField/TextField';
-export { default as Toolbar } from './Toolbar/Toolbar';
+export * from './Toolbar/Toolbar';
 export * from './Tooltip/Tooltip';
 export { default as Tree } from './Tree/Tree';
 export * from './Window/Window';
