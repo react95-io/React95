@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
-import React from 'react';
-import styled from 'styled-components';
 
-import { Select, Window, WindowContent, Cutout, Fieldset } from 'react95';
+import { ComponentMeta } from '@storybook/react';
+import { Cutout, Fieldset, Select, Window, WindowContent } from 'react95';
+import styled from 'styled-components';
+import { SelectChangeEvent, SelectOption } from './Select.types';
 
 const options = [
   { value: 1, label: '⚡ Pikachu' },
@@ -37,13 +38,14 @@ const Wrapper = styled.div`
   }
 `;
 
-const onChange = (evt, nextSelection) => console.log(evt, nextSelection);
+const onChange = (event: SelectChangeEvent, option: SelectOption) =>
+  console.log(event, option);
 
 export default {
   title: 'Select',
   component: Select,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
+} as ComponentMeta<typeof Select>;
 
 export function Default() {
   return (
@@ -154,7 +156,9 @@ Flat.story = {
 export function CustomDisplayFormatting() {
   return (
     <Select
-      formatDisplay={opt => `${opt.label.toUpperCase()} 👍 👍`}
+      formatDisplay={(opt: SelectOption<number>) =>
+        `${opt.label.toUpperCase()} 👍 👍`
+      }
       onChange={onChange}
       options={options}
       width={220}

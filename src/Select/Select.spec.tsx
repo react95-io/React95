@@ -1,10 +1,12 @@
 // Bsased on https://github.com/mui-org/material-ui
-import React from 'react';
-import { fireEvent } from '@testing-library/react';
-import { renderWithTheme } from '../../test/utils';
-import Select from './Select';
 
-const options = [
+import { fireEvent } from '@testing-library/react';
+import React from 'react';
+import { renderWithTheme } from '../../test/utils';
+import { Select } from './Select';
+import { SelectOption, SelectRef } from './Select.types';
+
+const options: SelectOption[] = [
   { label: 'ten', value: 10 },
   { label: 'twenty', value: 20 },
   { label: 'thirty', value: 30 }
@@ -15,7 +17,9 @@ describe('<Select />', () => {
     const { container } = renderWithTheme(
       <Select value={10} options={options} />
     );
-    expect(container.querySelector('input').value).toBe('10');
+
+    const input = container.querySelector('input') as HTMLInputElement;
+    expect(input.value).toBe('10');
   });
 
   it('renders dropdown button with icon', () => {
@@ -85,14 +89,17 @@ describe('<Select />', () => {
     expect(o[1]).toHaveAttribute('data-value', '20');
   });
   [' ', 'ArrowUp', 'ArrowDown', 'Enter'].forEach(key => {
-    it(`should open menu when pressed ${key} key on select`, () => {
+    it(`should open menu when pressed ${
+      key === ' ' ? 'Space' : key
+    } key on select`, () => {
       const { getByRole } = renderWithTheme(
         <Select value='' options={[{ label: 'none', value: '' }]} />
       );
       getByRole('button').focus();
-      fireEvent.keyDown(document.activeElement, { key });
+      const focusedButton = document.activeElement as HTMLButtonElement;
+      fireEvent.keyDown(focusedButton, { key });
       expect(getByRole('listbox', { hidden: false })).toBeInTheDocument();
-      fireEvent.keyUp(document.activeElement, { key });
+      fireEvent.keyUp(focusedButton, { key });
       expect(getByRole('listbox', { hidden: false })).toBeInTheDocument();
     });
   });
@@ -135,9 +142,9 @@ describe('<Select />', () => {
         <Select value={10} open options={options} menuMaxHeight={220} />
       );
 
-      const listbox = getByRole('listbox');
+      const listbox = getByRole('listbox') as HTMLElement;
       expect(
-        listbox.getAttribute('style').includes('max-height: 220px')
+        listbox.getAttribute('style')?.includes('max-height: 220px')
       ).toBeTruthy();
     });
   });
@@ -182,7 +189,10 @@ describe('<Select />', () => {
         <Select
           open
           value={obj1}
-          options={[{ value: obj1 }, { value: obj2 }]}
+          options={[
+            { label: '1', value: obj1 },
+            { label: '2', value: obj2 }
+          ]}
         />
       );
       const o = getAllByRole('option');
@@ -324,9 +334,10 @@ describe('<Select />', () => {
         <Select readOnly value='10' options={options} />
       );
       getByRole('button').focus();
-      fireEvent.keyDown(document.activeElement, { key: 'ArrowDown' });
+      const focusedButton = document.activeElement as HTMLElement;
+      fireEvent.keyDown(focusedButton, { key: 'ArrowDown' });
       expect(queryByRole('listbox')).not.toBeInTheDocument();
-      fireEvent.keyUp(document.activeElement, { key: 'ArrowDown' });
+      fireEvent.keyUp(focusedButton, { key: 'ArrowDown' });
       expect(queryByRole('listbox')).not.toBeInTheDocument();
     });
   });
@@ -346,7 +357,8 @@ describe('<Select />', () => {
 
   describe('prop: renderValue', () => {
     it('should use the prop to render the value', () => {
-      const formatDisplay = x => `0b${x.value.toString(2)}`;
+      const formatDisplay = (x: SelectOption) =>
+        `0b${Number(x.value).toString(2)}`;
       const { getByRole } = renderWithTheme(
         <Select
           formatDisplay={formatDisplay}
@@ -381,15 +393,15 @@ describe('<Select />', () => {
 
   describe('prop: inputRef', () => {
     it('should be able to return the input node via a ref object', () => {
-      const ref = React.createRef();
+      const ref = React.createRef<SelectRef>();
       renderWithTheme(<Select inputRef={ref} value='' />);
-      expect(ref.current.node).toHaveProperty('tagName', 'INPUT');
+      expect(ref.current?.node).toHaveProperty('tagName', 'INPUT');
     });
 
     it('should be able focus the trigger imperatively', () => {
-      const ref = React.createRef();
+      const ref = React.createRef<SelectRef>();
       const { getByRole } = renderWithTheme(<Select inputRef={ref} value='' />);
-      ref.current.focus();
+      ref.current?.focus();
       expect(getByRole('button')).toHaveFocus();
     });
   });

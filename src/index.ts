@@ -23,7 +23,7 @@ export { default as NumberField } from './NumberField/NumberField';
 export * from './Panel/Panel';
 export { default as Progress } from './Progress/Progress';
 export * from './Radio/Radio';
-export { default as Select } from './Select/Select';
+export * from './Select/Select';
 export { default as Slider } from './Slider/Slider';
 export { default as Tab } from './Tab/Tab';
 export { default as TabBody } from './TabBody/TabBody';
