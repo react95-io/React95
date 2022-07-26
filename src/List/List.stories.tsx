@@ -1,4 +1,4 @@
-import React from 'react';
+import { ComponentMeta } from '@storybook/react';
 import styled from 'styled-components';
 
 import { List, ListItem, Bar, Divider } from 'react95';
@@ -18,7 +18,7 @@ export default {
   component: List,
   subcomponents: { ListItem },
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
+} as ComponentMeta<typeof List>;
 
 export function Default() {
   return (

@@ -1,17 +1,14 @@
-import React from 'react';
-
 import { renderWithTheme, theme } from '../../test/utils';
 import { blockSizes } from '../common/system';
-import ListItem from './ListItem';
+import { ListItem } from './ListItem';
 
 const defaultSize = 'lg';
 describe('<ListItem />', () => {
   it('renders ListItem', () => {
-    const { container } = renderWithTheme(<ListItem />);
-    const listItem = container.firstChild;
+    const { getByRole } = renderWithTheme(<ListItem />);
+    const listItem = getByRole('menuitem');
     expect(listItem).toBeInTheDocument();
-    expect(listItem).toHaveAttribute('aria-disabled', 'false');
-    expect(ListItem.defaultProps.size).toBe(defaultSize);
+    expect(listItem).not.toHaveAttribute('aria-disabled');
   });
   it('renders children', () => {
     const textContent = 'Hi there!';
@@ -23,36 +20,36 @@ describe('<ListItem />', () => {
     expect(getByText(textContent)).toBeInTheDocument();
   });
   it('should have a default role of menuitem', () => {
-    const { container } = renderWithTheme(<ListItem />);
-    const listItem = container.firstChild;
+    const { getByRole } = renderWithTheme(<ListItem />);
+    const listItem = getByRole('menuitem');
     expect(listItem).toHaveAttribute('role', 'menuitem');
   });
 
   it('should render with custom role', () => {
-    const { container } = renderWithTheme(<ListItem role='option' />);
-    const listItem = container.firstChild;
+    const { getByRole } = renderWithTheme(<ListItem role='option' />);
+    const listItem = getByRole('option');
     expect(listItem).toHaveAttribute('role', 'option');
   });
 
   //   it('should have a tabIndex of -1 by default', () => {
-  //     const { container } = renderWithTheme(<ListItem role='option' />);
-  //     const listItem = container.firstChild;
+  //     const { getByRole } = renderWithTheme(<ListItem role='option' />);
+  //     const listItem = getByRole('menuitem');
   //     expect(listItem).toHaveAttribute('tabIndex', '-1');
   //   });
   describe('prop: disabled', () => {
     it('should not trigger onClick callback', () => {
       const clickHandler = jest.fn();
-      const { container } = renderWithTheme(
+      const { getByRole } = renderWithTheme(
         <ListItem disabled onClick={clickHandler} />
       );
-      const listItem = container.firstChild;
+      const listItem = getByRole('menuitem') as HTMLElement;
       listItem.click();
       expect(clickHandler).not.toBeCalled();
       expect(listItem).toHaveAttribute('aria-disabled', 'true');
     });
     it('renders with disabled styles ', () => {
-      const { container } = renderWithTheme(<ListItem disabled />);
-      const listItem = container.firstChild;
+      const { getByRole } = renderWithTheme(<ListItem disabled />);
+      const listItem = getByRole('menuitem');
       expect(listItem).toHaveStyleRule('pointer-events', 'none');
       expect(listItem).toHaveStyleRule('color', theme.materialTextDisabled);
       expect(listItem).toHaveStyleRule(
@@ -64,10 +61,10 @@ describe('<ListItem />', () => {
   describe('prop: onClick', () => {
     it('should be called when clicked', () => {
       const clickHandler = jest.fn();
-      const { container } = renderWithTheme(
+      const { getByRole } = renderWithTheme(
         <ListItem onClick={clickHandler} />
       );
-      const listItem = container.firstChild;
+      const listItem = getByRole('menuitem') as HTMLElement;
       listItem.click();
       expect(clickHandler).toHaveBeenCalledTimes(1);
     });
