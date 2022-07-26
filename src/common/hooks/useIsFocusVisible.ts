@@ -5,9 +5,9 @@ import * as ReactDOM from 'react-dom';
 
 let hadKeyboardEvent = true;
 let hadFocusVisibleRecently = false;
-let hadFocusVisibleRecentlyTimeout = null;
+let hadFocusVisibleRecentlyTimeout: number;
 
-const inputTypesWhitelist = {
+const inputTypesWhitelist: Record<string, boolean> = {
   text: true,
   search: true,
   url: true,
@@ -30,18 +30,22 @@ const inputTypesWhitelist = {
  * @param {Element} node
  * @return {boolean}
  */
-function focusTriggersKeyboardModality(node) {
-  const { type, tagName } = node;
+function focusTriggersKeyboardModality(
+  node: Element | HTMLElement | HTMLInputElement
+) {
+  if ('type' in node) {
+    const { type, tagName } = node;
 
-  if (tagName === 'INPUT' && inputTypesWhitelist[type] && !node.readOnly) {
-    return true;
+    if (tagName === 'INPUT' && inputTypesWhitelist[type] && !node.readOnly) {
+      return true;
+    }
+
+    if (tagName === 'TEXTAREA' && !node.readOnly) {
+      return true;
+    }
   }
 
-  if (tagName === 'TEXTAREA' && !node.readOnly) {
-    return true;
-  }
-
-  if (node.isContentEditable) {
+  if ('isContentEditable' in node && node.isContentEditable) {
     return true;
   }
 
@@ -55,7 +59,7 @@ function focusTriggersKeyboardModality(node) {
  * then the modality is keyboard. Otherwise, the modality is not keyboard.
  * @param {KeyboardEvent} event
  */
-function handleKeyDown(event) {
+function handleKeyDown(event: KeyboardEvent) {
   if (event.metaKey || event.altKey || event.ctrlKey) {
     return;
   }
@@ -73,7 +77,7 @@ function handlePointerDown() {
   hadKeyboardEvent = false;
 }
 
-function handleVisibilityChange() {
+function handleVisibilityChange(this: Document) {
   if (this.visibilityState === 'hidden') {
     // If the tab becomes active again, the browser will handle calling focus
     // on the element (Safari actually calls it twice).
@@ -85,7 +89,7 @@ function handleVisibilityChange() {
   }
 }
 
-function prepare(doc) {
+function prepare(doc: Document) {
   doc.addEventListener('keydown', handleKeyDown, true);
   doc.addEventListener('mousedown', handlePointerDown, true);
   doc.addEventListener('pointerdown', handlePointerDown, true);
@@ -93,7 +97,7 @@ function prepare(doc) {
   doc.addEventListener('visibilitychange', handleVisibilityChange, true);
 }
 
-export function teardown(doc) {
+export function teardown(doc: Document) {
   doc.removeEventListener('keydown', handleKeyDown, true);
   doc.removeEventListener('mousedown', handlePointerDown, true);
   doc.removeEventListener('pointerdown', handlePointerDown, true);
@@ -101,7 +105,7 @@ export function teardown(doc) {
   doc.removeEventListener('visibilitychange', handleVisibilityChange, true);
 }
 
-function isFocusVisible(event) {
+function isFocusVisible(event: React.FocusEvent) {
   const { target } = event;
   try {
     return target.matches(':focus-visible');
@@ -132,8 +136,8 @@ function handleBlurVisible() {
   }, 100);
 }
 
-export function useIsFocusVisible() {
-  const ref = React.useCallback(instance => {
+export function useIsFocusVisible<T extends Element = HTMLElement>() {
+  const ref = React.useCallback((instance: T) => {
     // eslint-disable-next-line react/no-find-dom-node
     const node = ReactDOM.findDOMNode(instance);
     if (node != null) {

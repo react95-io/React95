@@ -1,20 +1,15 @@
 // Pretty much straight out copied from https://github.com/mui-org/material-ui 😂
 
-import React from 'react';
 import { fireEvent } from '@testing-library/react';
 
 import { renderWithTheme, Touch } from '../../test/utils';
-import Slider from './Slider';
+import { Slider } from './Slider';
 
-function createTouches(touches) {
+function createTouches(
+  touches: { identifier: number; clientX?: number; clientY?: number }[]
+) {
   return {
-    changedTouches: touches.map(
-      touch =>
-        new Touch({
-          target: document.body,
-          ...touch
-        })
-    )
+    changedTouches: touches.map(touch => new Touch(touch))
   };
 }
 
@@ -31,14 +26,16 @@ describe('<Slider />', () => {
       />
     );
 
-    fireEvent.mouseDown(container.firstChild);
+    const slider = container.firstElementChild as HTMLElement;
+    fireEvent.mouseDown(slider);
     fireEvent.mouseUp(document.body);
 
     expect(handleChange).toHaveBeenCalledTimes(1);
     expect(handleChangeCommitted).toHaveBeenCalledTimes(1);
 
     getByRole('slider').focus();
-    fireEvent.keyDown(document.activeElement, {
+    const focusedSlider = document.activeElement as HTMLElement;
+    fireEvent.keyDown(focusedSlider, {
       key: 'Home'
     });
     expect(handleChange).toHaveBeenCalledTimes(2);
@@ -56,10 +53,8 @@ describe('<Slider />', () => {
       />
     );
 
-    fireEvent.touchStart(
-      container.firstChild,
-      createTouches([{ identifier: 1 }])
-    );
+    const slider = container.firstElementChild as HTMLElement;
+    fireEvent.touchStart(slider, createTouches([{ identifier: 1 }]));
     expect(handleChange).toHaveBeenCalledTimes(1);
     expect(handleChangeCommitted).not.toHaveBeenCalled();
 
@@ -93,7 +88,8 @@ describe('<Slider />', () => {
     const { container } = renderWithTheme(
       <Slider onMouseDown={handleMouseDown} value={0} />
     );
-    fireEvent.mouseDown(container.firstChild);
+    const slider = container.firstElementChild as HTMLElement;
+    fireEvent.mouseDown(slider);
     expect(handleMouseDown).toHaveBeenCalledTimes(1);
   });
   describe('prop: step', () => {
@@ -105,28 +101,30 @@ describe('<Slider />', () => {
           defaultValue={0}
         />
       );
+      const slider = container.firstElementChild as HTMLElement;
       // mocking containers size
-      container.firstChild.getBoundingClientRect = () => ({
-        width: 100,
-        height: 20,
-        bottom: 20,
-        left: 0
-      });
+      slider.getBoundingClientRect = () =>
+        ({
+          width: 100,
+          height: 20,
+          bottom: 20,
+          left: 0
+        } as DOMRect);
       const thumb = getByRole('slider');
 
       fireEvent.touchStart(
-        container.firstChild,
+        slider,
         createTouches([{ identifier: 1, clientX: 22, clientY: 0 }])
       );
       expect(thumb).toHaveAttribute('aria-valuenow', '20');
 
       thumb.focus();
-      fireEvent.keyDown(document.activeElement, {
+      fireEvent.keyDown(document.activeElement as HTMLElement, {
         key: 'ArrowUp'
       });
       expect(thumb).toHaveAttribute('aria-valuenow', '30');
 
-      fireEvent.keyDown(document.activeElement, {
+      fireEvent.keyDown(document.activeElement as HTMLElement, {
         key: 'ArrowDown'
       });
       expect(thumb).toHaveAttribute('aria-valuenow', '20');
@@ -143,11 +141,10 @@ describe('<Slider />', () => {
           disabled
         />
       );
+      const slider = container.firstElementChild as HTMLElement;
       const thumb = getByRole('slider');
       expect(
-        window
-          .getComputedStyle(container.firstChild, null)
-          .getPropertyValue('pointer-events')
+        window.getComputedStyle(slider, null).getPropertyValue('pointer-events')
       ).toBe('none');
       expect(thumb).toHaveAttribute('aria-disabled', 'true');
     });
@@ -159,27 +156,27 @@ describe('<Slider />', () => {
       const thumb = getByRole('slider');
       thumb.focus();
 
-      fireEvent.keyDown(document.activeElement, {
+      fireEvent.keyDown(document.activeElement as HTMLElement, {
         key: 'Home'
       });
       expect(thumb).toHaveAttribute('aria-valuenow', '0');
 
-      fireEvent.keyDown(document.activeElement, {
+      fireEvent.keyDown(document.activeElement as HTMLElement, {
         key: 'End'
       });
       expect(thumb).toHaveAttribute('aria-valuenow', '100');
 
-      fireEvent.keyDown(document.activeElement, {
+      fireEvent.keyDown(document.activeElement as HTMLElement, {
         key: 'PageDown'
       });
       expect(thumb).toHaveAttribute('aria-valuenow', '90');
 
-      fireEvent.keyDown(document.activeElement, {
+      fireEvent.keyDown(document.activeElement as HTMLElement, {
         key: 'Escape'
       });
       expect(thumb).toHaveAttribute('aria-valuenow', '90');
 
-      fireEvent.keyDown(document.activeElement, {
+      fireEvent.keyDown(document.activeElement as HTMLElement, {
         key: 'PageUp'
       });
       expect(thumb).toHaveAttribute('aria-valuenow', '100');
@@ -199,10 +196,10 @@ describe('<Slider />', () => {
       const thumb = getByRole('slider');
       thumb.focus();
 
-      fireEvent.keyDown(document.activeElement, moveRightEvent);
+      fireEvent.keyDown(document.activeElement as HTMLElement, moveRightEvent);
       expect(thumb).toHaveAttribute('aria-valuenow', '6');
 
-      fireEvent.keyDown(document.activeElement, moveLeftEvent);
+      fireEvent.keyDown(document.activeElement as HTMLElement, moveLeftEvent);
       expect(thumb).toHaveAttribute('aria-valuenow', '4');
 
       expect(thumb.style.left).toBe('20%');
@@ -215,19 +212,19 @@ describe('<Slider />', () => {
       const thumb = getByRole('slider');
       thumb.focus();
 
-      fireEvent.keyDown(document.activeElement, moveRightEvent);
+      fireEvent.keyDown(document.activeElement as HTMLElement, moveRightEvent);
       expect(thumb).toHaveAttribute('aria-valuenow', '96');
 
-      fireEvent.keyDown(document.activeElement, moveRightEvent);
+      fireEvent.keyDown(document.activeElement as HTMLElement, moveRightEvent);
       expect(thumb).toHaveAttribute('aria-valuenow', '106');
 
-      fireEvent.keyDown(document.activeElement, moveRightEvent);
+      fireEvent.keyDown(document.activeElement as HTMLElement, moveRightEvent);
       expect(thumb).toHaveAttribute('aria-valuenow', '108');
 
-      fireEvent.keyDown(document.activeElement, moveLeftEvent);
+      fireEvent.keyDown(document.activeElement as HTMLElement, moveLeftEvent);
       expect(thumb).toHaveAttribute('aria-valuenow', '96');
 
-      fireEvent.keyDown(document.activeElement, moveLeftEvent);
+      fireEvent.keyDown(document.activeElement as HTMLElement, moveLeftEvent);
       expect(thumb).toHaveAttribute('aria-valuenow', '86');
     });
 
@@ -238,13 +235,13 @@ describe('<Slider />', () => {
       const thumb = getByRole('slider');
       thumb.focus();
 
-      fireEvent.keyDown(document.activeElement, moveLeftEvent);
+      fireEvent.keyDown(document.activeElement as HTMLElement, moveLeftEvent);
       expect(thumb).toHaveAttribute('aria-valuenow', '6');
 
-      fireEvent.keyDown(document.activeElement, moveRightEvent);
+      fireEvent.keyDown(document.activeElement as HTMLElement, moveRightEvent);
       expect(thumb).toHaveAttribute('aria-valuenow', '16');
 
-      fireEvent.keyDown(document.activeElement, moveRightEvent);
+      fireEvent.keyDown(document.activeElement as HTMLElement, moveRightEvent);
       expect(thumb).toHaveAttribute('aria-valuenow', '26');
     });
 
@@ -255,7 +252,7 @@ describe('<Slider />', () => {
       const thumb = getByRole('slider');
       thumb.focus();
 
-      fireEvent.keyDown(document.activeElement, moveRightEvent);
+      fireEvent.keyDown(document.activeElement as HTMLElement, moveRightEvent);
       expect(thumb).toHaveAttribute('aria-valuenow', '0.3');
     });
 
@@ -271,7 +268,7 @@ describe('<Slider />', () => {
       const thumb = getByRole('slider');
       thumb.focus();
 
-      fireEvent.keyDown(document.activeElement, moveRightEvent);
+      fireEvent.keyDown(document.activeElement as HTMLElement, moveRightEvent);
       expect(thumb).toHaveAttribute('aria-valuenow', '3e-8');
     });
 
@@ -287,7 +284,7 @@ describe('<Slider />', () => {
       const thumb = getByRole('slider');
       thumb.focus();
 
-      fireEvent.keyDown(document.activeElement, moveLeftEvent);
+      fireEvent.keyDown(document.activeElement as HTMLElement, moveLeftEvent);
       expect(thumb).toHaveAttribute('aria-valuenow', '-3e-8');
     });
   });
@@ -314,16 +311,19 @@ describe('<Slider />', () => {
         />
       );
 
+      const slider = container.firstElementChild as HTMLElement;
+
       // mocking containers size
-      container.firstChild.getBoundingClientRect = () => ({
-        width: 20,
-        height: 100,
-        bottom: 100,
-        left: 0
-      });
+      slider.getBoundingClientRect = () =>
+        ({
+          width: 20,
+          height: 100,
+          bottom: 100,
+          left: 0
+        } as DOMRect);
 
       fireEvent.touchStart(
-        container.firstChild,
+        slider,
         createTouches([{ identifier: 1, clientX: 0, clientY: 20 }])
       );
       fireEvent.touchMove(

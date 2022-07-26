@@ -1,7 +1,6 @@
-import React from 'react';
+import { ComponentMeta } from '@storybook/react';
+import { Cutout, Slider } from 'react95';
 import styled from 'styled-components';
-
-import { Slider, Cutout } from '..';
 
 const Wrapper = styled.div`
   background: ${({ theme }) => theme.material};
@@ -38,7 +37,7 @@ export default {
   title: 'Slider',
   component: Slider,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
+} as ComponentMeta<typeof Slider>;
 
 export function Default() {
   return (

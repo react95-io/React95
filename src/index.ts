@@ -24,7 +24,7 @@ export * from './Panel/Panel';
 export * from './Progress/Progress';
 export * from './Radio/Radio';
 export * from './Select/Select';
-export { default as Slider } from './Slider/Slider';
+export * from './Slider/Slider';
 export { default as Tab } from './Tab/Tab';
 export { default as TabBody } from './TabBody/TabBody';
 export { default as Table } from './Table/Table';
