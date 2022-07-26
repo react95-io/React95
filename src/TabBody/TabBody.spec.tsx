@@ -1,7 +1,5 @@
-import React from 'react';
-
 import { renderWithTheme } from '../../test/utils';
-import TabBody from './TabBody';
+import { TabBody } from './TabBody';
 
 describe('<TabBody />', () => {
   describe('prop: children', () => {

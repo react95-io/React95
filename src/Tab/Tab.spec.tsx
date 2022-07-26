@@ -1,7 +1,5 @@
-import React from 'react';
-
 import { renderWithTheme } from '../../test/utils';
-import Tab from './Tab';
+import { Tab } from './Tab';
 
 describe('<Tab />', () => {
   describe('prop: children', () => {

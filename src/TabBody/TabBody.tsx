@@ -1,8 +1,13 @@
-import React from 'react';
-import propTypes from 'prop-types';
+import React, { forwardRef } from 'react';
 
 import styled from 'styled-components';
 import { createBorderStyles, createBoxStyles } from '../common';
+import { CommonStyledProps } from '../types';
+
+type TabBodyProps = {
+  children: React.ReactNode;
+} & React.HTMLAttributes<HTMLDivElement> &
+  CommonStyledProps;
 
 const StyledTabBody = styled.div`
   ${createBoxStyles()}
@@ -13,8 +18,10 @@ const StyledTabBody = styled.div`
   padding: 16px;
   font-size: 1rem;
 `;
-const TabBody = React.forwardRef(function TabBody(props, ref) {
-  const { children, ...otherProps } = props;
+const TabBody = forwardRef<HTMLDivElement, TabBodyProps>(function TabBody(
+  { children, ...otherProps },
+  ref
+) {
   return (
     <StyledTabBody ref={ref} {...otherProps}>
       {children}
@@ -22,11 +29,4 @@ const TabBody = React.forwardRef(function TabBody(props, ref) {
   );
 });
 
-TabBody.defaultProps = {
-  children: null
-};
-
-TabBody.propTypes = {
-  children: propTypes.node
-};
-export default TabBody;
+export { TabBody, TabBodyProps };

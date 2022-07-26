@@ -1,11 +1,21 @@
-import React from 'react';
-import propTypes from 'prop-types';
-
+import React, { forwardRef } from 'react';
 import styled from 'styled-components';
+
 import { createBorderStyles, createBoxStyles, focusOutline } from '../common';
 import { blockSizes } from '../common/system';
+import { CommonStyledProps } from '../types';
 
-const StyledTab = styled.button`
+type TabProps = {
+  children?: React.ReactNode;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>, value: any) => void;
+  selected?: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  value?: any;
+} & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'value'> &
+  CommonStyledProps;
+
+const StyledTab = styled.button<TabProps>`
   ${createBoxStyles()}
   ${createBorderStyles()}
   position: relative;
@@ -59,16 +69,17 @@ const StyledTab = styled.button`
   }
 `;
 
-const Tab = React.forwardRef(function Tab(props, ref) {
-  const { value, onClick, selected, children, ...otherProps } = props;
-
+const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(
+  { value, onClick, selected = false, children, ...otherProps },
+  ref
+) {
   return (
     <StyledTab
-      selected={selected}
       aria-selected={selected}
-      onClick={e => onClick(e, value)}
-      role='tab'
+      selected={selected}
+      onClick={(e: React.MouseEvent<HTMLButtonElement>) => onClick?.(e, value)}
       ref={ref}
+      role='tab'
       {...otherProps}
     >
       {children}
@@ -76,17 +87,4 @@ const Tab = React.forwardRef(function Tab(props, ref) {
   );
 });
 
-Tab.defaultProps = {
-  onClick: () => {},
-  selected: false,
-  children: null
-};
-
-Tab.propTypes = {
-  // eslint-disable-next-line react/require-default-props, react/forbid-prop-types
-  value: propTypes.any,
-  onClick: propTypes.func,
-  selected: propTypes.bool,
-  children: propTypes.node
-};
-export default Tab;
+export { Tab, TabProps };
