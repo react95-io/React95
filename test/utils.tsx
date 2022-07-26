@@ -10,29 +10,53 @@ export const renderWithTheme = (component: React.ReactNode) =>
   render(<ThemeProvider theme={theme}>{component}</ThemeProvider>);
 
 export class Touch {
-  instance: any;
+  #identifier: number;
 
-  constructor(instance: any) {
-    this.instance = instance;
+  #clientX = 0;
+
+  #clientY = 0;
+
+  #pageX = 0;
+
+  #pageY = 0;
+
+  constructor({
+    identifier,
+    clientX = 0,
+    clientY = 0,
+    pageX = 0,
+    pageY = 0
+  }: {
+    identifier: number;
+    clientX?: number;
+    clientY?: number;
+    pageX?: number;
+    pageY?: number;
+  }) {
+    this.#identifier = identifier;
+    this.#clientX = clientX;
+    this.#clientY = clientY;
+    this.#pageX = pageX;
+    this.#pageY = pageY;
   }
 
   get identifier() {
-    return this.instance.identifier;
+    return this.#identifier;
   }
 
   get pageX() {
-    return this.instance.pageX;
+    return this.#pageX;
   }
 
   get pageY() {
-    return this.instance.pageY;
+    return this.#pageY;
   }
 
   get clientX() {
-    return this.instance.clientX;
+    return this.#clientX;
   }
 
   get clientY() {
-    return this.instance.clientY;
+    return this.#clientY;
   }
 }
