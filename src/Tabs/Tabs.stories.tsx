@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-
+import { ComponentMeta } from '@storybook/react';
+import { useState } from 'react';
 import {
-  Tabs,
-  Tab,
-  TabBody,
-  Window,
-  WindowHeader,
-  WindowContent,
+  Anchor,
+  Checkbox,
   Fieldset,
   NumberField,
-  Checkbox,
-  Anchor
+  Tab,
+  TabBody,
+  Tabs,
+  Window,
+  WindowContent,
+  WindowHeader
 } from 'react95';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   padding: 5rem;
@@ -24,14 +24,17 @@ export default {
   component: Tabs,
   subcomponents: { Tab, TabBody },
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
+} as ComponentMeta<typeof Tabs>;
 
 export function Default() {
   const [state, setState] = useState({
     activeTab: 0
   });
 
-  const handleChange = (e, value) => setState({ activeTab: value });
+  const handleChange = (
+    _: React.MouseEvent<HTMLButtonElement>,
+    value: number
+  ) => setState({ activeTab: value });
 
   const { activeTab } = state;
   return (
@@ -85,7 +88,10 @@ export function MultiRow() {
     activeTab: 'Shoes'
   });
 
-  const handleChange = (e, value) => setState({ activeTab: value });
+  const handleChange = (
+    _: React.MouseEvent<HTMLButtonElement>,
+    value: number
+  ) => setState({ activeTab: value });
 
   const { activeTab } = state;
   return (

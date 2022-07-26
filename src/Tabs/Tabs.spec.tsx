@@ -1,9 +1,8 @@
-import React from 'react';
 import { fireEvent } from '@testing-library/react';
 
 import { renderWithTheme } from '../../test/utils';
 import { Tab } from '..';
-import Tabs from './Tabs';
+import { Tabs } from './Tabs';
 
 describe('<Tabs />', () => {
   describe('prop: children', () => {
@@ -112,7 +111,7 @@ describe('<Tabs />', () => {
       const rowElements = getAllByTestId('tab-row');
       const selectedTab = container.querySelector('[aria-selected=true]');
 
-      expect(rowElements.pop().contains(selectedTab)).toBe(true);
+      expect(rowElements?.pop()?.contains(selectedTab)).toBe(true);
     });
   });
 });
