@@ -1,8 +1,10 @@
-import React from 'react';
-import propTypes from 'prop-types';
-
+import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 import { blockSizes } from '../common/system';
+
+type TableRowProps = {
+  children?: React.ReactNode;
+} & React.HTMLAttributes<HTMLTableRowElement>;
 
 const StyledTr = styled.tr`
   color: inherit;
@@ -19,21 +21,14 @@ const StyledTr = styled.tr`
   }
 `;
 
-const TableRow = React.forwardRef(function TableRow(props, ref) {
-  const { children, ...otherProps } = props;
-  return (
-    <StyledTr ref={ref} {...otherProps}>
-      {children}
-    </StyledTr>
-  );
-});
+const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(
+  function TableRow({ children, ...otherProps }, ref) {
+    return (
+      <StyledTr ref={ref} {...otherProps}>
+        {children}
+      </StyledTr>
+    );
+  }
+);
 
-TableRow.defaultProps = {
-  children: null
-};
-
-TableRow.propTypes = {
-  children: propTypes.node
-};
-
-export default TableRow;
+export { TableRow, TableRowProps };

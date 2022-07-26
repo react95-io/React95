@@ -2,13 +2,13 @@ import React from 'react';
 
 import { renderWithTheme } from '../../test/utils';
 
-import TableHead from './TableHead';
+import { TableHead } from './TableHead';
 
 describe('<TableHead />', () => {
-  function mountInTable(node) {
+  function mountInTable(node: React.ReactNode) {
     const { container, getByTestId } = renderWithTheme(<table>{node}</table>);
     return {
-      tbody: container.querySelector('table').firstChild,
+      tbody: container.querySelector('table')?.firstElementChild,
       getByTestId
     };
   }
@@ -17,7 +17,7 @@ describe('<TableHead />', () => {
     const { tbody } = mountInTable(<TableHead />);
 
     expect(tbody).toBeInTheDocument();
-    expect(tbody.tagName).toBe('THEAD');
+    expect(tbody?.tagName).toBe('THEAD');
   });
 
   it('renders children', () => {

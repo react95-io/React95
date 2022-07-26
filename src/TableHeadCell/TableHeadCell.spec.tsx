@@ -2,10 +2,10 @@ import React from 'react';
 
 import { renderWithTheme } from '../../test/utils';
 
-import TableHeadCell from './TableHeadCell';
+import { TableHeadCell } from './TableHeadCell';
 
 describe('<TableHeadCell />', () => {
-  function mountInTable(node) {
+  function mountInTable(node: React.ReactNode) {
     const { container, getByText } = renderWithTheme(
       <table>
         <thead>
@@ -14,14 +14,14 @@ describe('<TableHeadCell />', () => {
       </table>
     );
     return {
-      th: container.querySelector('tr').firstChild,
+      th: container.querySelector('tr')?.firstElementChild as HTMLElement,
       getByText
     };
   }
 
   it('renders TableHeadCell', () => {
     const { th } = mountInTable(<TableHeadCell />);
-    expect(th.tagName).toBe('TH');
+    expect(th?.tagName).toBe('TH');
   });
 
   it('renders children', () => {
@@ -55,7 +55,7 @@ describe('<TableHeadCell />', () => {
       );
       expect(th).toHaveAttribute('aria-disabled', 'true');
 
-      th.click();
+      th?.click?.();
       expect(handleChange).not.toHaveBeenCalled();
     });
   });
