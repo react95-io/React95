@@ -6,7 +6,7 @@ import { Button } from '../Button/Button';
 import { Cutout } from '../Cutout/Cutout';
 import { NumberField } from '../NumberField/NumberField';
 import Select from '../Select/Select';
-import Toolbar from '../Toolbar/Toolbar';
+import { Toolbar } from '../Toolbar/Toolbar';
 import Window from '../Window/Window';
 import WindowContent from '../WindowContent/WindowContent';
 import WindowHeader from '../WindowHeader/WindowHeader';
