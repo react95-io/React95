@@ -2,7 +2,8 @@ module.exports = {
   extends: [
     'plugin:@typescript-eslint/recommended',
     'airbnb',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
+    'plugin:react-hooks/recommended'
   ],
   parser: '@typescript-eslint/parser',
   plugins: ['react', 'prettier'],
@@ -32,6 +33,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'jsx-a11y/label-has-associated-control': ['error', { assert: 'either' }],
     'jsx-a11y/label-has-for': 'off',
+    'no-nested-ternary': 'off',
     'prettier/prettier': 'error',
     'react/forbid-prop-types': 'off',
     'react/jsx-filename-extension': [

@@ -1,5 +1,3 @@
-/* eslint-disable no-nested-ternary */
-
 import React, { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import {
