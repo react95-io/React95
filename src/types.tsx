@@ -19,6 +19,7 @@ export type CommonStyledProps = {
 };
 
 export type CommonThemeProps = {
+  'data-testid'?: string;
   $disabled?: boolean;
   shadow?: boolean;
 };

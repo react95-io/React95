@@ -1,14 +1,23 @@
 import styled, { css } from 'styled-components';
-import { StyledButton as Button } from '../Button/Button';
 
+import { StyledButton as Button } from '../Button/Button';
 import {
-  shadow as commonShadow,
   createDisabledTextStyles,
   createFlatBoxStyles,
-  createScrollbars
+  createScrollbars,
+  shadow as commonShadow
 } from '../common';
 import { blockSizes } from '../common/system';
 import { StyledCutout } from '../Cutout/Cutout';
+import { CommonThemeProps } from '../types';
+
+import { SelectVariants } from './Select.types';
+
+type CommonSelectStyleProps = {
+  $disabled?: boolean;
+  native?: boolean;
+  variant?: SelectVariants;
+} & CommonThemeProps;
 
 const sharedInputContentStyles = css`
   box-sizing: border-box;
@@ -48,29 +57,29 @@ export const StyledSelectContent = styled.div`
     border: 2px dotted ${({ theme }) => theme.focusSecondary};
   }
 `;
-const sharedWrapperStyles = css`
+const sharedWrapperStyles = css<CommonSelectStyleProps>`
   height: ${blockSizes.md};
   display: inline-block;
-  color: ${({ theme, isDisabled }) =>
-    isDisabled ? createDisabledTextStyles() : theme.canvasText};
+  color: ${({ $disabled = false, theme }) =>
+    $disabled ? createDisabledTextStyles() : theme.canvasText};
   font-size: 1rem;
-  cursor: ${({ isDisabled }) => (isDisabled ? 'default' : 'pointer')};
+  cursor: ${({ $disabled }) => ($disabled ? 'default' : 'pointer')};
 `;
 
-export const StyledSelectWrapper = styled(StyledCutout)`
+export const StyledSelectWrapper = styled(StyledCutout)<CommonSelectStyleProps>`
   ${sharedWrapperStyles}
-  background: ${({ theme, isDisabled }) =>
-    isDisabled ? theme.material : theme.canvas};
+  background: ${({ $disabled = false, theme }) =>
+    $disabled ? theme.material : theme.canvas};
   &:focus {
     outline: 0;
   }
 `;
 
-export const StyledFlatSelectWrapper = styled.div`
+export const StyledFlatSelectWrapper = styled.div<CommonSelectStyleProps>`
   ${createFlatBoxStyles()}
   ${sharedWrapperStyles}
-  background: ${({ theme, isDisabled }) =>
-    isDisabled ? theme.flatLight : theme.canvas};
+  background: ${({ $disabled = false, theme }) =>
+    $disabled ? theme.flatLight : theme.canvas};
 `;
 
 export const StyledNativeSelect = styled.select`
@@ -96,11 +105,11 @@ export const StyledNativeSelect = styled.select`
   }
 `;
 
-export const StyledDropdownButton = styled(Button)`
+export const StyledDropdownButton = styled(Button)<CommonSelectStyleProps>`
   width: 30px;
   padding: 0;
   flex-shrink: 0;
-  ${({ variant }) =>
+  ${({ variant = 'default' }) =>
     variant === 'flat'
       ? css`
           height: 100%;
@@ -116,7 +125,7 @@ export const StyledDropdownButton = styled(Button)`
               inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
           }
         `}
-  ${({ native, variant }) =>
+  ${({ native = false, variant = 'default' }) =>
     native &&
     (variant === 'flat'
       ? `
@@ -130,11 +139,11 @@ export const StyledDropdownButton = styled(Button)`
     right: 2px;
     height: calc(100% - 4px);
     `)}
-    pointer-events: ${({ isDisabled, native }) =>
-    isDisabled || native ? 'none' : 'auto'}
+    pointer-events: ${({ $disabled = false, native = false }) =>
+    $disabled || native ? 'none' : 'auto'}
 `;
 
-export const StyledDropdownIcon = styled.span`
+export const StyledDropdownIcon = styled.span<CommonSelectStyleProps>`
   position: absolute;
   left: 50%;
   top: 50%;
@@ -145,10 +154,10 @@ export const StyledDropdownIcon = styled.span`
   border-right: 6px solid transparent;
   display: inline-block;
   border-top: 6px solid
-    ${({ theme, isDisabled }) =>
-      isDisabled ? theme.materialTextDisabled : theme.materialText};
-  ${({ theme, isDisabled }) =>
-    isDisabled &&
+    ${({ $disabled = false, theme }) =>
+      $disabled ? theme.materialTextDisabled : theme.materialText};
+  ${({ $disabled = false, theme }) =>
+    $disabled &&
     `
     filter: drop-shadow(1px 1px 0px ${theme.materialTextDisabledShadow});
     border-top-color: ${theme.materialTextDisabled};
@@ -158,7 +167,7 @@ export const StyledDropdownIcon = styled.span`
   }
 `;
 
-export const StyledDropdownMenu = styled.ul`
+export const StyledDropdownMenu = styled.ul<CommonSelectStyleProps>`
   box-sizing: border-box;
 
   font-size: 1rem;
@@ -172,7 +181,7 @@ export const StyledDropdownMenu = styled.ul`
   z-index: 1;
   cursor: pointer;
   box-shadow: ${commonShadow};
-  ${({ variant }) =>
+  ${({ variant = 'default' }) =>
     variant === 'flat'
       ? css`
           bottom: 2px;
@@ -184,7 +193,7 @@ export const StyledDropdownMenu = styled.ul`
           width: calc(100% - 2px);
           border: 2px solid ${({ theme }) => theme.borderDarkest};
         `}
-  ${({ variant }) => createScrollbars(variant)}
+  ${({ variant = 'default' }) => createScrollbars(variant)}
 `;
 
 export const StyledDropdownMenuItem = styled.li`
