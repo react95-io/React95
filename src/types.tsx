@@ -19,8 +19,7 @@ export type CommonStyledProps = {
 };
 
 export type CommonThemeProps = {
-  // TODO: Rename to base `disabled`
-  isDisabled?: boolean;
+  $disabled?: boolean;
   shadow?: boolean;
 };
 
