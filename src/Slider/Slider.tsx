@@ -48,7 +48,10 @@ type SliderProps = {
   step?: number | null;
   value?: number;
   variant?: 'default' | 'flat';
-} & React.HTMLAttributes<HTMLDivElement> &
+} & Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  'defaultValue' | 'onChange' | 'onMouseDown'
+> &
   CommonStyledProps;
 
 function percentToValue(percent: number, min: number, max: number) {
@@ -311,7 +314,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   const vertical = orientation === 'vertical';
   const [valueDerived, setValueState] = useControlledOrUncontrolled({
     value,
-    defaultValue
+    defaultValue: defaultValue ?? 0
   });
 
   const {
@@ -363,7 +366,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
       const tenPercents = (max - min) / 10;
       const marksValues = marks.map(mark => mark.value);
       const marksIndex = marksValues.indexOf(valueDerived);
-      let newValue;
+      let newValue = 0;
 
       switch (event.key) {
         case 'Home':
@@ -587,7 +590,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
         disabled={disabled}
         name={name}
         type='hidden'
-        value={valueDerived || 0}
+        value={valueDerived ?? 0}
       />
       {marks &&
         marks.map(m => (

@@ -58,7 +58,8 @@ type SelectNativeProps = {
 type SelectProps = {
   'aria-label'?: string;
   className?: string;
-  defaultValue?: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  defaultValue?: any;
   disabled?: boolean;
   formatDisplay?: SelectFormatDisplayCallback;
   inputRef?: React.RefObject<SelectRef>;
@@ -77,10 +78,12 @@ type SelectProps = {
   open?: boolean;
   options?: (SelectOption | null)[];
   readOnly?: boolean;
-  SelectDisplayProps?: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  SelectDisplayProps?: Record<string, any>;
   shadow?: boolean;
   style?: React.CSSProperties;
-  value?: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  value?: any;
   variant?: SelectVariants;
   width?: string | number;
 } & (SelectCustomProps | SelectNativeProps) &
@@ -120,7 +123,8 @@ const getDisplayLabel = (
   return selectedOption.label;
 };
 
-const getDefaultValue = (defaultValue: unknown, options: SelectOption[]) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const getDefaultValue = (defaultValue: any, options: SelectOption[]) => {
   if (defaultValue) {
     return defaultValue;
   }

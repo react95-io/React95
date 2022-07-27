@@ -8,12 +8,15 @@ import { Divider } from '../Divider/Divider';
 import { CommonStyledProps } from '../types';
 
 type ColorInputProps = {
-  value?: string;
   defaultValue?: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
   disabled?: boolean;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  value?: string;
   variant?: 'default' | 'flat';
-} & React.InputHTMLAttributes<HTMLInputElement> &
+} & Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  'defaultValue' | 'disabled' | 'onChange' | 'value'
+> &
   CommonStyledProps;
 
 const Trigger = styled(StyledButton)`
@@ -143,14 +146,14 @@ const ColorInput = forwardRef<HTMLInputElement, ColorInputProps>(
           onChange={handleChange}
           readOnly={disabled}
           disabled={disabled}
-          value={valueDerived || '#008080'}
+          value={valueDerived ?? '#008080'}
           type='color'
           ref={ref}
           {...otherProps}
         />
         <ColorPreview
           $disabled={disabled}
-          color={valueDerived}
+          color={valueDerived ?? '#008080'}
           role='presentation'
         />
         {variant === 'default' && <StyledDivider orientation='vertical' />}
