@@ -1,7 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import { ComponentMeta } from '@storybook/react';
+import { useCallback, useState } from 'react';
+import { Fieldset, Tree, TreeLeaf } from 'react95';
 import styled from 'styled-components';
-
-import { Tree, Fieldset } from 'react95';
 import { Button } from '../Button/Button';
 
 const Wrapper = styled.div`
@@ -26,7 +26,7 @@ export default {
   title: 'Tree',
   component: Tree,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
+} as ComponentMeta<typeof Tree>;
 
 const categories = [
   {
@@ -84,9 +84,9 @@ const categories = [
   }
 ];
 
-const allIds = [];
+const allIds: string[] = [];
 
-function getIds(item) {
+function getIds(item: TreeLeaf<string>) {
   allIds.push(item.id);
   // eslint-disable-next-line no-unused-expressions
   item.items?.forEach(getIds);
@@ -114,7 +114,7 @@ export function Controlled() {
 
   const handleExpandClick = useCallback(() => {
     setExpanded(oldExpanded => (oldExpanded.length === 0 ? allIds : []));
-  });
+  }, []);
 
   return (
     <div style={{ maxWidth: '250px' }}>
@@ -127,8 +127,8 @@ export function Controlled() {
       <Fieldset label='Catalog'>
         <Tree
           tree={categories}
-          onNodeSelect={(event, id) => setSelected(id)}
-          onNodeToggle={(event, ids) => setExpanded(ids)}
+          onNodeSelect={(_, id) => setSelected(id)}
+          onNodeToggle={(_, ids) => setExpanded(ids)}
           expanded={expanded}
           selected={selected}
         />
@@ -156,9 +156,14 @@ Disabled.story = {
 };
 
 export function DisabledTreeItems() {
-  const modifiedTree = categories.map((item, index) =>
-    index !== 1 ? item : { ...item, disabled: true }
-  );
+  function disableSecondItem<T>(items: TreeLeaf<T>[]): TreeLeaf<T>[] {
+    return items.map((item, index) => ({
+      ...item,
+      items: item.items ? disableSecondItem(item.items) : undefined,
+      disabled: index === 1
+    }));
+  }
+  const modifiedTree = disableSecondItem(categories);
 
   return (
     <div style={{ maxWidth: '250px' }}>

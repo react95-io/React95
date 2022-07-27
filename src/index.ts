@@ -37,7 +37,7 @@ export * from './Tabs/Tabs';
 export * from './TextField/TextField';
 export * from './Toolbar/Toolbar';
 export * from './Tooltip/Tooltip';
-export { default as Tree } from './Tree/Tree';
+export * from './Tree/Tree';
 export * from './Window/Window';
 export * from './WindowContent/WindowContent';
 export * from './WindowHeader/WindowHeader';
