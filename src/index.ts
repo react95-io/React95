@@ -14,7 +14,7 @@ export * from './Counter/Counter';
 export * from './Cutout/Cutout';
 export * from './Desktop/Desktop';
 export * from './Divider/Divider';
-export { default as Fieldset } from './Fieldset/Fieldset';
+export * from './Fieldset/Fieldset';
 export * from './Hourglass/Hourglass';
 export * from './List/List';
 export * from './ListItem/ListItem';
