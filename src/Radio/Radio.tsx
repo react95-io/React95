@@ -24,7 +24,10 @@ type RadioProps = {
   style?: CSSProperties;
   value?: string | number | boolean;
   variant?: RadioVariant;
-} & React.InputHTMLAttributes<HTMLInputElement> &
+} & Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  'checked' | 'className' | 'disabled' | 'name' | 'onChange' | 'style' | 'value'
+> &
   CommonStyledProps;
 
 const sharedCheckboxStyles = css`

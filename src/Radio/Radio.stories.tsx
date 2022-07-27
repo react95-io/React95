@@ -1,5 +1,5 @@
 import { ComponentMeta } from '@storybook/react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   Cutout,
   Divider,
@@ -33,7 +33,8 @@ export default {
 
 export function Default() {
   const [state, setState] = useState('Pear');
-  const handleChange = e => setState(e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setState(e.target.value);
 
   return (
     <Window>
@@ -83,7 +84,8 @@ Default.story = {
 
 export function Flat() {
   const [state, setState] = useState('Pear');
-  const handleChange = e => setState(e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setState(e.target.value);
 
   return (
     <Window>
@@ -147,8 +149,10 @@ export function Menu() {
     tool: 'Brush',
     color: 'Black'
   });
-  const handleToolChange = e => setState({ ...state, tool: e.target.value });
-  const handleColorChange = e => setState({ ...state, color: e.target.value });
+  const handleToolChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setState({ ...state, tool: e.target.value });
+  const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setState({ ...state, color: e.target.value });
 
   const { tool, color } = state;
 

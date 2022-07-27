@@ -26,7 +26,18 @@ type CheckboxProps = {
   style?: React.CSSProperties;
   value?: number | string;
   variant?: 'default' | 'flat' | 'menu';
-} & React.InputHTMLAttributes<HTMLInputElement>;
+} & Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  | 'checked'
+  | 'className'
+  | 'defaultChecked'
+  | 'disabled'
+  | 'label'
+  | 'name'
+  | 'onChange'
+  | 'style'
+  | 'value'
+>;
 
 type CheckmarkProps = {
   $disabled: boolean;

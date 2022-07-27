@@ -1,14 +1,14 @@
 import React from 'react';
 
-export type SelectChangeEvent =
+export type SelectChangeEvent<T> =
   | (React.MouseEvent & {
       target: {
-        value: { value: unknown; name: string | undefined };
+        value: { value: T; name: string | undefined };
       };
     })
   | React.ChangeEvent<HTMLSelectElement>;
 
-export type SelectOption<T = unknown> = {
+export type SelectOption<T> = {
   label: string;
   value: T;
 };
@@ -19,4 +19,6 @@ export type SelectRef = Pick<HTMLInputElement, 'value' | 'focus'> & {
 
 export type SelectVariants = 'default' | 'flat';
 
-export type SelectFormatDisplayCallback = (option: SelectOption) => string;
+export type SelectFormatDisplayCallback<T> = (
+  option: SelectOption<T>
+) => string;

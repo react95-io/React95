@@ -6,7 +6,7 @@ import { renderWithTheme } from '../../test/utils';
 import { Select } from './Select';
 import { SelectOption, SelectRef } from './Select.types';
 
-const options: SelectOption[] = [
+const options: SelectOption<number>[] = [
   { label: 'ten', value: 10 },
   { label: 'twenty', value: 20 },
   { label: 'thirty', value: 30 }
@@ -65,7 +65,7 @@ describe('<Select />', () => {
           }
         }}
         options={[
-          { label: 'ten', value: 10 },
+          { label: 'ten', value: '10' },
           { label: 'none', value: '' }
         ]}
       />
@@ -153,7 +153,7 @@ describe('<Select />', () => {
     it('should get selected option from arguments', () => {
       const onChange = jest.fn();
       const { getAllByRole, getByRole } = renderWithTheme(
-        <Select onChange={onChange} value='0' options={options} />
+        <Select onChange={onChange} value={0} options={options} />
       );
       fireEvent.mouseDown(getByRole('button'));
       getAllByRole('option')[1].click();
@@ -331,7 +331,7 @@ describe('<Select />', () => {
   describe('prop: readOnly', () => {
     it('should not trigger any event with readOnly', () => {
       const { getByRole, queryByRole } = renderWithTheme(
-        <Select readOnly value='10' options={options} />
+        <Select readOnly value={10} options={options} />
       );
       getByRole('button').focus();
       const focusedButton = document.activeElement as HTMLElement;
@@ -347,7 +347,7 @@ describe('<Select />', () => {
       const { getByRole } = renderWithTheme(
         <Select
           SelectDisplayProps={{ 'data-test': 'SelectDisplay' }}
-          value='10'
+          value={10}
           options={options}
         />
       );
@@ -357,7 +357,7 @@ describe('<Select />', () => {
 
   describe('prop: renderValue', () => {
     it('should use the prop to render the value', () => {
-      const formatDisplay = (x: SelectOption) =>
+      const formatDisplay = (x: SelectOption<number>) =>
         `0b${Number(x.value).toString(2)}`;
       const { getByRole } = renderWithTheme(
         <Select

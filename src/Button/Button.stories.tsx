@@ -106,7 +106,6 @@ export function Menu() {
                 top: '100%',
                 zIndex: '9999'
               }}
-              open={open}
               onClick={() => setOpen(false)}
             >
               <ListItem size='sm'>Copy link</ListItem>
