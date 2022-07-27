@@ -25,7 +25,14 @@ export function Default() {
     <>
       <List>
         <ListItem primary>Photos</ListItem>
-        <ListItem as='a' href='https://expensive.toys' target='_blank'>
+        <ListItem
+          as='a'
+          // TODO: Come up with a more elegant way to allow props when `as` is used
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          href='https://expensive.toys'
+          target='_blank'
+        >
           Link
         </ListItem>
         <ListItem disabled>Other</ListItem>

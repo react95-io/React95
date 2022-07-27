@@ -55,14 +55,13 @@ type SelectNativeProps = {
   native: true;
 } & Omit<React.SelectHTMLAttributes<HTMLSelectElement>, OmittedNativeProps>;
 
-type SelectProps = {
+type SelectProps<T> = {
   'aria-label'?: string;
   className?: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  defaultValue?: any;
+  defaultValue?: T;
   disabled?: boolean;
-  formatDisplay?: SelectFormatDisplayCallback;
-  inputRef?: React.RefObject<SelectRef>;
+  formatDisplay?: SelectFormatDisplayCallback<T>;
+  inputRef?: React.RefObject<SelectRef> | null;
   menuMaxHeight?: string | number;
   name?: string;
   /**
@@ -70,20 +69,19 @@ type SelectProps = {
    */
   native?: boolean;
   onBlur?: React.FocusEventHandler<HTMLDivElement | HTMLSelectElement>;
-  onChange?: (event: SelectChangeEvent, option: SelectOption) => void;
+  onChange?: (event: SelectChangeEvent<T>, option: SelectOption<T>) => void;
   onClose?: (event: AnyEvent) => void;
   onFocus?: React.FocusEventHandler<HTMLDivElement | HTMLSelectElement>;
   onOpen?: (event: AnyEvent) => void;
   labelId?: string;
   open?: boolean;
-  options?: (SelectOption | null)[];
+  options?: (SelectOption<T> | null)[];
   readOnly?: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   SelectDisplayProps?: Record<string, any>;
   shadow?: boolean;
   style?: React.CSSProperties;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  value?: any;
+  value?: T | string;
   variant?: SelectVariants;
   width?: string | number;
 } & (SelectCustomProps | SelectNativeProps) &
@@ -100,7 +98,7 @@ const KEYS = {
   TAB: 'Tab'
 };
 
-function areEqualValues(a: unknown, b: unknown) {
+function areEqualValues<T>(a: T, b: T) {
   if (typeof b === 'object' && b !== null) {
     return a === b;
   }
@@ -110,9 +108,9 @@ function areEqualValues(a: unknown, b: unknown) {
 const getWrapper = (variant: SelectVariants) =>
   variant === 'flat' ? StyledFlatSelectWrapper : StyledSelectWrapper;
 
-const getDisplayLabel = (
-  selectedOption: SelectOption | undefined,
-  formatDisplay: SelectFormatDisplayCallback | undefined
+const getDisplayLabel = <T,>(
+  selectedOption: SelectOption<T> | undefined,
+  formatDisplay: SelectFormatDisplayCallback<T> | undefined
 ) => {
   if (!selectedOption) {
     return '';
@@ -124,7 +122,7 @@ const getDisplayLabel = (
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const getDefaultValue = (defaultValue: any, options: SelectOption[]) => {
+const getDefaultValue = <T,>(defaultValue: any, options: SelectOption<T>[]) => {
   if (defaultValue) {
     return defaultValue;
   }
@@ -141,7 +139,7 @@ const getFocusedNodeIndex = (dropdownElement: HTMLUListElement) =>
       )
     : -1;
 
-const getOptionWithValue = (value: unknown, options: SelectOption[]) => {
+const getOptionWithValue = <T,>(value: T, options: SelectOption<T>[]) => {
   const isValueString = typeof value === 'string';
   return options.find(
     option =>
@@ -152,7 +150,7 @@ const getOptionWithValue = (value: unknown, options: SelectOption[]) => {
   );
 };
 
-const Select = forwardRef<SelectRef, SelectProps>(function Select(
+function SelectInner<T>(
   {
     'aria-label': ariaLabel,
     className,
@@ -168,7 +166,7 @@ const Select = forwardRef<SelectRef, SelectProps>(function Select(
     onClose,
     onFocus,
     onOpen,
-    open: openProp = null,
+    open: openProp,
     options: optionsProp = [],
     readOnly,
     SelectDisplayProps,
@@ -178,8 +176,8 @@ const Select = forwardRef<SelectRef, SelectProps>(function Select(
     variant = 'default',
     width = 'auto',
     ...otherProps
-  },
-  ref
+  }: SelectProps<T>,
+  ref: React.ForwardedRef<SelectRef>
 ) {
   const { native } = otherProps;
 
@@ -190,7 +188,7 @@ const Select = forwardRef<SelectRef, SelectProps>(function Select(
   const handleRef = useForkRef(ref, inputRefProp);
 
   const options = useMemo(
-    () => optionsProp.filter(Boolean) as SelectOption[],
+    () => optionsProp.filter(Boolean) as SelectOption<T>[],
     [optionsProp]
   );
   const [value, setValueState] = useControlledOrUncontrolled({
@@ -199,7 +197,7 @@ const Select = forwardRef<SelectRef, SelectProps>(function Select(
   });
 
   const [openState, setOpenState] = useState(false);
-  const isOpenControlled = openProp !== null;
+  const isOpenControlled = openProp !== undefined;
   const open = isOpenControlled ? openProp : openState;
 
   // to hijack native focus. when somebody passes ref
@@ -299,7 +297,7 @@ const Select = forwardRef<SelectRef, SelectProps>(function Select(
   );
 
   const handleOptionClick = useCallback(
-    (option: SelectOption) => (event: AnyEvent) => {
+    (option: SelectOption<T>) => (event: AnyEvent) => {
       const newValue = option.value;
       setValueState(newValue);
 
@@ -312,7 +310,7 @@ const Select = forwardRef<SelectRef, SelectProps>(function Select(
           value: { value: newValue, name }
         });
         // TODO: Unweirdify this event argument
-        onChange(event as unknown as SelectChangeEvent, option);
+        onChange(event as unknown as SelectChangeEvent<T>, option);
       }
 
       handleClose(event);
@@ -374,7 +372,7 @@ const Select = forwardRef<SelectRef, SelectProps>(function Select(
                 writable: true,
                 value: { value: option.value, name }
               });
-              onChange(event as unknown as SelectChangeEvent, option);
+              onChange(event as unknown as SelectChangeEvent<T>, option);
             }
           }
         }
@@ -428,12 +426,15 @@ const Select = forwardRef<SelectRef, SelectProps>(function Select(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       event.stopPropagation();
 
-      const nextSelection = getOptionWithValue(event.target.value, options);
+      const nextSelection = getOptionWithValue(
+        event.target.value,
+        options as unknown as SelectOption<string>[]
+      );
       if (!nextSelection) {
         return;
       }
 
-      onChange?.(event, nextSelection);
+      onChange?.(event, nextSelection as unknown as SelectOption<T>);
       setValueState(nextSelection.value);
       displayNode.current?.focus();
     },
@@ -584,6 +585,11 @@ const Select = forwardRef<SelectRef, SelectProps>(function Select(
       )}
     </Wrapper>
   );
-});
+}
+
+const Select = forwardRef(SelectInner) as <T>(
+  // eslint-disable-next-line no-use-before-define
+  props: SelectProps<T> & { ref?: React.ForwardedRef<SelectRef> }
+) => ReturnType<typeof SelectInner>;
 
 export { Select, SelectProps };

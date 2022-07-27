@@ -90,7 +90,7 @@ export function MultiRow() {
 
   const handleChange = (
     _: React.MouseEvent<HTMLButtonElement>,
-    value: number
+    value: string
   ) => setState({ activeTab: value });
 
   const { activeTab } = state;

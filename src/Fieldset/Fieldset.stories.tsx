@@ -82,7 +82,6 @@ export function ToggleExample() {
               style={{ margin: 0 }}
               label='Enable'
               checked={!state}
-              value={!state}
               onChange={() => setState(!state)}
             />
           }

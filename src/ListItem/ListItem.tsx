@@ -14,7 +14,7 @@ type ListItemProps = {
   CommonStyledProps;
 
 export const StyledListItem = styled.li<{
-  disabled?: boolean;
+  $disabled?: boolean;
   square?: boolean;
   primary?: boolean;
   size: Sizes;
@@ -34,11 +34,11 @@ export const StyledListItem = styled.li<{
   text-align: center;
   line-height: ${props => blockSizes[props.size]};
   color: ${({ theme }) => theme.materialText};
-  pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
+  pointer-events: ${({ $disabled }) => ($disabled ? 'none' : 'auto')};
   font-weight: ${({ primary }) => (primary ? 'bold' : 'normal')};
   &:hover {
-    ${({ theme, disabled }) =>
-      !disabled &&
+    ${({ theme, $disabled }) =>
+      !$disabled &&
       `
         color: ${theme.materialTextInvert};
         background: ${theme.hoverBackground};
@@ -46,7 +46,7 @@ export const StyledListItem = styled.li<{
 
     cursor: default;
   }
-  ${props => props.disabled && createDisabledTextStyles()}
+  ${props => props.$disabled && createDisabledTextStyles()}
 `;
 
 const ListItem = forwardRef<HTMLLIElement, ListItemProps>(function ListItem(
@@ -69,8 +69,8 @@ const ListItem = forwardRef<HTMLLIElement, ListItemProps>(function ListItem(
 
   return (
     <StyledListItem
+      $disabled={disabled}
       size={size}
-      disabled={disabled}
       square={square}
       onClick={disabled ? undefined : onClick}
       primary={primary}

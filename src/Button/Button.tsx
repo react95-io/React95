@@ -25,7 +25,10 @@ type ButtonProps = {
   square?: boolean;
   type?: string;
   variant?: 'default' | 'menu' | 'flat';
-} & React.ButtonHTMLAttributes<HTMLButtonElement> &
+} & Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  'disabled' | 'onClick' | 'onTouchStart' | 'type'
+> &
   CommonStyledProps;
 
 type StyledButtonProps = Pick<

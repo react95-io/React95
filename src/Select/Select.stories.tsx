@@ -38,7 +38,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const onChange = (event: SelectChangeEvent, option: SelectOption) =>
+const onChange = <T,>(event: SelectChangeEvent<T>, option: SelectOption<T>) =>
   console.log(event, option);
 
 export default {
@@ -156,9 +156,7 @@ Flat.story = {
 export function CustomDisplayFormatting() {
   return (
     <Select
-      formatDisplay={(opt: SelectOption<number>) =>
-        `${opt.label.toUpperCase()} 👍 👍`
-      }
+      formatDisplay={opt => `${opt.label.toUpperCase()} 👍 👍`}
       onChange={onChange}
       options={options}
       width={220}
