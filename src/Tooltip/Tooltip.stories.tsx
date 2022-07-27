@@ -1,7 +1,6 @@
-import React from 'react';
+import { ComponentMeta } from '@storybook/react';
+import { Button, Tooltip } from 'react95';
 import styled from 'styled-components';
-
-import { Tooltip, Button } from 'react95';
 
 const Wrapper = styled.div`
   padding: 5rem;
@@ -12,7 +11,7 @@ export default {
   title: 'Tooltip',
   component: Tooltip,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
+} as ComponentMeta<typeof Tooltip>;
 
 export function Default() {
   return (
