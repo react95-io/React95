@@ -1,6 +1,5 @@
-import React from 'react';
 import { renderWithTheme } from '../../test/utils';
-import Tree from './Tree';
+import { Tree } from './Tree';
 
 const categories = [
   {
@@ -61,7 +60,7 @@ const categories = [
 describe('<Tree />', () => {
   describe('prop: onNodeSelect', () => {
     it('should call onNodeSelect when uncontrolled', () => {
-      const onNodeSelect = jest.fn((event, id) => id);
+      const onNodeSelect = jest.fn((_, id) => id);
 
       const { getByText } = renderWithTheme(
         <Tree tree={categories} onNodeSelect={onNodeSelect} />
@@ -74,7 +73,7 @@ describe('<Tree />', () => {
     });
 
     it('should call onNodeSelect when controlled', () => {
-      const onNodeSelect = jest.fn((event, id) => id);
+      const onNodeSelect = jest.fn((_, id) => id);
 
       const { getByText } = renderWithTheme(
         <Tree tree={categories} selected='dairy' onNodeSelect={onNodeSelect} />
@@ -89,7 +88,7 @@ describe('<Tree />', () => {
 
   describe('prop: onNodeToggle', () => {
     it('should call onNodeToggle when uncontrolled', () => {
-      const onNodeToggle = jest.fn((event, ids) => ids);
+      const onNodeToggle = jest.fn((_, ids) => ids);
 
       const { getByText } = renderWithTheme(
         <Tree tree={categories} onNodeToggle={onNodeToggle} />
@@ -102,7 +101,7 @@ describe('<Tree />', () => {
     });
 
     it('should call onNodeToggle when controlled', () => {
-      const onNodeToggle = jest.fn((event, ids) => ids);
+      const onNodeToggle = jest.fn((_, ids) => ids);
 
       const { getByText } = renderWithTheme(
         <Tree
@@ -124,8 +123,8 @@ describe('<Tree />', () => {
 
   describe('prop: disabled', () => {
     it('should disable the whole tree', () => {
-      const onNodeSelect = jest.fn((event, id) => id);
-      const onNodeToggle = jest.fn((event, ids) => ids);
+      const onNodeSelect = jest.fn((_, id) => id);
+      const onNodeToggle = jest.fn((_, ids) => ids);
 
       const { getByText } = renderWithTheme(
         <Tree
@@ -143,8 +142,8 @@ describe('<Tree />', () => {
     });
 
     it('should disable a tree item', () => {
-      const onNodeSelect = jest.fn((event, id) => id);
-      const onNodeToggle = jest.fn((event, ids) => ids);
+      const onNodeSelect = jest.fn((_, id) => id);
+      const onNodeToggle = jest.fn((_, ids) => ids);
       const modifiedTree = categories.map((item, index) =>
         index !== 0 ? item : { ...item, disabled: true }
       );
