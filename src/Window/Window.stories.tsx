@@ -1,13 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
+import { ComponentMeta } from '@storybook/react';
 import {
+  Button,
+  Panel,
+  Toolbar,
   Window,
   WindowContent,
-  WindowHeader,
-  Button,
-  Toolbar,
-  Panel
+  WindowHeader
 } from 'react95';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   padding: 5rem;
@@ -66,7 +66,7 @@ export default {
   component: Window,
   subcomponents: { WindowHeader, WindowContent },
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
+} as ComponentMeta<typeof Window>;
 
 export function Default() {
   return (
@@ -97,7 +97,7 @@ export function Default() {
           </p>
         </WindowContent>
         <Panel variant='well' className='footer'>
-          Put some useful informations here
+          Put some useful information here
         </Panel>
       </Window>
 

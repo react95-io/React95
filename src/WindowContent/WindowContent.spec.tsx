@@ -1,8 +1,6 @@
-import React from 'react';
-
 import { renderWithTheme } from '../../test/utils';
 
-import WindowContent from './WindowContent';
+import { WindowContent } from './WindowContent';
 
 describe('<WindowContent />', () => {
   it('renders WindowContent', () => {

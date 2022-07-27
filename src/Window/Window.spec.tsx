@@ -1,8 +1,7 @@
-import React from 'react';
-
+import { createRef } from 'react';
 import { renderWithTheme } from '../../test/utils';
 
-import Window from './Window';
+import { Window } from './Window';
 
 describe('<Window />', () => {
   it('renders Window', () => {
@@ -28,10 +27,20 @@ describe('<Window />', () => {
 
       expect(queryByTestId('resizeHandle')).not.toBeInTheDocument();
     });
+
     it('renders resize handle when set to true', () => {
       const { queryByTestId } = renderWithTheme(<Window resizable />);
 
       expect(queryByTestId('resizeHandle')).toBeInTheDocument();
+    });
+
+    it('passes resizeRef to the resizable element', () => {
+      const ref = createRef<HTMLSpanElement>();
+      const { queryByTestId } = renderWithTheme(
+        <Window resizable resizeRef={ref} />
+      );
+
+      expect(queryByTestId('resizeHandle')).toBe(ref.current);
     });
   });
 });
