@@ -216,7 +216,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Checkbox(
       setState(newState);
       onChange(e);
     },
-    [onChange]
+    [onChange, setState]
   );
 
   const CheckboxComponent = CheckboxComponents[variant];

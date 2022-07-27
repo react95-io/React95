@@ -42,6 +42,7 @@
     "test:ci": "jest ./src --maxWorkers=2",
     "test:watch": "jest ./src --watch",
     "test:coverage": "jest ./src --coverage",
+    "typescript": "tsc --noEmit",
     "lint": "eslint --ext .js,.ts,.tsx src",
     "lint:fix": "yarn run lint --fix",
     "semantic-release": "semantic-release",
