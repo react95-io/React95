@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-
+import { ComponentMeta } from '@storybook/react';
+import { useState } from 'react';
 import { Checkbox, Cutout, Fieldset, Window, WindowContent } from 'react95';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   padding: 5rem;
@@ -12,7 +12,7 @@ export default {
   title: 'Fieldset',
   component: Fieldset,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-};
+} as ComponentMeta<typeof Fieldset>;
 
 export function Default() {
   return (

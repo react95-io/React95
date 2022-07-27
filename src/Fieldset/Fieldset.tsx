@@ -1,10 +1,20 @@
-import React from 'react';
 import propTypes from 'prop-types';
-
+import React, { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import { createDisabledTextStyles } from '../common';
+import { CommonStyledProps } from '../types';
 
-const StyledFieldset = styled.fieldset`
+type FieldsetProps = {
+  label?: React.ReactNode;
+  children?: React.ReactNode;
+  disabled?: boolean;
+  variant?: 'default' | 'flat';
+} & React.FieldsetHTMLAttributes<HTMLFieldSetElement> &
+  CommonStyledProps;
+
+const StyledFieldset = styled.fieldset<
+  Pick<FieldsetProps, 'variant'> & { $disabled: boolean }
+>`
   position: relative;
   border: 2px solid
     ${({ theme, variant }) =>
@@ -19,9 +29,10 @@ const StyledFieldset = styled.fieldset`
       box-shadow: -1px -1px 0 1px ${({ theme }) => theme.borderDark},
         inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
     `}
-  ${props => props.isDisabled && createDisabledTextStyles()}
+  ${props => props.$disabled && createDisabledTextStyles()}
 `;
-const StyledLegend = styled.legend`
+
+const StyledLegend = styled.legend<Pick<FieldsetProps, 'variant'>>`
   display: flex;
   position: absolute;
   top: 0;
@@ -34,21 +45,25 @@ const StyledLegend = styled.legend`
     variant === 'flat' ? theme.canvas : theme.material};
 `;
 
-const Fieldset = React.forwardRef(function Fieldset(props, ref) {
-  const { label, disabled, variant, children, ...otherProps } = props;
-  return (
-    <StyledFieldset
-      aria-disabled={disabled}
-      isDisabled={disabled}
-      variant={variant}
-      ref={ref}
-      {...otherProps}
-    >
-      {label && <StyledLegend variant={variant}>{label}</StyledLegend>}
-      {children}
-    </StyledFieldset>
-  );
-});
+const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
+  function Fieldset(
+    { label, disabled = false, variant = 'default', children, ...otherProps },
+    ref
+  ) {
+    return (
+      <StyledFieldset
+        aria-disabled={disabled}
+        $disabled={disabled}
+        variant={variant}
+        ref={ref}
+        {...otherProps}
+      >
+        {label && <StyledLegend variant={variant}>{label}</StyledLegend>}
+        {children}
+      </StyledFieldset>
+    );
+  }
+);
 
 Fieldset.defaultProps = {
   disabled: false,
@@ -64,4 +79,4 @@ Fieldset.propTypes = {
   variant: propTypes.oneOf(['default', 'flat'])
 };
 
-export default Fieldset;
+export { Fieldset, FieldsetProps };

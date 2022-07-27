@@ -1,13 +1,11 @@
-import React from 'react';
-
 import { renderWithTheme, theme } from '../../test/utils';
 
-import Fieldset from './Fieldset';
+import { Fieldset } from './Fieldset';
 
 describe('<Fieldset />', () => {
   it('renders Fieldset', () => {
     const { container } = renderWithTheme(<Fieldset />);
-    const fieldset = container.firstChild;
+    const fieldset = container.firstChild as HTMLFieldSetElement;
 
     expect(fieldset).toBeInTheDocument();
   });
@@ -25,13 +23,13 @@ describe('<Fieldset />', () => {
     it('renders Label', () => {
       const labelText = 'Name:';
       const { container } = renderWithTheme(<Fieldset label={labelText} />);
-      const fieldset = container.firstChild;
+      const fieldset = container.firstChild as HTMLFieldSetElement;
       const legend = fieldset.querySelector('legend');
-      expect(legend.textContent).toBe(labelText);
+      expect(legend?.textContent).toBe(labelText);
     });
     it('when not provided, <legend /> element is not rendered', () => {
       const { container } = renderWithTheme(<Fieldset />);
-      const fieldset = container.firstChild;
+      const fieldset = container.firstChild as HTMLFieldSetElement;
       const legend = fieldset.querySelector('legend');
       expect(legend).not.toBeInTheDocument();
     });
@@ -39,7 +37,7 @@ describe('<Fieldset />', () => {
   describe('prop: disabled', () => {
     it('renders with disabled text content', () => {
       const { container } = renderWithTheme(<Fieldset disabled />);
-      const fieldset = container.firstChild;
+      const fieldset = container.firstChild as HTMLFieldSetElement;
 
       expect(fieldset).toHaveAttribute('aria-disabled', 'true');
 
