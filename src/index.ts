@@ -36,7 +36,7 @@ export { default as TableRow } from './TableRow/TableRow';
 export * from './Tabs/Tabs';
 export { default as TextField } from './TextField/TextField';
 export { default as Toolbar } from './Toolbar/Toolbar';
-export { default as Tooltip } from './Tooltip/Tooltip';
+export * from './Tooltip/Tooltip';
 export { default as Tree } from './Tree/Tree';
 export { default as Window } from './Window/Window';
 export { default as WindowContent } from './WindowContent/WindowContent';

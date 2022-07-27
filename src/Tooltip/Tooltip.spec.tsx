@@ -1,9 +1,10 @@
-import React from 'react';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 
-import Tooltip from './Tooltip';
+import { Tooltip, TooltipProps } from './Tooltip';
 
-const getProps = (props = {}) => ({
+const getProps = (
+  props: Partial<TooltipProps> = {}
+): Omit<TooltipProps, 'children'> => ({
   className: props.className,
   disableFocusListener: props.disableFocusListener,
   disableMouseListener: props.disableMouseListener,
@@ -19,7 +20,7 @@ const getProps = (props = {}) => ({
   text: 'I am the tooltip'
 });
 
-const renderTooltip = props => (
+const renderTooltip = (props: Omit<TooltipProps, 'children'>) => (
   <Tooltip {...props}>
     <div>Kid</div>
   </Tooltip>
