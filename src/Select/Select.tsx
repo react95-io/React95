@@ -434,7 +434,10 @@ function SelectInner<T>(
         return;
       }
 
-      onChange?.(event, nextSelection as unknown as SelectOption<T>);
+      onChange?.(
+        event as unknown as SelectChangeEvent<T>,
+        nextSelection as unknown as SelectOption<T>
+      );
       setValueState(nextSelection.value);
       displayNode.current?.focus();
     },
