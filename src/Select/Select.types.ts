@@ -1,12 +1,19 @@
 import React from 'react';
 
+type SelectChangeEventTargetValue<T> = { value: T; name: string | undefined };
+
 export type SelectChangeEvent<T> =
-  | (React.MouseEvent & {
-      target: {
-        value: { value: T; name: string | undefined };
-      };
+  | (Omit<React.ChangeEvent<HTMLSelectElement>, 'target'> & {
+      target: Omit<
+        React.ChangeEvent<HTMLSelectElement>['target'],
+        'name' | 'value'
+      > &
+        SelectChangeEventTargetValue<T>;
     })
-  | React.ChangeEvent<HTMLSelectElement>;
+  | (Omit<React.MouseEvent, 'target'> & {
+      target: Omit<React.MouseEvent['target'], 'name' | 'value'> &
+        SelectChangeEventTargetValue<T>;
+    });
 
 export type SelectOption<T> = {
   label: string;
