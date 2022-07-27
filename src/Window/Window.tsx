@@ -1,8 +1,15 @@
-import React from 'react';
-import propTypes from 'prop-types';
-
+import React, { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import { createBorderStyles, createBoxStyles } from '../common';
+import { CommonStyledProps } from '../types';
+
+type WindowProps = {
+  children?: React.ReactNode;
+  resizable?: boolean;
+  resizeRef?: React.Ref<HTMLSpanElement>;
+  shadow?: boolean;
+} & React.HTMLAttributes<HTMLDivElement> &
+  CommonStyledProps;
 
 const StyledWindow = styled.div`
   position: relative;
@@ -11,6 +18,7 @@ const StyledWindow = styled.div`
   ${createBorderStyles({ windowBorders: true })}
   ${createBoxStyles()}
 `;
+
 const ResizeHandle = styled.span`
   ${({ theme }) => css`
     display: inline-block;
@@ -39,27 +47,16 @@ const ResizeHandle = styled.span`
   `}
 `;
 
-const Window = React.forwardRef(function Window(props, ref) {
-  const { resizable, children, ...otherProps } = props;
-
+const Window = forwardRef<HTMLDivElement, WindowProps>(function Window(
+  { children, resizable = false, resizeRef, shadow = true, ...otherProps },
+  ref
+) {
   return (
-    <StyledWindow ref={ref} {...otherProps}>
+    <StyledWindow ref={ref} shadow={shadow} {...otherProps}>
       {children}
-      {resizable && <ResizeHandle data-testid='resizeHandle' />}
+      {resizable && <ResizeHandle data-testid='resizeHandle' ref={resizeRef} />}
     </StyledWindow>
   );
 });
 
-Window.defaultProps = {
-  resizable: false,
-  shadow: true,
-  children: null
-};
-
-Window.propTypes = {
-  shadow: propTypes.bool,
-  resizable: propTypes.bool,
-  children: propTypes.node
-};
-
-export default Window;
+export { Window, WindowProps };
