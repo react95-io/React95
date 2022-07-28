@@ -2,7 +2,7 @@
  * https://www.deviantart.com/tpenguinltg/art/Solarized-Dark-592122068
  */
 
-import { Theme } from '../../types';
+import { Theme } from './types';
 
 export default {
   name: 'solarizedDark',

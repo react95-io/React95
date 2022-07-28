@@ -2,7 +2,7 @@
  * https://www.deviantart.com/tpenguinltg/art/Windows-1-573195578
  */
 
-import { Theme } from '../../types';
+import { Theme } from './types';
 
 export default {
   name: 'windows1',

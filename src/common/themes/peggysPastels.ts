@@ -2,7 +2,7 @@
  * https://www.deviantart.com/tpenguinltg/art/Peggy-s-Pastels-505540096
  */
 
-import { Theme } from '../../types';
+import { Theme } from './types';
 
 export default {
   name: 'peggysPastels',

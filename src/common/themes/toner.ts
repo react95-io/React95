@@ -2,7 +2,7 @@
  * https://www.deviantart.com/tpenguinltg/art/Toner-871968986
  */
 
-import { Theme } from '../../types';
+import { Theme } from './types';
 
 export default {
   name: 'toner',

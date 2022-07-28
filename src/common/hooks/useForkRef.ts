@@ -1,5 +1,6 @@
 // Straight out copied from https://github.com/mui-org/material-ui 😂
-import * as React from 'react';
+
+import { useMemo } from 'react';
 
 function setRef<T>(
   ref: React.RefCallback<T> | React.MutableRefObject<T> | null,
@@ -22,7 +23,7 @@ export default function useForkRef<T>(
    * This means react will call the old forkRef with `null` and the new forkRef
    * with the ref. Cleanup naturally emerges from this behavior
    */
-  return React.useMemo(() => {
+  return useMemo(() => {
     if (refA == null && refB == null) {
       return null;
     }

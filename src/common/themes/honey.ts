@@ -2,7 +2,7 @@
  * https://www.deviantart.com/tpenguinltg/art/Honey-632126512
  */
 
-import { Theme } from '../../types';
+import { Theme } from './types';
 
 export default {
   name: 'honey',

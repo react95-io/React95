@@ -1,5 +1,5 @@
 import { ComponentMeta } from '@storybook/react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Checkbox, Cutout, Fieldset, Window, WindowContent } from 'react95';
 import styled from 'styled-components';
 

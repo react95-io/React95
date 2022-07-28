@@ -1,5 +1,6 @@
 /* eslint-disable camelcase, react/jsx-pascal-case */
 import { ComponentMeta } from '@storybook/react';
+import React from 'react';
 import { DatePicker__UNSTABLE } from 'react95';
 import styled from 'styled-components';
 

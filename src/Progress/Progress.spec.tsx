@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { renderWithTheme } from '../../test/utils';
 import { Progress } from './Progress';
 

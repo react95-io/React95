@@ -2,7 +2,7 @@
  * https://www.deviantart.com/tpenguinltg/art/Hotdog-Stand-525606846
  */
 
-import { Theme } from '../../types';
+import { Theme } from './types';
 
 export default {
   name: 'hotdogStand',

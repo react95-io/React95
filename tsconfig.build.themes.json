@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist/themes",
+    "rootDir": "./src/common/themes",
+  },
+  "include": [
+    "src/common/themes/*.ts",
+    "src/common/themes/*.tsx"
+  ]
+}

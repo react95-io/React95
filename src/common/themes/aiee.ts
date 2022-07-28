@@ -2,7 +2,7 @@
  * https://www.deviantart.com/tpenguinltg/art/Aiee-668092636
  */
 
-import { Theme } from '../../types';
+import { Theme } from './types';
 
 export default {
   name: 'aiee',

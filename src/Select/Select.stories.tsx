@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 
 import { ComponentMeta } from '@storybook/react';
+import React from 'react';
 import { Cutout, Fieldset, Select, Window, WindowContent } from 'react95';
 import styled from 'styled-components';
 import { SelectChangeEvent, SelectOption } from './Select.types';

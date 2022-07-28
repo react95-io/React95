@@ -2,7 +2,7 @@
  * https://www.deviantart.com/tpenguinltg/art/FxDev-701274128
  */
 
-import { Theme } from '../../types';
+import { Theme } from './types';
 
 export default {
   name: 'fxDev',

@@ -2,7 +2,7 @@
  * https://www.deviantart.com/tpenguinltg/art/Vista-esque-Midnight-557498234
  */
 
-import { Theme } from '../../types';
+import { Theme } from './types';
 
 export default {
   name: 'vistaesqueMidnight',
