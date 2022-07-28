@@ -24,4 +24,6 @@ const Toolbar = forwardRef<HTMLDivElement, ToolbarProps>(function Toolbar(
   );
 });
 
+Toolbar.displayName = 'Toolbar';
+
 export { Toolbar };

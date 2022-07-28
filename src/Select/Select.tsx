@@ -590,9 +590,14 @@ function SelectInner<T>(
   );
 }
 
+/* eslint-disable no-use-before-define */
 const Select = forwardRef(SelectInner) as <T>(
-  // eslint-disable-next-line no-use-before-define
   props: SelectProps<T> & { ref?: React.ForwardedRef<SelectRef> }
-) => ReturnType<typeof SelectInner>;
+) => ReturnType<typeof SelectInner<T>>;
+/* eslint-enable no-use-before-define */
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+Select.displayName = 'Select';
 
 export { Select, SelectProps };

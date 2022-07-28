@@ -381,13 +381,15 @@ function TreeInner<T>(
   );
 }
 
+/* eslint-disable no-use-before-define */
 const TreeView = forwardRef(TreeInner) as <T>(
   // eslint-disable-next-line no-use-before-define
   props: TreeViewProps<T> & { ref?: React.ForwardedRef<HTMLUListElement> }
-) => ReturnType<typeof TreeInner>;
+) => ReturnType<typeof TreeInner<T>>;
+/* eslint-enable no-use-before-define */
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-TreeView.displayProps = 'TreeView';
+TreeView.displayName = 'TreeView';
 
 export { TreeView, TreeViewProps, TreeLeaf };

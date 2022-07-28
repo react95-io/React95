@@ -30,7 +30,7 @@
     "resolveJsonModule": true,
     "rootDir": "./",
     "skipLibCheck": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "strict": true,
     "strictFunctionTypes": true,
     "strictNullChecks": true,
