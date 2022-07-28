@@ -2,6 +2,7 @@ import esbuild from 'rollup-plugin-esbuild';
 import copy from 'rollup-plugin-copy';
 import dts from 'rollup-plugin-dts';
 import replace from 'rollup-plugin-replace';
+import fixThemesDts from './rollup.plugin.fixthemesdts';
 import packageJson from './package.json';
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
@@ -32,7 +33,10 @@ const bundle = config => [
       replace({
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
       }),
-      dts()
+      dts(),
+      fixThemesDts({
+        themesDtsFileName: 'common/themes/index.d.ts'
+      })
     ]
   }
 ];
