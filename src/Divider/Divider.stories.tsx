@@ -1,4 +1,5 @@
 import { ComponentMeta } from '@storybook/react';
+import React from 'react';
 import styled from 'styled-components';
 
 import { Divider, List, ListItem } from 'react95';

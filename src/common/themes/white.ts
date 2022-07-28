@@ -2,7 +2,7 @@
  * https://www.deviantart.com/tpenguinltg/art/White-870495714
  */
 
-import { Theme } from '../../types';
+import { Theme } from './types';
 
 export default {
   name: 'white',

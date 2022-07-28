@@ -1,7 +1,7 @@
 /* "Ash" by tPenguinLTG
  * https://www.deviantart.com/tpenguinltg/art/Ash-575566643
  */
-import { Theme } from '../../types';
+import { Theme } from './types';
 
 export default {
   name: 'ash',

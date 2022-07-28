@@ -1,4 +1,4 @@
-import { Theme } from '../../types';
+import { Theme } from './types';
 
 export default {
   name: 'coldGray',

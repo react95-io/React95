@@ -2,7 +2,7 @@
  * https://www.deviantart.com/tpenguinltg/art/Storm-Clouds-613198674
  */
 
-import { Theme } from '../../types';
+import { Theme } from './types';
 
 export default {
   name: 'stormClouds',

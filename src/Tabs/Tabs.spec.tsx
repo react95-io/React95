@@ -1,7 +1,8 @@
 import { fireEvent } from '@testing-library/react';
+import React from 'react';
 
-import { renderWithTheme } from '../../test/utils';
 import { Tab } from '..';
+import { renderWithTheme } from '../../test/utils';
 import { Tabs } from './Tabs';
 
 describe('<Tabs />', () => {

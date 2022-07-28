@@ -1,4 +1,5 @@
-import { render, fireEvent } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
+import React from 'react';
 
 import { renderWithTheme, theme } from '../../test/utils';
 import { blockSizes } from '../common/system';

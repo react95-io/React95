@@ -2,7 +2,7 @@
  * https://www.deviantart.com/tpenguinltg/art/Hot-Chocolate-654380979
  */
 
-import { Theme } from '../../types';
+import { Theme } from './types';
 
 export default {
   name: 'hotChocolate',

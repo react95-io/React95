@@ -1,6 +1,6 @@
 // Pretty much straight out copied from https://github.com/mui-org/material-ui 😂
-
 import { fireEvent } from '@testing-library/react';
+import React from 'react';
 
 import { renderWithTheme, Touch } from '../../test/utils';
 import { Slider } from './Slider';

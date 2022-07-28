@@ -187,10 +187,10 @@ const sharedGrooveStyles = () => css<StyledSliderProps>`
           width: 100%;
         `}
 `;
-const StyledGroove = styled(StyledCutout)`
+const StyledGroove = styled(StyledCutout)<StyledSliderProps>`
   ${sharedGrooveStyles()}
 `;
-const StyledFlatGroove = styled(StyledCutout)`
+const StyledFlatGroove = styled(StyledCutout)<StyledSliderProps>`
   ${sharedGrooveStyles()}
 
   border-left-color: ${({ theme }) => theme.flatLight};

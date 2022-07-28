@@ -1,7 +1,8 @@
 import { ComponentMeta } from '@storybook/react';
+import React from 'react';
 import styled from 'styled-components';
 
-import { List, ListItem, Bar, Divider } from 'react95';
+import { Bar, Divider, List, ListItem } from 'react95';
 
 const Wrapper = styled.div`
   padding: 5rem;

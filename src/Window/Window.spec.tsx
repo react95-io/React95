@@ -1,4 +1,5 @@
-import { createRef } from 'react';
+import React, { createRef } from 'react';
+
 import { renderWithTheme } from '../../test/utils';
 
 import { Window } from './Window';

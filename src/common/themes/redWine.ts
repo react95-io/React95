@@ -2,7 +2,7 @@
  * https://www.deviantart.com/tpenguinltg/art/Red-Wine-545729607
  */
 
-import { Theme } from '../../types';
+import { Theme } from './types';
 
 export default {
   name: 'redWine',

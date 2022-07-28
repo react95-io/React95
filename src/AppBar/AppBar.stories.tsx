@@ -1,15 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
+import { ComponentMeta } from '@storybook/react';
+import React, { useState } from 'react';
 import {
   AppBar,
-  Toolbar,
-  TextField,
   Button,
+  Divider,
   List,
   ListItem,
-  Divider
+  TextField,
+  Toolbar
 } from 'react95';
-import { ComponentMeta } from '@storybook/react';
+import styled from 'styled-components';
 import logoIMG from '../assets/images/logo.png';
 
 const Wrapper = styled.div`
@@ -24,7 +24,7 @@ export default {
 } as ComponentMeta<typeof AppBar>;
 
 export function Default() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <AppBar>

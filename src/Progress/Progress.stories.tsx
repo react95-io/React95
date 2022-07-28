@@ -1,5 +1,5 @@
 import { ComponentMeta } from '@storybook/react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Progress } from 'react95';
 import styled from 'styled-components';
 

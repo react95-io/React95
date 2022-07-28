@@ -1,4 +1,5 @@
 import { ComponentMeta } from '@storybook/react';
+import React from 'react';
 import { AppBar, Bar, Button, Toolbar } from 'react95';
 import styled from 'styled-components';
 

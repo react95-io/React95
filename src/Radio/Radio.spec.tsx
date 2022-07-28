@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { renderWithTheme } from '../../test/utils';
 import { Radio } from './Radio';
 

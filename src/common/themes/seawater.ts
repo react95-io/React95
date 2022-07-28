@@ -2,7 +2,7 @@
  * https://www.deviantart.com/tpenguinltg/art/Seawater-736002425
  */
 
-import { Theme } from '../../types';
+import { Theme } from './types';
 
 export default {
   name: 'seawater',

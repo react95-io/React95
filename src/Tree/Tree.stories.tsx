@@ -1,5 +1,5 @@
 import { ComponentMeta } from '@storybook/react';
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Fieldset, Tree, TreeLeaf } from 'react95';
 import styled from 'styled-components';
 import { Button } from '../Button/Button';
