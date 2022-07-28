@@ -2,7 +2,7 @@
  * https://www.deviantart.com/tpenguinltg/art/Blue-525167751
  */
 
-import { Theme } from '../../types';
+import { Theme } from './types';
 
 export default {
   name: 'blue',

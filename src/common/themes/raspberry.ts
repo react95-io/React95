@@ -2,7 +2,7 @@
  * https://www.deviantart.com/tpenguinltg/art/Raspberry-539289720
  */
 
-import { Theme } from '../../types';
+import { Theme } from './types';
 
 export default {
   name: 'raspberry',

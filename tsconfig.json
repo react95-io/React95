@@ -7,7 +7,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "lib": [
       "ESNext",
       "DOM"

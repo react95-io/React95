@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import React from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import useForkRef from './useForkRef';
 
@@ -17,9 +17,9 @@ describe('useForkRef', () => {
   it('returns a single ref-setter function that forks the ref to its inputs', () => {
     function Component(props: { innerRef: React.RefObject<HTMLDivElement> }) {
       const { innerRef } = props;
-      const ownRef = React.useRef<HTMLDivElement>();
-      const [, forceUpdate] = React.useState(true);
-      React.useEffect(() => forceUpdate(n => !n), []);
+      const ownRef = useRef<HTMLDivElement>();
+      const [, forceUpdate] = useState(true);
+      useEffect(() => forceUpdate(n => !n), []);
 
       const handleRef = useForkRef(innerRef, ownRef);
 
@@ -40,8 +40,8 @@ describe('useForkRef', () => {
       _,
       ref
     ) {
-      const [hasRef, setHasRef] = React.useState(false);
-      const handleOwnRef = React.useCallback(() => setHasRef(true), []);
+      const [hasRef, setHasRef] = useState(false);
+      const handleOwnRef = useCallback(() => setHasRef(true), []);
       const handleRef = useForkRef(handleOwnRef, ref);
 
       return <div ref={handleRef}>{String(hasRef)}</div>;

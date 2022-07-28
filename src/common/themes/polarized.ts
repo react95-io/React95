@@ -2,7 +2,7 @@
  * https://www.deviantart.com/tpenguinltg/art/Polarized-557712217
  */
 
-import { Theme } from '../../types';
+import { Theme } from './types';
 
 export default {
   name: 'polarized',

@@ -2,7 +2,7 @@
  * https://www.deviantart.com/tpenguinltg/art/Teal-for-Shelbi-Dark-631177772
  */
 
-import { Theme } from '../../types';
+import { Theme } from './types';
 
 export default {
   name: 'darkTeal',

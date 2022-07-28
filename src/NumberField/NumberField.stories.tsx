@@ -1,4 +1,5 @@
 import { ComponentMeta } from '@storybook/react';
+import React from 'react';
 import { Cutout, NumberField } from 'react95';
 import styled from 'styled-components';
 

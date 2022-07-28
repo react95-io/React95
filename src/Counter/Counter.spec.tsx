@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { renderWithTheme } from '../../test/utils';
 
 import { Counter } from './Counter';
