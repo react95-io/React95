@@ -1,4 +1,4 @@
-import React from 'react';
+import { ComponentType } from 'react';
 
 import { Color, Theme, WindowsTheme } from './common/themes/types';
 
@@ -15,7 +15,7 @@ export type CommonStyledProps = {
    * "as" polymorphic prop allows to render a different HTML element or React component
    * @see {@link https://styled-components.com/docs/api#as-polymorphic-prop}
    */
-  as?: string | React.ComponentType<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
+  as?: string | ComponentType<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
 };
 
 export type CommonThemeProps = {

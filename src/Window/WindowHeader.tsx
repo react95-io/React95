@@ -46,4 +46,6 @@ const WindowHeader = forwardRef<HTMLDivElement, WindowHeaderProps>(
   }
 );
 
+WindowHeader.displayName = 'WindowHeader';
+
 export { WindowHeader, WindowHeaderProps };
