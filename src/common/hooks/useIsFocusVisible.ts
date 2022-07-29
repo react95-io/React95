@@ -1,7 +1,8 @@
 // Straight out copied from https://github.com/mui-org/material-ui 😂
 // based on https://github.com/WICG/focus-visible/blob/v4.1.5/src/focus-visible.js
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+
+import { useCallback } from 'react';
+import { findDOMNode } from 'react-dom';
 
 let hadKeyboardEvent = true;
 let hadFocusVisibleRecently = false;
@@ -137,9 +138,9 @@ function handleBlurVisible() {
 }
 
 export function useIsFocusVisible<T extends Element = HTMLElement>() {
-  const ref = React.useCallback((instance: T) => {
+  const ref = useCallback((instance: T) => {
     // eslint-disable-next-line react/no-find-dom-node
-    const node = ReactDOM.findDOMNode(instance);
+    const node = findDOMNode(instance);
     if (node != null) {
       prepare(node.ownerDocument);
     }

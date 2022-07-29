@@ -1,5 +1,11 @@
-import React from 'react';
 import propTypes from 'prop-types';
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState
+} from 'react';
 
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import useForkRef from '../common/hooks/useForkRef';
@@ -60,7 +66,7 @@ const getDefaultValue = (defaultValue, options) => {
   return undefined;
 };
 
-const Select = React.forwardRef(function Select(props, ref) {
+const Select = forwardRef(function Select(props, ref) {
   const {
     'aria-label': ariaLabel,
     className,
@@ -88,25 +94,25 @@ const Select = React.forwardRef(function Select(props, ref) {
     width,
     ...otherProps
   } = props;
-  const wrapperRef = React.useRef();
-  const displayNode = React.useRef();
-  const inputRef = React.useRef();
-  const dropdownRef = React.useRef();
+  const wrapperRef = useRef();
+  const displayNode = useRef();
+  const inputRef = useRef();
+  const dropdownRef = useRef();
   const options = optionsProp.filter(Boolean);
   const [value, setValueState] = useControlledOrUncontrolled({
     value: valueProp,
     defaultValue: getDefaultValue(defaultValue, options)
   });
 
-  const { current: isOpenControlled } = React.useRef(openProp != null);
-  const [openState, setOpenState] = React.useState(false);
+  const { current: isOpenControlled } = useRef(openProp != null);
+  const [openState, setOpenState] = useState(false);
   const open =
     displayNode !== null && (isOpenControlled ? openProp : openState);
   const handleRef = useForkRef(ref, inputRefProp);
 
   // to hijack native focus. when somebody passes ref
   // and triggers focus, we focus displayNode instead of input
-  React.useImperativeHandle(
+  useImperativeHandle(
     handleRef,
     () => ({
       focus: () => {
@@ -167,7 +173,7 @@ const Select = React.forwardRef(function Select(props, ref) {
     update(!open, e);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleClick = e => {
       if (openState) {
         if (!wrapperRef.current.contains(e.target)) {
