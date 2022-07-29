@@ -1,6 +1,6 @@
 import React from 'react';
-
 import styled from 'styled-components';
+
 import { createBorderStyles, createBoxStyles } from '../common';
 import { CommonStyledProps } from '../types';
 

@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-
 import styled from 'styled-components';
 import { createDisabledTextStyles } from '../common';
 import { blockSizes } from '../common/system';
