@@ -3,10 +3,9 @@
 import { fireEvent } from '@testing-library/react';
 import React from 'react';
 import { renderWithTheme } from '../../test/utils';
-import { Select } from './Select';
-import { SelectOption, SelectRef } from './Select.types';
+import Select from './Select';
 
-const options: SelectOption<number>[] = [
+const options = [
   { label: 'ten', value: 10 },
   { label: 'twenty', value: 20 },
   { label: 'thirty', value: 30 }
@@ -18,7 +17,7 @@ describe('<Select />', () => {
       <Select value={10} options={options} />
     );
 
-    const input = container.querySelector('input') as HTMLInputElement;
+    const input = container.querySelector('input');
     expect(input.value).toBe('10');
   });
 
@@ -96,7 +95,7 @@ describe('<Select />', () => {
         <Select value='' options={[{ label: 'none', value: '' }]} />
       );
       getByRole('button').focus();
-      const focusedButton = document.activeElement as HTMLButtonElement;
+      const focusedButton = document.activeElement;
       fireEvent.keyDown(focusedButton, { key });
       expect(getByRole('listbox', { hidden: false })).toBeInTheDocument();
       fireEvent.keyUp(focusedButton, { key });
@@ -142,7 +141,7 @@ describe('<Select />', () => {
         <Select value={10} open options={options} menuMaxHeight={220} />
       );
 
-      const listbox = getByRole('listbox') as HTMLElement;
+      const listbox = getByRole('listbox');
       expect(
         listbox.getAttribute('style')?.includes('max-height: 220px')
       ).toBeTruthy();
@@ -334,7 +333,7 @@ describe('<Select />', () => {
         <Select readOnly value={10} options={options} />
       );
       getByRole('button').focus();
-      const focusedButton = document.activeElement as HTMLElement;
+      const focusedButton = document.activeElement;
       fireEvent.keyDown(focusedButton, { key: 'ArrowDown' });
       expect(queryByRole('listbox')).not.toBeInTheDocument();
       fireEvent.keyUp(focusedButton, { key: 'ArrowDown' });
@@ -357,8 +356,7 @@ describe('<Select />', () => {
 
   describe('prop: renderValue', () => {
     it('should use the prop to render the value', () => {
-      const formatDisplay = (x: SelectOption<number>) =>
-        `0b${Number(x.value).toString(2)}`;
+      const formatDisplay = x => `0b${Number(x.value).toString(2)}`;
       const { getByRole } = renderWithTheme(
         <Select
           formatDisplay={formatDisplay}
@@ -393,13 +391,13 @@ describe('<Select />', () => {
 
   describe('prop: inputRef', () => {
     it('should be able to return the input node via a ref object', () => {
-      const ref = React.createRef<SelectRef>();
+      const ref = React.createRef();
       renderWithTheme(<Select inputRef={ref} value='' />);
       expect(ref.current?.node).toHaveProperty('tagName', 'INPUT');
     });
 
     it('should be able focus the trigger imperatively', () => {
-      const ref = React.createRef<SelectRef>();
+      const ref = React.createRef();
       const { getByRole } = renderWithTheme(<Select inputRef={ref} value='' />);
       ref.current?.focus();
       expect(getByRole('button')).toHaveFocus();

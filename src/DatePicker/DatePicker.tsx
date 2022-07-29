@@ -4,8 +4,7 @@ import styled from 'styled-components';
 import { Button } from '../Button/Button';
 import { Cutout } from '../Cutout/Cutout';
 import { NumberField } from '../NumberField/NumberField';
-import { Select } from '../Select/Select';
-import { SelectChangeEvent } from '../Select/Select.types';
+import Select from '../Select/Select';
 import { Toolbar } from '../Toolbar/Toolbar';
 import { Window } from '../Window/Window';
 import { WindowContent } from '../WindowContent/WindowContent';
@@ -103,7 +102,8 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     const [date, setDate] = useState(() => convertDateToState(initialDate));
     const { year, month, day } = date;
 
-    const handleMonthSelect = useCallback((e: SelectChangeEvent<number>) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handleMonthSelect = useCallback((e: any) => {
       setDate(currentDate => ({ ...currentDate, month: e.target.value }));
     }, []);
 
@@ -169,6 +169,8 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         <WindowContent>
           <Toolbar noPadding style={{ justifyContent: 'space-between' }}>
             <Select
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
               options={months}
               value={month}
               onChange={handleMonthSelect}

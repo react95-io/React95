@@ -24,7 +24,7 @@ export * from './NumberField/NumberField';
 export * from './Panel/Panel';
 export * from './Progress/Progress';
 export * from './Radio/Radio';
-export * from './Select/Select';
+export { default as Select } from './Select/Select';
 export * from './Slider/Slider';
 export * from './Tab/Tab';
 export * from './TabBody/TabBody';
