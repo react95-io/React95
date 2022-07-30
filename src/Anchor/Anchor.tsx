@@ -3,7 +3,12 @@ import styled from 'styled-components';
 
 import { CommonStyledProps } from '../types';
 
-const StyledAnchor = styled.a`
+type AnchorProps = {
+  children: React.ReactNode;
+} & React.AnchorHTMLAttributes<HTMLAnchorElement> &
+  CommonStyledProps;
+
+const StyledAnchor = styled.a<{ underline: boolean }>`
   color: ${({ theme }) => theme.anchor};
   font-size: inherit;
   text-decoration: underline;
@@ -12,20 +17,16 @@ const StyledAnchor = styled.a`
   }
 `;
 
-type AnchorProps = {
-  children: React.ReactNode;
-} & React.AnchorHTMLAttributes<HTMLAnchorElement> &
-  CommonStyledProps;
+const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(
+  ({ children, ...otherProps }: AnchorProps, ref) => {
+    return (
+      <StyledAnchor ref={ref} {...otherProps}>
+        {children}
+      </StyledAnchor>
+    );
+  }
+);
 
-const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(function Anchor(
-  { children, ...otherProps }: AnchorProps,
-  ref
-) {
-  return (
-    <StyledAnchor ref={ref} {...otherProps}>
-      {children}
-    </StyledAnchor>
-  );
-});
+Anchor.displayName = 'Anchor';
 
 export { Anchor, AnchorProps };
