@@ -2,6 +2,6 @@
   "buildCommand": "build:prod",
   "node": "16",
   "sandboxes": [
-    "react95-template-xkfj0"
+    "react95-wes-template-o01dos"
   ]
 }
