@@ -9,7 +9,7 @@ import { TabBody } from '../TabBody/TabBody';
 import Fieldset from '../Fieldset/Fieldset';
 import Window from '../Window/Window';
 import WindowHeader from '../WindowHeader/WindowHeader';
-import { NumberField } from '../NumberField/NumberField';
+import { NumberInput } from '../NumberInput/NumberInput';
 import Checkbox from '../Checkbox/Checkbox';
 import WindowContent from '../WindowContent/WindowContent';
 
@@ -64,7 +64,7 @@ import WindowContent from '../WindowContent/WindowContent';
             <TabPanel value={0} activeTab={activeTab}>
               <Fieldset label='Order:'>
                 <div style={{ padding: '0.5em 0 0.5em 0' }}>Amount:</div>
-                <NumberField
+                <NumberInput
                   width='100%'
                   min={0}
                   value={0}

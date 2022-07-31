@@ -4,7 +4,7 @@ import {
   Anchor,
   Checkbox,
   GroupBox,
-  NumberField,
+  NumberInput,
   Tab,
   TabBody,
   Tabs,
@@ -51,7 +51,7 @@ export function Default() {
             <div>
               <GroupBox label='Order:'>
                 <div style={{ padding: '0.5em 0 0.5em 0' }}>Amount:</div>
-                <NumberField width='100%' min={0} defaultValue={0} />
+                <NumberInput width='100%' min={0} defaultValue={0} />
                 <br />
                 <Checkbox
                   name='shipping'

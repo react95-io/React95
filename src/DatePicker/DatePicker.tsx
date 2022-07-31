@@ -2,7 +2,7 @@ import React, { forwardRef, useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import { Button } from '../Button/Button';
-import { NumberField } from '../NumberField/NumberField';
+import { NumberInput } from '../NumberInput/NumberInput';
 import { ScrollView } from '../ScrollView/ScrollView';
 import { Select } from '../Select/Select';
 import { SelectChangeEvent } from '../Select/Select.types';
@@ -175,7 +175,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               width={128}
               menuMaxHeight={200}
             />
-            <NumberField value={year} onChange={handleYearSelect} width={100} />
+            <NumberInput value={year} onChange={handleYearSelect} width={100} />
           </Toolbar>
           <Calendar>
             <WeekDays>

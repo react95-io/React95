@@ -1,6 +1,6 @@
 import { ComponentMeta } from '@storybook/react';
 import React from 'react';
-import { NumberField, ScrollView } from 'react95';
+import { ScrollView, NumberInput } from 'react95';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -21,19 +21,19 @@ const Wrapper = styled.div`
 `;
 
 export default {
-  title: 'NumberField',
-  component: NumberField,
+  title: 'Controls/NumberInput',
+  component: NumberInput,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-} as ComponentMeta<typeof NumberField>;
+} as ComponentMeta<typeof NumberInput>;
 
 export function Default() {
   return (
     <>
-      <NumberField defaultValue={3} step={1.5} min={1.5} max={9} width={130} />
+      <NumberInput defaultValue={3} step={1.5} min={1.5} max={9} width={130} />
       <br />
-      <NumberField defaultValue={1995} width={130} />
+      <NumberInput defaultValue={1995} width={130} />
       <br />
-      <NumberField disabled defaultValue={2020} width={130} />
+      <NumberInput disabled defaultValue={2020} width={130} />
     </>
   );
 }
@@ -46,10 +46,10 @@ export function Flat() {
   return (
     <ScrollView id='cutout'>
       <p>
-        When you want to use NumberField on a light background (like scrollable
+        When you want to use NumberInput on a light background (like scrollable
         content), just use the flat variant:
       </p>
-      <NumberField
+      <NumberInput
         variant='flat'
         defaultValue={1.5}
         min={0}
@@ -57,9 +57,9 @@ export function Flat() {
         width='130px'
       />
       <br />
-      <NumberField variant='flat' defaultValue={1995} width='130px' />
+      <NumberInput variant='flat' defaultValue={1995} width='130px' />
       <br />
-      <NumberField variant='flat' disabled defaultValue={2020} width='130px' />
+      <NumberInput variant='flat' disabled defaultValue={2020} width='130px' />
     </ScrollView>
   );
 }
