@@ -1,7 +1,7 @@
 import React, { forwardRef, useMemo } from 'react';
 import styled from 'styled-components';
 
-import { createWellBorderStyles } from '../common';
+import { createBorderStyles } from '../common';
 import { CommonStyledProps, Sizes } from '../types';
 import { Digit } from './Digit';
 
@@ -13,7 +13,7 @@ type CounterProps = {
   CommonStyledProps;
 
 const CounterWrapper = styled.div`
-  ${createWellBorderStyles(true)}
+  ${createBorderStyles({ style: 'status' })}
   display: inline-flex;
   background: #000000;
 `;

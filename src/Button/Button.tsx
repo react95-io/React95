@@ -6,7 +6,6 @@ import {
   createDisabledTextStyles,
   createFlatBoxStyles,
   createHatchedBackground,
-  createWellBorderStyles,
   focusOutline
 } from '../common';
 import { blockSizes } from '../common/system';
@@ -107,12 +106,14 @@ export const StyledButton = styled.button<StyledButtonProps>`
           border: 2px solid transparent;
           &:hover,
           &:focus {
-            ${!disabled && !active && createWellBorderStyles(false)}
+            ${!disabled &&
+            !active &&
+            createBorderStyles({ style: 'buttonThin' })}
           }
           &:active {
-            ${!disabled && createWellBorderStyles(true)}
+            ${!disabled && createBorderStyles({ style: 'buttonThinPressed' })}
           }
-          ${active && createWellBorderStyles(true)}
+          ${active && createBorderStyles({ style: 'buttonThinPressed' })}
           ${disabled && createDisabledTextStyles()}
         `
       : css`

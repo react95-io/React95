@@ -37,7 +37,7 @@ const StyledHeadCell = styled.th<{ $disabled: boolean }>`
     css`
       &:active {
         &:before {
-          ${createBorderStyles({ invert: true, windowBorders: true })}
+          ${createBorderStyles({ invert: true, style: 'window' })}
           border-left: none;
           border-top: none;
           padding-top: 2px;

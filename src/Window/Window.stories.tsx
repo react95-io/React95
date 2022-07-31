@@ -2,7 +2,7 @@ import { ComponentMeta } from '@storybook/react';
 import React from 'react';
 import {
   Button,
-  Panel,
+  Frame,
   Toolbar,
   Window,
   WindowContent,
@@ -97,9 +97,9 @@ export function Default() {
             you tho!)
           </p>
         </WindowContent>
-        <Panel variant='well' className='footer'>
+        <Frame variant='well' className='footer'>
           Put some useful information here
-        </Panel>
+        </Frame>
       </Window>
 
       <Window className='window'>

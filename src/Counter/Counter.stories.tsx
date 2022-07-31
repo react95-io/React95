@@ -1,6 +1,6 @@
 import { ComponentMeta } from '@storybook/react';
 import React, { useState } from 'react';
-import { Button, Counter, Panel } from 'react95';
+import { Button, Counter, Frame } from 'react95';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -29,14 +29,14 @@ export function Default() {
   const [count, setCount] = useState(13);
   const handleClick = () => setCount(count + 1);
   return (
-    <Panel className='wrapper'>
+    <Frame className='wrapper'>
       <Counter value={123456789} minLength={11} size='lg' />
 
       <div className='counter-wrapper'>
         <Counter value={count} minLength={3} />
         <Button onClick={handleClick}>Click!</Button>
       </div>
-    </Panel>
+    </Frame>
   );
 }
 

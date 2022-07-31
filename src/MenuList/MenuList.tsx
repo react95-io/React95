@@ -17,7 +17,7 @@ const MenuList = styled.ul.attrs(() => ({
   box-sizing: border-box;
   width: ${props => (props.fullWidth ? '100%' : 'auto')};
   padding: 4px;
-  ${createBorderStyles({ windowBorders: true })}
+  ${createBorderStyles({ style: 'window' })}
   ${createBoxStyles()}
   ${props =>
     props.inline &&
