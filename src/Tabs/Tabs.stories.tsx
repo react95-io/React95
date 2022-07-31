@@ -20,7 +20,7 @@ const Wrapper = styled.div`
 `;
 
 export default {
-  title: 'Tabs',
+  title: 'Controls/Tabs',
   component: Tabs,
   subcomponents: { Tab, TabBody },
   decorators: [story => <Wrapper>{story()}</Wrapper>]

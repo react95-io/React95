@@ -24,8 +24,6 @@ export * from './ScrollView/ScrollView';
 export * from './Select/Select';
 export * from './Separator/Separator';
 export * from './Slider/Slider';
-export * from './Tab/Tab';
-export * from './TabBody/TabBody';
 export * from './Table/Table';
 export * from './TableBody/TableBody';
 export * from './TableDataCell/TableDataCell';
