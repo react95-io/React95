@@ -2,8 +2,8 @@ import React, { forwardRef, useMemo } from 'react';
 
 import styled from 'styled-components';
 import { noOp } from '../common/utils';
-import { TabProps } from '../Tab/Tab';
 import { CommonStyledProps } from '../types';
+import { TabProps } from './Tab';
 
 type TabsProps = {
   value?: TabProps['value'];
@@ -56,45 +56,55 @@ function splitToChunks<T>(array: T[], parts: number) {
   return result;
 }
 
-const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
-  { value, onChange = noOp, children, rows = 1, ...otherProps },
-  ref
-) {
-  // split tabs into equal rows and assign key to each row
-  const tabRowsToRender = useMemo(() => {
-    const childrenWithProps =
-      React.Children.map(children, child => {
-        if (!React.isValidElement(child)) {
-          return null;
-        }
-        const tabProps = {
-          selected: child.props.value === value,
-          onClick: onChange
-        };
-        return React.cloneElement(child, tabProps);
-      }) ?? [];
+const Tabs = forwardRef<HTMLDivElement, TabsProps>(
+  ({ value, onChange = noOp, children, rows = 1, ...otherProps }, ref) => {
+    // split tabs into equal rows and assign key to each row
+    const tabRowsToRender = useMemo(() => {
+      const childrenWithProps =
+        React.Children.map(children, child => {
+          if (!React.isValidElement(child)) {
+            return null;
+          }
+          const tabProps = {
+            selected: child.props.value === value,
+            onClick: onChange
+          };
+          return React.cloneElement(child, tabProps);
+        }) ?? [];
 
-    const tabRows = splitToChunks(childrenWithProps, rows).map((tabs, i) => ({
-      key: i,
-      tabs
-    }));
+      const tabRows = splitToChunks(childrenWithProps, rows).map((tabs, i) => ({
+        key: i,
+        tabs
+      }));
 
-    // move row containing currently selected tab to the bottom
-    const currentlySelectedRowIndex = tabRows.findIndex(tabRow =>
-      tabRow.tabs.some(tab => tab.props.selected)
+      // move row containing currently selected tab to the bottom
+      const currentlySelectedRowIndex = tabRows.findIndex(tabRow =>
+        tabRow.tabs.some(tab => tab.props.selected)
+      );
+      tabRows.push(tabRows.splice(currentlySelectedRowIndex, 1)[0]);
+
+      return tabRows;
+    }, [children, onChange, rows, value]);
+
+    return (
+      <StyledTabs
+        {...otherProps}
+        isMultiRow={rows > 1}
+        role='tablist'
+        ref={ref}
+      >
+        {tabRowsToRender.map(row => (
+          <Row key={row.key}>{row.tabs}</Row>
+        ))}
+      </StyledTabs>
     );
-    tabRows.push(tabRows.splice(currentlySelectedRowIndex, 1)[0]);
+  }
+);
 
-    return tabRows;
-  }, [children, onChange, rows, value]);
+Tabs.displayName = 'Tabs';
 
-  return (
-    <StyledTabs {...otherProps} isMultiRow={rows > 1} role='tablist' ref={ref}>
-      {tabRowsToRender.map(row => (
-        <Row key={row.key}>{row.tabs}</Row>
-      ))}
-    </StyledTabs>
-  );
-});
+export * from './Tab';
+
+export * from './TabBody';
 
 export { Tabs, TabsProps };

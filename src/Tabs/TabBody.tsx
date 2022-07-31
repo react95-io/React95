@@ -18,15 +18,16 @@ const StyledTabBody = styled.div`
   padding: 16px;
   font-size: 1rem;
 `;
-const TabBody = forwardRef<HTMLDivElement, TabBodyProps>(function TabBody(
-  { children, ...otherProps },
-  ref
-) {
-  return (
-    <StyledTabBody ref={ref} {...otherProps}>
-      {children}
-    </StyledTabBody>
-  );
-});
+const TabBody = forwardRef<HTMLDivElement, TabBodyProps>(
+  ({ children, ...otherProps }, ref) => {
+    return (
+      <StyledTabBody ref={ref} {...otherProps}>
+        {children}
+      </StyledTabBody>
+    );
+  }
+);
+
+TabBody.displayName = 'TabBody';
 
 export { TabBody, TabBodyProps };

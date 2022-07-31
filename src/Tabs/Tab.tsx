@@ -69,22 +69,25 @@ const StyledTab = styled.button<TabProps>`
   }
 `;
 
-const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(
-  { value, onClick, selected = false, children, ...otherProps },
-  ref
-) {
-  return (
-    <StyledTab
-      aria-selected={selected}
-      selected={selected}
-      onClick={(e: React.MouseEvent<HTMLButtonElement>) => onClick?.(e, value)}
-      ref={ref}
-      role='tab'
-      {...otherProps}
-    >
-      {children}
-    </StyledTab>
-  );
-});
+const Tab = forwardRef<HTMLButtonElement, TabProps>(
+  ({ value, onClick, selected = false, children, ...otherProps }, ref) => {
+    return (
+      <StyledTab
+        aria-selected={selected}
+        selected={selected}
+        onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+          onClick?.(e, value)
+        }
+        ref={ref}
+        role='tab'
+        {...otherProps}
+      >
+        {children}
+      </StyledTab>
+    );
+  }
+);
+
+Tab.displayName = 'Tab';
 
 export { Tab, TabProps };
