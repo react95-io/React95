@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { createDisabledTextStyles } from '../common';
 import { CommonStyledProps } from '../types';
 
-type FieldsetProps = {
+type GroupBoxProps = {
   label?: React.ReactNode;
   children?: React.ReactNode;
   disabled?: boolean;
@@ -12,7 +12,7 @@ type FieldsetProps = {
   CommonStyledProps;
 
 const StyledFieldset = styled.fieldset<
-  Pick<FieldsetProps, 'variant'> & { $disabled: boolean }
+  Pick<GroupBoxProps, 'variant'> & { $disabled: boolean }
 >`
   position: relative;
   border: 2px solid
@@ -31,7 +31,7 @@ const StyledFieldset = styled.fieldset<
   ${props => props.$disabled && createDisabledTextStyles()}
 `;
 
-const StyledLegend = styled.legend<Pick<FieldsetProps, 'variant'>>`
+const StyledLegend = styled.legend<Pick<GroupBoxProps, 'variant'>>`
   display: flex;
   position: absolute;
   top: 0;
@@ -44,11 +44,11 @@ const StyledLegend = styled.legend<Pick<FieldsetProps, 'variant'>>`
     variant === 'flat' ? theme.canvas : theme.material};
 `;
 
-const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
-  function Fieldset(
+const GroupBox = forwardRef<HTMLFieldSetElement, GroupBoxProps>(
+  (
     { label, disabled = false, variant = 'default', children, ...otherProps },
     ref
-  ) {
+  ) => {
     return (
       <StyledFieldset
         aria-disabled={disabled}
@@ -64,4 +64,6 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
   }
 );
 
-export { Fieldset, FieldsetProps };
+GroupBox.displayName = 'GroupBox';
+
+export { GroupBox, GroupBoxProps };

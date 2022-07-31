@@ -2,7 +2,7 @@
 
 import { ComponentMeta } from '@storybook/react';
 import React from 'react';
-import { Fieldset, ScrollView, Select, Window, WindowContent } from 'react95';
+import { GroupBox, ScrollView, Select, Window, WindowContent } from 'react95';
 import styled from 'styled-components';
 import { SelectChangeEvent, SelectOption } from './Select.types';
 
@@ -51,7 +51,7 @@ export default {
 export function Default() {
   return (
     <div id='default-selects'>
-      <Fieldset label='default'>
+      <GroupBox label='default'>
         <Select
           defaultValue={2}
           options={options}
@@ -71,8 +71,8 @@ export function Default() {
           width={160}
           menuMaxHeight={160}
         />
-      </Fieldset>
-      <Fieldset label='default native'>
+      </GroupBox>
+      <GroupBox label='default native'>
         <Select
           native
           onChange={onChange}
@@ -93,7 +93,7 @@ export function Default() {
           options={options}
           menuMaxHeight={160}
         />
-      </Fieldset>
+      </GroupBox>
     </div>
   );
 }
@@ -111,7 +111,7 @@ export function Flat() {
             When you want to use Select on a light background (like scrollable
             content), just use the flat variant:
           </p>
-          <Fieldset label='flat' variant='flat'>
+          <GroupBox label='flat' variant='flat'>
             <Select
               variant='flat'
               onChange={onChange}
@@ -126,8 +126,8 @@ export function Flat() {
               options={options}
               width='100%'
             />
-          </Fieldset>
-          <Fieldset label='flat native' variant='flat'>
+          </GroupBox>
+          <GroupBox label='flat native' variant='flat'>
             <Select
               variant='flat'
               native
@@ -143,7 +143,7 @@ export function Flat() {
               width='100%'
               options={options}
             />
-          </Fieldset>
+          </GroupBox>
         </ScrollView>
       </WindowContent>
     </Window>

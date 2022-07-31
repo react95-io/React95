@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { ComponentMeta } from '@storybook/react';
 import {
   Checkbox,
-  Fieldset,
+  GroupBox,
   List,
   ListItem,
   ScrollView,
@@ -78,7 +78,7 @@ export function Default() {
 
   return (
     <div style={{ maxWidth: '250px' }}>
-      <Fieldset label='Pizza toppings'>
+      <GroupBox label='Pizza toppings'>
         <Checkbox
           name='allToppings'
           label='All'
@@ -114,7 +114,7 @@ export function Default() {
             name='ingredients'
           />
         </div>
-      </Fieldset>
+      </GroupBox>
       <Checkbox
         name='shipping'
         value='shipping'
@@ -179,7 +179,7 @@ export function Flat() {
   return (
     <ScrollView id='cutout'>
       <div style={{ maxWidth: '250px' }}>
-        <Fieldset variant='flat' label='Pizza toppings'>
+        <GroupBox variant='flat' label='Pizza toppings'>
           <Checkbox
             variant='flat'
             name='allToppings'
@@ -219,7 +219,7 @@ export function Flat() {
               name='ingredients'
             />
           </div>
-        </Fieldset>
+        </GroupBox>
         <Checkbox
           variant='flat'
           name='shipping'
