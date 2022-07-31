@@ -15,7 +15,7 @@ const StyledWindow = styled.div`
   position: relative;
   padding: 4px;
   font-size: 1rem;
-  ${createBorderStyles({ windowBorders: true })}
+  ${createBorderStyles({ style: 'window' })}
   ${createBoxStyles()}
 `;
 

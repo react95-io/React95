@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-import { Color, CommonThemeProps } from '../types';
+import { Color, CommonThemeProps, Theme } from '../types';
 
 export const shadow = '4px 4px 10px 0 rgba(0, 0, 0, 0.35)';
 export const insetShadow = 'inset 2px 2px 3px rgba(0,0,0,0.2)';
@@ -11,11 +11,17 @@ export const createDisabledTextStyles = () => css`
   /* filter: grayscale(100%); */
 `;
 
-export const createBoxStyles = () => css`
+export const createBoxStyles = ({
+  background = 'material',
+  color = 'materialText'
+}: {
+  background?: keyof Theme;
+  color?: keyof Theme;
+} = {}) => css`
   box-sizing: border-box;
   display: inline-block;
-  background: ${({ theme }) => theme.material};
-  color: ${({ theme }) => theme.materialText};
+  background: ${({ theme }) => theme[background]};
+  color: ${({ theme }) => theme[color]};
 `;
 
 // TODO for flat box styles add checkered background when disabled (not solid color)
@@ -57,56 +63,137 @@ export const createFlatBoxStyles = () => css<CommonThemeProps>`
   outline-offset: -4px;
 `;
 
+export type BorderStyles =
+  | 'button'
+  | 'buttonPressed'
+  | 'buttonThin'
+  | 'buttonThinPressed'
+  | 'field'
+  | 'grouping'
+  | 'status'
+  | 'window';
+
+type BorderStyle = {
+  topLeftOuter: keyof Theme;
+  topLeftInner: keyof Theme | null;
+  bottomRightInner: keyof Theme | null;
+  bottomRightOuter: keyof Theme;
+};
+
+const borderStyles: Record<BorderStyles, BorderStyle> = {
+  button: {
+    topLeftOuter: 'borderLightest',
+    topLeftInner: 'borderLight',
+    bottomRightInner: 'borderDark',
+    bottomRightOuter: 'borderDarkest'
+  },
+  buttonPressed: {
+    topLeftOuter: 'borderDarkest',
+    topLeftInner: 'borderDark',
+    bottomRightInner: 'borderLight',
+    bottomRightOuter: 'borderLightest'
+  },
+  buttonThin: {
+    topLeftOuter: 'borderLightest',
+    topLeftInner: null,
+    bottomRightInner: null,
+    bottomRightOuter: 'borderDark'
+  },
+  buttonThinPressed: {
+    topLeftOuter: 'borderDark',
+    topLeftInner: null,
+    bottomRightInner: null,
+    bottomRightOuter: 'borderLightest'
+  },
+  field: {
+    topLeftOuter: 'borderDark',
+    topLeftInner: 'borderDarkest',
+    bottomRightInner: 'borderLight',
+    bottomRightOuter: 'borderLightest'
+  },
+  grouping: {
+    topLeftOuter: 'borderDark',
+    topLeftInner: 'borderLightest',
+    bottomRightInner: 'borderDark',
+    bottomRightOuter: 'borderLightest'
+  },
+  status: {
+    topLeftOuter: 'borderDark',
+    topLeftInner: null,
+    bottomRightInner: null,
+    bottomRightOuter: 'borderLightest'
+  },
+  window: {
+    topLeftOuter: 'borderLight',
+    topLeftInner: 'borderLightest',
+    bottomRightInner: 'borderDark',
+    bottomRightOuter: 'borderDarkest'
+  }
+};
+
+export const createInnerBorderWithShadow = ({
+  theme,
+  topLeftInner,
+  bottomRightInner,
+  hasShadow = false,
+  hasInsetShadow = false
+}: {
+  theme: Theme;
+  topLeftInner: keyof Theme | null;
+  bottomRightInner: keyof Theme | null;
+  hasShadow?: boolean;
+  hasInsetShadow?: boolean;
+}) =>
+  [
+    hasShadow ? shadow : false,
+    hasInsetShadow ? insetShadow : false,
+    topLeftInner !== null
+      ? `inset 1px 1px 0px 1px ${theme[topLeftInner]}`
+      : false,
+    bottomRightInner !== null
+      ? `inset -1px -1px 0 1px ${theme[bottomRightInner]}`
+      : false
+  ]
+    .filter(Boolean)
+    .join(', ');
+
 export const createBorderStyles = ({
   invert = false,
-  windowBorders = false
-} = {}) =>
-  invert
-    ? css<CommonThemeProps>`
-        border-style: solid;
-        border-width: 2px;
-        border-left-color: ${({ theme }) => theme.borderDarkest};
-        border-top-color: ${({ theme }) => theme.borderDarkest};
-        border-right-color: ${({ theme }) => theme.borderLightest};
-        border-bottom-color: ${({ theme }) => theme.borderLightest};
-        box-shadow: ${props => props.shadow && `${shadow}, `} inset 1px 1px 0px
-            1px ${({ theme }) => theme.borderDark},
-          inset -1px -1px 0 1px ${({ theme }) => theme.borderLight};
-      `
-    : css<CommonThemeProps>`
-        border-style: solid;
-        border-width: 2px;
-        border-left-color: ${({ theme }) =>
-          windowBorders ? theme.borderLight : theme.borderLightest};
-        border-top-color: ${({ theme }) =>
-          windowBorders ? theme.borderLight : theme.borderLightest};
-        border-right-color: ${({ theme }) => theme.borderDarkest};
-        border-bottom-color: ${({ theme }) => theme.borderDarkest};
-        box-shadow: ${props => props.shadow && `${shadow}, `} inset 1px 1px 0px
-            1px
-            ${({ theme }) =>
-              windowBorders ? theme.borderLightest : theme.borderLight},
-          inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
-      `;
+  style = 'button'
+}: { invert?: boolean; style?: BorderStyles } = {}) => {
+  const borders = {
+    topLeftOuter: invert ? 'bottomRightOuter' : 'topLeftOuter',
+    topLeftInner: invert ? 'bottomRightInner' : 'topLeftInner',
+    bottomRightInner: invert ? 'topLeftInner' : 'bottomRightInner',
+    bottomRightOuter: invert ? 'topLeftOuter' : 'bottomRightOuter'
+  } as const;
+  return css<CommonThemeProps>`
+    border-style: solid;
+    border-width: 2px;
+    border-left-color: ${({ theme }) =>
+      theme[borderStyles[style][borders.topLeftOuter]]};
+    border-top-color: ${({ theme }) =>
+      theme[borderStyles[style][borders.topLeftOuter]]};
+    border-right-color: ${({ theme }) =>
+      theme[borderStyles[style][borders.bottomRightOuter]]};
+    border-bottom-color: ${({ theme }) =>
+      theme[borderStyles[style][borders.bottomRightOuter]]};
+    box-shadow: ${({ theme, shadow: hasShadow }) =>
+      createInnerBorderWithShadow({
+        theme,
+        topLeftInner: borderStyles[style][borders.topLeftInner],
+        bottomRightInner: borderStyles[style][borders.bottomRightInner],
+        hasShadow
+      })};
+  `;
+};
 
+/** @deprecated Use `createBorderStyles` instead */
 export const createWellBorderStyles = (invert = false) =>
-  invert
-    ? css`
-        border-style: solid;
-        border-width: 2px;
-        border-left-color: ${({ theme }) => theme.borderDark};
-        border-top-color: ${({ theme }) => theme.borderDark};
-        border-right-color: ${({ theme }) => theme.borderLightest};
-        border-bottom-color: ${({ theme }) => theme.borderLightest};
-      `
-    : css`
-        border-style: solid;
-        border-width: 2px;
-        border-left-color: ${({ theme }) => theme.borderLightest};
-        border-top-color: ${({ theme }) => theme.borderLightest};
-        border-right-color: ${({ theme }) => theme.borderDark};
-        border-bottom-color: ${({ theme }) => theme.borderDark};
-      `;
+  createBorderStyles({
+    invert: !invert,
+    style: 'status'
+  });
 
 export const focusOutline = () => css`
   outline: 2px dotted ${({ theme }) => theme.materialText};
@@ -141,7 +228,7 @@ export const createScrollbars = (variant = 'default') => css`
     ${createBoxStyles()}
     ${variant === 'flat'
       ? createFlatBoxStyles()
-      : createBorderStyles({ windowBorders: true })}
+      : createBorderStyles({ style: 'window' })}
       outline-offset: -2px;
   }
 
@@ -152,7 +239,7 @@ export const createScrollbars = (variant = 'default') => css`
     ${createBoxStyles()}
     ${variant === 'flat'
       ? createFlatBoxStyles()
-      : createBorderStyles({ windowBorders: true })}
+      : createBorderStyles({ style: 'window' })}
       display: block;
     outline-offset: -2px;
     height: 26px;
@@ -165,7 +252,7 @@ export const createScrollbars = (variant = 'default') => css`
   ::-webkit-scrollbar-button:active {
     background-position: 0 1px;
     ${variant === 'default'
-      ? createBorderStyles({ windowBorders: true, invert: true })
+      ? createBorderStyles({ style: 'window', invert: true })
       : ''}
   }
 

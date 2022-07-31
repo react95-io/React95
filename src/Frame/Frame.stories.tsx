@@ -1,6 +1,6 @@
 import { ComponentMeta } from '@storybook/react';
 import React from 'react';
-import { Panel } from 'react95';
+import { Frame } from 'react95';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -19,28 +19,30 @@ const Wrapper = styled.div`
 `;
 
 export default {
-  title: 'Panel',
-  component: Panel,
+  title: 'Layout/Frame',
+  component: Frame,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-} as ComponentMeta<typeof Panel>;
+} as ComponentMeta<typeof Frame>;
 
 export function Default() {
   return (
-    <Panel
+    <Frame
       variant='outside'
       shadow
       style={{ padding: '0.5rem', lineHeight: '1.5', width: 600 }}
     >
       <p style={{ padding: '0.5rem' }}>
-        Notice the subtle difference in borders. The lightest border is not on
-        the edge of this panel.
+        This is a frame of the &apos;window&apos; variant, the default. Notice
+        the subtle difference in borders. The lightest border is not on the edge
+        of this frame.
       </p>
-      <Panel variant='inside' style={{ margin: '1rem', padding: '1rem' }}>
-        This panel on the other hand has the lightest border on the edge. Use
-        this panel inside &apos;outside&apos; panels.
+      <Frame variant='inside' style={{ margin: '1rem', padding: '1rem' }}>
+        This frame of the &apos;button&apos; variant on the other hand has the
+        lightest border on the edge. Use this frame inside &apos;window&apos;
+        frames.
         <br />
-        <Panel
-          variant='well'
+        <Frame
+          variant='field'
           style={{
             marginTop: '1rem',
             padding: '1rem',
@@ -48,17 +50,17 @@ export function Default() {
             width: 100
           }}
         >
-          Put some content here
-        </Panel>
-      </Panel>
-      <Panel
+          A field frame variant is used to display content.
+        </Frame>
+      </Frame>
+      <Frame
         variant='well'
         style={{ marginTop: '1rem', padding: '0.1rem 0.25rem', width: '100%' }}
       >
-        The &apos;well&apos; variant of a panel is often used as a window
-        footer.
-      </Panel>
-    </Panel>
+        The &apos;status&apos; variant of a frame is often used as a status bar
+        at the end of the window.
+      </Frame>
+    </Frame>
   );
 }
 
