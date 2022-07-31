@@ -1,6 +1,6 @@
 import { ComponentMeta } from '@storybook/react';
 import React from 'react';
-import { AppBar, Bar, Button, Toolbar } from 'react95';
+import { AppBar, Button, Handle, Toolbar } from 'react95';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -9,21 +9,21 @@ const Wrapper = styled.div`
 `;
 
 export default {
-  title: 'Bar',
-  component: Bar,
+  title: 'Controls/Handle',
+  component: Handle,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-} as ComponentMeta<typeof Bar>;
+} as ComponentMeta<typeof Handle>;
 
 export function Default() {
   return (
     <AppBar>
       <Toolbar>
-        <Bar size={35} />
+        <Handle size={35} />
         <Button variant='menu'>Edit</Button>
         <Button variant='menu' disabled>
           Save
         </Button>
-        <Bar size={35} />
+        <Handle size={35} />
       </Toolbar>
     </AppBar>
   );

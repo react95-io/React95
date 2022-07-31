@@ -6,7 +6,6 @@ export { createScrollbars } from './common/index';
 export * from './Anchor/Anchor';
 export * from './AppBar/AppBar';
 export * from './Avatar/Avatar';
-export * from './Bar/Bar';
 export * from './Button/Button';
 export * from './Checkbox/Checkbox';
 export * from './ColorInput/ColorInput';
@@ -16,6 +15,7 @@ export * from './DatePicker/DatePicker';
 export * from './Desktop/Desktop';
 export * from './Divider/Divider';
 export * from './Fieldset/Fieldset';
+export * from './Handle/Handle';
 export * from './Hourglass/Hourglass';
 export * from './List/List';
 export * from './ListItem/ListItem';
@@ -42,3 +42,6 @@ export * from './Tree/Tree';
 export * from './Window/Window';
 export * from './WindowContent/WindowContent';
 export * from './WindowHeader/WindowHeader';
+
+/* deprecated components */
+export * from './legacy/Bar';
