@@ -42,7 +42,7 @@ Apply style reset, wrap your app with ThemeProvider with theme of your choice...
 import React from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
-import { List, ListItem, Separator, styleReset } from 'react95';
+import { MenuList, MenuListItem, Separator, styleReset } from 'react95';
 // pick a theme of your choice
 import original from 'react95/dist/themes/original';
 // original Windows95 font (optionally)
@@ -72,12 +72,12 @@ const App = () => (
   <div>
     <GlobalStyles />
     <ThemeProvider theme={original}>
-      <List>
-        <ListItem>🎤 Sing</ListItem>
-        <ListItem>💃🏻 Dance</ListItem>
+      <MenuList>
+        <MenuListItem>🎤 Sing</MenuListItem>
+        <MenuListItem>💃🏻 Dance</MenuListItem>
         <Separator />
-        <ListItem disabled>😴 Sleep</ListItem>
-      </List>
+        <MenuListItem disabled>😴 Sleep</MenuListItem>
+      </MenuList>
     </ThemeProvider>
   </div>
 );

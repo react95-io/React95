@@ -2,8 +2,8 @@ import { ComponentMeta } from '@storybook/react';
 import React, { useState } from 'react';
 import {
   GroupBox,
-  List,
-  ListItem,
+  MenuList,
+  MenuListItem,
   Radio,
   ScrollView,
   Separator,
@@ -157,8 +157,8 @@ export function Menu() {
   const { tool, color } = state;
 
   return (
-    <List>
-      <ListItem size='sm'>
+    <MenuList>
+      <MenuListItem size='sm'>
         <Radio
           variant='menu'
           checked={tool === 'Brush'}
@@ -167,8 +167,8 @@ export function Menu() {
           label='Brush'
           name='tool'
         />
-      </ListItem>
-      <ListItem size='sm'>
+      </MenuListItem>
+      <MenuListItem size='sm'>
         <Radio
           variant='menu'
           checked={tool === 'Pencil'}
@@ -177,9 +177,9 @@ export function Menu() {
           label='Pencil'
           name='tool'
         />
-      </ListItem>
+      </MenuListItem>
       <Separator />
-      <ListItem size='sm' disabled>
+      <MenuListItem size='sm' disabled>
         <Radio
           disabled
           variant='menu'
@@ -189,8 +189,8 @@ export function Menu() {
           label='Black'
           name='color'
         />
-      </ListItem>
-      <ListItem size='sm' disabled>
+      </MenuListItem>
+      <MenuListItem size='sm' disabled>
         <Radio
           disabled
           variant='menu'
@@ -200,8 +200,8 @@ export function Menu() {
           label='Red'
           name='color'
         />
-      </ListItem>
-    </List>
+      </MenuListItem>
+    </MenuList>
   );
 }
 Menu.story = {

@@ -29,7 +29,7 @@ choice... and you are ready to go! 🚀
 
 ```jsx
 import React from 'react';
-import { List, ListItem, Separator, styleReset } from 'react95';
+import { MenuList, MenuListItem, Separator, styleReset } from 'react95';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 /* Pick a theme of your choice */
@@ -62,12 +62,12 @@ const App = () => (
   <div>
     <GlobalStyles />
     <ThemeProvider theme={original}>
-      <List>
-        <ListItem>🎤 Sing</ListItem>
-        <ListItem>💃🏻 Dance</ListItem>
+      <MenuList>
+        <MenuListItem>🎤 Sing</MenuListItem>
+        <MenuListItem>💃🏻 Dance</MenuListItem>
         <Separator />
-        <ListItem disabled>😴 Sleep</ListItem>
-      </List>
+        <MenuListItem disabled>😴 Sleep</MenuListItem>
+      </MenuList>
     </ThemeProvider>
   </div>
 );

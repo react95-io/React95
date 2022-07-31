@@ -5,7 +5,7 @@ import { createDisabledTextStyles } from '../common';
 import { blockSizes } from '../common/system';
 import { CommonStyledProps, Sizes } from '../types';
 
-type ListItemProps = {
+type MenuListItemProps = {
   disabled?: boolean;
   square?: boolean;
   primary?: boolean;
@@ -13,7 +13,7 @@ type ListItemProps = {
 } & React.HTMLAttributes<HTMLLIElement> &
   CommonStyledProps;
 
-export const StyledListItem = styled.li<{
+export const StyledMenuListItem = styled.li<{
   $disabled?: boolean;
   square?: boolean;
   primary?: boolean;
@@ -49,40 +49,44 @@ export const StyledListItem = styled.li<{
   ${props => props.$disabled && createDisabledTextStyles()}
 `;
 
-const ListItem = forwardRef<HTMLLIElement, ListItemProps>(function ListItem(
-  {
-    size = 'lg',
-    disabled,
-    // tabIndex: tabIndexProp,
-    square,
-    children,
-    onClick,
-    primary,
-    ...otherProps
-  },
-  ref
-) {
-  // let tabIndex;
-  // if (!disabled) {
-  //   tabIndex = tabIndexProp !== undefined ? tabIndexProp : -1;
-  // }
+const MenuListItem = forwardRef<HTMLLIElement, MenuListItemProps>(
+  (
+    {
+      size = 'lg',
+      disabled,
+      // tabIndex: tabIndexProp,
+      square,
+      children,
+      onClick,
+      primary,
+      ...otherProps
+    },
+    ref
+  ) => {
+    // let tabIndex;
+    // if (!disabled) {
+    //   tabIndex = tabIndexProp !== undefined ? tabIndexProp : -1;
+    // }
 
-  return (
-    <StyledListItem
-      $disabled={disabled}
-      size={size}
-      square={square}
-      onClick={disabled ? undefined : onClick}
-      primary={primary}
-      // tabIndex={tabIndex}
-      role='menuitem'
-      ref={ref}
-      aria-disabled={disabled}
-      {...otherProps}
-    >
-      {children}
-    </StyledListItem>
-  );
-});
+    return (
+      <StyledMenuListItem
+        $disabled={disabled}
+        size={size}
+        square={square}
+        onClick={disabled ? undefined : onClick}
+        primary={primary}
+        // tabIndex={tabIndex}
+        role='menuitem'
+        ref={ref}
+        aria-disabled={disabled}
+        {...otherProps}
+      >
+        {children}
+      </StyledMenuListItem>
+    );
+  }
+);
 
-export { ListItem, ListItemProps };
+MenuListItem.displayName = 'MenuListItem';
+
+export { MenuListItem, MenuListItemProps };

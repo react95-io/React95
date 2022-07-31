@@ -4,16 +4,16 @@ import styled from 'styled-components';
 import { createBorderStyles, createBoxStyles } from '../common';
 import { CommonStyledProps } from '../types';
 
-type ListProps = React.HTMLAttributes<HTMLUListElement> & {
+type MenuListProps = React.HTMLAttributes<HTMLUListElement> & {
   fullWidth?: boolean;
   shadow?: boolean;
   inline?: boolean;
 } & CommonStyledProps;
 
 // TODO keyboard controls
-const List = styled.ul.attrs(() => ({
+const MenuList = styled.ul.attrs(() => ({
   role: 'menu'
-}))<ListProps>`
+}))<MenuListProps>`
   box-sizing: border-box;
   width: ${props => (props.fullWidth ? '100%' : 'auto')};
   padding: 4px;
@@ -29,4 +29,8 @@ const List = styled.ul.attrs(() => ({
   position: relative;
 `;
 
-export { List, ListProps };
+MenuList.displayName = 'MenuList';
+
+export * from './MenuListItem';
+
+export { MenuList, MenuListProps };
