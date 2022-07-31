@@ -4,8 +4,8 @@ import styled, { css } from 'styled-components';
 import { createHatchedBackground } from '../common';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import { noOp } from '../common/utils';
+import { StyledMenuListItem } from '../MenuList/MenuList';
 import { StyledScrollView } from '../ScrollView/ScrollView';
-import { StyledListItem } from '../ListItem/ListItem';
 import {
   LabelText,
   size,
@@ -129,7 +129,7 @@ const CheckmarkIcon = styled.span.attrs(() => ({
               ? theme.checkmarkDisabled
               : theme.checkmark};
           `}
-  ${StyledListItem}:hover & {
+  ${StyledMenuListItem}:hover & {
     ${({ $disabled, theme, variant }) =>
       !$disabled &&
       variant === 'menu' &&
@@ -170,7 +170,7 @@ const IndeterminateIcon = styled.span.attrs(() => ({
     ${({ $disabled, theme, variant }) =>
       variant === 'menu' &&
       css`
-        ${StyledListItem}:hover & {
+        ${StyledMenuListItem}:hover & {
           ${createHatchedBackground({
             mainColor: theme.materialTextInvert
           })}

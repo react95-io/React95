@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
-import { createDisabledTextStyles, focusOutline } from '../common';
 
-import { StyledListItem } from '../ListItem/ListItem';
+import { createDisabledTextStyles, focusOutline } from '../common';
+import { StyledMenuListItem } from '../MenuList/MenuList';
 
 export const size = 20;
 
@@ -26,11 +26,11 @@ export const StyledLabel = styled.label<{ $disabled: boolean }>`
   color: ${({ theme }) => theme.materialText};
   ${props => props.$disabled && createDisabledTextStyles()}
 
-  ${StyledListItem} & {
+  ${StyledMenuListItem} & {
     margin: 0;
     height: 100%;
   }
-  ${StyledListItem}:hover & {
+  ${StyledMenuListItem}:hover & {
     ${({ $disabled, theme }) =>
       !$disabled &&
       css`

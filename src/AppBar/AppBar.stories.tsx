@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import {
   AppBar,
   Button,
-  List,
-  ListItem,
+  MenuList,
+  MenuListItem,
   Separator,
   TextField,
   Toolbar
@@ -43,7 +43,7 @@ export function Default() {
             Start
           </Button>
           {open && (
-            <List
+            <MenuList
               style={{
                 position: 'absolute',
                 left: '0',
@@ -51,26 +51,26 @@ export function Default() {
               }}
               onClick={() => setOpen(false)}
             >
-              <ListItem>
+              <MenuListItem>
                 <span role='img' aria-label='👨‍💻'>
                   👨‍💻
                 </span>
                 Profile
-              </ListItem>
-              <ListItem>
+              </MenuListItem>
+              <MenuListItem>
                 <span role='img' aria-label='📁'>
                   📁
                 </span>
                 My account
-              </ListItem>
+              </MenuListItem>
               <Separator />
-              <ListItem disabled>
+              <MenuListItem disabled>
                 <span role='img' aria-label='🔙'>
                   🔙
                 </span>
                 Logout
-              </ListItem>
-            </List>
+              </MenuListItem>
+            </MenuList>
           )}
         </div>
 

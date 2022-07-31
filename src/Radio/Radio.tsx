@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import styled, { css, CSSProperties } from 'styled-components';
 
 import { createFlatBoxStyles } from '../common';
-import { StyledListItem } from '../ListItem/ListItem';
+import { StyledMenuListItem } from '../MenuList/MenuList';
 import { StyledScrollView } from '../ScrollView/ScrollView';
 import {
   LabelText,
@@ -120,7 +120,7 @@ const Icon = styled.span.attrs(() => ({
       : css`
           background: ${$disabled ? theme.checkmarkDisabled : theme.checkmark};
         `}
-  ${StyledListItem}:hover & {
+  ${StyledMenuListItem}:hover & {
     ${({ $disabled, theme, variant }) =>
       !$disabled &&
       variant === 'menu' &&

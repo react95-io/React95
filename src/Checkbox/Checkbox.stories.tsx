@@ -5,8 +5,8 @@ import { ComponentMeta } from '@storybook/react';
 import {
   Checkbox,
   GroupBox,
-  List,
-  ListItem,
+  MenuList,
+  MenuListItem,
   ScrollView,
   Separator
 } from 'react95';
@@ -240,8 +240,8 @@ Flat.story = {
 
 export function Menu() {
   return (
-    <List>
-      <ListItem size='md'>
+    <MenuList>
+      <MenuListItem size='md'>
         <Checkbox
           name='useGradient'
           variant='menu'
@@ -249,8 +249,8 @@ export function Menu() {
           label='Use gradient'
           defaultChecked
         />
-      </ListItem>
-      <ListItem size='md'>
+      </MenuListItem>
+      <MenuListItem size='md'>
         <Checkbox
           name='thickBrush'
           variant='menu'
@@ -259,9 +259,9 @@ export function Menu() {
           label='Thick brush'
           indeterminate
         />
-      </ListItem>
+      </MenuListItem>
       <Separator />
-      <ListItem size='md' disabled>
+      <MenuListItem size='md' disabled>
         <Checkbox
           name='autoSave'
           variant='menu'
@@ -270,8 +270,8 @@ export function Menu() {
           label='Auto-save'
           disabled
         />
-      </ListItem>
-    </List>
+      </MenuListItem>
+    </MenuList>
   );
 }
 

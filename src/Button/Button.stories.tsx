@@ -2,8 +2,8 @@ import { ComponentMeta } from '@storybook/react';
 import React, { useState } from 'react';
 import {
   Button,
-  List,
-  ListItem,
+  MenuList,
+  MenuListItem,
   ScrollView,
   Separator,
   Toolbar,
@@ -135,7 +135,7 @@ export function Thin() {
             Share
           </Button>
           {open && (
-            <List
+            <MenuList
               style={{
                 position: 'absolute',
                 right: '0',
@@ -144,16 +144,16 @@ export function Thin() {
               }}
               onClick={() => setOpen(false)}
             >
-              <ListItem size='sm'>Copy link</ListItem>
+              <MenuListItem size='sm'>Copy link</MenuListItem>
               <Separator />
-              <ListItem size='sm'>Facebook</ListItem>
-              <ListItem size='sm'>Twitter</ListItem>
-              <ListItem size='sm'>Instagram</ListItem>
+              <MenuListItem size='sm'>Facebook</MenuListItem>
+              <MenuListItem size='sm'>Twitter</MenuListItem>
+              <MenuListItem size='sm'>Instagram</MenuListItem>
               <Separator />
-              <ListItem size='sm' disabled>
+              <MenuListItem size='sm' disabled>
                 MySpace
-              </ListItem>
-            </List>
+              </MenuListItem>
+            </MenuList>
           )}
         </div>
       </Toolbar>
