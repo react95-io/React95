@@ -18,7 +18,7 @@ const Wrapper = styled.div`
 `;
 
 export default {
-  title: 'AppBar',
+  title: 'Environment/AppBar',
   component: AppBar,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
 } as ComponentMeta<typeof AppBar>;

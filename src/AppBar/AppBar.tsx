@@ -1,7 +1,8 @@
 import React, { forwardRef } from 'react';
 import styled from 'styled-components';
-import { CommonStyledProps } from '../types';
+
 import { createBorderStyles, createBoxStyles } from '../common';
+import { CommonStyledProps } from '../types';
 
 type AppBarProps = {
   children: React.ReactNode;
@@ -22,15 +23,16 @@ const StyledAppBar = styled.header<AppBarProps>`
   width: 100%;
 `;
 
-const AppBar = forwardRef<HTMLElement, AppBarProps>(function AppBar(
-  { children, fixed = true, ...otherProps },
-  ref
-) {
-  return (
-    <StyledAppBar fixed={fixed} ref={ref} {...otherProps}>
-      {children}
-    </StyledAppBar>
-  );
-});
+const AppBar = forwardRef<HTMLElement, AppBarProps>(
+  ({ children, fixed = true, ...otherProps }, ref) => {
+    return (
+      <StyledAppBar fixed={fixed} ref={ref} {...otherProps}>
+        {children}
+      </StyledAppBar>
+    );
+  }
+);
+
+AppBar.displayName = 'AppBar';
 
 export { AppBar, AppBarProps };
