@@ -1,6 +1,6 @@
 import { ComponentMeta } from '@storybook/react';
 import React from 'react';
-import { Desktop } from 'react95';
+import { Monitor } from 'react95';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -9,13 +9,13 @@ const Wrapper = styled.div`
 `;
 
 export default {
-  title: 'Desktop',
-  component: Desktop,
+  title: 'Other/Monitor',
+  component: Monitor,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-} as ComponentMeta<typeof Desktop>;
+} as ComponentMeta<typeof Monitor>;
 
 export function Default() {
-  return <Desktop backgroundStyles={{ background: 'blue' }} />;
+  return <Monitor backgroundStyles={{ background: 'blue' }} />;
 }
 
 Default.story = {

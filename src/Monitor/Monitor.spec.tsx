@@ -2,30 +2,30 @@ import React from 'react';
 
 import { renderWithTheme } from '../../test/utils';
 
-import { Desktop } from './Desktop';
+import { Monitor } from './Monitor';
 
-describe('<Desktop />', () => {
+describe('<Monitor />', () => {
   it('should render', () => {
-    const { container } = renderWithTheme(<Desktop />);
-    const desktopElement = container.firstElementChild;
+    const { container } = renderWithTheme(<Monitor />);
+    const monitorElement = container.firstElementChild;
 
-    expect(desktopElement).toBeInTheDocument();
+    expect(monitorElement).toBeInTheDocument();
   });
 
   it('should handle custom props', () => {
     const customProps: React.HTMLAttributes<HTMLDivElement> = {
       title: 'potatoe'
     };
-    const { container } = renderWithTheme(<Desktop {...customProps} />);
-    const desktopElement = container.firstElementChild;
+    const { container } = renderWithTheme(<Monitor {...customProps} />);
+    const monitorElement = container.firstElementChild;
 
-    expect(desktopElement).toHaveAttribute('title', 'potatoe');
+    expect(monitorElement).toHaveAttribute('title', 'potatoe');
   });
 
   describe('prop: backgroundStyles', () => {
     it('should forward styles to background element', () => {
       const { getByTestId } = renderWithTheme(
-        <Desktop backgroundStyles={{ backgroundColor: 'papayawhip' }} />
+        <Monitor backgroundStyles={{ backgroundColor: 'papayawhip' }} />
       );
       const backgroundElement = getByTestId('background');
 
@@ -38,7 +38,7 @@ describe('<Desktop />', () => {
 
   describe('prop: children', () => {
     it('children should be rendered in background element', () => {
-      const { getByTestId } = renderWithTheme(<Desktop>Hi!</Desktop>);
+      const { getByTestId } = renderWithTheme(<Monitor>Hi!</Monitor>);
       const backgroundElement = getByTestId('background');
 
       expect(backgroundElement.innerHTML).toBe('Hi!');

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { StyledScrollView } from '../ScrollView/ScrollView';
 
-type DesktopProps = {
+type MonitorProps = {
   backgroundStyles?: React.CSSProperties;
   children?: React.ReactNode;
 };
@@ -18,7 +18,7 @@ const Inner = styled.div`
   position: relative;
 `;
 
-const Monitor = styled.div`
+const MonitorBody = styled.div`
   position: relative;
   z-index: 1;
   box-sizing: border-box;
@@ -106,20 +106,21 @@ const Stand = styled.div`
   }
 `;
 
-const Desktop = forwardRef<HTMLDivElement, DesktopProps>(function Desktop(
-  { backgroundStyles, children, ...otherProps },
-  ref
-) {
-  return (
-    <Wrapper ref={ref} {...otherProps}>
-      <Inner>
-        <Monitor>
-          <Background style={backgroundStyles}>{children}</Background>
-        </Monitor>
-        <Stand />
-      </Inner>
-    </Wrapper>
-  );
-});
+const Monitor = forwardRef<HTMLDivElement, MonitorProps>(
+  ({ backgroundStyles, children, ...otherProps }, ref) => {
+    return (
+      <Wrapper ref={ref} {...otherProps}>
+        <Inner>
+          <MonitorBody>
+            <Background style={backgroundStyles}>{children}</Background>
+          </MonitorBody>
+          <Stand />
+        </Inner>
+      </Wrapper>
+    );
+  }
+);
 
-export { Desktop, DesktopProps };
+Monitor.displayName = 'Monitor';
+
+export { Monitor, MonitorProps };
