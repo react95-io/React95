@@ -20,4 +20,6 @@ const TableHead = forwardRef<HTMLTableSectionElement, TableHeadProps>(
   }
 );
 
+TableHead.displayName = 'TableHead';
+
 export { TableHead, TableHeadProps };

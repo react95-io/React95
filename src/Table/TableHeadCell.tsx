@@ -88,4 +88,6 @@ const TableHeadCell = forwardRef<HTMLTableCellElement, TableHeadCellProps>(
   }
 );
 
+TableHeadCell.displayName = 'TableHeadCell';
+
 export { TableHeadCell, TableHeadCellProps };

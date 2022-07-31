@@ -22,17 +22,24 @@ const Wrapper = styled(StyledScrollView)`
   }
 `;
 
-const Table = forwardRef<HTMLTableElement, TableProps>(function Table(
-  { children, ...otherProps },
-  ref
-) {
-  return (
-    <Wrapper>
-      <StyledTable ref={ref} {...otherProps}>
-        {children}
-      </StyledTable>
-    </Wrapper>
-  );
-});
+const Table = forwardRef<HTMLTableElement, TableProps>(
+  ({ children, ...otherProps }, ref) => {
+    return (
+      <Wrapper>
+        <StyledTable ref={ref} {...otherProps}>
+          {children}
+        </StyledTable>
+      </Wrapper>
+    );
+  }
+);
+
+Table.displayName = 'Table';
+
+export * from './TableBody';
+export * from './TableDataCell';
+export * from './TableHead';
+export * from './TableHeadCell';
+export * from './TableRow';
 
 export { Table, TableProps };

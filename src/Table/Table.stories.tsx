@@ -19,7 +19,7 @@ const Wrapper = styled.div`
 `;
 
 export default {
-  title: 'Table',
+  title: 'Controls/Table',
   component: Table,
   subcomponents: {
     Table,

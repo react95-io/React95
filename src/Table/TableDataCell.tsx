@@ -21,4 +21,6 @@ const TableDataCell = forwardRef<HTMLTableCellElement, TableDataCellProps>(
   }
 );
 
+TableDataCell.displayName = 'TableDataCell';
+
 export { TableDataCell, TableDataCellProps };
