@@ -3,8 +3,8 @@ name: TextField
 menu: Components
 ---
 
+import { ScrollView } from '../ScrollView/ScrollView';
 import { TextField } from './TextField';
-import { Cutout } from '../Cutout/Cutout';
 
 # TextField
 
@@ -49,7 +49,7 @@ import { Cutout } from '../Cutout/Cutout';
 #### Flat
 
 <Playground>
-  <Cutout style={{ padding: '2rem', width: '300px' }}>
+  <ScrollView style={{ padding: '2rem', width: '300px' }}>
     <p style={{ lineHeight: 1.3 }}>
       When you want to add input field on a light background (like scrollable
       content), just use the flat variant:
@@ -69,13 +69,13 @@ import { Cutout } from '../Cutout/Cutout';
         onChange={e => console.log(e.target.value)}
       />
     </div>
-  </Cutout>
+  </ScrollView>
 </Playground>
 
 #### Flat disabled
 
 <Playground>
-  <Cutout style={{ padding: '2rem', width: '300px' }}>
+  <ScrollView style={{ padding: '2rem', width: '300px' }}>
     <p style={{ lineHeight: 1.3 }}>
       When you want to add input field on a light background (like scrollable
       content), just use the flat variant:
@@ -96,7 +96,7 @@ import { Cutout } from '../Cutout/Cutout';
         disabled
       />
     </div>
-  </Cutout>
+  </ScrollView>
 </Playground>
 
 ## API

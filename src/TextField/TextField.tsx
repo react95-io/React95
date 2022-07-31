@@ -7,7 +7,7 @@ import {
 } from '../common';
 import { blockSizes } from '../common/system';
 import { noOp } from '../common/utils';
-import { StyledCutout } from '../Cutout/Cutout';
+import { StyledScrollView } from '../ScrollView/ScrollView';
 import { CommonStyledProps, CommonThemeProps } from '../types';
 
 type TextFieldInputProps = {
@@ -49,7 +49,7 @@ const sharedWrapperStyles = css<WrapperProps>`
   min-height: ${blockSizes.md};
 `;
 
-const Wrapper = styled(StyledCutout).attrs({
+const Wrapper = styled(StyledScrollView).attrs({
   'data-testid': 'variant-default'
 })<WrapperProps>`
   ${sharedWrapperStyles}

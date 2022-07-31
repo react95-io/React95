@@ -2,8 +2,8 @@ import React, { forwardRef, useCallback, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import { Button } from '../Button/Button';
-import { Cutout } from '../Cutout/Cutout';
 import { NumberField } from '../NumberField/NumberField';
+import { ScrollView } from '../ScrollView/ScrollView';
 import { Select } from '../Select/Select';
 import { SelectChangeEvent } from '../Select/Select.types';
 import { Toolbar } from '../Toolbar/Toolbar';
@@ -19,7 +19,7 @@ type DatePickerProps = {
   shadow?: boolean;
 };
 
-const Calendar = styled(Cutout)`
+const Calendar = styled(ScrollView)`
   width: 234px;
   margin: 1rem 0;
   background: ${({ theme }) => theme.canvas};

@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import styled, { css, keyframes } from 'styled-components';
-import { StyledCutout } from '../Cutout/Cutout';
+import { StyledScrollView } from '../ScrollView/ScrollView';
 import { CommonStyledProps } from '../types';
 
 type LoadingIndicatorProps = {
@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   height: 15px;
   width: 100%;
 `;
-const ProgressCutout = styled(StyledCutout)`
+const ProgressCutout = styled(StyledScrollView)`
   width: 100%;
   height: 100%;
   width: 100%;

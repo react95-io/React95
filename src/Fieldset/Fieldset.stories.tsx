@@ -1,6 +1,6 @@
 import { ComponentMeta } from '@storybook/react';
 import React, { useState } from 'react';
-import { Checkbox, Cutout, Fieldset, Window, WindowContent } from 'react95';
+import { Checkbox, Fieldset, ScrollView, Window, WindowContent } from 'react95';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -44,7 +44,7 @@ export function Flat() {
   return (
     <Window>
       <WindowContent>
-        <Cutout
+        <ScrollView
           style={{ padding: '1rem', background: 'white', width: '300px' }}
         >
           <Fieldset variant='flat' label='Label here'>
@@ -60,7 +60,7 @@ export function Flat() {
               😍
             </span>
           </Fieldset>
-        </Cutout>
+        </ScrollView>
       </WindowContent>
     </Window>
   );

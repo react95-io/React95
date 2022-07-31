@@ -20,7 +20,7 @@ import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontro
 import useForkRef from '../common/hooks/useForkRef';
 import { useIsFocusVisible } from '../common/hooks/useIsFocusVisible';
 import { clamp, getSize, roundValueToStep } from '../common/utils';
-import { StyledCutout } from '../Cutout/Cutout';
+import { StyledScrollView } from '../ScrollView/ScrollView';
 import { CommonStyledProps } from '../types';
 
 type SliderProps = {
@@ -187,10 +187,10 @@ const sharedGrooveStyles = () => css<StyledSliderProps>`
           width: 100%;
         `}
 `;
-const StyledGroove = styled(StyledCutout)<StyledSliderProps>`
+const StyledGroove = styled(StyledScrollView)<StyledSliderProps>`
   ${sharedGrooveStyles()}
 `;
-const StyledFlatGroove = styled(StyledCutout)<StyledSliderProps>`
+const StyledFlatGroove = styled(StyledScrollView)<StyledSliderProps>`
   ${sharedGrooveStyles()}
 
   border-left-color: ${({ theme }) => theme.flatLight};

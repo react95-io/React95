@@ -1,6 +1,6 @@
 import { ComponentMeta } from '@storybook/react';
 import React from 'react';
-import { Cutout, NumberField } from 'react95';
+import { NumberField, ScrollView } from 'react95';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -44,7 +44,7 @@ Default.story = {
 
 export function Flat() {
   return (
-    <Cutout id='cutout'>
+    <ScrollView id='cutout'>
       <p>
         When you want to use NumberField on a light background (like scrollable
         content), just use the flat variant:
@@ -60,7 +60,7 @@ export function Flat() {
       <NumberField variant='flat' defaultValue={1995} width='130px' />
       <br />
       <NumberField variant='flat' disabled defaultValue={2020} width='130px' />
-    </Cutout>
+    </ScrollView>
   );
 }
 

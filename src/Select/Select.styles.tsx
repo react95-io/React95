@@ -8,7 +8,7 @@ import {
   shadow as commonShadow
 } from '../common';
 import { blockSizes } from '../common/system';
-import { StyledCutout } from '../Cutout/Cutout';
+import { StyledScrollView } from '../ScrollView/ScrollView';
 import { CommonThemeProps } from '../types';
 
 import { SelectVariants } from './Select.types';
@@ -66,7 +66,9 @@ const sharedWrapperStyles = css<CommonSelectStyleProps>`
   cursor: ${({ $disabled }) => ($disabled ? 'default' : 'pointer')};
 `;
 
-export const StyledSelectWrapper = styled(StyledCutout)<CommonSelectStyleProps>`
+export const StyledSelectWrapper = styled(
+  StyledScrollView
+)<CommonSelectStyleProps>`
   ${sharedWrapperStyles}
   background: ${({ $disabled = false, theme }) =>
     $disabled ? theme.material : theme.canvas};

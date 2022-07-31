@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import styled from 'styled-components';
-import { StyledCutout } from '../Cutout/Cutout';
+import { StyledScrollView } from '../ScrollView/ScrollView';
 import { CommonStyledProps } from '../types';
 
 type TableProps = {
@@ -16,7 +16,7 @@ const StyledTable = styled.table`
   font-size: 1rem;
 `;
 
-const Wrapper = styled(StyledCutout)`
+const Wrapper = styled(StyledScrollView)`
   &:before {
     box-shadow: none;
   }

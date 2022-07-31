@@ -10,7 +10,6 @@ export * from './Button/Button';
 export * from './Checkbox/Checkbox';
 export * from './ColorInput/ColorInput';
 export * from './Counter/Counter';
-export * from './Cutout/Cutout';
 export * from './DatePicker/DatePicker';
 export * from './Desktop/Desktop';
 export * from './Fieldset/Fieldset';
@@ -23,6 +22,7 @@ export * from './NumberField/NumberField';
 export * from './Panel/Panel';
 export * from './Progress/Progress';
 export * from './Radio/Radio';
+export * from './ScrollView/ScrollView';
 export * from './Select/Select';
 export * from './Separator/Separator';
 export * from './Slider/Slider';
@@ -45,4 +45,5 @@ export * from './WindowHeader/WindowHeader';
 
 /* deprecated components */
 export * from './legacy/Bar';
-export * from './legacy/Separator';
+export * from './legacy/Cutout';
+export * from './legacy/Divider';

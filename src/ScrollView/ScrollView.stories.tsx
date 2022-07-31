@@ -1,6 +1,6 @@
 import { ComponentMeta } from '@storybook/react';
 import React from 'react';
-import { Cutout, Window, WindowContent } from 'react95';
+import { ScrollView, Window, WindowContent } from 'react95';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -9,16 +9,16 @@ const Wrapper = styled.div`
 `;
 
 export default {
-  title: 'Cutout',
-  component: Cutout,
+  title: 'Layout/ScrollView',
+  component: ScrollView,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-} as ComponentMeta<typeof Cutout>;
+} as ComponentMeta<typeof ScrollView>;
 
 export function Default() {
   return (
     <Window>
       <WindowContent>
-        <Cutout style={{ width: '300px', height: '200px' }}>
+        <ScrollView style={{ width: '300px', height: '200px' }}>
           <div>
             <p style={{ width: 400 }}>
               React95 is the best UI library ever created
@@ -32,7 +32,7 @@ export function Default() {
             <p>React95 is the best UI library ever created</p>
             <p>React95 is the best UI library ever created</p>
           </div>
-        </Cutout>
+        </ScrollView>
       </WindowContent>
     </Window>
   );

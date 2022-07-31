@@ -1,11 +1,11 @@
 import { ComponentMeta } from '@storybook/react';
 import React, { useState } from 'react';
 import {
-  Cutout,
   Fieldset,
   List,
   ListItem,
   Radio,
+  ScrollView,
   Separator,
   Window,
   WindowContent
@@ -90,7 +90,7 @@ export function Flat() {
   return (
     <Window>
       <WindowContent>
-        <Cutout id='cutout'>
+        <ScrollView id='cutout'>
           <p>
             When you want to use radio buttons on a light background (like
             scrollable content), just use the flat variant:
@@ -134,7 +134,7 @@ export function Flat() {
               disabled
             />
           </Fieldset>
-        </Cutout>
+        </ScrollView>
       </WindowContent>
     </Window>
   );

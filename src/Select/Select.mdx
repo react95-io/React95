@@ -4,9 +4,9 @@ menu: Components
 ---
 
 import { Select } from './Select';
-import Window from '../Window/Window';
-import WindowContent from '../WindowContent/WindowContent';
-import { Cutout } from '../Cutout/Cutout';
+import { ScrollView } from '../ScrollView/ScrollView';
+import { Window } from '../Window/Window';
+import { WindowContent } from '../WindowContent/WindowContent';
 
 # Select
 
@@ -98,7 +98,7 @@ import { Cutout } from '../Cutout/Cutout';
     return (
       <Window>
         <WindowContent>
-          <Cutout
+          <ScrollView
             style={{
               padding: '1rem',
               paddingBottom: '3rem',
@@ -123,7 +123,7 @@ import { Cutout } from '../Cutout/Cutout';
                 width={150}
               />
             </div>
-          </Cutout>
+          </ScrollView>
         </WindowContent>
       </Window>
     );
