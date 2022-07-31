@@ -43,7 +43,7 @@ const onChange = <T,>(event: SelectChangeEvent<T>, option: SelectOption<T>) =>
   console.log(event, option);
 
 export default {
-  title: 'Select',
+  title: 'Controls/Select',
   component: Select,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
 } as ComponentMeta<typeof Select>;
