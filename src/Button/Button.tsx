@@ -24,11 +24,19 @@ type ButtonProps = {
   size?: Sizes;
   square?: boolean;
   type?: string;
-  variant?: 'default' | 'menu' | 'flat';
-} & Omit<
-  React.ButtonHTMLAttributes<HTMLButtonElement>,
-  'disabled' | 'onClick' | 'onTouchStart' | 'type'
-> &
+} & (
+  | {
+      variant?: 'default' | 'flat' | 'thin';
+    }
+  | {
+      /** @deprecated Use `thin` */
+      variant?: 'menu';
+    }
+) &
+  Omit<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    'disabled' | 'onClick' | 'onTouchStart' | 'type'
+  > &
   CommonStyledProps;
 
 type StyledButtonProps = Pick<
@@ -93,7 +101,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
             outline-offset: -4px;
           }
         `
-      : variant === 'menu'
+      : variant === 'menu' || variant === 'thin'
       ? css`
           ${createBoxStyles()};
           border: 2px solid transparent;
@@ -156,41 +164,46 @@ export const StyledButton = styled.button<StyledButtonProps>`
   ${commonButtonStyles}
 `;
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  {
-    onClick,
-    disabled = false,
-    children,
-    type = 'button',
-    fullWidth = false,
-    size = 'md',
-    square = false,
-    active = false,
-    onTouchStart = noOp,
-    primary = false,
-    variant = 'default',
-    ...otherProps
-  },
-  ref
-) {
-  return (
-    <StyledButton
-      active={active}
-      disabled={disabled}
-      fullWidth={fullWidth}
-      onClick={disabled ? undefined : onClick}
-      onTouchStart={onTouchStart}
-      primary={primary}
-      ref={ref}
-      size={size}
-      square={square}
-      type={type}
-      variant={variant}
-      {...otherProps}
-    >
-      {children}
-    </StyledButton>
-  );
-});
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      onClick,
+      disabled = false,
+      children,
+      type = 'button',
+      fullWidth = false,
+      size = 'md',
+      square = false,
+      active = false,
+      onTouchStart = noOp,
+      primary = false,
+      variant = 'default',
+      ...otherProps
+    },
+    ref
+  ) => {
+    return (
+      <StyledButton
+        active={active}
+        disabled={disabled}
+        $disabled={disabled}
+        fullWidth={fullWidth}
+        onClick={disabled ? undefined : onClick}
+        onTouchStart={onTouchStart}
+        primary={primary}
+        ref={ref}
+        size={size}
+        square={square}
+        type={type}
+        variant={variant}
+        {...otherProps}
+      >
+        {children}
+      </StyledButton>
+    );
+  }
+);
+
+Button.displayName = 'Button';
 
 export { Button, ButtonProps };

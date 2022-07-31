@@ -29,7 +29,7 @@ const Wrapper = styled.div`
 `;
 
 export default {
-  title: 'Button',
+  title: 'Controls/Button',
   component: Button,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
 } as ComponentMeta<typeof Button>;
@@ -63,9 +63,45 @@ Default.story = {
   name: 'default'
 };
 
+export function Flat() {
+  return (
+    <Window>
+      <WindowContent>
+        <Cutout id='cutout'>
+          <p style={{ lineHeight: 1.3 }}>
+            When you want to use Buttons on a light background (like scrollable
+            content), just use the flat variant:
+          </p>
+          <div
+            style={{
+              marginTop: '1.5rem'
+            }}
+          >
+            <Toolbar>
+              <Button variant='flat' primary style={{ marginRight: '0.5rem' }}>
+                Primary
+              </Button>
+              <Button variant='flat' style={{ marginRight: '0.5rem' }}>
+                Regular
+              </Button>
+              <Button variant='flat' disabled>
+                Disabled
+              </Button>
+            </Toolbar>
+          </div>
+        </Cutout>
+      </WindowContent>
+    </Window>
+  );
+}
+
+Flat.story = {
+  name: 'flat'
+};
+
 const imageSrc =
   'https://image.freepik.com/foto-gratuito/la-frutta-fresca-del-kiwi-tagliata-a-meta-con-la-decorazione-completa-del-pezzo-e-bella-sulla-tavola-di-legno_47436-1.jpg';
-export function Menu() {
+export function Thin() {
   const [open, setOpen] = useState(false);
 
   return (
@@ -77,10 +113,10 @@ export function Menu() {
         Kiwi.app
       </WindowHeader>
       <Toolbar noPadding>
-        <Button variant='menu' disabled>
+        <Button variant='thin' disabled>
           Upload
         </Button>
-        <Button variant='menu' disabled>
+        <Button variant='thin' disabled>
           Save
         </Button>
         <div
@@ -91,7 +127,7 @@ export function Menu() {
           }}
         >
           <Button
-            variant='menu'
+            variant='thin'
             onClick={() => setOpen(!open)}
             size='sm'
             active={open}
@@ -134,42 +170,6 @@ export function Menu() {
   );
 }
 
-Menu.story = {
-  name: 'menu'
-};
-
-export function Flat() {
-  return (
-    <Window>
-      <WindowContent>
-        <Cutout id='cutout'>
-          <p style={{ lineHeight: 1.3 }}>
-            When you want to use Buttons on a light background (like scrollable
-            content), just use the flat variant:
-          </p>
-          <div
-            style={{
-              marginTop: '1.5rem'
-            }}
-          >
-            <Toolbar>
-              <Button variant='flat' primary style={{ marginRight: '0.5rem' }}>
-                Primary
-              </Button>
-              <Button variant='flat' style={{ marginRight: '0.5rem' }}>
-                Regular
-              </Button>
-              <Button variant='flat' disabled>
-                Disabled
-              </Button>
-            </Toolbar>
-          </div>
-        </Cutout>
-      </WindowContent>
-    </Window>
-  );
-}
-
-Flat.story = {
-  name: 'flat'
+Thin.story = {
+  name: 'thin'
 };

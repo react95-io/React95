@@ -55,6 +55,10 @@ describe('<Button />', () => {
     rerender(<Button {...defaultProps} variant='flat' />);
     expect(button).toHaveStyleRule('color', theme.materialTextDisabled);
     expect(button).toHaveStyleRule('text-shadow', disabledTextShadow);
+
+    rerender(<Button {...defaultProps} variant='thin' />);
+    expect(button).toHaveStyleRule('color', theme.materialTextDisabled);
+    expect(button).toHaveStyleRule('text-shadow', disabledTextShadow);
   });
 
   it('should handle fullWidth prop', () => {
