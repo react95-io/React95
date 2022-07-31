@@ -25,21 +25,22 @@ const pixelSizes = {
   xl: 4
 };
 
-const Counter = forwardRef<HTMLDivElement, CounterProps>(function Counter(
-  { value = 0, minLength = 3, size = 'md', ...otherProps },
-  ref
-) {
-  const digits = useMemo(
-    () => value.toString().padStart(minLength, '0').split(''),
-    [minLength, value]
-  );
-  return (
-    <CounterWrapper ref={ref} {...otherProps}>
-      {digits.map((digit, i) => (
-        <Digit digit={digit} pixelSize={pixelSizes[size]} key={i} />
-      ))}
-    </CounterWrapper>
-  );
-});
+const Counter = forwardRef<HTMLDivElement, CounterProps>(
+  ({ value = 0, minLength = 3, size = 'md', ...otherProps }, ref) => {
+    const digits = useMemo(
+      () => value.toString().padStart(minLength, '0').split(''),
+      [minLength, value]
+    );
+    return (
+      <CounterWrapper ref={ref} {...otherProps}>
+        {digits.map((digit, i) => (
+          <Digit digit={digit} pixelSize={pixelSizes[size]} key={i} />
+        ))}
+      </CounterWrapper>
+    );
+  }
+);
+
+Counter.displayName = 'Counter';
 
 export { Counter, CounterProps };
