@@ -20,7 +20,7 @@ const Wrapper = styled.div`
 `;
 
 export default {
-  title: 'Counter',
+  title: 'Other/Counter',
   component: Counter,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
 } as ComponentMeta<typeof Counter>;
