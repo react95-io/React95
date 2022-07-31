@@ -2,11 +2,11 @@ import React from 'react';
 
 import { renderWithTheme } from '../../test/utils';
 
-import { Bar } from './Bar';
+import { Handle } from './Handle';
 
-describe('<Bar />', () => {
+describe('<Handle />', () => {
   it('should render bar', () => {
-    const { container } = renderWithTheme(<Bar />);
+    const { container } = renderWithTheme(<Handle />);
     const barEl = container.firstChild;
 
     expect(barEl).toBeInTheDocument();
@@ -14,7 +14,7 @@ describe('<Bar />', () => {
 
   it('should handle custom style', () => {
     const { container } = renderWithTheme(
-      <Bar style={{ backgroundColor: 'papayawhip' }} />
+      <Handle style={{ backgroundColor: 'papayawhip' }} />
     );
     const barEl = container.firstChild;
 
@@ -23,7 +23,7 @@ describe('<Bar />', () => {
 
   it('should handle custom props', () => {
     const customProps = { title: 'potatoe' };
-    const { container } = renderWithTheme(<Bar {...customProps} />);
+    const { container } = renderWithTheme(<Handle {...customProps} />);
     const barEl = container.firstChild;
 
     expect(barEl).toHaveAttribute('title', 'potatoe');
@@ -31,14 +31,14 @@ describe('<Bar />', () => {
 
   describe('prop: size', () => {
     it('should set proper size', () => {
-      const { container } = renderWithTheme(<Bar size='85%' />);
+      const { container } = renderWithTheme(<Handle size='85%' />);
       const barEl = container.firstChild;
 
       expect(barEl).toHaveStyleRule('height', '85%');
     });
 
     it('when passed a number, sets size in px', () => {
-      const { container } = renderWithTheme(<Bar size={25} />);
+      const { container } = renderWithTheme(<Handle size={25} />);
       const barEl = container.firstChild;
 
       expect(barEl).toHaveStyleRule('height', '25px');

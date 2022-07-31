@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import { CommonStyledProps } from '../types';
 import { getSize } from '../common/utils';
 
-type BarProps = {
+type HandleProps = {
   size?: string | number;
 } & React.HTMLAttributes<HTMLDivElement> &
   CommonStyledProps;
 
 // TODO: add horizontal variant
 // TODO: allow user to specify number of bars (like 3 horizontal bars for drag handle)
-const Bar = styled.div<BarProps>`
+const Handle = styled.div<HandleProps>`
   ${({ theme, size = '100%' }) => `
   display: inline-block;
   box-sizing: border-box;
@@ -24,4 +24,6 @@ const Bar = styled.div<BarProps>`
 `}
 `;
 
-export { Bar, BarProps };
+Handle.displayName = 'Handle';
+
+export { Handle, HandleProps };

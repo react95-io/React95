@@ -2,7 +2,7 @@ import { ComponentMeta } from '@storybook/react';
 import React from 'react';
 import styled from 'styled-components';
 
-import { Bar, Divider, List, ListItem } from 'react95';
+import { Divider, List, ListItem, Handle } from 'react95';
 
 const Wrapper = styled.div`
   padding: 5rem;
@@ -44,7 +44,7 @@ export function Default() {
             🌿
           </span>
         </ListItem>
-        <Bar size={38} />
+        <Handle size={38} />
         <ListItem>Tackle</ListItem>
         <ListItem>Growl</ListItem>
         <ListItem disabled>Razor Leaf</ListItem>
