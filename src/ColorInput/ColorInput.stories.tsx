@@ -28,7 +28,7 @@ const Wrapper = styled.div`
 `;
 
 export default {
-  title: 'ColorInput',
+  title: 'Controls/ColorInput',
   component: ColorInput,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
 } as ComponentMeta<typeof ColorInput>;
