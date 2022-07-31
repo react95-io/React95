@@ -35,7 +35,7 @@ const Wrapper = styled.div`
 `;
 
 export default {
-  title: 'Slider',
+  title: 'Controls/Slider',
   component: Slider,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
 } as ComponentMeta<typeof Slider>;
