@@ -19,7 +19,7 @@ const Wrapper = styled.div`
 `;
 
 export default {
-  title: 'Checkbox',
+  title: 'Controls/Checkbox',
   component: Checkbox,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
 } as ComponentMeta<typeof Checkbox>;
