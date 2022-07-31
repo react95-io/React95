@@ -2,7 +2,7 @@
 
 import { ComponentMeta } from '@storybook/react';
 import React from 'react';
-import { Cutout, Fieldset, Select, Window, WindowContent } from 'react95';
+import { Fieldset, ScrollView, Select, Window, WindowContent } from 'react95';
 import styled from 'styled-components';
 import { SelectChangeEvent, SelectOption } from './Select.types';
 
@@ -106,7 +106,7 @@ export function Flat() {
   return (
     <Window>
       <WindowContent>
-        <Cutout id='cutout'>
+        <ScrollView id='cutout'>
           <p>
             When you want to use Select on a light background (like scrollable
             content), just use the flat variant:
@@ -144,7 +144,7 @@ export function Flat() {
               options={options}
             />
           </Fieldset>
-        </Cutout>
+        </ScrollView>
       </WindowContent>
     </Window>
   );

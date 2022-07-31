@@ -2,9 +2,9 @@ import { ComponentMeta } from '@storybook/react';
 import React, { useState } from 'react';
 import {
   Button,
-  Cutout,
   List,
   ListItem,
+  ScrollView,
   Separator,
   Toolbar,
   Window,
@@ -67,7 +67,7 @@ export function Flat() {
   return (
     <Window>
       <WindowContent>
-        <Cutout id='cutout'>
+        <ScrollView id='cutout'>
           <p style={{ lineHeight: 1.3 }}>
             When you want to use Buttons on a light background (like scrollable
             content), just use the flat variant:
@@ -89,7 +89,7 @@ export function Flat() {
               </Button>
             </Toolbar>
           </div>
-        </Cutout>
+        </ScrollView>
       </WindowContent>
     </Window>
   );
@@ -158,13 +158,13 @@ export function Thin() {
         </div>
       </Toolbar>
       <WindowContent style={{ padding: '0.25rem' }}>
-        <Cutout>
+        <ScrollView>
           <img
             style={{ width: '100%', height: '1uto', display: 'block' }}
             src={imageSrc}
             alt='kiwi'
           />
-        </Cutout>
+        </ScrollView>
       </WindowContent>
     </Window>
   );

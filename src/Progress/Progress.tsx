@@ -8,7 +8,7 @@ import React, {
 import styled, { css } from 'styled-components';
 
 import { blockSizes } from '../common/system';
-import { StyledCutout } from '../Cutout/Cutout';
+import { StyledScrollView } from '../ScrollView/ScrollView';
 import { CommonStyledProps } from '../types';
 
 type ProgressProps = {
@@ -24,7 +24,7 @@ const Wrapper = styled.div`
   height: ${blockSizes.md};
   width: 100%;
 `;
-const ProgressCutout = styled(StyledCutout)`
+const ProgressCutout = styled(StyledScrollView)`
   width: 100%;
   height: 100%;
   width: 100%;

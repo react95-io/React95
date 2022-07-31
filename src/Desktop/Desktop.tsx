@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 
-import { StyledCutout } from '../Cutout/Cutout';
+import { StyledScrollView } from '../ScrollView/ScrollView';
 
 type DesktopProps = {
   backgroundStyles?: React.CSSProperties;
@@ -56,7 +56,7 @@ const Monitor = styled.div`
   }
 `;
 
-const Background = styled(StyledCutout).attrs(() => ({
+const Background = styled(StyledScrollView).attrs(() => ({
   'data-testid': 'background'
 }))`
   width: 100%;

@@ -2,7 +2,7 @@ import { ComponentMeta } from '@storybook/react';
 import React from 'react';
 import styled from 'styled-components';
 
-import { ColorInput, Cutout } from 'react95';
+import { ColorInput, ScrollView } from 'react95';
 
 const Wrapper = styled.div`
   background: ${({ theme }) => theme.material};
@@ -50,7 +50,7 @@ Default.story = {
 
 export function Flat() {
   return (
-    <Cutout id='cutout'>
+    <ScrollView id='cutout'>
       <div className='content'>
         <div>
           <span>enabled: </span>
@@ -61,7 +61,7 @@ export function Flat() {
           <ColorInput variant='flat' disabled defaultValue='#00f' />
         </div>
       </div>
-    </Cutout>
+    </ScrollView>
   );
 }
 

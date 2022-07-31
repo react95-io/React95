@@ -1,6 +1,6 @@
 import { ComponentMeta } from '@storybook/react';
 import React from 'react';
-import { Cutout, Slider } from 'react95';
+import { ScrollView, Slider } from 'react95';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -116,7 +116,7 @@ Default.story = {
 
 export function Flat() {
   return (
-    <Cutout id='cutout'>
+    <ScrollView id='cutout'>
       <p>
         When you want to add input field on a light background (like scrollable
         content), just use the flat variant:
@@ -146,7 +146,7 @@ export function Flat() {
           { value: 6, label: '6°C' }
         ]}
       />
-    </Cutout>
+    </ScrollView>
   );
 }
 

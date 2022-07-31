@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { Checkbox, Fieldset, Cutout, List, ListItem, Separator } from 'react95';
 import { ComponentMeta } from '@storybook/react';
+import {
+  Checkbox,
+  Fieldset,
+  List,
+  ListItem,
+  ScrollView,
+  Separator
+} from 'react95';
 
 const Wrapper = styled.div`
   background: ${({ theme }) => theme.material};
@@ -170,7 +177,7 @@ export function Flat() {
   };
 
   return (
-    <Cutout id='cutout'>
+    <ScrollView id='cutout'>
       <div style={{ maxWidth: '250px' }}>
         <Fieldset variant='flat' label='Pizza toppings'>
           <Checkbox
@@ -223,7 +230,7 @@ export function Flat() {
           style={{ marginTop: '1rem' }}
         />
       </div>
-    </Cutout>
+    </ScrollView>
   );
 }
 

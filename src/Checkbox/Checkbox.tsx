@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { createHatchedBackground } from '../common';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import { noOp } from '../common/utils';
-import { StyledCutout } from '../Cutout/Cutout';
+import { StyledScrollView } from '../ScrollView/ScrollView';
 import { StyledListItem } from '../ListItem/ListItem';
 import {
   LabelText,
@@ -52,7 +52,7 @@ const sharedCheckboxStyles = css`
   justify-content: space-around;
   margin-right: 0.5rem;
 `;
-const StyledCheckbox = styled(StyledCutout)<CommonThemeProps>`
+const StyledCheckbox = styled(StyledScrollView)<CommonThemeProps>`
   ${sharedCheckboxStyles}
   width: ${size}px;
   height: ${size}px;

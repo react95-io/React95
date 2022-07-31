@@ -2,8 +2,8 @@ import React, { forwardRef } from 'react';
 import styled, { css, CSSProperties } from 'styled-components';
 
 import { createFlatBoxStyles } from '../common';
-import { StyledCutout } from '../Cutout/Cutout';
 import { StyledListItem } from '../ListItem/ListItem';
+import { StyledScrollView } from '../ScrollView/ScrollView';
 import {
   LabelText,
   size,
@@ -44,7 +44,7 @@ type StyledCheckboxProps = {
   $disabled: boolean;
 };
 
-const StyledCheckbox = styled(StyledCutout)<StyledCheckboxProps>`
+const StyledCheckbox = styled(StyledScrollView)<StyledCheckboxProps>`
   ${sharedCheckboxStyles}
   background: ${({ $disabled, theme }) =>
     $disabled ? theme.material : theme.canvas};

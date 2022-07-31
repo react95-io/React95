@@ -1,6 +1,6 @@
 import { ComponentMeta } from '@storybook/react';
 import React, { useState } from 'react';
-import { Button, Cutout, TextField } from 'react95';
+import { Button, ScrollView, TextField } from 'react95';
 import styled from 'styled-components';
 
 const loremIpsum = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin, ante vel porttitor posuere, tellus nisi interdum ipsum, non bibendum ante risus ut purus. Curabitur vel posuere odio. Vivamus rutrum, nunc et ullamcorper sagittis, tellus ligula maximus quam, id dapibus sapien metus lobortis diam. Proin luctus, dolor in finibus feugiat, lacus enim gravida sem, quis aliquet tellus leo nec enim. Morbi varius bibendum augue quis venenatis. Curabitur ut elit augue. Pellentesque posuere enim a mattis interdum. Donec sodales convallis turpis, a vulputate elit. Suspendisse potenti.`;
@@ -68,7 +68,7 @@ Default.story = {
 
 export function Flat() {
   return (
-    <Cutout id='cutout'>
+    <ScrollView id='cutout'>
       <p>
         When you want to add input field on a light background (like scrollable
         content), just use the flat variant:
@@ -110,7 +110,7 @@ export function Flat() {
         onChange={onChange}
         fullWidth
       />
-    </Cutout>
+    </ScrollView>
   );
 }
 

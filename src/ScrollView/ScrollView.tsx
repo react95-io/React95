@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { insetShadow, createScrollbars } from '../common';
 import { CommonStyledProps } from '../types';
 
-type CutoutProps = {
+type ScrollViewProps = {
   children?: React.ReactNode;
   shadow?: boolean;
 } & React.HTMLAttributes<HTMLDivElement> &
   CommonStyledProps;
 
-export const StyledCutout = styled.div<Pick<CutoutProps, 'shadow'>>`
+export const StyledScrollView = styled.div<Pick<ScrollViewProps, 'shadow'>>`
   position: relative;
   box-sizing: border-box;
   padding: 2px;
@@ -50,15 +50,16 @@ const Content = styled.div`
   ${createScrollbars()}
 `;
 
-const Cutout = forwardRef<HTMLDivElement, CutoutProps>(function Cutout(
-  { children, shadow = true, ...otherProps },
-  ref
-) {
-  return (
-    <StyledCutout ref={ref} shadow={shadow} {...otherProps}>
-      <Content>{children}</Content>
-    </StyledCutout>
-  );
-});
+const ScrollView = forwardRef<HTMLDivElement, ScrollViewProps>(
+  ({ children, shadow = true, ...otherProps }, ref) => {
+    return (
+      <StyledScrollView ref={ref} shadow={shadow} {...otherProps}>
+        <Content>{children}</Content>
+      </StyledScrollView>
+    );
+  }
+);
 
-export { Cutout, CutoutProps };
+ScrollView.displayName = 'ScrollView';
+
+export { ScrollView, ScrollViewProps };
