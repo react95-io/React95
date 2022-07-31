@@ -53,30 +53,34 @@ const StyledAvatarImg = styled.img`
   height: 100%;
 `;
 
-const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
-  {
-    alt = '',
-    children,
-    noBorder = false,
-    size = 35,
-    square = false,
-    src,
-    ...otherProps
-  },
-  ref
-) {
-  return (
-    <StyledAvatar
-      noBorder={noBorder}
-      ref={ref}
-      size={getSize(size)}
-      square={square}
-      src={src}
-      {...otherProps}
-    >
-      {src ? <StyledAvatarImg src={src} alt={alt} /> : children}
-    </StyledAvatar>
-  );
-});
+const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
+  (
+    {
+      alt = '',
+      children,
+      noBorder = false,
+      size = 35,
+      square = false,
+      src,
+      ...otherProps
+    },
+    ref
+  ) => {
+    return (
+      <StyledAvatar
+        noBorder={noBorder}
+        ref={ref}
+        size={getSize(size)}
+        square={square}
+        src={src}
+        {...otherProps}
+      >
+        {src ? <StyledAvatarImg src={src} alt={alt} /> : children}
+      </StyledAvatar>
+    );
+  }
+);
+
+Avatar.displayName = 'Avatar';
 
 export { Avatar, AvatarProps };

@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 `;
 
 export default {
-  title: 'Avatar',
+  title: 'Other/Avatar',
   component: Avatar,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
 } as ComponentMeta<typeof Avatar>;
