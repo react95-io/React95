@@ -1,6 +1,6 @@
 import { ComponentMeta } from '@storybook/react';
 import React, { useEffect, useState } from 'react';
-import { Progress } from 'react95';
+import { ProgressBar } from 'react95';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -9,10 +9,10 @@ const Wrapper = styled.div`
 `;
 
 export default {
-  title: 'Progress',
-  component: Progress,
+  title: 'Controls/ProgressBar',
+  component: ProgressBar,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-} as ComponentMeta<typeof Progress>;
+} as ComponentMeta<typeof ProgressBar>;
 
 export function Default() {
   const [percent, setPercent] = useState(0);
@@ -32,7 +32,7 @@ export function Default() {
     };
   }, []);
 
-  return <Progress value={Math.floor(percent)} />;
+  return <ProgressBar value={Math.floor(percent)} />;
 }
 
 Default.story = {
@@ -57,7 +57,7 @@ export function Tile() {
     };
   }, []);
 
-  return <Progress variant='tile' value={Math.floor(percent)} />;
+  return <ProgressBar variant='tile' value={Math.floor(percent)} />;
 }
 
 Tile.story = {
@@ -82,7 +82,7 @@ export function HideValue() {
     };
   }, []);
 
-  return <Progress hideValue value={Math.floor(percent)} />;
+  return <ProgressBar hideValue value={Math.floor(percent)} />;
 }
 
 HideValue.story = {
