@@ -1,24 +1,26 @@
 import React from 'react';
 
 import { renderWithTheme } from '../../test/utils';
-import { Progress } from './Progress';
+import { ProgressBar } from './ProgressBar';
 
-describe('<Progress />', () => {
-  it('renders Progress', () => {
+describe('<ProgressBar />', () => {
+  it('renders ProgressBar', () => {
     const value = 32;
-    const { getByRole } = renderWithTheme(<Progress value={value} />);
+    const { getByRole } = renderWithTheme(<ProgressBar value={value} />);
 
-    const progress = getByRole('progressbar');
+    const progressBar = getByRole('progressbar');
 
-    expect(progress).toBeInTheDocument();
-    expect(progress).toHaveAttribute('aria-valuenow', value.toString());
+    expect(progressBar).toBeInTheDocument();
+    expect(progressBar).toHaveAttribute('aria-valuenow', value.toString());
   });
 
   describe('prop: variant', () => {
     describe('variant: "default"', () => {
       it('displays current percentage value', () => {
         const value = 32;
-        const { queryByTestId } = renderWithTheme(<Progress value={value} />);
+        const { queryByTestId } = renderWithTheme(
+          <ProgressBar value={value} />
+        );
 
         expect(queryByTestId('defaultProgress1')?.textContent).toBe(
           `${value}%`
@@ -38,7 +40,9 @@ describe('<Progress />', () => {
 
     describe('variant: "tile"', () => {
       it('Renders "tile" progress', () => {
-        const { queryByTestId } = renderWithTheme(<Progress variant='tile' />);
+        const { queryByTestId } = renderWithTheme(
+          <ProgressBar variant='tile' />
+        );
         expect(queryByTestId('defaultProgress1')).not.toBeInTheDocument();
         expect(queryByTestId('defaultProgress2')).not.toBeInTheDocument();
         expect(queryByTestId('tileProgress')).toBeInTheDocument();
@@ -66,7 +70,7 @@ describe('<Progress />', () => {
     it('renders progress bars, but does not show value', () => {
       const value = 32;
       const { queryByTestId } = renderWithTheme(
-        <Progress hideValue value={value} />
+        <ProgressBar hideValue value={value} />
       );
       expect(queryByTestId('defaultProgress1')).toBeInTheDocument();
       expect(queryByTestId('defaultProgress2')).toBeInTheDocument();
