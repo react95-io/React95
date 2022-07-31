@@ -116,7 +116,7 @@ const ChevronIcon = styled.span<
 
 // TODO make sure all aria and role attributes are in place
 const ColorInput = forwardRef<HTMLInputElement, ColorInputProps>(
-  function ColorInput(
+  (
     {
       value,
       defaultValue,
@@ -126,7 +126,7 @@ const ColorInput = forwardRef<HTMLInputElement, ColorInputProps>(
       ...otherProps
     },
     ref
-  ) {
+  ) => {
     const [valueDerived, setValueState] = useControlledOrUncontrolled({
       value,
       defaultValue
@@ -162,5 +162,7 @@ const ColorInput = forwardRef<HTMLInputElement, ColorInputProps>(
     );
   }
 );
+
+ColorInput.displayName = 'ColorInput';
 
 export { ColorInput, ColorInputProps };
