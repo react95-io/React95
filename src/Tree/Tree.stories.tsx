@@ -1,6 +1,6 @@
 import { ComponentMeta } from '@storybook/react';
 import React, { useCallback, useState } from 'react';
-import { Fieldset, Tree, TreeLeaf } from 'react95';
+import { GroupBox, Tree, TreeLeaf } from 'react95';
 import styled from 'styled-components';
 import { Button } from '../Button/Button';
 
@@ -97,9 +97,9 @@ categories.forEach(getIds);
 export function Basic() {
   return (
     <div style={{ maxWidth: '250px' }}>
-      <Fieldset label='Catalog'>
+      <GroupBox label='Catalog'>
         <Tree tree={categories} />
-      </Fieldset>
+      </GroupBox>
     </div>
   );
 }
@@ -124,7 +124,7 @@ export function Controlled() {
         </Button>
       </Panel>
 
-      <Fieldset label='Catalog'>
+      <GroupBox label='Catalog'>
         <Tree
           tree={categories}
           onNodeSelect={(_, id) => setSelected(id)}
@@ -132,7 +132,7 @@ export function Controlled() {
           expanded={expanded}
           selected={selected}
         />
-      </Fieldset>
+      </GroupBox>
     </div>
   );
 }
@@ -144,9 +144,9 @@ Controlled.story = {
 export function Disabled() {
   return (
     <div style={{ maxWidth: '250px' }}>
-      <Fieldset label='Catalog'>
+      <GroupBox label='Catalog'>
         <Tree tree={categories} disabled />
-      </Fieldset>
+      </GroupBox>
     </div>
   );
 }
@@ -167,9 +167,9 @@ export function DisabledTreeItems() {
 
   return (
     <div style={{ maxWidth: '250px' }}>
-      <Fieldset label='Catalog'>
+      <GroupBox label='Catalog'>
         <Tree tree={modifiedTree} />
-      </Fieldset>
+      </GroupBox>
     </div>
   );
 }

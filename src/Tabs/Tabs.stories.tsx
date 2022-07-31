@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import {
   Anchor,
   Checkbox,
-  Fieldset,
+  GroupBox,
   NumberField,
   Tab,
   TabBody,
@@ -49,7 +49,7 @@ export function Default() {
         <TabBody style={{ height: 300 }}>
           {activeTab === 0 && (
             <div>
-              <Fieldset label='Order:'>
+              <GroupBox label='Order:'>
                 <div style={{ padding: '0.5em 0 0.5em 0' }}>Amount:</div>
                 <NumberField width='100%' min={0} defaultValue={0} />
                 <br />
@@ -60,7 +60,7 @@ export function Default() {
                   onChange={() => null}
                   defaultChecked
                 />
-              </Fieldset>
+              </GroupBox>
             </div>
           )}
           {activeTab === 1 && (

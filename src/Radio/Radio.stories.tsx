@@ -1,7 +1,7 @@
 import { ComponentMeta } from '@storybook/react';
 import React, { useState } from 'react';
 import {
-  Fieldset,
+  GroupBox,
   List,
   ListItem,
   Radio,
@@ -39,7 +39,7 @@ export function Default() {
   return (
     <Window>
       <WindowContent>
-        <Fieldset label='Fruits'>
+        <GroupBox label='Fruits'>
           <Radio
             checked={state === 'Pear'}
             onChange={handleChange}
@@ -72,7 +72,7 @@ export function Default() {
             name='fruits'
             disabled
           />
-        </Fieldset>
+        </GroupBox>
       </WindowContent>
     </Window>
   );
@@ -96,7 +96,7 @@ export function Flat() {
             scrollable content), just use the flat variant:
           </p>
 
-          <Fieldset variant='flat' label='Fruits'>
+          <GroupBox variant='flat' label='Fruits'>
             <Radio
               variant='flat'
               checked={state === 'Pear'}
@@ -133,7 +133,7 @@ export function Flat() {
               name='fruits'
               disabled
             />
-          </Fieldset>
+          </GroupBox>
         </ScrollView>
       </WindowContent>
     </Window>

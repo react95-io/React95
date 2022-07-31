@@ -1,6 +1,6 @@
 import { ComponentMeta } from '@storybook/react';
 import React, { useState } from 'react';
-import { Checkbox, Fieldset, ScrollView, Window, WindowContent } from 'react95';
+import { Checkbox, GroupBox, ScrollView, Window, WindowContent } from 'react95';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -9,28 +9,28 @@ const Wrapper = styled.div`
 `;
 
 export default {
-  title: 'Fieldset',
-  component: Fieldset,
+  title: 'Controls/GroupBox',
+  component: GroupBox,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-} as ComponentMeta<typeof Fieldset>;
+} as ComponentMeta<typeof GroupBox>;
 
 export function Default() {
   return (
     <Window>
       <WindowContent>
-        <Fieldset label='Label here'>
+        <GroupBox label='Label here'>
           Some content here
           <span role='img' aria-label='😍'>
             😍
           </span>
-        </Fieldset>
+        </GroupBox>
         <br />
-        <Fieldset label='Disabled' disabled>
+        <GroupBox label='Disabled' disabled>
           Some content here
           <span role='img' aria-label='😍'>
             😍
           </span>
-        </Fieldset>
+        </GroupBox>
       </WindowContent>
     </Window>
   );
@@ -47,19 +47,19 @@ export function Flat() {
         <ScrollView
           style={{ padding: '1rem', background: 'white', width: '300px' }}
         >
-          <Fieldset variant='flat' label='Label here'>
+          <GroupBox variant='flat' label='Label here'>
             Some content here
             <span role='img' aria-label='😍'>
               😍
             </span>
-          </Fieldset>
+          </GroupBox>
           <br />
-          <Fieldset variant='flat' label='Disabled' disabled>
+          <GroupBox variant='flat' label='Disabled' disabled>
             Some content here
             <span role='img' aria-label='😍'>
               😍
             </span>
-          </Fieldset>
+          </GroupBox>
         </ScrollView>
       </WindowContent>
     </Window>
@@ -75,7 +75,7 @@ export function ToggleExample() {
   return (
     <Window>
       <WindowContent>
-        <Fieldset
+        <GroupBox
           disabled={state}
           label={
             <Checkbox
@@ -90,7 +90,7 @@ export function ToggleExample() {
           <span role='img' aria-label='emoji in love'>
             😍
           </span>
-        </Fieldset>
+        </GroupBox>
       </WindowContent>
     </Window>
   );
