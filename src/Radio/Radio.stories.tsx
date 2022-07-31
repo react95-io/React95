@@ -26,7 +26,7 @@ const Wrapper = styled.div`
   }
 `;
 export default {
-  title: 'Radio',
+  title: 'Controls/Radio',
   component: Radio,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
 } as ComponentMeta<typeof Radio>;
