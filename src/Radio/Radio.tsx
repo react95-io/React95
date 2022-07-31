@@ -136,38 +136,42 @@ const CheckboxComponents = {
   menu: StyledMenuCheckbox
 };
 
-const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
-  {
-    checked,
-    className = '',
-    disabled = false,
-    label = '',
-    onChange,
-    style = {},
-    variant = 'default',
-    ...otherProps
-  },
-  ref
-) {
-  const CheckboxComponent = CheckboxComponents[variant];
+const Radio = forwardRef<HTMLInputElement, RadioProps>(
+  (
+    {
+      checked,
+      className = '',
+      disabled = false,
+      label = '',
+      onChange,
+      style = {},
+      variant = 'default',
+      ...otherProps
+    },
+    ref
+  ) => {
+    const CheckboxComponent = CheckboxComponents[variant];
 
-  return (
-    <StyledLabel $disabled={disabled} className={className} style={style}>
-      <CheckboxComponent $disabled={disabled} role='presentation'>
-        {checked && <Icon $disabled={disabled} variant={variant} />}
-      </CheckboxComponent>
-      <StyledInput
-        disabled={disabled}
-        onChange={disabled ? undefined : onChange}
-        readOnly={disabled}
-        type='radio'
-        checked={checked}
-        ref={ref}
-        {...otherProps}
-      />
-      {label && <LabelText>{label}</LabelText>}
-    </StyledLabel>
-  );
-});
+    return (
+      <StyledLabel $disabled={disabled} className={className} style={style}>
+        <CheckboxComponent $disabled={disabled} role='presentation'>
+          {checked && <Icon $disabled={disabled} variant={variant} />}
+        </CheckboxComponent>
+        <StyledInput
+          disabled={disabled}
+          onChange={disabled ? undefined : onChange}
+          readOnly={disabled}
+          type='radio'
+          checked={checked}
+          ref={ref}
+          {...otherProps}
+        />
+        {label && <LabelText>{label}</LabelText>}
+      </StyledLabel>
+    );
+  }
+);
+
+Radio.displayName = 'Radio';
 
 export { Radio, RadioProps };
