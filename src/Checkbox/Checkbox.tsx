@@ -189,64 +189,68 @@ const CheckboxComponents = {
   menu: StyledMenuCheckbox
 };
 
-const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Checkbox(
-  {
-    checked,
-    className = '',
-    defaultChecked = false,
-    disabled = false,
-    indeterminate = false,
-    label = '',
-    onChange = noOp,
-    style = {},
-    value,
-    variant = 'default',
-    ...otherProps
-  },
-  ref
-) {
-  const [state, setState] = useControlledOrUncontrolled({
-    value: checked,
-    defaultValue: defaultChecked
-  });
-
-  const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const newState = e.target.checked;
-      setState(newState);
-      onChange(e);
+const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
+  (
+    {
+      checked,
+      className = '',
+      defaultChecked = false,
+      disabled = false,
+      indeterminate = false,
+      label = '',
+      onChange = noOp,
+      style = {},
+      value,
+      variant = 'default',
+      ...otherProps
     },
-    [onChange, setState]
-  );
+    ref
+  ) => {
+    const [state, setState] = useControlledOrUncontrolled({
+      value: checked,
+      defaultValue: defaultChecked
+    });
 
-  const CheckboxComponent = CheckboxComponents[variant];
+    const handleChange = useCallback(
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newState = e.target.checked;
+        setState(newState);
+        onChange(e);
+      },
+      [onChange, setState]
+    );
 
-  let Icon = null;
-  if (indeterminate) {
-    Icon = IndeterminateIcon;
-  } else if (state) {
-    Icon = CheckmarkIcon;
+    const CheckboxComponent = CheckboxComponents[variant];
+
+    let Icon = null;
+    if (indeterminate) {
+      Icon = IndeterminateIcon;
+    } else if (state) {
+      Icon = CheckmarkIcon;
+    }
+
+    return (
+      <StyledLabel $disabled={disabled} className={className} style={style}>
+        <StyledInput
+          disabled={disabled}
+          onChange={disabled ? undefined : handleChange}
+          readOnly={disabled}
+          type='checkbox'
+          value={value}
+          checked={state}
+          data-indeterminate={indeterminate}
+          ref={ref}
+          {...otherProps}
+        />
+        <CheckboxComponent $disabled={disabled} role='presentation'>
+          {Icon && <Icon $disabled={disabled} variant={variant} />}
+        </CheckboxComponent>
+        {label && <LabelText>{label}</LabelText>}
+      </StyledLabel>
+    );
   }
+);
 
-  return (
-    <StyledLabel $disabled={disabled} className={className} style={style}>
-      <StyledInput
-        disabled={disabled}
-        onChange={disabled ? undefined : handleChange}
-        readOnly={disabled}
-        type='checkbox'
-        value={value}
-        checked={state}
-        data-indeterminate={indeterminate}
-        ref={ref}
-        {...otherProps}
-      />
-      <CheckboxComponent $disabled={disabled} role='presentation'>
-        {Icon && <Icon $disabled={disabled} variant={variant} />}
-      </CheckboxComponent>
-      {label && <LabelText>{label}</LabelText>}
-    </StyledLabel>
-  );
-});
+Checkbox.displayName = 'Checkbox';
 
 export { Checkbox, CheckboxProps };
