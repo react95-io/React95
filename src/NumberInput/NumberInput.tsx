@@ -8,7 +8,7 @@ import { clamp, getSize } from '../common/utils';
 import { TextField } from '../TextField/TextField';
 import { CommonStyledProps } from '../types';
 
-type NumberFieldProps = {
+type NumberInputProps = {
   className?: string;
   defaultValue?: number;
   disabled?: boolean;
@@ -22,12 +22,12 @@ type NumberFieldProps = {
   width?: string | number;
 } & CommonStyledProps;
 
-const StyledNumberFieldWrapper = styled.div`
+const StyledNumberInputWrapper = styled.div`
   display: inline-flex;
   align-items: center;
 `;
 
-const StyledButton = styled(Button)<Pick<NumberFieldProps, 'variant'>>`
+const StyledButton = styled(Button)<Pick<NumberInputProps, 'variant'>>`
   width: 30px;
   padding: 0;
   flex-shrink: 0;
@@ -49,7 +49,7 @@ const StyledButton = styled(Button)<Pick<NumberFieldProps, 'variant'>>`
         `}
 `;
 
-const StyledButtonWrapper = styled.div<Pick<NumberFieldProps, 'variant'>>`
+const StyledButtonWrapper = styled.div<Pick<NumberInputProps, 'variant'>>`
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -96,9 +96,8 @@ const StyledButtonIcon = styled.span<{ invert?: boolean }>`
           `}
   }
 `;
-
-const NumberField = forwardRef<HTMLInputElement, NumberFieldProps>(
-  function NumberField(
+const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
+  (
     {
       className,
       defaultValue,
@@ -113,7 +112,7 @@ const NumberField = forwardRef<HTMLInputElement, NumberFieldProps>(
       width
     },
     ref
-  ) {
+  ) => {
     const [valueDerived, setValueState] = useControlledOrUncontrolled({
       value,
       defaultValue
@@ -157,7 +156,7 @@ const NumberField = forwardRef<HTMLInputElement, NumberFieldProps>(
     }, [handleClick, step]);
 
     return (
-      <StyledNumberFieldWrapper
+      <StyledNumberInputWrapper
         className={className}
         style={{
           ...style,
@@ -192,9 +191,11 @@ const NumberField = forwardRef<HTMLInputElement, NumberFieldProps>(
             <StyledButtonIcon />
           </StyledButton>
         </StyledButtonWrapper>
-      </StyledNumberFieldWrapper>
+      </StyledNumberInputWrapper>
     );
   }
 );
 
-export { NumberField, NumberFieldProps };
+NumberInput.displayName = 'NumberInput';
+
+export { NumberInput, NumberInputProps };

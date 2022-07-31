@@ -2,15 +2,15 @@ import { fireEvent } from '@testing-library/react';
 import React from 'react';
 
 import { renderWithTheme } from '../../test/utils';
-import { NumberField } from './NumberField';
+import { NumberInput } from './NumberInput';
 
 // TODO: should we pass number or string to callbacks?
-describe('<NumberField />', () => {
+describe('<NumberInput />', () => {
   it('should call onChange on spin buttons click', () => {
     const handleChange = jest.fn();
 
     const { getByTestId } = renderWithTheme(
-      <NumberField onChange={handleChange} defaultValue={2} />
+      <NumberInput onChange={handleChange} defaultValue={2} />
     );
     const spinButton = getByTestId('increment');
     spinButton.click();
@@ -21,7 +21,7 @@ describe('<NumberField />', () => {
   it('should call onChange on blur after keyboard input', () => {
     const handleChange = jest.fn();
     const { container } = renderWithTheme(
-      <NumberField onChange={handleChange} defaultValue={0} />
+      <NumberInput onChange={handleChange} defaultValue={0} />
     );
     const input = container.querySelector('input') as HTMLInputElement;
     input.focus();
@@ -39,7 +39,7 @@ describe('<NumberField />', () => {
     const handleChange = jest.fn();
 
     const { getByTestId, container } = renderWithTheme(
-      <NumberField onChange={handleChange} value={0} />
+      <NumberInput onChange={handleChange} value={0} />
     );
     const input = container.querySelector('input') as HTMLInputElement;
     const incrementButton = getByTestId('increment');
@@ -55,7 +55,7 @@ describe('<NumberField />', () => {
   it('should give correct result after user changes input value and then clicks increment button', () => {
     const handleChange = jest.fn();
     const { container, getByTestId } = renderWithTheme(
-      <NumberField onChange={handleChange} defaultValue={0} />
+      <NumberInput onChange={handleChange} defaultValue={0} />
     );
     const input = container.querySelector('input') as HTMLInputElement;
     const incrementButton = getByTestId('increment');
@@ -68,7 +68,7 @@ describe('<NumberField />', () => {
 
   it('should reach max value', () => {
     const { getByTestId, container } = renderWithTheme(
-      <NumberField defaultValue={90} min={0} max={100} step={10} />
+      <NumberInput defaultValue={90} min={0} max={100} step={10} />
     );
     const input = container.querySelector('input') as HTMLInputElement;
     const incrementButton = getByTestId('increment');
@@ -79,7 +79,7 @@ describe('<NumberField />', () => {
 
   it('should reach min value', () => {
     const { getByTestId, container } = renderWithTheme(
-      <NumberField defaultValue={10} min={0} max={100} step={10} />
+      <NumberInput defaultValue={10} min={0} max={100} step={10} />
     );
     const input = container.querySelector('input') as HTMLInputElement;
     const decrementButton = getByTestId('decrement');
@@ -91,7 +91,7 @@ describe('<NumberField />', () => {
   describe('prop: step', () => {
     it('should be 1 by default', () => {
       const { getByTestId, container } = renderWithTheme(
-        <NumberField defaultValue={0} />
+        <NumberInput defaultValue={0} />
       );
       const input = container.querySelector('input') as HTMLInputElement;
       const incrementButton = getByTestId('increment');
@@ -102,7 +102,7 @@ describe('<NumberField />', () => {
 
     it('should change value by specified step', () => {
       const { getByTestId, container } = renderWithTheme(
-        <NumberField defaultValue={10} step={3} />
+        <NumberInput defaultValue={10} step={3} />
       );
       const input = container.querySelector('input') as HTMLInputElement;
       const decrementButton = getByTestId('decrement');
@@ -113,7 +113,7 @@ describe('<NumberField />', () => {
 
     it('should handle decimal step', () => {
       const { getByTestId, container } = renderWithTheme(
-        <NumberField defaultValue={10} step={0.3} />
+        <NumberInput defaultValue={10} step={0.3} />
       );
       const input = container.querySelector('input') as HTMLInputElement;
       const decrementButton = getByTestId('decrement');
@@ -126,7 +126,7 @@ describe('<NumberField />', () => {
   describe('prop: disabled', () => {
     it('should render disabled', () => {
       const { getByTestId, container } = renderWithTheme(
-        <NumberField defaultValue={10} disabled />
+        <NumberInput defaultValue={10} disabled />
       );
       const input = container.querySelector('input') as HTMLInputElement;
       const incrementButton = getByTestId('increment');
@@ -139,7 +139,7 @@ describe('<NumberField />', () => {
 
     it('should not react to button clicks', () => {
       const { getByTestId, container } = renderWithTheme(
-        <NumberField defaultValue={10} disabled />
+        <NumberInput defaultValue={10} disabled />
       );
       const input = container.querySelector('input') as HTMLInputElement;
       const incrementButton = getByTestId('increment');
@@ -156,7 +156,7 @@ describe('<NumberField />', () => {
   describe('prop: width', () => {
     it('should render component of specified width', () => {
       const { container } = renderWithTheme(
-        <NumberField defaultValue={10} disabled width={93} />
+        <NumberInput defaultValue={10} disabled width={93} />
       );
       expect(
         getComputedStyle(container.firstElementChild as HTMLInputElement).width
@@ -165,7 +165,7 @@ describe('<NumberField />', () => {
 
     it('should handle %', () => {
       const { container } = renderWithTheme(
-        <NumberField defaultValue={10} disabled width='93%' />
+        <NumberInput defaultValue={10} disabled width='93%' />
       );
       expect(
         getComputedStyle(container.firstElementChild as HTMLInputElement).width
