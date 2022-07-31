@@ -22,7 +22,7 @@ const StyledHourglass = styled.span`
 `;
 
 const Hourglass = forwardRef<HTMLSpanElement, HourglassProps>(
-  function Hourglass({ size = 30, ...otherProps }, ref) {
+  ({ size = 30, ...otherProps }, ref) => {
     return (
       <StyledContainer size={size} ref={ref} {...otherProps}>
         <StyledHourglass />
@@ -30,5 +30,7 @@ const Hourglass = forwardRef<HTMLSpanElement, HourglassProps>(
     );
   }
 );
+
+Hourglass.displayName = 'Hourglass';
 
 export { Hourglass, HourglassProps };

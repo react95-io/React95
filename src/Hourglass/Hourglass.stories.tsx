@@ -9,7 +9,7 @@ const Wrapper = styled.div`
 `;
 
 export default {
-  title: 'Hourglass',
+  title: 'Other/Hourglass',
   component: Hourglass,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
 } as ComponentMeta<typeof Hourglass>;
