@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import {
   Button,
   Cutout,
-  Divider,
   List,
   ListItem,
+  Separator,
   Toolbar,
   Window,
   WindowContent,
@@ -145,11 +145,11 @@ export function Thin() {
               onClick={() => setOpen(false)}
             >
               <ListItem size='sm'>Copy link</ListItem>
-              <Divider />
+              <Separator />
               <ListItem size='sm'>Facebook</ListItem>
               <ListItem size='sm'>Twitter</ListItem>
               <ListItem size='sm'>Instagram</ListItem>
-              <Divider />
+              <Separator />
               <ListItem size='sm' disabled>
                 MySpace
               </ListItem>

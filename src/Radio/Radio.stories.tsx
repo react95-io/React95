@@ -2,11 +2,11 @@ import { ComponentMeta } from '@storybook/react';
 import React, { useState } from 'react';
 import {
   Cutout,
-  Divider,
   Fieldset,
   List,
   ListItem,
   Radio,
+  Separator,
   Window,
   WindowContent
 } from 'react95';
@@ -178,7 +178,7 @@ export function Menu() {
           name='tool'
         />
       </ListItem>
-      <Divider />
+      <Separator />
       <ListItem size='sm' disabled>
         <Radio
           disabled

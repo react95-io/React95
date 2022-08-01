@@ -2,7 +2,7 @@ import { ComponentMeta } from '@storybook/react';
 import React from 'react';
 import styled from 'styled-components';
 
-import { Divider, List, ListItem, Handle } from 'react95';
+import { Handle, List, ListItem, Separator } from 'react95';
 
 const Wrapper = styled.div`
   padding: 5rem;
@@ -53,11 +53,11 @@ export function Default() {
         <ListItem primary size='sm'>
           View
         </ListItem>
-        <Divider />
+        <Separator />
         <ListItem size='sm'>Paste</ListItem>
         <ListItem size='sm'>Paste Shortcut</ListItem>
         <ListItem size='sm'>Undo Copy</ListItem>
-        <Divider />
+        <Separator />
         <ListItem size='sm'>Properties</ListItem>
       </List>
       <List>

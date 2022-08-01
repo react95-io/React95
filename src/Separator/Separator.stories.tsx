@@ -2,7 +2,7 @@ import { ComponentMeta } from '@storybook/react';
 import React from 'react';
 import styled from 'styled-components';
 
-import { Divider, List, ListItem } from 'react95';
+import { Separator, List, ListItem } from 'react95';
 
 const Wrapper = styled.div`
   padding: 5rem;
@@ -10,26 +10,26 @@ const Wrapper = styled.div`
 `;
 
 export default {
-  title: 'Divider',
-  component: Divider,
+  title: 'Layout/Separator',
+  component: Separator,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-} as ComponentMeta<typeof Divider>;
+} as ComponentMeta<typeof Separator>;
 
 export function Default() {
   return (
     <>
       <List>
         <ListItem>Item 1</ListItem>
-        <Divider />
+        <Separator />
         <ListItem>Item 2</ListItem>
-        <Divider />
+        <Separator />
         <ListItem>Item 3</ListItem>
       </List>
       <List inline style={{ margin: 30 }}>
         <ListItem>Item 1</ListItem>
-        <Divider orientation='vertical' size='43px' />
+        <Separator orientation='vertical' size='43px' />
         <ListItem>Item 2</ListItem>
-        <Divider orientation='vertical' size='43px' />
+        <Separator orientation='vertical' size='43px' />
         <ListItem>Item 3</ListItem>
       </List>
     </>
