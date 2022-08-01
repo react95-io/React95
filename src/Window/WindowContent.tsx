@@ -21,4 +21,6 @@ const WindowContent = forwardRef<HTMLDivElement, WindowContentProps>(
   }
 );
 
+WindowContent.displayName = 'WindowContent';
+
 export { WindowContent, WindowContentProps };

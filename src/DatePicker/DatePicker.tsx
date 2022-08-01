@@ -7,9 +7,7 @@ import { ScrollView } from '../ScrollView/ScrollView';
 import { Select } from '../Select/Select';
 import { SelectChangeEvent } from '../Select/Select.types';
 import { Toolbar } from '../Toolbar/Toolbar';
-import { Window } from '../Window/Window';
-import { WindowContent } from '../WindowContent/WindowContent';
-import { WindowHeader } from '../WindowHeader/WindowHeader';
+import { Window, WindowContent, WindowHeader } from '../Window/Window';
 
 type DatePickerProps = {
   className?: string;
