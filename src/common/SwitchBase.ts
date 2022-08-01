@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { createDisabledTextStyles, focusOutline } from '../common';
+import { createDisabledTextStyles, focusOutline } from '.';
 import { StyledMenuListItem } from '../MenuList/MenuList';
 
 export const size = 20;

@@ -3,15 +3,15 @@ import styled, { css } from 'styled-components';
 
 import { createHatchedBackground } from '../common';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
-import { noOp } from '../common/utils';
-import { StyledMenuListItem } from '../MenuList/MenuList';
-import { StyledScrollView } from '../ScrollView/ScrollView';
 import {
   LabelText,
   size,
   StyledInput,
   StyledLabel
-} from '../SwitchBase/SwitchBase';
+} from '../common/SwitchBase';
+import { noOp } from '../common/utils';
+import { StyledMenuListItem } from '../MenuList/MenuList';
+import { StyledScrollView } from '../ScrollView/ScrollView';
 import { CommonThemeProps } from '../types';
 
 type CheckboxProps = {
