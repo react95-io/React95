@@ -6,7 +6,7 @@ import {
   MenuList,
   MenuListItem,
   Separator,
-  TextField,
+  TextInput,
   Toolbar
 } from 'react95';
 import styled from 'styled-components';
@@ -74,7 +74,7 @@ export function Default() {
           )}
         </div>
 
-        <TextField placeholder='Search...' width={150} />
+        <TextInput placeholder='Search...' width={150} />
       </Toolbar>
     </AppBar>
   );

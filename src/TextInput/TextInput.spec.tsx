@@ -4,11 +4,11 @@ import React from 'react';
 import { fireEvent } from '@testing-library/react';
 
 import { renderWithTheme } from '../../test/utils';
-import { TextField } from './TextField';
+import { TextInput } from './TextInput';
 
-describe('<TextField />', () => {
+describe('<TextInput />', () => {
   it('should render an <input /> inside the div', () => {
-    const { container } = renderWithTheme(<TextField />);
+    const { container } = renderWithTheme(<TextInput />);
     const input = container.querySelector('input');
     expect(input).toHaveAttribute('type', 'text');
     expect(input).not.toHaveAttribute('required');
@@ -21,7 +21,7 @@ describe('<TextField />', () => {
     const handleKeyUp = jest.fn();
     const handleKeyDown = jest.fn();
     const { getByRole } = renderWithTheme(
-      <TextField
+      <TextInput
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
@@ -50,7 +50,7 @@ describe('<TextField />', () => {
   });
 
   it('should considered [] as controlled', () => {
-    const { getByRole } = renderWithTheme(<TextField value={[]} />);
+    const { getByRole } = renderWithTheme(<TextInput value={[]} />);
     const input = getByRole('textbox');
 
     expect(input).toHaveProperty('value', '');
@@ -60,20 +60,20 @@ describe('<TextField />', () => {
 
   it('should forwardRef to native input', () => {
     const inputRef = React.createRef<HTMLInputElement>();
-    const { getByRole } = renderWithTheme(<TextField ref={inputRef} />);
+    const { getByRole } = renderWithTheme(<TextInput ref={inputRef} />);
     const input = getByRole('textbox');
     expect(inputRef.current).toBe(input);
   });
 
   describe('multiline', () => {
     it('should render textarea when passed the multiline prop', () => {
-      const { container } = renderWithTheme(<TextField multiline />);
+      const { container } = renderWithTheme(<TextInput multiline />);
       const textarea = container.querySelector('textarea');
       expect(textarea).not.toBe(null);
     });
 
     it('should forward rows prop', () => {
-      const { container } = renderWithTheme(<TextField multiline rows={3} />);
+      const { container } = renderWithTheme(<TextInput multiline rows={3} />);
       const textarea = container.querySelector('textarea');
       expect(textarea).toHaveAttribute('rows', '3');
     });
@@ -81,13 +81,13 @@ describe('<TextField />', () => {
 
   describe('prop: disabled', () => {
     it('should render a disabled <input />', () => {
-      const { container } = renderWithTheme(<TextField disabled />);
+      const { container } = renderWithTheme(<TextInput disabled />);
       const input = container.querySelector('input');
       expect(input).toHaveAttribute('disabled');
     });
     it('should be overridden by props', () => {
-      const { getByRole, rerender } = renderWithTheme(<TextField disabled />);
-      rerender(<TextField disabled={false} />);
+      const { getByRole, rerender } = renderWithTheme(<TextInput disabled />);
+      rerender(<TextInput disabled={false} />);
       const input = getByRole('textbox');
       expect(input).not.toHaveAttribute('disabled');
     });
@@ -95,18 +95,18 @@ describe('<TextField />', () => {
 
   describe('prop: variant', () => {
     it('should be "default" by default', () => {
-      const { getByTestId } = renderWithTheme(<TextField />);
+      const { getByTestId } = renderWithTheme(<TextInput />);
       expect(getByTestId('variant-default')).toBeInTheDocument();
     });
     it('should handle "flat" variant', () => {
-      const { getByTestId } = renderWithTheme(<TextField variant='flat' />);
+      const { getByTestId } = renderWithTheme(<TextInput variant='flat' />);
       expect(getByTestId('variant-flat')).toBeInTheDocument();
     });
   });
 
   describe('prop: fullWidth', () => {
     it('should make component take 100% width', () => {
-      const { container } = renderWithTheme(<TextField fullWidth />);
+      const { container } = renderWithTheme(<TextInput fullWidth />);
       expect(
         window.getComputedStyle(container.firstChild as HTMLInputElement).width
       ).toBe('100%');

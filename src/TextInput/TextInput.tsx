@@ -10,7 +10,7 @@ import { noOp } from '../common/utils';
 import { StyledScrollView } from '../ScrollView/ScrollView';
 import { CommonStyledProps, CommonThemeProps } from '../types';
 
-type TextFieldInputProps = {
+type TextInputInputProps = {
   multiline?: false | undefined;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   /** @default text */
@@ -20,7 +20,7 @@ type TextFieldInputProps = {
   'className' | 'disabled' | 'style' | 'type'
 >;
 
-type TextFieldTextAreaProps = {
+type TextInputTextAreaProps = {
   multiline: true;
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
 } & Omit<
@@ -28,7 +28,7 @@ type TextFieldTextAreaProps = {
   'className' | 'disabled' | 'style' | 'type'
 >;
 
-type TextFieldProps = {
+type TextInputProps = {
   className?: string;
   disabled?: boolean;
   fullWidth?: boolean;
@@ -36,10 +36,10 @@ type TextFieldProps = {
   shadow?: boolean;
   style?: React.CSSProperties;
   variant?: 'default' | 'flat';
-} & (TextFieldInputProps | TextFieldTextAreaProps) &
+} & (TextInputInputProps | TextInputTextAreaProps) &
   CommonStyledProps;
 
-type WrapperProps = Pick<TextFieldProps, 'fullWidth' | 'variant'> &
+type WrapperProps = Pick<TextInputProps, 'fullWidth' | 'variant'> &
   CommonThemeProps;
 
 const sharedWrapperStyles = css<WrapperProps>`
@@ -65,7 +65,7 @@ const FlatWrapper = styled.div.attrs({
   position: relative;
 `;
 
-type InputProps = Pick<TextFieldProps, 'disabled' | 'fullWidth' | 'variant'>;
+type InputProps = Pick<TextInputProps, 'disabled' | 'fullWidth' | 'variant'>;
 
 const sharedInputStyles = css<InputProps>`
   display: block;
@@ -95,60 +95,64 @@ const StyledTextArea = styled.textarea<InputProps>`
   ${({ variant }) => createScrollbars(variant)}
 `;
 
-const TextField = forwardRef<
+const TextInput = forwardRef<
   HTMLInputElement | HTMLTextAreaElement,
-  TextFieldProps
->(function TextField(
-  {
-    className,
-    disabled = false,
-    fullWidth,
-    onChange = noOp,
-    shadow = true,
-    style,
-    variant = 'default',
-    ...otherProps
-  },
-  ref
-) {
-  const WrapperComponent = variant === 'flat' ? FlatWrapper : Wrapper;
+  TextInputProps
+>(
+  (
+    {
+      className,
+      disabled = false,
+      fullWidth,
+      onChange = noOp,
+      shadow = true,
+      style,
+      variant = 'default',
+      ...otherProps
+    },
+    ref
+  ) => {
+    const WrapperComponent = variant === 'flat' ? FlatWrapper : Wrapper;
 
-  const field = useMemo(
-    () =>
-      otherProps.multiline ? (
-        <StyledTextArea
-          disabled={disabled}
-          onChange={disabled ? undefined : onChange}
-          readOnly={disabled}
-          ref={ref}
-          variant={variant}
-          {...otherProps}
-        />
-      ) : (
-        <StyledTextInput
-          disabled={disabled}
-          onChange={disabled ? undefined : onChange}
-          readOnly={disabled}
-          ref={ref}
-          type={otherProps.type ?? 'text'}
-          variant={variant}
-          {...otherProps}
-        />
-      ),
-    [disabled, onChange, otherProps, ref, variant]
-  );
+    const field = useMemo(
+      () =>
+        otherProps.multiline ? (
+          <StyledTextArea
+            disabled={disabled}
+            onChange={disabled ? undefined : onChange}
+            readOnly={disabled}
+            ref={ref}
+            variant={variant}
+            {...otherProps}
+          />
+        ) : (
+          <StyledTextInput
+            disabled={disabled}
+            onChange={disabled ? undefined : onChange}
+            readOnly={disabled}
+            ref={ref}
+            type={otherProps.type ?? 'text'}
+            variant={variant}
+            {...otherProps}
+          />
+        ),
+      [disabled, onChange, otherProps, ref, variant]
+    );
 
-  return (
-    <WrapperComponent
-      className={className}
-      fullWidth={fullWidth}
-      $disabled={disabled}
-      shadow={shadow}
-      style={style}
-    >
-      {field}
-    </WrapperComponent>
-  );
-});
+    return (
+      <WrapperComponent
+        className={className}
+        fullWidth={fullWidth}
+        $disabled={disabled}
+        shadow={shadow}
+        style={style}
+      >
+        {field}
+      </WrapperComponent>
+    );
+  }
+);
 
-export { TextField, TextFieldProps };
+TextInput.displayName = 'TextInput';
+
+export { TextInput, TextInputProps };
