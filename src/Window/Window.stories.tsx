@@ -13,7 +13,7 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   padding: 5rem;
   background: ${({ theme }) => theme.desktopBackground};
-  .window-header {
+  .window-title {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -63,7 +63,7 @@ const Wrapper = styled.div`
 `;
 
 export default {
-  title: 'Window',
+  title: 'Environment/Window',
   component: Window,
   subcomponents: { WindowHeader, WindowContent },
   decorators: [story => <Wrapper>{story()}</Wrapper>]
@@ -73,7 +73,7 @@ export function Default() {
   return (
     <>
       <Window resizable className='window'>
-        <WindowHeader className='window-header'>
+        <WindowHeader className='window-title'>
           <span>react95.exe</span>
           <Button>
             <span className='close-icon' />
@@ -103,7 +103,7 @@ export function Default() {
       </Window>
 
       <Window className='window'>
-        <WindowHeader active={false} className='window-header'>
+        <WindowHeader active={false} className='window-title'>
           <span>not-active.exe</span>
           <Button>
             <span className='close-icon' />

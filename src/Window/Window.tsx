@@ -47,16 +47,26 @@ const ResizeHandle = styled.span`
   `}
 `;
 
-const Window = forwardRef<HTMLDivElement, WindowProps>(function Window(
-  { children, resizable = false, resizeRef, shadow = true, ...otherProps },
-  ref
-) {
-  return (
-    <StyledWindow ref={ref} shadow={shadow} {...otherProps}>
-      {children}
-      {resizable && <ResizeHandle data-testid='resizeHandle' ref={resizeRef} />}
-    </StyledWindow>
-  );
-});
+const Window = forwardRef<HTMLDivElement, WindowProps>(
+  (
+    { children, resizable = false, resizeRef, shadow = true, ...otherProps },
+    ref
+  ) => {
+    return (
+      <StyledWindow ref={ref} shadow={shadow} {...otherProps}>
+        {children}
+        {resizable && (
+          <ResizeHandle data-testid='resizeHandle' ref={resizeRef} />
+        )}
+      </StyledWindow>
+    );
+  }
+);
+
+Window.displayName = 'Window';
+
+export * from './WindowContent';
+
+export * from './WindowHeader';
 
 export { Window, WindowProps };
