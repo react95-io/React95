@@ -1,6 +1,6 @@
 import { ComponentMeta } from '@storybook/react';
 import React, { useCallback, useState } from 'react';
-import { GroupBox, Tree, TreeLeaf } from 'react95';
+import { GroupBox, TreeLeaf, TreeView } from 'react95';
 import styled from 'styled-components';
 import { Button } from '../Button/Button';
 
@@ -23,10 +23,10 @@ const Panel = styled.div`
 `;
 
 export default {
-  title: 'Tree',
-  component: Tree,
+  title: 'Controls/TreeView',
+  component: TreeView,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-} as ComponentMeta<typeof Tree>;
+} as ComponentMeta<typeof TreeView>;
 
 const categories = [
   {
@@ -98,7 +98,7 @@ export function Basic() {
   return (
     <div style={{ maxWidth: '250px' }}>
       <GroupBox label='Catalog'>
-        <Tree tree={categories} />
+        <TreeView tree={categories} />
       </GroupBox>
     </div>
   );
@@ -125,7 +125,7 @@ export function Controlled() {
       </Panel>
 
       <GroupBox label='Catalog'>
-        <Tree
+        <TreeView
           tree={categories}
           onNodeSelect={(_, id) => setSelected(id)}
           onNodeToggle={(_, ids) => setExpanded(ids)}
@@ -145,7 +145,7 @@ export function Disabled() {
   return (
     <div style={{ maxWidth: '250px' }}>
       <GroupBox label='Catalog'>
-        <Tree tree={categories} disabled />
+        <TreeView tree={categories} disabled />
       </GroupBox>
     </div>
   );
@@ -168,7 +168,7 @@ export function DisabledTreeItems() {
   return (
     <div style={{ maxWidth: '250px' }}>
       <GroupBox label='Catalog'>
-        <Tree tree={modifiedTree} />
+        <TreeView tree={modifiedTree} />
       </GroupBox>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { renderWithTheme } from '../../test/utils';
-import { Tree } from './Tree';
+import { TreeView } from './TreeView';
 
 const categories = [
   {
@@ -59,13 +59,13 @@ const categories = [
   }
 ];
 
-describe('<Tree />', () => {
+describe('<TreeView />', () => {
   describe('prop: onNodeSelect', () => {
     it('should call onNodeSelect when uncontrolled', () => {
       const onNodeSelect = jest.fn((_, id) => id);
 
       const { getByText } = renderWithTheme(
-        <Tree tree={categories} onNodeSelect={onNodeSelect} />
+        <TreeView tree={categories} onNodeSelect={onNodeSelect} />
       );
 
       getByText('Beverages').click();
@@ -78,7 +78,11 @@ describe('<Tree />', () => {
       const onNodeSelect = jest.fn((_, id) => id);
 
       const { getByText } = renderWithTheme(
-        <Tree tree={categories} selected='dairy' onNodeSelect={onNodeSelect} />
+        <TreeView
+          tree={categories}
+          selected='dairy'
+          onNodeSelect={onNodeSelect}
+        />
       );
 
       getByText('Beverages').click();
@@ -93,7 +97,7 @@ describe('<Tree />', () => {
       const onNodeToggle = jest.fn((_, ids) => ids);
 
       const { getByText } = renderWithTheme(
-        <Tree tree={categories} onNodeToggle={onNodeToggle} />
+        <TreeView tree={categories} onNodeToggle={onNodeToggle} />
       );
 
       getByText('Beverages').click();
@@ -106,7 +110,7 @@ describe('<Tree />', () => {
       const onNodeToggle = jest.fn((_, ids) => ids);
 
       const { getByText } = renderWithTheme(
-        <Tree
+        <TreeView
           tree={categories}
           expanded={['dairy']}
           onNodeToggle={onNodeToggle}
@@ -129,7 +133,7 @@ describe('<Tree />', () => {
       const onNodeToggle = jest.fn((_, ids) => ids);
 
       const { getByText } = renderWithTheme(
-        <Tree
+        <TreeView
           disabled
           tree={categories}
           onNodeSelect={onNodeSelect}
@@ -151,7 +155,7 @@ describe('<Tree />', () => {
       );
 
       const { getByText } = renderWithTheme(
-        <Tree
+        <TreeView
           tree={modifiedTree}
           onNodeSelect={onNodeSelect}
           onNodeToggle={onNodeToggle}
