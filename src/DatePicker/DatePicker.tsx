@@ -205,5 +205,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
   }
 );
 
+DatePicker.displayName = 'DatePicker';
+
 // eslint-disable-next-line camelcase
 export { DatePicker as DatePicker__UNSTABLE, DatePickerProps };
