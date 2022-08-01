@@ -33,7 +33,7 @@ First, install component library and styled-components in your project directory
 $ yarn add react95 styled-components
 
 # npm
-$ npm i react95 styled-components
+$ npm install react95 styled-components
 ```
 
 Apply style reset, wrap your app with ThemeProvider with theme of your choice... and you are ready to go! 🚀
@@ -42,7 +42,7 @@ Apply style reset, wrap your app with ThemeProvider with theme of your choice...
 import React from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
-import { styleReset, List, ListItem, Divider } from 'react95';
+import { Divider, List, ListItem, styleReset } from 'react95';
 // pick a theme of your choice
 import original from 'react95/dist/themes/original';
 // original Windows95 font (optionally)

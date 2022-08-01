@@ -1,9 +1,8 @@
----
-name: Getting Started
-route: /installation
----
+import { Meta } from '@storybook/addon-docs';
 
-## Installation
+<Meta title='Docs/Getting Started' />
+
+# Installation
 
 React95 is available as an [npm package](https://www.npmjs.com/package/react95).
 
@@ -12,23 +11,26 @@ React95 is available as an [npm package](https://www.npmjs.com/package/react95).
 To install and save your `package.json` dependencies, run:
 
 ```sh
-// yarn
+# yarn
 yarn add react95 styled-components
 
-// npm
-npm i -S react95 styled-components
+# npm
+npm install -S react95 styled-components
 ```
 
-In order to have `react95` working properly, you'll also need [`styled-components`](https://github.com/styled-components/styled-components), this way you can use custom themes and get the best of the library 🙂
+In order to have `react95` working properly, you'll also need
+[styled-components 💅](https://github.com/styled-components/styled-components),
+this way you can use custom themes and get the best of the library 🙂
 
 ## Usage
 
-Apply style reset, wrap your app content with ThemeProvider with theme of your choice... and you are ready to go! 🚀
+Apply style reset, wrap your app content with ThemeProvider with theme of your
+choice... and you are ready to go! 🚀
 
 ```jsx
 import React from 'react';
+import { Divider, List, ListItem, styleReset } from 'react95';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import { styleReset, List, ListItem, Divider } from 'react95';
 
 /* Pick a theme of your choice */
 import original from 'react95/dist/themes/original';
@@ -50,7 +52,7 @@ const GlobalStyles = createGlobalStyle`
     font-weight: bold;
     font-style: normal
   }
-  body {
+  body, input, select, textarea {
     font-family: 'ms_sans_serif';
   }
   ${styleReset}
