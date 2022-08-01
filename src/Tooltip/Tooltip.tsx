@@ -68,126 +68,130 @@ const Wrapper = styled.div`
   white-space: nowrap;
 `;
 
-const Tooltip = forwardRef<HTMLSpanElement, TooltipProps>(function Tooltip(
-  {
-    className,
-    children,
-    disableFocusListener = false,
-    disableMouseListener = false,
-    enterDelay = 1000,
-    leaveDelay = 0,
-    onBlur,
-    onClose,
-    onFocus,
-    onMouseEnter,
-    onMouseLeave,
-    onOpen,
-    style,
-    text,
-    position = 'top',
-    ...otherProps
-  },
-  ref
-) {
-  const [show, setShow] = useState(false);
-  const [openTimer, setOpenTimer] = useState<number>();
-  const [closeTimer, setCloseTimer] = useState<number>();
-
-  const isUsingFocus = !disableFocusListener;
-  const isUsingMouse = !disableMouseListener;
-
-  const handleOpen = (
-    event: React.FocusEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>
+const Tooltip = forwardRef<HTMLSpanElement, TooltipProps>(
+  (
+    {
+      className,
+      children,
+      disableFocusListener = false,
+      disableMouseListener = false,
+      enterDelay = 1000,
+      leaveDelay = 0,
+      onBlur,
+      onClose,
+      onFocus,
+      onMouseEnter,
+      onMouseLeave,
+      onOpen,
+      style,
+      text,
+      position = 'top',
+      ...otherProps
+    },
+    ref
   ) => {
-    window.clearTimeout(openTimer);
-    window.clearTimeout(closeTimer);
+    const [show, setShow] = useState(false);
+    const [openTimer, setOpenTimer] = useState<number>();
+    const [closeTimer, setCloseTimer] = useState<number>();
 
-    const timer = window.setTimeout(() => {
-      setShow(true);
+    const isUsingFocus = !disableFocusListener;
+    const isUsingMouse = !disableMouseListener;
 
-      onOpen?.(event);
-    }, enterDelay);
+    const handleOpen = (
+      event: React.FocusEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>
+    ) => {
+      window.clearTimeout(openTimer);
+      window.clearTimeout(closeTimer);
 
-    setOpenTimer(timer);
-  };
+      const timer = window.setTimeout(() => {
+        setShow(true);
 
-  const handleEnter = (
-    event: React.FocusEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>
-  ) => {
-    event.persist();
+        onOpen?.(event);
+      }, enterDelay);
 
-    if (isReactFocusEvent(event)) {
-      onFocus?.(event);
-    } else if (isReactMouseEvent(event)) {
-      onMouseEnter?.(event);
-    }
+      setOpenTimer(timer);
+    };
 
-    handleOpen(event);
-  };
+    const handleEnter = (
+      event: React.FocusEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>
+    ) => {
+      event.persist();
 
-  const handleClose = (
-    event: React.FocusEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>
-  ) => {
-    window.clearTimeout(openTimer);
-    window.clearTimeout(closeTimer);
+      if (isReactFocusEvent(event)) {
+        onFocus?.(event);
+      } else if (isReactMouseEvent(event)) {
+        onMouseEnter?.(event);
+      }
 
-    const timer = window.setTimeout(() => {
-      setShow(false);
+      handleOpen(event);
+    };
 
-      onClose?.(event);
-    }, leaveDelay);
+    const handleClose = (
+      event: React.FocusEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>
+    ) => {
+      window.clearTimeout(openTimer);
+      window.clearTimeout(closeTimer);
 
-    setCloseTimer(timer);
-  };
+      const timer = window.setTimeout(() => {
+        setShow(false);
 
-  const handleLeave = (
-    event: React.FocusEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>
-  ) => {
-    event.persist();
+        onClose?.(event);
+      }, leaveDelay);
 
-    if (isReactFocusEvent(event)) {
-      onBlur?.(event);
-    } else if (isReactMouseEvent(event)) {
-      onMouseLeave?.(event);
-    }
+      setCloseTimer(timer);
+    };
 
-    handleClose(event);
-  };
+    const handleLeave = (
+      event: React.FocusEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>
+    ) => {
+      event.persist();
 
-  // set callbacks for onBlur and onFocus, unless disableFocusListener is true
-  const blurCb = isUsingFocus ? handleLeave : undefined;
-  const focusCb = isUsingFocus ? handleEnter : undefined;
+      if (isReactFocusEvent(event)) {
+        onBlur?.(event);
+      } else if (isReactMouseEvent(event)) {
+        onMouseLeave?.(event);
+      }
 
-  // set callbacks for onMouseEnter and onMouseLeave, unless disableMouseListener is true
-  const mouseEnterCb = isUsingMouse ? handleEnter : undefined;
-  const mouseLeaveCb = isUsingMouse ? handleLeave : undefined;
+      handleClose(event);
+    };
 
-  // set the wrapper's tabIndex for focus events, unless disableFocusListener is true
-  const tabIndex = isUsingFocus ? 0 : undefined;
+    // set callbacks for onBlur and onFocus, unless disableFocusListener is true
+    const blurCb = isUsingFocus ? handleLeave : undefined;
+    const focusCb = isUsingFocus ? handleEnter : undefined;
 
-  return (
-    <Wrapper
-      data-testid='tooltip-wrapper'
-      onBlur={blurCb}
-      onFocus={focusCb}
-      onMouseEnter={mouseEnterCb}
-      onMouseLeave={mouseLeaveCb}
-      tabIndex={tabIndex}
-    >
-      <Tip
-        className={className}
-        data-testid='tooltip'
-        position={position}
-        ref={ref}
-        show={show}
-        style={style}
-        {...otherProps}
+    // set callbacks for onMouseEnter and onMouseLeave, unless disableMouseListener is true
+    const mouseEnterCb = isUsingMouse ? handleEnter : undefined;
+    const mouseLeaveCb = isUsingMouse ? handleLeave : undefined;
+
+    // set the wrapper's tabIndex for focus events, unless disableFocusListener is true
+    const tabIndex = isUsingFocus ? 0 : undefined;
+
+    return (
+      <Wrapper
+        data-testid='tooltip-wrapper'
+        onBlur={blurCb}
+        onFocus={focusCb}
+        onMouseEnter={mouseEnterCb}
+        onMouseLeave={mouseLeaveCb}
+        tabIndex={tabIndex}
       >
-        {text}
-      </Tip>
-      {children}
-    </Wrapper>
-  );
-});
+        <Tip
+          className={className}
+          data-testid='tooltip'
+          position={position}
+          ref={ref}
+          show={show}
+          style={style}
+          {...otherProps}
+        >
+          {text}
+        </Tip>
+        {children}
+      </Wrapper>
+    );
+  }
+);
+
+Tooltip.displayName = 'Tooltip';
 
 export { Tooltip, TooltipProps };

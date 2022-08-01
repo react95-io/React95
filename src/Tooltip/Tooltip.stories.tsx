@@ -9,7 +9,7 @@ const Wrapper = styled.div`
 `;
 
 export default {
-  title: 'Tooltip',
+  title: 'Controls/Tooltip',
   component: Tooltip,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
 } as ComponentMeta<typeof Tooltip>;
