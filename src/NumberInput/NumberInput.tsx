@@ -5,7 +5,7 @@ import { Button } from '../Button/Button';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import { blockSizes } from '../common/system';
 import { clamp, getSize } from '../common/utils';
-import { TextField } from '../TextField/TextField';
+import { TextInput } from '../TextInput/TextInput';
 import { CommonStyledProps } from '../types';
 
 type NumberInputProps = {
@@ -163,7 +163,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           width: width !== undefined ? getSize(width) : 'auto'
         }}
       >
-        <TextField
+        <TextInput
           value={valueDerived}
           variant={variant}
           onChange={handleInputChange}

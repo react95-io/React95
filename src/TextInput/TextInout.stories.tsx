@@ -1,6 +1,6 @@
 import { ComponentMeta } from '@storybook/react';
 import React, { useState } from 'react';
-import { Button, ScrollView, TextField } from 'react95';
+import { Button, ScrollView, TextInput } from 'react95';
 import styled from 'styled-components';
 
 const loremIpsum = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin, ante vel porttitor posuere, tellus nisi interdum ipsum, non bibendum ante risus ut purus. Curabitur vel posuere odio. Vivamus rutrum, nunc et ullamcorper sagittis, tellus ligula maximus quam, id dapibus sapien metus lobortis diam. Proin luctus, dolor in finibus feugiat, lacus enim gravida sem, quis aliquet tellus leo nec enim. Morbi varius bibendum augue quis venenatis. Curabitur ut elit augue. Pellentesque posuere enim a mattis interdum. Donec sodales convallis turpis, a vulputate elit. Suspendisse potenti.`;
@@ -19,10 +19,10 @@ const Wrapper = styled.div`
 `;
 
 export default {
-  title: 'TextField',
-  component: TextField,
+  title: 'Controls/TextInput',
+  component: TextInput,
   decorators: [story => <Wrapper>{story()}</Wrapper>]
-} as ComponentMeta<typeof TextField>;
+} as ComponentMeta<typeof TextInput>;
 
 export function Default() {
   const [state, setState] = useState({
@@ -36,7 +36,7 @@ export function Default() {
   return (
     <div style={{ width: 400 }}>
       <div style={{ display: 'flex' }}>
-        <TextField
+        <TextInput
           value={state.value}
           placeholder='Type here...'
           onChange={handleChange}
@@ -47,11 +47,11 @@ export function Default() {
         </Button>
       </div>
       <br />
-      <TextField defaultValue='Disabled' disabled fullWidth />
+      <TextInput defaultValue='Disabled' disabled fullWidth />
       <br />
-      <TextField multiline rows={4} defaultValue={loremIpsum} fullWidth />
+      <TextInput multiline rows={4} defaultValue={loremIpsum} fullWidth />
       <br />
-      <TextField
+      <TextInput
         multiline
         disabled
         rows={4}
@@ -74,7 +74,7 @@ export function Flat() {
         content), just use the flat variant:
       </p>
       <br />
-      <TextField
+      <TextInput
         variant='flat'
         placeholder='type here...'
         width={150}
@@ -82,7 +82,7 @@ export function Flat() {
         fullWidth
       />
       <br />
-      <TextField
+      <TextInput
         id='disabled'
         variant='flat'
         placeholder='Disabled'
@@ -92,7 +92,7 @@ export function Flat() {
         fullWidth
       />
       <br />
-      <TextField
+      <TextInput
         multiline
         variant='flat'
         rows={4}
@@ -101,7 +101,7 @@ export function Flat() {
         fullWidth
       />
       <br />
-      <TextField
+      <TextInput
         multiline
         variant='flat'
         disabled
