@@ -4,7 +4,7 @@ import type { PropItem } from 'react-docgen-typescript';
 const path = require('path');
 
 const storybookConfig: StorybookConfig = {
-  stories: ['../src/**/*.stories.@(tsx|mdx)'],
+  stories: ['../@(docs|src)/**/*.stories.@(tsx|mdx)'],
   addons: [
     {
       name: '@storybook/addon-docs',
