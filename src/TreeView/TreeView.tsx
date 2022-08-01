@@ -1,8 +1,8 @@
 import React, { forwardRef, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 
-import { StyledLabel, LabelText } from '../SwitchBase/SwitchBase';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
+import { LabelText, StyledLabel } from '../common/SwitchBase';
 import { CommonStyledProps } from '../types';
 
 type TreeLeaf<T> = {
@@ -13,7 +13,7 @@ type TreeLeaf<T> = {
   label?: string;
 };
 
-type TreeProps<T> = {
+type TreeViewProps<T> = {
   className?: string;
   defaultExpanded?: T[];
   defaultSelected?: T;
@@ -66,7 +66,7 @@ const focusedElementStyles = css<{ $disabled: boolean }>`
       : `cursor: default;`}
 `;
 
-const TreeView = styled.ul<{ isRootLevel: boolean }>`
+const TreeWrapper = styled.ul<{ isRootLevel: boolean }>`
   position: relative;
   isolation: isolate;
 
@@ -293,7 +293,7 @@ function TreeBranch<T>({
   );
 
   return (
-    <TreeView
+    <TreeWrapper
       className={isRootLevel ? className : undefined}
       style={isRootLevel ? style : undefined}
       ref={isRootLevel ? innerRef : undefined}
@@ -301,7 +301,7 @@ function TreeBranch<T>({
       isRootLevel={isRootLevel}
     >
       {tree.map(renderLeaf)}
-    </TreeView>
+    </TreeWrapper>
   );
 }
 
@@ -317,7 +317,7 @@ function TreeInner<T>(
     selected,
     style,
     tree = []
-  }: TreeProps<T>,
+  }: TreeViewProps<T>,
   ref: React.ForwardedRef<HTMLUListElement>
 ) {
   const [expandedInternal, setExpandedInternal] = useControlledOrUncontrolled({
@@ -381,9 +381,13 @@ function TreeInner<T>(
   );
 }
 
-const Tree = forwardRef(TreeInner) as <T>(
+const TreeView = forwardRef(TreeInner) as <T>(
   // eslint-disable-next-line no-use-before-define
-  props: TreeProps<T> & { ref?: React.ForwardedRef<HTMLUListElement> }
+  props: TreeViewProps<T> & { ref?: React.ForwardedRef<HTMLUListElement> }
 ) => ReturnType<typeof TreeInner>;
 
-export { Tree, TreeLeaf, TreeProps };
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+TreeView.displayProps = 'TreeView';
+
+export { TreeView, TreeViewProps, TreeLeaf };
