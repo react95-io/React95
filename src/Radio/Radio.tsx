@@ -2,14 +2,14 @@ import React, { forwardRef } from 'react';
 import styled, { css, CSSProperties } from 'styled-components';
 
 import { createFlatBoxStyles } from '../common';
-import { StyledMenuListItem } from '../MenuList/MenuList';
-import { StyledScrollView } from '../ScrollView/ScrollView';
 import {
   LabelText,
   size,
   StyledInput,
   StyledLabel
-} from '../SwitchBase/SwitchBase';
+} from '../common/SwitchBase';
+import { StyledMenuListItem } from '../MenuList/MenuList';
+import { StyledScrollView } from '../ScrollView/ScrollView';
 import { CommonStyledProps } from '../types';
 
 type RadioVariant = 'default' | 'flat' | 'menu';

@@ -36,10 +36,7 @@ describe('useForkRef', () => {
   });
 
   it('forks if only one of the branches requires a ref', () => {
-    const Component = React.forwardRef<HTMLDivElement>(function Component(
-      _,
-      ref
-    ) {
+    const Component = React.forwardRef<HTMLDivElement>((_, ref) => {
       const [hasRef, setHasRef] = useState(false);
       const handleOwnRef = useCallback(() => setHasRef(true), []);
       const handleRef = useForkRef(handleOwnRef, ref);
@@ -60,10 +57,7 @@ describe('useForkRef', () => {
       children: React.ReactElement;
     };
 
-    const Outer = React.forwardRef<null, OuterProps>(function Outer(
-      props,
-      ref
-    ) {
+    const Outer = React.forwardRef<null, OuterProps>((props, ref) => {
       const { children } = props;
 
       // TODO: Fix this test as reading ref from children is not allowed so not available on React types
