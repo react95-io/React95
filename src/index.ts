@@ -13,7 +13,6 @@ export * from './Counter/Counter';
 export * from './Cutout/Cutout';
 export * from './DatePicker/DatePicker';
 export * from './Desktop/Desktop';
-export * from './Divider/Divider';
 export * from './Fieldset/Fieldset';
 export * from './Handle/Handle';
 export * from './Hourglass/Hourglass';
@@ -25,6 +24,7 @@ export * from './Panel/Panel';
 export * from './Progress/Progress';
 export * from './Radio/Radio';
 export * from './Select/Select';
+export * from './Separator/Separator';
 export * from './Slider/Slider';
 export * from './Tab/Tab';
 export * from './TabBody/TabBody';
@@ -45,3 +45,4 @@ export * from './WindowHeader/WindowHeader';
 
 /* deprecated components */
 export * from './legacy/Bar';
+export * from './legacy/Separator';

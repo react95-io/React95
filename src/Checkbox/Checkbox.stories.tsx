@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { Checkbox, Fieldset, Cutout, List, ListItem, Divider } from 'react95';
+import { Checkbox, Fieldset, Cutout, List, ListItem, Separator } from 'react95';
 import { ComponentMeta } from '@storybook/react';
 
 const Wrapper = styled.div`
@@ -253,7 +253,7 @@ export function Menu() {
           indeterminate
         />
       </ListItem>
-      <Divider />
+      <Separator />
       <ListItem size='md' disabled>
         <Checkbox
           name='autoSave'

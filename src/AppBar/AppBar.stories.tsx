@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import {
   AppBar,
   Button,
-  Divider,
   List,
   ListItem,
+  Separator,
   TextField,
   Toolbar
 } from 'react95';
@@ -63,7 +63,7 @@ export function Default() {
                 </span>
                 My account
               </ListItem>
-              <Divider />
+              <Separator />
               <ListItem disabled>
                 <span role='img' aria-label='🔙'>
                   🔙

@@ -4,7 +4,7 @@ import { StyledButton } from '../Button/Button';
 import { focusOutline } from '../common';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import { noOp } from '../common/utils';
-import { Divider } from '../Divider/Divider';
+import { Separator } from '../Separator/Separator';
 import { CommonStyledProps } from '../types';
 
 type ColorInputProps = {
@@ -23,7 +23,7 @@ const Trigger = styled(StyledButton)`
   padding-left: 8px;
 `;
 
-const StyledDivider = styled(Divider)`
+const StyledSeparator = styled(Separator)`
   height: 21px;
   position: relative;
   top: 0;
@@ -156,7 +156,7 @@ const ColorInput = forwardRef<HTMLInputElement, ColorInputProps>(
           color={valueDerived ?? '#008080'}
           role='presentation'
         />
-        {variant === 'default' && <StyledDivider orientation='vertical' />}
+        {variant === 'default' && <StyledSeparator orientation='vertical' />}
         <ChevronIcon $disabled={disabled} variant={variant} />
       </Trigger>
     );

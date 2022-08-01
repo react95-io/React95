@@ -2,11 +2,12 @@ import styled from 'styled-components';
 import { getSize } from '../common/utils';
 import { Orientation } from '../types';
 
-type DividerProps = {
+type SeparatorProps = {
   size?: string | number;
   orientation?: Orientation;
 };
-const Divider = styled.div<DividerProps>`
+
+const Separator = styled.div<SeparatorProps>`
   ${({ orientation, theme, size = '100%' }) =>
     orientation === 'vertical'
       ? `
@@ -23,4 +24,6 @@ const Divider = styled.div<DividerProps>`
     `}
 `;
 
-export { Divider, DividerProps };
+Separator.displayName = 'Separator';
+
+export { Separator, SeparatorProps };
