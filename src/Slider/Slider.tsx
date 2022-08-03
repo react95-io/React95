@@ -314,7 +314,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
   const vertical = orientation === 'vertical';
   const [valueDerived, setValueState] = useControlledOrUncontrolled({
     value,
-    defaultValue: defaultValue ?? 0
+    defaultValue: defaultValue ?? min
   });
 
   const {
