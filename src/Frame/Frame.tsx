@@ -6,16 +6,26 @@ import { CommonStyledProps } from '../types';
 type FrameProps = {
   children?: React.ReactNode;
   shadow?: boolean;
-  variant?: 'outside' | 'field' | 'inside' | 'well';
-} & React.HTMLAttributes<HTMLDivElement> &
+} & (
+  | {
+      variant?: 'window' | 'button' | 'field' | 'status';
+    }
+  | {
+      /** @deprecated Use 'window', 'button' or 'status' */
+      variant?: 'outside' | 'inside' | 'well';
+    }
+) &
+  React.HTMLAttributes<HTMLDivElement> &
   CommonStyledProps;
 
 const createFrameStyles = (variant: FrameProps['variant']) => {
   switch (variant) {
+    case 'status':
     case 'well':
       return css`
         ${createBorderStyles({ style: 'status' })}
       `;
+    case 'window':
     case 'outside':
       return css`
         ${createBorderStyles({ style: 'window' })}
