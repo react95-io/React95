@@ -31,6 +31,15 @@ describe('<AppBar />', () => {
     expect(headerEl).toHaveStyleRule('position', 'absolute');
   });
 
+  it('should render position prop properly', () => {
+    const { container } = render(
+      <AppBar {...defaultProps} position='sticky' />
+    );
+    const headerEl = container.firstElementChild;
+
+    expect(headerEl).toHaveStyleRule('position', 'sticky');
+  });
+
   it('should custom style', () => {
     const { container } = render(
       <AppBar {...defaultProps} style={{ backgroundColor: 'papayawhip' }} />
