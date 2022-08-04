@@ -5,22 +5,23 @@ import { CommonStyledProps } from '../types';
 
 type AnchorProps = {
   children: React.ReactNode;
+  underline?: boolean;
 } & React.AnchorHTMLAttributes<HTMLAnchorElement> &
   CommonStyledProps;
 
 const StyledAnchor = styled.a<{ underline: boolean }>`
   color: ${({ theme }) => theme.anchor};
   font-size: inherit;
-  text-decoration: underline;
+  text-decoration: ${({ underline }) => (underline ? 'underline' : 'none')};
   &:visited {
     color: ${({ theme }) => theme.anchorVisited};
   }
 `;
 
 const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(
-  ({ children, ...otherProps }: AnchorProps, ref) => {
+  ({ children, underline = true, ...otherProps }: AnchorProps, ref) => {
     return (
-      <StyledAnchor ref={ref} {...otherProps}>
+      <StyledAnchor ref={ref} underline={underline} {...otherProps}>
         {children}
       </StyledAnchor>
     );
