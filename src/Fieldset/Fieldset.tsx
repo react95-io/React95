@@ -1,4 +1,3 @@
-import propTypes from 'prop-types';
 import React, { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import { createDisabledTextStyles } from '../common';
@@ -64,19 +63,5 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
     );
   }
 );
-
-Fieldset.defaultProps = {
-  disabled: false,
-  variant: 'default',
-  label: null,
-  children: null
-};
-
-Fieldset.propTypes = {
-  label: propTypes.node,
-  children: propTypes.node,
-  disabled: propTypes.bool,
-  variant: propTypes.oneOf(['default', 'flat'])
-};
 
 export { Fieldset, FieldsetProps };

@@ -1,5 +1,4 @@
 import React, { forwardRef } from 'react';
-import propTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import {
   createBorderStyles,
@@ -49,17 +48,5 @@ const Panel = forwardRef<HTMLDivElement, PanelProps>(function Panel(
     </StyledPanel>
   );
 });
-
-Panel.defaultProps = {
-  children: null,
-  shadow: false,
-  variant: 'outside'
-};
-
-Panel.propTypes = {
-  variant: propTypes.oneOf(['outside', 'inside', 'well']),
-  children: propTypes.node,
-  shadow: propTypes.bool
-};
 
 export { Panel, PanelProps };
