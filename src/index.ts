@@ -14,7 +14,6 @@ export * from './DatePicker/DatePicker';
 export * from './GroupBox/GroupBox';
 export * from './Handle/Handle';
 export * from './Hourglass/Hourglass';
-export * from './LoadingIndicator/LoadingIndicator';
 export * from './MenuList/MenuList';
 export * from './Monitor/Monitor';
 export * from './NumberField/NumberField';
