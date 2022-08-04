@@ -12,7 +12,7 @@
       "ESNext",
       "DOM"
     ],
-    "module": "ESNext",
+    "module": "CommonJS",
     "moduleResolution": "Node",
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
@@ -35,7 +35,7 @@
     "strictFunctionTypes": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
-    "target": "ESNext",
+    "target": "ES2018"
   },
   "include": [
     "**/*.ts",

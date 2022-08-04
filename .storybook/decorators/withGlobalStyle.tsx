@@ -1,10 +1,10 @@
+import { DecoratorFn } from '@storybook/react';
 import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 
-import styleReset from '../../src/common/styleReset';
-// TODO is there a way to keep import paths consistent with what end user will get?
 import ms_sans_serif from '../../src/assets/fonts/dist/ms_sans_serif.woff2';
 import ms_sans_serif_bold from '../../src/assets/fonts/dist/ms_sans_serif_bold.woff2';
+import styleReset from '../../src/common/styleReset';
 
 const GlobalStyle = createGlobalStyle`
   ${styleReset}
@@ -25,9 +25,9 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export default storyFn => (
+export const withGlobalStyle: DecoratorFn = story => (
   <>
     <GlobalStyle />
-    {storyFn()}
+    {story()}
   </>
 );
