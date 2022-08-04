@@ -6,6 +6,22 @@ import packageJson from './package.json';
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
+const dtsConfigIndex = {
+  compilerOptions: {
+    emitDeclarationOnly: true,
+    outDir: './dist',
+    rootDir: './src'
+  }
+};
+
+const dtsConfigThemes = {
+  compilerOptions: {
+    emitDeclarationOnly: true,
+    outDir: './dist/themes',
+    rootDir: './src/common/themes'
+  }
+};
+
 const bundle = config => [
   {
     ...config,
@@ -32,7 +48,7 @@ const bundle = config => [
       replace({
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
       }),
-      dts()
+      dts(config.input === './src/index.ts' ? dtsConfigIndex : dtsConfigThemes)
     ]
   }
 ];
