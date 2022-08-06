@@ -1,8 +1,8 @@
 import { DecoratorFn, Parameters } from '@storybook/react';
 import { withGlobalStyle } from './decorators/withGlobalStyle';
-import { withThemesProvider } from './theme-picker/ThemeProvider';
+import { withThemeSettings } from './theme-settings/ThemeProvider';
 
-export const decorators: DecoratorFn[] = [withGlobalStyle, withThemesProvider];
+export const decorators: DecoratorFn[] = [withGlobalStyle, withThemeSettings];
 
 export const parameters: Parameters = {
   layout: 'fullscreen',

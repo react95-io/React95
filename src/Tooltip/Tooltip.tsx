@@ -1,7 +1,12 @@
 import React, { forwardRef, useState } from 'react';
-import styled from 'styled-components';
+import styled, {
+  css,
+  DefaultTheme,
+  FlattenInterpolation,
+  ThemeProps
+} from 'styled-components';
 
-import { shadow } from '../common';
+import { shadow, styledDimension } from '../common';
 import { isReactFocusEvent, isReactMouseEvent } from '../common/utils/events';
 import { CommonStyledProps } from '../types';
 
@@ -33,19 +38,30 @@ type TooltipProps = {
 > &
   CommonStyledProps;
 
-const positioningStyles: Record<TooltipPosition, string> = {
-  top: `top: -4px;
-        left: 50%;
-        transform: translate(-50%, -100%);`,
-  bottom: `bottom: -4px;
-           left: 50%;
-           transform: translate(-50%, 100%);`,
-  left: `left: -4px;
-         top: 50%;
-         transform: translate(-100%, -50%);`,
-  right: `right: -4px;
-          top: 50%;
-          transform: translate(100%, -50%);`
+const positioningStyles: Record<
+  TooltipPosition,
+  FlattenInterpolation<ThemeProps<DefaultTheme>>
+> = {
+  top: css`
+    top: -${styledDimension(2)};
+    left: 50%;
+    transform: translate(-50%, -100%);
+  `,
+  bottom: css`
+    bottom: -${styledDimension(2)};
+    left: 50%;
+    transform: translate(-50%, 100%);
+  `,
+  left: css`
+    left: -${styledDimension(2)};
+    top: 50%;
+    transform: translate(-100%, -50%);
+  `,
+  right: css`
+    right: -${styledDimension(2)};
+    top: 50%;
+    transform: translate(100%, -50%);
+  `
 };
 
 const Tip = styled.span<{ position: TooltipPosition; show: boolean }>`
@@ -53,8 +69,8 @@ const Tip = styled.span<{ position: TooltipPosition; show: boolean }>`
 
   z-index: 1;
   display: ${props => (props.show ? 'block' : 'none')};
-  padding: 4px;
-  border: 2px solid ${({ theme }) => theme.borderDarkest};
+  padding: ${styledDimension(2)};
+  border: ${styledDimension(1)} solid ${({ theme }) => theme.borderDarkest};
   background: ${({ theme }) => theme.tooltip};
   box-shadow: ${shadow};
   text-align: center;

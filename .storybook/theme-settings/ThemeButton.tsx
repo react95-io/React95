@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { Button } from '../../src/Button/Button';
+import { Button } from '../../src/index';
 import { Theme } from '../../src/types';
 
 export function ThemeButton({
@@ -9,11 +9,11 @@ export function ThemeButton({
   theme
 }: {
   active: boolean;
-  onChoose: (themeName: string) => void;
+  onChoose: (theme: Theme) => void;
   theme: Theme;
 }) {
   const handleClick = useCallback(() => {
-    onChoose(theme.name);
+    onChoose(theme);
   }, []);
 
   return (

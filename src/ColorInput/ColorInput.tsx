@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import { StyledButton } from '../Button/Button';
-import { focusOutline } from '../common';
+import { focusOutline, styledDimension } from '../common';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import { noOp } from '../common/utils';
 import { Separator } from '../Separator/Separator';
@@ -20,11 +20,11 @@ type ColorInputProps = {
   CommonStyledProps;
 
 const Trigger = styled(StyledButton)`
-  padding-left: 8px;
+  padding-left: ${styledDimension(4)};
 `;
 
 const StyledSeparator = styled(Separator)`
-  height: 21px;
+  height: ${styledDimension(10.5)};
   position: relative;
   top: 0;
 `;
@@ -50,23 +50,26 @@ const ColorPreview = styled.div<{
   $disabled: boolean;
 }>`
   box-sizing: border-box;
-  height: 19px;
+  height: ${styledDimension(9.5)};
   display: inline-block;
-  width: 35px;
-  margin-right: 5px;
+  width: ${styledDimension(17.5)};
+  margin-right: ${styledDimension(2.5)};
 
   background: ${({ color }) => color};
 
   ${({ $disabled }) =>
     $disabled
       ? css`
-          border: 2px solid ${({ theme }) => theme.materialTextDisabled};
+          border: ${styledDimension(1)} solid
+            ${({ theme }) => theme.materialTextDisabled};
           filter: drop-shadow(
-            1px 1px 0px ${({ theme }) => theme.materialTextDisabledShadow}
+            ${styledDimension(0.5)} ${styledDimension(0.5)} 0px
+              ${({ theme }) => theme.materialTextDisabledShadow}
           );
         `
       : css`
-          border: 2px solid ${({ theme }) => theme.materialText};
+          border: ${styledDimension(1)} solid
+            ${({ theme }) => theme.materialText};
         `}
   ${StyledColorInput}:focus:not(:active) + &:after {
     content: '';
@@ -76,7 +79,7 @@ const ColorPreview = styled.div<{
     width: 100%;
     height: 100%;
     ${focusOutline}
-    outline-offset: -8px;
+    outline-offset: -${styledDimension(4)};
   }
 `;
 
@@ -87,30 +90,34 @@ const ChevronIcon = styled.span<
 >`
   width: 0px;
   height: 0px;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
+  border-left: ${styledDimension(3)} solid transparent;
+  border-right: ${styledDimension(3)} solid transparent;
   display: inline-block;
-  margin-left: 6px;
+  margin-left: ${styledDimension(3)};
 
   ${({ $disabled }) =>
     $disabled
       ? css`
-          border-top: 6px solid ${({ theme }) => theme.materialTextDisabled};
+          border-top: ${styledDimension(3)} solid
+            ${({ theme }) => theme.materialTextDisabled};
           filter: drop-shadow(
-            1px 1px 0px ${({ theme }) => theme.materialTextDisabledShadow}
+            ${styledDimension(0.5)} ${styledDimension(0.5)} 0px
+              ${({ theme }) => theme.materialTextDisabledShadow}
           );
         `
       : css`
-          border-top: 6px solid ${({ theme }) => theme.materialText};
+          border-top: ${styledDimension(3)} solid
+            ${({ theme }) => theme.materialText};
         `}
   &:after {
     content: '';
     box-sizing: border-box;
     position: absolute;
-    top: ${({ variant }) => (variant === 'flat' ? '6px' : '8px')};
-    right: 8px;
-    width: 16px;
-    height: 19px;
+    top: ${({ variant }) =>
+      variant === 'flat' ? styledDimension(3) : styledDimension(4)};
+    right: ${styledDimension(4)};
+    width: ${styledDimension(8)};
+    height: ${styledDimension(9.5)};
   }
 `;
 

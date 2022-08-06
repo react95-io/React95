@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import styled, { css, CSSProperties } from 'styled-components';
 
-import { createFlatBoxStyles } from '../common';
+import { createFlatBoxStyles, styledDimension } from '../common';
 import {
   LabelText,
   size,
@@ -31,8 +31,8 @@ type RadioProps = {
   CommonStyledProps;
 
 const sharedCheckboxStyles = css`
-  width: ${size}px;
-  height: ${size}px;
+  width: ${styledDimension(size)};
+  height: ${styledDimension(size)};
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -54,8 +54,8 @@ const StyledCheckbox = styled(StyledScrollView)<StyledCheckboxProps>`
     position: absolute;
     left: 0px;
     top: 0px;
-    width: calc(100% - 4px);
-    height: calc(100% - 4px);
+    width: calc(100% - ${styledDimension(2)});
+    height: calc(100% - ${styledDimension(2)});
     border-radius: 50%;
     box-shadow: none;
   }
@@ -72,9 +72,9 @@ const StyledFlatCheckbox = styled.div<StyledCheckboxProps>`
     position: absolute;
     top: 0;
     left: 0;
-    width: calc(100% - 4px);
-    height: calc(100% - 4px);
-    border: 2px solid ${({ theme }) => theme.flatDark};
+    width: calc(100% - ${styledDimension(2)});
+    height: calc(100% - ${styledDimension(2)});
+    border: ${styledDimension(1)} solid ${({ theme }) => theme.flatDark};
     border-radius: 50%;
   }
 `;
@@ -102,8 +102,8 @@ const Icon = styled.span.attrs(() => ({
   display: inline-block;
   top: 50%;
   left: 50%;
-  width: 6px;
-  height: 6px;
+  width: ${styledDimension(3)};
+  height: ${styledDimension(3)};
   transform: translate(-50%, -50%);
   border-radius: 50%;
   ${({ $disabled, theme, variant }) =>
@@ -113,7 +113,7 @@ const Icon = styled.span.attrs(() => ({
             ? theme.materialTextDisabled
             : theme.materialText};
           filter: drop-shadow(
-            1px 1px 0px
+            ${styledDimension(0.5)} ${styledDimension(0.5)} 0px
               ${$disabled ? theme.materialTextDisabledShadow : 'transparent'}
           );
         `

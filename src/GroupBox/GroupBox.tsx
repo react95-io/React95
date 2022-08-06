@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
-import { createDisabledTextStyles } from '../common';
+import { createDisabledTextStyles, styledDimension } from '../common';
 import { CommonStyledProps } from '../types';
 
 type GroupBoxProps = {
@@ -15,18 +15,20 @@ const StyledFieldset = styled.fieldset<
   Pick<GroupBoxProps, 'variant'> & { $disabled: boolean }
 >`
   position: relative;
-  border: 2px solid
+  border: ${styledDimension(1)} solid
     ${({ theme, variant }) =>
       variant === 'flat' ? theme.flatDark : theme.borderLightest};
-  padding: 16px;
-  margin-top: 8px;
+  padding: ${styledDimension(8)};
+  margin-top: ${styledDimension(4)};
   font-size: 1rem;
   color: ${({ theme }) => theme.materialText};
   ${({ variant }) =>
     variant !== 'flat' &&
     css`
-      box-shadow: -1px -1px 0 1px ${({ theme }) => theme.borderDark},
-        inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
+      box-shadow: -${styledDimension(0.5)} -${styledDimension(0.5)} 0
+          ${styledDimension(0.5)} ${({ theme }) => theme.borderDark},
+        inset -${styledDimension(0.5)} -${styledDimension(0.5)} 0
+          ${styledDimension(0.5)} ${({ theme }) => theme.borderDark};
     `}
   ${props => props.$disabled && createDisabledTextStyles()}
 `;
@@ -35,9 +37,9 @@ const StyledLegend = styled.legend<Pick<GroupBoxProps, 'variant'>>`
   display: flex;
   position: absolute;
   top: 0;
-  left: 8px;
-  transform: translateY(calc(-50% - 2px));
-  padding: 0 8px;
+  left: ${styledDimension(4)};
+  transform: translateY(calc(-50% - ${styledDimension(1)}));
+  padding: 0 ${styledDimension(4)};
 
   font-size: 1rem;
   background: ${({ theme, variant }) =>

@@ -10,3 +10,5 @@ export const KEYBOARD_KEY_CODES = {
   SPACE: 'Space',
   TAB: 'Tab'
 };
+
+export const SCALE = 2;

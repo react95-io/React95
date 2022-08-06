@@ -1,5 +1,6 @@
 import React, { forwardRef, useCallback } from 'react';
 import styled, { css } from 'styled-components';
+import { styledDimension } from '../common';
 
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import { LabelText, StyledLabel } from '../common/SwitchBase';
@@ -59,7 +60,8 @@ const focusedElementStyles = css<{ $disabled: boolean }>`
             ${Text} {
               background: ${({ theme }) => theme.hoverBackground};
               color: ${({ theme }) => theme.materialTextInvert};
-              outline: 2px dotted ${({ theme }) => theme.focusSecondary};
+              outline: ${styledDimension(1)} dotted
+                ${({ theme }) => theme.focusSecondary};
             }
           }
         `
@@ -76,16 +78,17 @@ const TreeWrapper = styled.ul<{ isRootLevel: boolean }>`
       &:before {
         content: '';
         position: absolute;
-        top: 20px;
+        top: ${styledDimension(10)};
         bottom: 0;
-        left: 5.5px;
-        width: 1px;
-        border-left: 2px dashed ${({ theme }) => theme.borderDark};
+        left: ${styledDimension(2.75)};
+        width: ${styledDimension(0.5)};
+        border-left: ${styledDimension(1)} dashed
+          ${({ theme }) => theme.borderDark};
       }
     `}
 
   ul {
-    padding-left: 19.5px;
+    padding-left: ${styledDimension(9.75)};
   }
 
   li {
@@ -94,18 +97,19 @@ const TreeWrapper = styled.ul<{ isRootLevel: boolean }>`
     &:before {
       content: '';
       position: absolute;
-      top: 17.5px;
-      left: 5.5px;
-      width: 22px;
-      border-top: 2px dashed ${({ theme }) => theme.borderDark};
-      font-size: 12px;
+      top: ${styledDimension(8.75)};
+      left: ${styledDimension(2.75)};
+      width: ${styledDimension(11)};
+      border-top: ${styledDimension(1)} dashed
+        ${({ theme }) => theme.borderDark};
+      font-size: ${styledDimension(6)};
     }
   }
 `;
 
 const TreeItem = styled.li<{ hasItems: boolean; isRootLevel: boolean }>`
   position: relative;
-  padding-left: ${({ hasItems }) => (!hasItems ? '13px' : '0')};
+  padding-left: ${({ hasItems }) => (!hasItems ? styledDimension(6.5) : '0')};
 
   ${({ isRootLevel }) =>
     !isRootLevel
@@ -115,10 +119,10 @@ const TreeItem = styled.li<{ hasItems: boolean; isRootLevel: boolean }>`
               content: '';
               position: absolute;
               z-index: 1;
-              top: 19.5px;
+              top: ${styledDimension(9.75)};
               bottom: 0;
-              left: 1.5px;
-              width: 10px;
+              left: ${styledDimension(0.75)};
+              width: ${styledDimension(5)};
               background: ${({ theme }) => theme.material};
             }
           }
@@ -128,10 +132,10 @@ const TreeItem = styled.li<{ hasItems: boolean; isRootLevel: boolean }>`
             &:after {
               content: '';
               position: absolute;
-              top: 19.5px;
-              left: 1px;
+              top: ${styledDimension(9.75)};
+              left: ${styledDimension(0.5)};
               bottom: 0;
-              width: 10px;
+              width: ${styledDimension(5)};
               background: ${({ theme }) => theme.material};
             }
           }
@@ -141,10 +145,11 @@ const TreeItem = styled.li<{ hasItems: boolean; isRootLevel: boolean }>`
     &:after {
       content: '';
       position: absolute;
-      top: -18px;
+      top: ${styledDimension(-9)};
       bottom: 0;
-      left: 25px;
-      border-left: 2px dashed ${({ theme }) => theme.borderDark};
+      left: ${styledDimension(12.5)};
+      border-left: ${styledDimension(1)} dashed
+        ${({ theme }) => theme.borderDark};
     }
   }
 `;
@@ -165,7 +170,7 @@ const Summary = styled.summary`
   align-items: center;
   color: ${({ theme }) => theme.materialText};
   user-select: none;
-  padding-left: 18px;
+  padding-left: ${styledDimension(9)};
   ${focusedElementStyles};
 
   &::-webkit-details-marker {
@@ -177,12 +182,12 @@ const Summary = styled.summary`
     position: absolute;
     left: 0;
     display: block;
-    width: 8px;
-    height: 9px;
-    border: 2px solid #808080;
-    padding-left: 1px;
+    width: ${styledDimension(4)};
+    height: ${styledDimension(4.5)};
+    border: ${styledDimension(1)} solid #808080;
+    padding-left: ${styledDimension(0.5)};
     background-color: #fff;
-    line-height: 8px;
+    line-height: ${styledDimension(4)};
     text-align: center;
   }
 `;
@@ -193,8 +198,8 @@ const TitleWithIcon = styled(StyledLabel)`
   background: none;
   border: 0;
   font-family: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding-top: ${styledDimension(4)};
+  padding-bottom: ${styledDimension(4)};
   margin: 0;
   ${focusedElementStyles};
 `;
@@ -203,9 +208,9 @@ const Icon = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 16px;
-  height: 16px;
-  margin-right: 6px;
+  width: ${styledDimension(8)};
+  height: ${styledDimension(8)};
+  margin-right: ${styledDimension(3)};
 `;
 
 function toggleItem<T>(state: T[], id: T) {

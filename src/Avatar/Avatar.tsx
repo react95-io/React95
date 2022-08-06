@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { styledDimension } from '../common';
 import { getSize } from '../common/utils';
 import { CommonStyledProps } from '../types';
 
@@ -28,13 +29,13 @@ const StyledAvatar = styled.div<
   overflow: hidden;
   ${({ noBorder, theme }) =>
     !noBorder &&
-    `
-    border-top: 2px solid ${theme.borderDark};
-    border-left: 2px solid ${theme.borderDark};
-    border-bottom: 2px solid ${theme.borderLightest};
-    border-right: 2px solid ${theme.borderLightest};
-    background: ${theme.material};
-  `}
+    css`
+      border-top: ${styledDimension(1)} solid ${theme.borderDark};
+      border-left: ${styledDimension(1)} solid ${theme.borderDark};
+      border-bottom: ${styledDimension(1)} solid ${theme.borderLightest};
+      border-right: ${styledDimension(1)} solid ${theme.borderLightest};
+      background: ${theme.material};
+    `}
   ${({ src }) =>
     !src &&
     `

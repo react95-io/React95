@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import styled from 'styled-components';
+import { styledDimension } from '../common';
 import { CommonStyledProps } from '../types';
 
 type TableDataCellProps = {
@@ -8,7 +9,7 @@ type TableDataCellProps = {
   CommonStyledProps;
 
 const StyledTd = styled.td`
-  padding: 0 8px;
+  padding: 0 ${styledDimension(4)};
 `;
 
 const TableDataCell = forwardRef<HTMLTableCellElement, TableDataCellProps>(

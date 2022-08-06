@@ -1,8 +1,13 @@
 import React, { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-import { createBorderStyles, createBoxStyles, focusOutline } from '../common';
-import { blockSizes } from '../common/system';
+import {
+  createBorderStyles,
+  createBoxStyles,
+  focusOutline,
+  styledDimension
+} from '../common';
+import { styledBlockSize } from '../common/system';
 import { CommonStyledProps } from '../types';
 
 type TabProps = {
@@ -23,13 +28,13 @@ const StyledTab = styled.button<TabProps>`
   align-items: center;
   justify-content: center;
   font-size: 1rem;
-  height: ${blockSizes.md};
-  line-height: ${blockSizes.md};
-  padding: 0 8px;
+  height: ${styledBlockSize('md')};
+  line-height: ${styledBlockSize('md')};
+  padding: 0 ${styledDimension(4)};
   border-bottom: none;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  margin: 0 0 -2px 0;
+  border-top-left-radius: ${styledDimension(2.5)};
+  border-top-right-radius: ${styledDimension(2.5)};
+  margin: 0 0 ${styledDimension(-1)} 0;
   cursor: default;
   color: ${({ theme }) => theme.materialText};
   user-select: none;
@@ -43,29 +48,29 @@ const StyledTab = styled.button<TabProps>`
     width: 100%;
     height: 100%;
     ${focusOutline}
-    outline-offset: -6px;
+    outline-offset: ${styledDimension(-3)};
   }
   ${props =>
     props.selected &&
-    `
-    z-index: 1;
-    height: calc(${blockSizes.md} + 4px);
-    top: -4px;
-    margin-bottom: -6px;
-    padding: 0 16px;
-    margin-left: -8px;
-    &:not(:last-child) {
-      margin-right: -8px;
-    }
-  `}
+    css`
+      z-index: 1;
+      height: calc(${styledBlockSize('md')} + ${styledDimension(2)});
+      top: ${styledDimension(-2)};
+      margin-bottom: ${styledDimension(-3)};
+      padding: 0 ${styledDimension(8)};
+      margin-left: ${styledDimension(-4)};
+      &:not(:last-child) {
+        margin-right: ${styledDimension(-4)};
+      }
+    `}
   &:before {
     content: '';
     position: absolute;
-    width: calc(100% - 4px);
-    height: 6px;
+    width: calc(100% - ${styledDimension(2)});
+    height: ${styledDimension(3)};
     background: ${({ theme }) => theme.material};
-    bottom: -4px;
-    left: 2px;
+    bottom: ${styledDimension(-2)};
+    left: ${styledDimension(1)};
   }
 `;
 

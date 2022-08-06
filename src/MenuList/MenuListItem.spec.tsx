@@ -1,8 +1,15 @@
 import React from 'react';
 
 import { renderWithTheme, theme } from '../../test/utils';
+import { SCALE } from '../common/constants';
 import { blockSizes } from '../common/system';
 import { MenuListItem } from './MenuListItem';
+
+const expectedBlockSizes = {
+  sm: `${blockSizes.sm * SCALE}px`,
+  md: `${blockSizes.md * SCALE}px`,
+  lg: `${blockSizes.lg * SCALE}px`
+};
 
 const defaultSize = 'lg';
 describe('<MenuListItem />', () => {
@@ -76,8 +83,14 @@ describe('<MenuListItem />', () => {
       const { getByRole } = renderWithTheme(<MenuListItem square />);
       const menuListItem = getByRole('menuitem');
 
-      expect(menuListItem).toHaveStyleRule('width', blockSizes[defaultSize]);
-      expect(menuListItem).toHaveStyleRule('height', blockSizes[defaultSize]);
+      expect(menuListItem).toHaveStyleRule(
+        'width',
+        expectedBlockSizes[defaultSize]
+      );
+      expect(menuListItem).toHaveStyleRule(
+        'height',
+        expectedBlockSizes[defaultSize]
+      );
     });
   });
   describe('prop: size', () => {
@@ -86,7 +99,7 @@ describe('<MenuListItem />', () => {
       const { getByRole } = renderWithTheme(<MenuListItem size={size} />);
       const menuListItem = getByRole('menuitem');
 
-      expect(menuListItem).toHaveStyleRule('height', blockSizes[size]);
+      expect(menuListItem).toHaveStyleRule('height', expectedBlockSizes[size]);
     });
   });
 });

@@ -1,13 +1,18 @@
 import { css } from 'styled-components';
-import { Color, CommonThemeProps, Theme } from '../types';
+import { CommonThemeProps, Theme } from '../types';
+import { SCALE } from './constants';
+import { Color, ThemeColors } from './themes/types';
 
-export const shadow = '4px 4px 10px 0 rgba(0, 0, 0, 0.35)';
-export const insetShadow = 'inset 2px 2px 3px rgba(0,0,0,0.2)';
+export const styledDimension =
+  (ratio = 1, { delta = 0, unit = 'px' } = {}) =>
+  ({ theme }: { theme: Theme | undefined }) =>
+    `${(theme?.scale ?? SCALE) * ratio + delta}${unit}`;
 
 export const createDisabledTextStyles = () => css`
   -webkit-text-fill-color: ${({ theme }) => theme.materialTextDisabled};
   color: ${({ theme }) => theme.materialTextDisabled};
-  text-shadow: 1px 1px ${({ theme }) => theme.materialTextDisabledShadow};
+  text-shadow: ${styledDimension(0.5)} ${styledDimension(0.5)}
+    ${({ theme }) => theme.materialTextDisabledShadow};
   /* filter: grayscale(100%); */
 `;
 
@@ -15,8 +20,8 @@ export const createBoxStyles = ({
   background = 'material',
   color = 'materialText'
 }: {
-  background?: keyof Theme;
-  color?: keyof Theme;
+  background?: keyof ThemeColors;
+  color?: keyof ThemeColors;
 } = {}) => css`
   box-sizing: border-box;
   display: inline-block;
@@ -28,28 +33,34 @@ export const createBoxStyles = ({
 export const createHatchedBackground = ({
   mainColor = 'black',
   secondaryColor = 'transparent',
-  pixelSize = 2
-}) => css`
-  background-image: ${[
-    `linear-gradient(
-      45deg,
-      ${mainColor} 25%,
-      transparent 25%,
-      transparent 75%,
-      ${mainColor} 75%
-    )`,
-    `linear-gradient(
-      45deg,
-      ${mainColor} 25%,
-      transparent 25%,
-      transparent 75%,
-      ${mainColor} 75%
-    )`
-  ].join(',')};
-  background-color: ${secondaryColor};
-  background-size: ${`${pixelSize * 2}px ${pixelSize * 2}px`};
-  background-position: 0 0, ${`${pixelSize}px ${pixelSize}px`};
-`;
+  pixelSize
+}: {
+  mainColor?: Color;
+  secondaryColor?: Color;
+  pixelSize?: number;
+}) => {
+  const size = styledDimension(pixelSize !== undefined ? pixelSize / 2 : 1);
+  const doubleSize = styledDimension(pixelSize !== undefined ? pixelSize : 2);
+  return css`
+    background-image: linear-gradient(
+        45deg,
+        ${mainColor} 25%,
+        transparent 25%,
+        transparent 75%,
+        ${mainColor} 75%
+      ),
+      linear-gradient(
+        45deg,
+        ${mainColor} 25%,
+        transparent 25%,
+        transparent 75%,
+        ${mainColor} 75%
+      );
+    background-color: ${secondaryColor};
+    background-size: ${doubleSize} ${doubleSize};
+    background-position: 0 0, ${size} ${size};
+  `;
+};
 
 export const createFlatBoxStyles = () => css<CommonThemeProps>`
   position: relative;
@@ -58,9 +69,9 @@ export const createFlatBoxStyles = () => css<CommonThemeProps>`
   color: ${({ theme }) => theme.materialText};
   background: ${({ $disabled, theme }) =>
     $disabled ? theme.flatLight : theme.canvas};
-  border: 2px solid ${({ theme }) => theme.canvas};
-  outline: 2px solid ${({ theme }) => theme.flatDark};
-  outline-offset: -4px;
+  border: ${styledDimension(1)} solid ${({ theme }) => theme.canvas};
+  outline: ${styledDimension(1)} solid ${({ theme }) => theme.flatDark};
+  outline-offset: -${styledDimension(2)};
 `;
 
 export type BorderStyles =
@@ -74,10 +85,10 @@ export type BorderStyles =
   | 'window';
 
 type BorderStyle = {
-  topLeftOuter: keyof Theme;
-  topLeftInner: keyof Theme | null;
-  bottomRightInner: keyof Theme | null;
-  bottomRightOuter: keyof Theme;
+  topLeftOuter: keyof ThemeColors;
+  topLeftInner: keyof ThemeColors | undefined;
+  bottomRightInner: keyof ThemeColors | undefined;
+  bottomRightOuter: keyof ThemeColors;
 };
 
 const borderStyles: Record<BorderStyles, BorderStyle> = {
@@ -95,14 +106,14 @@ const borderStyles: Record<BorderStyles, BorderStyle> = {
   },
   buttonThin: {
     topLeftOuter: 'borderLightest',
-    topLeftInner: null,
-    bottomRightInner: null,
+    topLeftInner: undefined,
+    bottomRightInner: undefined,
     bottomRightOuter: 'borderDark'
   },
   buttonThinPressed: {
     topLeftOuter: 'borderDark',
-    topLeftInner: null,
-    bottomRightInner: null,
+    topLeftInner: undefined,
+    bottomRightInner: undefined,
     bottomRightOuter: 'borderLightest'
   },
   field: {
@@ -119,8 +130,8 @@ const borderStyles: Record<BorderStyles, BorderStyle> = {
   },
   status: {
     topLeftOuter: 'borderDark',
-    topLeftInner: null,
-    bottomRightInner: null,
+    topLeftInner: undefined,
+    bottomRightInner: undefined,
     bottomRightOuter: 'borderLightest'
   },
   window: {
@@ -139,23 +150,35 @@ export const createInnerBorderWithShadow = ({
   hasInsetShadow = false
 }: {
   theme: Theme;
-  topLeftInner: keyof Theme | null;
-  bottomRightInner: keyof Theme | null;
+  topLeftInner?: keyof ThemeColors;
+  bottomRightInner?: keyof ThemeColors;
   hasShadow?: boolean;
   hasInsetShadow?: boolean;
-}) =>
-  [
-    hasShadow ? shadow : false,
-    hasInsetShadow ? insetShadow : false,
-    topLeftInner !== null
-      ? `inset 1px 1px 0px 1px ${theme[topLeftInner]}`
+}) => {
+  const scale = Number(styledDimension(1, { unit: '' })({ theme }));
+  return [
+    hasShadow
+      ? `${scale * 2}px ${scale * 2}px ${scale * 5}px 0 rgba(0, 0, 0, 0.35)`
       : false,
-    bottomRightInner !== null
-      ? `inset -1px -1px 0 1px ${theme[bottomRightInner]}`
+    hasInsetShadow
+      ? `inset ${scale * 1}px ${scale * 1}px ${
+          scale * 1.5
+        }px rgba(0, 0, 0, 0.2)`
+      : false,
+    topLeftInner !== undefined
+      ? `inset ${scale / 2}px ${scale / 2}px 0px ${scale / 2}px ${
+          theme[topLeftInner]
+        }`
+      : false,
+    bottomRightInner !== undefined
+      ? `inset -${scale / 2}px -${scale / 2}px 0 ${scale / 2}px ${
+          theme[bottomRightInner]
+        }`
       : false
   ]
     .filter(Boolean)
     .join(', ');
+};
 
 export const createBorderStyles = ({
   invert = false,
@@ -169,7 +192,7 @@ export const createBorderStyles = ({
   } as const;
   return css<CommonThemeProps>`
     border-style: solid;
-    border-width: 2px;
+    border-width: ${styledDimension(1)};
     border-left-color: ${({ theme }) =>
       theme[borderStyles[style][borders.topLeftOuter]]};
     border-top-color: ${({ theme }) =>
@@ -178,12 +201,12 @@ export const createBorderStyles = ({
       theme[borderStyles[style][borders.bottomRightOuter]]};
     border-bottom-color: ${({ theme }) =>
       theme[borderStyles[style][borders.bottomRightOuter]]};
-    box-shadow: ${({ theme, shadow: hasShadow }) =>
+    box-shadow: ${({ defaultShadow, theme, shadow: hasShadow }) =>
       createInnerBorderWithShadow({
         theme,
         topLeftInner: borderStyles[style][borders.topLeftInner],
         bottomRightInner: borderStyles[style][borders.bottomRightInner],
-        hasShadow
+        hasShadow: (defaultShadow && theme.shadow) || hasShadow
       })};
   `;
 };
@@ -196,16 +219,23 @@ export const createWellBorderStyles = (invert = false) =>
   });
 
 export const focusOutline = () => css`
-  outline: 2px dotted ${({ theme }) => theme.materialText};
+  outline: ${styledDimension(1)} dotted ${({ theme }) => theme.materialText};
 `;
 
 const nodeBtoa = (string: string) => Buffer.from(string).toString('base64');
 const base64encode = typeof btoa !== 'undefined' ? btoa : nodeBtoa;
 
-const createTriangleSVG = (color: Color, angle = 0) => {
-  const svg = `<svg height="26" width="26" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <g transform="rotate(${angle} 13 13)">
-      <polygon fill="${color}" points="6,10 20,10 13,17"/>
+const createTriangleSVG = (theme: Theme, angle = 0) => {
+  const scale = Number(styledDimension(1, { unit: '' })({ theme }));
+  const svg = `<svg height="${scale * 13}" width="${scale * 13}" viewBox="0 0 ${
+    scale * 13
+  } ${
+    scale * 13
+  }" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g transform="rotate(${angle} ${scale * 6.5} ${scale * 6.5})">
+      <polygon fill="${theme.materialText}" points="${scale * 3},${scale * 5} ${
+    scale * 10
+  },${scale * 5} ${scale * 6.5},${scale * 8.5}"/>
     </g>
   </svg>`;
   const encoded = base64encode(svg);
@@ -214,8 +244,8 @@ const createTriangleSVG = (color: Color, angle = 0) => {
 
 export const createScrollbars = (variant = 'default') => css`
   ::-webkit-scrollbar {
-    width: 26px;
-    height: 26px;
+    width: ${styledDimension(13)};
+    height: ${styledDimension(13)};
   }
   ::-webkit-scrollbar-track {
     ${({ theme }) =>
@@ -229,7 +259,7 @@ export const createScrollbars = (variant = 'default') => css`
     ${variant === 'flat'
       ? createFlatBoxStyles()
       : createBorderStyles({ style: 'window' })}
-      outline-offset: -2px;
+      outline-offset: -${styledDimension(1)};
   }
 
   ::-webkit-scrollbar-corner {
@@ -241,9 +271,9 @@ export const createScrollbars = (variant = 'default') => css`
       ? createFlatBoxStyles()
       : createBorderStyles({ style: 'window' })}
       display: block;
-    outline-offset: -2px;
-    height: 26px;
-    width: 26px;
+    outline-offset: -${styledDimension(1)};
+    height: ${styledDimension(13)};
+    width: ${styledDimension(13)};
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: 0 0;
@@ -264,22 +294,18 @@ export const createScrollbars = (variant = 'default') => css`
   }
 
   ::-webkit-scrollbar-button:horizontal:decrement {
-    background-image: ${({ theme }) =>
-      createTriangleSVG(theme.materialText, 90)};
+    background-image: ${({ theme }) => createTriangleSVG(theme, 90)};
   }
 
   ::-webkit-scrollbar-button:horizontal:increment {
-    background-image: ${({ theme }) =>
-      createTriangleSVG(theme.materialText, 270)};
+    background-image: ${({ theme }) => createTriangleSVG(theme, 270)};
   }
 
   ::-webkit-scrollbar-button:vertical:decrement {
-    background-image: ${({ theme }) =>
-      createTriangleSVG(theme.materialText, 180)};
+    background-image: ${({ theme }) => createTriangleSVG(theme, 180)};
   }
 
   ::-webkit-scrollbar-button:vertical:increment {
-    background-image: ${({ theme }) =>
-      createTriangleSVG(theme.materialText, 0)};
+    background-image: ${({ theme }) => createTriangleSVG(theme, 0)};
   }
 `;

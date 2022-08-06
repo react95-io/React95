@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import styled from 'styled-components';
+import { styledDimension } from '../common';
 import { CommonStyledProps } from '../types';
 
 type WindowContentProps = {
@@ -8,7 +9,7 @@ type WindowContentProps = {
   CommonStyledProps;
 
 const StyledWindowContent = styled.div`
-  padding: 16px;
+  padding: ${styledDimension(8)};
 `;
 
 const WindowContent = forwardRef<HTMLDivElement, WindowContentProps>(

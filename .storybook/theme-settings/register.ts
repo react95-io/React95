@@ -1,17 +1,17 @@
 import addons, { makeDecorator, types } from '@storybook/addons';
 import { THEMES_ID } from './constants';
-import { ThemeList } from './ThemeList';
+import { ThemeSettings } from './ThemeSettings';
 
 addons.register(THEMES_ID, () => {
   addons.addPanel(`${THEMES_ID}/panel`, {
-    title: 'Themes',
+    title: 'Theme Settings',
     type: types.PANEL,
-    render: ThemeList
+    render: ThemeSettings
   });
 });
 
 export default makeDecorator({
-  name: 'withThemesProvider',
+  name: 'withThemeSettingsProvider',
   parameterName: 'theme',
   wrapper: (getStory, context) => getStory(context)
 });

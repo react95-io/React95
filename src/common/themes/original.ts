@@ -32,5 +32,7 @@ export default {
   materialTextDisabledShadow: '#fefefe',
   materialTextInvert: '#fefefe',
   progress: '#060084',
+  scale: 2,
+  shadow: true,
   tooltip: '#fefbcc'
 } as Theme;
