@@ -21,9 +21,6 @@ const storybookConfig: StorybookConfig = {
     builder: 'webpack5'
   },
   features: {
-    babelModeV7: true,
-    storyStoreV7: true,
-    modernInlineRender: true,
     postcss: false
   },
   typescript: {

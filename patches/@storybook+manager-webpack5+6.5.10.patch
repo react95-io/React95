@@ -1,0 +1,15 @@
+diff --git a/node_modules/@storybook/manager-webpack5/dist/cjs/index.js b/node_modules/@storybook/manager-webpack5/dist/cjs/index.js
+index c1d7fda..40006a0 100644
+--- a/node_modules/@storybook/manager-webpack5/dist/cjs/index.js
++++ b/node_modules/@storybook/manager-webpack5/dist/cjs/index.js
+@@ -573,6 +573,10 @@ var builder = /*#__PURE__*/function () {
+             return;
+ 
+           case 12:
++            if (config.entry && config.entry.some(entry => entry === undefined)) {
++              console.log(config)
++              console.trace('undefined found in entry!')
++            }
+             compiler = webpackInstance(config);
+ 
+             if (compiler) {

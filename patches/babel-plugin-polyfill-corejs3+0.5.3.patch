@@ -1,0 +1,15 @@
+diff --git a/node_modules/babel-plugin-polyfill-corejs3/esm/index.mjs b/node_modules/babel-plugin-polyfill-corejs3/esm/index.mjs
+index 2819a9c..ab56032 100644
+--- a/node_modules/babel-plugin-polyfill-corejs3/esm/index.mjs
++++ b/node_modules/babel-plugin-polyfill-corejs3/esm/index.mjs
+@@ -475,6 +475,10 @@ var index = defineProvider(function ({
+     static: StaticProperties,
+     instance: InstanceProperties
+   });
++  if (typeof getModulesListForTargetVersion !== 'function') {
++    console.log(getModulesListForTargetVersion)
++    console.trace('getModulesListForTargetVersion is not a function')
++  }
+   const available = new Set(getModulesListForTargetVersion(version));
+ 
+   function getCoreJSPureBase(useProposalBase) {

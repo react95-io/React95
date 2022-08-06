@@ -1,0 +1,13 @@
+diff --git a/node_modules/@storybook/builder-webpack5/dist/cjs/index.js b/node_modules/@storybook/builder-webpack5/dist/cjs/index.js
+index 1037f48..0ee4bcf 100644
+--- a/node_modules/@storybook/builder-webpack5/dist/cjs/index.js
++++ b/node_modules/@storybook/builder-webpack5/dist/cjs/index.js
+@@ -231,6 +231,8 @@ var builder = async function* builderGeneratorFn({
+             return _nodeLogger.logger.error(e.message);
+           });
+           compiler.close(function () {
++            console.log(config)
++            console.trace('webpack failed')
+             return options.debugWebpack ? fail(stats) : fail(new Error('=> Webpack failed, learn more with --debug-webpack'));
+           });
+           return;
