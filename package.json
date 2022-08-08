@@ -33,7 +33,7 @@
     "access": "public"
   },
   "scripts": {
-    "start": "cross-env STORYBOOK_DISPLAY_WARNING=true DISPLAY_WARNING=true start-storybook -p 9009",
+    "start": "cross-env STORYBOOK_DISPLAY_WARNING=true DISPLAY_WARNING=true start-storybook -p 9009 --no-open",
     "build:storybook": "cross-env STORYBOOK_DISPLAY_WARNING=true DISPLAY_WARNING=true build-storybook -o ./storybook",
     "build": "rm -rf dist && yarn run build:prod",
     "build:dev": "cross-env NODE_ENV=development rollup -c",
@@ -82,6 +82,7 @@
     "@storybook/react": "6.5.10",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.5",
+    "@testing-library/react-hooks": "^8.0.1",
     "@types/jest": "^28.1.6",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",

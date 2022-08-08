@@ -2,19 +2,24 @@
 
 import { ComponentMeta } from '@storybook/react';
 import React from 'react';
-import { GroupBox, ScrollView, Select, Window, WindowContent } from 'react95';
+import {
+  GroupBox,
+  ScrollView,
+  Select,
+  SelectNative,
+  Window,
+  WindowContent
+} from 'react95';
 import styled from 'styled-components';
-import { SelectChangeEvent, SelectOption } from './Select.types';
+import { PokemonOptions } from './Select.stories.data';
+import { SelectOption } from './Select.types';
 
-const options = [
-  { value: 1, label: '⚡ Pikachu' },
-  { value: 2, label: '🌿 Bulbasaur' },
-  { value: 3, label: '💦 Squirtle' },
-  { value: 4, label: '🔥 Mega Charizard Y' },
-  { value: 5, label: '🎤 Jigglypuff' },
-  { value: 6, label: '🛌🏻 Snorlax' },
-  { value: 7, label: '⛰ Geodude' }
-];
+const options = PokemonOptions;
+
+const nativeOptions = options.map(option => ({
+  ...option,
+  value: String(option.value)
+}));
 
 const Wrapper = styled.div`
   background: ${({ theme }) => theme.material};
@@ -39,8 +44,10 @@ const Wrapper = styled.div`
   }
 `;
 
-const onChange = <T,>(event: SelectChangeEvent<T>, option: SelectOption<T>) =>
-  console.log(event, option);
+const onChange = <T,>(
+  selectedOption: SelectOption<T>,
+  changeOptions: { fromEvent: React.SyntheticEvent | Event }
+) => console.log(selectedOption, changeOptions.fromEvent);
 
 export default {
   title: 'Controls/Select',
@@ -73,25 +80,20 @@ export function Default() {
         />
       </GroupBox>
       <GroupBox label='default native'>
-        <Select
-          native
+        <SelectNative
           onChange={onChange}
-          defaultValue={2}
-          options={options}
+          defaultValue='2'
+          options={nativeOptions}
           width={160}
-          menuMaxHeight={160}
-          onClose={() => console.log('native close')}
           onBlur={() => console.log('native blur')}
           onFocus={() => console.log('native focus')}
         />
-        <Select
-          native
+        <SelectNative
           disabled
           onChange={onChange}
           width={160}
-          defaultValue={2}
-          options={options}
-          menuMaxHeight={160}
+          defaultValue='2'
+          options={nativeOptions}
         />
       </GroupBox>
     </div>
@@ -128,20 +130,18 @@ export function Flat() {
             />
           </GroupBox>
           <GroupBox label='flat native' variant='flat'>
-            <Select
+            <SelectNative
               variant='flat'
-              native
               onChange={onChange}
-              options={options}
+              options={nativeOptions}
               width='100%'
             />
-            <Select
+            <SelectNative
               variant='flat'
-              native
               disabled
               onChange={onChange}
               width='100%'
-              options={options}
+              options={nativeOptions}
             />
           </GroupBox>
         </ScrollView>
@@ -157,7 +157,7 @@ Flat.story = {
 export function CustomDisplayFormatting() {
   return (
     <Select
-      formatDisplay={opt => `${opt.label.toUpperCase()} 👍 👍`}
+      formatDisplay={opt => `${opt.label?.toUpperCase()} 👍 👍`}
       onChange={onChange}
       options={options}
       width={220}

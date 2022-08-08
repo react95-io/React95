@@ -107,7 +107,9 @@ export const StyledNativeSelect = styled.select`
   }
 `;
 
-export const StyledDropdownButton = styled(Button)<CommonSelectStyleProps>`
+export const StyledDropdownButton = styled(Button).attrs(() => ({
+  'aria-hidden': 'true'
+}))<CommonSelectStyleProps>`
   width: 30px;
   padding: 0;
   flex-shrink: 0;
@@ -198,7 +200,7 @@ export const StyledDropdownMenu = styled.ul<CommonSelectStyleProps>`
   ${({ variant = 'default' }) => createScrollbars(variant)}
 `;
 
-export const StyledDropdownMenuItem = styled.li`
+export const StyledDropdownMenuItem = styled.li<{ active: boolean }>`
   box-sizing: border-box;
 
   width: 100%;
@@ -211,12 +213,9 @@ export const StyledDropdownMenuItem = styled.li`
   overflow: hidden;
   text-overflow: ellipsis;
   color: ${({ theme }) => theme.canvasText};
-  &:hover,
   &:focus {
-    ${sharedHoverStyles}
     outline: 0;
   }
+  ${({ active }) => (active ? sharedHoverStyles : '')}
   user-select: none;
 `;
-
-export const StyledNativeOption = styled.option``;

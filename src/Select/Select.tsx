@@ -1,163 +1,87 @@
 import React, {
   forwardRef,
   useCallback,
-  useEffect,
   useImperativeHandle,
   useMemo,
-  useRef,
-  useState
+  useRef
 } from 'react';
 
-import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
-import useForkRef from '../common/hooks/useForkRef';
-import { clamp } from '../common/utils';
+import { useId } from '../common/hooks/useId';
 import { CommonStyledProps } from '../types';
 
 import {
-  StyledDropdownButton,
-  StyledDropdownIcon,
   StyledDropdownMenu,
   StyledDropdownMenuItem,
-  StyledFlatSelectWrapper,
   StyledInner,
-  StyledNativeOption,
-  StyledNativeSelect,
-  StyledSelectContent,
-  StyledSelectWrapper
+  StyledSelectContent
 } from './Select.styles';
-import {
-  SelectChangeEvent,
-  SelectFormatDisplayCallback,
-  SelectOption,
-  SelectRef,
-  SelectVariants
-} from './Select.types';
+import { SelectOption, SelectInnerProps, SelectRef } from './Select.types';
+import { useSelectCommon } from './useSelectCommon';
+import { useSelectState } from './useSelectState';
 
-type AnyEvent = MouseEvent | React.MouseEvent | React.KeyboardEvent;
-
-type OmittedNativeProps =
-  | 'className'
-  | 'defaultValue'
-  | 'disabled'
-  | 'name'
-  | 'onBlur'
-  | 'onChange'
-  | 'onFocus'
-  | 'readOnly'
-  | 'style'
-  | 'value';
-
-type SelectCustomProps = {
-  native?: undefined | false;
-} & Omit<React.InputHTMLAttributes<HTMLInputElement>, OmittedNativeProps>;
-
-type SelectNativeProps = {
-  native: true;
-} & Omit<React.SelectHTMLAttributes<HTMLSelectElement>, OmittedNativeProps>;
-
-type SelectProps<T> = {
-  'aria-label'?: string;
-  className?: string;
-  defaultValue?: T;
-  disabled?: boolean;
-  formatDisplay?: SelectFormatDisplayCallback<T>;
-  inputRef?: React.RefObject<SelectRef> | null;
-  menuMaxHeight?: string | number;
-  name?: string;
-  /**
-   * @default [false]
-   */
-  native?: boolean;
-  onBlur?: React.FocusEventHandler<HTMLDivElement | HTMLSelectElement>;
-  onChange?: (event: SelectChangeEvent<T>, option: SelectOption<T>) => void;
-  onClose?: (event: AnyEvent) => void;
-  onFocus?: React.FocusEventHandler<HTMLDivElement | HTMLSelectElement>;
-  onOpen?: (event: AnyEvent) => void;
-  labelId?: string;
-  open?: boolean;
-  options?: (SelectOption<T> | null)[];
-  readOnly?: boolean;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  SelectDisplayProps?: Record<string, any>;
-  shadow?: boolean;
-  style?: React.CSSProperties;
-  value?: T | string;
-  variant?: SelectVariants;
-  width?: string | number;
-} & (SelectCustomProps | SelectNativeProps) &
+type SelectProps<T> = SelectInnerProps<T> &
+  Omit<
+    React.HTMLAttributes<HTMLDivElement>,
+    'defaultValue' | 'name' | 'onChange' | 'onFocus' | 'style' | 'value'
+  > &
   CommonStyledProps;
 
-const KEYS = {
-  ARROW_DOWN: 'ArrowDown',
-  ARROW_LEFT: 'ArrowLeft',
-  ARROW_RIGHT: 'ArrowRight',
-  ARROW_UP: 'ArrowUp',
-  ENTER: 'Enter',
-  ESC: 'Escape',
-  SPACE: ' ',
-  TAB: 'Tab'
-};
+function SelectInnerOption<T>({
+  activateOptionIndex,
+  active,
+  index,
+  onClick,
+  option,
+  selected,
+  setRef
+}: {
+  activateOptionIndex: (optionIndex: number) => void;
+  active: boolean;
+  index: number;
+  onClick: React.MouseEventHandler<HTMLLIElement>;
+  option: SelectOption<T>;
+  selected: boolean;
+  setRef: (ref: HTMLLIElement | null, optionIndex: number) => void;
+}) {
+  const handleOnMouseEnter = useCallback(() => {
+    activateOptionIndex(index);
+  }, [activateOptionIndex, index]);
 
-function areEqualValues<T>(a: T, b: T) {
-  if (typeof b === 'object' && b !== null) {
-    return a === b;
-  }
-  return String(a) === String(b);
-}
-
-const getWrapper = (variant: SelectVariants) =>
-  variant === 'flat' ? StyledFlatSelectWrapper : StyledSelectWrapper;
-
-const getDisplayLabel = <T,>(
-  selectedOption: SelectOption<T> | undefined,
-  formatDisplay: SelectFormatDisplayCallback<T> | undefined
-) => {
-  if (!selectedOption) {
-    return '';
-  }
-  if (formatDisplay) {
-    return formatDisplay(selectedOption);
-  }
-  return selectedOption.label;
-};
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const getDefaultValue = <T,>(defaultValue: any, options: SelectOption<T>[]) => {
-  if (defaultValue) {
-    return defaultValue;
-  }
-  if (options && options[0]) {
-    return options[0].value;
-  }
-  return undefined;
-};
-
-const getFocusedNodeIndex = (dropdownElement: HTMLUListElement) =>
-  dropdownElement
-    ? Array.from(dropdownElement.childNodes).findIndex(
-        node => node === document.activeElement
-      )
-    : -1;
-
-const getOptionWithValue = <T,>(value: T, options: SelectOption<T>[]) => {
-  const isValueString = typeof value === 'string';
-  return options.find(
-    option =>
-      option.value === value ||
-      (typeof option.value === 'number' &&
-        isValueString &&
-        option.value === parseInt(value, 10))
+  const handleSetRef = useCallback(
+    (ref: HTMLLIElement | null) => {
+      setRef(ref, index);
+    },
+    [index, setRef]
   );
-};
+
+  const id = useId();
+
+  return (
+    <StyledDropdownMenuItem
+      active={active}
+      aria-selected={selected ? 'true' : undefined}
+      data-value={option.value}
+      id={id}
+      onClick={onClick}
+      onMouseEnter={handleOnMouseEnter}
+      ref={handleSetRef}
+      role='option'
+      tabIndex={0}
+    >
+      {option.label}
+    </StyledDropdownMenuItem>
+  );
+}
 
 function SelectInner<T>(
   {
     'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledBy,
     className,
     defaultValue,
     disabled = false,
     formatDisplay,
-    inputRef: inputRefProp = null,
+    inputProps,
     labelId,
     menuMaxHeight,
     name,
@@ -165,375 +89,144 @@ function SelectInner<T>(
     onChange,
     onClose,
     onFocus,
+    onKeyDown,
+    onMouseDown,
     onOpen,
     open: openProp,
-    options: optionsProp = [],
+    options: optionsProp,
     readOnly,
-    SelectDisplayProps,
     shadow = true,
     style,
-    value: valueProp,
     variant = 'default',
+    value: valueProp,
     width = 'auto',
     ...otherProps
   }: SelectProps<T>,
   ref: React.ForwardedRef<SelectRef>
 ) {
-  const { native } = otherProps;
-
-  const wrapperRef = useRef<HTMLDivElement | null>(null);
-  const displayNode = useRef<HTMLDivElement | null>(null);
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  const dropdownRef = useRef<HTMLUListElement | null>(null);
-  const handleRef = useForkRef(ref, inputRefProp);
-
-  const options = useMemo(
-    () => optionsProp.filter(Boolean) as SelectOption<T>[],
-    [optionsProp]
-  );
-  const [value, setValueState] = useControlledOrUncontrolled({
+  const {
+    isEnabled,
+    options,
+    setValue,
+    value,
+    wrapperProps,
+    DropdownButton,
+    Wrapper
+  } = useSelectCommon<T>({
+    className,
+    defaultValue,
+    disabled,
+    native: false,
+    onChange,
+    options: optionsProp,
+    style,
+    readOnly,
     value: valueProp,
-    defaultValue: getDefaultValue(defaultValue, options)
+    variant,
+    width
   });
 
-  const [openState, setOpenState] = useState(false);
-  const isOpenControlled = openProp !== undefined;
-  const open = isOpenControlled ? openProp : openState;
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const selectRef = useRef<HTMLDivElement | null>(null);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+
+  const {
+    activeOption,
+    handleActivateOptionIndex,
+    handleBlur,
+    handleButtonKeyDown,
+    handleDropdownKeyDown,
+    handleFocus,
+    handleMouseDown,
+    handleOptionClick,
+    handleSetDropdownRef,
+    handleSetOptionRef,
+    open,
+    selectedOption
+  } = useSelectState<T>({
+    onBlur,
+    onChange,
+    onClose,
+    onFocus,
+    onKeyDown,
+    onMouseDown,
+    onOpen,
+    open: openProp,
+    options,
+    value,
+    selectRef,
+    setValue,
+    wrapperRef
+  });
 
   // to hijack native focus. when somebody passes ref
   // and triggers focus, we focus displayNode instead of input
   useImperativeHandle(
-    handleRef,
+    ref,
     () => ({
-      focus: () => {
-        displayNode.current?.focus();
+      focus: focusOptions => {
+        selectRef.current?.focus(focusOptions);
       },
       node: inputRef.current,
-      value
+      value: String(value)
     }),
-    [displayNode, value]
+    [value]
   );
 
-  const selectedOption = useMemo(
-    () => getOptionWithValue(value, options),
-    [options, value]
+  const displayLabel = useMemo(
+    () =>
+      !selectedOption
+        ? ''
+        : typeof formatDisplay === 'function'
+        ? formatDisplay(selectedOption)
+        : selectedOption.label,
+    [formatDisplay, selectedOption]
   );
-
-  const update = useCallback(
-    (opens: boolean, event: AnyEvent) => {
-      if (opens) {
-        onOpen?.(event);
-      } else {
-        onClose?.(event);
-      }
-
-      if (!isOpenControlled) {
-        setOpenState(opens);
-      }
-    },
-    [isOpenControlled, onClose, onOpen]
-  );
-
-  const handleOpen = useCallback(
-    (event: AnyEvent) => {
-      update(true, event);
-    },
-    [update]
-  );
-
-  const handleClose = useCallback(
-    (event: AnyEvent) => {
-      update(false, event);
-    },
-    [update]
-  );
-
-  const toggleOpen = useCallback(
-    (event: AnyEvent) => {
-      update(!open, event);
-    },
-    [open, update]
-  );
-
-  useEffect(() => {
-    const handleClick = (event: MouseEvent) => {
-      if (!openState) {
-        return;
-      }
-
-      const target = event.target as Node;
-
-      if (!wrapperRef.current?.contains(target)) {
-        event.preventDefault();
-        handleClose(event);
-        displayNode.current?.focus();
-      }
-    };
-
-    document.addEventListener('mousedown', handleClick);
-    return () => {
-      document.removeEventListener('mousedown', handleClick);
-    };
-  }, [handleClose, openState]);
-
-  const handleMouseDown = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
-      // ignore everything but left-click
-      if (event.button !== 0) {
-        return;
-      }
-
-      // hijack the default focus behavior.
-      event.preventDefault();
-      displayNode.current?.focus();
-
-      if (open) {
-        handleClose(event.nativeEvent);
-      } else {
-        handleOpen(event.nativeEvent);
-      }
-    },
-    [handleClose, handleOpen, open]
-  );
-
-  const handleOptionClick = useCallback(
-    (option: SelectOption<T>) => (event: AnyEvent) => {
-      const newValue = option.value;
-      setValueState(newValue);
-
-      if (onChange) {
-        if ('persist' in event) {
-          event.persist();
-        }
-        Object.defineProperty(event, 'target', {
-          writable: true,
-          value: { value: newValue, name }
-        });
-        // TODO: Unweirdify this event argument
-        onChange(event as unknown as SelectChangeEvent<T>, option);
-      }
-
-      handleClose(event);
-      displayNode.current?.focus();
-    },
-    [handleClose, name, onChange, setValueState]
-  );
-
-  const handleKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLDivElement | HTMLUListElement>) => {
-      const { key } = event;
-      // the native select doesn't respond to enter on mac, but it's recommended by
-      // https://www.w3.org/TR/wai-aria-practices/examples/listbox/listbox-collapsible.html
-      const { ARROW_DOWN, ARROW_UP, ENTER, SPACE, TAB } = KEYS;
-
-      if (key === TAB) {
-        if (open) {
-          // if dropdown is open- close it
-          // prevent default behaviour (focusing on next element)
-          // and focus select instead
-          event.preventDefault();
-          toggleOpen(event);
-          displayNode.current?.focus();
-        }
-      } else {
-        event.preventDefault();
-        if (key === SPACE) {
-          // space toggles the dropdown (open/closed) while keeping focus
-          toggleOpen(event);
-          displayNode.current?.focus();
-        } else if ([ARROW_DOWN, ARROW_UP, ENTER].includes(key)) {
-          if (!open) {
-            handleOpen(event);
-          }
-          if (!dropdownRef.current) {
-            return;
-          }
-          const currentFocusIndex = getFocusedNodeIndex(dropdownRef.current);
-          if ([ARROW_UP, ARROW_DOWN].includes(key)) {
-            const change = key === ARROW_UP ? -1 : 1;
-            const nextOptionIndex = clamp(
-              currentFocusIndex + change,
-              0,
-              options.length - 1
-            );
-            const nextOption = dropdownRef.current.childNodes[
-              nextOptionIndex
-            ] as HTMLElement;
-            nextOption?.focus();
-          } else if (key === ENTER && currentFocusIndex > -1) {
-            setValueState(options[currentFocusIndex].value);
-            handleClose(event);
-            displayNode.current?.focus();
-
-            if (onChange) {
-              const option = options[currentFocusIndex];
-              event.persist();
-              Object.defineProperty(event, 'target', {
-                writable: true,
-                value: { value: option.value, name }
-              });
-              onChange(event as unknown as SelectChangeEvent<T>, option);
-            }
-          }
-        }
-      }
-    },
-    [
-      handleClose,
-      handleOpen,
-      name,
-      onChange,
-      open,
-      options,
-      setValueState,
-      toggleOpen
-    ]
-  );
-
-  const handleBlur = useCallback(
-    (event: React.FocusEvent<HTMLDivElement>) => {
-      // trigger onBlur only when dropdown is closesd
-      // otherwise onBlur would be triggered when switching focus
-      // from display node to
-      if (!open && onBlur) {
-        event.persist();
-        // Preact support, target is read only property on a native event.
-        Object.defineProperty(event, 'target', {
-          writable: true,
-          value: { value, name }
-        });
-        onBlur(event);
-      }
-    },
-    [name, onBlur, open, value]
-  );
-
-  const handleOptionKeyUp = useCallback(
-    (event: React.KeyboardEvent<HTMLLIElement | HTMLSelectElement>) => {
-      if (event.key === KEYS.SPACE) {
-        // otherwise our MenuItems dispatches a click event
-        // it's not behavior of the native <option> and causes
-        // the select to close immediately since we open on space keydown
-        event.preventDefault();
-      }
-    },
-    []
-  );
-
-  // function below to enable using
-  // value/defaultValue in native select
-  const handleNativeSelection = useCallback(
-    (event: React.ChangeEvent<HTMLSelectElement>) => {
-      event.stopPropagation();
-
-      const nextSelection = getOptionWithValue(
-        event.target.value,
-        options as unknown as SelectOption<string>[]
-      );
-      if (!nextSelection) {
-        return;
-      }
-
-      onChange?.(
-        event as unknown as SelectChangeEvent<T>,
-        nextSelection as unknown as SelectOption<T>
-      );
-      setValueState(nextSelection.value);
-      displayNode.current?.focus();
-    },
-    [onChange, options, setValueState]
-  );
-
-  const isEnabled = !(disabled || readOnly);
-  const displayLabel = getDisplayLabel(selectedOption, formatDisplay);
   const tabIndex = isEnabled ? 1 : undefined;
-  const Wrapper = getWrapper(variant);
+
+  const dropdownMenuStyle = useMemo(
+    () =>
+      menuMaxHeight
+        ? { overflow: 'auto', maxHeight: menuMaxHeight }
+        : undefined,
+    [menuMaxHeight]
+  );
+
+  const dropdownMenuId = useId();
 
   const optionsContent = useMemo(
     () =>
       options.map((option, index) => {
         const key = `${value}-${index}`;
-
-        if (native) {
-          return (
-            <StyledNativeOption key={key} value={String(option.value)}>
-              {option.label}
-            </StyledNativeOption>
-          );
-        }
-
-        const selected = areEqualValues(option.value, value);
+        const active = option === activeOption;
+        const selected = option === selectedOption;
         return (
-          <StyledDropdownMenuItem
-            ref={el => {
-              if (el && option.value === value) {
-                el.focus();
-              }
-            }}
-            aria-selected={selected ? 'true' : undefined}
-            data-value={option.value}
+          <SelectInnerOption
+            activateOptionIndex={handleActivateOptionIndex}
+            active={active}
+            index={index}
             key={key}
-            onClick={handleOptionClick(option)}
-            onKeyUp={handleOptionKeyUp}
-            role='option'
-            tabIndex={0}
-          >
-            {option.label}
-          </StyledDropdownMenuItem>
+            onClick={handleOptionClick}
+            option={option}
+            selected={selected}
+            setRef={handleSetOptionRef}
+          />
         );
       }),
-    [handleOptionClick, handleOptionKeyUp, native, options, value]
+    [
+      activeOption,
+      handleActivateOptionIndex,
+      handleOptionClick,
+      handleSetOptionRef,
+      options,
+      selectedOption,
+      value
+    ]
   );
-
-  const wrapperCommonProps: React.HTMLAttributes<HTMLDivElement> = {
-    className,
-    style: { ...style, width }
-  };
-
-  const DropdownButton = (
-    <StyledDropdownButton
-      as='div'
-      data-testid='select-button'
-      $disabled={disabled}
-      native={native}
-      tabIndex={-1}
-      variant={variant}
-    >
-      <StyledDropdownIcon data-testid='select-icon' $disabled={disabled} />
-    </StyledDropdownButton>
-  );
-
-  if (native) {
-    return (
-      <Wrapper {...wrapperCommonProps}>
-        <StyledInner>
-          <StyledNativeSelect
-            {...otherProps}
-            onBlur={onBlur}
-            onFocus={onFocus}
-            onClose={onClose}
-            disabled={disabled}
-            onChange={isEnabled ? handleNativeSelection : undefined}
-            ref={displayNode}
-            value={value}
-          >
-            {optionsContent}
-          </StyledNativeSelect>
-          {DropdownButton}
-        </StyledInner>
-      </Wrapper>
-    );
-  }
-
-  const buttonId = SelectDisplayProps?.id
-    ? String(SelectDisplayProps?.id)
-    : name
-    ? `react95-component-select-${name}`
-    : undefined;
 
   return (
     <Wrapper
-      {...wrapperCommonProps}
+      {...wrapperProps}
       $disabled={disabled}
       ref={wrapperRef}
       shadow={shadow}
@@ -543,27 +236,24 @@ function SelectInner<T>(
         name={name}
         ref={inputRef}
         type='hidden'
-        value={value}
-        {...otherProps}
+        value={String(value)}
+        {...inputProps}
       />
       <StyledInner
         aria-disabled={disabled}
-        aria-expanded={open ? 'true' : undefined}
+        aria-expanded={open}
         aria-haspopup='listbox'
         aria-label={ariaLabel}
-        aria-labelledby={
-          [labelId, buttonId].filter(Boolean).join(' ') || undefined
-        }
-        // The id is required for proper a11y
-        id={buttonId}
+        aria-labelledby={ariaLabelledBy ?? labelId}
+        aria-owns={isEnabled && open ? dropdownMenuId : undefined}
         onBlur={handleBlur}
-        onFocus={onFocus}
-        onKeyDown={handleKeyDown}
-        onMouseDown={isEnabled ? handleMouseDown : undefined}
-        ref={displayNode}
+        onFocus={handleFocus}
+        onKeyDown={handleButtonKeyDown}
+        onMouseDown={isEnabled ? handleMouseDown : onMouseDown}
+        ref={selectRef}
         role='button'
         tabIndex={tabIndex}
-        {...SelectDisplayProps}
+        {...otherProps}
       >
         <StyledSelectContent>{displayLabel}</StyledSelectContent>
 
@@ -571,15 +261,11 @@ function SelectInner<T>(
       </StyledInner>
       {isEnabled && open && (
         <StyledDropdownMenu
-          aria-labelledby={labelId}
-          onKeyDown={handleKeyDown}
-          ref={dropdownRef}
+          id={dropdownMenuId}
+          onKeyDown={handleDropdownKeyDown}
+          ref={handleSetDropdownRef}
           role='listbox'
-          style={
-            menuMaxHeight
-              ? { overflow: 'auto', maxHeight: menuMaxHeight }
-              : undefined
-          }
+          style={dropdownMenuStyle}
           tabIndex={0}
           variant={variant}
         >
@@ -599,5 +285,7 @@ const Select = forwardRef(SelectInner) as <T>(
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 Select.displayName = 'Select';
+
+export * from './SelectNative';
 
 export { Select, SelectProps };

@@ -5,7 +5,6 @@ import { Button } from '../Button/Button';
 import { NumberInput } from '../NumberInput/NumberInput';
 import { ScrollView } from '../ScrollView/ScrollView';
 import { Select } from '../Select/Select';
-import { SelectChangeEvent } from '../Select/Select.types';
 import { Toolbar } from '../Toolbar/Toolbar';
 import { Window, WindowContent, WindowHeader } from '../Window/Window';
 
@@ -101,9 +100,12 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     const [date, setDate] = useState(() => convertDateToState(initialDate));
     const { year, month, day } = date;
 
-    const handleMonthSelect = useCallback((e: SelectChangeEvent<number>) => {
-      setDate(currentDate => ({ ...currentDate, month: e.target.value }));
-    }, []);
+    const handleMonthSelect = useCallback(
+      ({ value: monthSelected }: { value: number }) => {
+        setDate(currentDate => ({ ...currentDate, month: monthSelected }));
+      },
+      []
+    );
 
     const handleYearSelect = useCallback((yearSelected: number) => {
       setDate(currentDate => ({ ...currentDate, year: yearSelected }));

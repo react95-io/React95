@@ -18,6 +18,9 @@ export type CommonStyledProps = {
   as?: string | ComponentType<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type HTMLDataAttributes = Record<`data-${string}`, any>;
+
 export type CommonThemeProps = {
   'data-testid'?: string;
   $disabled?: boolean;
