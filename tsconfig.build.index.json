@@ -3,7 +3,8 @@
   "compilerOptions": {
     "emitDeclarationOnly": true,
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "sourceMap": false
   },
   "include": [
     "types/global.d.ts",
