@@ -1,13 +1,12 @@
 module.exports = {
   globals: {
-    extensionsToTreatAsEsm: ['.js'],
     'ts-jest': {
       diagnostics: false,
-      isolatedModules: true,
-      useESM: true
+      isolatedModules: true
     }
   },
-  preset: 'ts-jest/presets/js-with-ts-esm',
+  coverageReporters: ['text', 'html'],
+  preset: 'ts-jest/presets/default-esm',
   setupFilesAfterEnv: ['<rootDir>/test/setup-test.ts'],
   testEnvironment: 'jsdom'
 };
