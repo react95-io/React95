@@ -321,13 +321,19 @@ function TreeInner<T>(
   ref: React.ForwardedRef<HTMLUListElement>
 ) {
   const [expandedInternal, setExpandedInternal] = useControlledOrUncontrolled({
+    defaultValue: defaultExpanded,
+    onChange: onNodeToggle,
+    onChangePropName: 'onNodeToggle',
     value: expanded,
-    defaultValue: defaultExpanded
+    valuePropName: 'expanded'
   });
 
   const [selectedInternal, setSelectedInternal] = useControlledOrUncontrolled({
+    defaultValue: defaultSelected,
+    onChange: onNodeSelect,
+    onChangePropName: 'onNodeSelect',
     value: selected,
-    defaultValue: defaultSelected
+    valuePropName: 'selected'
   });
 
   const toggleMenu = useCallback(

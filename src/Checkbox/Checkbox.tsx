@@ -207,8 +207,10 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     ref
   ) => {
     const [state, setState] = useControlledOrUncontrolled({
-      value: checked,
-      defaultValue: defaultChecked
+      defaultValue: defaultChecked,
+      onChange,
+      readOnly: otherProps.readOnly ?? disabled,
+      value: checked
     });
 
     const handleChange = useCallback(

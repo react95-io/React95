@@ -14,6 +14,20 @@ function createTouches(
 }
 
 describe('<Slider />', () => {
+  beforeAll(() => {
+    jest
+      .spyOn(HTMLElement.prototype, 'getBoundingClientRect')
+      .mockImplementation(
+        () =>
+          ({
+            width: 100,
+            height: 20,
+            bottom: 20,
+            left: 0
+          } as DOMRect)
+      );
+  });
+
   it('should call handlers', () => {
     const handleChange = jest.fn();
     const handleChangeCommitted = jest.fn();
@@ -76,7 +90,7 @@ describe('<Slider />', () => {
   });
 
   it('defaults to horizontal orientation', () => {
-    const { getByRole } = renderWithTheme(<Slider value={0} />);
+    const { getByRole } = renderWithTheme(<Slider defaultValue={0} />);
 
     expect(getByRole('slider')).toHaveAttribute(
       'aria-orientation',
@@ -86,7 +100,7 @@ describe('<Slider />', () => {
   it('should forward mouseDown', () => {
     const handleMouseDown = jest.fn();
     const { container } = renderWithTheme(
-      <Slider onMouseDown={handleMouseDown} value={0} />
+      <Slider onMouseDown={handleMouseDown} defaultValue={0} />
     );
     const slider = container.firstElementChild as HTMLElement;
     fireEvent.mouseDown(slider);
@@ -103,13 +117,6 @@ describe('<Slider />', () => {
       );
       const slider = container.firstElementChild as HTMLElement;
       // mocking containers size
-      slider.getBoundingClientRect = () =>
-        ({
-          width: 100,
-          height: 20,
-          bottom: 20,
-          left: 0
-        } as DOMRect);
       const thumb = getByRole('slider');
 
       fireEvent.touchStart(
@@ -292,7 +299,7 @@ describe('<Slider />', () => {
   describe('prop: orientation', () => {
     it('when vertical, should render with aria-orientation attribute set to "vertical" ', () => {
       const { getByRole } = renderWithTheme(
-        <Slider orientation='vertical' value={0} />
+        <Slider orientation='vertical' defaultValue={0} />
       );
 
       expect(getByRole('slider')).toHaveAttribute(
@@ -314,13 +321,17 @@ describe('<Slider />', () => {
       const slider = container.firstElementChild as HTMLElement;
 
       // mocking containers size
-      slider.getBoundingClientRect = () =>
-        ({
-          width: 20,
-          height: 100,
-          bottom: 100,
-          left: 0
-        } as DOMRect);
+      jest
+        .spyOn(HTMLElement.prototype, 'getBoundingClientRect')
+        .mockImplementation(
+          () =>
+            ({
+              width: 20,
+              height: 100,
+              bottom: 100,
+              left: 0
+            } as DOMRect)
+        );
 
       fireEvent.touchStart(
         slider,
