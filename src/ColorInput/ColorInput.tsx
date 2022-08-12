@@ -128,8 +128,10 @@ const ColorInput = forwardRef<HTMLInputElement, ColorInputProps>(
     ref
   ) => {
     const [valueDerived, setValueState] = useControlledOrUncontrolled({
-      value,
-      defaultValue
+      defaultValue,
+      onChange,
+      readOnly: otherProps.readOnly ?? disabled,
+      value
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

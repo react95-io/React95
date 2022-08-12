@@ -14,6 +14,7 @@ type NumberInputProps = {
   disabled?: boolean;
   max?: number;
   min?: number;
+  readOnly?: boolean;
   step?: number;
   onChange?: (newValue: number) => void;
   style?: React.CSSProperties;
@@ -105,6 +106,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       max,
       min,
       onChange,
+      readOnly,
       step = 1,
       style,
       value,
@@ -114,8 +116,10 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
     ref
   ) => {
     const [valueDerived, setValueState] = useControlledOrUncontrolled({
-      value,
-      defaultValue
+      defaultValue,
+      onChange,
+      readOnly,
+      value
     });
 
     const handleInputChange = useCallback(
@@ -169,6 +173,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           onChange={handleInputChange}
           disabled={disabled}
           type='number'
+          readOnly={readOnly}
           ref={ref}
           fullWidth
           onBlur={onBlur}
@@ -177,7 +182,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           <StyledButton
             data-testid='increment'
             variant={variant}
-            disabled={disabled}
+            disabled={disabled || readOnly}
             onClick={stepUp}
           >
             <StyledButtonIcon invert />
@@ -185,7 +190,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           <StyledButton
             data-testid='decrement'
             variant={variant}
-            disabled={disabled}
+            disabled={disabled || readOnly}
             onClick={stepDown}
           >
             <StyledButtonIcon />
