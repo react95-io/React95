@@ -313,9 +313,10 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
   ) => {
     const Groove = variant === 'flat' ? StyledFlatGroove : StyledGroove;
     const vertical = orientation === 'vertical';
-    const [valueDerived, setValueState] = useControlledOrUncontrolled({
-      value,
-      defaultValue: defaultValue ?? min
+    const [valueDerived = min, setValueState] = useControlledOrUncontrolled({
+      defaultValue,
+      onChange: onChange ?? onChangeCommitted,
+      value
     });
 
     const {
