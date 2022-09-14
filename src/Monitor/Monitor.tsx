@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import styled from 'styled-components';
+import { styledDimension } from '../common';
 
 import { StyledScrollView } from '../ScrollView/ScrollView';
 
@@ -11,7 +12,7 @@ type MonitorProps = {
 const Wrapper = styled.div`
   position: relative;
   display: inline-block;
-  padding-bottom: 26px;
+  padding-bottom: ${styledDimension(13)};
 `;
 
 const Inner = styled.div`
@@ -22,17 +23,18 @@ const MonitorBody = styled.div`
   position: relative;
   z-index: 1;
   box-sizing: border-box;
-  width: 195px;
-  height: 155px;
-  padding: 12px;
+  width: ${styledDimension(97.5)};
+  height: ${styledDimension(77.5)};
+  padding: ${styledDimension(6)};
   background: ${({ theme }) => theme.material};
-  border-top: 4px solid ${({ theme }) => theme.borderLightest};
-  border-left: 4px solid ${({ theme }) => theme.borderLightest};
-  border-bottom: 4px solid ${({ theme }) => theme.borderDark};
-  border-right: 4px solid ${({ theme }) => theme.borderDark};
+  border-top: ${styledDimension(2)} solid ${({ theme }) => theme.borderLightest};
+  border-left: ${styledDimension(2)} solid
+    ${({ theme }) => theme.borderLightest};
+  border-bottom: ${styledDimension(2)} solid ${({ theme }) => theme.borderDark};
+  border-right: ${styledDimension(2)} solid ${({ theme }) => theme.borderDark};
 
-  outline: 1px dotted ${({ theme }) => theme.material};
-  outline-offset: -3px;
+  outline: ${styledDimension(0.5)} dotted ${({ theme }) => theme.material};
+  outline-offset: ${styledDimension(-1.5)};
   &:before {
     content: '';
     position: absolute;
@@ -40,19 +42,20 @@ const MonitorBody = styled.div`
     top: 0;
     width: 100%;
     height: 100%;
-    outline: 1px dotted ${({ theme }) => theme.material};
+    outline: ${styledDimension(0.5)} dotted ${({ theme }) => theme.material};
   }
-  box-shadow: 1px 1px 0 1px ${({ theme }) => theme.borderDarkest};
+  box-shadow: ${styledDimension(0.5)} ${styledDimension(0.5)} 0
+    ${styledDimension(0.5)} ${({ theme }) => theme.borderDarkest};
 
   &:after {
     content: '';
     display: inline-block;
     position: absolute;
-    bottom: 4px;
-    right: 12px;
-    width: 10px;
-    border-top: 2px solid #4d9046;
-    border-bottom: 2px solid #07ff00;
+    bottom: ${styledDimension(2)};
+    right: ${styledDimension(6)};
+    width: ${styledDimension(5)};
+    border-top: ${styledDimension(1)} solid #4d9046;
+    border-bottom: ${styledDimension(1)} solid #07ff00;
   }
 `;
 
@@ -66,43 +69,52 @@ const Background = styled(StyledScrollView).attrs(() => ({
 const Stand = styled.div`
   box-sizing: border-box;
   position: absolute;
-  top: calc(100% + 2px);
+  top: calc(100% + ${styledDimension(1)});
   left: 50%;
   transform: translateX(-50%);
-  height: 10px;
+  height: ${styledDimension(5)};
   width: 50%;
   background: ${({ theme }) => theme.material};
-  border-left: 2px solid ${({ theme }) => theme.borderLightest};
-  border-bottom: 2px solid ${({ theme }) => theme.borderDarkest};
-  border-right: 2px solid ${({ theme }) => theme.borderDarkest};
-  box-shadow: inset 0px 0px 0px 2px ${({ theme }) => theme.borderDark};
+  border-left: ${styledDimension(1)} solid
+    ${({ theme }) => theme.borderLightest};
+  border-bottom: ${styledDimension(1)} solid
+    ${({ theme }) => theme.borderDarkest};
+  border-right: ${styledDimension(1)} solid
+    ${({ theme }) => theme.borderDarkest};
+  box-shadow: inset 0px 0px 0px ${styledDimension(1)}
+    ${({ theme }) => theme.borderDark};
 
   &:before {
     content: '';
     position: absolute;
-    top: calc(100% + 2px);
+    top: calc(100% + ${styledDimension(1)});
     left: 50%;
     transform: translateX(-50%);
     width: 80%;
-    height: 8px;
+    height: ${styledDimension(4)};
     background: ${({ theme }) => theme.material};
-    border-left: 2px solid ${({ theme }) => theme.borderLightest};
-    border-right: 2px solid ${({ theme }) => theme.borderDarkest};
-    box-shadow: inset 0px 0px 0px 2px ${({ theme }) => theme.borderDark};
+    border-left: ${styledDimension(1)} solid
+      ${({ theme }) => theme.borderLightest};
+    border-right: ${styledDimension(1)} solid
+      ${({ theme }) => theme.borderDarkest};
+    box-shadow: inset 0px 0px 0px ${styledDimension(1)}
+      ${({ theme }) => theme.borderDark};
   }
   &:after {
     content: '';
     position: absolute;
-    top: calc(100% + 8px);
+    top: calc(100% + ${styledDimension(4)});
     left: 50%;
     transform: translateX(-50%);
     width: 150%;
-    height: 4px;
+    height: ${styledDimension(2)};
     background: ${({ theme }) => theme.material};
-    border: 2px solid ${({ theme }) => theme.borderDark};
+    border: ${styledDimension(1)} solid ${({ theme }) => theme.borderDark};
     border-bottom: none;
-    box-shadow: inset 1px 1px 0px 1px ${({ theme }) => theme.borderLightest},
-      1px 1px 0 1px ${({ theme }) => theme.borderDarkest};
+    box-shadow: inset ${styledDimension(0.5)} ${styledDimension(0.5)} 0px
+        ${styledDimension(0.5)} ${({ theme }) => theme.borderLightest},
+      ${styledDimension(0.5)} ${styledDimension(0.5)} 0 ${styledDimension(0.5)}
+        ${({ theme }) => theme.borderDarkest};
   }
 `;
 

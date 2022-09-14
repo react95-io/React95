@@ -1,7 +1,6 @@
 export type Color = string;
 
-export type Theme = {
-  name: string;
+export type ThemeColors = {
   anchor: Color;
   anchorVisited: Color;
   borderDark: Color;
@@ -33,6 +32,12 @@ export type Theme = {
   progress: Color;
   tooltip: Color;
 };
+
+export type Theme = {
+  name: string;
+  scale?: number;
+  shadow?: boolean;
+} & ThemeColors;
 
 export type WindowsTheme = {
   ActiveBorder: Color;

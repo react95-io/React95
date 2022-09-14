@@ -6,6 +6,7 @@ import React, {
   useState
 } from 'react';
 import styled, { css } from 'styled-components';
+import { styledDimension } from '../common';
 
 import { blockSizes } from '../common/system';
 import { StyledScrollView } from '../ScrollView/ScrollView';
@@ -13,6 +14,7 @@ import { CommonStyledProps } from '../types';
 
 type ProgressBarProps = {
   hideValue?: boolean;
+  /** @deprecated Change `shadow` property on theme */
   shadow?: boolean;
   value?: number;
   variant?: 'default' | 'tile';
@@ -39,8 +41,8 @@ const ProgressCutout = styled(StyledScrollView)<
   }
 `;
 const commonBarStyles = css`
-  width: calc(100% - 4px);
-  height: calc(100% - 4px);
+  width: calc(100% - ${styledDimension(2)});
+  height: calc(100% - ${styledDimension(2)});
 
   display: flex;
   align-items: center;
@@ -48,19 +50,19 @@ const commonBarStyles = css`
 `;
 const WhiteBar = styled.div`
   position: relative;
-  top: 4px;
+  top: ${styledDimension(2)};
   ${commonBarStyles}
   background: ${({ theme }) => theme.canvas};
   color: #000;
-  margin-left: 2px;
-  margin-top: -2px;
+  margin-left: ${styledDimension(1)};
+  margin-top: ${styledDimension(-1)};
   color: ${({ theme }) => theme.materialText};
 `;
 
 const BlueBar = styled.div<Pick<ProgressBarProps, 'value'>>`
   position: absolute;
-  top: 2px;
-  left: 2px;
+  top: ${styledDimension(1)};
+  left: ${styledDimension(1)};
   ${commonBarStyles}
   color: ${({ theme }) => theme.materialTextInvert};
   background: ${({ theme }) => theme.progress};
@@ -74,35 +76,29 @@ const BlueBar = styled.div<Pick<ProgressBarProps, 'value'>>`
 `;
 
 const TilesWrapper = styled.div`
-  width: calc(100% - 6px);
-  height: calc(100% - 8px);
+  width: calc(100% - ${styledDimension(3)});
+  height: calc(100% - ${styledDimension(4)});
   position: absolute;
-  left: 3px;
-  top: 4px;
+  left: ${styledDimension(1.5)};
+  top: ${styledDimension(2)};
   box-sizing: border-box;
   display: inline-flex;
 `;
-const tileWidth = 17;
+const tileWidth = 8.5;
 const Tile = styled.span`
   display: inline-block;
-  width: ${tileWidth}px;
+  width: ${styledDimension(tileWidth)};
   box-sizing: border-box;
   height: 100%;
   background: ${({ theme }) => theme.progress};
   border-color: ${({ theme }) => theme.material};
-  border-width: 0px 1px;
+  border-width: 0px ${styledDimension(0.5)};
   border-style: solid;
 `;
 
 const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
   (
-    {
-      hideValue = false,
-      shadow = true,
-      value,
-      variant = 'default',
-      ...otherProps
-    },
+    { hideValue = false, shadow, value, variant = 'default', ...otherProps },
     ref
   ) => {
     const displayValue = hideValue ? null : `${value}%`;
@@ -138,7 +134,7 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         variant={variant}
         {...otherProps}
       >
-        <ProgressCutout variant={variant} shadow={shadow}>
+        <ProgressCutout shadow={shadow} variant={variant}>
           {variant === 'default' ? (
             <>
               <WhiteBar data-testid='defaultProgress1'>{displayValue}</WhiteBar>

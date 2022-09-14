@@ -1,7 +1,11 @@
 import React, { forwardRef } from 'react';
 
 import styled from 'styled-components';
-import { createBorderStyles, createBoxStyles } from '../common';
+import {
+  createBorderStyles,
+  createBoxStyles,
+  styledDimension
+} from '../common';
 import { CommonStyledProps } from '../types';
 
 type TabBodyProps = {
@@ -15,7 +19,7 @@ const StyledTabBody = styled.div`
   position: relative;
   display: block;
   height: 100%;
-  padding: 16px;
+  padding: ${styledDimension(8)};
   font-size: 1rem;
 `;
 const TabBody = forwardRef<HTMLDivElement, TabBodyProps>(

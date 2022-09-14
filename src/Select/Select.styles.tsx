@@ -5,9 +5,10 @@ import {
   createDisabledTextStyles,
   createFlatBoxStyles,
   createScrollbars,
-  shadow as commonShadow
+  shadow as commonShadow,
+  styledDimension
 } from '../common';
-import { blockSizes } from '../common/system';
+import { blockSizes, styledBlockSize } from '../common/system';
 import { StyledScrollView } from '../ScrollView/ScrollView';
 import { CommonThemeProps } from '../types';
 
@@ -21,7 +22,7 @@ type CommonSelectStyleProps = {
 
 const sharedInputContentStyles = css`
   box-sizing: border-box;
-  padding-left: 4px;
+  padding-left: ${styledDimension(2)};
   overflow: hidden;
   white-space: nowrap;
   user-select: none;
@@ -45,20 +46,20 @@ export const StyledInner = styled.div`
 
 export const StyledSelectContent = styled.div`
   ${sharedInputContentStyles}
-  padding-right: 8px;
+  padding-right: ${styledDimension(4)};
   align-items: center;
   display: flex;
-  height: calc(100% - 4px);
-  width: calc(100% - 4px);
-  margin: 0 2px;
-  border: 2px solid transparent;
+  height: calc(100% - ${styledDimension(2)});
+  width: calc(100% - ${styledDimension(2)});
+  margin: 0 ${styledDimension(1)};
+  border: ${styledDimension(1)} solid transparent;
   ${StyledInner}:focus & {
     ${sharedHoverStyles}
-    border: 2px dotted ${({ theme }) => theme.focusSecondary};
+    border: ${styledDimension(1)} dotted ${({ theme }) => theme.focusSecondary};
   }
 `;
 const sharedWrapperStyles = css<CommonSelectStyleProps>`
-  height: ${blockSizes.md};
+  height: ${styledBlockSize('md')};
   display: inline-block;
   color: ${({ $disabled = false, theme }) =>
     $disabled ? createDisabledTextStyles() : theme.canvasText};
@@ -97,7 +98,7 @@ export const StyledNativeSelect = styled.select`
   background: none;
   -webkit-tap-highlight-color: transparent;
   border-radius: 0;
-  padding-right: 30px;
+  padding-right: ${styledDimension(15)};
   ${sharedInputContentStyles}
   cursor: pointer;
   &:disabled {
@@ -110,7 +111,7 @@ export const StyledNativeSelect = styled.select`
 export const StyledDropdownButton = styled(Button).attrs(() => ({
   'aria-hidden': 'true'
 }))<CommonSelectStyleProps>`
-  width: 30px;
+  width: ${styledDimension(15)};
   padding: 0;
   flex-shrink: 0;
   ${({ variant = 'default' }) =>
@@ -124,9 +125,11 @@ export const StyledDropdownButton = styled(Button).attrs(() => ({
           &:before {
             border-left-color: ${({ theme }) => theme.borderLight};
             border-top-color: ${({ theme }) => theme.borderLight};
-            box-shadow: inset 1px 1px 0px 1px
+            box-shadow: inset ${styledDimension(0.5)} ${styledDimension(0.5)}
+                0px ${styledDimension(0.5)}
                 ${({ theme }) => theme.borderLightest},
-              inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
+              inset -${styledDimension(0.5)} -${styledDimension(0.5)} 0
+                ${styledDimension(0.5)} ${({ theme }) => theme.borderDark};
           }
         `}
   ${({ native = false, variant = 'default' }) =>
@@ -137,12 +140,12 @@ export const StyledDropdownButton = styled(Button).attrs(() => ({
       right: 0;
       height: 100%;
       `
-      : `
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    height: calc(100% - 4px);
-    `)}
+      : css`
+          position: absolute;
+          top: ${styledDimension(1)};
+          right: ${styledDimension(1)};
+          height: calc(100% - ${styledDimension(2)});
+        `)}
     pointer-events: ${({ $disabled = false, native = false }) =>
     $disabled || native ? 'none' : 'auto'}
 `;
@@ -154,20 +157,23 @@ export const StyledDropdownIcon = styled.span<CommonSelectStyleProps>`
   transform: translate(-50%, -50%);
   width: 0;
   height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
+  border-left: ${styledDimension(3)} solid transparent;
+  border-right: ${styledDimension(3)} solid transparent;
   display: inline-block;
-  border-top: 6px solid
+  border-top: ${styledDimension(3)} solid
     ${({ $disabled = false, theme }) =>
       $disabled ? theme.materialTextDisabled : theme.materialText};
   ${({ $disabled = false, theme }) =>
     $disabled &&
-    `
-    filter: drop-shadow(1px 1px 0px ${theme.materialTextDisabledShadow});
-    border-top-color: ${theme.materialTextDisabled};
+    css`
+      filter: drop-shadow(
+        ${styledDimension(0.5)} ${styledDimension(0.5)} 0px
+          ${theme.materialTextDisabledShadow}
+      );
+      border-top-color: ${theme.materialTextDisabled};
     `}
   ${StyledDropdownButton}:active & {
-    margin-top: 2px;
+    margin-top: ${styledDimension(1)};
   }
 `;
 
@@ -179,7 +185,7 @@ export const StyledDropdownMenu = styled.ul<CommonSelectStyleProps>`
   transform: translateY(100%);
   left: 0;
   background: ${({ theme }) => theme.canvas};
-  padding: 2px;
+  padding: ${styledDimension(1)};
   border-top: none;
   cursor: default;
   z-index: 1;
@@ -188,14 +194,15 @@ export const StyledDropdownMenu = styled.ul<CommonSelectStyleProps>`
   ${({ variant = 'default' }) =>
     variant === 'flat'
       ? css`
-          bottom: 2px;
+          bottom: ${styledDimension(1)};
           width: 100%;
-          border: 2px solid ${({ theme }) => theme.flatDark};
+          border: ${styledDimension(1)} solid ${({ theme }) => theme.flatDark};
         `
       : css`
-          bottom: -2px;
-          width: calc(100% - 2px);
-          border: 2px solid ${({ theme }) => theme.borderDarkest};
+          bottom: -${styledDimension(1)};
+          width: calc(100% - ${styledDimension(1)});
+          border: ${styledDimension(1)} solid
+            ${({ theme }) => theme.borderDarkest};
         `}
   ${({ variant = 'default' }) => createScrollbars(variant)}
 `;
@@ -204,10 +211,10 @@ export const StyledDropdownMenuItem = styled.li<{ active: boolean }>`
   box-sizing: border-box;
 
   width: 100%;
-  padding-left: 8px;
+  padding-left: ${styledDimension(4)};
 
-  height: calc(${blockSizes.md} - 4px);
-  line-height: calc(${blockSizes.md} - 4px);
+  height: calc(${blockSizes.md} - ${styledDimension(2)});
+  line-height: calc(${blockSizes.md} - ${styledDimension(2)});
   font-size: 1rem;
   white-space: nowrap;
   overflow: hidden;

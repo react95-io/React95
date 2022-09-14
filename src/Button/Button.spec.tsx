@@ -3,11 +3,18 @@ import React from 'react';
 
 import { renderWithTheme, theme } from '../../test/utils';
 import { blockSizes } from '../common/system';
+import { SCALE } from '../common/constants';
 
 import { Button } from './Button';
 
 const defaultProps = {
   children: 'click me'
+};
+
+const expectedBlockSizes = {
+  sm: `${blockSizes.sm * SCALE}px`,
+  md: `${blockSizes.md * SCALE}px`,
+  lg: `${blockSizes.lg * SCALE}px`
 };
 
 describe('<Button />', () => {
@@ -80,11 +87,11 @@ describe('<Button />', () => {
     );
     const button = getByRole('button');
 
-    expect(button).toHaveStyleRule('height', blockSizes.sm);
+    expect(button).toHaveStyleRule('height', expectedBlockSizes.sm);
 
     rerender(<Button {...defaultProps} size='lg' />);
 
-    expect(button).toHaveStyleRule('height', blockSizes.lg);
+    expect(button).toHaveStyleRule('height', expectedBlockSizes.lg);
   });
 
   it('should handle square prop', () => {
@@ -92,7 +99,7 @@ describe('<Button />', () => {
     const button = getByRole('button');
 
     expect(button).toHaveStyleRule('padding', '0');
-    expect(button).toHaveStyleRule('width', blockSizes.md);
+    expect(button).toHaveStyleRule('width', expectedBlockSizes.md);
   });
 
   it('should render children', () => {

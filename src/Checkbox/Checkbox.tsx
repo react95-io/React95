@@ -1,7 +1,7 @@
 import React, { forwardRef, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 
-import { createHatchedBackground } from '../common';
+import { createHatchedBackground, styledDimension } from '../common';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import {
   LabelText,
@@ -45,8 +45,8 @@ type CheckmarkProps = {
 };
 
 const sharedCheckboxStyles = css`
-  width: ${size}px;
-  height: ${size}px;
+  width: ${styledDimension(size)};
+  height: ${styledDimension(size)};
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -54,8 +54,8 @@ const sharedCheckboxStyles = css`
 `;
 const StyledCheckbox = styled(StyledScrollView)<CommonThemeProps>`
   ${sharedCheckboxStyles}
-  width: ${size}px;
-  height: ${size}px;
+  width: ${styledDimension(size)};
+  height: ${styledDimension(size)};
   background: ${({ $disabled, theme }) =>
     $disabled ? theme.material : theme.canvas};
   &:before {
@@ -69,10 +69,10 @@ const StyledFlatCheckbox = styled.div<CommonThemeProps>`
   background: ${({ $disabled, theme }) =>
     $disabled ? theme.flatLight : theme.canvas};
   ${sharedCheckboxStyles}
-  width: ${size - 4}px;
-  height: ${size - 4}px;
+  width: ${styledDimension(size, { delta: -4 })};
+  height: ${styledDimension(size, { delta: -4 })};
   outline: none;
-  border: 2px solid ${({ theme }) => theme.flatDark};
+  border: ${styledDimension(1)} solid ${({ theme }) => theme.flatDark};
   background: ${({ $disabled, theme }) =>
     $disabled ? theme.flatLight : theme.canvas};
 `;
@@ -84,8 +84,8 @@ const StyledMenuCheckbox = styled.div<CommonThemeProps>`
   background: ${({ $disabled, theme }) =>
     $disabled ? theme.flatLight : theme.canvas};
   ${sharedCheckboxStyles}
-  width: ${size - 4}px;
-  height: ${size - 4}px;
+  width: ${styledDimension(size, { delta: -4 })};
+  height: ${styledDimension(size, { delta: -4 })};
   background: none;
   border: none;
   outline: none;
@@ -103,14 +103,14 @@ const CheckmarkIcon = styled.span.attrs(() => ({
     display: block;
     position: absolute;
     left: 50%;
-    top: calc(50% - 1px);
-    width: 3px;
-    height: 7px;
+    top: calc(50% - ${styledDimension(0.5)});
+    width: ${styledDimension(1.5)};
+    height: ${styledDimension(3.5)};
 
     border: solid
       ${({ $disabled, theme }) =>
         $disabled ? theme.checkmarkDisabled : theme.checkmark};
-    border-width: 0 3px 3px 0;
+    border-width: 0 ${styledDimension(1.5)} ${styledDimension(1.5)} 0;
     transform: translate(-50%, -50%) rotate(45deg);
 
     ${({ $disabled, theme, variant }) =>
@@ -120,7 +120,7 @@ const CheckmarkIcon = styled.span.attrs(() => ({
               ? theme.materialTextDisabled
               : theme.materialText};
             filter: drop-shadow(
-              1px 1px 0px
+              ${styledDimension(0.5)} ${styledDimension(0.5)} 0px
                 ${$disabled ? theme.materialTextDisabledShadow : 'transparent'}
             );
           `
@@ -147,8 +147,8 @@ const IndeterminateIcon = styled.span.attrs(() => ({
   ${({ variant }) =>
     variant === 'menu'
       ? css`
-          height: calc(100% - 4px);
-          width: calc(100% - 4px);
+          height: calc(100% - ${styledDimension(2)});
+          width: calc(100% - ${styledDimension(2)});
         `
       : css`
           width: 100%;
@@ -165,7 +165,7 @@ const IndeterminateIcon = styled.span.attrs(() => ({
       createHatchedBackground({
         mainColor: $disabled ? theme.checkmarkDisabled : theme.checkmark
       })}
-    background-position: 0px 0px, 2px 2px;
+    background-position: 0px 0px, ${styledDimension(1)} ${styledDimension(1)};
 
     ${({ $disabled, theme, variant }) =>
       variant === 'menu' &&
@@ -176,7 +176,7 @@ const IndeterminateIcon = styled.span.attrs(() => ({
           })}
         }
         filter: drop-shadow(
-          1px 1px 0px
+          ${styledDimension(0.5)} ${styledDimension(0.5)} 0px
             ${$disabled ? theme.materialTextDisabledShadow : 'transparent'}
         );
       `};

@@ -1,22 +1,28 @@
 import React from 'react';
 
 import styled from 'styled-components';
-import { createBorderStyles, createBoxStyles } from '../common';
+import {
+  createBorderStyles,
+  createBoxStyles,
+  styledDimension
+} from '../common';
 import { CommonStyledProps } from '../types';
 
 type MenuListProps = React.HTMLAttributes<HTMLUListElement> & {
   fullWidth?: boolean;
+  /** @deprecated Change `shadow` property on theme */
   shadow?: boolean;
   inline?: boolean;
 } & CommonStyledProps;
 
 // TODO keyboard controls
 const MenuList = styled.ul.attrs(() => ({
-  role: 'menu'
+  role: 'menu',
+  shadow: true
 }))<MenuListProps>`
   box-sizing: border-box;
   width: ${props => (props.fullWidth ? '100%' : 'auto')};
-  padding: 4px;
+  padding: ${styledDimension(2)};
   ${createBorderStyles({ style: 'window' })}
   ${createBoxStyles()}
   ${props =>

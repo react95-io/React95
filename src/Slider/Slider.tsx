@@ -14,7 +14,8 @@ import {
   createBoxStyles,
   createDisabledTextStyles,
   createFlatBoxStyles,
-  createHatchedBackground
+  createHatchedBackground,
+  styledDimension
 } from '../common';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
 import useForkRef from '../common/hooks/useForkRef';
@@ -132,15 +133,16 @@ const Wrapper = styled.div<StyledSliderProps>`
     content: '';
     display: inline-block;
     position: absolute;
-    top: -2px;
-    left: -15px;
-    width: calc(100% + 30px);
-    height: ${({ hasMarks }) => (hasMarks ? '41px' : '39px')};
+    top: ${styledDimension(-1)};
+    left: ${styledDimension(-7.5)};
+    width: calc(100% + ${styledDimension(15)});
+    height: ${({ hasMarks }) =>
+      hasMarks ? styledDimension(20.5) : styledDimension(19.5)};
     ${({ isFocused, theme }) =>
       isFocused &&
-      `
-        outline: 2px dotted ${theme.materialText};
-        `}
+      css`
+        outline: ${styledDimension(1)} dotted ${theme.materialText};
+      `}
   }
 
   ${({ orientation, size }) =>
@@ -149,20 +151,22 @@ const Wrapper = styled.div<StyledSliderProps>`
           height: ${size};
           margin-right: 1.5rem;
           &:before {
-            left: -6px;
-            top: -15px;
-            height: calc(100% + 30px);
-            width: ${({ hasMarks }) => (hasMarks ? '41px' : '39px')};
+            left: ${styledDimension(-1)};
+            top: ${styledDimension(-7.5)};
+            height: calc(100% + ${styledDimension(15)});
+            width: ${({ hasMarks }) =>
+              hasMarks ? styledDimension(20.5) : styledDimension(19.5)};
           }
         `
       : css<StyledSliderProps>`
           width: ${size};
           margin-bottom: 1.5rem;
           &:before {
-            top: -2px;
-            left: -15px;
-            width: calc(100% + 30px);
-            height: ${({ hasMarks }) => (hasMarks ? '41px' : '39px')};
+            top: ${styledDimension(-1)};
+            left: ${styledDimension(-7.5)};
+            width: calc(100% + ${styledDimension(15)});
+            height: ${({ hasMarks }) =>
+              hasMarks ? styledDimension(20.5) : styledDimension(19.5)};
           }
         `}
 
@@ -177,13 +181,13 @@ const sharedGrooveStyles = () => css<StyledSliderProps>`
           left: 50%;
           transform: translateX(-50%);
           height: 100%;
-          width: 8px;
+          width: ${styledDimension(4)};
         `
       : css`
           left: 0;
           top: 50%;
           transform: translateY(-50%);
-          height: 8px;
+          height: ${styledDimension(4)};
           width: 100%;
         `}
 `;
@@ -209,22 +213,22 @@ const Thumb = styled.span<StyledSliderProps>`
   ${({ orientation }) =>
     orientation === 'vertical'
       ? css`
-          width: 32px;
-          height: 18px;
-          right: 2px;
+          width: ${styledDimension(16)};
+          height: ${styledDimension(9)};
+          right: ${styledDimension(1)};
           transform: translateY(-50%);
         `
       : css`
-          height: 32px;
-          width: 18px;
-          top: 2px;
+          height: ${styledDimension(16)};
+          width: ${styledDimension(9)};
+          top: ${styledDimension(1)};
           transform: translateX(-50%);
         `}
   ${({ variant }) =>
     variant === 'flat'
       ? css`
           ${createFlatBoxStyles()}
-          outline: 2px solid ${({ theme }) => theme.flatDark};
+          outline: ${styledDimension(1)} solid ${({ theme }) => theme.flatDark};
           background: ${({ theme }) => theme.flatLight};
         `
       : css`
@@ -242,7 +246,7 @@ const Thumb = styled.span<StyledSliderProps>`
     })}
 `;
 
-const tickHeight = 6;
+const tickHeight = 3;
 const Tick = styled.span<StyledSliderProps>`
   display: inline-block;
   position: absolute;
@@ -250,18 +254,21 @@ const Tick = styled.span<StyledSliderProps>`
   ${({ orientation }) =>
     orientation === 'vertical'
       ? css`
-          right: ${-tickHeight - 2}px;
+          right: ${styledDimension(-tickHeight - 1)};
           bottom: 0px;
-          transform: translateY(1px);
-          width: ${tickHeight}px;
-          border-bottom: 2px solid ${({ theme }) => theme.materialText};
+          transform: translateY(${styledDimension(0.5)});
+          width: ${styledDimension(tickHeight)};
+          border-bottom: ${styledDimension(1)} solid
+            ${({ theme }) => theme.materialText};
         `
       : css`
-          bottom: ${-tickHeight}px;
-          height: ${tickHeight}px;
-          transform: translateX(-1px);
-          border-left: 1px solid ${({ theme }) => theme.materialText};
-          border-right: 1px solid ${({ theme }) => theme.materialText};
+          bottom: ${styledDimension(-tickHeight)};
+          height: ${styledDimension(tickHeight)};
+          transform: translateX(${styledDimension(-0.5)});
+          border-left: ${styledDimension(0.5)} solid
+            ${({ theme }) => theme.materialText};
+          border-right: ${styledDimension(0.5)} solid
+            ${({ theme }) => theme.materialText};
         `}
 
   color:  ${({ theme }) => theme.materialText};
@@ -269,7 +276,9 @@ const Tick = styled.span<StyledSliderProps>`
     $disabled &&
     css`
       ${createDisabledTextStyles()}
-      box-shadow: 1px 1px 0px ${theme.materialTextDisabledShadow};
+      box-shadow: ${styledDimension(0.5)} ${styledDimension(
+        0.5
+      )} 0px ${theme.materialTextDisabledShadow};
       border-color: ${theme.materialTextDisabled};
     `}
 `;
@@ -283,10 +292,13 @@ const Mark = styled.div<StyledSliderProps>`
   ${({ orientation }) =>
     orientation === 'vertical'
       ? css`
-          transform: translate(${tickHeight + 2}px, ${tickHeight + 1}px);
+          transform: translate(
+            ${styledDimension(tickHeight + 1)},
+            ${styledDimension(tickHeight + 0.5)}
+          );
         `
       : css`
-          transform: translate(-0.5ch, calc(100% + 2px));
+          transform: translate(-0.5ch, calc(100% + ${styledDimension(1)}));
         `}
 `;
 

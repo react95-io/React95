@@ -2,7 +2,8 @@ import {
   clamp,
   mapFromWindowsTheme,
   getDecimalPrecision,
-  roundValueToStep
+  roundValueToStep,
+  defaultTrue
 } from './index';
 
 describe('clamp', () => {
@@ -27,147 +28,64 @@ describe('clamp', () => {
   });
 });
 
-describe('mapFromWindowsTheme', () => {
-  it('should map corresponding properties directly if gradients are disabled', () => {
-    const theme = {
-      ButtonAlternateFace: '#000000',
-      ButtonDkShadow: '#000001',
-      ButtonFace: '#000002',
-      ButtonHilight: '#000003',
-      ButtonLight: '#000004',
-      ButtonShadow: '#000005',
-      ButtonText: '#000006',
-      ActiveBorder: '#000007',
-      AppWorkspace: '#000008',
-      Background: '#000009',
-      InactiveBorder: '#00000a',
-      Scrollbar: '#00000b',
-      Window: '#00000c',
-      WindowFrame: '#00000d',
-      WindowText: '#00000e',
-      ActiveTitle: '#00000f',
-      GradientActiveTitle: '#000010',
-      GradientInactiveTitle: '#000011',
-      InactiveTitle: '#000012',
-      InactiveTitleText: '#000013',
-      TitleText: '#000014',
-      Menu: '#000015',
-      MenuBar: '#000016',
-      MenuHilight: '#000017',
-      MenuText: '#000018',
-      GrayText: '#000019',
-      Hilight: '#00001a',
-      HilightText: '#00001b',
-      HotTrackingColor: '#00001c',
-      InfoText: '#00001d',
-      InfoWindow: '#00001e'
-    };
-    const expectedTheme = {
-      name: 'theme',
-      anchor: '#00001c',
-      anchorVisited: '#00001c',
-      borderDark: '#000005',
-      borderDarkest: '#000001',
-      borderLight: '#000004',
-      borderLightest: '#000003',
-      canvas: '#00000c',
-      canvasText: '#00000e',
-      canvasTextDisabled: '#000005',
-      canvasTextDisabledShadow: '#000003',
-      canvasTextInvert: '#00001b',
-      checkmark: '#00000e',
-      checkmarkDisabled: '#000019',
-      desktopBackground: '#000009',
-      flatDark: '#000005',
-      flatLight: '#000004',
-      focusSecondary: '#000003',
-      headerBackground: '#00000f',
-      headerNotActiveBackground: '#000012',
-      headerNotActiveText: '#000013',
-      headerText: '#000014',
-      hoverBackground: '#00001a',
-      material: '#000002',
-      materialDark: '#000012',
-      materialText: '#000006',
-      materialTextDisabled: '#000005',
-      materialTextDisabledShadow: '#000003',
-      materialTextInvert: '#00001b',
-      progress: '#00001a',
-      tooltip: '#00001e'
-    };
+describe(defaultTrue, () => {
+  it.each([
+    [null, true],
+    [undefined, true],
+    [true, true],
+    [false, false]
+  ])('when %s, returns %s', (value, expected) => {
+    expect(defaultTrue(value)).toEqual(expected);
+  });
+});
 
-    expect(mapFromWindowsTheme('theme', theme, false)).toEqual(expectedTheme);
+describe('mapFromWindowsTheme', () => {
+  const theme = {
+    ButtonAlternateFace: '#000000',
+    ButtonDkShadow: '#000001',
+    ButtonFace: '#000002',
+    ButtonHilight: '#000003',
+    ButtonLight: '#000004',
+    ButtonShadow: '#000005',
+    ButtonText: '#000006',
+    ActiveBorder: '#000007',
+    AppWorkspace: '#000008',
+    Background: '#000009',
+    InactiveBorder: '#00000a',
+    Scrollbar: '#00000b',
+    Window: '#00000c',
+    WindowFrame: '#00000d',
+    WindowText: '#00000e',
+    ActiveTitle: '#00000f',
+    GradientActiveTitle: '#000010',
+    GradientInactiveTitle: '#000011',
+    InactiveTitle: '#000012',
+    InactiveTitleText: '#000013',
+    TitleText: '#000014',
+    Menu: '#000015',
+    MenuBar: '#000016',
+    MenuHilight: '#000017',
+    MenuText: '#000018',
+    GrayText: '#000019',
+    Hilight: '#00001a',
+    HilightText: '#00001b',
+    HotTrackingColor: '#00001c',
+    InfoText: '#00001d',
+    InfoWindow: '#00001e'
+  };
+
+  it('should map corresponding properties directly', () => {
+    expect(mapFromWindowsTheme('theme', theme)).toMatchSnapshot();
   });
 
-  it('should map corresponding properties with gradients if gradients are enabled', () => {
-    const theme = {
-      ButtonAlternateFace: '#000000',
-      ButtonDkShadow: '#000001',
-      ButtonFace: '#000002',
-      ButtonHilight: '#000003',
-      ButtonLight: '#000004',
-      ButtonShadow: '#000005',
-      ButtonText: '#000006',
-      ActiveBorder: '#000007',
-      AppWorkspace: '#000008',
-      Background: '#000009',
-      InactiveBorder: '#00000a',
-      Scrollbar: '#00000b',
-      Window: '#00000c',
-      WindowFrame: '#00000d',
-      WindowText: '#00000e',
-      ActiveTitle: '#00000f',
-      GradientActiveTitle: '#000010',
-      GradientInactiveTitle: '#000011',
-      InactiveTitle: '#000012',
-      InactiveTitleText: '#000013',
-      TitleText: '#000014',
-      Menu: '#000015',
-      MenuBar: '#000016',
-      MenuHilight: '#000017',
-      MenuText: '#000018',
-      GrayText: '#000019',
-      Hilight: '#00001a',
-      HilightText: '#00001b',
-      HotTrackingColor: '#00001c',
-      InfoText: '#00001d',
-      InfoWindow: '#00001e'
-    };
-    const expectedTheme = {
-      name: 'theme',
-      anchor: '#00001c',
-      anchorVisited: '#00001c',
-      borderDark: '#000005',
-      borderDarkest: '#000001',
-      borderLight: '#000004',
-      borderLightest: '#000003',
-      canvas: '#00000c',
-      canvasText: '#00000e',
-      canvasTextDisabled: '#000005',
-      canvasTextDisabledShadow: '#000003',
-      canvasTextInvert: '#00001b',
-      checkmark: '#00000e',
-      checkmarkDisabled: '#000019',
-      desktopBackground: '#000009',
-      flatDark: '#000005',
-      flatLight: '#000004',
-      focusSecondary: '#000003',
-      headerBackground: 'linear-gradient(to right, #00000f, #000010)',
-      headerNotActiveBackground: 'linear-gradient(to right, #000012, #000011)',
-      headerNotActiveText: '#000013',
-      headerText: '#000014',
-      hoverBackground: '#00001a',
-      material: '#000002',
-      materialDark: '#000012',
-      materialText: '#000006',
-      materialTextDisabled: '#000005',
-      materialTextDisabledShadow: '#000003',
-      materialTextInvert: '#00001b',
-      progress: '#00001a',
-      tooltip: '#00001e'
-    };
-
-    expect(mapFromWindowsTheme('theme', theme, true)).toEqual(expectedTheme);
+  it('should support gradients and shadows and scale', () => {
+    expect(
+      mapFromWindowsTheme('theme', theme, {
+        useGradients: true,
+        useShadow: false,
+        scale: 1.5
+      })
+    ).toMatchSnapshot();
   });
 });
 

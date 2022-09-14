@@ -1,4 +1,5 @@
 import { WindowsTheme } from '../../types';
+import { SCALE } from '../constants';
 
 export const noOp = () => {};
 
@@ -12,6 +13,10 @@ export function clamp(value: number, min: number | null, max: number | null) {
   return value;
 }
 
+export function defaultTrue(value: boolean | null | undefined) {
+  return value === undefined || value === null ? true : value;
+}
+
 function linearGradient(left: string, right: string) {
   return `linear-gradient(to right, ${left}, ${right})`;
 }
@@ -19,7 +24,11 @@ function linearGradient(left: string, right: string) {
 export function mapFromWindowsTheme(
   name: string,
   windowsTheme: WindowsTheme,
-  useGradients: boolean
+  {
+    useGradients = false,
+    useShadow = true,
+    scale = SCALE
+  }: { useGradients?: boolean; useShadow?: boolean; scale?: number } = {}
 ) {
   const {
     ButtonDkShadow,
@@ -80,6 +89,8 @@ export function mapFromWindowsTheme(
     materialTextDisabledShadow: ButtonHilight,
     materialTextInvert: HilightText,
     progress: Hilight,
+    scale,
+    shadow: useShadow,
     tooltip: InfoWindow
   };
 }

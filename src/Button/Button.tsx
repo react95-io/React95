@@ -6,9 +6,10 @@ import {
   createDisabledTextStyles,
   createFlatBoxStyles,
   createHatchedBackground,
-  focusOutline
+  focusOutline,
+  styledDimension
 } from '../common';
-import { blockSizes } from '../common/system';
+import { styledBlockSize } from '../common/system';
 import { noOp } from '../common/utils';
 import { CommonStyledProps, Sizes } from '../types';
 
@@ -54,16 +55,17 @@ const commonButtonStyles = css<StyledButtonProps>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: ${({ size = 'md' }) => blockSizes[size]};
+  height: ${({ size = 'md' }) => styledBlockSize(size)};
   width: ${({ fullWidth, size = 'md', square }) =>
-    fullWidth ? '100%' : square ? blockSizes[size] : 'auto'};
-  padding: ${({ square }) => (square ? 0 : `0 10px`)};
+    fullWidth ? '100%' : square ? styledBlockSize(size) : 'auto'};
+  padding: ${({ square }) => (square ? 0 : css`0 ${styledDimension(5)}`)};
   font-size: 1rem;
   user-select: none;
   &:active {
-    padding-top: ${({ disabled }) => !disabled && '2px'};
+    padding-top: ${({ disabled }) => !disabled && styledDimension(1)};
   }
-  padding-top: ${({ active, disabled }) => active && !disabled && '2px'};
+  padding-top: ${({ active, disabled }) =>
+    active && !disabled && styledDimension(1)};
   &:after {
     content: '';
     position: absolute;
@@ -85,25 +87,25 @@ export const StyledButton = styled.button<StyledButtonProps>`
       ? css`
           ${createFlatBoxStyles()}
           ${primary
-            ? `
-          border: 2px solid ${theme.checkmark};
-            outline: 2px solid ${theme.flatDark};
-            outline-offset: -4px;
-          `
-            : `
-          border: 2px solid ${theme.flatDark};
-            outline: 2px solid transparent;
-            outline-offset: -4px;
-          `}
+            ? css`
+                border: ${styledDimension(1)} solid ${theme.checkmark};
+                outline: ${styledDimension(1)} solid ${theme.flatDark};
+                outline-offset: -${styledDimension(2)};
+              `
+            : css`
+                border: ${styledDimension(1)} solid ${theme.flatDark};
+                outline: ${styledDimension(1)} solid transparent;
+                outline-offset: -${styledDimension(2)};
+              `}
           &:focus:after, &:active:after {
             ${!active && !disabled && focusOutline}
-            outline-offset: -4px;
+            outline-offset: -${styledDimension(2)};
           }
         `
       : variant === 'menu' || variant === 'thin'
       ? css`
           ${createBoxStyles()};
-          border: 2px solid transparent;
+          border: ${styledDimension(1)} solid transparent;
           &:hover,
           &:focus {
             ${!disabled &&
@@ -132,13 +134,13 @@ export const StyledButton = styled.button<StyledButtonProps>`
             position: absolute;
             ${primary
               ? css`
-                  left: 2px;
-                  top: 2px;
-                  width: calc(100% - 4px);
-                  height: calc(100% - 4px);
-                  outline: 2px solid ${theme.borderDarkest};
+                  left: ${styledDimension(1)};
+                  top: ${styledDimension(1)};
+                  width: calc(100% - ${styledDimension(2)});
+                  height: calc(100% - ${styledDimension(2)});
+                  outline: ${styledDimension(1)} solid ${theme.borderDarkest};
                 `
-              : css`
+              : `
                   left: 0;
                   top: 0;
                   width: 100%;
@@ -155,11 +157,11 @@ export const StyledButton = styled.button<StyledButtonProps>`
           &:focus:after,
           &:active:after {
             ${!active && !disabled && focusOutline}
-            outline-offset: -8px;
+            outline-offset: ${styledDimension(-4)};
           }
           &:active:focus:after,
           &:active:after {
-            top: ${active ? '0' : '1px'};
+            top: ${active ? '0' : styledDimension(0.5)};
           }
         `}
   ${commonButtonStyles}

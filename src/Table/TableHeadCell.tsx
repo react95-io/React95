@@ -1,6 +1,10 @@
 import React, { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
-import { createBorderStyles, createDisabledTextStyles } from '../common';
+import {
+  createBorderStyles,
+  createDisabledTextStyles,
+  styledDimension
+} from '../common';
 import { noOp } from '../common/utils';
 import { CommonStyledProps } from '../types';
 
@@ -13,7 +17,7 @@ type TableHeadCellProps = {
 
 const StyledHeadCell = styled.th<{ $disabled: boolean }>`
   position: relative;
-  padding: 0 8px;
+  padding: 0 ${styledDimension(4)};
   display: table-cell;
   vertical-align: inherit;
   background: ${({ theme }) => theme.material};
@@ -40,12 +44,12 @@ const StyledHeadCell = styled.th<{ $disabled: boolean }>`
           ${createBorderStyles({ invert: true, style: 'window' })}
           border-left: none;
           border-top: none;
-          padding-top: 2px;
+          padding-top: ${styledDimension(1)};
         }
 
         & > div {
           position: relative;
-          top: 2px;
+          top: ${styledDimension(1)};
         }
       }
     `}

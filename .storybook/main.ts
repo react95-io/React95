@@ -15,7 +15,7 @@ const storybookConfig: StorybookConfig = {
       }
     },
     '@storybook/addon-storysource',
-    './theme-picker/register.ts'
+    './theme-settings/register.ts'
   ],
   core: {
     builder: 'webpack5'

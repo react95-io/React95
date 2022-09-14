@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 import { StyledButton } from '../Button/Button';
+import { styledDimension } from '../common';
 import { CommonStyledProps } from '../types';
 
 type WindowHeaderProps = {
@@ -10,12 +11,12 @@ type WindowHeaderProps = {
   CommonStyledProps;
 
 const StyledWindowHeader = styled.div<Pick<WindowHeaderProps, 'active'>>`
-  height: 33px;
-  line-height: 33px;
+  height: ${styledDimension(16.5)};
+  line-height: ${styledDimension(16.5)};
   padding-left: 0.25rem;
-  padding-right: 3px;
+  padding-right: ${styledDimension(1.5)};
   font-weight: bold;
-  border: 2px solid ${({ theme }) => theme.material};
+  border: ${styledDimension(1)} solid ${({ theme }) => theme.material};
   ${({ active }) =>
     active === false
       ? css`
@@ -30,8 +31,8 @@ const StyledWindowHeader = styled.div<Pick<WindowHeaderProps, 'active'>>`
   ${StyledButton} {
     padding-left: 0;
     padding-right: 0;
-    height: 27px;
-    width: 31px;
+    height: ${styledDimension(13.5)};
+    width: ${styledDimension(15.5)};
   }
 `;
 

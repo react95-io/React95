@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import styled from 'styled-components';
+import { styledDimension } from '../common';
 import { blockSizes } from '../common/system';
 
 type TableRowProps = {
@@ -9,8 +10,8 @@ type TableRowProps = {
 const StyledTr = styled.tr`
   color: inherit;
   display: table-row;
-  height: calc(${blockSizes.md} - 2px);
-  line-height: calc(${blockSizes.md} - 2px);
+  height: calc(${blockSizes.md} - ${styledDimension(1)});
+  line-height: calc(${blockSizes.md} - ${styledDimension(1)});
   vertical-align: middle;
   outline: none;
 

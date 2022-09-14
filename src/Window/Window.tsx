@@ -1,19 +1,24 @@
 import React, { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
-import { createBorderStyles, createBoxStyles } from '../common';
+import {
+  createBorderStyles,
+  createBoxStyles,
+  styledDimension
+} from '../common';
 import { CommonStyledProps } from '../types';
 
 type WindowProps = {
   children?: React.ReactNode;
   resizable?: boolean;
   resizeRef?: React.Ref<HTMLSpanElement>;
+  /** @deprecated Change `shadow` property on theme */
   shadow?: boolean;
 } & React.HTMLAttributes<HTMLDivElement> &
   CommonStyledProps;
 
 const StyledWindow = styled.div`
   position: relative;
-  padding: 4px;
+  padding: ${styledDimension(2)};
   font-size: 1rem;
   ${createBorderStyles({ style: 'window' })}
   ${createBoxStyles()}
@@ -23,10 +28,10 @@ const ResizeHandle = styled.span`
   ${({ theme }) => css`
     display: inline-block;
     position: absolute;
-    bottom: 10px;
-    right: 10px;
-    width: 25px;
-    height: 25px;
+    bottom: ${styledDimension(5)};
+    right: ${styledDimension(5)};
+    width: ${styledDimension(12.5)};
+    height: ${styledDimension(12.5)};
     background-image: linear-gradient(
       135deg,
       ${theme.borderLightest} 16.67%,
@@ -41,19 +46,16 @@ const ResizeHandle = styled.span`
       ${theme.borderDark} 83.33%,
       ${theme.borderDark} 100%
     );
-    background-size: 8.49px 8.49px;
+    background-size: ${styledDimension(4.245)} ${styledDimension(4.245)};
     clip-path: polygon(100% 0px, 0px 100%, 100% 100%);
     cursor: nwse-resize;
   `}
 `;
 
 const Window = forwardRef<HTMLDivElement, WindowProps>(
-  (
-    { children, resizable = false, resizeRef, shadow = true, ...otherProps },
-    ref
-  ) => {
+  ({ children, resizable = false, resizeRef, shadow, ...otherProps }, ref) => {
     return (
-      <StyledWindow ref={ref} shadow={shadow} {...otherProps}>
+      <StyledWindow defaultShadow ref={ref} shadow={shadow} {...otherProps}>
         {children}
         {resizable && (
           <ResizeHandle data-testid='resizeHandle' ref={resizeRef} />

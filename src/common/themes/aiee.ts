@@ -37,5 +37,7 @@ export default {
   materialTextDisabledShadow: 'rgb(250,254,255)',
   materialTextInvert: 'rgb(0,62,109)',
   progress: 'rgb(251,211,61)',
+  scale: 2,
+  shadow: true,
   tooltip: 'rgb(255,243,185)'
 } as Theme;

@@ -1,6 +1,7 @@
 import React, { forwardRef, useMemo } from 'react';
 
 import styled from 'styled-components';
+import { styledDimension } from '../common';
 import { noOp } from '../common/utils';
 import { CommonStyledProps } from '../types';
 import { TabProps } from './Tab';
@@ -22,7 +23,7 @@ const StyledTabs = styled.div<{ isMultiRow: boolean }>`
     flex-grow: 1;
   }
   button:last-child:before {
-    border-right: 2px solid ${theme.borderDark};
+    border-right: ${styledDimension(1)} solid ${theme.borderDark};
   }
   `}
 `;
@@ -34,8 +35,8 @@ const Row = styled.div.attrs(() => ({
   display: flex;
   flex-wrap: no-wrap;
   text-align: left;
-  left: 8px;
-  width: calc(100% - 8px);
+  left: ${styledDimension(4)};
+  width: calc(100% - ${styledDimension(4)});
 
   &:not(:first-child):before {
     content: '';
@@ -43,8 +44,10 @@ const Row = styled.div.attrs(() => ({
     right: 0;
     left: 0;
     height: 100%;
-    border-right: 2px solid ${({ theme }) => theme.borderDarkest};
-    border-left: 2px solid ${({ theme }) => theme.borderLightest};
+    border-right: ${styledDimension(1)} solid
+      ${({ theme }) => theme.borderDarkest};
+    border-left: ${styledDimension(1)} solid
+      ${({ theme }) => theme.borderLightest};
   }
 `;
 

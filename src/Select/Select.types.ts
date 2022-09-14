@@ -46,6 +46,7 @@ export type SelectCommonProps<T> = {
   ) => void;
   options?: (SelectOption<T> | null | undefined)[];
   readOnly?: boolean;
+  /** @deprecated Change `shadow` property on theme */
   shadow?: boolean;
   style?: React.CSSProperties;
   value?: T;

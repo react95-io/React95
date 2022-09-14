@@ -33,6 +33,7 @@ type TextInputProps = {
   disabled?: boolean;
   fullWidth?: boolean;
   multiline?: boolean;
+  /** @deprecated Change `shadow` property on theme */
   shadow?: boolean;
   style?: React.CSSProperties;
   variant?: 'default' | 'flat';
@@ -105,7 +106,7 @@ const TextInput = forwardRef<
       disabled = false,
       fullWidth,
       onChange = noOp,
-      shadow = true,
+      shadow,
       style,
       variant = 'default',
       ...otherProps
@@ -141,9 +142,10 @@ const TextInput = forwardRef<
 
     return (
       <WrapperComponent
-        className={className}
-        fullWidth={fullWidth}
         $disabled={disabled}
+        className={className}
+        defaultShadow
+        fullWidth={fullWidth}
         shadow={shadow}
         style={style}
       >

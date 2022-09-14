@@ -15,7 +15,7 @@ import {
   StyledInner,
   StyledSelectContent
 } from './Select.styles';
-import { SelectOption, SelectInnerProps, SelectRef } from './Select.types';
+import { SelectInnerProps, SelectOption, SelectRef } from './Select.types';
 import { useSelectCommon } from './useSelectCommon';
 import { useSelectState } from './useSelectState';
 
@@ -95,7 +95,7 @@ function SelectInner<T>(
     open: openProp,
     options: optionsProp,
     readOnly,
-    shadow = true,
+    shadow,
     style,
     variant = 'default',
     value: valueProp,
@@ -228,6 +228,7 @@ function SelectInner<T>(
     <Wrapper
       {...wrapperProps}
       $disabled={disabled}
+      defaultShadow
       ref={wrapperRef}
       shadow={shadow}
       style={{ ...style, width }}

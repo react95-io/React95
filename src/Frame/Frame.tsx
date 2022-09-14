@@ -5,6 +5,7 @@ import { CommonStyledProps } from '../types';
 
 type FrameProps = {
   children?: React.ReactNode;
+  /** @deprecated Change `shadow` property on theme */
   shadow?: boolean;
 } & (
   | {

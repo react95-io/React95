@@ -1,7 +1,8 @@
 import React, { forwardRef, useCallback, useMemo, useState } from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 import { Button } from '../Button/Button';
+import { styledDimension } from '../common';
 import { NumberInput } from '../NumberInput/NumberInput';
 import { ScrollView } from '../ScrollView/ScrollView';
 import { Select } from '../Select/Select';
@@ -13,11 +14,12 @@ type DatePickerProps = {
   date?: string;
   onAccept?: (chosenDate: string) => void;
   onCancel?: React.MouseEventHandler<HTMLButtonElement>;
+  /** @deprecated Change `shadow` property on theme */
   shadow?: boolean;
 };
 
 const Calendar = styled(ScrollView)`
-  width: 234px;
+  width: ${styledDimension(117)};
   margin: 1rem 0;
   background: ${({ theme }) => theme.canvas};
 `;
@@ -49,7 +51,7 @@ const DateItemContent = styled.span<{ active: boolean }>`
     active ? theme.canvasTextInvert : theme.canvasText};
 
   &:hover {
-    border: 2px dashed
+    border: ${styledDimension(1)} dashed
       ${({ theme, active }) => (active ? 'none' : theme.materialDark)};
   }
 `;
@@ -93,10 +95,11 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       date: initialDate = new Date().toISOString(),
       onAccept,
       onCancel,
-      shadow = true
+      shadow
     },
     ref
   ) => {
+    const theme = useTheme();
     const [date, setDate] = useState(() => convertDateToState(initialDate));
     const { year, month, day } = date;
 
@@ -172,10 +175,14 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               options={months}
               value={month}
               onChange={handleMonthSelect}
-              width={128}
-              menuMaxHeight={200}
+              width={styledDimension(64)({ theme })}
+              menuMaxHeight={styledDimension(100)({ theme })}
             />
-            <NumberInput value={year} onChange={handleYearSelect} width={100} />
+            <NumberInput
+              value={year}
+              onChange={handleYearSelect}
+              width={styledDimension(50)({ theme })}
+            />
           </Toolbar>
           <Calendar>
             <WeekDays>
