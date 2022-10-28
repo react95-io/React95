@@ -15,7 +15,7 @@ export default {
 } as ComponentMeta<typeof Hourglass>;
 
 export function Default() {
-  return <Hourglass size={32} />;
+  return <Hourglass size={32} style={{ margin: 20 }} />;
 }
 
 Default.story = {

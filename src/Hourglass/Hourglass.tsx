@@ -1,13 +1,15 @@
 import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 import { getSize } from '../common/utils';
+import { CommonStyledProps } from '../types';
 import base64hourglass from './base64hourglass';
 
 type HourglassProps = {
   size?: string | number;
-};
+} & React.HTMLAttributes<HTMLDivElement> &
+  CommonStyledProps;
 
-const StyledContainer = styled.span<Required<Pick<HourglassProps, 'size'>>>`
+const StyledContainer = styled.div<Required<Pick<HourglassProps, 'size'>>>`
   display: inline-block;
   height: ${({ size }) => getSize(size)};
   width: ${({ size }) => getSize(size)};
