@@ -1,6 +1,6 @@
 import { ComponentMeta } from '@storybook/react';
 import React from 'react';
-import { ScrollView, Slider } from 'react95';
+import { ScrollView, Slider, SliderOnChangeHandler } from 'react95';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -41,6 +41,10 @@ export default {
 } as ComponentMeta<typeof Slider>;
 
 export function Default() {
+  const [state, setState] = React.useState(0);
+
+  const onChange: SliderOnChangeHandler = (_, newValue) => setState(newValue);
+
   return (
     <div className='row'>
       <div className='col'>
@@ -66,7 +70,8 @@ export function Default() {
           min={0}
           max={6}
           step={1}
-          defaultValue={0}
+          value={state}
+          onChange={onChange}
           marks={[
             { value: 0, label: '0°C' },
             { value: 2, label: '2°C' },

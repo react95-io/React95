@@ -17,11 +17,21 @@ import {
   createHatchedBackground
 } from '../common';
 import useControlledOrUncontrolled from '../common/hooks/useControlledOrUncontrolled';
+import useEventCallback from '../common/hooks/useEventCallback';
 import useForkRef from '../common/hooks/useForkRef';
 import { useIsFocusVisible } from '../common/hooks/useIsFocusVisible';
 import { clamp, getSize, roundValueToStep } from '../common/utils';
 import { StyledScrollView } from '../ScrollView/ScrollView';
 import { CommonStyledProps } from '../types';
+
+export type SliderOnChangeHandler = (
+  event:
+    | MouseEvent
+    | React.KeyboardEvent<HTMLSpanElement>
+    | React.MouseEvent<HTMLDivElement>
+    | TouchEvent,
+  value: number
+) => void;
 
 type SliderProps = {
   defaultValue?: number;
@@ -30,18 +40,8 @@ type SliderProps = {
   max?: number;
   min?: number;
   name?: string;
-  onChange?: (
-    event:
-      | MouseEvent
-      | React.KeyboardEvent<HTMLSpanElement>
-      | React.MouseEvent<HTMLDivElement>
-      | TouchEvent,
-    value: number
-  ) => void;
-  onChangeCommitted?: (
-    event: MouseEvent | React.KeyboardEvent<HTMLSpanElement> | TouchEvent,
-    value: number
-  ) => void;
+  onChange?: SliderOnChangeHandler;
+  onChangeCommitted?: SliderOnChangeHandler;
   onMouseDown?: (event: React.MouseEvent<HTMLDivElement>) => void;
   orientation?: 'horizontal' | 'vertical';
   size?: string | number;
@@ -330,21 +330,20 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
     const handleFocusRef = useForkRef(focusVisibleRef, sliderRef);
     const handleRef = useForkRef(ref, handleFocusRef);
 
-    const handleFocus = useCallback(
+    const handleFocus = useEventCallback(
       (event: React.FocusEvent<HTMLSpanElement>) => {
         if (isFocusVisible(event)) {
           setFocusVisible(true);
         }
-      },
-      [isFocusVisible]
+      }
     );
 
-    const handleBlur = useCallback(() => {
+    const handleBlur = useEventCallback(() => {
       if (focusVisible !== false) {
         setFocusVisible(false);
         onBlurVisible();
       }
-    }, [focusVisible, onBlurVisible]);
+    });
 
     const touchId = useRef<number>();
 
@@ -363,7 +362,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
       [marksProp, max, min, step]
     );
 
-    const handleKeyDown = useCallback(
+    const handleKeyDown = useEventCallback(
       (event: React.KeyboardEvent<HTMLSpanElement>) => {
         const tenPercents = (max - min) / 10;
         const marksValues = marks.map(mark => mark.value);
@@ -422,17 +421,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
 
         onChange?.(event, newValue);
         onChangeCommitted?.(event, newValue);
-      },
-      [
-        marks,
-        max,
-        min,
-        onChange,
-        onChangeCommitted,
-        setValueState,
-        step,
-        valueDerived
-      ]
+      }
     );
 
     const getNewValue = useCallback(
@@ -464,7 +453,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
       [marks, max, min, step, vertical]
     );
 
-    const handleTouchMove = useCallback(
+    const handleTouchMove = useEventCallback(
       (event: MouseEvent | TouchEvent) => {
         const finger = trackFinger(event, touchId.current);
 
@@ -478,11 +467,10 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
         setFocusVisible(true);
 
         onChange?.(event, newValue);
-      },
-      [getNewValue, onChange, setValueState]
+      }
     );
 
-    const handleTouchEnd = useCallback(
+    const handleTouchEnd = useEventCallback(
       (event: MouseEvent | TouchEvent) => {
         const finger = trackFinger(event, touchId.current);
 
@@ -501,11 +489,10 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
         doc.removeEventListener('mouseup', handleTouchEnd);
         doc.removeEventListener('touchmove', handleTouchMove);
         doc.removeEventListener('touchend', handleTouchEnd);
-      },
-      [getNewValue, handleTouchMove, onChangeCommitted]
+      }
     );
 
-    const handleMouseDown = useCallback(
+    const handleMouseDown = useEventCallback(
       (event: React.MouseEvent<HTMLDivElement>) => {
         // TODO should we also pass event together with new value to callbacks? (same thing with other input components)
         onMouseDown?.(event);
@@ -524,43 +511,32 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
         const doc = ownerDocument(sliderRef.current);
         doc.addEventListener('mousemove', handleTouchMove);
         doc.addEventListener('mouseup', handleTouchEnd);
-      },
-      [
-        getNewValue,
-        handleTouchEnd,
-        handleTouchMove,
-        onChange,
-        onMouseDown,
-        setValueState
-      ]
+      }
     );
 
-    const handleTouchStart = useCallback(
-      (event: TouchEvent) => {
-        // Workaround as Safari has partial support for touchAction: 'none'.
-        event.preventDefault();
-        const touch = event.changedTouches[0];
-        if (touch != null) {
-          // A number that uniquely identifies the current finger in the touch session.
-          touchId.current = touch.identifier;
-        }
+    const handleTouchStart = useEventCallback((event: TouchEvent) => {
+      // Workaround as Safari has partial support for touchAction: 'none'.
+      event.preventDefault();
+      const touch = event.changedTouches[0];
+      if (touch != null) {
+        // A number that uniquely identifies the current finger in the touch session.
+        touchId.current = touch.identifier;
+      }
 
-        thumbRef.current?.focus();
-        setFocusVisible(true);
+      thumbRef.current?.focus();
+      setFocusVisible(true);
 
-        const finger = trackFinger(event, touchId.current);
-        if (finger) {
-          const newValue = getNewValue(finger);
-          setValueState(newValue);
-          onChange?.(event, newValue);
-        }
+      const finger = trackFinger(event, touchId.current);
+      if (finger) {
+        const newValue = getNewValue(finger);
+        setValueState(newValue);
+        onChange?.(event, newValue);
+      }
 
-        const doc = ownerDocument(sliderRef.current);
-        doc.addEventListener('touchmove', handleTouchMove);
-        doc.addEventListener('touchend', handleTouchEnd);
-      },
-      [getNewValue, handleTouchEnd, handleTouchMove, onChange, setValueState]
-    );
+      const doc = ownerDocument(sliderRef.current);
+      doc.addEventListener('touchmove', handleTouchMove);
+      doc.addEventListener('touchend', handleTouchEnd);
+    });
 
     useEffect(() => {
       const { current: slider } = sliderRef;
