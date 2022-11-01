@@ -95,7 +95,6 @@ function SelectInner<T>(
     open: openProp,
     options: optionsProp,
     readOnly,
-    shadow = true,
     style,
     variant = 'default',
     value: valueProp,
@@ -229,7 +228,6 @@ function SelectInner<T>(
       {...wrapperProps}
       $disabled={disabled}
       ref={wrapperRef}
-      shadow={shadow}
       style={{ ...style, width }}
     >
       <input

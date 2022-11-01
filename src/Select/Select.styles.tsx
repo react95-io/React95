@@ -132,9 +132,9 @@ export const StyledDropdownButton = styled(Button).attrs(() => ({
       `
       : `
     position: absolute;
-    top: 2px;
-    right: 2px;
-    height: calc(100% - 4px);
+    top: 4px;
+    right: 4px;
+    height: calc(100% - 8px);
     `)}
     pointer-events: ${({ $disabled = false, native = false }) =>
     $disabled || native ? 'none' : 'auto'}
@@ -170,7 +170,6 @@ export const StyledDropdownMenu = styled.ul<CommonSelectStyleProps>`
   font-size: 1rem;
   position: absolute;
   transform: translateY(100%);
-  left: 0;
   background: ${({ theme }) => theme.canvas};
   padding: 2px;
   border-top: none;
@@ -181,13 +180,15 @@ export const StyledDropdownMenu = styled.ul<CommonSelectStyleProps>`
   ${({ variant = 'default' }) =>
     variant === 'flat'
       ? css`
+          left: 0;
           bottom: 2px;
           width: 100%;
           border: 2px solid ${({ theme }) => theme.flatDark};
         `
       : css`
-          bottom: -2px;
-          width: calc(100% - 2px);
+          left: 2px;
+          right: 4px;
+          bottom: 0;
           border: 2px solid ${({ theme }) => theme.borderDarkest};
         `}
   ${({ variant = 'default' }) => createScrollbars(variant)}

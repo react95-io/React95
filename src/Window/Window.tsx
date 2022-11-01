@@ -23,10 +23,12 @@ const ResizeHandle = styled.span`
   ${({ theme }) => css`
     display: inline-block;
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 0;
+    right: 0;
     width: 25px;
     height: 25px;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid transparent;
     background-image: linear-gradient(
       135deg,
       ${theme.borderLightest} 16.67%,

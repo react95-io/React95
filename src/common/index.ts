@@ -2,7 +2,6 @@ import { css } from 'styled-components';
 import { Color, CommonThemeProps, Theme } from '../types';
 
 export const shadow = '4px 4px 10px 0 rgba(0, 0, 0, 0.35)';
-export const insetShadow = 'inset 2px 2px 3px rgba(0,0,0,0.2)';
 
 export const createDisabledTextStyles = () => css`
   -webkit-text-fill-color: ${({ theme }) => theme.materialTextDisabled};
@@ -131,32 +130,6 @@ const borderStyles: Record<BorderStyles, BorderStyle> = {
   }
 };
 
-export const createInnerBorderWithShadow = ({
-  theme,
-  topLeftInner,
-  bottomRightInner,
-  hasShadow = false,
-  hasInsetShadow = false
-}: {
-  theme: Theme;
-  topLeftInner: keyof Theme | null;
-  bottomRightInner: keyof Theme | null;
-  hasShadow?: boolean;
-  hasInsetShadow?: boolean;
-}) =>
-  [
-    hasShadow ? shadow : false,
-    hasInsetShadow ? insetShadow : false,
-    topLeftInner !== null
-      ? `inset 1px 1px 0px 1px ${theme[topLeftInner]}`
-      : false,
-    bottomRightInner !== null
-      ? `inset -1px -1px 0 1px ${theme[bottomRightInner]}`
-      : false
-  ]
-    .filter(Boolean)
-    .join(', ');
-
 export const createBorderStyles = ({
   invert = false,
   style = 'button'
@@ -167,26 +140,42 @@ export const createBorderStyles = ({
     bottomRightInner: invert ? 'topLeftInner' : 'bottomRightInner',
     bottomRightOuter: invert ? 'topLeftOuter' : 'bottomRightOuter'
   } as const;
+  const topLeftInner = borderStyles[style][borders.topLeftInner];
+  const bottomRightInner = borderStyles[style][borders.bottomRightInner];
   return css<CommonThemeProps>`
-    border-style: solid;
-    border-width: 2px;
-    border-left-color: ${({ theme }) =>
-      theme[borderStyles[style][borders.topLeftOuter]]};
-    border-top-color: ${({ theme }) =>
-      theme[borderStyles[style][borders.topLeftOuter]]};
-    border-right-color: ${({ theme }) =>
-      theme[borderStyles[style][borders.bottomRightOuter]]};
-    border-bottom-color: ${({ theme }) =>
-      theme[borderStyles[style][borders.bottomRightOuter]]};
-    box-shadow: ${({ theme, shadow: hasShadow }) =>
-      createInnerBorderWithShadow({
-        theme,
-        topLeftInner: borderStyles[style][borders.topLeftInner],
-        bottomRightInner: borderStyles[style][borders.bottomRightInner],
-        hasShadow
-      })};
+    box-shadow: inset -2px -2px
+        ${({ theme }) => theme[borderStyles[style][borders.bottomRightOuter]]},
+      inset 2px 2px
+        ${({ theme }) => theme[borderStyles[style][borders.topLeftOuter]]},
+      inset -4px -4px
+        ${({ theme }) =>
+          bottomRightInner ? theme[bottomRightInner] : 'transparent'},
+      inset 4px 4px
+        ${({ theme }) => (topLeftInner ? theme[topLeftInner] : 'transparent')};
   `;
 };
+// background: linear-gradient(
+//   to bottom,
+//   ${({ theme }) => theme[borderStyles[style][borders.topLeftOuter]]},
+//   ${({ theme }) => (topLeftInner ? theme[topLeftInner] : 'transparent')},
+//   transparent 4px,
+//   transparent calc(100% - 4px),
+//   ${({ theme }) =>
+//     bottomRightInner ? theme[bottomRightInner] : 'transparent'},
+//   ${({ theme }) => theme[borderStyles[style][borders.bottomRightOuter]]}
+// ),
+// linear-gradient(
+//   to right,
+//   ${({ theme }) => theme[borderStyles[style][borders.topLeftOuter]]},
+//   ${({ theme }) => (topLeftInner ? theme[topLeftInner] : 'transparent')},
+//   transparent 4px,
+//   transparent calc(100% - 4px),
+//   ${({ theme }) =>
+//     bottomRightInner ? theme[bottomRightInner] : 'transparent'},
+//   ${({ theme }) => theme[borderStyles[style][borders.bottomRightOuter]]}
+// );
+// background-blend-mode: hard-light;
+// border-radius: 2px;
 
 /** @deprecated Use `createBorderStyles` instead */
 export const createWellBorderStyles = (invert = false) =>

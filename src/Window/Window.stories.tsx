@@ -55,7 +55,7 @@ const Wrapper = styled.div`
   }
   .footer {
     display: block;
-    margin: 0.25rem;
+    margin: 4px;
     height: 31px;
     line-height: 31px;
     padding-left: 0.25rem;

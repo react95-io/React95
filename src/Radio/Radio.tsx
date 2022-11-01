@@ -9,7 +9,6 @@ import {
   StyledLabel
 } from '../common/SwitchBase';
 import { StyledMenuListItem } from '../MenuList/MenuList';
-import { StyledScrollView } from '../ScrollView/ScrollView';
 import { CommonStyledProps } from '../types';
 
 type RadioVariant = 'default' | 'flat' | 'menu';
@@ -44,11 +43,18 @@ type StyledCheckboxProps = {
   $disabled: boolean;
 };
 
-const StyledCheckbox = styled(StyledScrollView)<StyledCheckboxProps>`
+// had to style borders here instead of using ScrollView or createBorderStyles
+// due to round shape (box-shadow based borders only look good for rectangular elements)
+const StyledCheckbox = styled.div<StyledCheckboxProps>`
   ${sharedCheckboxStyles}
-  background: ${({ $disabled, theme }) =>
-    $disabled ? theme.material : theme.canvas};
-
+  box-sizing: border-box;
+  position: relative;
+  background: ${props => props.theme.canvas};
+  border-color: ${props => props.theme.borderDark}
+    ${props => props.theme.borderLightest}
+    ${props => props.theme.borderLightest} ${props => props.theme.borderDark};
+  border-style: solid;
+  border-width: 2px;
   &:before {
     content: '';
     position: absolute;
@@ -57,7 +63,11 @@ const StyledCheckbox = styled(StyledScrollView)<StyledCheckboxProps>`
     width: calc(100% - 4px);
     height: calc(100% - 4px);
     border-radius: 50%;
-    box-shadow: none;
+    border-color: ${props => props.theme.borderDarkest}
+      ${props => props.theme.borderLight} ${props => props.theme.borderLight}
+      ${props => props.theme.borderDarkest};
+    border-style: solid;
+    border-width: 2px;
   }
 `;
 const StyledFlatCheckbox = styled.div<StyledCheckboxProps>`

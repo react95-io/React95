@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react';
 import styled from 'styled-components';
-import { insetShadow } from '../common';
 import { CommonStyledProps } from '../types';
 
 type TableBodyProps = {
@@ -11,7 +10,6 @@ type TableBodyProps = {
 const StyledTableBody = styled.tbody`
   background: ${({ theme }) => theme.canvas};
   display: table-row-group;
-  box-shadow: ${insetShadow};
   overflow-y: auto;
 `;
 

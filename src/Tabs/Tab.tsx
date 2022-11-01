@@ -18,6 +18,8 @@ type TabProps = {
 const StyledTab = styled.button<TabProps>`
   ${createBoxStyles()}
   ${createBorderStyles()}
+  border: none;
+  appearance: none;
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -61,11 +63,11 @@ const StyledTab = styled.button<TabProps>`
   &:before {
     content: '';
     position: absolute;
-    width: calc(100% - 4px);
+    width: calc(100% - 8px);
     height: 6px;
     background: ${({ theme }) => theme.material};
-    bottom: -4px;
-    left: 2px;
+    bottom: 2px;
+    left: 4px;
   }
 `;
 

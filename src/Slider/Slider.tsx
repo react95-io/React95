@@ -190,19 +190,13 @@ const sharedGrooveStyles = () => css<StyledSliderProps>`
 const StyledGroove = styled(StyledScrollView)<StyledSliderProps>`
   ${sharedGrooveStyles()}
 `;
-const StyledFlatGroove = styled(StyledScrollView)<StyledSliderProps>`
+const StyledFlatGroove = styled.div`
   ${sharedGrooveStyles()}
-
-  border-left-color: ${({ theme }) => theme.flatLight};
-  border-top-color: ${({ theme }) => theme.flatLight};
-  border-right-color: ${({ theme }) => theme.canvas};
-  border-bottom-color: ${({ theme }) => theme.canvas};
-  &:before {
-    border-left-color: ${({ theme }) => theme.flatDark};
-    border-top-color: ${({ theme }) => theme.flatDark};
-    border-right-color: ${({ theme }) => theme.flatLight};
-    border-bottom-color: ${({ theme }) => theme.flatLight};
-  }
+  box-shadow: inset -2px -2px ${({ theme }) =>
+    theme.canvas}, inset 2px 2px  ${({ theme }) => theme.flatLight},
+    inset -4px -4px ${({ theme }) => theme.flatLight}, inset 4px 4px ${({
+    theme
+  }) => theme.flatDark};
 `;
 const Thumb = styled.span<StyledSliderProps>`
   position: relative;

@@ -18,12 +18,12 @@ export function Default() {
   return (
     <AppBar>
       <Toolbar>
-        <Handle size={35} />
+        <Handle size={32} />
         <Button variant='menu'>Edit</Button>
         <Button variant='menu' disabled>
           Save
         </Button>
-        <Handle size={35} />
+        <Handle size={32} />
       </Toolbar>
     </AppBar>
   );

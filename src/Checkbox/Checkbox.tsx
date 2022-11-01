@@ -129,13 +129,14 @@ const CheckmarkIcon = styled.span.attrs(() => ({
               ? theme.checkmarkDisabled
               : theme.checkmark};
           `}
-  ${StyledMenuListItem}:hover & {
-    ${({ $disabled, theme, variant }) =>
-      !$disabled &&
-      variant === 'menu' &&
-      css`
-        border-color: ${theme.materialTextInvert};
-      `};
+    ${StyledMenuListItem}:hover & {
+      ${({ $disabled, theme, variant }) =>
+        !$disabled &&
+        variant === 'menu' &&
+        css`
+          border-color: ${theme.materialTextInvert};
+        `};
+    }
   }
 `;
 const IndeterminateIcon = styled.span.attrs(() => ({
