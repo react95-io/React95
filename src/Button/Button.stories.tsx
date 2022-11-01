@@ -63,6 +63,47 @@ Default.story = {
   name: 'default'
 };
 
+export function Raised() {
+  return (
+    <div id='default-buttons'>
+      <Button variant='raised'>Default</Button>
+      <br />
+      <Button variant='raised' primary>
+        Primary
+      </Button>
+      <br />
+      <Button variant='raised' disabled>
+        Disabled
+      </Button>
+      <br />
+      <Button variant='raised' active>
+        Active
+      </Button>
+      <br />
+      <Button variant='raised' square>
+        <span role='img' aria-label='recycle'>
+          ♻︎
+        </span>
+      </Button>
+      <br />
+      <Button variant='raised' fullWidth>
+        Full width
+      </Button>
+      <br />
+      <Button variant='raised' size='sm'>
+        Size small
+      </Button>
+      <Button variant='raised' size='lg'>
+        Size large
+      </Button>
+    </div>
+  );
+}
+
+Raised.story = {
+  name: 'raised'
+};
+
 export function Flat() {
   return (
     <Window>

@@ -25,7 +25,7 @@ type ButtonProps = {
   type?: string;
 } & (
   | {
-      variant?: 'default' | 'flat' | 'thin';
+      variant?: 'default' | 'raised' | 'flat' | 'thin';
     }
   | {
       /** @deprecated Use `thin` */
@@ -146,11 +146,21 @@ export const StyledButton = styled.button<StyledButtonProps>`
                 `}
 
             ${active
-              ? createBorderStyles({ invert: true })
-              : createBorderStyles({ invert: false })}
+              ? createBorderStyles({
+                  style: variant === 'raised' ? 'window' : 'button',
+                  invert: true
+                })
+              : createBorderStyles({
+                  style: variant === 'raised' ? 'window' : 'button',
+                  invert: false
+                })}
           }
           &:active:before {
-            ${!disabled && createBorderStyles({ invert: true })}
+            ${!disabled &&
+            createBorderStyles({
+              style: variant === 'raised' ? 'window' : 'button',
+              invert: true
+            })}
           }
           &:focus:after,
           &:active:after {

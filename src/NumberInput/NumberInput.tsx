@@ -28,7 +28,7 @@ const StyledNumberInputWrapper = styled.div`
   align-items: center;
 `;
 
-const StyledButton = styled(Button)<Pick<NumberInputProps, 'variant'>>`
+const StyledButton = styled(Button)`
   width: 30px;
   padding: 0;
   flex-shrink: 0;
@@ -40,13 +40,6 @@ const StyledButton = styled(Button)<Pick<NumberInputProps, 'variant'>>`
         `
       : css`
           height: 50%;
-          &:before {
-            border-left-color: ${({ theme }) => theme.borderLight};
-            border-top-color: ${({ theme }) => theme.borderLight};
-            box-shadow: inset 1px 1px 0px 1px
-                ${({ theme }) => theme.borderLightest},
-              inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
-          }
         `}
 `;
 
@@ -159,6 +152,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       handleClick(-step);
     }, [handleClick, step]);
 
+    const buttonVariant = variant === 'flat' ? 'flat' : 'raised';
     return (
       <StyledNumberInputWrapper
         className={className}
@@ -181,7 +175,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         <StyledButtonWrapper variant={variant}>
           <StyledButton
             data-testid='increment'
-            variant={variant}
+            variant={buttonVariant}
             disabled={disabled || readOnly}
             onClick={stepUp}
           >
@@ -189,7 +183,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           </StyledButton>
           <StyledButton
             data-testid='decrement'
-            variant={variant}
+            variant={buttonVariant}
             disabled={disabled || readOnly}
             onClick={stepDown}
           >
