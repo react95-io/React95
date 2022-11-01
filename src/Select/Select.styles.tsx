@@ -109,7 +109,7 @@ export const StyledNativeSelect = styled.select`
 
 export const StyledDropdownButton = styled(Button).attrs(() => ({
   'aria-hidden': 'true'
-}))<CommonSelectStyleProps>`
+}))<Omit<CommonSelectStyleProps, 'variant'>>`
   width: 30px;
   padding: 0;
   flex-shrink: 0;
@@ -121,13 +121,6 @@ export const StyledDropdownButton = styled(Button).attrs(() => ({
         `
       : css`
           height: 100%;
-          &:before {
-            border-left-color: ${({ theme }) => theme.borderLight};
-            border-top-color: ${({ theme }) => theme.borderLight};
-            box-shadow: inset 1px 1px 0px 1px
-                ${({ theme }) => theme.borderLightest},
-              inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
-          }
         `}
   ${({ native = false, variant = 'default' }) =>
     native &&
