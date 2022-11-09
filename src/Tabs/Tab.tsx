@@ -8,7 +8,7 @@ import { CommonStyledProps } from '../types';
 type TabProps = {
   children?: React.ReactNode;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>, value: any) => void;
+  onClick?: (value: any, event: React.MouseEvent<HTMLButtonElement>) => void;
   selected?: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value?: any;
@@ -76,7 +76,7 @@ const Tab = forwardRef<HTMLButtonElement, TabProps>(
         aria-selected={selected}
         selected={selected}
         onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
-          onClick?.(e, value)
+          onClick?.(value, e)
         }
         ref={ref}
         role='tab'

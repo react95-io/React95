@@ -61,7 +61,7 @@ describe('<Tabs />', () => {
 
       fireEvent.click(getAllByRole('tab')[1]);
       expect(handleChange).toBeCalledTimes(1);
-      expect(handleChange.mock.calls[0][1]).toBe(1);
+      expect(handleChange.mock.calls[0][0]).toBe(1);
     });
   });
 
