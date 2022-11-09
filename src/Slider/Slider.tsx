@@ -24,14 +24,7 @@ import { clamp, getSize, roundValueToStep } from '../common/utils';
 import { StyledScrollView } from '../ScrollView/ScrollView';
 import { CommonStyledProps } from '../types';
 
-export type SliderOnChangeHandler = (
-  event:
-    | MouseEvent
-    | React.KeyboardEvent<HTMLSpanElement>
-    | React.MouseEvent<HTMLDivElement>
-    | TouchEvent,
-  value: number
-) => void;
+export type SliderOnChangeHandler = (value: number) => void;
 
 type SliderProps = {
   defaultValue?: number;
@@ -419,8 +412,8 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
         setValueState(newValue);
         setFocusVisible(true);
 
-        onChange?.(event, newValue);
-        onChangeCommitted?.(event, newValue);
+        onChange?.(newValue);
+        onChangeCommitted?.(newValue);
       }
     );
 
@@ -466,7 +459,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
         setValueState(newValue);
         setFocusVisible(true);
 
-        onChange?.(event, newValue);
+        onChange?.(newValue);
       }
     );
 
@@ -480,7 +473,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
 
         const newValue = getNewValue(finger);
 
-        onChangeCommitted?.(event, newValue);
+        onChangeCommitted?.(newValue);
 
         touchId.current = undefined;
 
@@ -505,7 +498,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
         if (finger) {
           const newValue = getNewValue(finger);
           setValueState(newValue);
-          onChange?.(event, newValue);
+          onChange?.(newValue);
         }
 
         const doc = ownerDocument(sliderRef.current);
@@ -530,7 +523,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
       if (finger) {
         const newValue = getNewValue(finger);
         setValueState(newValue);
-        onChange?.(event, newValue);
+        onChange?.(newValue);
       }
 
       const doc = ownerDocument(sliderRef.current);

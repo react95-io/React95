@@ -43,7 +43,7 @@ export default {
 export function Default() {
   const [state, setState] = React.useState(0);
 
-  const onChange: SliderOnChangeHandler = (_, newValue) => setState(newValue);
+  const onChange: SliderOnChangeHandler = newValue => setState(newValue);
 
   return (
     <div className='row'>
