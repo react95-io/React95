@@ -32,9 +32,12 @@ export function Default() {
   });
 
   const handleChange = (
-    _: React.MouseEvent<HTMLButtonElement>,
-    value: number
-  ) => setState({ activeTab: value });
+    value: number,
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    console.log({ value, event });
+    setState({ activeTab: value });
+  };
 
   const { activeTab } = state;
   return (
@@ -88,10 +91,7 @@ export function MultiRow() {
     activeTab: 'Shoes'
   });
 
-  const handleChange = (
-    _: React.MouseEvent<HTMLButtonElement>,
-    value: string
-  ) => setState({ activeTab: value });
+  const handleChange = (value: string) => setState({ activeTab: value });
 
   const { activeTab } = state;
   return (
