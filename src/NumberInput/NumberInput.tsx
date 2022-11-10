@@ -104,7 +104,8 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       style,
       value,
       variant = 'default',
-      width
+      width,
+      ...otherProps
     },
     ref
   ) => {
@@ -160,6 +161,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           ...style,
           width: width !== undefined ? getSize(width) : 'auto'
         }}
+        {...otherProps}
       >
         <TextInput
           value={valueDerived}
