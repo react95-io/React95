@@ -2,14 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { ComponentMeta } from '@storybook/react';
-import {
-  Checkbox,
-  GroupBox,
-  MenuList,
-  MenuListItem,
-  ScrollView,
-  Separator
-} from 'react95';
+import { Checkbox, GroupBox, ScrollView } from 'react95';
 
 const Wrapper = styled.div`
   background: ${({ theme }) => theme.material};
@@ -236,45 +229,4 @@ export function Flat() {
 
 Flat.story = {
   name: 'flat'
-};
-
-export function Menu() {
-  return (
-    <MenuList>
-      <MenuListItem size='md'>
-        <Checkbox
-          name='useGradient'
-          variant='menu'
-          value='useGradient'
-          label='Use gradient'
-          defaultChecked
-        />
-      </MenuListItem>
-      <MenuListItem size='md'>
-        <Checkbox
-          name='thickBrush'
-          variant='menu'
-          defaultChecked={false}
-          value='thickBrush'
-          label='Thick brush'
-          indeterminate
-        />
-      </MenuListItem>
-      <Separator />
-      <MenuListItem size='md' disabled>
-        <Checkbox
-          name='autoSave'
-          variant='menu'
-          value='autoSave'
-          checked
-          label='Auto-save'
-          disabled
-        />
-      </MenuListItem>
-    </MenuList>
-  );
-}
-
-Menu.story = {
-  name: 'menu'
 };
