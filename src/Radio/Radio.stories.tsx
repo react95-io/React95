@@ -1,15 +1,6 @@
 import { ComponentMeta } from '@storybook/react';
 import React, { useState } from 'react';
-import {
-  GroupBox,
-  MenuList,
-  MenuListItem,
-  Radio,
-  ScrollView,
-  Separator,
-  Window,
-  WindowContent
-} from 'react95';
+import { GroupBox, Radio, ScrollView, Window, WindowContent } from 'react95';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -25,6 +16,7 @@ const Wrapper = styled.div`
     }
   }
 `;
+
 export default {
   title: 'Controls/Radio',
   component: Radio,
@@ -142,68 +134,4 @@ export function Flat() {
 
 Flat.story = {
   name: 'flat'
-};
-
-export function Menu() {
-  const [state, setState] = useState({
-    tool: 'Brush',
-    color: 'Black'
-  });
-  const handleToolChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setState({ ...state, tool: e.target.value });
-  const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setState({ ...state, color: e.target.value });
-
-  const { tool, color } = state;
-
-  return (
-    <MenuList>
-      <MenuListItem size='sm'>
-        <Radio
-          variant='menu'
-          checked={tool === 'Brush'}
-          onChange={handleToolChange}
-          value='Brush'
-          label='Brush'
-          name='tool'
-        />
-      </MenuListItem>
-      <MenuListItem size='sm'>
-        <Radio
-          variant='menu'
-          checked={tool === 'Pencil'}
-          onChange={handleToolChange}
-          value='Pencil'
-          label='Pencil'
-          name='tool'
-        />
-      </MenuListItem>
-      <Separator />
-      <MenuListItem size='sm' disabled>
-        <Radio
-          disabled
-          variant='menu'
-          checked={color === 'Black'}
-          onChange={handleColorChange}
-          value='Black'
-          label='Black'
-          name='color'
-        />
-      </MenuListItem>
-      <MenuListItem size='sm' disabled>
-        <Radio
-          disabled
-          variant='menu'
-          checked={color === 'Red'}
-          onChange={handleColorChange}
-          value='Red'
-          label='Red'
-          name='color'
-        />
-      </MenuListItem>
-    </MenuList>
-  );
-}
-Menu.story = {
-  name: 'menu'
 };
