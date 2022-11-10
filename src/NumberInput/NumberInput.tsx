@@ -16,7 +16,7 @@ type NumberInputProps = {
   min?: number;
   readOnly?: boolean;
   step?: number;
-  onChange?: (newValue: number) => void;
+  onChange?: (value: number) => void;
   style?: React.CSSProperties;
   value?: number;
   variant?: 'default' | 'flat';
