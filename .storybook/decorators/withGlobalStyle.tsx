@@ -20,6 +20,13 @@ const GlobalStyle = createGlobalStyle`
     font-weight: bold;
     font-style: normal
   }
+  html, body, #root {
+   height: 100%;
+  }
+  #root > * {
+    height: 100%;
+    box-sizing: border-box;
+  }
   body {
     font-family: 'ms_sans_serif', 'sans-serif';
   }
