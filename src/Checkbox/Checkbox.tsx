@@ -10,7 +10,6 @@ import {
   StyledLabel
 } from '../common/SwitchBase';
 import { noOp } from '../common/utils';
-import { StyledMenuListItem } from '../MenuList/MenuList';
 import { StyledScrollView } from '../ScrollView/ScrollView';
 import { CommonThemeProps } from '../types';
 
@@ -25,7 +24,7 @@ type CheckboxProps = {
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   style?: React.CSSProperties;
   value?: number | string;
-  variant?: 'default' | 'flat' | 'menu';
+  variant?: 'default' | 'flat';
 } & Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
   | 'checked'
@@ -41,7 +40,7 @@ type CheckboxProps = {
 
 type CheckmarkProps = {
   $disabled: boolean;
-  variant: 'default' | 'flat' | 'menu';
+  variant: 'default' | 'flat';
 };
 
 const sharedCheckboxStyles = css`
@@ -77,20 +76,6 @@ const StyledFlatCheckbox = styled.div<CommonThemeProps>`
     $disabled ? theme.flatLight : theme.canvas};
 `;
 
-const StyledMenuCheckbox = styled.div<CommonThemeProps>`
-  position: relative;
-  box-sizing: border-box;
-  display: inline-block;
-  background: ${({ $disabled, theme }) =>
-    $disabled ? theme.flatLight : theme.canvas};
-  ${sharedCheckboxStyles}
-  width: ${size - 4}px;
-  height: ${size - 4}px;
-  background: none;
-  border: none;
-  outline: none;
-`;
-
 const CheckmarkIcon = styled.span.attrs(() => ({
   'data-testid': 'checkmarkIcon'
 }))<CheckmarkProps>`
@@ -113,30 +98,8 @@ const CheckmarkIcon = styled.span.attrs(() => ({
     border-width: 0 3px 3px 0;
     transform: translate(-50%, -50%) rotate(45deg);
 
-    ${({ $disabled, theme, variant }) =>
-      variant === 'menu'
-        ? css`
-            border-color: ${$disabled
-              ? theme.materialTextDisabled
-              : theme.materialText};
-            filter: drop-shadow(
-              1px 1px 0px
-                ${$disabled ? theme.materialTextDisabledShadow : 'transparent'}
-            );
-          `
-        : css`
-            border-color: ${$disabled
-              ? theme.checkmarkDisabled
-              : theme.checkmark};
-          `}
-    ${StyledMenuListItem}:hover & {
-      ${({ $disabled, theme, variant }) =>
-        !$disabled &&
-        variant === 'menu' &&
-        css`
-          border-color: ${theme.materialTextInvert};
-        `};
-    }
+    border-color: ${p =>
+      p.$disabled ? p.theme.checkmarkDisabled : p.theme.checkmark};
   }
 `;
 const IndeterminateIcon = styled.span.attrs(() => ({
@@ -145,16 +108,9 @@ const IndeterminateIcon = styled.span.attrs(() => ({
   display: inline-block;
   position: relative;
 
-  ${({ variant }) =>
-    variant === 'menu'
-      ? css`
-          height: calc(100% - 4px);
-          width: calc(100% - 4px);
-        `
-      : css`
-          width: 100%;
-          height: 100%;
-        `}
+  width: 100%;
+  height: 100%;
+
   &:after {
     content: '';
     display: block;
@@ -167,27 +123,12 @@ const IndeterminateIcon = styled.span.attrs(() => ({
         mainColor: $disabled ? theme.checkmarkDisabled : theme.checkmark
       })}
     background-position: 0px 0px, 2px 2px;
-
-    ${({ $disabled, theme, variant }) =>
-      variant === 'menu' &&
-      css`
-        ${StyledMenuListItem}:hover & {
-          ${createHatchedBackground({
-            mainColor: theme.materialTextInvert
-          })}
-        }
-        filter: drop-shadow(
-          1px 1px 0px
-            ${$disabled ? theme.materialTextDisabledShadow : 'transparent'}
-        );
-      `};
   }
 `;
 
 const CheckboxComponents = {
   flat: StyledFlatCheckbox,
-  default: StyledCheckbox,
-  menu: StyledMenuCheckbox
+  default: StyledCheckbox
 };
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
