@@ -4,6 +4,58 @@ on:
   pull_request:
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Cache packages
+        uses: actions/cache@v3
+        with:
+          key: node_modules-v4-${{ hashFiles('yarn.lock') }}
+          path: |-
+            node_modules
+            */node_modules
+          restore-keys: 'node_modules-v4-'
+
+      - name: Yarn install
+        run: yarn install --ignore-optional --frozen-lockfile
+
+      - name: Lint
+        run: yarn run lint
+
+  type-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Cache packages
+        uses: actions/cache@v3
+        with:
+          key: node_modules-v4-${{ hashFiles('yarn.lock') }}
+          path: |-
+            node_modules
+            */node_modules
+          restore-keys: 'node_modules-v4-'
+
+      - name: Yarn install
+        run: yarn install --ignore-optional --frozen-lockfile
+
+      - name: Type Check
+        run: yarn run typescript
+
   test:
     runs-on: ubuntu-latest
     steps:

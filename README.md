@@ -10,7 +10,7 @@
 <h3 align="center">
   <a href="https://storybook.react95.io/?path=/story/window--default">Components</a> -
   <a href="https://coins95.web.app/">Demo app</a> -
-  <a href="https://react95.io/">Website</a> -
+  <a href="https://github.com/react95-io/react95-native">React Native</a> -
   <a href="https://join.slack.com/t/react95/shared_invite/enQtOTA1NzEyNjAyNTc4LWYxZjU3NWRiMWJlMGJiMjhkNzE2MDA3ZmZjZDc1YmY0ODdlZjMwZDA1NWJiYWExYmY1NTJmNmE4OWVjNWFhMTE">Slack</a> -
   <a href="https://www.paypal.me/react95">PayPal donation 💰</a>
 </h3>
@@ -33,7 +33,7 @@ First, install component library and styled-components in your project directory
 $ yarn add react95 styled-components
 
 # npm
-$ npm i react95 styled-components
+$ npm install react95 styled-components
 ```
 
 Apply style reset, wrap your app with ThemeProvider with theme of your choice... and you are ready to go! 🚀
@@ -42,7 +42,7 @@ Apply style reset, wrap your app with ThemeProvider with theme of your choice...
 import React from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
-import { styleReset, List, ListItem, Divider } from 'react95';
+import { MenuList, MenuListItem, Separator, styleReset } from 'react95';
 // pick a theme of your choice
 import original from 'react95/dist/themes/original';
 // original Windows95 font (optionally)
@@ -72,12 +72,12 @@ const App = () => (
   <div>
     <GlobalStyles />
     <ThemeProvider theme={original}>
-      <List>
-        <ListItem>🎤 Sing</ListItem>
-        <ListItem>💃🏻 Dance</ListItem>
-        <Divider />
-        <ListItem disabled>😴 Sleep</ListItem>
-      </List>
+      <MenuList>
+        <MenuListItem>🎤 Sing</MenuListItem>
+        <MenuListItem>💃🏻 Dance</MenuListItem>
+        <Separator />
+        <MenuListItem disabled>😴 Sleep</MenuListItem>
+      </MenuList>
     </ThemeProvider>
   </div>
 );

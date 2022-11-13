@@ -1,65 +1,74 @@
-import babel from 'rollup-plugin-babel';
-import commonjs from 'rollup-plugin-commonjs';
-import resolve from 'rollup-plugin-node-resolve';
-import replace from 'rollup-plugin-replace';
+import typescript from '@rollup/plugin-typescript';
 import copy from 'rollup-plugin-copy';
-import packageJson from './package.json';
+import esbuild from 'rollup-plugin-esbuild';
+import replace from 'rollup-plugin-replace';
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
+const baseBundle = {
+  external: id => !/^[./]/.test(id),
+  plugins: [
+    replace({
+      'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
+    }),
+    esbuild()
+  ]
+};
+
 export default [
   {
-    input: './src/index.js',
+    ...baseBundle,
+    input: ['./src/index.ts', './src/types.ts'],
     output: [
       {
-        file: packageJson.main,
+        dir: 'dist',
+        entryFileNames: '[name].js',
+        exports: 'auto',
         format: 'cjs',
-        sourcemap: true
+        preserveModules: true,
+        preserveModulesRoot: 'src'
       },
       {
-        file: packageJson.module,
-        format: 'esm',
-        sourcemap: true
+        dir: 'dist',
+        entryFileNames: '[name].mjs',
+        exports: 'auto',
+        format: 'es',
+        preserveModules: true,
+        preserveModulesRoot: 'src'
       }
     ],
     plugins: [
-      replace({
-        'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
-      }),
-      babel({
-        exclude: 'node_modules/**',
-        runtimeHelpers: true
-      }),
-      resolve(),
-      commonjs()
-    ],
-    external: id => /^react|react-dom|styled-components/.test(id)
+      ...baseBundle.plugins,
+      typescript({
+        tsconfig: './tsconfig.build.index.json',
+        declaration: true,
+        declarationDir: 'dist'
+      })
+    ]
   },
   {
-    input: './src/common/themes/index.js',
+    ...baseBundle,
+    input: './src/common/themes/index.ts',
     output: {
       dir: 'dist/themes',
       exports: 'default',
-      format: 'cjs'
+      format: 'cjs',
+      preserveModules: true,
+      preserveModulesRoot: 'src/common/themes'
     },
-    preserveModules: true,
     plugins: [
+      ...baseBundle.plugins,
       copy({
         targets: [
           { src: './src/assets/fonts/dist/*', dest: './dist/fonts' },
           { src: './src/assets/images/*', dest: './dist/images' }
         ]
       }),
-      replace({
-        'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
-      }),
-      babel({
-        exclude: 'node_modules/**',
-        runtimeHelpers: true
-      }),
-      resolve(),
-      commonjs()
-    ],
-    external: id => /^react|react-dom|styled-components/.test(id)
+      typescript({
+        tsconfig: './tsconfig.build.themes.json',
+        declaration: true,
+        declarationDir: 'dist/themes'
+      })
+    ]
   }
 ];
