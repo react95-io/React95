@@ -10,7 +10,7 @@
 <h3 align="center">
   <a href="https://storybook.react95.io/?path=/story/window--default">Components</a> -
   <a href="https://coins95.web.app/">Demo app</a> -
-  <a href="https://react95.io/">Website</a> -
+  <a href="https://github.com/react95-io/react95-native">React Native</a> -
   <a href="https://join.slack.com/t/react95/shared_invite/enQtOTA1NzEyNjAyNTc4LWYxZjU3NWRiMWJlMGJiMjhkNzE2MDA3ZmZjZDc1YmY0ODdlZjMwZDA1NWJiYWExYmY1NTJmNmE4OWVjNWFhMTE">Slack</a> -
   <a href="https://www.paypal.me/react95">PayPal donation 💰</a>
 </h3>
