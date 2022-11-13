@@ -1,0 +1,76 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title='Docs/Getting Started' />
+
+# Installation
+
+React95 is available as an [npm package](https://www.npmjs.com/package/react95).
+
+## npm
+
+To install and save your `package.json` dependencies, run:
+
+```sh
+# yarn
+yarn add react95 styled-components
+
+# npm
+npm install -S react95 styled-components
+```
+
+In order to have `react95` working properly, you'll also need
+[styled-components 💅](https://github.com/styled-components/styled-components),
+this way you can use custom themes and get the best of the library 🙂
+
+## Usage
+
+Apply style reset, wrap your app content with ThemeProvider with theme of your
+choice... and you are ready to go! 🚀
+
+```jsx
+import React from 'react';
+import { MenuList, MenuListItem, Separator, styleReset } from 'react95';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+
+/* Pick a theme of your choice */
+import original from 'react95/dist/themes/original';
+
+/* Original Windows95 font (optional) */
+import ms_sans_serif from 'react95/dist/fonts/ms_sans_serif.woff2';
+import ms_sans_serif_bold from 'react95/dist/fonts/ms_sans_serif_bold.woff2';
+
+const GlobalStyles = createGlobalStyle`
+  @font-face {
+    font-family: 'ms_sans_serif';
+    src: url('${ms_sans_serif}') format('woff2');
+    font-weight: 400;
+    font-style: normal
+  }
+  @font-face {
+    font-family: 'ms_sans_serif';
+    src: url('${ms_sans_serif_bold}') format('woff2');
+    font-weight: bold;
+    font-style: normal
+  }
+  body, input, select, textarea {
+    font-family: 'ms_sans_serif';
+  }
+  ${styleReset}
+`;
+
+const App = () => (
+  <div>
+    <GlobalStyles />
+    <ThemeProvider theme={original}>
+      <MenuList>
+        <MenuListItem>🎤 Sing</MenuListItem>
+        <MenuListItem>💃🏻 Dance</MenuListItem>
+        <Separator />
+        <MenuListItem disabled>😴 Sleep</MenuListItem>
+      </MenuList>
+    </ThemeProvider>
+  </div>
+);
+
+export default App;
+```
