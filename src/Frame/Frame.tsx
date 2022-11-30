@@ -44,13 +44,14 @@ const createFrameStyles = (variant: FrameProps['variant']) => {
 const StyledFrame = styled.div<Required<Pick<FrameProps, 'variant'>>>`
   position: relative;
   font-size: 1rem;
-  ${({ variant }) => createFrameStyles(variant)}
+
   ${({ variant }) =>
     createBoxStyles(
       variant === 'field'
         ? { background: 'canvas', color: 'canvasText' }
         : undefined
     )}
+  ${({ variant }) => createFrameStyles(variant)}
 `;
 
 const Frame = forwardRef<HTMLDivElement, FrameProps>(

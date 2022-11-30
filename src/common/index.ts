@@ -143,39 +143,31 @@ export const createBorderStyles = ({
   const topLeftInner = borderStyles[style][borders.topLeftInner];
   const bottomRightInner = borderStyles[style][borders.bottomRightInner];
   return css<CommonThemeProps>`
-    box-shadow: inset -2px -2px
-        ${({ theme }) => theme[borderStyles[style][borders.bottomRightOuter]]},
-      inset 2px 2px
+    background: linear-gradient(
+        to bottom,
         ${({ theme }) => theme[borderStyles[style][borders.topLeftOuter]]},
-      inset -4px -4px
+        ${({ theme }) => (topLeftInner ? theme[topLeftInner] : 'transparent')},
+        transparent 4px,
+        transparent calc(100% - 4px),
         ${({ theme }) =>
           bottomRightInner ? theme[bottomRightInner] : 'transparent'},
-      inset 4px 4px
-        ${({ theme }) => (topLeftInner ? theme[topLeftInner] : 'transparent')};
+        ${({ theme }) => theme[borderStyles[style][borders.bottomRightOuter]]}
+      ),
+      linear-gradient(
+        to right,
+        ${({ theme }) => theme[borderStyles[style][borders.topLeftOuter]]},
+        ${({ theme }) => (topLeftInner ? theme[topLeftInner] : 'transparent')},
+        transparent 4px,
+        transparent calc(100% - 4px),
+        ${({ theme }) =>
+          bottomRightInner ? theme[bottomRightInner] : 'transparent'},
+        ${({ theme }) => theme[borderStyles[style][borders.bottomRightOuter]]}
+      );
+    background-blend-mode: hard-light;
+    border-radius: 2px;
+    /* border: 1px solid ${p => p.theme.borderDarkest}; */
   `;
 };
-// background: linear-gradient(
-//   to bottom,
-//   ${({ theme }) => theme[borderStyles[style][borders.topLeftOuter]]},
-//   ${({ theme }) => (topLeftInner ? theme[topLeftInner] : 'transparent')},
-//   transparent 4px,
-//   transparent calc(100% - 4px),
-//   ${({ theme }) =>
-//     bottomRightInner ? theme[bottomRightInner] : 'transparent'},
-//   ${({ theme }) => theme[borderStyles[style][borders.bottomRightOuter]]}
-// ),
-// linear-gradient(
-//   to right,
-//   ${({ theme }) => theme[borderStyles[style][borders.topLeftOuter]]},
-//   ${({ theme }) => (topLeftInner ? theme[topLeftInner] : 'transparent')},
-//   transparent 4px,
-//   transparent calc(100% - 4px),
-//   ${({ theme }) =>
-//     bottomRightInner ? theme[bottomRightInner] : 'transparent'},
-//   ${({ theme }) => theme[borderStyles[style][borders.bottomRightOuter]]}
-// );
-// background-blend-mode: hard-light;
-// border-radius: 2px;
 
 /** @deprecated Use `createBorderStyles` instead */
 export const createWellBorderStyles = (invert = false) =>
