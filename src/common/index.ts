@@ -19,7 +19,7 @@ export const createBoxStyles = ({
 } = {}) => css`
   box-sizing: border-box;
   display: inline-block;
-  background: ${({ theme }) => theme[background]};
+  background-color: ${({ theme }) => theme[background]};
   color: ${({ theme }) => theme[color]};
 `;
 
