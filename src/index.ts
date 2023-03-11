@@ -15,6 +15,7 @@ export * from './Frame/Frame';
 export * from './GroupBox/GroupBox';
 export * from './Handle/Handle';
 export * from './Hourglass/Hourglass';
+export * from './IconWrapper/IconWrapper';
 export * from './MenuList/MenuList';
 export * from './Monitor/Monitor';
 export * from './NumberInput/NumberInput';
@@ -45,3 +46,8 @@ export * from './legacy/Panel';
 export * from './legacy/Progress';
 export * from './legacy/TextField';
 export * from './legacy/Tree';
+
+/* other */
+
+export * from './common/ThemeProvider';
+export * from './common/React95Provider';
