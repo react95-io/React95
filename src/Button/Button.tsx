@@ -164,7 +164,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
           }
           &:focus:after,
           &:active:after {
-            ${!active && !disabled && focusOutline}
+            ${!disabled && focusOutline}
             outline-offset: -8px;
           }
           &:active:focus:after,
