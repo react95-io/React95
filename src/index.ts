@@ -31,6 +31,7 @@ export * from './Toolbar/Toolbar';
 export * from './Tooltip/Tooltip';
 export * from './TreeView/TreeView';
 export * from './Window/Window';
+export * from './IELoading/IELoading';
 
 /* deprecated components */
 export * from './legacy/Bar';
