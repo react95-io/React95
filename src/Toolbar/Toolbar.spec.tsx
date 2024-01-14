@@ -26,4 +26,15 @@ describe('<Toolbar />', () => {
       expect(toolbar).toHaveStyleRule('padding', '0');
     });
   });
+
+  describe('prop: onOutsideClick', () => {
+    it('should fire callback on container click', () => {
+      const mockCallBack = jest.fn();
+      const { container } = render(<Toolbar onOutsideClick={mockCallBack} />);
+
+      container.click();
+
+      expect(mockCallBack).toHaveBeenCalled();
+    });
+  });
 });
