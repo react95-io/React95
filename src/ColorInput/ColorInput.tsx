@@ -143,7 +143,7 @@ const ColorInput = forwardRef<HTMLInputElement, ColorInputProps>(
     return (
       //  we only need button styles, so we display
       // it as a div and reset type attribute
-      <Trigger disabled={disabled} as='div' variant={variant} size='md'>
+      <Trigger $disabled={disabled} as='div' $variant={variant} $size='md'>
         <StyledColorInput
           onChange={handleChange}
           readOnly={disabled}

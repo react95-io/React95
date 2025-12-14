@@ -19,15 +19,15 @@ type ProgressBarProps = {
 } & React.HTMLAttributes<HTMLDivElement> &
   CommonStyledProps;
 
-const Wrapper = styled.div<Required<Pick<ProgressBarProps, 'variant'>>>`
+const Wrapper = styled.div<{ $variant: 'default' | 'tile' }>`
   display: inline-block;
   height: ${blockSizes.md};
   width: 100%;
 `;
 
-const ProgressCutout = styled(StyledScrollView)<
-  Required<Pick<ProgressBarProps, 'variant'>>
->`
+const ProgressCutout = styled(StyledScrollView)<{
+  $variant: 'default' | 'tile';
+}>`
   width: 100%;
   height: 100%;
   position: relative;
@@ -57,7 +57,7 @@ const WhiteBar = styled.div`
   color: ${({ theme }) => theme.materialText};
 `;
 
-const BlueBar = styled.div<Pick<ProgressBarProps, 'value'>>`
+const BlueBar = styled.div<{ $value?: number }>`
   position: absolute;
   top: 2px;
   left: 2px;
@@ -66,8 +66,8 @@ const BlueBar = styled.div<Pick<ProgressBarProps, 'value'>>`
   background: ${({ theme }) => theme.progress};
   clip-path: polygon(
     0 0,
-    ${({ value = 0 }) => value}% 0,
-    ${({ value = 0 }) => value}% 100%,
+    ${({ $value = 0 }) => $value}% 0,
+    ${({ $value = 0 }) => $value}% 100%,
     0 100%
   );
   transition: 0.4s linear clip-path;
@@ -135,14 +135,14 @@ const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
         aria-valuenow={value !== undefined ? Math.round(value) : undefined}
         ref={ref}
         role='progressbar'
-        variant={variant}
+        $variant={variant}
         {...otherProps}
       >
-        <ProgressCutout variant={variant} shadow={shadow}>
+        <ProgressCutout $variant={variant} $shadow={shadow}>
           {variant === 'default' ? (
             <>
               <WhiteBar data-testid='defaultProgress1'>{displayValue}</WhiteBar>
-              <BlueBar data-testid='defaultProgress2' value={value}>
+              <BlueBar data-testid='defaultProgress2' $value={value}>
                 {displayValue}
               </BlueBar>
             </>

@@ -108,13 +108,13 @@ function findClosest(values: number[], currentValue: number) {
   return closestIndex ?? -1;
 }
 
-type StyledSliderProps = Pick<
-  SliderProps,
-  'orientation' | 'size' | 'variant'
-> & {
+type StyledSliderProps = {
+  $orientation?: SliderProps['orientation'];
+  $size?: SliderProps['size'];
+  $variant?: SliderProps['variant'];
   $disabled?: boolean;
-  hasMarks?: boolean;
-  isFocused?: boolean;
+  $hasMarks?: boolean;
+  $isFocused?: boolean;
 };
 
 const Wrapper = styled.div<StyledSliderProps>`
@@ -128,34 +128,34 @@ const Wrapper = styled.div<StyledSliderProps>`
     top: -2px;
     left: -15px;
     width: calc(100% + 30px);
-    height: ${({ hasMarks }) => (hasMarks ? '41px' : '39px')};
-    ${({ isFocused, theme }) =>
-      isFocused &&
+    height: ${({ $hasMarks }) => ($hasMarks ? '41px' : '39px')};
+    ${({ $isFocused, theme }) =>
+      $isFocused &&
       `
         outline: 2px dotted ${theme.materialText};
         `}
   }
 
-  ${({ orientation, size }) =>
-    orientation === 'vertical'
+  ${({ $orientation, $size }) =>
+    $orientation === 'vertical'
       ? css<StyledSliderProps>`
-          height: ${size};
+          height: ${$size};
           margin-right: 1.5rem;
           &:before {
             left: -6px;
             top: -15px;
             height: calc(100% + 30px);
-            width: ${({ hasMarks }) => (hasMarks ? '41px' : '39px')};
+            width: ${({ $hasMarks }) => ($hasMarks ? '41px' : '39px')};
           }
         `
       : css<StyledSliderProps>`
-          width: ${size};
+          width: ${$size};
           margin-bottom: 1.5rem;
           &:before {
             top: -2px;
             left: -15px;
             width: calc(100% + 30px);
-            height: ${({ hasMarks }) => (hasMarks ? '41px' : '39px')};
+            height: ${({ $hasMarks }) => ($hasMarks ? '41px' : '39px')};
           }
         `}
 
@@ -163,8 +163,8 @@ const Wrapper = styled.div<StyledSliderProps>`
 `;
 const sharedGrooveStyles = () => css<StyledSliderProps>`
   position: absolute;
-  ${({ orientation }) =>
-    orientation === 'vertical'
+  ${({ $orientation }) =>
+    $orientation === 'vertical'
       ? css`
           bottom: 0;
           left: 50%;
@@ -199,8 +199,8 @@ const StyledFlatGroove = styled(StyledScrollView)<StyledSliderProps>`
 `;
 const Thumb = styled.span<StyledSliderProps>`
   position: relative;
-  ${({ orientation }) =>
-    orientation === 'vertical'
+  ${({ $orientation }) =>
+    $orientation === 'vertical'
       ? css`
           width: 32px;
           height: 18px;
@@ -213,8 +213,8 @@ const Thumb = styled.span<StyledSliderProps>`
           top: 2px;
           transform: translateX(-50%);
         `}
-  ${({ variant }) =>
-    variant === 'flat'
+  ${({ $variant }) =>
+    $variant === 'flat'
       ? css`
           ${createFlatBoxStyles()}
           outline: 2px solid ${({ theme }) => theme.flatDark};
@@ -240,8 +240,8 @@ const Tick = styled.span<StyledSliderProps>`
   display: inline-block;
   position: absolute;
 
-  ${({ orientation }) =>
-    orientation === 'vertical'
+  ${({ $orientation }) =>
+    $orientation === 'vertical'
       ? css`
           right: ${-tickHeight - 2}px;
           bottom: 0px;
@@ -273,8 +273,8 @@ const Mark = styled.div<StyledSliderProps>`
   line-height: 1;
   font-size: 0.875rem;
 
-  ${({ orientation }) =>
-    orientation === 'vertical'
+  ${({ $orientation }) =>
+    $orientation === 'vertical'
       ? css`
           transform: translate(${tickHeight + 2}px, ${tickHeight + 1}px);
         `
@@ -548,12 +548,12 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
     return (
       <Wrapper
         $disabled={disabled}
-        hasMarks={Boolean(marks.length)}
-        isFocused={focusVisible}
+        $hasMarks={Boolean(marks.length)}
+        $isFocused={focusVisible}
         onMouseDown={handleMouseDown}
-        orientation={orientation}
+        $orientation={orientation}
         ref={handleRef}
-        size={getSize(size)}
+        $size={getSize(size)}
         {...otherProps}
       >
         {/* should we keep the hidden input ? */}
@@ -569,7 +569,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
               $disabled={disabled}
               data-testid='tick'
               key={(m.value / (max - min)) * 100}
-              orientation={orientation}
+              $orientation={orientation}
               style={{
                 [vertical ? 'bottom' : 'left']: `${
                   ((m.value - min) / (max - min)) * 100
@@ -577,13 +577,13 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
               }}
             >
               {m.label && (
-                <Mark aria-hidden data-testid='mark' orientation={orientation}>
+                <Mark aria-hidden data-testid='mark' $orientation={orientation}>
                   {m.label}
                 </Mark>
               )}
             </Tick>
           ))}
-        <Groove orientation={orientation} variant={variant} />
+        <Groove $orientation={orientation} $variant={variant} />
         <Thumb
           $disabled={disabled}
           aria-disabled={disabled ? true : undefined}
@@ -594,7 +594,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
           onBlur={handleBlur}
           onFocus={handleFocus}
           onKeyDown={handleKeyDown}
-          orientation={orientation}
+          $orientation={orientation}
           ref={thumbRef}
           role='slider'
           style={{
@@ -603,7 +603,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProps>(
             }%`
           }}
           tabIndex={disabled ? undefined : 0}
-          variant={variant}
+          $variant={variant}
         />
       </Wrapper>
     );

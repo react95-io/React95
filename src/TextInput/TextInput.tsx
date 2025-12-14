@@ -39,13 +39,15 @@ type TextInputProps = {
 } & (TextInputInputProps | TextInputTextAreaProps) &
   CommonStyledProps;
 
-type WrapperProps = Pick<TextInputProps, 'fullWidth' | 'variant'> &
-  CommonThemeProps;
+type WrapperProps = {
+  $fullWidth?: boolean;
+  $variant?: TextInputProps['variant'];
+} & CommonThemeProps;
 
 const sharedWrapperStyles = css<WrapperProps>`
   display: flex;
   align-items: center;
-  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
+  width: ${({ $fullWidth }) => ($fullWidth ? '100%' : 'auto')};
   min-height: ${blockSizes.md};
 `;
 
@@ -65,7 +67,11 @@ const FlatWrapper = styled.div.attrs({
   position: relative;
 `;
 
-type InputProps = Pick<TextInputProps, 'disabled' | 'fullWidth' | 'variant'>;
+type InputProps = {
+  disabled?: boolean;
+  $fullWidth?: boolean;
+  $variant?: TextInputProps['variant'];
+};
 
 const sharedInputStyles = css<InputProps>`
   display: block;
@@ -79,8 +85,8 @@ const sharedInputStyles = css<InputProps>`
   min-height: 27px;
   font-family: inherit;
   color: ${({ theme }) => theme.canvasText};
-  ${({ disabled, variant }) =>
-    variant !== 'flat' && disabled && createDisabledTextStyles()}
+  ${({ disabled, $variant }) =>
+    $variant !== 'flat' && disabled && createDisabledTextStyles()}
 `;
 
 const StyledTextInput = styled.input<InputProps>`
@@ -92,7 +98,7 @@ const StyledTextArea = styled.textarea<InputProps>`
   ${sharedInputStyles}
   padding: 8px;
   resize: none;
-  ${({ variant }) => createScrollbars(variant)}
+  ${({ $variant }) => createScrollbars($variant)}
 `;
 
 const TextInput = forwardRef<
@@ -122,7 +128,7 @@ const TextInput = forwardRef<
             onChange={disabled ? undefined : onChange}
             readOnly={disabled}
             ref={ref}
-            variant={variant}
+            $variant={variant}
             {...otherProps}
           />
         ) : (
@@ -132,7 +138,7 @@ const TextInput = forwardRef<
             readOnly={disabled}
             ref={ref}
             type={otherProps.type ?? 'text'}
-            variant={variant}
+            $variant={variant}
             {...otherProps}
           />
         ),
@@ -142,9 +148,9 @@ const TextInput = forwardRef<
     return (
       <WrapperComponent
         className={className}
-        fullWidth={fullWidth}
+        $fullWidth={fullWidth}
         $disabled={disabled}
-        shadow={shadow}
+        $shadow={shadow}
         style={style}
       >
         {field}

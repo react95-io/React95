@@ -9,10 +9,10 @@ type AnchorProps = {
 } & React.AnchorHTMLAttributes<HTMLAnchorElement> &
   CommonStyledProps;
 
-const StyledAnchor = styled.a<{ underline: boolean }>`
+const StyledAnchor = styled.a<{ $underline: boolean }>`
   color: ${({ theme }) => theme.anchor};
   font-size: inherit;
-  text-decoration: ${({ underline }) => (underline ? 'underline' : 'none')};
+  text-decoration: ${({ $underline }) => ($underline ? 'underline' : 'none')};
   &:visited {
     color: ${({ theme }) => theme.anchorVisited};
   }
@@ -21,7 +21,7 @@ const StyledAnchor = styled.a<{ underline: boolean }>`
 const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(
   ({ children, underline = true, ...otherProps }: AnchorProps, ref) => {
     return (
-      <StyledAnchor ref={ref} underline={underline} {...otherProps}>
+      <StyledAnchor ref={ref} $underline={underline} {...otherProps}>
         {children}
       </StyledAnchor>
     );

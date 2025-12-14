@@ -13,10 +13,10 @@ type TabsProps = {
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onChange' | 'value'> &
   CommonStyledProps;
 
-const StyledTabs = styled.div<{ isMultiRow: boolean }>`
+const StyledTabs = styled.div<{ $isMultiRow: boolean }>`
   position: relative;
-  ${({ isMultiRow, theme }) =>
-    isMultiRow &&
+  ${({ $isMultiRow, theme }) =>
+    $isMultiRow &&
     `
   button {
     flex-grow: 1;
@@ -89,7 +89,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(
     return (
       <StyledTabs
         {...otherProps}
-        isMultiRow={rows > 1}
+        $isMultiRow={rows > 1}
         role='tablist'
         ref={ref}
       >

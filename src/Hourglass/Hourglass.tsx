@@ -9,10 +9,10 @@ type HourglassProps = {
 } & React.HTMLAttributes<HTMLDivElement> &
   CommonStyledProps;
 
-const StyledContainer = styled.div<Required<Pick<HourglassProps, 'size'>>>`
+const StyledContainer = styled.div<{ $size: string | number }>`
   display: inline-block;
-  height: ${({ size }) => getSize(size)};
-  width: ${({ size }) => getSize(size)};
+  height: ${({ $size }) => getSize($size)};
+  width: ${({ $size }) => getSize($size)};
 `;
 
 const StyledHourglass = styled.span`
@@ -26,7 +26,7 @@ const StyledHourglass = styled.span`
 const Hourglass = forwardRef<HTMLSpanElement, HourglassProps>(
   ({ size = 30, ...otherProps }, ref) => {
     return (
-      <StyledContainer size={size} ref={ref} {...otherProps}>
+      <StyledContainer $size={size} ref={ref} {...otherProps}>
         <StyledHourglass />
       </StyledContainer>
     );

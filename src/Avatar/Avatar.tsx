@@ -13,21 +13,26 @@ type AvatarProps = {
 } & React.HTMLAttributes<HTMLDivElement> &
   CommonStyledProps;
 
-const StyledAvatar = styled.div<
-  Pick<AvatarProps, 'noBorder' | 'square' | 'src'> & { size?: string }
->`
+type StyledAvatarProps = {
+  $noBorder?: boolean;
+  $square?: boolean;
+  $src?: string;
+  $size?: string;
+};
+
+const StyledAvatar = styled.div<StyledAvatarProps>`
   display: inline-block;
   box-sizing: border-box;
   object-fit: contain;
-  ${({ size }) =>
+  ${({ $size }) =>
     `
-    height: ${size};
-    width: ${size};
+    height: ${$size};
+    width: ${$size};
     `}
-  border-radius: ${({ square }) => (square ? 0 : '50%')};
+  border-radius: ${({ $square }) => ($square ? 0 : '50%')};
   overflow: hidden;
-  ${({ noBorder, theme }) =>
-    !noBorder &&
+  ${({ $noBorder, theme }) =>
+    !$noBorder &&
     `
     border-top: 2px solid ${theme.borderDark};
     border-left: 2px solid ${theme.borderDark};
@@ -35,8 +40,8 @@ const StyledAvatar = styled.div<
     border-right: 2px solid ${theme.borderLightest};
     background: ${theme.material};
   `}
-  ${({ src }) =>
-    !src &&
+  ${({ $src }) =>
+    !$src &&
     `
     display: flex;
     align-items: center;
@@ -68,11 +73,11 @@ const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
   ) => {
     return (
       <StyledAvatar
-        noBorder={noBorder}
+        $noBorder={noBorder}
         ref={ref}
-        size={getSize(size)}
-        square={square}
-        src={src}
+        $size={getSize(size)}
+        $square={square}
+        $src={src}
         {...otherProps}
       >
         {src ? <StyledAvatarImg src={src} alt={alt} /> : children}

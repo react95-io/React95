@@ -53,7 +53,7 @@ const Window = forwardRef<HTMLDivElement, WindowProps>(
     ref
   ) => {
     return (
-      <StyledWindow ref={ref} shadow={shadow} {...otherProps}>
+      <StyledWindow ref={ref} $shadow={shadow} {...otherProps}>
         {children}
         {resizable && (
           <ResizeHandle data-testid='resizeHandle' ref={resizeRef} />

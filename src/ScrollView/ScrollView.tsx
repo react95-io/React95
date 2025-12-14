@@ -9,7 +9,7 @@ type ScrollViewProps = {
 } & React.HTMLAttributes<HTMLDivElement> &
   CommonStyledProps;
 
-export const StyledScrollView = styled.div<Pick<ScrollViewProps, 'shadow'>>`
+export const StyledScrollView = styled.div<{ $shadow?: boolean }>`
   position: relative;
   box-sizing: border-box;
   padding: 2px;
@@ -37,7 +37,7 @@ export const StyledScrollView = styled.div<Pick<ScrollViewProps, 'shadow'>>`
     border-bottom-color: ${({ theme }) => theme.borderLight};
 
     pointer-events: none;
-    ${props => props.shadow && `box-shadow:${insetShadow};`}
+    ${props => props.$shadow && `box-shadow:${insetShadow};`}
   }
 `;
 
@@ -53,7 +53,7 @@ const Content = styled.div`
 const ScrollView = forwardRef<HTMLDivElement, ScrollViewProps>(
   ({ children, shadow = true, ...otherProps }, ref) => {
     return (
-      <StyledScrollView ref={ref} shadow={shadow} {...otherProps}>
+      <StyledScrollView ref={ref} $shadow={shadow} {...otherProps}>
         <Content>{children}</Content>
       </StyledScrollView>
     );

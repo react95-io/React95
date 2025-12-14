@@ -178,12 +178,12 @@ export const createBorderStyles = ({
       theme[borderStyles[style][borders.bottomRightOuter]]};
     border-bottom-color: ${({ theme }) =>
       theme[borderStyles[style][borders.bottomRightOuter]]};
-    box-shadow: ${({ theme, shadow: hasShadow }) =>
+    box-shadow: ${({ theme, shadow, $shadow }) =>
       createInnerBorderWithShadow({
         theme,
         topLeftInner: borderStyles[style][borders.topLeftInner],
         bottomRightInner: borderStyles[style][borders.bottomRightInner],
-        hasShadow
+        hasShadow: $shadow ?? shadow
       })};
   `;
 };

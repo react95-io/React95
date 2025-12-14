@@ -15,7 +15,7 @@ type TabProps = {
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onClick' | 'value'> &
   CommonStyledProps;
 
-const StyledTab = styled.button<TabProps>`
+const StyledTab = styled.button<{ $selected?: boolean }>`
   ${createBoxStyles()}
   ${createBorderStyles()}
   position: relative;
@@ -46,7 +46,7 @@ const StyledTab = styled.button<TabProps>`
     outline-offset: -6px;
   }
   ${props =>
-    props.selected &&
+    props.$selected &&
     `
     z-index: 1;
     height: calc(${blockSizes.md} + 4px);
@@ -74,7 +74,7 @@ const Tab = forwardRef<HTMLButtonElement, TabProps>(
     return (
       <StyledTab
         aria-selected={selected}
-        selected={selected}
+        $selected={selected}
         onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
           onClick?.(value, e)
         }

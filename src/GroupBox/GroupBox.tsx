@@ -11,19 +11,20 @@ type GroupBoxProps = {
 } & React.FieldsetHTMLAttributes<HTMLFieldSetElement> &
   CommonStyledProps;
 
-const StyledFieldset = styled.fieldset<
-  Pick<GroupBoxProps, 'variant'> & { $disabled: boolean }
->`
+const StyledFieldset = styled.fieldset<{
+  $variant: GroupBoxProps['variant'];
+  $disabled: boolean;
+}>`
   position: relative;
   border: 2px solid
-    ${({ theme, variant }) =>
-      variant === 'flat' ? theme.flatDark : theme.borderLightest};
+    ${({ theme, $variant }) =>
+      $variant === 'flat' ? theme.flatDark : theme.borderLightest};
   padding: 16px;
   margin-top: 8px;
   font-size: 1rem;
   color: ${({ theme }) => theme.materialText};
-  ${({ variant }) =>
-    variant !== 'flat' &&
+  ${({ $variant }) =>
+    $variant !== 'flat' &&
     css`
       box-shadow: -1px -1px 0 1px ${({ theme }) => theme.borderDark},
         inset -1px -1px 0 1px ${({ theme }) => theme.borderDark};
@@ -31,7 +32,7 @@ const StyledFieldset = styled.fieldset<
   ${props => props.$disabled && createDisabledTextStyles()}
 `;
 
-const StyledLegend = styled.legend<Pick<GroupBoxProps, 'variant'>>`
+const StyledLegend = styled.legend<{ $variant: GroupBoxProps['variant'] }>`
   display: flex;
   position: absolute;
   top: 0;
@@ -40,8 +41,8 @@ const StyledLegend = styled.legend<Pick<GroupBoxProps, 'variant'>>`
   padding: 0 8px;
 
   font-size: 1rem;
-  background: ${({ theme, variant }) =>
-    variant === 'flat' ? theme.canvas : theme.material};
+  background: ${({ theme, $variant }) =>
+    $variant === 'flat' ? theme.canvas : theme.material};
 `;
 
 const GroupBox = forwardRef<HTMLFieldSetElement, GroupBoxProps>(
@@ -53,11 +54,11 @@ const GroupBox = forwardRef<HTMLFieldSetElement, GroupBoxProps>(
       <StyledFieldset
         aria-disabled={disabled}
         $disabled={disabled}
-        variant={variant}
+        $variant={variant}
         ref={ref}
         {...otherProps}
       >
-        {label && <StyledLegend variant={variant}>{label}</StyledLegend>}
+        {label && <StyledLegend $variant={variant}>{label}</StyledLegend>}
         {children}
       </StyledFieldset>
     );

@@ -9,15 +9,15 @@ type WindowHeaderProps = {
 } & React.HTMLAttributes<HTMLDivElement> &
   CommonStyledProps;
 
-const StyledWindowHeader = styled.div<Pick<WindowHeaderProps, 'active'>>`
+const StyledWindowHeader = styled.div<{ $active?: boolean }>`
   height: 33px;
   line-height: 33px;
   padding-left: 0.25rem;
   padding-right: 3px;
   font-weight: bold;
   border: 2px solid ${({ theme }) => theme.material};
-  ${({ active }) =>
-    active === false
+  ${({ $active }) =>
+    $active === false
       ? css`
           background: ${({ theme }) => theme.headerNotActiveBackground};
           color: ${({ theme }) => theme.headerNotActiveText};
@@ -39,7 +39,7 @@ const StyledWindowHeader = styled.div<Pick<WindowHeaderProps, 'active'>>`
 const WindowHeader = forwardRef<HTMLDivElement, WindowHeaderProps>(
   function WindowHeader({ active = true, children, ...otherProps }, ref) {
     return (
-      <StyledWindowHeader active={active} ref={ref} {...otherProps}>
+      <StyledWindowHeader $active={active} ref={ref} {...otherProps}>
         {children}
       </StyledWindowHeader>
     );

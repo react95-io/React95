@@ -40,17 +40,17 @@ const DateItem = styled.div`
   width: 14.28%;
 `;
 
-const DateItemContent = styled.span<{ active: boolean }>`
+const DateItemContent = styled.span<{ $active: boolean }>`
   cursor: pointer;
 
-  background: ${({ active, theme }) =>
-    active ? theme.hoverBackground : 'transparent'};
-  color: ${({ active, theme }) =>
-    active ? theme.canvasTextInvert : theme.canvasText};
+  background: ${({ $active, theme }) =>
+    $active ? theme.hoverBackground : 'transparent'};
+  color: ${({ $active, theme }) =>
+    $active ? theme.canvasTextInvert : theme.canvasText};
 
   &:hover {
     border: 2px dashed
-      ${({ theme, active }) => (active ? 'none' : theme.materialDark)};
+      ${({ theme, $active }) => ($active ? 'none' : theme.materialDark)};
   }
 `;
 
@@ -141,7 +141,7 @@ const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 handleDaySelect(dayNumber);
               }}
             >
-              <DateItemContent active={dayNumber === itemDay}>
+              <DateItemContent $active={dayNumber === itemDay}>
                 {dayNumber}
               </DateItemContent>
             </DateItem>

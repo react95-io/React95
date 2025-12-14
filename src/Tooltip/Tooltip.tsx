@@ -48,18 +48,18 @@ const positioningStyles: Record<TooltipPosition, string> = {
           transform: translate(100%, -50%);`
 };
 
-const Tip = styled.span<{ position: TooltipPosition; show: boolean }>`
+const Tip = styled.span<{ $position: TooltipPosition; $show: boolean }>`
   position: absolute;
 
   z-index: 1;
-  display: ${props => (props.show ? 'block' : 'none')};
+  display: ${props => (props.$show ? 'block' : 'none')};
   padding: 4px;
   border: 2px solid ${({ theme }) => theme.borderDarkest};
   background: ${({ theme }) => theme.tooltip};
   box-shadow: ${shadow};
   text-align: center;
   font-size: 1rem;
-  ${props => positioningStyles[props.position]}
+  ${props => positioningStyles[props.$position]}
 `;
 
 const Wrapper = styled.div`
@@ -178,9 +178,9 @@ const Tooltip = forwardRef<HTMLSpanElement, TooltipProps>(
         <Tip
           className={className}
           data-testid='tooltip'
-          position={position}
+          $position={position}
           ref={ref}
-          show={show}
+          $show={show}
           style={style}
           {...otherProps}
         >
